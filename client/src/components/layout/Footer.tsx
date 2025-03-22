@@ -31,6 +31,7 @@ export function Footer() {
             <ul className="space-y-2">
               <li><a href="#inicio" className="text-gray-400 hover:text-white transition">Inicio</a></li>
               <li><a href="#nosotros" className="text-gray-400 hover:text-white transition">Quiénes Somos</a></li>
+              <li><a href="#servicios" className="text-gray-400 hover:text-white transition">Servicios</a></li>
               <li><a href="#catalogo" className="text-gray-400 hover:text-white transition">Catálogo</a></li>
               <li><a href="#destacados" className="text-gray-400 hover:text-white transition">Remates Destacados</a></li>
               <li><a href="#contacto" className="text-gray-400 hover:text-white transition">Contacto</a></li>
@@ -38,14 +39,32 @@ export function Footer() {
           </div>
           
           <div>
-            <h3 className="font-heading font-bold text-lg mb-4">Categorías</h3>
-            <ul className="space-y-2">
-              <li><a href="#" className="text-gray-400 hover:text-white transition">Excavadoras</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-white transition">Camiones</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-white transition">Cargadores</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-white transition">Generadores</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-white transition">Grúas</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-white transition">Ver todas</a></li>
+            <h3 className="font-heading font-bold text-lg mb-4">Oficinas</h3>
+            <ul className="space-y-3">
+              <li className="flex items-start">
+                <i className="fas fa-map-marker-alt text-secondary mt-1 mr-2"></i>
+                <span className="text-gray-400">La Negra, Antofagasta, Chile</span>
+              </li>
+              <li className="flex items-start">
+                <i className="fas fa-map-marker-alt text-secondary mt-1 mr-2"></i>
+                <span className="text-gray-400">Sierra Gorda, Antofagasta, Chile</span>
+              </li>
+              <li className="flex items-start">
+                <i className="fas fa-map-marker-alt text-secondary mt-1 mr-2"></i>
+                <span className="text-gray-400">Los Abedules 3082, Vitacura, Santiago, Chile</span>
+              </li>
+              <li className="flex items-start">
+                <i className="fas fa-map-marker-alt text-secondary mt-1 mr-2"></i>
+                <span className="text-gray-400">Boston, Massachusetts, USA</span>
+              </li>
+              <li className="flex items-start">
+                <i className="fas fa-phone-alt text-secondary mt-1 mr-2"></i>
+                <span className="text-gray-400">+56 2 2756 9900</span>
+              </li>
+              <li className="flex items-start">
+                <i className="fas fa-envelope text-secondary mt-1 mr-2"></i>
+                <span className="text-gray-400">contacto@macbid.com</span>
+              </li>
             </ul>
           </div>
           
@@ -67,6 +86,9 @@ export function Footer() {
         <div className="border-t border-gray-800 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
           <div className="text-gray-400 text-sm mb-4 md:mb-0">
             &copy; {new Date().getFullYear()} MacBid. Todos los derechos reservados.
+            <div className="mt-2">
+              Developed by <a href="http://prelco.tech" target="_blank" rel="noopener noreferrer" className="text-secondary hover:text-white transition">Prelco Technologies</a>
+            </div>
           </div>
           <div className="flex space-x-4 text-sm text-gray-400">
             <a href="#" className="hover:text-white transition">Términos y Condiciones</a>
