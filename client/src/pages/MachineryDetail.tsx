@@ -19,12 +19,12 @@ export default function MachineryDetail() {
   }, []);
   
   // Fetch the machinery data
-  const { data: machinery, isLoading, isError } = useQuery<Machinery>({
+  const { data: machinery, isLoading, isError } = useQuery({
     queryKey: ['/api/machinery', machineryId],
     enabled: !!machineryId,
     queryFn: async () => {
       if (!machineryId) throw new Error('ID required');
-      return apiRequest<Machinery>(`/api/machinery/${machineryId}`);
+      return apiRequest(`/api/machinery/${machineryId}`);
     }
   });
   
@@ -296,7 +296,7 @@ export default function MachineryDetail() {
               <div key={i} className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow">
                 <div className="h-48 relative">
                   <img 
-                    src={`https://images.unsplash.com/photo-156366587793${i+1}-87e78b4b1ed0?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80`} 
+                    src={`https://images.pexels.com/photos/27176${i+80}/pexels-photo-27176${i+80}.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1`} 
                     alt="Similar machinery" 
                     className="w-full h-full object-cover"
                   />
