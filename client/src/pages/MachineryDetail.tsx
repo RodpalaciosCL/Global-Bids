@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Machinery, typeLabels, conditionLabels } from '@/types/machinery';
 import { useEffect } from 'react';
+import { apiRequest } from '@/lib/queryClient';
 
 export default function MachineryDetail() {
   // Extract the ID from the URL
@@ -18,9 +19,13 @@ export default function MachineryDetail() {
   }, []);
   
   // Fetch the machinery data
-  const { data: machinery, isLoading, isError } = useQuery({
+  const { data: machinery, isLoading, isError } = useQuery<Machinery>({
     queryKey: ['/api/machinery', machineryId],
     enabled: !!machineryId,
+    queryFn: async () => {
+      if (!machineryId) throw new Error('ID required');
+      return apiRequest<Machinery>(`/api/machinery/${machineryId}`);
+    }
   });
   
   if (isLoading) {

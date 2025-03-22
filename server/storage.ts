@@ -267,7 +267,7 @@ export class MemStorage implements IStorage {
         price: 45000,
         condition: "good",
         description: "Generador diesel con capacidad de 350kW, insonorizado, con panel digital de última generación.",
-        image: "https://images.unsplash.com/photo-1565124896924-13713a3bdc58?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+        image: "https://images.pexels.com/photos/3934007/pexels-photo-3934007.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
         isSold: false,
       },
       {
@@ -279,7 +279,7 @@ export class MemStorage implements IStorage {
         price: 168000,
         condition: "good",
         description: "Grúa torre con alcance de 65 metros y capacidad de carga máxima de 10 toneladas. Incluye documentación técnica.",
-        image: "https://images.unsplash.com/photo-1528323273322-d81458248d40?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+        image: "https://images.pexels.com/photos/532079/pexels-photo-532079.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
         isSold: false,
       },
       {
