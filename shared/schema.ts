@@ -1,0 +1,64 @@
+import { pgTable, text, serial, integer, boolean, date, varchar } from "drizzle-orm/pg-core";
+import { createInsertSchema } from "drizzle-zod";
+import { z } from "zod";
+
+// Users table for admin access
+export const users = pgTable("users", {
+  id: serial("id").primaryKey(),
+  username: text("username").notNull().unique(),
+  password: text("password").notNull(),
+});
+
+export const insertUserSchema = createInsertSchema(users).pick({
+  username: true,
+  password: true,
+});
+
+// Machinery table
+export const machinery = pgTable("machinery", {
+  id: serial("id").primaryKey(),
+  name: text("name").notNull(),
+  type: text("type").notNull(), // excavator, truck, loader, etc.
+  brand: text("brand").notNull(),
+  year: integer("year").notNull(),
+  hours: integer("hours"),
+  kilometers: integer("kilometers"),
+  price: integer("price").notNull(),
+  condition: text("condition").notNull(), // excellent, good, fair, repair
+  description: text("description").notNull(),
+  image: text("image").notNull(),
+  isSold: boolean("is_sold").default(false),
+  auctionDate: date("auction_date"),
+  createdAt: date("created_at").notNull().defaultNow(),
+});
+
+export const insertMachinerySchema = createInsertSchema(machinery).omit({
+  id: true,
+  createdAt: true,
+});
+
+// Contact form submissions
+export const contacts = pgTable("contacts", {
+  id: serial("id").primaryKey(),
+  name: text("name").notNull(),
+  email: text("email").notNull(),
+  phone: text("phone"),
+  subject: text("subject").notNull(),
+  message: text("message").notNull(),
+  createdAt: date("created_at").notNull().defaultNow(),
+});
+
+export const insertContactSchema = createInsertSchema(contacts).omit({
+  id: true,
+  createdAt: true,
+});
+
+// Type exports
+export type InsertUser = z.infer<typeof insertUserSchema>;
+export type User = typeof users.$inferSelect;
+
+export type InsertMachinery = z.infer<typeof insertMachinerySchema>;
+export type Machinery = typeof machinery.$inferSelect;
+
+export type InsertContact = z.infer<typeof insertContactSchema>;
+export type Contact = typeof contacts.$inferSelect;
