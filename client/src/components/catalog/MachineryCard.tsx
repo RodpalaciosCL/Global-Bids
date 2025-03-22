@@ -33,8 +33,8 @@ export function MachineryCard({ item, index }: MachineryCardProps) {
       
       <div className="p-5">
         <div className="flex justify-between items-start mb-2">
-          <h3 className="font-heading font-bold text-lg text-primary">{name}</h3>
-          <div className="bg-secondary text-primary font-bold px-2 py-1 rounded text-sm">
+          <h3 className="font-heading font-bold text-lg text-primary line-clamp-2">{name}</h3>
+          <div className="bg-secondary text-primary font-bold px-2 py-1 rounded text-sm ml-2 flex-shrink-0">
             ${price.toLocaleString()}
           </div>
         </div>

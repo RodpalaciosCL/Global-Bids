@@ -5,10 +5,12 @@ export function HeroSection() {
   return (
     <section id="inicio" className="relative bg-primary overflow-hidden">
       <div className="absolute inset-0 z-0 opacity-30">
-        <img 
-          src="https://images.unsplash.com/photo-1533582437341-eac7a0e8f0ab?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80" 
-          alt="" 
-          className="w-full h-full object-cover" 
+        <div 
+          className="w-full h-full bg-cover bg-center"
+          style={{
+            backgroundImage: `url('https://images.unsplash.com/photo-1533582437341-eac7a0e8f0ab?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')`,
+            backgroundColor: '#101827'
+          }}
         />
       </div>
       <div className="container mx-auto px-4 py-16 md:py-28 relative z-10">
