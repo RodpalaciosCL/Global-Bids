@@ -46,7 +46,7 @@ export function AboutSection() {
             <div className="absolute inset-0 bg-primary/20 rounded-xl translate-x-4 translate-y-4"></div>
             <div className="relative rounded-xl overflow-hidden shadow-2xl">
               <img 
-                src="https://images.unsplash.com/photo-1563665877939-87e78b4b1ed0?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
+                src="https://images.pexels.com/photos/2760250/pexels-photo-2760250.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" 
                 alt="Equipo de expertos en maquinaria" 
                 className="w-full h-auto" 
               />
