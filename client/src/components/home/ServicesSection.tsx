@@ -60,18 +60,18 @@ export function ServicesSection() {
       
       <div className="container mx-auto px-4">
         <motion.div 
-          className="text-center mb-16"
+          className="text-center mb-12 md:mb-16"
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
           variants={fadeIn}
         >
-          <div className="inline-block bg-secondary/10 px-6 py-2 rounded-full mb-4">
-            <span className="text-primary font-semibold">Soluciones Especializadas</span>
+          <div className="inline-block bg-secondary/10 px-4 sm:px-6 py-2 rounded-full mb-4">
+            <span className="text-primary font-semibold text-sm sm:text-base">Soluciones Especializadas</span>
           </div>
-          <h2 className="font-heading text-4xl md:text-5xl font-bold mb-6 text-primary">Nuestros Servicios</h2>
-          <div className="w-24 h-1.5 bg-secondary mx-auto mb-8"></div>
-          <p className="max-w-3xl mx-auto text-gray-600 text-lg leading-relaxed">
-            Ofrecemos soluciones integrales para la gestión y comercialización de activos de maquinaria minera, forestal e industrial, adaptadas a las necesidades específicas de cada cliente.
+          <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold mb-4 md:mb-6 text-primary px-2">Nuestros Servicios</h2>
+          <div className="w-16 md:w-24 h-1 md:h-1.5 bg-secondary mx-auto mb-6 md:mb-8"></div>
+          <p className="max-w-3xl mx-auto text-gray-600 text-base md:text-lg leading-relaxed px-4">
+            Ofrecemos soluciones integrales para la gestión y comercialización de activos de maquinaria minera, forestal e industrial.
           </p>
         </motion.div>
         
@@ -84,23 +84,23 @@ export function ServicesSection() {
           {services.map((service, index) => (
             <motion.div 
               key={index}
-              className="bg-white p-8 rounded-xl shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300 group relative overflow-hidden"
+              className="bg-white p-5 md:p-8 rounded-xl shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300 group relative overflow-hidden"
               variants={slideUp}
               whileHover={{ y: -8, transition: { duration: 0.3 } }}
             >
               {/* Gradient background for icon */}
               <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-secondary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10"></div>
               
-              <div className={`w-16 h-16 rounded-lg bg-gradient-to-br ${service.color} flex items-center justify-center mb-6 text-white transform transition-transform group-hover:scale-110 duration-300`}>
-                <i className={`fas ${service.icon} text-2xl`}></i>
+              <div className={`w-12 h-12 md:w-16 md:h-16 rounded-lg bg-gradient-to-br ${service.color} flex items-center justify-center mb-4 md:mb-6 text-white transform transition-transform group-hover:scale-110 duration-300`}>
+                <i className={`fas ${service.icon} text-xl md:text-2xl`}></i>
               </div>
               
-              <h3 className="font-heading font-bold text-2xl mb-3 text-primary group-hover:text-secondary transition-colors duration-300">{service.title}</h3>
-              <p className="text-sm text-gray-500 uppercase tracking-wider mb-4 font-medium">{service.subtitle}</p>
-              <p className="text-gray-600 leading-relaxed">{service.description}</p>
+              <h3 className="font-heading font-bold text-xl md:text-2xl mb-2 md:mb-3 text-primary group-hover:text-secondary transition-colors duration-300">{service.title}</h3>
+              <p className="text-xs md:text-sm text-gray-500 uppercase tracking-wider mb-3 md:mb-4 font-medium">{service.subtitle}</p>
+              <p className="text-gray-600 text-sm md:text-base leading-relaxed">{service.description}</p>
               
-              <div className="mt-6 pt-4 border-t border-gray-100">
-                <a href="#" className="inline-flex items-center text-secondary font-medium group-hover:text-primary transition-colors duration-300">
+              <div className="mt-4 md:mt-6 pt-3 md:pt-4 border-t border-gray-100">
+                <a href="#contacto" className="inline-flex items-center text-secondary font-medium text-sm md:text-base group-hover:text-primary transition-colors duration-300">
                   Más información
                   <i className="fas fa-arrow-right ml-2 transform group-hover:translate-x-2 transition-transform duration-300"></i>
                 </a>

@@ -8,8 +8,8 @@ export function AboutSection() {
   const isInView = useInView(sectionRef, { once: true, amount: 0.3 });
   
   const benefitsList = [
-    "Valoraciones precisas por expertos certificados en maquinaria minera, forestal e industrial",
-    "Red internacional de compradores calificados que maximizan el valor de venta",
+    "Valoraciones precisas por expertos certificados en maquinaria",
+    "Red global de compradores que maximizan el valor de venta",
     "Documentación completa y transparente de cada activo",
     "Logística integral para transporte nacional e internacional",
     "Proceso de subasta claro, seguro y eficiente"
@@ -30,7 +30,7 @@ export function AboutSection() {
         >
           <h2 className="font-heading text-4xl md:text-5xl font-bold mb-6 text-primary">Quiénes Somos</h2>
           <div className="w-24 h-1.5 bg-secondary mx-auto mb-8"></div>
-          <p className="max-w-4xl mx-auto text-lg text-gray-600 leading-relaxed">
+          <p className="max-w-4xl mx-auto text-base md:text-lg text-gray-600 leading-relaxed px-2">
             Con más de <span className="font-semibold text-primary">15 años de experiencia</span>, nos hemos consolidado como líderes en el mercado de subastas y valoración de maquinaria pesada en Latinoamérica, especializándonos en equipos para los sectores <span className="font-semibold text-primary">minero, forestal e industrial</span>.
           </p>
         </motion.div>
@@ -71,20 +71,20 @@ export function AboutSection() {
             </motion.h3>
             
             <motion.div className="space-y-4" variants={slideUp}>
-              <p className="text-gray-600 text-lg leading-relaxed">
+              <p className="text-gray-600 text-base md:text-lg leading-relaxed">
                 En MacBid entendemos la complejidad del mercado de maquinaria pesada para sectores <span className="font-semibold">mineros, forestales e industriales</span>, donde cada equipo representa una inversión significativa que debe ser valorada con precisión.
               </p>
               
-              <p className="text-gray-600 text-lg leading-relaxed">
+              <p className="text-gray-600 text-base md:text-lg leading-relaxed">
                 Nuestro equipo multidisciplinario incluye ingenieros, mecánicos, expertos en valoración y especialistas en cada tipo de maquinaria, garantizando un proceso transparente y profesional.
               </p>
             </motion.div>
             
-            <motion.div variants={slideUp} className="bg-white p-6 rounded-xl shadow-lg border-l-4 border-secondary">
-              <h4 className="font-bold text-xl mb-4 text-primary">¿Por qué elegir nuestros servicios?</h4>
+            <motion.div variants={slideUp} className="bg-white p-5 md:p-6 rounded-xl shadow-lg border-l-4 border-secondary">
+              <h4 className="font-bold text-lg md:text-xl mb-4 text-primary">¿Por qué elegir nuestros servicios?</h4>
               
               <motion.ul 
-                className="space-y-4"
+                className="space-y-3 md:space-y-4"
                 variants={staggerContainer}
               >
                 {benefitsList.map((item, index) => (
@@ -93,8 +93,8 @@ export function AboutSection() {
                     className="flex items-start"
                     variants={slideUp}
                   >
-                    <i className="fas fa-check-circle text-secondary text-lg mt-1 mr-3"></i>
-                    <span className="text-gray-700">{item}</span>
+                    <i className="fas fa-check-circle text-secondary text-base md:text-lg mt-1 mr-2 md:mr-3 flex-shrink-0"></i>
+                    <span className="text-gray-700 text-sm md:text-base">{item}</span>
                   </motion.li>
                 ))}
               </motion.ul>

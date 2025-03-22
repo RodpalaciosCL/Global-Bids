@@ -9,56 +9,24 @@ export function BrandsSection() {
   
   const brands = [
     {
-      name: 'Komatsu',
-      description: 'Líder mundial en equipos de construcción y minería',
-      logo: (
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 60" width="150" height="60" className="text-gray-800">
-          <rect width="150" height="60" fill="transparent"/>
-          <text x="75" y="35" textAnchor="middle" className="text-gray-800 font-bold" style={{ fontSize: '24px' }}>KOMATSU</text>
-        </svg>
-      )
+      name: 'KOMATSU',
+      description: 'Líder mundial en equipos de construcción y minería'
     },
     {
-      name: 'Caterpillar',
-      description: 'Fabricante líder de equipos para construcción y minería',
-      logo: (
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 60" width="150" height="60" className="text-yellow-600">
-          <rect width="150" height="60" fill="transparent"/>
-          <text x="75" y="35" textAnchor="middle" className="text-yellow-600 font-black" style={{ fontSize: '28px' }}>CAT</text>
-        </svg>
-      )
+      name: 'CAT',
+      description: 'Fabricante líder de equipos para construcción y minería'
     },
     {
-      name: 'Finning',
-      description: 'Distribuidor de equipos Caterpillar más grande del mundo',
-      logo: (
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 60" width="150" height="60" className="text-gray-800">
-          <rect width="150" height="60" fill="transparent"/>
-          <text x="75" y="35" textAnchor="middle" className="text-gray-800 font-bold" style={{ fontSize: '24px' }}>FINNING</text>
-        </svg>
-      )
+      name: 'FINNING',
+      description: 'Distribuidor de equipos Caterpillar más grande del mundo'
     },
     {
-      name: 'Volvo',
-      description: 'Soluciones innovadoras para equipos de construcción',
-      logo: (
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 60" width="150" height="60" className="text-blue-800">
-          <rect width="150" height="60" fill="transparent"/>
-          <circle cx="75" cy="30" r="25" fill="transparent" stroke="currentColor" strokeWidth="3"/>
-          <path d="M58 30h34" stroke="currentColor" strokeWidth="3"/>
-          <text x="75" y="35" textAnchor="middle" className="text-blue-800 font-bold" style={{ fontSize: '16px' }}>VOLVO</text>
-        </svg>
-      )
+      name: 'VOLVO',
+      description: 'Soluciones innovadoras para equipos de construcción'
     },
     {
-      name: 'Liebherr',
-      description: 'Tecnología avanzada en maquinaria industrial y minera',
-      logo: (
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 60" width="150" height="60" className="text-gray-800">
-          <rect width="150" height="60" fill="transparent"/>
-          <text x="75" y="35" textAnchor="middle" className="text-gray-800 font-bold" style={{ fontSize: '22px' }}>LIEBHERR</text>
-        </svg>
-      )
+      name: 'LIEBHERR',
+      description: 'Tecnología avanzada en maquinaria industrial y minera'
     }
   ];
 
@@ -82,7 +50,7 @@ export function BrandsSection() {
         
         {/* Logos with animation */}
         <motion.div 
-          className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 items-center mb-16"
+          className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 md:gap-8 items-center mb-16"
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
           variants={staggerContainer}
@@ -99,15 +67,13 @@ export function BrandsSection() {
                 ease: [0.43, 0.13, 0.23, 0.96]
               }}
               whileHover={{ 
-                scale: 1.08,
+                scale: 1.05,
                 transition: { duration: 0.2 }
               }}
             >
-              <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-all duration-300 w-full h-32 flex flex-col items-center justify-center border border-gray-100">
-                <div className="grayscale group-hover:grayscale-0 transition-all duration-500">
-                  {brand.logo}
-                </div>
-                <span className="text-xs text-gray-500 mt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">{brand.name}</span>
+              <div className="bg-white p-4 sm:p-6 rounded-lg shadow-md hover:shadow-xl transition-all duration-300 w-full h-24 sm:h-32 flex flex-col items-center justify-center border border-gray-100">
+                <span className="text-gray-800 font-bold text-lg sm:text-2xl">{brand.name}</span>
+                <span className="text-xs text-gray-500 mt-2 hidden sm:block">{brand.description}</span>
               </div>
             </motion.div>
           ))}
