@@ -1,0 +1,22 @@
+Quiero que me generes un sitio web moderno, visualmente atractivo, con efectos y transiciones suaves. El sitio es para una empresa de subastas de maquinaria pesada (como camiones, retroexcavadoras, generadores, cargadores, etc.). No se subasta directamente en este sitio, sino que es una plataforma informativa donde los usuarios pueden ver todos los productos disponibles para remate, sus precios, descripciones y fotos.
+
+Características que debe tener el sitio web:
+	1.	Look and feel moderno: con transiciones visuales, efectos de carga, animaciones al pasar el cursor sobre elementos, y un diseño atractivo que invite a explorar.
+	2.	Home page:
+	•	Una sección de “Quiénes somos” con un texto que explique por qué somos expertos en subastas de maquinaria.
+	•	Una sección que muestre números de éxito: cuántas subastas hemos hecho, número de clientes, total rematado, etc.
+	•	Una sección con los remates más recientes realizados o casos destacados.
+	3.	Catálogo de maquinarias:
+	•	Mostrar todos los productos disponibles para remate.
+	•	Debe tener filtros por: tipo de maquinaria (camión, retroexcavadora, etc.), marca, año, estado, y rango de precio.
+	•	Cada producto debe mostrar: foto, nombre, precio base, breve descripción, y botón “Ver más”.
+	4.	Botón destacado que diga “Ir a remates” o “Ver subastas activas” que lleve al usuario a la plataforma externa donde realmente se hacen los remates.
+	5.	Diseño responsive (adaptado para móviles y escritorio).
+	6.	Diseño de tarjetas o módulos para cada maquinaria con efecto hover (cuando pasas el mouse), animaciones al cargar, etc.
+	7.	Opcional: módulo de búsqueda por palabra clave.
+
+Extra:
+	•	Puedes incluir una animación o módulo de carga visual cuando se entra al sitio o al cargar productos.
+	•	Deja bien comentado el código para poder hacer futuras modificaciones.
+
+Resumen: Sitio informativo de subastas de maquinaria con diseño moderno, transiciones y efectos, catálogo filtrable, información de la empresa y botón de acceso a la plataforma de remates.
