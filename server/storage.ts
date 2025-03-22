@@ -182,7 +182,7 @@ export class MemStorage implements IStorage {
     const machinery: Machinery = { 
       ...insertMachinery, 
       id,
-      createdAt: now
+      createdAt: now.toISOString() as any
     };
     this.machinery.set(id, machinery);
     return machinery;
@@ -208,7 +208,7 @@ export class MemStorage implements IStorage {
     const contact: Contact = { 
       ...insertContact, 
       id,
-      createdAt: now
+      createdAt: now.toISOString() as any
     };
     this.contacts.set(id, contact);
     return contact;
@@ -306,7 +306,7 @@ export class MemStorage implements IStorage {
         description: "Excavadora hidráulica de 20 toneladas en excelente estado, con 5,200 horas de uso y mantenimiento al día.",
         image: "https://images.unsplash.com/photo-1566715276118-8944f448b350?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
         isSold: true,
-        auctionDate: new Date("2022-12-15"),
+        auctionDate: new Date("2022-12-15").toISOString(),
       },
       {
         name: "Camión Volvo FH16",
@@ -319,7 +319,7 @@ export class MemStorage implements IStorage {
         description: "Camión de carga pesada con capacidad de 32 toneladas, motor Euro 5 y cabina full equipo con solo 80,000 km.",
         image: "https://images.unsplash.com/photo-1605166809748-ce576e62e6ca?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
         isSold: true,
-        auctionDate: new Date("2023-02-20"),
+        auctionDate: new Date("2023-02-20").toISOString(),
       },
       {
         name: "Generador Industrial Caterpillar",
@@ -332,7 +332,7 @@ export class MemStorage implements IStorage {
         description: "Generador industrial 500kW diesel con cubierta insonorizada y panel de control digital. 1,200 horas de uso.",
         image: "https://images.unsplash.com/photo-1601459669008-8f169de32f02?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
         isSold: true,
-        auctionDate: new Date("2023-04-10"),
+        auctionDate: new Date("2023-04-10").toISOString(),
       }
     ];
     
