@@ -1,18 +1,35 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'wouter';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [activeSection, setActiveSection] = useState('inicio');
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 50) {
-        setScrolled(true);
-      } else {
-        setScrolled(false);
+      // Update scrolled state
+      setScrolled(window.scrollY > 50);
+      
+      // Update active section based on scroll position
+      const sections = ['inicio', 'nosotros', 'catalogo', 'destacados', 'contacto'];
+      const positions = sections.map(id => {
+        const element = document.getElementById(id);
+        if (!element) return { id, position: 0 };
+        return { 
+          id, 
+          position: element.getBoundingClientRect().top 
+        };
+      });
+      
+      const activeSectionData = positions
+        .filter(section => section.position <= 100)
+        .sort((a, b) => b.position - a.position)[0];
+        
+      if (activeSectionData) {
+        setActiveSection(activeSectionData.id);
       }
     };
     
@@ -20,75 +37,140 @@ export function Header() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
   
+  const menuItems = [
+    { href: '#inicio', label: 'Inicio', icon: 'fa-home' },
+    { href: '#nosotros', label: 'Nosotros', icon: 'fa-users' },
+    { href: '#catalogo', label: 'Catálogo', icon: 'fa-th-large' },
+    { href: '#destacados', label: 'Destacados', icon: 'fa-star' },
+    { href: '#contacto', label: 'Contacto', icon: 'fa-envelope' }
+  ];
+  
   return (
     <header 
-      className={`bg-primary text-white shadow-lg sticky top-0 z-40 transition-all duration-300 ${
-        scrolled ? 'py-2' : 'py-3'
+      className={`backdrop-blur-md bg-white/90 text-gray-800 sticky top-0 z-40 transition-all duration-300 shadow-md ${
+        scrolled ? 'py-2' : 'py-4'
       }`}
     >
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center">
           {/* Logo & Brand Name */}
-          <div className="flex items-center">
-            <Link href="/">
-              <div className="text-secondary font-heading font-bold text-2xl mr-2 cursor-pointer">MacBid</div>
-            </Link>
-            <div className="text-sm text-gray-300 hidden sm:block">Subastas de Maquinaria Profesional</div>
-          </div>
+          <Link href="/">
+            <motion.div 
+              className="flex items-center cursor-pointer"
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.97 }}
+            >
+              <div className="bg-primary rounded-xl h-10 w-10 flex items-center justify-center mr-3 shadow-md">
+                <span className="text-white font-bold text-xl">M</span>
+              </div>
+              <div>
+                <div className="font-heading font-bold text-2xl text-primary">MacBid</div>
+                <div className="text-xs text-gray-500 -mt-1">Subastas de Maquinaria</div>
+              </div>
+            </motion.div>
+          </Link>
           
           {/* Mobile menu toggle */}
-          <button 
-            className="md:hidden text-white focus:outline-none"
+          <motion.button 
+            className="md:hidden w-10 h-10 flex items-center justify-center bg-gray-100 rounded-full focus:outline-none"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             aria-label="Toggle menu"
+            whileTap={{ scale: 0.9 }}
           >
-            <i className={`fas ${isMenuOpen ? 'fa-times' : 'fa-bars'} text-xl`}></i>
-          </button>
+            <i className={`fas ${isMenuOpen ? 'fa-times' : 'fa-bars'} text-gray-700`}></i>
+          </motion.button>
           
           {/* Desktop Menu */}
-          <nav className="hidden md:flex items-center space-x-1">
-            <a href="#inicio" className="px-3 py-2 hover:text-secondary transition duration-200 font-medium">Inicio</a>
-            <a href="#nosotros" className="px-3 py-2 hover:text-secondary transition duration-200 font-medium">Quiénes Somos</a>
-            <a href="#catalogo" className="px-3 py-2 hover:text-secondary transition duration-200 font-medium">Catálogo</a>
-            <a href="#destacados" className="px-3 py-2 hover:text-secondary transition duration-200 font-medium">Destacados</a>
-            <a href="#contacto" className="px-3 py-2 hover:text-secondary transition duration-200 font-medium">Contacto</a>
+          <div className="hidden md:flex items-center space-x-2">
+            <nav className="flex items-center bg-gray-100 p-1 rounded-full mr-3">
+              {menuItems.map((item) => (
+                <a 
+                  key={item.href}
+                  href={item.href} 
+                  className={`relative px-4 py-2 rounded-full font-medium transition-all duration-300 flex items-center ${
+                    activeSection === item.href.substring(1) 
+                      ? 'text-white' 
+                      : 'text-gray-700 hover:text-primary'
+                  }`}
+                >
+                  {activeSection === item.href.substring(1) && (
+                    <motion.div 
+                      className="absolute inset-0 bg-primary rounded-full z-0"
+                      layoutId="navIndicator"
+                      initial={false}
+                      transition={{ type: 'spring', damping: 25, stiffness: 300 }}
+                    />
+                  )}
+                  <i className={`fas ${item.icon} mr-2 z-10 relative ${
+                    activeSection === item.href.substring(1) ? 'text-white' : 'text-primary'
+                  }`}></i>
+                  <span className="relative z-10">{item.label}</span>
+                </a>
+              ))}
+            </nav>
             
             <motion.a 
               href="https://subastas-externas.com" 
               target="_blank"
               rel="noopener noreferrer"
-              className="ml-2 bg-secondary hover:bg-secondary-dark text-primary px-4 py-2 rounded-lg font-semibold transition duration-300 flex items-center justify-center"
+              className="bg-primary hover:bg-primary/90 text-white px-5 py-2.5 rounded-full font-semibold transition-all duration-300 flex items-center justify-center shadow-md"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
               <span>Ir a Remates</span>
-              <i className="fas fa-arrow-right ml-2"></i>
+              <i className="fas fa-external-link-alt ml-2"></i>
             </motion.a>
-          </nav>
+          </div>
         </div>
         
         {/* Mobile Menu Dropdown */}
-        {isMenuOpen && (
-          <div className="md:hidden pt-3 pb-2 border-t border-gray-700 mt-2">
-            <nav className="flex flex-col space-y-3">
-              <a href="#inicio" className="px-2 py-1 hover:text-secondary transition duration-200 font-medium">Inicio</a>
-              <a href="#nosotros" className="px-2 py-1 hover:text-secondary transition duration-200 font-medium">Quiénes Somos</a>
-              <a href="#catalogo" className="px-2 py-1 hover:text-secondary transition duration-200 font-medium">Catálogo</a>
-              <a href="#destacados" className="px-2 py-1 hover:text-secondary transition duration-200 font-medium">Destacados</a>
-              <a href="#contacto" className="px-2 py-1 hover:text-secondary transition duration-200 font-medium">Contacto</a>
+        <AnimatePresence>
+          {isMenuOpen && (
+            <motion.div 
+              className="md:hidden mt-4 bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-100"
+              initial={{ opacity: 0, height: 0, y: -10 }}
+              animate={{ opacity: 1, height: 'auto', y: 0 }}
+              exit={{ opacity: 0, height: 0, y: -10 }}
+              transition={{ duration: 0.3 }}
+            >
+              <nav className="flex flex-col divide-y divide-gray-100">
+                {menuItems.map((item) => (
+                  <a 
+                    key={item.href}
+                    href={item.href} 
+                    className={`px-5 py-3 transition flex items-center ${
+                      activeSection === item.href.substring(1)
+                        ? 'bg-primary/5 text-primary font-medium'
+                        : 'text-gray-700 hover:bg-gray-50'
+                    }`}
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    <i className={`fas ${item.icon} w-6 mr-3 ${
+                      activeSection === item.href.substring(1) ? 'text-primary' : 'text-gray-400'
+                    }`}></i>
+                    {item.label}
+                    {activeSection === item.href.substring(1) && (
+                      <div className="ml-auto w-1.5 h-6 bg-primary rounded-full"></div>
+                    )}
+                  </a>
+                ))}
+              </nav>
               
-              <a 
-                href="https://subastas-externas.com" 
-                target="_blank"
-                rel="noopener noreferrer"
-                className="bg-secondary hover:bg-secondary-dark text-primary px-4 py-2 rounded-lg font-semibold transition duration-300 flex items-center justify-center w-full"
-              >
-                <span>Ir a Remates</span>
-                <i className="fas fa-arrow-right ml-2"></i>
-              </a>
-            </nav>
-          </div>
-        )}
+              <div className="p-4 bg-gray-50">
+                <a 
+                  href="https://subastas-externas.com" 
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="bg-primary hover:bg-primary/90 text-white py-3 px-4 rounded-full font-medium transition-colors flex items-center justify-center w-full shadow-sm"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  <i className="fas fa-gavel mr-2"></i>
+                  <span>Participar en Remates</span>
+                </a>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </header>
   );
