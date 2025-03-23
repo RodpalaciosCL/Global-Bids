@@ -13,15 +13,6 @@ export function AboutSection() {
     setActiveTab(tab);
   };
   
-  // Logos de clientes y marcas
-  const brandLogos = [
-    { name: "Komatsu", letter: "K" },
-    { name: "Caterpillar", letter: "C" },
-    { name: "Finning", letter: "F" },
-    { name: "Volvo", letter: "V" },
-    { name: "Liebherr", letter: "L" }
-  ];
-  
   // Contenido de los tabs
   const tabContent = {
     historia: {
@@ -220,17 +211,6 @@ export function AboutSection() {
                           {content.cta}
                           <i className="fas fa-arrow-right ml-2 transition-transform group-hover:translate-x-1"></i>
                         </motion.a>
-                        
-                        <div className="flex gap-1">
-                          {brandLogos.map((brand, idx) => (
-                            <motion.div
-                              key={idx}
-                              className="w-8 h-8 rounded-full bg-primary/10"
-                              whileHover={{ scale: 1.1, backgroundColor: "rgba(219, 39, 119, 0.2)" }}
-                            >
-                            </motion.div>
-                          ))}
-                        </div>
                       </div>
                     </div>
                     
