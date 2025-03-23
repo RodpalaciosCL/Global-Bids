@@ -60,11 +60,13 @@ export function Header() {
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.97 }}
             >
-              <div className="bg-primary rounded-xl h-10 w-10 flex items-center justify-center mr-3 shadow-md">
-                <span className="text-white font-bold text-xl">M</span>
-              </div>
+              <img 
+                src="/global-bids-logo.jpg" 
+                alt="Global Bids Logo" 
+                className="h-10 mr-3 rounded-lg"
+              />
               <div>
-                <div className="font-heading font-bold text-2xl text-primary">MacBid</div>
+                <div className="font-heading font-bold text-2xl text-primary">Global Bids</div>
                 <div className="text-xs text-gray-500 -mt-1">Subastas de Maquinaria</div>
               </div>
             </motion.div>

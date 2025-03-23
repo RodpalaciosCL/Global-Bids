@@ -28,7 +28,7 @@ export function AboutSection() {
       title: "Una Historia de Excelencia",
       subtitle: "Nuestra trayectoria desde 2010",
       description: [
-        "MacBid nació en 2010 como respuesta a la necesidad del mercado latinoamericano de contar con un servicio profesional para la valoración y comercialización de maquinaria pesada.",
+        "Global Bids nació en 2010 como respuesta a la necesidad del mercado latinoamericano de contar con un servicio profesional para la valoración y comercialización de maquinaria pesada.",
         "Lo que comenzó como una pequeña empresa familiar en Santiago de Chile, rápidamente se expandió por toda la región gracias a nuestro enfoque en la especialización técnica, el servicio personalizado y la transparencia.",
         "Hoy contamos con un equipo de más de 120 profesionales especializados y nos hemos consolidado como el referente regional en subastas de maquinaria industrial."
       ],

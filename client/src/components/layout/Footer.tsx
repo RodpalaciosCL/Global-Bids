@@ -67,11 +67,13 @@ export function Footer() {
           {/* Logo, descripción y redes sociales */}
           <div className="lg:col-span-3 space-y-4">
             <div className="flex items-center mb-3">
-              <div className="bg-white rounded-lg h-10 w-10 flex items-center justify-center shadow-lg mr-3">
-                <span className="text-primary font-bold text-xl">M</span>
-              </div>
+              <img 
+                src="/global-bids-logo.jpg" 
+                alt="Global Bids Logo" 
+                className="h-10 mr-3 rounded-lg" 
+              />
               <div>
-                <div className="text-white font-heading font-bold text-xl">MacBid</div>
+                <div className="text-white font-heading font-bold text-xl">Global Bids</div>
                 <div className="text-gray-400 text-xs">Subastas de Maquinaria</div>
               </div>
             </div>
@@ -158,7 +160,7 @@ export function Footer() {
           </div>
           
           <div className="text-gray-400 text-xs flex items-center gap-2">
-            <span>&copy; {currentYear} MacBid</span>
+            <span>&copy; {currentYear} Global Bids</span>
             <span>|</span>
             <span>
               Developed by 
