@@ -56,176 +56,121 @@ export function Footer() {
   ];
   
   return (
-    <footer className="pt-16 pb-8 overflow-hidden bg-gradient-to-br from-gray-900 to-gray-800 relative">
+    <footer className="pt-10 pb-6 overflow-hidden bg-gradient-to-br from-gray-900 to-gray-800 relative">
       {/* Elementos decorativos */}
       <div className="absolute -top-24 -right-24 w-48 h-48 bg-primary/20 rounded-full blur-3xl opacity-60"></div>
       <div className="absolute -bottom-24 -left-24 w-48 h-48 bg-primary/10 rounded-full blur-3xl opacity-70"></div>
       
-      {/* Logo y descripción con el formulario de suscripción */}
-      <div className="container mx-auto px-6 mb-12">
-        <div className="grid grid-cols-1 lg:grid-cols-5 gap-10">
-          <div className="lg:col-span-2 space-y-6">
-            <div className="flex items-center mb-6">
-              <div className="bg-white rounded-lg h-12 w-12 flex items-center justify-center shadow-lg mr-3">
-                <span className="text-primary font-bold text-2xl">M</span>
+      <div className="container mx-auto px-6">
+        {/* Grid principal de contenido */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-8">
+          {/* Logo, descripción y redes sociales */}
+          <div className="lg:col-span-3 space-y-4">
+            <div className="flex items-center mb-3">
+              <div className="bg-white rounded-lg h-10 w-10 flex items-center justify-center shadow-lg mr-3">
+                <span className="text-primary font-bold text-xl">M</span>
               </div>
               <div>
-                <div className="text-white font-heading font-bold text-2xl">MacBid</div>
-                <div className="text-gray-400 text-xs">Subastas de Maquinaria Profesional</div>
+                <div className="text-white font-heading font-bold text-xl">MacBid</div>
+                <div className="text-gray-400 text-xs">Subastas de Maquinaria</div>
               </div>
             </div>
             
-            <p className="text-gray-300 max-w-md">
-              Somos líderes en remates de maquinaria pesada para los sectores minero, forestal e industrial, 
-              ofreciendo un servicio profesional y transparente para compradores y vendedores en toda Latinoamérica.
+            <p className="text-gray-300 text-sm">
+              Líderes en remates de maquinaria pesada para sectores minero, forestal e industrial.
             </p>
             
-            <div className="flex flex-wrap gap-2">
+            <div className="flex gap-2 mt-3">
               {socialLinks.map((social, index) => (
-                <motion.a 
+                <a 
                   key={index}
                   href={social.href}
-                  className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-gray-300 hover:bg-primary hover:text-white transition-all duration-300"
-                  whileHover={{ scale: 1.1, y: -3 }}
-                  whileTap={{ scale: 0.9 }}
+                  className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-gray-300 hover:bg-primary hover:text-white transition-all duration-300"
                   aria-label={social.label}
                 >
                   <i className={social.icon}></i>
-                </motion.a>
+                </a>
               ))}
             </div>
           </div>
           
-          <div className="lg:col-span-3">
-            <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-8 border border-white/10 shadow-xl">
-              <h3 className="text-white font-bold text-xl mb-6">Recibe alertas de nuevas subastas</h3>
-              <p className="text-gray-300 mb-6">
-                Suscríbete para recibir notificaciones sobre nuevos lotes, próximas subastas y ofertas especiales.
-              </p>
-              
-              <form className="space-y-4">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div>
-                    <label htmlFor="name" className="block text-gray-300 text-sm font-medium mb-2">Nombre</label>
-                    <input 
-                      type="text" 
-                      id="name" 
-                      className="w-full px-4 py-3 rounded-lg bg-white/10 border border-white/10 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-transparent" 
-                      placeholder="Tu nombre"
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="email" className="block text-gray-300 text-sm font-medium mb-2">Email</label>
-                    <input 
-                      type="email" 
-                      id="email" 
-                      className="w-full px-4 py-3 rounded-lg bg-white/10 border border-white/10 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-transparent" 
-                      placeholder="Tu correo electrónico"
-                    />
-                  </div>
-                </div>
-                <div>
-                  <label className="inline-flex items-center">
-                    <input type="checkbox" className="rounded bg-white/10 border-white/10 text-primary focus:ring-primary/50" />
-                    <span className="ml-2 text-gray-300 text-sm">Acepto recibir comunicaciones comerciales</span>
-                  </label>
-                </div>
-                <div>
-                  <motion.button 
-                    type="submit" 
-                    className="w-full bg-primary hover:bg-primary/90 text-white px-6 py-3 rounded-lg font-medium transition-all duration-300 flex items-center justify-center"
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                  >
-                    <i className="fas fa-bell mr-2"></i>
-                    Suscribirme a Alertas
-                  </motion.button>
-                </div>
-                <p className="text-gray-400 text-xs text-center">
-                  Al suscribirte, aceptas nuestra <a href="#" className="text-primary">política de privacidad</a> y 
-                  nuestros <a href="#" className="text-primary">términos de servicio</a>.
-                </p>
-              </form>
+          {/* Formulario de suscripción */}
+          <div className="lg:col-span-4">
+            <div className="bg-white/5 backdrop-blur-sm rounded-xl p-4 border border-white/10">
+              <h3 className="text-white font-medium text-base mb-3">Recibe alertas de subastas</h3>
+              <div className="flex">
+                <input 
+                  type="email" 
+                  className="flex-grow px-3 py-2 rounded-l-lg bg-white/10 border border-white/10 text-white placeholder-gray-400 focus:outline-none text-sm"
+                  placeholder="Tu correo electrónico" 
+                />
+                <button 
+                  type="submit" 
+                  className="bg-primary hover:bg-primary/90 text-white px-4 py-2 rounded-r-lg transition-colors flex items-center justify-center"
+                >
+                  <i className="fas fa-paper-plane text-sm"></i>
+                </button>
+              </div>
+              <div className="mt-2 flex items-center">
+                <input type="checkbox" className="rounded bg-white/10 border-white/10 text-primary focus:ring-primary/50 mr-2" />
+                <span className="text-gray-300 text-xs">Acepto recibir comunicaciones comerciales</span>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
-      
-      {/* Separador con efecto */}
-      <div className="container mx-auto px-6">
-        <div className="h-px bg-gradient-to-r from-transparent via-gray-700 to-transparent my-10"></div>
-      </div>
-      
-      {/* Enlaces y oficinas */}
-      <div className="container mx-auto px-6 mb-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
-          {footerLinks.map((category, index) => (
-            <div key={index}>
-              <h3 className="text-white font-bold text-lg mb-5 border-b border-gray-700 pb-2">{category.title}</h3>
-              <ul className="space-y-3">
-                {category.links.map((link, linkIndex) => (
-                  <li key={linkIndex}>
-                    <a href={link.href} className="text-gray-400 hover:text-primary transition-colors duration-300 flex items-center group">
-                      <i className="fas fa-chevron-right text-xs mr-2 text-primary/70 group-hover:translate-x-1 transition-transform"></i>
-                      <span>{link.label}</span>
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
           
-          <div>
-            <h3 className="text-white font-bold text-lg mb-5 border-b border-gray-700 pb-2">Nuestras Oficinas</h3>
-            <ul className="space-y-4">
-              {offices.map((office, index) => (
-                <li key={index} className="flex items-start">
-                  <div className="mt-1 mr-3 w-6 h-6 rounded-full bg-primary/20 flex items-center justify-center flex-shrink-0">
-                    <i className={`fas ${office.icon} text-primary/90 text-xs`}></i>
-                  </div>
-                  <div>
-                    <div className="text-white font-medium">{office.city}</div>
-                    <div className="text-gray-400 text-sm">{office.region}</div>
-                  </div>
-                </li>
+          {/* Enlaces rápidos */}
+          <div className="lg:col-span-5">
+            <div className="grid grid-cols-3 gap-4">
+              {footerLinks.map((category, index) => (
+                <div key={index}>
+                  <h3 className="text-white font-medium text-sm mb-3">{category.title}</h3>
+                  <ul className="space-y-1.5">
+                    {category.links.slice(0, 4).map((link, linkIndex) => (
+                      <li key={linkIndex}>
+                        <a href={link.href} className="text-gray-400 hover:text-primary transition-colors text-sm">
+                          {link.label}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               ))}
-              <li className="flex items-start pt-4">
-                <div className="mt-1 mr-3 w-6 h-6 rounded-full bg-primary/20 flex items-center justify-center flex-shrink-0">
-                  <i className="fas fa-phone-alt text-primary/90 text-xs"></i>
-                </div>
-                <div>
-                  <div className="text-white font-medium">Contáctanos</div>
-                  <div className="text-gray-400 text-sm">+56 2 2756 9900</div>
-                </div>
-              </li>
-            </ul>
+            </div>
           </div>
         </div>
-      </div>
-      
-      {/* Créditos y copyright */}
-      <div className="container mx-auto px-6">
-        <div className="pt-8 border-t border-gray-700/50 flex flex-col md:flex-row justify-between items-center">
-          <div className="text-gray-400 text-sm mb-4 md:mb-0 flex flex-col md:flex-row items-center">
-            <span>&copy; {currentYear} MacBid. Todos los derechos reservados.</span>
-            <span className="hidden md:block mx-2">|</span>
+        
+        {/* Separador */}
+        <div className="h-px bg-gradient-to-r from-transparent via-gray-700 to-transparent my-6"></div>
+        
+        {/* Oficinas y copyright */}
+        <div className="flex flex-col md:flex-row justify-between items-center text-sm">
+          <div className="flex gap-x-6 gap-y-2 flex-wrap justify-center mb-4 md:mb-0">
+            {offices.map((office, index) => (
+              <div key={index} className="flex items-center text-gray-400">
+                <i className={`fas ${office.icon} text-primary/80 mr-1.5`}></i>
+                <span className="text-xs">{office.city}, {office.region}</span>
+              </div>
+            ))}
+            <div className="flex items-center text-gray-400">
+              <i className="fas fa-phone-alt text-primary/80 mr-1.5"></i>
+              <span className="text-xs">+56 2 2756 9900</span>
+            </div>
+          </div>
+          
+          <div className="text-gray-400 text-xs flex items-center gap-2">
+            <span>&copy; {currentYear} MacBid</span>
+            <span>|</span>
             <span>
-              Developed by <a 
+              Developed by 
+              <a 
                 href="http://prelco.tech" 
                 target="_blank" 
                 rel="noopener noreferrer" 
-                className="text-primary hover:text-white transition-colors"
+                className="text-primary hover:text-white transition-colors ml-1"
               >
                 Prelco Technologies
               </a>
             </span>
-          </div>
-          
-          <div className="flex items-center">
-            <div className="mr-4 text-xs text-gray-500">
-              <i className="fas fa-shield-alt mr-1 text-primary/80"></i> SSL Seguro
-            </div>
-            <img src="https://via.placeholder.com/120x30?text=Payment+Methods" alt="Métodos de pago" className="h-6 opacity-70" />
           </div>
         </div>
       </div>
