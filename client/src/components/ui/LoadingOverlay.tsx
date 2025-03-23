@@ -16,7 +16,7 @@ export function LoadingOverlay({ isLoading }: LoadingOverlayProps) {
         >
           <div className="text-center">
             <div className="w-12 h-12 border-4 border-white border-b-secondary rounded-full animate-spin mx-auto mb-4"></div>
-            <div className="text-white font-heading font-semibold text-xl animate-pulse">Cargando MacBid...</div>
+            <div className="text-white font-heading font-semibold text-xl animate-pulse">Cargando Global Bids...</div>
           </div>
         </motion.div>
       )}
