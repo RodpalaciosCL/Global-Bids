@@ -61,7 +61,7 @@ export function Header() {
               whileTap={{ scale: 0.97 }}
             >
               <img 
-                src="/global-bids-logo.jpg" 
+                src="https://images.proxibid.com/AuctionImages/11639/global%20bids.jpg" 
                 alt="Global Bids Logo" 
                 className="h-10 mr-3 rounded-lg"
               />

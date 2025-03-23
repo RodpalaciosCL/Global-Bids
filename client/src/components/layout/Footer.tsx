@@ -68,7 +68,7 @@ export function Footer() {
           <div className="lg:col-span-3 space-y-4">
             <div className="flex items-center mb-3">
               <img 
-                src="/global-bids-logo.jpg" 
+                src="https://images.proxibid.com/AuctionImages/11639/global%20bids.jpg" 
                 alt="Global Bids Logo" 
                 className="h-10 mr-3 rounded-lg" 
               />
