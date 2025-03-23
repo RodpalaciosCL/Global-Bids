@@ -9,88 +9,106 @@ export function BrandsSection() {
   
   const brands = [
     {
-      name: 'KOMATSU',
-      description: 'Líder mundial en equipos de construcción y minería'
+      name: 'Komatsu',
+      logo: 'https://1000marcas.net/wp-content/uploads/2020/11/Komatsu-Logo.png',
+      className: 'bg-white'
     },
     {
-      name: 'CAT',
-      description: 'Fabricante líder de equipos para construcción y minería'
+      name: 'Caterpillar',
+      logo: 'https://1000marcas.net/wp-content/uploads/2020/03/Logo-Caterpillar.png',
+      className: 'bg-[#FFCC01] bg-opacity-5'
     },
     {
-      name: 'FINNING',
-      description: 'Distribuidor de equipos Caterpillar más grande del mundo'
+      name: 'Liebherr',
+      logo: 'https://1000marcas.net/wp-content/uploads/2021/05/Liebherr-logo.png',
+      className: 'bg-white'
     },
     {
-      name: 'VOLVO',
-      description: 'Soluciones innovadoras para equipos de construcción'
+      name: 'Volvo',
+      logo: 'https://cdn.worldvectorlogo.com/logos/volvo-3.svg',
+      className: 'bg-[#003057] bg-opacity-5'
     },
     {
-      name: 'LIEBHERR',
-      description: 'Tecnología avanzada en maquinaria industrial y minera'
+      name: 'Sandvik',
+      logo: 'https://cdn.worldvectorlogo.com/logos/sandvik-1.svg',
+      className: 'bg-white'
     }
   ];
 
   return (
-    <section className="py-20 bg-gray-50 border-t border-b border-gray-200" ref={sectionRef}>
-      <div className="container mx-auto px-4">
+    <section className="py-24 relative bg-gray-50" ref={sectionRef} id="marcas">
+      <div className="absolute inset-0 bg-gradient-to-r from-gray-100 to-white opacity-50"></div>
+      
+      <div className="container mx-auto px-4 relative z-10">
         <motion.div 
-          className="text-center mb-12"
-          initial="hidden"
-          animate={isInView ? "visible" : "hidden"}
-          variants={fadeIn}
+          className="text-center mb-16"
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+          transition={{ duration: 0.7 }}
         >
-          <div className="inline-block bg-primary/10 px-6 py-2 rounded-full mb-4">
-            <span className="text-primary font-semibold">Alianzas Estratégicas</span>
-          </div>
-          <h3 className="font-heading text-3xl md:text-4xl font-bold text-primary mb-4">Trabajamos con las Mejores Marcas</h3>
-          <p className="max-w-2xl mx-auto text-gray-600">
-            Nuestros especialistas están certificados y capacitados en las principales marcas de maquinaria industrial, minera y forestal.
+          <h3 className="font-heading text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+            Las Principales Marcas <span className="text-primary">del Mercado</span>
+          </h3>
+          <div className="w-24 h-1.5 bg-primary mx-auto mb-6 rounded-full"></div>
+          <p className="max-w-3xl mx-auto text-gray-600 text-lg">
+            Contamos con experiencia certificada en las principales marcas de maquinaria industrial, minera y forestal.
           </p>
         </motion.div>
         
-        {/* Logos with animation */}
+        {/* Logos carousel/grid */}
         <motion.div 
-          className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 md:gap-8 items-center mb-16"
+          className="relative z-10 px-6 py-10"
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
           variants={staggerContainer}
         >
-          {brands.map((brand, index) => (
-            <motion.div 
-              key={index}
-              className="flex items-center justify-center group"
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-              transition={{ 
-                duration: 0.5,
-                delay: index * 0.1,
-                ease: [0.43, 0.13, 0.23, 0.96]
-              }}
-              whileHover={{ 
-                scale: 1.05,
-                transition: { duration: 0.2 }
-              }}
-            >
-              <div className="bg-white p-4 sm:p-6 rounded-lg shadow-md hover:shadow-xl transition-all duration-300 w-full h-24 sm:h-32 flex flex-col items-center justify-center border border-gray-100">
-                <span className="text-gray-800 font-bold text-lg sm:text-2xl">{brand.name}</span>
-                <span className="text-xs text-gray-500 mt-2 hidden sm:block">{brand.description}</span>
-              </div>
-            </motion.div>
-          ))}
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 items-center">
+            {brands.map((brand, index) => (
+              <motion.div 
+                key={index}
+                className="flex items-center justify-center"
+                initial={{ opacity: 0, y: 20 }}
+                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                transition={{ 
+                  duration: 0.5, 
+                  delay: index * 0.1 + 0.2
+                }}
+                whileHover={{ 
+                  scale: 1.05,
+                  filter: 'brightness(1.1)',
+                  transition: { duration: 0.2 }
+                }}
+              >
+                <div className={`rounded-xl p-6 h-32 flex items-center justify-center w-full transition-all duration-300 relative group overflow-hidden shadow-sm hover:shadow-lg ${brand.className}`}>
+                  {/* Glass effect overlay */}
+                  <div className="absolute inset-0 bg-white bg-opacity-70 backdrop-blur-sm z-0"></div>
+                  
+                  {/* Logo */}
+                  <div className="relative z-10 w-full h-full flex items-center justify-center">
+                    <img 
+                      src={brand.logo} 
+                      alt={`${brand.name} logo`} 
+                      className="max-h-20 max-w-[80%] object-contain filter"
+                    />
+                  </div>
+                  
+                  {/* Hover overlay */}
+                  <div className="absolute inset-0 bg-primary bg-opacity-0 group-hover:bg-opacity-5 transition-all duration-300"></div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
         </motion.div>
         
-        {/* Additional context */}
+        {/* Experience statement */}
         <motion.div
-          className="bg-white rounded-xl shadow-lg p-8 border border-gray-100 text-center max-w-4xl mx-auto"
+          className="mt-10 text-center max-w-4xl mx-auto"
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-          transition={{ duration: 0.5, delay: 0.6 }}
+          transition={{ duration: 0.5, delay: 0.8 }}
         >
-          <h4 className="text-primary font-bold text-xl mb-4">Experiencia certificada en múltiples marcas</h4>
-          <p className="text-gray-600">
-            Nuestro equipo cuenta con más de 15 años de experiencia trabajando con los principales fabricantes
-            de maquinaria pesada. Esto nos permite ofrecer valoraciones precisas y un servicio integral
-            para equipos de cualquier marca y modelo.
+          <p className="text-gray-700 text-lg font-medium italic">
+            "Más de 15 años de experiencia trabajando con los principales fabricantes de maquinaria pesada"
           </p>
         </motion.div>
       </div>
