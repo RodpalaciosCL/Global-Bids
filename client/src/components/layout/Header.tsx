@@ -14,7 +14,7 @@ export function Header() {
       setScrolled(window.scrollY > 50);
       
       // Update active section based on scroll position
-      const sections = ['inicio', 'nosotros', 'catalogo', 'destacados', 'contacto'];
+      const sections = ['inicio', 'nosotros', 'catalogo', 'contacto'];
       const positions = sections.map(id => {
         const element = document.getElementById(id);
         if (!element) return { id, position: 0 };
@@ -41,7 +41,6 @@ export function Header() {
     { href: '#inicio', label: 'Inicio', icon: 'fa-home' },
     { href: '#nosotros', label: 'Nosotros', icon: 'fa-users' },
     { href: '#catalogo', label: 'Catálogo', icon: 'fa-th-large' },
-    { href: '#destacados', label: 'Destacados', icon: 'fa-star' },
     { href: '#contacto', label: 'Contacto', icon: 'fa-envelope' }
   ];
   
