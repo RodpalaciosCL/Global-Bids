@@ -88,7 +88,7 @@ export function HeroSection() {
                       >
                         <div className="inline-flex items-center bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full mb-6">
                           <i className={`fas ${slide.icon} text-white mr-2`}></i>
-                          <span className="text-white font-medium">MacBid Premium</span>
+                          <span className="text-white font-medium">Global Bids Premium</span>
                         </div>
                         
                         <h1 className="font-heading text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">

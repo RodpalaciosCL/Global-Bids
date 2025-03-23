@@ -241,7 +241,7 @@ export default function MachineryDetail() {
                   </li>
                   <li className="flex items-center">
                     <i className="fas fa-envelope text-gray-500 mr-3 w-5"></i>
-                    <span className="text-sm">ventas@macbid.com</span>
+                    <span className="text-sm">ventas@globalbids.com</span>
                   </li>
                 </ul>
               </div>
@@ -249,7 +249,7 @@ export default function MachineryDetail() {
               <div className="border border-secondary/20 p-4 rounded-lg bg-secondary/5">
                 <h3 className="font-medium text-primary mb-2 flex items-center">
                   <i className="fas fa-shield-alt text-secondary mr-2"></i> 
-                  Garantía MacBid
+                  Garantía Global Bids
                 </h3>
                 <p className="text-sm text-gray-600 mb-2">
                   Todos nuestros equipos pasan por un proceso de inspección y verificación exhaustivo.

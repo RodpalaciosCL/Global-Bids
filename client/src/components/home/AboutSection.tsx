@@ -52,7 +52,7 @@ export function AboutSection() {
       title: "Presencia Internacional",
       subtitle: "Operaciones en 12 países",
       description: [
-        "Actualmente, MacBid tiene presencia en 12 países de Latinoamérica, con oficinas principales en Chile, Perú, Colombia, México y Estados Unidos.",
+        "Actualmente, Global Bids tiene presencia en 12 países de Latinoamérica, con oficinas principales en Chile, Perú, Colombia, México y Estados Unidos.",
         "Nuestra sede central en Boston coordina las operaciones globales, mientras que nuestros centros operativos en Antofagasta, La Negra y Sierra Gorda atienden al sector minero chileno.",
         "La oficina de Vitacura en Santiago funciona como nuestro principal centro comercial y administrativo para la región sur."
       ],
@@ -120,7 +120,7 @@ export function AboutSection() {
             </h2>
             <div className="w-28 h-1.5 bg-primary mx-auto mb-6"></div>
             <p className="max-w-3xl mx-auto text-lg text-gray-600 leading-relaxed">
-              MacBid es líder en subastas y valoración de maquinaria pesada en Latinoamérica, especializados en equipos para los sectores <span className="font-medium text-gray-800">minero, forestal e industrial</span>.
+              Global Bids es líder en subastas y valoración de maquinaria pesada en Latinoamérica, especializados en equipos para los sectores <span className="font-medium text-gray-800">minero, forestal e industrial</span>.
             </p>
           </motion.div>
         </div>
