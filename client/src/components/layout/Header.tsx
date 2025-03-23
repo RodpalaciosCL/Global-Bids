@@ -60,14 +60,19 @@ export function Header() {
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.97 }}
             >
-              <img 
-                src="https://images.proxibid.com/AuctionImages/11639/global%20bids.jpg" 
-                alt="Global Bids Logo" 
-                className="h-10 mr-3 rounded-lg"
-              />
+              <div className="relative mr-3">
+                <img 
+                  src="https://images.proxibid.com/AuctionImages/11639/global%20bids.jpg" 
+                  alt="Global Bids Logo" 
+                  className="h-14 w-auto object-contain rounded-lg shadow-sm border-2 border-primary/20"
+                />
+                <div className="absolute -right-2 -bottom-1 bg-primary text-white text-[10px] px-1.5 py-0.5 rounded font-bold shadow-sm">
+                  PRO
+                </div>
+              </div>
               <div>
-                <div className="font-heading font-bold text-2xl text-primary">Global Bids</div>
-                <div className="text-xs text-gray-500 -mt-1">Subastas de Maquinaria</div>
+                <div className="font-heading font-bold text-2xl text-primary tracking-tight">Global Bids</div>
+                <div className="text-xs text-gray-600 -mt-1 font-medium">Subastas de Maquinaria <span className="text-primary">•</span> Premium</div>
               </div>
             </motion.div>
           </Link>
@@ -115,12 +120,15 @@ export function Header() {
               href="https://subastas-externas.com" 
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-primary hover:bg-primary/90 text-white px-5 py-2.5 rounded-full font-semibold transition-all duration-300 flex items-center justify-center shadow-md"
-              whileHover={{ scale: 1.05 }}
+              className="bg-primary hover:bg-primary/90 text-white px-5 py-2.5 rounded-full font-semibold transition-all duration-300 flex items-center justify-center shadow-md border-2 border-primary/20"
+              whileHover={{ scale: 1.05, boxShadow: "0 10px 25px -5px rgba(220, 38, 38, 0.2)" }}
               whileTap={{ scale: 0.95 }}
             >
+              <i className="fas fa-gavel mr-2"></i>
               <span>Ir a Remates</span>
-              <i className="fas fa-external-link-alt ml-2"></i>
+              <div className="ml-2 h-4 w-4 bg-white/20 rounded-full flex items-center justify-center">
+                <i className="fas fa-arrow-right text-[10px]"></i>
+              </div>
             </motion.a>
           </div>
         </div>
@@ -136,6 +144,23 @@ export function Header() {
               transition={{ duration: 0.3 }}
             >
               <nav className="flex flex-col divide-y divide-gray-100">
+                <div className="p-4 flex items-center justify-center">
+                  <div className="relative mr-3">
+                    <img 
+                      src="https://images.proxibid.com/AuctionImages/11639/global%20bids.jpg" 
+                      alt="Global Bids Logo" 
+                      className="h-12 w-auto object-contain rounded-lg shadow-sm border-2 border-primary/20"
+                    />
+                    <div className="absolute -right-2 -bottom-1 bg-primary text-white text-[8px] px-1 py-0.5 rounded font-bold shadow-sm">
+                      PRO
+                    </div>
+                  </div>
+                  <div>
+                    <div className="font-heading font-bold text-xl text-primary tracking-tight">Global Bids</div>
+                    <div className="text-xs text-gray-600 -mt-1 font-medium">Subastas Premium</div>
+                  </div>
+                </div>
+                <div className="h-px w-full bg-gray-100 mb-2"></div>
                 {menuItems.map((item) => (
                   <a 
                     key={item.href}
@@ -163,11 +188,14 @@ export function Header() {
                   href="https://subastas-externas.com" 
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="bg-primary hover:bg-primary/90 text-white py-3 px-4 rounded-full font-medium transition-colors flex items-center justify-center w-full shadow-sm"
+                  className="bg-primary hover:bg-primary/90 text-white py-3 px-4 rounded-full font-medium transition-colors flex items-center justify-center w-full shadow-sm border-2 border-primary/20"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   <i className="fas fa-gavel mr-2"></i>
                   <span>Participar en Remates</span>
+                  <div className="ml-2 h-4 w-4 bg-white/20 rounded-full flex items-center justify-center">
+                    <i className="fas fa-arrow-right text-[10px]"></i>
+                  </div>
                 </a>
               </div>
             </motion.div>
