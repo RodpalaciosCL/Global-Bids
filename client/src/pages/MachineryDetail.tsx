@@ -33,8 +33,8 @@ export default function MachineryDetail() {
   }
   
   return (
-    <div className="py-8 md:py-16 bg-accent min-h-screen">
-      <div className="container mx-auto px-4">
+    <div className="bg-accent h-screen flex flex-col overflow-y-auto">
+      <div className="flex-grow container mx-auto px-4 py-4 md:py-6">
         {/* Breadcrumb */}
         <motion.div 
           className="mb-6 md:mb-10 flex items-center text-sm"

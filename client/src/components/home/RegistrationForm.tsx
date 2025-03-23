@@ -43,7 +43,7 @@ export function RegistrationForm() {
   // Submit handler using API
   const mutation = useMutation({
     mutationFn: (data: RegistrationFormData) => {
-      return apiRequest('/api/register', 'POST', data);
+      return apiRequest('POST', '/api/register', data);
     },
     onSuccess: () => {
       toast({
