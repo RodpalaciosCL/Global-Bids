@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { fadeIn, slideUp } from '@/lib/animations';
+import { RegistrationForm } from './RegistrationForm';
 
 export function ActionCTA() {
   return (
@@ -31,18 +32,7 @@ export function ActionCTA() {
           >
             Accede a nuestra plataforma de remates en vivo para pujar por la maquinaria que necesitas a precios competitivos. Regístrate gratis hoy mismo.
           </motion.p>
-          <motion.a 
-            href="https://subastas-externas.com" 
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-block bg-secondary hover:bg-secondary-dark text-primary text-lg font-bold px-8 py-4 rounded-lg transition duration-300 shadow-lg"
-            variants={slideUp}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            Ir a la Plataforma de Remates
-            <i className="fas fa-arrow-right ml-2"></i>
-          </motion.a>
+          <RegistrationForm />
         </motion.div>
       </div>
     </section>
