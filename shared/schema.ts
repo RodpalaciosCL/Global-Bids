@@ -53,6 +53,22 @@ export const insertContactSchema = createInsertSchema(contacts).omit({
   createdAt: true,
 });
 
+// Registration form submissions
+export const registrations = pgTable("registrations", {
+  id: serial("id").primaryKey(),
+  firstName: text("first_name").notNull(),
+  lastName: text("last_name").notNull(),
+  email: text("email").notNull(),
+  phone: text("phone").notNull(),
+  interestedIn: text("interested_in").array().notNull(),
+  createdAt: date("created_at").notNull().defaultNow(),
+});
+
+export const insertRegistrationSchema = createInsertSchema(registrations).omit({
+  id: true,
+  createdAt: true,
+});
+
 // Type exports
 export type InsertUser = z.infer<typeof insertUserSchema>;
 export type User = typeof users.$inferSelect;
@@ -62,3 +78,6 @@ export type Machinery = typeof machinery.$inferSelect;
 
 export type InsertContact = z.infer<typeof insertContactSchema>;
 export type Contact = typeof contacts.$inferSelect;
+
+export type InsertRegistration = z.infer<typeof insertRegistrationSchema>;
+export type Registration = typeof registrations.$inferSelect;

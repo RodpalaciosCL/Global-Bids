@@ -7,7 +7,10 @@ import {
   type InsertMachinery,
   contacts,
   type Contact,
-  type InsertContact
+  type InsertContact,
+  registrations,
+  type Registration,
+  type InsertRegistration
 } from "@shared/schema";
 
 // Interface for storage operations
@@ -40,6 +43,10 @@ export interface IStorage {
   // Contact form operations
   createContact(contact: InsertContact): Promise<Contact>;
   getAllContacts(): Promise<Contact[]>;
+  
+  // Registration operations
+  createRegistration(registration: InsertRegistration): Promise<Registration>;
+  getAllRegistrations(): Promise<Registration[]>;
 }
 
 // In-memory implementation of storage
