@@ -16,7 +16,7 @@ export function BrandsSection() {
     {
       name: 'Caterpillar',
       logo: 'https://1000marcas.net/wp-content/uploads/2020/03/Logo-Caterpillar.png',
-      className: 'bg-[#FFCC01] bg-opacity-5'
+      className: 'bg-white'
     },
     {
       name: 'Liebherr',
@@ -26,7 +26,7 @@ export function BrandsSection() {
     {
       name: 'Volvo',
       logo: 'https://cdn.worldvectorlogo.com/logos/volvo-3.svg',
-      className: 'bg-[#003057] bg-opacity-5'
+      className: 'bg-white'
     },
     {
       name: 'Sandvik',
@@ -36,8 +36,7 @@ export function BrandsSection() {
   ];
 
   return (
-    <section className="py-24 relative bg-gray-50" ref={sectionRef} id="marcas">
-      <div className="absolute inset-0 bg-gradient-to-r from-gray-100 to-white opacity-50"></div>
+    <section className="py-20 bg-white border-t border-b border-gray-100" ref={sectionRef} id="marcas">
       
       <div className="container mx-auto px-4 relative z-10">
         <motion.div 
@@ -55,14 +54,14 @@ export function BrandsSection() {
           </p>
         </motion.div>
         
-        {/* Logos carousel/grid */}
+        {/* Logos grid */}
         <motion.div 
-          className="relative z-10 px-6 py-10"
+          className="relative max-w-5xl mx-auto"
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
           variants={staggerContainer}
         >
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 items-center">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 sm:gap-8 items-center">
             {brands.map((brand, index) => (
               <motion.div 
                 key={index}
@@ -79,21 +78,12 @@ export function BrandsSection() {
                   transition: { duration: 0.2 }
                 }}
               >
-                <div className={`rounded-xl p-6 h-32 flex items-center justify-center w-full transition-all duration-300 relative group overflow-hidden shadow-sm hover:shadow-lg ${brand.className}`}>
-                  {/* Glass effect overlay */}
-                  <div className="absolute inset-0 bg-white bg-opacity-70 backdrop-blur-sm z-0"></div>
-                  
-                  {/* Logo */}
-                  <div className="relative z-10 w-full h-full flex items-center justify-center">
-                    <img 
-                      src={brand.logo} 
-                      alt={`${brand.name} logo`} 
-                      className="max-h-20 max-w-[80%] object-contain filter"
-                    />
-                  </div>
-                  
-                  {/* Hover overlay */}
-                  <div className="absolute inset-0 bg-primary bg-opacity-0 group-hover:bg-opacity-5 transition-all duration-300"></div>
+                <div className="bg-white border border-gray-200 rounded-lg p-5 h-28 flex items-center justify-center w-full transition-all duration-300 shadow-sm hover:shadow-md">
+                  <img 
+                    src={brand.logo} 
+                    alt={`${brand.name} logo`} 
+                    className="max-h-16 max-w-[85%] object-contain"
+                  />
                 </div>
               </motion.div>
             ))}
