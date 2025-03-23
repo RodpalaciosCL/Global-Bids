@@ -33,8 +33,8 @@ export default function MachineryDetail() {
   }
   
   return (
-    <div className="py-0 bg-accent min-h-screen">
-      <div className="container mx-auto px-0 md:px-0 max-w-full">
+    <div className="py-8 md:py-16 bg-accent min-h-screen">
+      <div className="container mx-auto px-4">
         {/* Breadcrumb */}
         <motion.div 
           className="mb-6 md:mb-10 flex items-center text-sm"
@@ -333,8 +333,8 @@ export default function MachineryDetail() {
 
 function LoadingSkeleton() {
   return (
-    <div className="py-0 bg-accent min-h-screen">
-      <div className="container mx-auto px-0 md:px-0 max-w-full">
+    <div className="py-8 md:py-16 bg-accent min-h-screen">
+      <div className="container mx-auto px-4">
         <div className="mb-6 md:mb-10">
           <Skeleton className="h-6 w-64" />
         </div>
@@ -377,8 +377,8 @@ function LoadingSkeleton() {
 
 function ErrorState() {
   return (
-    <div className="py-0 bg-accent min-h-screen flex items-center justify-center">
-      <div className="container mx-auto px-0 md:px-0 max-w-full text-center">
+    <div className="py-16 bg-accent min-h-screen">
+      <div className="container mx-auto px-4 text-center">
         <motion.div 
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}

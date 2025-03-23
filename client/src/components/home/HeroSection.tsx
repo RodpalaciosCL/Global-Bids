@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { fadeIn, slideUp } from '@/lib/animations';
-import { RegistrationForm } from './RegistrationForm';
 
 export function HeroSection() {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -167,11 +166,48 @@ export function HeroSection() {
               
               <div className="lg:col-span-2 hidden lg:block">
                 <motion.div
+                  className="bg-white/10 backdrop-blur-md rounded-3xl p-8 border border-white/20"
                   initial={{ opacity: 0, x: 50 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.7, delay: 0.3 }}
                 >
-                  <RegistrationForm />
+                  <h3 className="text-white font-bold text-2xl mb-6">Próximas Subastas</h3>
+                  
+                  {[1, 2, 3].map((_, index) => (
+                    <motion.div 
+                      key={index}
+                      className="bg-white/10 rounded-xl p-4 mb-4 hover:bg-white/20 transition-colors cursor-pointer"
+                      whileHover={{ y: -5, backgroundColor: "rgba(255, 255, 255, 0.2)" }}
+                    >
+                      <div className="flex justify-between items-start mb-3">
+                        <span className="font-medium text-white text-lg">Subasta {index + 1 < 10 ? `0${index + 1}` : index + 1}</span>
+                        <span className="bg-primary/50 text-white text-xs py-1 px-2 rounded-lg">
+                          {index === 0 ? 'En 2 días' : index === 1 ? 'En 1 semana' : 'En 2 semanas'}
+                        </span>
+                      </div>
+                      <p className="text-white/80 text-sm mb-2">{index === 0 ? 'Maquinaria Minera' : index === 1 ? 'Equipos Forestales' : 'Camiones y Transporte'}</p>
+                      <div className="flex justify-between items-center">
+                        <span className="text-white/80 text-xs">
+                          <i className="fas fa-map-marker-alt mr-1"></i>
+                          {index === 0 ? 'Antofagasta, Chile' : index === 1 ? 'Santiago, Chile' : 'Lima, Perú'}
+                        </span>
+                        <span className="text-white/80 text-xs">
+                          <i className="fas fa-tag mr-1"></i>
+                          {index === 0 ? '25' : index === 1 ? '42' : '38'} lotes
+                        </span>
+                      </div>
+                    </motion.div>
+                  ))}
+                  
+                  <motion.a
+                    href="#catalogo"
+                    className="block text-center text-white py-3 rounded-xl border border-white/30 hover:bg-white/10 transition-colors mt-4"
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                  >
+                    Ver todas las subastas
+                    <i className="fas fa-chevron-right ml-2 text-xs"></i>
+                  </motion.a>
                 </motion.div>
               </div>
             </div>

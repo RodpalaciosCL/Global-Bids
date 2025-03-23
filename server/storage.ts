@@ -54,23 +54,19 @@ export class MemStorage implements IStorage {
   private users: Map<number, User>;
   private machinery: Map<number, Machinery>;
   private contacts: Map<number, Contact>;
-  private registrations: Map<number, Registration>;
   
   private userIdCounter: number;
   private machineryIdCounter: number;
   private contactIdCounter: number;
-  private registrationIdCounter: number;
 
   constructor() {
     this.users = new Map();
     this.machinery = new Map();
     this.contacts = new Map();
-    this.registrations = new Map();
     
     this.userIdCounter = 1;
     this.machineryIdCounter = 1;
     this.contactIdCounter = 1;
-    this.registrationIdCounter = 1;
     
     // Initialize with sample data
     this.initSampleData();
@@ -227,23 +223,6 @@ export class MemStorage implements IStorage {
   
   async getAllContacts(): Promise<Contact[]> {
     return Array.from(this.contacts.values());
-  }
-  
-  // Registration methods
-  async createRegistration(insertRegistration: InsertRegistration): Promise<Registration> {
-    const id = this.registrationIdCounter++;
-    const now = new Date();
-    const registration: Registration = { 
-      ...insertRegistration, 
-      id,
-      createdAt: now.toISOString() as any
-    };
-    this.registrations.set(id, registration);
-    return registration;
-  }
-  
-  async getAllRegistrations(): Promise<Registration[]> {
-    return Array.from(this.registrations.values());
   }
   
   // Initialize with sample data
