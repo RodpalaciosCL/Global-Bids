@@ -49,10 +49,7 @@ export function RegistrationForm() {
 
   const mutation = useMutation({
     mutationFn: (data: RegistrationFormData) => {
-      return apiRequest('/api/registrations', {
-        method: 'POST',
-        body: JSON.stringify(data)
-      });
+      return apiRequest('/api/registrations', 'POST', data);
     },
     onSuccess: () => {
       setIsFormSubmitted(true);

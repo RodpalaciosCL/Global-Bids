@@ -2,7 +2,7 @@ import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { z } from "zod";
-import { insertContactSchema } from "@shared/schema";
+import { insertContactSchema, insertRegistrationSchema } from "@shared/schema";
 
 export async function registerRoutes(app: Express): Promise<Server> {
   // Prefix all API routes with /api
@@ -89,6 +89,32 @@ export async function registerRoutes(app: Express): Promise<Server> {
       
       console.error("Error submitting contact form:", error);
       res.status(500).json({ message: "Failed to submit contact form" });
+    }
+  });
+  
+  // Registration form submission
+  app.post("/api/registrations", async (req, res) => {
+    try {
+      // Validate request body
+      const validatedData = insertRegistrationSchema.parse(req.body);
+      
+      // Store registration submission
+      const registration = await storage.createRegistration(validatedData);
+      
+      res.status(201).json({ 
+        message: "Registration submitted successfully", 
+        registrationId: registration.id 
+      });
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        return res.status(400).json({ 
+          message: "Validation error", 
+          errors: error.errors 
+        });
+      }
+      
+      console.error("Error submitting registration:", error);
+      res.status(500).json({ message: "Failed to submit registration" });
     }
   });
 
