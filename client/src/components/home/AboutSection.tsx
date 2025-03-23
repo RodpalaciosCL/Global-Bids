@@ -225,10 +225,9 @@ export function AboutSection() {
                           {brandLogos.map((brand, idx) => (
                             <motion.div
                               key={idx}
-                              className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary"
+                              className="w-8 h-8 rounded-full bg-primary/10"
                               whileHover={{ scale: 1.1, backgroundColor: "rgba(219, 39, 119, 0.2)" }}
                             >
-                              {brand.letter}
                             </motion.div>
                           ))}
                         </div>
