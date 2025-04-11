@@ -26,12 +26,6 @@ export function HeroSection() {
     setCurrentSlide(index);
   };
   
-  const stats = [
-    { value: "15+", label: "Años de experiencia", icon: "fa-history" },
-    { value: "2,000+", label: "Máquinas en catálogo", icon: "fa-tools" },
-    { value: "99%", label: "Clientes satisfechos", icon: "fa-smile" }
-  ];
-  
   return (
     <section id="inicio" className="relative overflow-hidden bg-white">
       <div className="absolute inset-0 z-0">
@@ -164,32 +158,7 @@ export function HeroSection() {
           </div>
         </div>
         
-        {/* Stats Bar */}
-        <div className="relative z-10 mt-auto">
-          <div className="container mx-auto px-4 pb-8">
-            <div className="bg-white/10 backdrop-blur-md rounded-2xl p-5 border border-white/20">
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                {stats.map((stat, index) => (
-                  <motion.div 
-                    key={index}
-                    className="flex items-center justify-center"
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: 0.1 * index + 0.5 }}
-                  >
-                    <div className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center mr-4 text-white">
-                      <i className={`fas ${stat.icon} text-xl`}></i>
-                    </div>
-                    <div>
-                      <div className="text-white font-bold text-2xl">{stat.value}</div>
-                      <div className="text-white/80 text-sm">{stat.label}</div>
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
+
       </div>
     </section>
   );
