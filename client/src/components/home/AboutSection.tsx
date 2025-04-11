@@ -17,11 +17,11 @@ export function AboutSection() {
   const tabContent = {
     historia: {
       title: "Una Historia de Excelencia",
-      subtitle: "Nuestra trayectoria desde 2010",
+      subtitle: "Abriendo el mercado latinoamericano",
       description: [
-        "Global Bids nació en 2010 como respuesta a la necesidad del mercado latinoamericano de contar con un servicio profesional para la valoración y comercialización de maquinaria pesada.",
-        "Lo que comenzó como una pequeña empresa familiar en Santiago de Chile, rápidamente se expandió por toda la región gracias a nuestro enfoque en la especialización técnica, el servicio personalizado y la transparencia.",
-        "Hoy contamos con un equipo de más de 120 profesionales especializados y nos hemos consolidado como el referente regional en subastas de maquinaria industrial."
+        "Global Bids surgió como el primer portal especializado en abrir el mercado latinoamericano para equipos, piezas, partes y otros activos de alta calidad, revolucionando la forma en que las empresas acceden a maquinaria industrial.",
+        "Nuestra experiencia en el rubro nos ha permitido consolidarnos como la plataforma líder en subastas y comercialización de activos industriales, ofreciendo servicios con los más altos estándares de transparencia, rentabilidad y rapidez.",
+        "Hoy contamos con una red global de proveedores y clientes que confían en nuestra capacidad para conectar la oferta y demanda de equipos especializados en toda Latinoamérica, apoyados por una robusta plataforma tecnológica y un equipo de expertos en valoración."
       ],
       cta: "Conoce nuestra historia",
       image: "https://images.pexels.com/photos/1216589/pexels-photo-1216589.jpeg?auto=compress&cs=tinysrgb&w=1600",
@@ -242,17 +242,52 @@ export function AboutSection() {
         
         {/* CTA final */}
         <motion.div 
-          className="mt-16 md:mt-24 p-8 md:p-10 bg-gradient-to-br from-primary to-primary/80 rounded-3xl shadow-xl text-white text-center"
+          className="mt-16 md:mt-24 p-8 md:p-10 bg-gradient-to-br from-primary to-primary/80 rounded-3xl shadow-xl text-white"
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
           transition={{ duration: 0.6, delay: 0.5 }}
         >
-          <h3 className="text-2xl md:text-3xl font-bold mb-4">
-            Una Empresa con Respaldo y Experiencia
-          </h3>
-          <p className="text-white/80 max-w-2xl mx-auto mb-8">
-            Con 15 años de trayectoria, somos la mejor opción para la valoración y comercialización de maquinaria pesada en toda Latinoamérica.
-          </p>
+          <div className="text-center mb-8">
+            <h3 className="text-2xl md:text-3xl font-bold mb-4">
+              Abrimos el Mercado Latinoamericano
+            </h3>
+            <p className="text-white/80 max-w-2xl mx-auto">
+              Global Bids ofrece soluciones premium para equipos, piezas, partes y otros activos con respaldo y experiencia comprobada.
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            <div className="bg-white/10 backdrop-blur-sm rounded-xl p-5 text-center">
+              <div className="w-12 h-12 mx-auto bg-white/20 rounded-full flex items-center justify-center mb-3">
+                <span className="text-white font-bold text-xl">1</span>
+              </div>
+              <h4 className="font-bold text-xl mb-2">Rentabilidad</h4>
+              <p className="text-white/70 text-sm">
+                Maximizamos el valor de sus activos mediante nuestra extensa red global de compradores y expertos en valoración.
+              </p>
+            </div>
+            
+            <div className="bg-white/10 backdrop-blur-sm rounded-xl p-5 text-center">
+              <div className="w-12 h-12 mx-auto bg-white/20 rounded-full flex items-center justify-center mb-3">
+                <span className="text-white font-bold text-xl">2</span>
+              </div>
+              <h4 className="font-bold text-xl mb-2">Rapidez</h4>
+              <p className="text-white/70 text-sm">
+                Procesos optimizados y eficientes que garantizan transacciones ágiles y una rotación efectiva de sus activos.
+              </p>
+            </div>
+            
+            <div className="bg-white/10 backdrop-blur-sm rounded-xl p-5 text-center">
+              <div className="w-12 h-12 mx-auto bg-white/20 rounded-full flex items-center justify-center mb-3">
+                <span className="text-white font-bold text-xl">3</span>
+              </div>
+              <h4 className="font-bold text-xl mb-2">Transparencia</h4>
+              <p className="text-white/70 text-sm">
+                Información completa y detallada en cada operación, con documentación certificada y procesos auditables.
+              </p>
+            </div>
+          </div>
+          
           <div className="flex flex-wrap justify-center gap-4">
             <motion.a 
               href="#catalogo" 
