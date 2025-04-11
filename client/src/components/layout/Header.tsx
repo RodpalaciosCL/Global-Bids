@@ -14,7 +14,17 @@ export function Header() {
       setScrolled(window.scrollY > 50);
       
       // Update active section based on scroll position
-      const sections = ['inicio', 'nosotros', 'catalogo', 'contacto'];
+      const sections = [
+        'inicio', 
+        'nosotros', 
+        'activos', 
+        'piezas-partes', 
+        'tech', 
+        'eventos', 
+        'catalogo', 
+        'soporte', 
+        'contacto'
+      ];
       const positions = sections.map(id => {
         const element = document.getElementById(id);
         if (!element) return { id, position: 0 };
@@ -40,7 +50,12 @@ export function Header() {
   const menuItems = [
     { href: '#inicio', label: 'Inicio', icon: 'fa-home' },
     { href: '#nosotros', label: 'Nosotros', icon: 'fa-users' },
+    { href: '#activos', label: 'Activos', icon: 'fa-cube' },
+    { href: '#piezas-partes', label: 'Piezas y Partes', icon: 'fa-cogs' },
+    { href: '#tech', label: 'Tech & IA', icon: 'fa-microchip' },
+    { href: '#eventos', label: 'Nuestros Eventos', icon: 'fa-calendar-alt' },
     { href: '#catalogo', label: 'Catálogo', icon: 'fa-th-large' },
+    { href: '#soporte', label: 'Soporte', icon: 'fa-headset' },
     { href: '#contacto', label: 'Contacto', icon: 'fa-envelope' }
   ];
   
