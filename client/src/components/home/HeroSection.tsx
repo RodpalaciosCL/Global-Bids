@@ -7,22 +7,10 @@ export function HeroSection() {
   
   const slides = [
     {
-      title: "Subastas de Maquinaria Premium",
+      title: "Subastas de\nMaquinaria Premium",
       subtitle: "Accede a equipos de clase mundial verificados por expertos",
       image: "https://images.pexels.com/photos/2760243/pexels-photo-2760243.jpeg?auto=compress&cs=tinysrgb&w=1600",
       icon: "fa-gavel"
-    },
-    {
-      title: "Equipos Mineros Especializados",
-      subtitle: "Excavadoras, camiones y equipos de movimiento de tierra",
-      image: "https://images.pexels.com/photos/2086795/pexels-photo-2086795.jpeg?auto=compress&cs=tinysrgb&w=1600",
-      icon: "fa-truck-monster"
-    },
-    {
-      title: "Valoraciones Certificadas",
-      subtitle: "Precios justos y transparentes con documentación completa",
-      image: "https://images.pexels.com/photos/259984/pexels-photo-259984.jpeg?auto=compress&cs=tinysrgb&w=1600",
-      icon: "fa-certificate"
     }
   ];
   
@@ -91,7 +79,7 @@ export function HeroSection() {
                           <span className="text-white font-medium">Global Bids Premium</span>
                         </div>
                         
-                        <h1 className="font-heading text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
+                        <h1 className="font-heading text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight whitespace-pre-line">
                           {slide.title}
                         </h1>
                         
@@ -123,45 +111,7 @@ export function HeroSection() {
                     )
                   ))}
                 </AnimatePresence>
-                
-                {/* Carousel Controls */}
-                <div className="mt-16 flex items-center">
-                  <div className="flex space-x-2">
-                    {slides.map((_, index) => (
-                      <button
-                        key={index}
-                        className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                          index === currentSlide 
-                            ? 'bg-white w-10' 
-                            : 'bg-white/40 hover:bg-white/60'
-                        }`}
-                        onClick={() => handleDotClick(index)}
-                        aria-label={`Go to slide ${index + 1}`}
-                      />
-                    ))}
-                  </div>
-                  
-                  <div className="ml-auto flex space-x-2">
-                    <motion.button
-                      className="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white"
-                      onClick={() => setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length)}
-                      whileHover={{ scale: 1.1 }}
-                      whileTap={{ scale: 0.9 }}
-                      aria-label="Previous slide"
-                    >
-                      <i className="fas fa-chevron-left"></i>
-                    </motion.button>
-                    <motion.button
-                      className="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white"
-                      onClick={() => setCurrentSlide((prev) => (prev + 1) % slides.length)}
-                      whileHover={{ scale: 1.1 }}
-                      whileTap={{ scale: 0.9 }}
-                      aria-label="Next slide"
-                    >
-                      <i className="fas fa-chevron-right"></i>
-                    </motion.button>
-                  </div>
-                </div>
+
               </div>
               
               <div className="lg:col-span-2 hidden lg:block">
