@@ -23,7 +23,7 @@ export function Footer() {
         { label: "Tasaciones", href: "#" },
         { label: "Consignación", href: "#" },
         { label: "Transporte", href: "#" },
-        { label: "Financiamiento", href: "#" }
+        { label: "Preguntas Frecuentes", href: "#soporte" }
       ]
     }
   ];

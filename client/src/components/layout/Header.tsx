@@ -21,9 +21,6 @@ export function Header() {
       const sections = [
         'inicio', 
         'nosotros', 
-        'activos', 
-        'tech', 
-        'eventos', 
         'catalogo', 
         'soporte', 
         'contacto'
@@ -53,9 +50,6 @@ export function Header() {
   const menuItems = [
     { href: '#inicio', label: t('nav.home'), icon: 'fa-home' },
     { href: '#nosotros', label: t('nav.about'), icon: 'fa-users' },
-    { href: '#activos', label: 'Activos', icon: 'fa-cube' },
-    { href: '#tech', label: 'Tech & IA', icon: 'fa-microchip' },
-    { href: '#eventos', label: t('events.title'), icon: 'fa-calendar-alt' },
     { href: '#catalogo', label: t('nav.catalog'), icon: 'fa-th-large' },
     { href: '#soporte', label: 'Soporte', icon: 'fa-headset' },
     { href: '#contacto', label: t('nav.contact'), icon: 'fa-envelope' }

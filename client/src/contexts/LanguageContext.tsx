@@ -20,7 +20,7 @@ const translations: Record<Language, Record<string, string>> = {
     'nav.home': 'Inicio',
     'nav.about': 'Nosotros',
     'nav.services': 'Servicios',
-    'nav.catalog': 'Catálogo',
+    'nav.catalog': 'Marketplace',
     'nav.contact': 'Contacto',
     'nav.login': 'Iniciar Sesión',
     'nav.register': 'Registrarse',
@@ -117,7 +117,7 @@ const translations: Record<Language, Record<string, string>> = {
     'registration.errorMsg': 'Hubo un problema al enviar tu registro. Por favor intenta nuevamente.',
     
     // Catálogo
-    'catalog.title': 'Catálogo de Equipos',
+    'catalog.title': 'Marketplace',
     'catalog.subtitle': 'Explora nuestra amplia selección de maquinaria industrial',
     'catalog.filter': 'Filtrar por',
     'catalog.search': 'Buscar equipo',
@@ -183,7 +183,7 @@ const translations: Record<Language, Record<string, string>> = {
     'nav.home': 'Home',
     'nav.about': 'About',
     'nav.services': 'Services',
-    'nav.catalog': 'Catalog',
+    'nav.catalog': 'Marketplace',
     'nav.contact': 'Contact',
     'nav.login': 'Log In',
     'nav.register': 'Register',
@@ -280,7 +280,7 @@ const translations: Record<Language, Record<string, string>> = {
     'registration.errorMsg': 'There was a problem submitting your registration. Please try again.',
     
     // Catalog
-    'catalog.title': 'Equipment Catalog',
+    'catalog.title': 'Marketplace',
     'catalog.subtitle': 'Explore our wide selection of industrial machinery',
     'catalog.filter': 'Filter by',
     'catalog.search': 'Search equipment',
