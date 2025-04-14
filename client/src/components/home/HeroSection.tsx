@@ -7,7 +7,7 @@ export function HeroSection() {
   
   const slides = [
     {
-      title: "Subastas de Maquinaria",
+      title: "Subastas de Equipos",
       subtitle: "Accede a equipos de clase mundial verificados por expertos",
       image: "https://images.pexels.com/photos/2760243/pexels-photo-2760243.jpeg?auto=compress&cs=tinysrgb&w=1600",
       icon: "fa-gavel"
@@ -161,48 +161,104 @@ export function HeroSection() {
                 >
                   <h3 className="text-white font-bold text-2xl mb-6">Próximas Subastas</h3>
                   
-                  {[1, 2, 3].map((_, index) => (
-                    <motion.div 
-                      key={index}
-                      className="bg-white/10 rounded-xl p-4 mb-4 hover:bg-white/20 transition-colors cursor-pointer"
-                      whileHover={{ y: -5, backgroundColor: "rgba(255, 255, 255, 0.2)" }}
-                    >
-                      <div className="flex justify-between items-start mb-3">
-                        <span className="font-medium text-white text-lg">Subasta {index + 1 < 10 ? `0${index + 1}` : index + 1}</span>
-                        <span className="bg-primary/50 text-white text-xs py-1 px-2 rounded-lg">
-                          {index === 0 ? 'En 2 días' : index === 1 ? 'En 1 semana' : 'En 2 semanas'}
-                        </span>
+                  {/* Auction Item 1 */}
+                  <a 
+                    href="#registro"
+                    className="bg-white/10 rounded-xl p-4 mb-4 hover:bg-white/20 transition-colors cursor-pointer block"
+                  >
+                    <div className="flex justify-between items-start mb-3">
+                      <span className="font-medium text-white text-lg">Subasta</span>
+                      <div className="bg-primary/80 text-white text-xs py-1 px-2 rounded-lg flex items-center gap-1">
+                        <div className="flex flex-col items-center">
+                          <div className="font-bold text-xs">01</div>
+                          <div className="text-[8px] opacity-80">días</div>
+                        </div>
+                        <div className="mx-1 font-bold">:</div>
+                        <div className="flex flex-col items-center">
+                          <div className="font-bold text-xs">12</div>
+                          <div className="text-[8px] opacity-80">hrs</div>
+                        </div>
+                        <div className="mx-1 font-bold">:</div>
+                        <div className="flex flex-col items-center">
+                          <div className="font-bold text-xs">00</div>
+                          <div className="text-[8px] opacity-80">min</div>
+                        </div>
                       </div>
-                      <p className="text-white/80 text-sm mb-2">{index === 0 ? 'Maquinaria Minera' : index === 1 ? 'Equipos Forestales' : 'Camiones y Transporte'}</p>
-                      <div className="flex justify-between items-center">
-                        <span className="text-white/80 text-xs">
-                          <i className="fas fa-map-marker-alt mr-1"></i>
-                          {index === 0 ? 'Antofagasta, Chile' : index === 1 ? 'Santiago, Chile' : 'Lima, Perú'}
-                        </span>
-                        <span className="text-white/80 text-xs">
-                          <i className="fas fa-tag mr-1"></i>
-                          {index === 0 ? '25' : index === 1 ? '42' : '38'} lotes
-                        </span>
-                      </div>
-                    </motion.div>
-                  ))}
+                    </div>
+                    <p className="text-white/80 text-sm mb-2">Equipos Mineros</p>
+                    <div className="flex justify-between items-center">
+                      <span className="text-white/80 text-xs hover:text-white hover:underline transition-colors">
+                        <i className="fas fa-user-plus mr-1"></i>
+                        Regístrate aquí
+                      </span>
+                      <span className="text-white/80 text-xs">
+                        <i className="fas fa-tag mr-1"></i>
+                        25 lotes
+                      </span>
+                    </div>
+                  </a>
                   
-                  <motion.a
+                  {/* Auction Item 2 */}
+                  <a 
+                    href="#registro"
+                    className="bg-white/10 rounded-xl p-4 mb-4 hover:bg-white/20 transition-colors cursor-pointer block"
+                  >
+                    <div className="flex justify-between items-start mb-3">
+                      <span className="font-medium text-white text-lg">Subasta</span>
+                      <div className="bg-primary/50 text-white text-xs py-1 px-2 rounded-lg">
+                        En 1 semana
+                      </div>
+                    </div>
+                    <p className="text-white/80 text-sm mb-2">Equipos Forestales</p>
+                    <div className="flex justify-between items-center">
+                      <span className="text-white/80 text-xs hover:text-white hover:underline transition-colors">
+                        <i className="fas fa-user-plus mr-1"></i>
+                        Regístrate aquí
+                      </span>
+                      <span className="text-white/80 text-xs">
+                        <i className="fas fa-tag mr-1"></i>
+                        42 lotes
+                      </span>
+                    </div>
+                  </a>
+                  
+                  {/* Auction Item 3 */}
+                  <a 
+                    href="#registro"
+                    className="bg-white/10 rounded-xl p-4 mb-4 hover:bg-white/20 transition-colors cursor-pointer block"
+                  >
+                    <div className="flex justify-between items-start mb-3">
+                      <span className="font-medium text-white text-lg">Subasta</span>
+                      <div className="bg-primary/50 text-white text-xs py-1 px-2 rounded-lg">
+                        En 2 semanas
+                      </div>
+                    </div>
+                    <p className="text-white/80 text-sm mb-2">Camiones y Transporte</p>
+                    <div className="flex justify-between items-center">
+                      <span className="text-white/80 text-xs hover:text-white hover:underline transition-colors">
+                        <i className="fas fa-user-plus mr-1"></i>
+                        Regístrate aquí
+                      </span>
+                      <span className="text-white/80 text-xs">
+                        <i className="fas fa-tag mr-1"></i>
+                        38 lotes
+                      </span>
+                    </div>
+                  </a>
+                  
+                  {/* See All Link */}
+                  <a
                     href="#catalogo"
                     className="block text-center text-white py-3 rounded-xl border border-white/30 hover:bg-white/10 transition-colors mt-4"
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
                   >
                     Ver todas las subastas
                     <i className="fas fa-chevron-right ml-2 text-xs"></i>
-                  </motion.a>
+                  </a>
                 </motion.div>
               </div>
             </div>
           </div>
         </div>
-        
-
       </div>
     </section>
   );
