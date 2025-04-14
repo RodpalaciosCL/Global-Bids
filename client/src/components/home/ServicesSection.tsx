@@ -98,13 +98,6 @@ export function ServicesSection() {
               <h3 className="font-heading font-bold text-xl md:text-2xl mb-2 md:mb-3 text-primary group-hover:text-secondary transition-colors duration-300">{service.title}</h3>
               <p className="text-xs md:text-sm text-gray-500 uppercase tracking-wider mb-3 md:mb-4 font-medium">{service.subtitle}</p>
               <p className="text-gray-600 text-sm md:text-base leading-relaxed">{service.description}</p>
-              
-              <div className="mt-4 md:mt-6 pt-3 md:pt-4 border-t border-gray-100">
-                <a href="#contacto" className="inline-flex items-center text-secondary font-medium text-sm md:text-base group-hover:text-primary transition-colors duration-300">
-                  Más información
-                  <i className="fas fa-arrow-right ml-2 transform group-hover:translate-x-2 transition-transform duration-300"></i>
-                </a>
-              </div>
             </motion.div>
           ))}
         </motion.div>
