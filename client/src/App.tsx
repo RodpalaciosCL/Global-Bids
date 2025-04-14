@@ -7,6 +7,7 @@ import { BackToTop } from "@/components/ui/BackToTop";
 import { useEffect, useState } from "react";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
+import { LanguageProvider } from "@/contexts/LanguageContext";
 
 function Router() {
   return (
@@ -31,7 +32,7 @@ function App() {
   }, []);
 
   return (
-    <>
+    <LanguageProvider>
       <LoadingOverlay isLoading={loading} />
       <Header />
       <main>
@@ -39,7 +40,7 @@ function App() {
       </main>
       <Footer />
       <BackToTop />
-    </>
+    </LanguageProvider>
   );
 }
 

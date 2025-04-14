@@ -2,14 +2,16 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { fadeIn, slideUp } from '@/lib/animations';
 import { openRegistrationForm } from './RegistrationForm';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 export function HeroSection() {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const { t, language } = useLanguage();
   
   const slides = [
     {
-      title: "Subastas de Equipos",
-      subtitle: "Accede a equipos de clase mundial verificados por expertos",
+      title: t('hero.title'),
+      subtitle: t('hero.subtitle'),
       image: "https://images.pexels.com/photos/2760243/pexels-photo-2760243.jpeg?auto=compress&cs=tinysrgb&w=1600",
       icon: "fa-gavel"
     }
@@ -28,9 +30,9 @@ export function HeroSection() {
   };
   
   const stats = [
-    { value: "15+", label: "Años de experiencia", icon: "fa-history" },
-    { value: "2,000+", label: "Máquinas en catálogo", icon: "fa-tools" },
-    { value: "99%", label: "Clientes satisfechos", icon: "fa-smile" }
+    { value: "15+", label: t('about.experience'), icon: "fa-history" },
+    { value: "2,000+", label: t('about.machines'), icon: "fa-tools" },
+    { value: "99%", label: t('about.clients'), icon: "fa-smile" }
   ];
 
   const openRegistration = () => {
@@ -100,7 +102,7 @@ export function HeroSection() {
                             whileTap={{ scale: 0.95 }}
                           >
                             <i className="fas fa-search mr-2"></i>
-                            Explorar Catálogo
+                            {t('hero.explore')}
                           </motion.a>
                           <motion.a 
                             href="#contacto" 
@@ -109,7 +111,7 @@ export function HeroSection() {
                             whileTap={{ scale: 0.95 }}
                           >
                             <i className="fas fa-envelope mr-2"></i>
-                            Contáctanos
+                            {t('hero.contact')}
                           </motion.a>
                         </div>
                       </motion.div>
@@ -164,7 +166,7 @@ export function HeroSection() {
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.7, delay: 0.3 }}
                 >
-                  <h3 className="text-white font-bold text-2xl mb-6">Próximas Subastas</h3>
+                  <h3 className="text-white font-bold text-2xl mb-6">{t('hero.auctions')}</h3>
                   
                   {/* Auction Item 1 */}
                   <div 
@@ -172,20 +174,20 @@ export function HeroSection() {
                     className="bg-white/10 rounded-xl p-4 mb-4 hover:bg-white/20 transition-colors cursor-pointer block"
                   >
                     <div className="flex justify-between items-start mb-3">
-                      <span className="font-medium text-white text-lg">Subasta</span>
+                      <span className="font-medium text-white text-lg">{language === 'es' ? 'Subasta' : 'Auction'}</span>
                       <div className="bg-primary/80 text-white text-xs py-1 px-2 rounded-lg">
-                        En 1 día
+                        {t('hero.day')}
                       </div>
                     </div>
-                    <p className="text-white/80 text-sm mb-2">Equipos Mineros</p>
+                    <p className="text-white/80 text-sm mb-2">{t('hero.miningEquipment')}</p>
                     <div className="flex justify-between items-center">
                       <span className="text-white/80 text-xs hover:text-white hover:underline transition-colors">
                         <i className="fas fa-user-plus mr-1"></i>
-                        Regístrate aquí
+                        {t('hero.register')}
                       </span>
                       <span className="text-white/80 text-xs">
                         <i className="fas fa-tag mr-1"></i>
-                        25 lotes
+                        25 {t('hero.lots')}
                       </span>
                     </div>
                   </div>
@@ -196,20 +198,20 @@ export function HeroSection() {
                     className="bg-white/10 rounded-xl p-4 mb-4 hover:bg-white/20 transition-colors cursor-pointer block"
                   >
                     <div className="flex justify-between items-start mb-3">
-                      <span className="font-medium text-white text-lg">Subasta</span>
+                      <span className="font-medium text-white text-lg">{language === 'es' ? 'Subasta' : 'Auction'}</span>
                       <div className="bg-primary/50 text-white text-xs py-1 px-2 rounded-lg">
-                        En 1 semana
+                        {t('hero.week')}
                       </div>
                     </div>
-                    <p className="text-white/80 text-sm mb-2">Equipos Forestales</p>
+                    <p className="text-white/80 text-sm mb-2">{t('hero.forestryEquipment')}</p>
                     <div className="flex justify-between items-center">
                       <span className="text-white/80 text-xs hover:text-white hover:underline transition-colors">
                         <i className="fas fa-user-plus mr-1"></i>
-                        Regístrate aquí
+                        {t('hero.register')}
                       </span>
                       <span className="text-white/80 text-xs">
                         <i className="fas fa-tag mr-1"></i>
-                        42 lotes
+                        42 {t('hero.lots')}
                       </span>
                     </div>
                   </div>
@@ -220,20 +222,20 @@ export function HeroSection() {
                     className="bg-white/10 rounded-xl p-4 mb-4 hover:bg-white/20 transition-colors cursor-pointer block"
                   >
                     <div className="flex justify-between items-start mb-3">
-                      <span className="font-medium text-white text-lg">Subasta</span>
+                      <span className="font-medium text-white text-lg">{language === 'es' ? 'Subasta' : 'Auction'}</span>
                       <div className="bg-primary/50 text-white text-xs py-1 px-2 rounded-lg">
-                        En 2 semanas
+                        {t('hero.twoWeeks')}
                       </div>
                     </div>
-                    <p className="text-white/80 text-sm mb-2">Camiones y Transporte</p>
+                    <p className="text-white/80 text-sm mb-2">{t('hero.trucksTransport')}</p>
                     <div className="flex justify-between items-center">
                       <span className="text-white/80 text-xs hover:text-white hover:underline transition-colors">
                         <i className="fas fa-user-plus mr-1"></i>
-                        Regístrate aquí
+                        {t('hero.register')}
                       </span>
                       <span className="text-white/80 text-xs">
                         <i className="fas fa-tag mr-1"></i>
-                        38 lotes
+                        38 {t('hero.lots')}
                       </span>
                     </div>
                   </div>
@@ -243,7 +245,7 @@ export function HeroSection() {
                     href="#catalogo"
                     className="block text-center text-white py-3 rounded-xl border border-white/30 hover:bg-white/10 transition-colors mt-4"
                   >
-                    Ver todas las subastas
+                    {t('hero.viewAll')}
                     <i className="fas fa-chevron-right ml-2 text-xs"></i>
                   </a>
                 </motion.div>
