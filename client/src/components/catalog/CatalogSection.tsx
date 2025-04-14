@@ -10,6 +10,7 @@ import {
   MachineryType,
   MachineryCondition,
 } from "@/types/machinery";
+import { CurrencySelector } from "@/components/ui/CurrencySelector";
 
 export function CatalogSection() {
   const sectionRef = useRef(null);

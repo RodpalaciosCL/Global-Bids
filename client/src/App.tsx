@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { LanguageProvider } from "@/contexts/LanguageContext";
+import { CurrencyProvider } from "@/contexts/CurrencyContext";
 
 function Router() {
   return (
@@ -33,13 +34,15 @@ function App() {
 
   return (
     <LanguageProvider>
-      <LoadingOverlay isLoading={loading} />
-      <Header />
-      <main>
-        <Router />
-      </main>
-      <Footer />
-      <BackToTop />
+      <CurrencyProvider>
+        <LoadingOverlay isLoading={loading} />
+        <Header />
+        <main>
+          <Router />
+        </main>
+        <Footer />
+        <BackToTop />
+      </CurrencyProvider>
     </LanguageProvider>
   );
 }
