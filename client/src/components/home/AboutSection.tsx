@@ -19,9 +19,9 @@ export function AboutSection() {
       title: "Una Historia de Excelencia",
       subtitle: "Abriendo el mercado latinoamericano",
       description: [
-        "Global Bids surgió como el primer portal especializado en abrir el mercado latinoamericano para equipos, piezas, partes y otros activos de alta calidad, revolucionando la forma en que las empresas acceden a maquinaria industrial.",
-        "Nuestra experiencia en el rubro nos ha permitido consolidarnos como la plataforma líder en subastas y comercialización de activos industriales, ofreciendo servicios con los más altos estándares de transparencia, rentabilidad y rapidez.",
-        "Hoy contamos con una red global de proveedores y clientes que confían en nuestra capacidad para conectar la oferta y demanda de equipos especializados en toda Latinoamérica, apoyados por una robusta plataforma tecnológica y un equipo de expertos en valoración."
+        "Global Bids nace de un Joint-Venture entre North Country Auction, empresa Americana experta en subastas, y Grupo Prelco, quienes han estado en el rubro de minería más de 20 años.",
+        "En Global Bids contamos con acceso a más de 950,000 clientes internacionales a través de nuestras plataformas online, lo que nos permite conectar la oferta sudamericana con la demanda global de manera digital, segmentada y transparente.",
+        "Nuestro enfoque garantiza el mejor valor para los consignatarios al encontrar compradores en mercados donde estos activos tienen alta demanda."
       ],
       cta: "Conoce nuestra historia",
       image: "https://images.pexels.com/photos/1216589/pexels-photo-1216589.jpeg?auto=compress&cs=tinysrgb&w=1600",

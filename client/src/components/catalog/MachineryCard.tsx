@@ -26,9 +26,6 @@ export function MachineryCard({ item, index }: MachineryCardProps) {
           alt={name} 
           className="w-full h-48 object-cover" 
         />
-        <div className="absolute top-0 left-0 bg-primary text-white font-bold px-3 py-1 m-2 rounded text-sm">
-          {typeLabels[type]}
-        </div>
       </div>
       
       <div className="p-5">

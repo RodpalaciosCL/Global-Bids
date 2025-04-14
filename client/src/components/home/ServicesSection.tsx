@@ -19,14 +19,14 @@ export function ServicesSection() {
       icon: 'fa-database',
       color: 'from-green-500 to-green-600',
       title: 'Gestión de Obsoletos',
-      subtitle: 'Optimización de inventarios',
-      description: 'Servicio integral para la gestión eficiente de inventarios obsoletos. Incluye identificación, catalogación y comercialización, ayudando a recuperar valor de equipos en desuso.'
+      subtitle: 'Tecnología de punta',
+      description: 'Pioneros en tecnología de punta para detección, inspección, visualización y contabilización de assets y equipos con AI y Visión Computacional.'
     },
     {
       icon: 'fa-search',
       color: 'from-purple-500 to-purple-600',
-      title: 'Marketing Digital',
-      subtitle: 'Estrategias personalizadas',
+      title: 'Marketing Intelligence',
+      subtitle: 'Estrategias 1:1 personalizadas',
       description: 'Desarrollamos campañas especializadas para el sector de maquinaria pesada, conectando vendedores con compradores específicos y satisfaciendo necesidades 1:1 en tiempo récord.'
     },
     {
@@ -39,16 +39,16 @@ export function ServicesSection() {
     {
       icon: 'fa-truck',
       color: 'from-orange-500 to-orange-600',
-      title: 'Logística Internacional',
-      subtitle: 'Transporte especializado',
-      description: 'Soluciones logísticas integrales para el transporte nacional e internacional de equipos pesados. Manejamos toda la documentación, permisos y seguros necesarios.'
+      title: 'Apoyo Logístico',
+      subtitle: 'Soporte en transporte',
+      description: 'Brindamos apoyo en servicios logísticos para el transporte nacional e internacional de equipos pesados, facilitando la documentación, permisos y seguros necesarios.'
     },
     {
       icon: 'fa-camera',
       color: 'from-cyan-500 to-cyan-600',
-      title: 'Fotografía Industrial',
-      subtitle: 'Documentación profesional',
-      description: 'Servicio de fotografía y videografía avanzada, incluyendo tecnología de realidad virtual, para crear experiencias inmersivas que potencian las ventas de maquinaria.'
+      title: 'Documentación Visual',
+      subtitle: 'Tecnología avanzada',
+      description: 'Servicio de fotografía 360, videos interactivos, modelos 3D y acceso remoto al asset, entre otras soluciones que potencian la visibilidad y ventas de equipos.'
     }
   ];
 

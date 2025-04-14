@@ -16,10 +16,10 @@ export function StatsSection() {
   const isInView = useInView(sectionRef, { once: true, amount: 0.3 });
   
   const stats: StatItem[] = [
-    { icon: 'fa-gavel', value: 2500, label: 'Subastas Realizadas' },
-    { icon: 'fa-users', value: 1, label: 'Clientes Satisfechos', suffix: 'M' },
-    { icon: 'fa-truck-monster', value: 9800, label: 'Máquinas Vendidas Últimos 24 Meses' },
-    { icon: 'fa-dollar-sign', value: 450, label: 'Vendidos Últimos 24 Meses', prefix: '$', suffix: 'M' }
+    { icon: 'fa-clock', value: 15, label: 'Años de experiencia', suffix: '+' },
+    { icon: 'fa-truck-monster', value: 1500, label: 'Maquinarias vendidas', suffix: '+' },
+    { icon: 'fa-globe', value: 12, label: 'Países cubiertos' },
+    { icon: 'fa-smile', value: 98, label: 'Clientes satisfechos', suffix: '%' }
   ];
   
   return (
