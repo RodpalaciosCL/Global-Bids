@@ -227,9 +227,12 @@ export function CatalogSection() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 mt-4">
               {/* Price range */}
               <div className="lg:col-span-2">
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Rango de Precio
-                </label>
+                <div className="flex justify-between items-center mb-1">
+                  <label className="block text-sm font-medium text-gray-700">
+                    Rango de Precio
+                  </label>
+                  <CurrencySelector />
+                </div>
                 <div className="flex items-center space-x-2">
                   <input
                     type="number"

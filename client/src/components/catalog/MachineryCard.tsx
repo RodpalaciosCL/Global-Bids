@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { slideUp } from '@/lib/animations';
 import { Machinery, typeLabels, conditionLabels } from '@/types/machinery';
+import { useCurrency } from '@/contexts/CurrencyContext';
 
 interface MachineryCardProps {
   item: Machinery;
@@ -8,10 +9,13 @@ interface MachineryCardProps {
 }
 
 export function MachineryCard({ item, index }: MachineryCardProps) {
+  const { convertPrice, formatPrice } = useCurrency();
   const { 
     id, name, price, type, brand, year, hours, 
     kilometers, condition, description, image, isSold 
   } = item;
+  
+  const displayPrice = convertPrice(price);
   
   return (
     <motion.div 
@@ -32,7 +36,7 @@ export function MachineryCard({ item, index }: MachineryCardProps) {
         <div className="flex justify-between items-start mb-2">
           <h3 className="font-heading font-bold text-lg text-primary line-clamp-2">{name}</h3>
           <div className="bg-secondary text-primary font-bold px-2 py-1 rounded text-sm ml-2 flex-shrink-0">
-            ${price.toLocaleString()}
+            {formatPrice(displayPrice)}
           </div>
         </div>
         
