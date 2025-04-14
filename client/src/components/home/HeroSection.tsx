@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { fadeIn, slideUp } from '@/lib/animations';
+import { openRegistrationForm } from './RegistrationForm';
 
 export function HeroSection() {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -31,6 +32,10 @@ export function HeroSection() {
     { value: "2,000+", label: "Máquinas en catálogo", icon: "fa-tools" },
     { value: "99%", label: "Clientes satisfechos", icon: "fa-smile" }
   ];
+
+  const openRegistration = () => {
+    openRegistrationForm();
+  };
   
   return (
     <section id="inicio" className="relative overflow-hidden bg-white">
@@ -162,27 +167,14 @@ export function HeroSection() {
                   <h3 className="text-white font-bold text-2xl mb-6">Próximas Subastas</h3>
                   
                   {/* Auction Item 1 */}
-                  <a 
-                    href="#registro"
+                  <div 
+                    onClick={openRegistration}
                     className="bg-white/10 rounded-xl p-4 mb-4 hover:bg-white/20 transition-colors cursor-pointer block"
                   >
                     <div className="flex justify-between items-start mb-3">
                       <span className="font-medium text-white text-lg">Subasta</span>
-                      <div className="bg-primary/80 text-white text-xs py-1 px-2 rounded-lg flex items-center gap-1">
-                        <div className="flex flex-col items-center">
-                          <div className="font-bold text-xs">01</div>
-                          <div className="text-[8px] opacity-80">días</div>
-                        </div>
-                        <div className="mx-1 font-bold">:</div>
-                        <div className="flex flex-col items-center">
-                          <div className="font-bold text-xs">12</div>
-                          <div className="text-[8px] opacity-80">hrs</div>
-                        </div>
-                        <div className="mx-1 font-bold">:</div>
-                        <div className="flex flex-col items-center">
-                          <div className="font-bold text-xs">00</div>
-                          <div className="text-[8px] opacity-80">min</div>
-                        </div>
+                      <div className="bg-primary/80 text-white text-xs py-1 px-2 rounded-lg">
+                        En 1 día
                       </div>
                     </div>
                     <p className="text-white/80 text-sm mb-2">Equipos Mineros</p>
@@ -196,11 +188,11 @@ export function HeroSection() {
                         25 lotes
                       </span>
                     </div>
-                  </a>
+                  </div>
                   
                   {/* Auction Item 2 */}
-                  <a 
-                    href="#registro"
+                  <div 
+                    onClick={openRegistration}
                     className="bg-white/10 rounded-xl p-4 mb-4 hover:bg-white/20 transition-colors cursor-pointer block"
                   >
                     <div className="flex justify-between items-start mb-3">
@@ -220,11 +212,11 @@ export function HeroSection() {
                         42 lotes
                       </span>
                     </div>
-                  </a>
+                  </div>
                   
                   {/* Auction Item 3 */}
-                  <a 
-                    href="#registro"
+                  <div 
+                    onClick={openRegistration}
                     className="bg-white/10 rounded-xl p-4 mb-4 hover:bg-white/20 transition-colors cursor-pointer block"
                   >
                     <div className="flex justify-between items-start mb-3">
@@ -244,7 +236,7 @@ export function HeroSection() {
                         38 lotes
                       </span>
                     </div>
-                  </a>
+                  </div>
                   
                   {/* See All Link */}
                   <a
