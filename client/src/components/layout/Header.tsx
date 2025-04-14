@@ -163,20 +163,7 @@ export function Header() {
               ))}
             </nav>
             
-            <motion.a 
-              href="https://subastas-externas.com" 
-              target="_blank"
-              rel="noopener noreferrer"
-              className="bg-primary hover:bg-primary/90 text-white px-5 py-2.5 rounded-full font-semibold transition-all duration-300 flex items-center justify-center shadow-md border-2 border-primary/20"
-              whileHover={{ scale: 1.05, boxShadow: "0 10px 25px -5px rgba(220, 38, 38, 0.2)" }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <i className="fas fa-gavel mr-2"></i>
-              <span>Ir a Remates</span>
-              <div className="ml-2 h-4 w-4 bg-white/20 rounded-full flex items-center justify-center">
-                <i className="fas fa-arrow-right text-[10px]"></i>
-              </div>
-            </motion.a>
+
           </div>
         </div>
         
@@ -227,21 +214,7 @@ export function Header() {
                 ))}
               </nav>
               
-              <div className="p-4 bg-gray-50">
-                <a 
-                  href="https://subastas-externas.com" 
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="bg-primary hover:bg-primary/90 text-white py-3 px-4 rounded-full font-medium transition-colors flex items-center justify-center w-full shadow-sm border-2 border-primary/20"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  <i className="fas fa-gavel mr-2"></i>
-                  <span>Participar en Remates</span>
-                  <div className="ml-2 h-4 w-4 bg-white/20 rounded-full flex items-center justify-center">
-                    <i className="fas fa-arrow-right text-[10px]"></i>
-                  </div>
-                </a>
-              </div>
+
             </motion.div>
           )}
         </AnimatePresence>

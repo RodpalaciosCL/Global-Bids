@@ -24,7 +24,7 @@ export function ActionCTA() {
             className="font-heading text-3xl md:text-4xl font-bold mb-4"
             variants={slideUp}
           >
-            ¿Listo para participar en nuestras subastas?
+            ¿Listo para participar en nuestros eventos?
           </motion.h2>
           <motion.p 
             className="text-gray-300 mb-8"

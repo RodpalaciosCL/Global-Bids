@@ -12,6 +12,13 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Checkbox } from '@/components/ui/checkbox';
 import { LoadingOverlay } from '@/components/ui/LoadingOverlay';
+import { 
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
 
 // Extend the registration schema with additional validation
 const registrationFormSchema = insertRegistrationSchema.extend({
@@ -26,7 +33,24 @@ type RegistrationFormData = z.infer<typeof registrationFormSchema>;
 
 export function RegistrationForm() {
   const [isFormOpen, setIsFormOpen] = useState(false);
+  const [countryCode, setCountryCode] = useState('+56'); // Chile por defecto
   const { toast } = useToast();
+
+  // Lista de países comunes en Latinoamérica y sus códigos
+  const countries = [
+    { code: '+56', name: 'Chile' },
+    { code: '+54', name: 'Argentina' },
+    { code: '+55', name: 'Brasil' },
+    { code: '+51', name: 'Perú' },
+    { code: '+57', name: 'Colombia' },
+    { code: '+52', name: 'México' },
+    { code: '+593', name: 'Ecuador' },
+    { code: '+598', name: 'Uruguay' },
+    { code: '+591', name: 'Bolivia' },
+    { code: '+58', name: 'Venezuela' },
+    { code: '+1', name: 'Estados Unidos / Canadá' },
+    { code: '+34', name: 'España' },
+  ];
   
   // Form with validation
   const form = useForm<RegistrationFormData>({
@@ -161,12 +185,43 @@ export function RegistrationForm() {
 
             <div>
               <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">Teléfono</label>
-              <Input
-                id="phone"
-                placeholder="+56 9 XXXX XXXX"
-                {...form.register('phone')}
-                className={form.formState.errors.phone ? 'border-red-500' : ''}
-              />
+              <div className="flex gap-2">
+                <div className="w-1/3">
+                  <Select 
+                    value={countryCode} 
+                    onValueChange={(value) => {
+                      setCountryCode(value);
+                      // Actualiza el valor del teléfono con el nuevo código de país
+                      const phoneNumber = form.getValues('phone').replace(/^\+\d+\s/, '');
+                      form.setValue('phone', `${value} ${phoneNumber}`);
+                    }}
+                  >
+                    <SelectTrigger>
+                      <SelectValue placeholder="País" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {countries.map((country) => (
+                        <SelectItem key={country.code} value={country.code}>
+                          {country.code} {country.name}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+                <div className="flex-1">
+                  <Input
+                    id="phone"
+                    placeholder="9 XXXX XXXX"
+                    value={form.getValues('phone').replace(/^\+\d+\s/, '')}
+                    onChange={(e) => {
+                      // Elimina cualquier código de país existente y agrega el seleccionado
+                      const phoneWithoutCode = e.target.value.replace(/^\+\d+\s/, '');
+                      form.setValue('phone', `${countryCode} ${phoneWithoutCode}`);
+                    }}
+                    className={form.formState.errors.phone ? 'border-red-500' : ''}
+                  />
+                </div>
+              </div>
               {form.formState.errors.phone && (
                 <p className="text-red-500 text-xs mt-1">{form.formState.errors.phone.message}</p>
               )}
