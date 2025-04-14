@@ -1,12 +1,14 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'wouter';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { Button } from '@/components/ui/button';
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState('inicio');
+  const [currentLanguage, setCurrentLanguage] = useState('es'); // es = español, en = inglés
 
   useEffect(() => {
     const handleScroll = () => {
@@ -66,6 +68,40 @@ export function Header() {
       }`}
     >
       <div className="container mx-auto px-4">
+        {/* Language Selector (top right, absolute) */}
+        <div className="absolute top-2 right-4 md:right-6 z-50">
+          <Popover>
+            <PopoverTrigger asChild>
+              <motion.button
+                className="flex items-center space-x-1 px-3 py-1.5 rounded-full text-sm text-gray-700 bg-gray-100 hover:bg-gray-200 transition-colors"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <span>{currentLanguage === 'es' ? 'ES' : 'EN'}</span>
+                <i className="fas fa-globe text-xs text-primary"></i>
+              </motion.button>
+            </PopoverTrigger>
+            <PopoverContent className="w-32 p-2">
+              <div className="flex flex-col space-y-1 text-sm">
+                <button 
+                  className={`flex items-center space-x-2 px-3 py-2 rounded hover:bg-gray-100 ${currentLanguage === 'es' ? 'bg-primary/10 text-primary font-medium' : ''}`}
+                  onClick={() => setCurrentLanguage('es')}
+                >
+                  <span>Español</span>
+                  {currentLanguage === 'es' && <i className="fas fa-check text-xs ml-auto"></i>}
+                </button>
+                <button 
+                  className={`flex items-center space-x-2 px-3 py-2 rounded hover:bg-gray-100 ${currentLanguage === 'en' ? 'bg-primary/10 text-primary font-medium' : ''}`}
+                  onClick={() => setCurrentLanguage('en')}
+                >
+                  <span>English</span>
+                  {currentLanguage === 'en' && <i className="fas fa-check text-xs ml-auto"></i>}
+                </button>
+              </div>
+            </PopoverContent>
+          </Popover>
+        </div>
+        
         <div className="flex justify-between items-center">
           {/* Logo & Brand Name */}
           <Link href="/">
@@ -80,13 +116,10 @@ export function Header() {
                   alt="Global Bids Logo" 
                   className="h-14 w-auto object-contain rounded-lg shadow-sm border-2 border-primary/20"
                 />
-                <div className="absolute -right-2 -bottom-1 bg-primary text-white text-[10px] px-1.5 py-0.5 rounded font-bold shadow-sm">
-                  PRO
-                </div>
               </div>
               <div>
                 <div className="font-heading font-bold text-2xl text-primary tracking-tight">Global Bids</div>
-                <div className="text-xs text-gray-600 -mt-1 font-medium">Subastas de Maquinaria <span className="text-primary">•</span> Premium</div>
+                <div className="text-xs text-gray-600 -mt-1 font-medium">Subastas de Maquinaria</div>
               </div>
             </motion.div>
           </Link>
@@ -165,13 +198,10 @@ export function Header() {
                       alt="Global Bids Logo" 
                       className="h-12 w-auto object-contain rounded-lg shadow-sm border-2 border-primary/20"
                     />
-                    <div className="absolute -right-2 -bottom-1 bg-primary text-white text-[8px] px-1 py-0.5 rounded font-bold shadow-sm">
-                      PRO
-                    </div>
                   </div>
                   <div>
                     <div className="font-heading font-bold text-xl text-primary tracking-tight">Global Bids</div>
-                    <div className="text-xs text-gray-600 -mt-1 font-medium">Subastas Premium</div>
+                    <div className="text-xs text-gray-600 -mt-1 font-medium">Subastas de Maquinaria</div>
                   </div>
                 </div>
                 <div className="h-px w-full bg-gray-100 mb-2"></div>

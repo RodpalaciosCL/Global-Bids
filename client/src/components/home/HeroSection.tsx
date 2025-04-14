@@ -7,22 +7,10 @@ export function HeroSection() {
   
   const slides = [
     {
-      title: "Subastas de Maquinaria Premium",
+      title: "Subastas de Maquinaria",
       subtitle: "Accede a equipos de clase mundial verificados por expertos",
       image: "https://images.pexels.com/photos/2760243/pexels-photo-2760243.jpeg?auto=compress&cs=tinysrgb&w=1600",
       icon: "fa-gavel"
-    },
-    {
-      title: "Equipos Mineros Especializados",
-      subtitle: "Excavadoras, camiones y equipos de movimiento de tierra",
-      image: "https://images.pexels.com/photos/2086795/pexels-photo-2086795.jpeg?auto=compress&cs=tinysrgb&w=1600",
-      icon: "fa-truck-monster"
-    },
-    {
-      title: "Valoraciones Certificadas",
-      subtitle: "Precios justos y transparentes con documentación completa",
-      image: "https://images.pexels.com/photos/259984/pexels-photo-259984.jpeg?auto=compress&cs=tinysrgb&w=1600",
-      icon: "fa-certificate"
     }
   ];
   
@@ -88,7 +76,7 @@ export function HeroSection() {
                       >
                         <div className="inline-flex items-center bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full mb-6">
                           <i className={`fas ${slide.icon} text-white mr-2`}></i>
-                          <span className="text-white font-medium">Global Bids Premium</span>
+                          <span className="text-white font-medium">Global Bids</span>
                         </div>
                         
                         <h1 className="font-heading text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight whitespace-pre-line">
@@ -214,32 +202,7 @@ export function HeroSection() {
           </div>
         </div>
         
-        {/* Stats Bar */}
-        <div className="relative z-10 mt-auto">
-          <div className="container mx-auto px-4 pb-8">
-            <div className="bg-white/10 backdrop-blur-md rounded-2xl p-5 border border-white/20">
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                {stats.map((stat, index) => (
-                  <motion.div 
-                    key={index}
-                    className="flex items-center justify-center"
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: 0.1 * index + 0.5 }}
-                  >
-                    <div className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center mr-4 text-white">
-                      <i className={`fas ${stat.icon} text-xl`}></i>
-                    </div>
-                    <div>
-                      <div className="text-white font-bold text-2xl">{stat.value}</div>
-                      <div className="text-white/80 text-sm">{stat.label}</div>
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
+
       </div>
     </section>
   );
