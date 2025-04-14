@@ -8,6 +8,7 @@ import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { useToast } from '@/hooks/use-toast';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 // Form validation schema
 const contactFormSchema = z.object({
@@ -24,6 +25,7 @@ export function ContactSection() {
   const sectionRef = useRef(null);
   const isInView = useInView(sectionRef, { once: true, amount: 0.2 });
   const { toast } = useToast();
+  const { t, language } = useLanguage();
   
   const { register, handleSubmit, reset, formState: { errors } } = useForm<ContactFormData>({
     resolver: zodResolver(contactFormSchema),
@@ -42,15 +44,15 @@ export function ContactSection() {
     },
     onSuccess: () => {
       toast({
-        title: "Mensaje enviado",
-        description: "Gracias por contactarnos. Te responderemos a la brevedad.",
+        title: t('contact.successTitle'),
+        description: t('contact.successMsg'),
       });
       reset();
     },
     onError: (error) => {
       toast({
-        title: "Error al enviar mensaje",
-        description: error.message || "Por favor intenta nuevamente más tarde.",
+        title: t('contact.errorTitle'),
+        description: error.message || t('contact.errorMsg'),
         variant: "destructive"
       });
     }
@@ -89,9 +91,9 @@ export function ContactSection() {
           animate={isInView ? "visible" : "hidden"}
           variants={fadeIn}
         >
-          <h2 className="font-heading text-3xl md:text-4xl font-bold mb-4">Contáctanos</h2>
+          <h2 className="font-heading text-3xl md:text-4xl font-bold mb-4">{t('contact.title')}</h2>
           <div className="w-20 h-1 bg-secondary mx-auto mb-6"></div>
-          <p className="max-w-3xl mx-auto">Estamos aquí para ayudarte</p>
+          <p className="max-w-3xl mx-auto">{t('contact.subtitle')}</p>
         </motion.div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
