@@ -27,9 +27,8 @@ export function Footer() {
       ]
     },
     {
-      title: "Ayuda",
+      title: "Enlaces Legales",
       links: [
-        { label: "Preguntas Frecuentes", href: "#" },
         { label: "Términos y Condiciones", href: "#" },
         { label: "Política de Privacidad", href: "#" },
         { label: "Soporte", href: "#contacto" },
@@ -40,10 +39,9 @@ export function Footer() {
   
   // Oficinas
   const offices = [
-    { city: "La Negra", region: "Antofagasta, Chile", icon: "fa-map-marker-alt" },
-    { city: "Sierra Gorda", region: "Antofagasta, Chile", icon: "fa-map-marker-alt" },
-    { city: "Vitacura", region: "Santiago, Chile", icon: "fa-map-marker-alt" },
-    { city: "Boston", region: "Massachusetts, USA", icon: "fa-map-marker-alt" }
+    { city: "Casa Matriz", region: "Luis Carrera 1263 oficina 301, Vitacura, Chile", icon: "fa-map-marker-alt" },
+    { city: "Centro Operaciones Norte", region: "Sierra Gorda, Antofagasta, Chile", icon: "fa-map-marker-alt" },
+    { city: "Massachusetts Office", region: "Boston, Massachusetts, USA", icon: "fa-map-marker-alt" }
   ];
   
   // Redes sociales
@@ -156,6 +154,10 @@ export function Footer() {
             <div className="flex items-center text-gray-400">
               <i className="fas fa-phone-alt text-primary/80 mr-1.5"></i>
               <span className="text-xs">+56 2 2756 9900</span>
+            </div>
+            <div className="flex items-center text-gray-400">
+              <i className="fas fa-envelope text-primary/80 mr-1.5"></i>
+              <span className="text-xs">auctions@theglobalbid.com</span>
             </div>
           </div>
           
