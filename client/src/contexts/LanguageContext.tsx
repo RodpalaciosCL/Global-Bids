@@ -91,6 +91,8 @@ const translations: Record<Language, Record<string, string>> = {
     'contact.successMsg': 'Gracias por contactarnos. Te responderemos a la brevedad.',
     'contact.errorTitle': 'Error al enviar mensaje',
     'contact.errorMsg': 'Por favor intenta nuevamente más tarde.',
+    'contact.phone': 'Teléfono',
+    'contact.emailLabel': 'Email',
     
     // Registro
     'registration.title': 'Inscríbete en nuestra plataforma',
@@ -252,6 +254,8 @@ const translations: Record<Language, Record<string, string>> = {
     'contact.successMsg': 'Thank you for contacting us. We will respond shortly.',
     'contact.errorTitle': 'Error sending message',
     'contact.errorMsg': 'Please try again later.',
+    'contact.phone': 'Phone',
+    'contact.emailLabel': 'Email',
     
     // Registration
     'registration.title': 'Register on our platform',

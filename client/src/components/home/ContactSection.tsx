@@ -63,8 +63,8 @@ export function ContactSection() {
     contactMutation.mutate(data);
   };
 
-  // Locations from the screenshot
-  const locations = [
+  // Locations based on language
+  const locations = language === 'es' ? [
     {
       name: "Centro Logístico",
       address: "La Negra, Antofagasta, Chile"
@@ -75,6 +75,23 @@ export function ContactSection() {
     },
     {
       name: "Centro Operaciones Norte",
+      address: "Sierra Gorda, Antofagasta, Chile"
+    },
+    {
+      name: "Oficina Massachusetts",
+      address: "Boston, Massachusetts, USA"
+    }
+  ] : [
+    {
+      name: "Logistics Center",
+      address: "La Negra, Antofagasta, Chile"
+    },
+    {
+      name: "Headquarters",
+      address: "Luis Carrera 1263 office 301, Vitacura, Chile"
+    },
+    {
+      name: "Northern Operations Center",
       address: "Sierra Gorda, Antofagasta, Chile"
     },
     {
@@ -208,7 +225,7 @@ export function ContactSection() {
                   {...register('subject')}
                   defaultValue="info"
                 >
-                  <option value="info">Información general</option>
+                  <option value="info">{language === 'es' ? 'Información general' : 'General information'}</option>
                 </select>
               </div>
               
