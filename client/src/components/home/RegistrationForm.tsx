@@ -12,13 +12,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Checkbox } from '@/components/ui/checkbox';
 import { LoadingOverlay } from '@/components/ui/LoadingOverlay';
-import { 
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select';
+import ReactFlagsSelect from 'react-flags-select';
 
 // Extend the registration schema with additional validation
 const registrationFormSchema = insertRegistrationSchema.extend({
@@ -33,24 +27,36 @@ type RegistrationFormData = z.infer<typeof registrationFormSchema>;
 
 export function RegistrationForm() {
   const [isFormOpen, setIsFormOpen] = useState(false);
-  const [countryCode, setCountryCode] = useState('+56'); // Chile por defecto
+  const [selectedCountry, setSelectedCountry] = useState("CL"); // Chile por defecto
   const { toast } = useToast();
 
-  // Lista de países comunes en Latinoamérica y sus códigos
-  const countries = [
-    { code: '+56', name: 'Chile' },
-    { code: '+54', name: 'Argentina' },
-    { code: '+55', name: 'Brasil' },
-    { code: '+51', name: 'Perú' },
-    { code: '+57', name: 'Colombia' },
-    { code: '+52', name: 'México' },
-    { code: '+593', name: 'Ecuador' },
-    { code: '+598', name: 'Uruguay' },
-    { code: '+591', name: 'Bolivia' },
-    { code: '+58', name: 'Venezuela' },
-    { code: '+1', name: 'Estados Unidos / Canadá' },
-    { code: '+34', name: 'España' },
-  ];
+  // Mapa de códigos de país a códigos telefónicos
+  const countryToCode: Record<string, string> = {
+    "CL": "+56", // Chile
+    "AR": "+54", // Argentina
+    "BR": "+55", // Brasil
+    "PE": "+51", // Perú
+    "CO": "+57", // Colombia
+    "MX": "+52", // México
+    "EC": "+593", // Ecuador
+    "UY": "+598", // Uruguay
+    "BO": "+591", // Bolivia
+    "VE": "+58", // Venezuela
+    "US": "+1", // Estados Unidos
+    "CA": "+1", // Canadá
+    "ES": "+34", // España
+    "DE": "+49", // Alemania
+    "FR": "+33", // Francia
+    "IT": "+39", // Italia
+    "GB": "+44", // Reino Unido
+    "PT": "+351", // Portugal
+    "NL": "+31", // Países Bajos
+    "CH": "+41", // Suiza
+    "AU": "+61", // Australia
+  };
+  
+  // Obtener el código telefónico actual basado en el país seleccionado
+  const getCountryCode = () => countryToCode[selectedCountry] || "+56";
   
   // Form with validation
   const form = useForm<RegistrationFormData>({
@@ -186,37 +192,34 @@ export function RegistrationForm() {
             <div>
               <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">Teléfono</label>
               <div className="flex gap-2">
-                <div className="w-1/3">
-                  <Select 
-                    value={countryCode} 
-                    onValueChange={(value) => {
-                      setCountryCode(value);
+                <div className="w-2/5">
+                  <ReactFlagsSelect
+                    selected={selectedCountry}
+                    onSelect={(code) => {
+                      setSelectedCountry(code);
                       // Actualiza el valor del teléfono con el nuevo código de país
                       const phoneNumber = form.getValues('phone').replace(/^\+\d+\s/, '');
-                      form.setValue('phone', `${value} ${phoneNumber}`);
+                      form.setValue('phone', `${getCountryCode()} ${phoneNumber}`);
                     }}
-                  >
-                    <SelectTrigger>
-                      <SelectValue placeholder="País" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {countries.map((country) => (
-                        <SelectItem key={country.code} value={country.code}>
-                          {country.code} {country.name}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
+                    countries={Object.keys(countryToCode)}
+                    customLabels={Object.keys(countryToCode).reduce((acc, code) => {
+                      acc[code] = `${countryToCode[code]} ${code}`;
+                      return acc;
+                    }, {} as Record<string, string>)}
+                    placeholder="Selecciona"
+                    searchable={true}
+                    selectButtonClassName="!border-gray-300 rounded-md h-10 !bg-white w-full"
+                  />
                 </div>
                 <div className="flex-1">
                   <Input
                     id="phone"
                     placeholder="9 XXXX XXXX"
-                    value={form.getValues('phone').replace(/^\+\d+\s/, '')}
+                    value={form.getValues('phone')?.replace(/^\+\d+\s/, '') || ''}
                     onChange={(e) => {
                       // Elimina cualquier código de país existente y agrega el seleccionado
                       const phoneWithoutCode = e.target.value.replace(/^\+\d+\s/, '');
-                      form.setValue('phone', `${countryCode} ${phoneWithoutCode}`);
+                      form.setValue('phone', `${getCountryCode()} ${phoneWithoutCode}`);
                     }}
                     className={form.formState.errors.phone ? 'border-red-500' : ''}
                   />

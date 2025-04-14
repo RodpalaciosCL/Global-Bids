@@ -25,15 +25,6 @@ export function Footer() {
         { label: "Transporte", href: "#" },
         { label: "Financiamiento", href: "#" }
       ]
-    },
-    {
-      title: "Enlaces Legales",
-      links: [
-        { label: "Términos y Condiciones", href: "#" },
-        { label: "Política de Privacidad", href: "#" },
-        { label: "Soporte", href: "#contacto" },
-        { label: "Cookies", href: "#" }
-      ]
     }
   ];
   
@@ -120,12 +111,12 @@ export function Footer() {
           
           {/* Enlaces rápidos */}
           <div className="lg:col-span-5">
-            <div className="grid grid-cols-3 gap-4">
+            <div className="grid grid-cols-2 gap-4">
               {footerLinks.map((category, index) => (
                 <div key={index}>
                   <h3 className="text-white font-medium text-sm mb-3">{category.title}</h3>
                   <ul className="space-y-1.5">
-                    {category.links.slice(0, 4).map((link, linkIndex) => (
+                    {category.links.slice(0, 5).map((link, linkIndex) => (
                       <li key={linkIndex}>
                         <a href={link.href} className="text-gray-400 hover:text-primary transition-colors text-sm">
                           {link.label}
