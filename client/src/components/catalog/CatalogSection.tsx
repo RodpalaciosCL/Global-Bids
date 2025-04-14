@@ -108,11 +108,11 @@ export function CatalogSection() {
           variants={fadeIn}
         >
           <h2 className="font-heading text-3xl md:text-4xl font-bold mb-4 text-primary">
-            Catálogo de Maquinaria
+            Catálogo de Equipos
           </h2>
           <div className="w-20 h-1 bg-secondary mx-auto mb-6"></div>
           <p className="max-w-3xl mx-auto text-gray-600">
-            Explora nuestra amplia selección de maquinaria pesada disponible
+            Explora nuestra amplia selección de equipos pesados disponibles
             para remate. Utiliza los filtros para encontrar exactamente lo que
             necesitas.
           </p>
@@ -156,7 +156,7 @@ export function CatalogSection() {
                   htmlFor="type-filter"
                   className="block text-sm font-medium text-gray-700 mb-1"
                 >
-                  Tipo de Maquinaria
+                  Tipo de Equipo
                 </label>
                 <select
                   id="type-filter"

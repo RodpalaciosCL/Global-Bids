@@ -171,7 +171,7 @@ export function SoporteSection() {
                 </div>
                 <div>
                   <h4 className="font-bold text-lg">Correo Electrónico</h4>
-                  <p className="text-gray-600">soporte@globalbids.com</p>
+                  <p className="text-gray-600">auctions@theglobalbid.com</p>
                   <p className="text-sm text-gray-500">Respuesta en menos de 24 horas</p>
                 </div>
               </div>
@@ -182,7 +182,7 @@ export function SoporteSection() {
                 </div>
                 <div>
                   <h4 className="font-bold text-lg">Oficina Central</h4>
-                  <p className="text-gray-600">Av. Apoquindo 5555, Las Condes</p>
+                  <p className="text-gray-600">Luis Carrera 1263 oficina 301, Vitacura</p>
                   <p className="text-sm text-gray-500">Santiago, Chile</p>
                 </div>
               </div>
