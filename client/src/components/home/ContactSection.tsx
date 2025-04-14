@@ -11,21 +11,22 @@ import { useToast } from '@/hooks/use-toast';
 import { useLanguage } from '@/contexts/LanguageContext';
 
 // Form validation schema
-const contactFormSchema = z.object({
-  name: z.string().min(3, "Nombre debe tener al menos 3 caracteres"),
-  email: z.string().email("Email inválido"),
+const getContactFormSchema = (language: string) => z.object({
+  name: z.string().min(3, language === 'es' ? "Nombre debe tener al menos 3 caracteres" : "Name must be at least 3 characters"),
+  email: z.string().email(language === 'es' ? "Email inválido" : "Invalid email"),
   phone: z.string().optional(),
-  subject: z.string().min(1, "Por favor selecciona un asunto"),
-  message: z.string().min(10, "Mensaje debe tener al menos 10 caracteres")
+  subject: z.string().min(1, language === 'es' ? "Por favor selecciona un asunto" : "Please select a subject"),
+  message: z.string().min(10, language === 'es' ? "Mensaje debe tener al menos 10 caracteres" : "Message must be at least 10 characters")
 });
-
-type ContactFormData = z.infer<typeof contactFormSchema>;
 
 export function ContactSection() {
   const sectionRef = useRef(null);
   const isInView = useInView(sectionRef, { once: true, amount: 0.2 });
   const { toast } = useToast();
   const { t, language } = useLanguage();
+  
+  const contactFormSchema = getContactFormSchema(language);
+  type ContactFormData = z.infer<typeof contactFormSchema>;
   
   const { register, handleSubmit, reset, formState: { errors } } = useForm<ContactFormData>({
     resolver: zodResolver(contactFormSchema),
@@ -128,7 +129,7 @@ export function ContactSection() {
                 <i className="fas fa-phone-alt"></i>
               </div>
               <div>
-                <h4 className="font-medium text-lg">Teléfono</h4>
+                <h4 className="font-medium text-lg">{t('contact.phone')}</h4>
                 <p className="text-gray-300">+56 2 2756 9900</p>
               </div>
             </motion.div>
@@ -141,7 +142,7 @@ export function ContactSection() {
                 <i className="fas fa-envelope"></i>
               </div>
               <div>
-                <h4 className="font-medium text-lg">Email</h4>
+                <h4 className="font-medium text-lg">{t('contact.emailLabel')}</h4>
                 <p className="text-gray-300">auctions@theglobalbid.com</p>
               </div>
             </motion.div>
@@ -161,7 +162,7 @@ export function ContactSection() {
               <div>
                 <input 
                   id="name" 
-                  placeholder="Nombre"
+                  placeholder={t('contact.name')}
                   {...register('name')}
                   className={`w-full p-4 border ${errors.name ? 'border-red-500' : 'border-gray-300'} rounded-lg focus:ring-2 focus:ring-secondary focus:border-secondary transition`}
                 />
@@ -174,7 +175,7 @@ export function ContactSection() {
                 <input 
                   id="email" 
                   type="email"
-                  placeholder="Email"
+                  placeholder={t('contact.email')}
                   {...register('email')}
                   className={`w-full p-4 border ${errors.email ? 'border-red-500' : 'border-gray-300'} rounded-lg focus:ring-2 focus:ring-secondary focus:border-secondary transition`}
                 />
@@ -187,7 +188,7 @@ export function ContactSection() {
                 <textarea 
                   id="message"
                   rows={5}
-                  placeholder="Mensaje"
+                  placeholder={t('contact.message')}
                   {...register('message')}
                   className={`w-full p-4 border ${errors.message ? 'border-red-500' : 'border-gray-300'} rounded-lg focus:ring-2 focus:ring-secondary focus:border-secondary transition`}
                 ></textarea>
@@ -222,12 +223,12 @@ export function ContactSection() {
                       <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                       <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                     </svg>
-                    Enviando...
+                    {t('contact.sending')}
                   </>
                 ) : (
                   <>
                     <i className="fas fa-paper-plane mr-2"></i>
-                    Enviar mensaje
+                    {t('contact.send')}
                   </>
                 )}
               </button>
