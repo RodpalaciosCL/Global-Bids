@@ -131,7 +131,7 @@ export function RegistrationForm() {
   };
   
   return (
-    <div>
+    <div id="registro">
       {!isFormOpen ? (
         <motion.button
           onClick={toggleForm}

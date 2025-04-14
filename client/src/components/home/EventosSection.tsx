@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { fadeIn, slideUp } from '@/lib/animations';
 import { useIsMobile } from '@/hooks/use-mobile';
+import { openRegistrationForm } from './RegistrationForm';
 
 export function EventosSection() {
   const isMobile = useIsMobile();
@@ -131,8 +132,8 @@ export function EventosSection() {
                     <i className="fas fa-arrow-right ml-1 text-xs"></i>
                   </motion.a>
                   
-                  <motion.a
-                    href="#contacto"
+                  <motion.button
+                    onClick={openRegistrationForm}
                     className={`py-2 px-4 rounded-full text-white text-sm font-bold flex items-center ${
                       event.isHighlighted ? 'bg-primary' : 'bg-gray-700'
                     }`}
@@ -141,7 +142,7 @@ export function EventosSection() {
                   >
                     <i className="fas fa-user-plus mr-1"></i>
                     Inscribirse
-                  </motion.a>
+                  </motion.button>
                 </div>
               </div>
             </motion.div>
