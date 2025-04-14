@@ -68,7 +68,7 @@ export function ContactSection() {
     },
     {
       name: "Casa Matriz",
-      address: "Los Abedules 3082, Vitacura, Chile"
+      address: "Luis Carrera 1263 oficina 301, Vitacura, Chile"
     },
     {
       name: "Centro Operaciones Norte",
@@ -140,7 +140,7 @@ export function ContactSection() {
               </div>
               <div>
                 <h4 className="font-medium text-lg">Email</h4>
-                <p className="text-gray-300">auctions@grupoprelco.com</p>
+                <p className="text-gray-300">auctions@theglobalbid.com</p>
               </div>
             </motion.div>
           </motion.div>
