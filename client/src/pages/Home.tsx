@@ -5,7 +5,6 @@ import { BrandsSection } from "@/components/home/BrandsSection";
 import { ContactSection } from "@/components/home/ContactSection";
 import { EventosSection } from "@/components/home/EventosSection";
 import { HeroSection } from "@/components/home/HeroSection";
-import { PiezasPartesSection } from "@/components/home/PiezasPartesSection";
 import { ServicesSection } from "@/components/home/ServicesSection";
 import { SoporteSection } from "@/components/home/SoporteSection";
 import { StatsSection } from "@/components/home/StatsSection";
@@ -19,7 +18,6 @@ export default function Home() {
       <AboutSection />
       <ServicesSection />
       <ActivosSection />
-      <PiezasPartesSection />
       <BrandsSection />
       <EventosSection />
       <TechSection />
