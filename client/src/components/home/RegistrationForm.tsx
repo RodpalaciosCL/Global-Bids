@@ -130,6 +130,19 @@ export function RegistrationForm() {
     setIsFormOpen(!isFormOpen);
   };
   
+  // Prevent body scroll when form is open
+  useEffect(() => {
+    if (isFormOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'auto';
+    }
+    
+    return () => {
+      document.body.style.overflow = 'auto';
+    };
+  }, [isFormOpen]);
+  
   return (
     <div id="registro">
       <motion.button
@@ -146,13 +159,13 @@ export function RegistrationForm() {
       <AnimatePresence>
         {isFormOpen && (
           <motion.div 
-            className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4"
+            className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4 overflow-y-auto"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
           >
             <motion.div 
-              className="bg-white rounded-lg p-6 shadow-xl max-w-lg w-full text-left relative z-20"
+              className="bg-white rounded-lg p-6 shadow-xl max-w-lg w-full text-left relative z-20 my-8"
               initial={{ opacity: 0, scale: 0.9, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.9, y: -20 }}
@@ -182,7 +195,7 @@ export function RegistrationForm() {
                       className={form.formState.errors.firstName ? 'border-red-500' : ''}
                     />
                     {form.formState.errors.firstName && (
-                      <p className="text-red-500 text-xs mt-1">{form.formState.errors.firstName.message}</p>
+                      <p className="text-red-500 text-xs mt-1">{form.formState.errors.firstName.message?.toString()}</p>
                     )}
                   </div>
 
@@ -195,7 +208,7 @@ export function RegistrationForm() {
                       className={form.formState.errors.lastName ? 'border-red-500' : ''}
                     />
                     {form.formState.errors.lastName && (
-                      <p className="text-red-500 text-xs mt-1">{form.formState.errors.lastName.message}</p>
+                      <p className="text-red-500 text-xs mt-1">{form.formState.errors.lastName.message?.toString()}</p>
                     )}
                   </div>
                 </div>
@@ -210,7 +223,7 @@ export function RegistrationForm() {
                     className={form.formState.errors.email ? 'border-red-500' : ''}
                   />
                   {form.formState.errors.email && (
-                    <p className="text-red-500 text-xs mt-1">{form.formState.errors.email.message}</p>
+                    <p className="text-red-500 text-xs mt-1">{form.formState.errors.email.message?.toString()}</p>
                   )}
                 </div>
 
@@ -251,7 +264,7 @@ export function RegistrationForm() {
                     </div>
                   </div>
                   {form.formState.errors.phone && (
-                    <p className="text-red-500 text-xs mt-1">{form.formState.errors.phone.message}</p>
+                    <p className="text-red-500 text-xs mt-1">{form.formState.errors.phone.message?.toString()}</p>
                   )}
                 </div>
 
@@ -279,7 +292,7 @@ export function RegistrationForm() {
                     ))}
                   </div>
                   {form.formState.errors.interestedIn && (
-                    <p className="text-red-500 text-xs mt-1">{form.formState.errors.interestedIn.message}</p>
+                    <p className="text-red-500 text-xs mt-1">{form.formState.errors.interestedIn.message?.toString()}</p>
                   )}
                 </div>
 
@@ -288,7 +301,7 @@ export function RegistrationForm() {
                   className="w-full bg-primary hover:bg-primary-dark text-white font-bold py-2"
                   disabled={mutation.isPending}
                 >
-                  Registrarme
+                  {mutation.isPending ? 'Enviando...' : 'Registrarme'}
                 </Button>
 
                 <p className="text-xs text-gray-500 text-center mt-2">

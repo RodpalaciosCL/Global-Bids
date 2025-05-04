@@ -109,13 +109,13 @@ export function CatalogSection() {
           variants={fadeIn}
         >
           <h2 className="font-heading text-3xl md:text-4xl font-bold mb-4 text-primary">
-            Catálogo de Equipos
+            Marketplace
           </h2>
           <div className="w-20 h-1 bg-secondary mx-auto mb-6"></div>
           <p className="max-w-3xl mx-auto text-gray-600">
-            Explora nuestra amplia selección de equipos pesados disponibles
-            para remate. Utiliza los filtros para encontrar exactamente lo que
-            necesitas.
+            Explora nuestra amplia selección de maquinaria industrial, chatarra, 
+            herramientas y repuestos disponibles para remate. Utiliza los filtros 
+            para encontrar exactamente lo que necesitas.
           </p>
         </motion.div>
 
