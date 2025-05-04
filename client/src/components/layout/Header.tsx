@@ -21,7 +21,8 @@ export function Header() {
       const sections = [
         'inicio', 
         'nosotros', 
-        'catalogo', 
+        'catalogo',
+        'subastas', 
         'soporte', 
         'contacto'
       ];
@@ -48,11 +49,12 @@ export function Header() {
   }, []);
   
   const menuItems = [
-    { href: '#inicio', label: t('nav.home'), icon: 'fa-home' },
-    { href: '#nosotros', label: t('nav.about'), icon: 'fa-users' },
-    { href: '#catalogo', label: t('nav.catalog'), icon: 'fa-th-large' },
+    { href: '#inicio', label: 'Inicio', icon: 'fa-home' },
+    { href: '#nosotros', label: 'Nosotros', icon: 'fa-users' },
+    { href: '#catalogo', label: 'Marketplace', icon: 'fa-th-large' },
+    { href: '#subastas', label: 'Subastas', icon: 'fa-gavel' },
     { href: '#soporte', label: 'Soporte', icon: 'fa-headset' },
-    { href: '#contacto', label: t('nav.contact'), icon: 'fa-envelope' }
+    { href: '#contacto', label: 'Contacto', icon: 'fa-envelope' }
   ];
   
   return (
@@ -62,11 +64,6 @@ export function Header() {
       }`}
     >
       <div className="container mx-auto px-4">
-        {/* Language Selector (top right, absolute) */}
-        <div className="absolute top-2 right-4 md:right-6 z-50">
-          <LanguageSelector />
-        </div>
-        
         <div className="flex justify-between items-center">
           {/* Logo & Brand Name */}
           <Link href="/">
@@ -102,13 +99,13 @@ export function Header() {
           </motion.button>
           
           {/* Desktop Menu */}
-          <div className="hidden md:flex items-center space-x-2">
-            <nav className="flex items-center bg-gray-100 p-1 rounded-full mr-3">
+          <div className="hidden md:flex items-center space-x-3">
+            <nav className="flex items-center bg-gray-100 p-1 rounded-full">
               {menuItems.map((item) => (
                 <a 
                   key={item.href}
                   href={item.href} 
-                  className={`relative px-4 py-2 rounded-full font-medium transition-all duration-300 flex items-center ${
+                  className={`relative px-3 py-2 rounded-full font-medium transition-all duration-300 flex items-center ${
                     activeSection === item.href.substring(1) 
                       ? 'text-white' 
                       : 'text-gray-700 hover:text-primary'
@@ -130,7 +127,7 @@ export function Header() {
               ))}
             </nav>
             
-
+            <LanguageSelector />
           </div>
         </div>
         
@@ -181,9 +178,10 @@ export function Header() {
                     )}
                   </a>
                 ))}
+                <div className="px-5 py-4 flex justify-center border-t border-gray-100 mt-2">
+                  <LanguageSelector />
+                </div>
               </nav>
-              
-
             </motion.div>
           )}
         </AnimatePresence>
