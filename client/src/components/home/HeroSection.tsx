@@ -175,8 +175,8 @@ export function HeroSection() {
                   >
                     <div className="flex justify-between items-start mb-3">
                       <span className="font-medium text-white text-lg">{language === 'es' ? 'Subasta' : 'Auction'}</span>
-                      <div className="bg-primary/80 text-white text-xs py-1 px-2 rounded-lg">
-                        {t('hero.day')}
+                      <div className="bg-gray-700 text-white text-xs py-1 px-3 rounded-lg">
+                        En 1 día
                       </div>
                     </div>
                     <p className="text-white/80 text-sm mb-2">{t('hero.miningEquipment')}</p>
@@ -199,8 +199,8 @@ export function HeroSection() {
                   >
                     <div className="flex justify-between items-start mb-3">
                       <span className="font-medium text-white text-lg">{language === 'es' ? 'Subasta' : 'Auction'}</span>
-                      <div className="bg-primary/50 text-white text-xs py-1 px-2 rounded-lg">
-                        {t('hero.week')}
+                      <div className="bg-gray-700 text-white text-xs py-1 px-3 rounded-lg">
+                        En 1 semana
                       </div>
                     </div>
                     <p className="text-white/80 text-sm mb-2">{t('hero.forestryEquipment')}</p>
@@ -223,8 +223,8 @@ export function HeroSection() {
                   >
                     <div className="flex justify-between items-start mb-3">
                       <span className="font-medium text-white text-lg">{language === 'es' ? 'Subasta' : 'Auction'}</span>
-                      <div className="bg-primary/50 text-white text-xs py-1 px-2 rounded-lg">
-                        {t('hero.twoWeeks')}
+                      <div className="bg-gray-700 text-white text-xs py-1 px-3 rounded-lg">
+                        En 2 semanas
                       </div>
                     </div>
                     <p className="text-white/80 text-sm mb-2">{t('hero.trucksTransport')}</p>

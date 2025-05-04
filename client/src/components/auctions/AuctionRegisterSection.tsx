@@ -150,7 +150,7 @@ export function AuctionRegisterSection() {
 
           <div className="divide-y divide-white/10">
             <div className="py-4 flex flex-col md:flex-row items-start md:items-center gap-4">
-              <div className="bg-blue-800/50 text-white rounded-lg p-3 text-center">
+              <div className="bg-blue-900 text-white rounded-lg p-3 text-center w-16 h-16 flex flex-col items-center justify-center">
                 <div className="text-xl font-bold">15</div>
                 <div className="text-xs">MAYO</div>
               </div>
@@ -176,7 +176,7 @@ export function AuctionRegisterSection() {
             </div>
             
             <div className="py-4 flex flex-col md:flex-row items-start md:items-center gap-4">
-              <div className="bg-blue-800/50 text-white rounded-lg p-3 text-center">
+              <div className="bg-blue-900 text-white rounded-lg p-3 text-center w-16 h-16 flex flex-col items-center justify-center">
                 <div className="text-xl font-bold">28</div>
                 <div className="text-xs">MAYO</div>
               </div>
@@ -202,7 +202,7 @@ export function AuctionRegisterSection() {
             </div>
             
             <div className="py-4 flex flex-col md:flex-row items-start md:items-center gap-4">
-              <div className="bg-blue-800/50 text-white rounded-lg p-3 text-center">
+              <div className="bg-blue-900 text-white rounded-lg p-3 text-center w-16 h-16 flex flex-col items-center justify-center">
                 <div className="text-xl font-bold">10</div>
                 <div className="text-xs">JUNIO</div>
               </div>
