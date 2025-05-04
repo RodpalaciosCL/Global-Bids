@@ -221,12 +221,14 @@ export function AuctionRegisterSection() {
                 <span className="bg-yellow-500/20 text-yellow-400 text-xs px-3 py-1 rounded-full">
                   {language === 'es' ? 'Próximamente' : 'Coming soon'}
                 </span>
-                <button 
+                <a 
+                  href="#subastas"
                   onClick={openForm}
-                  className="ml-4 bg-primary/80 hover:bg-primary text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors"
+                  className="ml-4 bg-primary/80 hover:bg-primary text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors inline-flex items-center"
                 >
+                  <i className="fas fa-bell mr-1"></i>
                   {language === 'es' ? 'Notificarme' : 'Notify me'}
-                </button>
+                </a>
               </div>
             </div>
             
@@ -245,12 +247,14 @@ export function AuctionRegisterSection() {
                 <span className="bg-blue-500/20 text-blue-400 text-xs px-3 py-1 rounded-full">
                   {language === 'es' ? 'Virtual' : 'Virtual'}
                 </span>
-                <button 
+                <a 
+                  href="#subastas"
                   onClick={openForm}
-                  className="ml-4 bg-primary/80 hover:bg-primary text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors"
+                  className="ml-4 bg-primary/80 hover:bg-primary text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors inline-flex items-center"
                 >
+                  <i className="fas fa-laptop mr-1"></i>
                   {language === 'es' ? 'Pre-registro' : 'Pre-register'}
-                </button>
+                </a>
               </div>
             </div>
           </div>
@@ -261,13 +265,14 @@ export function AuctionRegisterSection() {
                 ? 'Regístrese para acceder al calendario completo de subastas y eventos.'
                 : 'Register to access the complete calendar of auctions and events.'}
             </p>
-            <button
+            <a
+              href="#subastas"
               onClick={openForm}
               className="inline-flex items-center text-primary-light hover:text-white font-medium transition-colors"
             >
               {language === 'es' ? 'Ver todos los eventos' : 'View all events'}
               <i className="fas fa-arrow-right ml-2"></i>
-            </button>
+            </a>
           </div>
         </motion.div>
       </div>
