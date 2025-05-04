@@ -342,7 +342,7 @@ export function CatalogSection() {
                 </div>
               ))
             ) : machinery.length > 0 ? (
-              machinery.map((item: Machinery, index) => (
+              machinery.slice(0, 6).map((item: Machinery, index) => (
                 <MachineryCard key={item.id} item={item} index={index} />
               ))
             ) : (
@@ -358,58 +358,7 @@ export function CatalogSection() {
             )}
           </motion.div>
 
-          {/* Pagination */}
-          {totalPages > 1 && (
-            <motion.div
-              className="mt-10 flex justify-center"
-              variants={slideUp}
-            >
-              <nav className="inline-flex rounded-md shadow">
-                <button
-                  className="px-4 py-2 bg-white border border-gray-300 rounded-l-md hover:bg-gray-50 text-gray-500 disabled:opacity-50"
-                  onClick={() =>
-                    setCurrentPage((prev) => Math.max(prev - 1, 1))
-                  }
-                  disabled={currentPage === 1}
-                >
-                  <i className="fas fa-chevron-left"></i>
-                </button>
-
-                {pageNumbers.map((page, index) =>
-                  typeof page === "number" ? (
-                    <button
-                      key={index}
-                      className={`px-4 py-2 ${
-                        page === currentPage
-                          ? "bg-primary text-white border border-primary"
-                          : "bg-white border border-gray-300 hover:bg-gray-50 text-gray-700"
-                      }`}
-                      onClick={() => setCurrentPage(page)}
-                    >
-                      {page}
-                    </button>
-                  ) : (
-                    <span
-                      key={index}
-                      className="px-4 py-2 bg-white border border-gray-300 text-gray-500"
-                    >
-                      {page}
-                    </span>
-                  ),
-                )}
-
-                <button
-                  className="px-4 py-2 bg-white border border-gray-300 rounded-r-md hover:bg-gray-50 text-gray-500 disabled:opacity-50"
-                  onClick={() =>
-                    setCurrentPage((prev) => Math.min(prev + 1, totalPages))
-                  }
-                  disabled={currentPage === totalPages}
-                >
-                  <i className="fas fa-chevron-right"></i>
-                </button>
-              </nav>
-            </motion.div>
-          )}
+          {/* Sin paginación por solicitud del cliente */}
         </motion.div>
       </div>
     </section>

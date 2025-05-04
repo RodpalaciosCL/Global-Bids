@@ -59,8 +59,8 @@ export function Header() {
   
   return (
     <header 
-      className={`backdrop-blur-md bg-white/90 text-gray-800 sticky top-0 z-40 transition-all duration-300 shadow-md ${
-        scrolled ? 'py-2' : 'py-4'
+      className={`bg-white text-gray-800 sticky top-0 z-40 transition-all duration-300 shadow-lg border-b border-gray-100 ${
+        scrolled ? 'py-2' : 'py-3'
       }`}
     >
       <div className="container mx-auto px-4">
@@ -76,12 +76,12 @@ export function Header() {
                 <img 
                   src="https://images.proxibid.com/AuctionImages/11639/global%20bids.jpg" 
                   alt="Global Bids Logo" 
-                  className="h-14 w-auto object-contain rounded-lg shadow-sm border-2 border-primary/20"
+                  className="h-16 w-auto object-contain rounded-lg shadow-sm"
                 />
               </div>
               <div>
-                <div className="font-heading font-bold text-2xl text-primary tracking-tight">Global Bids</div>
-                <div className="text-xs text-gray-600 -mt-1 font-medium">
+                <div className="font-heading font-bold text-2xl text-gray-800 tracking-tight">Global Bids</div>
+                <div className="text-xs text-primary font-semibold">
                   {language === 'es' ? 'Subastas de Equipos' : 'Equipment Auctions'}
                 </div>
               </div>

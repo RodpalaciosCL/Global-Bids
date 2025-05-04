@@ -7,6 +7,8 @@ import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { LanguageProvider } from "@/contexts/LanguageContext";
 import { CurrencyProvider } from "@/contexts/CurrencyContext";
+import { RegistrationProvider } from "@/contexts/RegistrationContext";
+import { RegistrationForm } from "@/components/registration/RegistrationForm";
 
 function Router() {
   return (
@@ -19,16 +21,18 @@ function Router() {
 }
 
 function App() {
-  // Eliminamos el estado de carga y el efecto del temporizador
   return (
     <LanguageProvider>
       <CurrencyProvider>
-        <Header />
-        <main>
-          <Router />
-        </main>
-        <Footer />
-        <BackToTop />
+        <RegistrationProvider>
+          <Header />
+          <main>
+            <Router />
+          </main>
+          <Footer />
+          <BackToTop />
+          <RegistrationForm />
+        </RegistrationProvider>
       </CurrencyProvider>
     </LanguageProvider>
   );

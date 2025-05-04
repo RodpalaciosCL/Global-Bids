@@ -8,6 +8,7 @@ import { SoporteSection } from "@/components/home/SoporteSection";
 import { StatsSection } from "@/components/home/StatsSection";
 import { TimelineSection } from "@/components/home/TimelineSection";
 import { CatalogSection } from "@/components/catalog/CatalogSection";
+import { AuctionRegisterSection } from "@/components/auctions/AuctionRegisterSection";
 
 export default function Home() {
   return (
@@ -19,6 +20,7 @@ export default function Home() {
       <BrandsSection />
       <StatsSection />
       <CatalogSection />
+      <AuctionRegisterSection />
       <SoporteSection />
       <ActionCTA />
       <ContactSection />
