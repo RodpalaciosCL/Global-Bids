@@ -105,8 +105,14 @@ export function SoporteSection() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
+            className="bg-white rounded-2xl p-8 border border-gray-200 shadow-sm h-full"
           >
-            <h3 className="text-2xl font-bold mb-6">Preguntas Frecuentes</h3>
+            <div className="flex items-center mb-6">
+              <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white mr-4">
+                <i className="fas fa-question-circle"></i>
+              </div>
+              <h3 className="text-2xl font-bold">Preguntas Frecuentes</h3>
+            </div>
             
             <div className="space-y-4">
               {faqs.map((faq, index) => (
@@ -144,7 +150,7 @@ export function SoporteSection() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="bg-gray-50 rounded-2xl p-8 border border-gray-200"
+            className="bg-gray-50 rounded-2xl p-8 border border-gray-200 h-full"
           >
             <div className="flex items-center mb-6">
               <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white mr-4">

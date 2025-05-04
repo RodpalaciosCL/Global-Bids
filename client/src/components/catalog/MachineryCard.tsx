@@ -26,10 +26,21 @@ export function MachineryCard({ item, index }: MachineryCardProps) {
     >
       <div className="relative">
         <img 
-          src={image} 
+          src={image || 'https://images.pexels.com/photos/2760242/pexels-photo-2760242.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'} 
           alt={name} 
           className="w-full h-48 object-cover" 
+          onError={(e) => {
+            e.currentTarget.src = 'https://images.pexels.com/photos/2760242/pexels-photo-2760242.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1';
+          }}
         />
+        <div className="absolute top-3 left-3 bg-primary text-white font-bold px-2 py-1 rounded-md text-xs">
+          {typeLabels[type]}
+        </div>
+        {isSold && (
+          <div className="absolute top-3 right-3 bg-red-600 text-white font-bold px-2 py-1 rounded-md text-xs">
+            VENDIDO
+          </div>
+        )}
       </div>
       
       <div className="p-5">
