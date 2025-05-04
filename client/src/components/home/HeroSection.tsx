@@ -65,10 +65,10 @@ export function HeroSection() {
         </AnimatePresence>
       </div>
       
-      <div className="min-h-screen flex flex-col">
-        <div className="flex-grow flex items-center relative z-10">
-          <div className="container mx-auto px-4 py-16 md:py-0">
-            <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 items-center">
+      <div className="min-h-[90vh] md:min-h-screen flex flex-col">
+        <div className="flex-grow flex items-center relative z-10 pt-16 md:pt-0">
+          <div className="container mx-auto px-4 py-8 md:py-0">
+            <div className="grid grid-cols-1 lg:grid-cols-5 gap-4 md:gap-8 items-center">
               <div className="lg:col-span-3">
                 <AnimatePresence mode="wait">
                   {slides.map((slide, index) => (
@@ -81,23 +81,23 @@ export function HeroSection() {
                         exit={{ opacity: 0, y: -20 }}
                         transition={{ duration: 0.5 }}
                       >
-                        <div className="inline-flex items-center bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full mb-6">
+                        <div className="inline-flex items-center bg-white/20 backdrop-blur-sm px-3 py-1 md:px-4 md:py-2 rounded-full mb-4 md:mb-6">
                           <i className={`fas ${slide.icon} text-white mr-2`}></i>
-                          <span className="text-white font-medium">Global Bids</span>
+                          <span className="text-white font-medium text-sm md:text-base">Global Bids</span>
                         </div>
                         
-                        <h1 className="font-heading text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight whitespace-pre-line">
+                        <h1 className="font-heading text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 md:mb-6 leading-tight">
                           {slide.title}
                         </h1>
                         
-                        <p className="text-xl md:text-2xl mb-10 text-white/90 max-w-2xl">
+                        <p className="text-base sm:text-lg md:text-xl lg:text-2xl mb-6 md:mb-8 text-white/90 max-w-2xl">
                           {slide.subtitle}
                         </p>
                         
-                        <div className="flex flex-wrap gap-4">
+                        <div className="flex flex-wrap gap-3 md:gap-4">
                           <motion.a 
                             href="#catalogo" 
-                            className="bg-white text-primary px-8 py-4 rounded-full font-bold transition-all duration-300 text-center shadow-lg flex items-center"
+                            className="bg-white text-primary px-4 sm:px-6 md:px-8 py-3 md:py-4 rounded-full font-bold transition-all duration-300 text-center shadow-lg flex items-center text-sm sm:text-base"
                             whileHover={{ scale: 1.05, backgroundColor: "#fff", boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.1)" }}
                             whileTap={{ scale: 0.95 }}
                           >
@@ -106,7 +106,7 @@ export function HeroSection() {
                           </motion.a>
                           <motion.a 
                             href="#contacto" 
-                            className="border-2 border-white bg-transparent hover:bg-white/10 text-white px-8 py-4 rounded-full font-bold transition-all duration-300 text-center flex items-center"
+                            className="border-2 border-white bg-transparent hover:bg-white/10 text-white px-4 sm:px-6 md:px-8 py-3 md:py-4 rounded-full font-bold transition-all duration-300 text-center flex items-center text-sm sm:text-base"
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
                           >

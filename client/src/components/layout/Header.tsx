@@ -72,18 +72,18 @@ export function Header() {
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.97 }}
             >
-              <div className="relative mr-3">
+              <div className="relative mr-2 sm:mr-3">
                 <div className="bg-white p-1 rounded-lg shadow-md">
                   <img 
                     src="https://images.proxibid.com/AuctionImages/11639/global%20bids.jpg" 
                     alt="Global Bids Logo" 
-                    className="h-14 w-auto object-contain"
+                    className="h-10 sm:h-12 md:h-14 w-auto object-contain"
                   />
                 </div>
               </div>
               <div>
-                <div className="font-heading font-bold text-2xl text-white tracking-tight">Global Bids</div>
-                <div className="text-xs text-white/90 font-medium">
+                <div className="font-heading font-bold text-lg sm:text-xl md:text-2xl text-white tracking-tight">Global Bids</div>
+                <div className="text-xs text-white/90 font-medium hidden xs:block">
                   {language === 'es' ? 'Marketplace y Subastas' : 'Marketplace & Auctions'}
                 </div>
               </div>
