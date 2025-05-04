@@ -26,8 +26,8 @@ const translations: Record<Language, Record<string, string>> = {
     'nav.register': 'Registrarse',
     
     // Hero Section
-    'hero.title': 'Marketplace y Subastas de Equipos',
-    'hero.subtitle': 'Accede a equipos de clase mundial verificados por expertos',
+    'hero.title': 'Marketplace y Subastas de Activos',
+    'hero.subtitle': 'Accede a activos de clase mundial verificados por expertos',
     'hero.explore': 'Explorar Catálogo',
     'hero.contact': 'Contáctanos',
     'hero.auctions': 'Próximas Subastas',
@@ -37,17 +37,17 @@ const translations: Record<Language, Record<string, string>> = {
     'hero.day': 'En 1 día',
     'hero.week': 'En 1 semana',
     'hero.twoWeeks': 'En 2 semanas',
-    'hero.miningEquipment': 'Equipos Mineros',
-    'hero.forestryEquipment': 'Equipos Forestales',
+    'hero.miningEquipment': 'Activos Mineros',
+    'hero.forestryEquipment': 'Activos Forestales',
     'hero.trucksTransport': 'Camiones y Transporte',
     
     // Servicios
     'services.title': 'Nuestros Servicios',
     'services.subtitle': 'Soluciones integrales para la industria',
     'services.auctions.title': 'Subastas',
-    'services.auctions.description': 'Accede a nuestra plataforma de subastas para equipos verificados',
+    'services.auctions.description': 'Accede a nuestra plataforma de subastas para activos verificados',
     'services.valuation.title': 'Tasaciones',
-    'services.valuation.description': 'Valoraciones precisas de equipos por expertos en la industria',
+    'services.valuation.description': 'Valoraciones precisas de activos por expertos en la industria',
     'services.logistics.title': 'Logística',
     'services.logistics.description': 'Soluciones de transporte y entrega en todo el mundo',
     
@@ -120,7 +120,7 @@ const translations: Record<Language, Record<string, string>> = {
     'catalog.title': 'Marketplace',
     'catalog.subtitle': 'Explora nuestra amplia selección de maquinaria industrial',
     'catalog.filter': 'Filtrar por',
-    'catalog.search': 'Buscar equipo',
+    'catalog.search': 'Buscar activo',
     'catalog.type': 'Tipo',
     'catalog.brand': 'Marca',
     'catalog.year': 'Año',
@@ -189,8 +189,8 @@ const translations: Record<Language, Record<string, string>> = {
     'nav.register': 'Register',
     
     // Hero Section
-    'hero.title': 'Marketplace and Equipment Auctions',
-    'hero.subtitle': 'Access world-class equipment verified by experts',
+    'hero.title': 'Marketplace and Asset Auctions',
+    'hero.subtitle': 'Access world-class assets verified by experts',
     'hero.explore': 'Explore Catalog',
     'hero.contact': 'Contact Us',
     'hero.auctions': 'Upcoming Auctions',
@@ -208,9 +208,9 @@ const translations: Record<Language, Record<string, string>> = {
     'services.title': 'Our Services',
     'services.subtitle': 'Comprehensive solutions for the industry',
     'services.auctions.title': 'Auctions',
-    'services.auctions.description': 'Access our auction platform for verified equipment',
+    'services.auctions.description': 'Access our auction platform for verified assets',
     'services.valuation.title': 'Valuations',
-    'services.valuation.description': 'Precise equipment valuations by industry experts',
+    'services.valuation.description': 'Precise asset valuations by industry experts',
     'services.logistics.title': 'Logistics',
     'services.logistics.description': 'Transport and delivery solutions worldwide',
     
@@ -283,7 +283,7 @@ const translations: Record<Language, Record<string, string>> = {
     'catalog.title': 'Marketplace',
     'catalog.subtitle': 'Explore our wide selection of industrial machinery',
     'catalog.filter': 'Filter by',
-    'catalog.search': 'Search equipment',
+    'catalog.search': 'Search asset',
     'catalog.type': 'Type',
     'catalog.brand': 'Brand',
     'catalog.year': 'Year',
