@@ -268,7 +268,7 @@ export function CatalogSection() {
                   onChange={handleSelectChange}
                   value={filters.condition || ""}
                 >
-                  <option value="">Todos</option>
+                  <option value="">Todos los estados</option>
                   <option value="excellent">Excelente</option>
                   <option value="good">Bueno</option>
                   <option value="fair">Regular</option>
