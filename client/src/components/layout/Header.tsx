@@ -60,7 +60,7 @@ export function Header() {
   return (
     <header 
       className={`bg-primary text-white sticky top-0 z-40 transition-all duration-300 shadow-lg ${
-        scrolled ? 'py-2' : 'py-3'
+        scrolled ? 'py-1 md:py-2' : 'py-2 md:py-3'
       }`}
     >
       <div className="container mx-auto px-4">
@@ -77,7 +77,7 @@ export function Header() {
                   <img 
                     src="https://images.proxibid.com/AuctionImages/11639/global%20bids.jpg" 
                     alt="Global Bids Logo" 
-                    className="h-10 sm:h-12 md:h-14 w-auto object-contain"
+                    className="h-8 sm:h-10 md:h-12 w-auto object-contain"
                   />
                 </div>
               </div>
