@@ -38,11 +38,11 @@ export function TimelineSection() {
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ duration: 0.6 }}
         >
-          <div className="inline-block bg-primary/10 px-4 py-2 rounded-full mb-4">
-            <span className="text-primary font-semibold">Nuestra Historia</span>
+          <div className="inline-block bg-blue-600/10 px-4 py-2 rounded-full mb-4">
+            <span className="text-blue-600 font-semibold">Nuestra Historia</span>
           </div>
           <h2 className="text-3xl md:text-4xl font-bold font-heading mb-5">Nuestra Evolución</h2>
-          <div className="w-24 h-1.5 bg-secondary mx-auto mb-6"></div>
+          <div className="w-24 h-1.5 bg-blue-500 mx-auto mb-6"></div>
           <p className="max-w-2xl mx-auto text-gray-600 text-lg">
             Descubre la historia detrás de Global Bids y cómo hemos evolucionado para convertirnos en líderes del mercado.
           </p>
@@ -91,7 +91,7 @@ export function TimelineSection() {
 
                 {/* Punto central con ícono (visible solo en desktop) */}
                 <div className="hidden md:flex w-2/12 justify-center items-center">
-                  <div className="w-14 h-14 bg-gradient-to-br from-primary to-secondary rounded-full flex items-center justify-center shadow-lg z-20 border-4 border-white">
+                  <div className="w-14 h-14 bg-gradient-to-br from-blue-500 to-blue-700 rounded-full flex items-center justify-center shadow-lg z-20 border-4 border-white">
                     <i className={`fas ${event.icon} text-white`}></i>
                   </div>
                 </div>
@@ -109,7 +109,7 @@ export function TimelineSection() {
             animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0 }}
             transition={{ duration: 0.8, delay: timelineEvents.length * 0.3 }}
           >
-            <div className="w-16 h-16 bg-gradient-to-br from-secondary to-primary rounded-full flex items-center justify-center shadow-xl border-4 border-white">
+            <div className="w-16 h-16 bg-gradient-to-br from-blue-600 to-blue-800 rounded-full flex items-center justify-center shadow-xl border-4 border-white">
               <i className="fas fa-check text-white text-xl"></i>
             </div>
           </motion.div>
@@ -122,12 +122,12 @@ export function TimelineSection() {
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
           transition={{ duration: 0.7, delay: timelineEvents.length * 0.3 + 0.4 }}
         >
-          <h3 className="text-xl font-bold text-primary mb-3">Hoy en Global Bids</h3>
+          <h3 className="text-xl font-bold text-blue-600 mb-3">Hoy en Global Bids</h3>
           <p className="text-lg text-gray-700 mb-4">
             Conectamos la oferta sudamericana con la demanda global a través de nuestra plataforma digital, con presencia en 12 países.
           </p>
-          <div className="inline-block bg-secondary/10 px-6 py-3 rounded-full">
-            <span className="text-lg text-secondary font-bold">
+          <div className="inline-block bg-blue-500/10 px-6 py-3 rounded-full">
+            <span className="text-lg text-blue-600 font-bold">
               Acceso a más de 950,000 clientes internacionales
             </span>
           </div>

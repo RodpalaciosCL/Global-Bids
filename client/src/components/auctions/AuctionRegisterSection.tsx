@@ -151,8 +151,8 @@ export function AuctionRegisterSection() {
           <div className="divide-y divide-white/10">
             <div className="py-4 flex flex-col md:flex-row items-start md:items-center gap-4">
               <div className="bg-blue-900 text-white rounded-lg p-3 text-center w-16 h-16 flex flex-col items-center justify-center">
-                <div className="text-xl font-bold">15</div>
-                <div className="text-xs">MAYO</div>
+                <div className="text-sm font-bold">EN</div>
+                <div className="text-xl font-bold">1 DÍA</div>
               </div>
               <div className="flex-grow">
                 <h4 className="font-bold text-white">
@@ -177,8 +177,8 @@ export function AuctionRegisterSection() {
             
             <div className="py-4 flex flex-col md:flex-row items-start md:items-center gap-4">
               <div className="bg-blue-900 text-white rounded-lg p-3 text-center w-16 h-16 flex flex-col items-center justify-center">
-                <div className="text-xl font-bold">28</div>
-                <div className="text-xs">MAYO</div>
+                <div className="text-sm font-bold">EN</div>
+                <div className="text-xl font-bold">2 SEM</div>
               </div>
               <div className="flex-grow">
                 <h4 className="font-bold text-white">
@@ -203,8 +203,8 @@ export function AuctionRegisterSection() {
             
             <div className="py-4 flex flex-col md:flex-row items-start md:items-center gap-4">
               <div className="bg-blue-900 text-white rounded-lg p-3 text-center w-16 h-16 flex flex-col items-center justify-center">
-                <div className="text-xl font-bold">10</div>
-                <div className="text-xs">JUNIO</div>
+                <div className="text-sm font-bold">EN</div>
+                <div className="text-xl font-bold">1 MES</div>
               </div>
               <div className="flex-grow">
                 <h4 className="font-bold text-white">
