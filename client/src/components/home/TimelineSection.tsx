@@ -51,7 +51,7 @@ export function TimelineSection() {
         {/* Timeline moderna */}
         <div className="relative max-w-5xl mx-auto">
           {/* Línea de conexión */}
-          <div className="absolute left-0 md:left-1/2 h-full w-0.5 bg-gradient-to-b from-primary via-secondary to-primary/50 transform md:-translate-x-1/2"></div>
+          <div className="absolute left-0 md:left-1/2 h-full w-0.5 bg-gradient-to-b from-blue-600 via-blue-500 to-blue-400 transform md:-translate-x-1/2"></div>
           
           {/* Eventos de la línea de tiempo */}
           <div className="space-y-12 md:space-y-24 relative">
@@ -67,10 +67,10 @@ export function TimelineSection() {
               >
                 {/* Marcador de tiempo y punto de conexión (visible en móvil) */}
                 <div className="md:hidden flex items-center mb-4">
-                  <div className="w-10 h-10 bg-primary rounded-full flex items-center justify-center shadow-md mr-4">
+                  <div className="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center shadow-md mr-4">
                     <i className={`fas ${event.icon} text-white text-sm`}></i>
                   </div>
-                  <span className="font-semibold text-primary">{event.year}</span>
+                  <span className="font-semibold text-blue-600">{event.year}</span>
                 </div>
 
                 {/* Contenido principal */}
@@ -79,7 +79,7 @@ export function TimelineSection() {
                 }`}>
                   <div className="bg-white p-6 md:p-8 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 border border-gray-100 relative transform hover:-translate-y-1">
                     {/* Indicador de fase (visible solo en desktop) */}
-                    <span className={`hidden md:block absolute top-6 text-sm font-bold bg-secondary/10 text-secondary px-3 py-1 rounded-full 
+                    <span className={`hidden md:block absolute top-6 text-sm font-bold bg-blue-500/10 text-blue-600 px-3 py-1 rounded-full 
                       ${index % 2 === 0 ? 'right-6' : 'left-6'}`}>
                       {event.year}
                     </span>
