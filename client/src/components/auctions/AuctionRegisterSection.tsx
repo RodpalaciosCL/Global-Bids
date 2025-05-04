@@ -195,12 +195,14 @@ export function AuctionRegisterSection() {
                 <span className="bg-green-500/20 text-green-400 text-xs px-3 py-1 rounded-full">
                   {language === 'es' ? 'Abierto para registro' : 'Open for registration'}
                 </span>
-                <button 
+                <a 
+                  href="#subastas"
                   onClick={openForm}
-                  className="ml-4 bg-primary/80 hover:bg-primary text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors"
+                  className="ml-4 bg-primary/80 hover:bg-primary text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors inline-flex items-center"
                 >
+                  <i className="fas fa-user-plus mr-1"></i>
                   {language === 'es' ? 'Registrar' : 'Register'}
-                </button>
+                </a>
               </div>
             </div>
             
