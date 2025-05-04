@@ -17,7 +17,7 @@ export function AboutSection() {
   const tabContent = {
     historia: {
       title: "Una Historia de Excelencia",
-      subtitle: "Abriendo el mercado latinoamericano",
+      subtitle: "",
       description: [
         "Global Bids nace de un Joint-Venture entre North Country Auction, empresa Americana experta en subastas, y Grupo Prelco, quienes han estado en el rubro de minería más de 20 años.",
         "En Global Bids contamos con acceso a más de 950,000 clientes internacionales a través de nuestras plataformas online, lo que nos permite conectar la oferta sudamericana con la demanda global de manera digital, segmentada y transparente.",
@@ -111,7 +111,7 @@ export function AboutSection() {
             </h2>
             <div className="w-28 h-1.5 bg-primary mx-auto mb-6"></div>
             <p className="max-w-3xl mx-auto text-lg text-gray-600 leading-relaxed">
-              Global Bids es líder en subastas y valoración de maquinaria pesada en Latinoamérica, especializados en equipos para los sectores <span className="font-medium text-gray-800">minero, forestal e industrial</span>.
+              Global Bids es líder en subastas y valoración de maquinaria pesada, chatarra, herramientas y repuestos en Latinoamérica, especializados en equipos y lotes para los sectores <span className="font-medium text-gray-800">minero, forestal e industrial</span>.
             </p>
           </motion.div>
         </div>
@@ -288,26 +288,7 @@ export function AboutSection() {
             </div>
           </div>
           
-          <div className="flex flex-wrap justify-center gap-4">
-            <motion.a 
-              href="#catalogo" 
-              className="bg-white text-primary hover:bg-white/90 px-8 py-3 rounded-full font-medium transition-all duration-300 inline-flex items-center shadow-md"
-              whileHover={{ scale: 1.03 }}
-              whileTap={{ scale: 0.98 }}
-            >
-              <i className="fas fa-search mr-2"></i>
-              Explorar Catálogo
-            </motion.a>
-            <motion.a 
-              href="#contacto" 
-              className="bg-transparent border-2 border-white hover:bg-white/10 text-white px-8 py-3 rounded-full font-medium transition-all duration-300 inline-flex items-center"
-              whileHover={{ scale: 1.03 }}
-              whileTap={{ scale: 0.98 }}
-            >
-              <i className="fas fa-envelope mr-2"></i>
-              Contactar a un Especialista
-            </motion.a>
-          </div>
+          {/* Se eliminaron los botones de acción a petición del cliente */}
         </motion.div>
       </div>
     </section>
