@@ -102,18 +102,7 @@ export function ServicesSection() {
           ))}
         </motion.div>
         
-        {/* Extra CTA */}
-        <motion.div 
-          className="mt-16 text-center"
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-          transition={{ duration: 0.5, delay: 0.8 }}
-        >
-          <a href="#contacto" className="inline-flex items-center px-8 py-3 bg-primary text-white font-medium rounded-full hover:bg-primary-dark transition-colors duration-300">
-            <span>Consultar por servicios personalizados</span>
-            <i className="fas fa-chevron-right ml-2"></i>
-          </a>
-        </motion.div>
+        {/* Se eliminó el botón de "Consultar por servicios personalizados" */}
       </div>
     </section>
   );

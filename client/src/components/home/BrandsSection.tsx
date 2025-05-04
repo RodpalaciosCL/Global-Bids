@@ -50,7 +50,7 @@ export function BrandsSection() {
           </h3>
           <div className="w-24 h-1.5 bg-primary mx-auto mb-6 rounded-full"></div>
           <p className="max-w-3xl mx-auto text-gray-600 text-lg">
-            Contamos con experiencia certificada en las principales marcas de maquinaria industrial, minera y forestal.
+            Vasta experiencia certificando y validando equipos de las mejores marcas del mundo, para los mercados y clientes más exigentes de las industrias que operamos.
           </p>
         </motion.div>
         

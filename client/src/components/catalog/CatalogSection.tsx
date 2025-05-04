@@ -255,7 +255,7 @@ export function CatalogSection() {
               </div>
 
               {/* Condition filter */}
-              <div>
+              <div className="lg:col-span-1">
                 <label
                   htmlFor="condition-filter"
                   className="block text-sm font-medium text-gray-700 mb-1"
