@@ -65,10 +65,10 @@ export function HeroSection() {
         </AnimatePresence>
       </div>
       
-      <div className="min-h-[90vh] md:min-h-screen flex flex-col">
-        <div className="flex-grow flex items-center relative z-10 pt-16 md:pt-0">
-          <div className="container mx-auto px-4 py-8 md:py-0">
-            <div className="grid grid-cols-1 lg:grid-cols-5 gap-4 md:gap-8 items-center">
+      <div className="min-h-[80vh] md:min-h-screen flex flex-col">
+        <div className="flex-grow flex items-center relative z-10 pt-14 md:pt-0">
+          <div className="container mx-auto px-3 sm:px-4 py-6 md:py-0">
+            <div className="grid grid-cols-1 lg:grid-cols-5 gap-3 md:gap-8 items-center">
               <div className="lg:col-span-3">
                 <AnimatePresence mode="wait">
                   {slides.map((slide, index) => (
@@ -86,11 +86,11 @@ export function HeroSection() {
                           <span className="text-white font-medium text-sm md:text-base">Global Bids</span>
                         </div>
                         
-                        <h1 className="font-heading text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 md:mb-6 leading-tight">
+                        <h1 className="font-heading text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-bold mb-3 md:mb-6 leading-tight">
                           {slide.title}
                         </h1>
                         
-                        <p className="text-base sm:text-lg md:text-xl lg:text-2xl mb-6 md:mb-8 text-white/90 max-w-2xl">
+                        <p className="text-sm sm:text-base md:text-xl lg:text-2xl mb-4 md:mb-8 text-white/90 max-w-2xl">
                           {slide.subtitle}
                         </p>
                         
@@ -120,14 +120,14 @@ export function HeroSection() {
                 </AnimatePresence>
                 
                 {/* Carousel Controls */}
-                <div className="mt-16 flex items-center">
-                  <div className="flex space-x-2">
+                <div className="mt-8 md:mt-16 flex items-center">
+                  <div className="flex space-x-1 sm:space-x-2">
                     {slides.map((_, index) => (
                       <button
                         key={index}
-                        className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                        className={`w-2 sm:w-3 h-2 sm:h-3 rounded-full transition-all duration-300 ${
                           index === currentSlide 
-                            ? 'bg-white w-10' 
+                            ? 'bg-white w-8 sm:w-10' 
                             : 'bg-white/40 hover:bg-white/60'
                         }`}
                         onClick={() => handleDotClick(index)}
@@ -136,24 +136,24 @@ export function HeroSection() {
                     ))}
                   </div>
                   
-                  <div className="ml-auto flex space-x-2">
+                  <div className="ml-auto flex space-x-1 sm:space-x-2">
                     <motion.button
-                      className="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white"
+                      className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white"
                       onClick={() => setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length)}
                       whileHover={{ scale: 1.1 }}
                       whileTap={{ scale: 0.9 }}
                       aria-label="Previous slide"
                     >
-                      <i className="fas fa-chevron-left"></i>
+                      <i className="fas fa-chevron-left text-xs sm:text-base"></i>
                     </motion.button>
                     <motion.button
-                      className="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white"
+                      className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white"
                       onClick={() => setCurrentSlide((prev) => (prev + 1) % slides.length)}
                       whileHover={{ scale: 1.1 }}
                       whileTap={{ scale: 0.9 }}
                       aria-label="Next slide"
                     >
-                      <i className="fas fa-chevron-right"></i>
+                      <i className="fas fa-chevron-right text-xs sm:text-base"></i>
                     </motion.button>
                   </div>
                 </div>

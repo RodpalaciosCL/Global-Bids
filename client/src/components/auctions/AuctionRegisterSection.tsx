@@ -151,23 +151,23 @@ export function AuctionRegisterSection() {
           <div className="divide-y divide-white/10">
             <div className="py-4 flex flex-col md:flex-row items-start md:items-center gap-4">
               <div className="bg-blue-900 text-white rounded-lg p-3 text-center w-16 h-16 flex flex-col items-center justify-center">
-                <div className="text-sm font-bold">EN</div>
-                <div className="text-xl font-bold">1 DÍA</div>
+                <div className="text-xs sm:text-sm font-bold">EN</div>
+                <div className="text-lg sm:text-xl font-bold">1 DÍA</div>
               </div>
               <div className="flex-grow">
-                <h4 className="font-bold text-white">
+                <h4 className="font-bold text-white text-sm sm:text-base">
                   {language === 'es' ? 'Subasta de Maquinaria Minera' : 'Mining Machinery Auction'}
                 </h4>
-                <p className="text-gray-400 text-sm">Santiago, Chile</p>
+                <p className="text-gray-400 text-xs sm:text-sm">Santiago, Chile</p>
               </div>
-              <div className="flex items-center">
+              <div className="flex flex-wrap mt-2 md:mt-0 items-center">
                 <span className="bg-green-500/20 text-green-400 text-xs px-3 py-1 rounded-full">
                   {language === 'es' ? 'Abierto para registro' : 'Open for registration'}
                 </span>
                 <a 
                   href="#subastas"
                   onClick={openForm}
-                  className="ml-4 bg-primary/80 hover:bg-primary text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors inline-flex items-center"
+                  className="mt-2 md:mt-0 md:ml-4 bg-primary/80 hover:bg-primary text-white px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg text-xs sm:text-sm font-medium transition-colors inline-flex items-center"
                 >
                   <i className="fas fa-user-plus mr-1"></i>
                   {language === 'es' ? 'Registrar' : 'Register'}
@@ -177,23 +177,23 @@ export function AuctionRegisterSection() {
             
             <div className="py-4 flex flex-col md:flex-row items-start md:items-center gap-4">
               <div className="bg-blue-900 text-white rounded-lg p-3 text-center w-16 h-16 flex flex-col items-center justify-center">
-                <div className="text-sm font-bold">EN</div>
-                <div className="text-xl font-bold">2 SEM</div>
+                <div className="text-xs sm:text-sm font-bold">EN</div>
+                <div className="text-lg sm:text-xl font-bold">2 SEM</div>
               </div>
               <div className="flex-grow">
-                <h4 className="font-bold text-white">
+                <h4 className="font-bold text-white text-sm sm:text-base">
                   {language === 'es' ? 'Subasta de Equipos Forestales' : 'Forestry Equipment Auction'}
                 </h4>
-                <p className="text-gray-400 text-sm">Concepción, Chile</p>
+                <p className="text-gray-400 text-xs sm:text-sm">Concepción, Chile</p>
               </div>
-              <div className="flex items-center">
+              <div className="flex flex-wrap mt-2 md:mt-0 items-center">
                 <span className="bg-yellow-500/20 text-yellow-400 text-xs px-3 py-1 rounded-full">
                   {language === 'es' ? 'Próximamente' : 'Coming soon'}
                 </span>
                 <a 
                   href="#subastas"
                   onClick={openForm}
-                  className="ml-4 bg-primary/80 hover:bg-primary text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors inline-flex items-center"
+                  className="mt-2 md:mt-0 md:ml-4 bg-primary/80 hover:bg-primary text-white px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg text-xs sm:text-sm font-medium transition-colors inline-flex items-center"
                 >
                   <i className="fas fa-bell mr-1"></i>
                   {language === 'es' ? 'Notificarme' : 'Notify me'}
@@ -203,23 +203,23 @@ export function AuctionRegisterSection() {
             
             <div className="py-4 flex flex-col md:flex-row items-start md:items-center gap-4">
               <div className="bg-blue-900 text-white rounded-lg p-3 text-center w-16 h-16 flex flex-col items-center justify-center">
-                <div className="text-sm font-bold">EN</div>
-                <div className="text-xl font-bold">1 MES</div>
+                <div className="text-xs sm:text-sm font-bold">EN</div>
+                <div className="text-lg sm:text-xl font-bold">1 MES</div>
               </div>
               <div className="flex-grow">
-                <h4 className="font-bold text-white">
+                <h4 className="font-bold text-white text-sm sm:text-base">
                   {language === 'es' ? 'Subasta de Repuestos Industriales' : 'Industrial Parts Auction'}
                 </h4>
-                <p className="text-gray-400 text-sm">Online (Virtual)</p>
+                <p className="text-gray-400 text-xs sm:text-sm">Online (Virtual)</p>
               </div>
-              <div className="flex items-center">
+              <div className="flex flex-wrap mt-2 md:mt-0 items-center">
                 <span className="bg-blue-500/20 text-blue-400 text-xs px-3 py-1 rounded-full">
                   {language === 'es' ? 'Virtual' : 'Virtual'}
                 </span>
                 <a 
                   href="#subastas"
                   onClick={openForm}
-                  className="ml-4 bg-primary/80 hover:bg-primary text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors inline-flex items-center"
+                  className="mt-2 md:mt-0 md:ml-4 bg-primary/80 hover:bg-primary text-white px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg text-xs sm:text-sm font-medium transition-colors inline-flex items-center"
                 >
                   <i className="fas fa-laptop mr-1"></i>
                   {language === 'es' ? 'Pre-registro' : 'Pre-register'}
