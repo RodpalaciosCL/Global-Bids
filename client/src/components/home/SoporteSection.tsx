@@ -216,31 +216,7 @@ export function SoporteSection() {
           </motion.div>
         </div>
 
-        <motion.div 
-          className="text-center bg-primary/5 rounded-2xl p-8 border border-primary/20"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.3 }}
-        >
-          <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center text-white mx-auto mb-4">
-            <i className="fas fa-headset text-2xl"></i>
-          </div>
-          <h3 className="text-2xl font-bold mb-2">¿Necesita ayuda personalizada?</h3>
-          <p className="text-lg text-gray-600 mb-6 max-w-3xl mx-auto">
-            Nuestro equipo de expertos está listo para brindarle asesoramiento técnico especializado y resolver 
-            todas sus consultas sobre nuestros servicios y productos.
-          </p>
-          <motion.a
-            href="#contacto"
-            className="bg-primary text-white px-8 py-4 rounded-full font-bold inline-flex items-center shadow-lg hover:shadow-xl"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            <i className="fas fa-phone-alt mr-2"></i>
-            Contactar con soporte
-          </motion.a>
-        </motion.div>
+        {/* Se eliminó el recuadro de ayuda personalizada a petición del cliente */}
       </div>
     </section>
   );
