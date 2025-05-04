@@ -25,7 +25,7 @@ export function AuctionRegisterSection() {
           </motion.div>
 
           <motion.h2 
-            className="text-4xl md:text-5xl font-bold text-white mb-6"
+            className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4 sm:mb-6 leading-tight"
             variants={slideUp}
             initial="hidden"
             whileInView="visible"
@@ -37,7 +37,7 @@ export function AuctionRegisterSection() {
           </motion.h2>
 
           <motion.p 
-            className="text-lg text-gray-300 mb-8"
+            className="text-sm sm:text-base md:text-lg text-gray-300 mb-6 sm:mb-8 px-1"
             variants={slideUp}
             initial="hidden"
             whileInView="visible"
@@ -106,11 +106,11 @@ export function AuctionRegisterSection() {
             whileInView="visible"
             viewport={{ once: true }}
             transition={{ delay: 0.3 }}
-            className="flex flex-col md:flex-row justify-center gap-4"
+            className="flex flex-col md:flex-row justify-center gap-3 md:gap-4"
           >
             <button
               onClick={openForm}
-              className="px-8 py-4 bg-primary hover:bg-primary-dark text-white font-bold rounded-lg shadow-lg hover:shadow-xl transition duration-300 transform hover:-translate-y-1 flex items-center justify-center"
+              className="px-6 sm:px-8 py-3 sm:py-4 bg-primary hover:bg-primary-dark text-white text-sm sm:text-base font-bold rounded-lg shadow-lg hover:shadow-xl transition duration-300 transform hover:-translate-y-1 flex items-center justify-center"
             >
               <i className="fas fa-user-plus mr-2"></i>
               {language === 'es' ? 'Registrarse Ahora' : 'Register Now'}
@@ -118,7 +118,7 @@ export function AuctionRegisterSection() {
             
             <a 
               href="#contacto"
-              className="px-8 py-4 bg-white/10 backdrop-blur-md hover:bg-white/20 text-white font-medium rounded-lg border border-white/30 transition duration-300 flex items-center justify-center"
+              className="px-6 sm:px-8 py-3 sm:py-4 bg-white/10 backdrop-blur-md hover:bg-white/20 text-white text-sm sm:text-base font-medium rounded-lg border border-white/30 transition duration-300 flex items-center justify-center"
             >
               <i className="fas fa-info-circle mr-2"></i>
               {language === 'es' ? 'Más Información' : 'More Information'}
@@ -127,22 +127,22 @@ export function AuctionRegisterSection() {
         </div>
 
         <motion.div 
-          className="max-w-4xl mx-auto mt-16 bg-white/5 backdrop-blur-md rounded-xl p-6 border border-white/20"
+          className="max-w-4xl mx-auto mt-10 md:mt-16 bg-white/5 backdrop-blur-md rounded-xl p-4 sm:p-6 border border-white/20"
           variants={fadeIn}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
           transition={{ delay: 0.4 }}
         >
-          <div className="flex items-center mb-6">
-            <div className="w-12 h-12 bg-primary/20 rounded-full flex items-center justify-center text-white mr-4">
-              <i className="fas fa-calendar-alt"></i>
+          <div className="flex flex-wrap items-center mb-4 sm:mb-6 gap-2">
+            <div className="w-10 h-10 sm:w-12 sm:h-12 bg-primary/20 rounded-full flex items-center justify-center text-white mr-2 sm:mr-4">
+              <i className="fas fa-calendar-alt text-sm sm:text-base"></i>
             </div>
-            <h3 className="text-xl font-bold text-white">
+            <h3 className="text-base sm:text-xl font-bold text-white">
               {language === 'es' ? 'Próximos Eventos' : 'Upcoming Events'}
             </h3>
             <div className="ml-auto">
-              <span className="bg-primary/80 text-white text-xs font-bold px-3 py-1 rounded-full">
+              <span className="bg-primary/80 text-white text-xs font-bold px-2 sm:px-3 py-1 rounded-full">
                 {language === 'es' ? 'ACCESO EXCLUSIVO' : 'EXCLUSIVE ACCESS'}
               </span>
             </div>
