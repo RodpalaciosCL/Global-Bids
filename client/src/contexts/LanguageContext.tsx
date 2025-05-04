@@ -26,7 +26,7 @@ const translations: Record<Language, Record<string, string>> = {
     'nav.register': 'Registrarse',
     
     // Hero Section
-    'hero.title': 'Marketplace y Subastas de Activos',
+    'hero.title': 'Marketplace y Subastas de Activos para todo el mundo',
     'hero.subtitle': 'Accede a activos de clase mundial verificados por expertos',
     'hero.explore': 'Explorar Catálogo',
     'hero.contact': 'Contáctanos',
@@ -189,7 +189,7 @@ const translations: Record<Language, Record<string, string>> = {
     'nav.register': 'Register',
     
     // Hero Section
-    'hero.title': 'Marketplace and Asset Auctions',
+    'hero.title': 'Marketplace and Asset Auctions for the entire world',
     'hero.subtitle': 'Access world-class assets verified by experts',
     'hero.explore': 'Explore Catalog',
     'hero.contact': 'Contact Us',
