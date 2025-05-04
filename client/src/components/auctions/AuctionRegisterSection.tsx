@@ -32,8 +32,8 @@ export function AuctionRegisterSection() {
             viewport={{ once: true }}
           >
             {language === 'es' 
-              ? 'Subastas de equipos con oportunidades únicas' 
-              : 'Equipment auctions with unique opportunities'}
+              ? 'Subastas de activos con oportunidades únicas' 
+              : 'Asset auctions with unique opportunities'}
           </motion.h2>
 
           <motion.p 
@@ -66,8 +66,8 @@ export function AuctionRegisterSection() {
               </h3>
               <p className="text-gray-300 text-sm">
                 {language === 'es' 
-                  ? 'Excavadoras, cargadores, camiones y más equipos para minería y construcción.'
-                  : 'Excavators, loaders, trucks and more equipment for mining and construction.'}
+                  ? 'Excavadoras, cargadores, camiones y más activos para minería y construcción.'
+                  : 'Excavators, loaders, trucks and more assets for mining and construction.'}
               </p>
             </div>
 
@@ -80,8 +80,8 @@ export function AuctionRegisterSection() {
               </h3>
               <p className="text-gray-300 text-sm">
                 {language === 'es'
-                  ? 'Componentes originales, herramientas especializadas y accesorios para equipos.'
-                  : 'Original components, specialized tools and accessories for equipment.'}
+                  ? 'Componentes originales, herramientas especializadas y accesorios para activos.'
+                  : 'Original components, specialized tools and accessories for assets.'}
               </p>
             </div>
 
@@ -94,8 +94,8 @@ export function AuctionRegisterSection() {
               </h3>
               <p className="text-gray-300 text-sm">
                 {language === 'es'
-                  ? 'Lotes completos de equipamiento, flotas y activos de proyectos completos.'
-                  : 'Complete lots of equipment, fleets and assets from complete projects.'}
+                  ? 'Lotes completos de activos, flotas y elementos de proyectos completos.'
+                  : 'Complete lots of assets, fleets and elements from complete projects.'}
               </p>
             </div>
           </motion.div>
@@ -156,7 +156,7 @@ export function AuctionRegisterSection() {
               </div>
               <div className="flex-grow">
                 <h4 className="font-bold text-white text-sm sm:text-base">
-                  {language === 'es' ? 'Subasta de Maquinaria Minera' : 'Mining Machinery Auction'}
+                  {language === 'es' ? 'Subasta de Activos Mineros' : 'Mining Assets Auction'}
                 </h4>
                 <p className="text-gray-400 text-xs sm:text-sm">Santiago, Chile</p>
               </div>
@@ -182,7 +182,7 @@ export function AuctionRegisterSection() {
               </div>
               <div className="flex-grow">
                 <h4 className="font-bold text-white text-sm sm:text-base">
-                  {language === 'es' ? 'Subasta de Equipos Forestales' : 'Forestry Equipment Auction'}
+                  {language === 'es' ? 'Subasta de Activos Forestales' : 'Forestry Assets Auction'}
                 </h4>
                 <p className="text-gray-400 text-xs sm:text-sm">Concepción, Chile</p>
               </div>
