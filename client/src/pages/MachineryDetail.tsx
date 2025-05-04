@@ -67,38 +67,68 @@ export default function MachineryDetail() {
                 SUBASTA: {new Date(machinery.auctionDate).toLocaleDateString('es-ES', {day: '2-digit', month: 'short', year: 'numeric'})}
               </div>
             )}
-            <div className="w-full h-64 md:h-96 relative">
-              <img 
-                src={machinery.image || 'https://images.pexels.com/photos/1882537/pexels-photo-1882537.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'} 
-                alt={machinery.name} 
-                className="w-full h-full object-cover"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
-              <div className="absolute bottom-0 left-0 p-6 md:p-10">
-                <div className="inline-block bg-secondary text-primary font-bold px-3 py-1 rounded text-sm mb-3">
-                  {typeLabels[machinery.type as keyof typeof typeLabels]}
+            {/* Galería de fotos */}
+            <div className="relative">
+              {/* Imagen principal */}
+              <div className="w-full h-64 md:h-96 relative">
+                <img 
+                  src={machinery.image || 'https://images.pexels.com/photos/1882537/pexels-photo-1882537.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'} 
+                  alt={machinery.name} 
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+                <div className="absolute bottom-0 left-0 p-6 md:p-10">
+                  <div className="inline-block bg-secondary text-primary font-bold px-3 py-1 rounded text-sm mb-3">
+                    {typeLabels[machinery.type as keyof typeof typeLabels]}
+                  </div>
+                  <h1 className="text-white text-2xl md:text-4xl font-bold mb-2 font-heading">{machinery.name}</h1>
+                  <div className="flex flex-wrap gap-4 text-white/90 text-sm">
+                    <div className="flex items-center">
+                      <i className="fas fa-calendar-alt mr-2"></i>
+                      <span>{machinery.year}</span>
+                    </div>
+                    <div className="flex items-center">
+                      <i className="fas fa-tag mr-2"></i>
+                      <span>{machinery.brand}</span>
+                    </div>
+                    <div className="flex items-center">
+                      <i className="fas fa-tachometer-alt mr-2"></i>
+                      <span>
+                        {machinery.hours ? `${machinery.hours.toLocaleString()} hrs` : 
+                        machinery.kilometers ? `${machinery.kilometers.toLocaleString()} km` : 'N/A'}
+                      </span>
+                    </div>
+                    <div className="flex items-center">
+                      <i className="fas fa-check-circle mr-2"></i>
+                      <span>{conditionLabels[machinery.condition as keyof typeof conditionLabels]}</span>
+                    </div>
+                  </div>
                 </div>
-                <h1 className="text-white text-2xl md:text-4xl font-bold mb-2 font-heading">{machinery.name}</h1>
-                <div className="flex flex-wrap gap-4 text-white/90 text-sm">
-                  <div className="flex items-center">
-                    <i className="fas fa-calendar-alt mr-2"></i>
-                    <span>{machinery.year}</span>
+              </div>
+              
+              {/* Miniaturas de galería */}
+              <div className="bg-gray-900 p-4">
+                <h3 className="text-white text-sm font-medium mb-3">Galería de fotos</h3>
+                <div className="grid grid-cols-5 gap-2">
+                  {/* Imagen principal en miniatura */}
+                  <div className="relative border-2 border-secondary">
+                    <img 
+                      src={machinery.image || 'https://images.pexels.com/photos/1882537/pexels-photo-1882537.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'} 
+                      alt={`${machinery.name} - Vista principal`} 
+                      className="w-full h-14 object-cover"
+                    />
                   </div>
-                  <div className="flex items-center">
-                    <i className="fas fa-tag mr-2"></i>
-                    <span>{machinery.brand}</span>
-                  </div>
-                  <div className="flex items-center">
-                    <i className="fas fa-tachometer-alt mr-2"></i>
-                    <span>
-                      {machinery.hours ? `${machinery.hours.toLocaleString()} hrs` : 
-                      machinery.kilometers ? `${machinery.kilometers.toLocaleString()} km` : 'N/A'}
-                    </span>
-                  </div>
-                  <div className="flex items-center">
-                    <i className="fas fa-check-circle mr-2"></i>
-                    <span>{conditionLabels[machinery.condition as keyof typeof conditionLabels]}</span>
-                  </div>
+                  
+                  {/* Miniaturas adicionales */}
+                  {[1, 2, 3, 4].map((idx) => (
+                    <div key={idx} className="relative border border-gray-700 hover:border-gray-500 cursor-pointer transition-colors">
+                      <img 
+                        src={`https://images.pexels.com/photos/${2760240 + idx}/pexels-photo-${2760240 + idx}.jpeg?auto=compress&cs=tinysrgb&w=300`} 
+                        alt={`${machinery.name} - Vista ${idx + 1}`} 
+                        className="w-full h-14 object-cover"
+                      />
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>
@@ -219,8 +249,8 @@ export default function MachineryDetail() {
               
               <div className="space-y-3">
                 <Button className="w-full bg-primary hover:bg-primary-dark text-white py-3" size="lg">
-                  <i className="fas fa-gavel mr-2"></i>
-                  {machinery.isSold ? 'Ver opciones similares' : 'Participa en la subasta'}
+                  <i className="fas fa-shopping-cart mr-2"></i>
+                  {machinery.isSold ? 'Ver opciones similares' : 'Comprar ahora'}
                 </Button>
                 <Button className="w-full bg-white border border-gray-300 text-primary hover:bg-gray-50 py-3" size="lg">
                   <i className="fas fa-phone-alt mr-2"></i>
@@ -273,58 +303,19 @@ export default function MachineryDetail() {
           </div>
         </div>
         
-        {/* Related machines - we would implement this in a real app */}
+        {/* Botón de volver al catálogo */}
         <motion.div 
-          className="mt-16"
+          className="mt-16 text-center"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.5 }}
         >
-          <h2 className="text-2xl md:text-3xl font-bold text-primary mb-6 font-heading text-center">Maquinaria Similar</h2>
-          <div className="text-center mb-10">
-            <p className="text-gray-600">
-              Estas unidades similares podrían interesarte:
-            </p>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {[1, 2, 3].map((_, i) => (
-              <div key={i} className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow">
-                <div className="h-48 relative">
-                  <img 
-                    src={`https://images.pexels.com/photos/27176${i+80}/pexels-photo-27176${i+80}.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1`} 
-                    alt="Similar machinery" 
-                    className="w-full h-full object-cover"
-                  />
-                  <div className="absolute top-0 left-0 bg-primary text-white font-bold px-3 py-1 m-2 rounded text-sm">
-                    {typeLabels[machinery.type as keyof typeof typeLabels]}
-                  </div>
-                </div>
-                <div className="p-4">
-                  <h3 className="font-bold text-lg text-primary">{machinery.brand} {i+325}</h3>
-                  <div className="flex justify-between items-center mt-2">
-                    <span className="text-sm text-gray-600">{machinery.year - i}</span>
-                    <span className="font-bold text-xl text-primary">${(machinery.price * (0.8 + i*0.1)).toLocaleString()}</span>
-                  </div>
-                  <a 
-                    href="#" 
-                    className="mt-4 block text-center bg-primary hover:bg-primary-dark text-white font-medium px-4 py-2 rounded transition duration-300"
-                  >
-                    Ver detalles
-                  </a>
-                </div>
-              </div>
-            ))}
-          </div>
-          
-          <div className="text-center mt-8">
-            <Button asChild variant="outline" className="mt-4">
-              <a href="/#catalogo">
-                <i className="fas fa-arrow-left mr-2"></i>
-                Volver al catálogo
-              </a>
-            </Button>
-          </div>
+          <Button asChild variant="outline" className="mt-4">
+            <a href="/#catalogo">
+              <i className="fas fa-arrow-left mr-2"></i>
+              Volver al catálogo
+            </a>
+          </Button>
         </motion.div>
       </div>
     </div>
