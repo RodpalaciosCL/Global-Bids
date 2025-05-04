@@ -7,41 +7,10 @@ export function AuctionRegisterSection() {
   const { openForm } = useRegistration();
   const { language } = useLanguage();
 
-  // Imagenes de fondo para el carrusel
-  const bgImages = [
-    'https://images.pexels.com/photos/4312212/pexels-photo-4312212.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-    'https://images.pexels.com/photos/4513940/pexels-photo-4513940.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-    'https://images.pexels.com/photos/1238864/pexels-photo-1238864.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-  ];
-
   return (
-    <section className="relative py-20 overflow-hidden" id="subastas">
-      {/* Slide de imágenes en el fondo */}
-      <div className="absolute inset-0 w-full h-full">
-        {bgImages.map((img, index) => (
-          <motion.div
-            key={index}
-            className="absolute inset-0 w-full h-full z-0"
-            initial={{ opacity: 0 }}
-            animate={{ 
-              opacity: [0, 1, 1, 0], 
-            }}
-            transition={{ 
-              duration: 15, 
-              times: [0, 0.3, 0.7, 1],
-              delay: index * 5,
-              repeat: Infinity,
-              repeatDelay: (bgImages.length - 1) * 5
-            }}
-          >
-            <div 
-              className="absolute inset-0 w-full h-full bg-cover bg-center z-0"
-              style={{ backgroundImage: `url(${img})` }}
-            />
-            <div className="absolute inset-0 bg-black/75 backdrop-blur-sm z-10"></div>
-          </motion.div>
-        ))}
-      </div>
+    <section className="relative py-16 overflow-hidden bg-gray-900" id="subastas">
+      {/* Fondo sólido en lugar de imágenes */}
+      <div className="absolute inset-0 w-full h-full bg-gradient-to-b from-gray-900 to-gray-800"></div>
 
       <div className="container mx-auto px-4 relative z-20">
         <div className="max-w-3xl mx-auto text-center">
@@ -181,7 +150,7 @@ export function AuctionRegisterSection() {
 
           <div className="divide-y divide-white/10">
             <div className="py-4 flex flex-col md:flex-row items-start md:items-center gap-4">
-              <div className="bg-primary/20 text-white rounded-lg p-3 text-center">
+              <div className="bg-blue-800/50 text-white rounded-lg p-3 text-center">
                 <div className="text-xl font-bold">15</div>
                 <div className="text-xs">MAYO</div>
               </div>
@@ -207,7 +176,7 @@ export function AuctionRegisterSection() {
             </div>
             
             <div className="py-4 flex flex-col md:flex-row items-start md:items-center gap-4">
-              <div className="bg-primary/20 text-white rounded-lg p-3 text-center">
+              <div className="bg-blue-800/50 text-white rounded-lg p-3 text-center">
                 <div className="text-xl font-bold">28</div>
                 <div className="text-xs">MAYO</div>
               </div>
@@ -233,7 +202,7 @@ export function AuctionRegisterSection() {
             </div>
             
             <div className="py-4 flex flex-col md:flex-row items-start md:items-center gap-4">
-              <div className="bg-primary/20 text-white rounded-lg p-3 text-center">
+              <div className="bg-blue-800/50 text-white rounded-lg p-3 text-center">
                 <div className="text-xl font-bold">10</div>
                 <div className="text-xs">JUNIO</div>
               </div>
@@ -259,21 +228,7 @@ export function AuctionRegisterSection() {
             </div>
           </div>
           
-          <div className="mt-6 text-center">
-            <p className="text-gray-400 text-sm mb-4">
-              {language === 'es' 
-                ? 'Regístrese para acceder al calendario completo de subastas y eventos.'
-                : 'Register to access the complete calendar of auctions and events.'}
-            </p>
-            <a
-              href="#subastas"
-              onClick={openForm}
-              className="inline-flex items-center text-primary-light hover:text-white font-medium transition-colors"
-            >
-              {language === 'es' ? 'Ver todos los eventos' : 'View all events'}
-              <i className="fas fa-arrow-right ml-2"></i>
-            </a>
-          </div>
+          {/* Eliminamos el botón "Ver todos los eventos" según la solicitud */}
         </motion.div>
       </div>
     </section>
