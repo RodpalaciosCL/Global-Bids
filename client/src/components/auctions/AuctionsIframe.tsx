@@ -25,7 +25,7 @@ export function AuctionsIframe() {
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
           >
-            Explore nuestros eventos exclusivos con maquinaria pesada y equipamiento industrial de las mejores marcas
+            Explore nuestros eventos con lo más diverso en máquinas, herramientas, repuestos y diversos lotes y familias de productos disponibles, y de primer nivel.
           </motion.p>
         </div>
         
