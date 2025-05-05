@@ -42,28 +42,31 @@ export default function MachineryDetail() {
           <span className="mx-1 text-gray-400">/</span>
           <a href="/#catalogo" className="text-gray-500 hover:text-primary">Catálogo</a>
           <span className="mx-1 text-gray-400">/</span>
-          <span className="text-primary font-medium truncate">{machinery.name}</span>
+          <span className="text-gray-700 font-medium truncate">{machinery.name}</span>
         </div>
         
-        <div className="mb-1">
-          <div className="text-xs text-gray-600">
-            Plataforma Elevadora
-          </div>
-          <h1 className="text-xl font-bold text-gray-900 leading-tight">{machinery.name}</h1>
+        {/* Info de plataforma */}
+        <div className="text-xs text-gray-600 mb-1">
+          Plataforma Elevadora
         </div>
         
-        <div className="flex flex-wrap items-center gap-x-4 text-xs text-gray-600 mb-2">
-          <div className="flex items-center">
-            <i className="fas fa-calendar-alt mr-1 text-gray-500"></i>
-            <span>{machinery.year}</span>
-          </div>
-          <div className="flex items-center">
-            <i className="fas fa-tachometer-alt mr-1 text-gray-500"></i>
-            <span>{machinery.hours} hrs</span>
-          </div>
-          <div className="flex items-center">
-            <i className="fas fa-check-circle mr-1 text-gray-500"></i>
-            <span>Buen estado</span>
+        {/* Título y datos básicos */}
+        <div className="mb-3 border-b border-gray-200 pb-2">
+          <h1 className="text-2xl font-bold text-gray-900 mb-2">{machinery.name}</h1>
+          
+          <div className="flex items-center gap-x-6 text-sm text-gray-600">
+            <div className="flex items-center">
+              <i className="fas fa-calendar-alt mr-2 text-gray-500"></i>
+              <span>{machinery.year}</span>
+            </div>
+            <div className="flex items-center">
+              <i className="fas fa-tachometer-alt mr-2 text-gray-500"></i>
+              <span>{machinery.hours} hrs</span>
+            </div>
+            <div className="flex items-center">
+              <i className="fas fa-check-circle mr-2 text-gray-500"></i>
+              <span>Buen estado</span>
+            </div>
           </div>
         </div>
         
