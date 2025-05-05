@@ -35,9 +35,9 @@ export default function MachineryDetail() {
   
   return (
     <div className="bg-white min-h-screen">
-      <div className="container mx-auto px-4 py-4">
+      <div className="container mx-auto px-4 py-3">
         {/* Navegación simple */}
-        <div className="flex items-center text-sm mb-4">
+        <div className="flex items-center text-sm mb-2">
           <a href="/" className="text-gray-500 hover:text-primary">Inicio</a>
           <span className="mx-2 text-gray-400">/</span>
           <a href="/#catalogo" className="text-gray-500 hover:text-primary">Catálogo</a>
@@ -45,223 +45,212 @@ export default function MachineryDetail() {
           <span className="text-primary font-medium truncate">{machinery.name}</span>
         </div>
         
-        {/* Sección de información de cabecera */}
-        <div className="bg-white rounded-lg shadow-sm mb-6">
-          {/* Etiqueta de tipo */}
-          <div className="inline-block bg-gray-100 text-primary font-medium px-3 py-1 rounded text-sm mb-2">
-            {typeLabels[machinery.type as keyof typeof typeLabels]}
-          </div>
-          
-          {/* Título y datos básicos */}
-          <h1 className="text-2xl font-bold text-gray-900 mb-2">{machinery.name}</h1>
-          
-          <div className="flex flex-wrap gap-4 text-sm text-gray-600 mb-4">
-            <div className="flex items-center">
-              <i className="fas fa-calendar-alt mr-2"></i>
-              <span>{machinery.year}</span>
-            </div>
-            <div className="flex items-center">
-              <i className="fas fa-tag mr-2"></i>
-              <span>{machinery.brand}</span>
-            </div>
-            <div className="flex items-center">
-              <i className="fas fa-tachometer-alt mr-2"></i>
-              <span>
-                {machinery.hours ? `${machinery.hours.toLocaleString()} hrs` : 
-                machinery.kilometers ? `${machinery.kilometers.toLocaleString()} km` : 'N/A'}
-              </span>
-            </div>
-            <div className="flex items-center">
-              <i className="fas fa-check-circle mr-2"></i>
-              <span>{conditionLabels[machinery.condition as keyof typeof conditionLabels]}</span>
-            </div>
-          </div>
-          
-          {/* Galería de fotos */}
-          <div className="border border-gray-200 rounded-lg overflow-hidden mb-6">
-            {machinery.gallery && machinery.gallery.length > 0 ? (
-              <ImageGallery 
-                images={[machinery.image, ...(machinery.gallery || [])]} 
-                alt={machinery.name} 
-              />
-            ) : (
-              <ImageGallery 
-                images={[machinery.image]} 
-                alt={machinery.name} 
-              />
-            )}
-          </div>
-          
-          {/* Contenido principal en 2 columnas */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {/* Columna izquierda - Descripción y especificaciones */}
-            <div className="md:col-span-2">
-              <div className="mb-6">
-                <h2 className="text-xl font-bold text-gray-900 mb-3">Descripción</h2>
-                <p className="text-gray-700">
-                  {machinery.description || `${machinery.name} en ${conditionLabels[machinery.condition as keyof typeof conditionLabels].toLowerCase()} estado de funcionamiento. Con su potente motor y estructura robusta, esta máquina es ideal para proyectos de construcción, minería o forestales que requieren equipos confiables y de alto rendimiento.`}
-                </p>
+        {/* Panel principal */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
+          {/* Columna izquierda con información principal */}
+          <div className="md:col-span-2">
+            {/* Cabecera con título */}
+            <div className="mb-2">
+              <div className="inline-block bg-gray-100 text-primary font-medium px-3 py-1 rounded text-sm mb-1">
+                {typeLabels[machinery.type as keyof typeof typeLabels]}
               </div>
               
-              <div className="mb-6">
-                <h2 className="text-xl font-bold text-gray-900 mb-3">Especificaciones</h2>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div className="bg-gray-50 p-4 rounded-lg">
-                    <h3 className="font-semibold text-gray-900 mb-2">Información General</h3>
-                    <table className="w-full text-sm">
-                      <tbody>
-                        <tr className="border-b border-gray-200">
-                          <td className="py-2 text-gray-600">Marca:</td>
-                          <td className="py-2 text-right font-medium">{machinery.brand}</td>
-                        </tr>
-                        <tr className="border-b border-gray-200">
-                          <td className="py-2 text-gray-600">Modelo:</td>
-                          <td className="py-2 text-right font-medium">{machinery.name.split(' ').slice(1).join(' ')}</td>
-                        </tr>
-                        <tr className="border-b border-gray-200">
-                          <td className="py-2 text-gray-600">Año:</td>
-                          <td className="py-2 text-right font-medium">{machinery.year}</td>
-                        </tr>
-                        <tr>
-                          <td className="py-2 text-gray-600">Condición:</td>
-                          <td className="py-2 text-right font-medium">{conditionLabels[machinery.condition as keyof typeof conditionLabels]}</td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
-                  
-                  <div className="bg-gray-50 p-4 rounded-lg">
-                    <h3 className="font-semibold text-gray-900 mb-2">Uso y Rendimiento</h3>
-                    <table className="w-full text-sm">
-                      <tbody>
-                        <tr className="border-b border-gray-200">
-                          <td className="py-2 text-gray-600">Horas de uso:</td>
-                          <td className="py-2 text-right font-medium">{machinery.hours ? `${machinery.hours.toLocaleString()} hrs` : 'N/A'}</td>
-                        </tr>
-                        <tr className="border-b border-gray-200">
-                          <td className="py-2 text-gray-600">Kilometraje:</td>
-                          <td className="py-2 text-right font-medium">{machinery.kilometers ? `${machinery.kilometers.toLocaleString()} km` : 'N/A'}</td>
-                        </tr>
-                        <tr className="border-b border-gray-200">
-                          <td className="py-2 text-gray-600">Potencia:</td>
-                          <td className="py-2 text-right font-medium">375 HP</td>
-                        </tr>
-                        <tr>
-                          <td className="py-2 text-gray-600">Capacidad:</td>
-                          <td className="py-2 text-right font-medium">{
-                            machinery.type === 'manlift' ? '500 lbs' :
-                            machinery.type === 'excavator' ? '2.1 m³' : 
-                            machinery.type === 'loader' ? '3.5 m³' : 
-                            machinery.type === 'truck' ? '20 ton' : 'N/A'
-                          }</td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
+              <h1 className="text-xl md:text-2xl font-bold text-gray-900 mb-1">{machinery.name}</h1>
+              
+              <div className="flex flex-wrap gap-3 text-sm text-gray-600">
+                <div className="flex items-center">
+                  <i className="fas fa-calendar-alt mr-1.5"></i>
+                  <span>{machinery.year}</span>
                 </div>
-              </div>
-              
-              <div className="mb-6">
-                <h2 className="text-xl font-bold text-gray-900 mb-3">Características Adicionales</h2>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  {generateFeatures(machinery.type as string).map((feature, index) => (
-                    <div key={index} className="flex items-start">
-                      <div className="text-yellow-500 mr-2">
-                        <i className="fas fa-check text-xs"></i>
-                      </div>
-                      <span className="text-gray-700 text-sm">{feature}</span>
-                    </div>
-                  ))}
+                <div className="flex items-center">
+                  <i className="fas fa-tag mr-1.5"></i>
+                  <span>{machinery.brand}</span>
+                </div>
+                <div className="flex items-center">
+                  <i className="fas fa-tachometer-alt mr-1.5"></i>
+                  <span>
+                    {machinery.hours ? `${machinery.hours.toLocaleString()} hrs` : 
+                    machinery.kilometers ? `${machinery.kilometers.toLocaleString()} km` : 'N/A'}
+                  </span>
+                </div>
+                <div className="flex items-center">
+                  <i className="fas fa-check-circle mr-1.5"></i>
+                  <span>{conditionLabels[machinery.condition as keyof typeof conditionLabels]}</span>
                 </div>
               </div>
             </div>
             
-            {/* Columna derecha - Precio y acciones */}
-            <div className="space-y-5">
-              <div className="bg-gray-50 p-5 rounded-lg">
-                <h3 className="text-xl font-bold text-gray-900 mb-1">Precio</h3>
-                <div className="flex items-baseline">
-                  <div className="text-3xl font-bold text-primary">${machinery.price.toLocaleString()}</div>
-                  <p className="text-gray-500 text-sm ml-2">
-                    {machinery.auctionDate && !machinery.isSold ? 'Precio de apertura' : 'Precio final'}
-                  </p>
-                </div>
-                
-                <div className="border-t border-gray-200 my-4 pt-4">
-                  <h4 className="font-medium text-gray-900 mb-1">Fecha de subasta</h4>
-                  <p className="text-gray-600 text-sm">
-                    {machinery.auctionDate ? 
-                      new Date(machinery.auctionDate).toLocaleDateString('es-ES', {
-                        day: 'numeric', 
-                        month: 'long', 
-                        year: 'numeric'
-                      }) : 
-                      'Venta directa (sin subasta)'}
-                  </p>
-                </div>
-                
-                <div className="mt-4 space-y-3">
-                  <Button className="w-full bg-primary hover:bg-primary-dark text-white py-2.5" size="lg">
-                    <i className="fas fa-shopping-cart mr-2"></i>
-                    Comprar ahora
-                  </Button>
-                  <Button className="w-full bg-white border border-gray-300 text-gray-700 hover:bg-gray-50 py-2.5" size="lg">
-                    <i className="fas fa-phone-alt mr-2"></i>
-                    Contactar consultor
-                  </Button>
-                </div>
-              </div>
-              
-              <div className="bg-gray-50 p-4 rounded-lg">
-                <h3 className="font-medium text-gray-900 mb-3">Información de Contacto</h3>
-                <ul className="space-y-2">
-                  <li className="flex items-center">
-                    <i className="fas fa-user-tie text-gray-500 mr-3 w-5"></i>
-                    <span className="text-sm">Juan Pérez - Especialista en {typeLabels[machinery.type as keyof typeof typeLabels]}</span>
-                  </li>
-                  <li className="flex items-center">
-                    <i className="fas fa-phone-alt text-gray-500 mr-3 w-5"></i>
-                    <span className="text-sm">+56 9 8765 4321</span>
-                  </li>
-                  <li className="flex items-center">
-                    <i className="fas fa-envelope text-gray-500 mr-3 w-5"></i>
-                    <span className="text-sm">ventas@globalbids.com</span>
-                  </li>
-                </ul>
-              </div>
-              
-              <div className="border border-yellow-200 p-4 rounded-lg bg-yellow-50">
-                <h3 className="font-medium text-gray-900 mb-2 flex items-center">
-                  <i className="fas fa-shield-alt text-yellow-500 mr-2"></i> 
-                  Garantía Global Bids
-                </h3>
-                <ul className="space-y-1 text-sm text-gray-600">
-                  <li className="flex items-start">
-                    <i className="fas fa-check text-yellow-500 text-xs mt-1 mr-2"></i>
-                    <span>Inspección técnica certificada</span>
-                  </li>
-                  <li className="flex items-start">
-                    <i className="fas fa-check text-yellow-500 text-xs mt-1 mr-2"></i>
-                    <span>Historial de mantenimiento verificado</span>
-                  </li>
-                  <li className="flex items-start">
-                    <i className="fas fa-check text-yellow-500 text-xs mt-1 mr-2"></i>
-                    <span>Garantía de 30 días en componentes principales</span>
-                  </li>
-                </ul>
-              </div>
+            {/* Galería de fotos */}
+            <div className="border border-gray-200 rounded-lg overflow-hidden mb-4">
+              {machinery.gallery && machinery.gallery.length > 0 ? (
+                <ImageGallery 
+                  images={[machinery.image, ...(machinery.gallery || [])]} 
+                  alt={machinery.name} 
+                />
+              ) : (
+                <ImageGallery 
+                  images={[machinery.image]} 
+                  alt={machinery.name} 
+                />
+              )}
             </div>
           </div>
           
-          {/* Botón de volver al catálogo */}
-          <div className="mt-8 text-center">
-            <Button asChild variant="outline">
-              <a href="/#catalogo">
-                <i className="fas fa-arrow-left mr-2"></i>
-                Volver al catálogo
-              </a>
-            </Button>
+          {/* Columna derecha con precio y acciones */}
+          <div className="md:col-span-1 md:flex flex-col space-y-4">
+            <div className="bg-gray-50 p-4 rounded-lg shadow-sm">
+              <h3 className="text-xl font-bold text-gray-900 mb-1">Precio</h3>
+              <div className="flex items-baseline">
+                <div className="text-3xl font-bold text-primary">${machinery.price.toLocaleString()}</div>
+                <p className="text-gray-500 text-sm ml-2">
+                  {machinery.auctionDate && !machinery.isSold ? 'Precio de apertura' : 'Precio final'}
+                </p>
+              </div>
+              
+              <div className="border-t border-gray-200 my-3 pt-3">
+                <h4 className="font-medium text-gray-900 mb-1">Fecha de subasta</h4>
+                <p className="text-gray-600 text-sm">
+                  {machinery.auctionDate ? 
+                    new Date(machinery.auctionDate).toLocaleDateString('es-ES', {
+                      day: 'numeric', 
+                      month: 'long', 
+                      year: 'numeric'
+                    }) : 
+                    'Venta directa (sin subasta)'}
+                </p>
+              </div>
+              
+              <div className="mt-3 space-y-2">
+                <Button className="w-full bg-primary hover:bg-primary-dark text-white py-2" size="lg">
+                  <i className="fas fa-shopping-cart mr-2"></i>
+                  Comprar ahora
+                </Button>
+                <Button className="w-full bg-white border border-gray-300 text-gray-700 hover:bg-gray-50 py-2" size="lg">
+                  <i className="fas fa-phone-alt mr-2"></i>
+                  Contactar consultor
+                </Button>
+              </div>
+            </div>
+            
+            <div className="bg-gray-50 p-4 rounded-lg shadow-sm">
+              <h3 className="font-medium text-gray-900 mb-2">Información de Contacto</h3>
+              <ul className="space-y-1.5">
+                <li className="flex items-center">
+                  <i className="fas fa-user-tie text-gray-500 mr-2.5 w-4 text-center"></i>
+                  <span className="text-sm">Juan Pérez - Especialista en {typeLabels[machinery.type as keyof typeof typeLabels]}</span>
+                </li>
+                <li className="flex items-center">
+                  <i className="fas fa-phone-alt text-gray-500 mr-2.5 w-4 text-center"></i>
+                  <span className="text-sm">+56 9 8765 4321</span>
+                </li>
+                <li className="flex items-center">
+                  <i className="fas fa-envelope text-gray-500 mr-2.5 w-4 text-center"></i>
+                  <span className="text-sm">ventas@globalbids.com</span>
+                </li>
+              </ul>
+            </div>
+            
+            <div className="border border-yellow-200 p-4 rounded-lg bg-yellow-50 shadow-sm">
+              <h3 className="font-medium text-gray-900 mb-2 flex items-center">
+                <i className="fas fa-shield-alt text-yellow-500 mr-2"></i> 
+                Garantía Global Bids
+              </h3>
+              <ul className="space-y-1 text-sm text-gray-600">
+                <li className="flex items-start">
+                  <i className="fas fa-check text-yellow-500 text-xs mt-1 mr-2"></i>
+                  <span>Inspección técnica certificada</span>
+                </li>
+                <li className="flex items-start">
+                  <i className="fas fa-check text-yellow-500 text-xs mt-1 mr-2"></i>
+                  <span>Historial de mantenimiento verificado</span>
+                </li>
+                <li className="flex items-start">
+                  <i className="fas fa-check text-yellow-500 text-xs mt-1 mr-2"></i>
+                  <span>Garantía de 30 días en componentes principales</span>
+                </li>
+              </ul>
+            </div>
           </div>
+        </div>
+        
+        {/* Sección de especificaciones */}
+        <div className="mt-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <h2 className="text-lg font-bold text-gray-900 mb-3">Descripción</h2>
+              <div className="bg-gray-50 p-4 rounded-lg shadow-sm">
+                <p className="text-gray-700 text-sm">
+                  {machinery.description || `${machinery.name} en ${conditionLabels[machinery.condition as keyof typeof conditionLabels].toLowerCase()} estado de funcionamiento. Con su potente motor y estructura robusta, esta máquina es ideal para proyectos de construcción, minería o forestales que requieren equipos confiables y de alto rendimiento.`}
+                </p>
+              </div>
+            </div>
+            
+            <div>
+              <h2 className="text-lg font-bold text-gray-900 mb-3">Especificaciones</h2>
+              <div className="grid grid-cols-2 gap-4">
+                <div className="bg-gray-50 p-3 rounded-lg shadow-sm">
+                  <table className="w-full text-sm">
+                    <tbody>
+                      <tr className="border-b border-gray-200">
+                        <td className="py-1.5 text-gray-600">Marca:</td>
+                        <td className="py-1.5 text-right font-medium">{machinery.brand}</td>
+                      </tr>
+                      <tr className="border-b border-gray-200">
+                        <td className="py-1.5 text-gray-600">Modelo:</td>
+                        <td className="py-1.5 text-right font-medium">{machinery.name.split(' ').slice(1).join(' ')}</td>
+                      </tr>
+                      <tr className="border-b border-gray-200">
+                        <td className="py-1.5 text-gray-600">Año:</td>
+                        <td className="py-1.5 text-right font-medium">{machinery.year}</td>
+                      </tr>
+                      <tr>
+                        <td className="py-1.5 text-gray-600">Condición:</td>
+                        <td className="py-1.5 text-right font-medium">{conditionLabels[machinery.condition as keyof typeof conditionLabels]}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                
+                <div className="bg-gray-50 p-3 rounded-lg shadow-sm">
+                  <table className="w-full text-sm">
+                    <tbody>
+                      <tr className="border-b border-gray-200">
+                        <td className="py-1.5 text-gray-600">Horas:</td>
+                        <td className="py-1.5 text-right font-medium">{machinery.hours ? `${machinery.hours.toLocaleString()} hrs` : 'N/A'}</td>
+                      </tr>
+                      <tr className="border-b border-gray-200">
+                        <td className="py-1.5 text-gray-600">Kilometraje:</td>
+                        <td className="py-1.5 text-right font-medium">{machinery.kilometers ? `${machinery.kilometers.toLocaleString()} km` : 'N/A'}</td>
+                      </tr>
+                      <tr className="border-b border-gray-200">
+                        <td className="py-1.5 text-gray-600">Potencia:</td>
+                        <td className="py-1.5 text-right font-medium">375 HP</td>
+                      </tr>
+                      <tr>
+                        <td className="py-1.5 text-gray-600">Capacidad:</td>
+                        <td className="py-1.5 text-right font-medium">{
+                          machinery.type === 'manlift' ? '500 lbs' :
+                          machinery.type === 'excavator' ? '2.1 m³' : 
+                          machinery.type === 'loader' ? '3.5 m³' : 
+                          machinery.type === 'truck' ? '20 ton' : 'N/A'
+                        }</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        {/* Botón de volver */}
+        <div className="mt-4 mb-2 text-right">
+          <Button asChild variant="outline" size="sm">
+            <a href="/#catalogo">
+              <i className="fas fa-arrow-left mr-2"></i>
+              Volver al catálogo
+            </a>
+          </Button>
         </div>
       </div>
     </div>

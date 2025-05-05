@@ -34,11 +34,12 @@ export function ImageGallery({ images, alt }: ImageGalleryProps) {
     <div className="relative">
       {/* Vista principal con imagen grande */}
       <div className="relative">
-        <div className="relative bg-gray-100 h-[400px] overflow-hidden">
+        <div className="relative bg-gray-100 h-[320px] overflow-hidden">
           <img 
             src={imageList[currentIndex]} 
             alt={`${alt} - Imagen ${currentIndex + 1}`} 
             className="w-full h-full object-contain"
+            style={{ maxHeight: '320px', margin: '0 auto', objectFit: 'cover', objectPosition: 'center' }}
           />
           
           {/* Controles laterales */}
