@@ -34,7 +34,7 @@ export function ImageGallery({ images, alt }: ImageGalleryProps) {
     <div className="relative">
       {/* Vista principal con imagen grande */}
       <div className="relative">
-        <div className="relative bg-gray-100 h-[280px] overflow-hidden">
+        <div className="relative bg-gray-100 h-[350px] overflow-hidden">
           <img 
             src={imageList[currentIndex]} 
             alt={`${alt} - Imagen ${currentIndex + 1}`} 
@@ -43,13 +43,13 @@ export function ImageGallery({ images, alt }: ImageGalleryProps) {
           
           {/* Controles laterales */}
           <button 
-            className="absolute left-2 top-1/2 transform -translate-y-1/2 h-8 w-8 rounded-full bg-black/20 text-white hover:bg-black/40 flex items-center justify-center focus:outline-none transition-colors"
+            className="absolute left-2 top-1/2 transform -translate-y-1/2 h-10 w-10 rounded-full bg-black/20 text-white hover:bg-black/40 flex items-center justify-center focus:outline-none transition-colors"
             onClick={handlePrev}
           >
             <i className="fas fa-chevron-left"></i>
           </button>
           <button 
-            className="absolute right-2 top-1/2 transform -translate-y-1/2 h-8 w-8 rounded-full bg-black/20 text-white hover:bg-black/40 flex items-center justify-center focus:outline-none transition-colors"
+            className="absolute right-2 top-1/2 transform -translate-y-1/2 h-10 w-10 rounded-full bg-black/20 text-white hover:bg-black/40 flex items-center justify-center focus:outline-none transition-colors"
             onClick={handleNext}
           >
             <i className="fas fa-chevron-right"></i>
@@ -63,8 +63,8 @@ export function ImageGallery({ images, alt }: ImageGalleryProps) {
       </div>
       
       {/* Miniaturas en fila simple */}
-      <div className="bg-gray-800 py-1 overflow-x-auto">
-        <div className="flex gap-1 px-1">
+      <div className="bg-gray-800 py-2 overflow-x-auto">
+        <div className="flex px-1 gap-1">
           {imageList.map((image, index) => (
             <div 
               key={index}
@@ -74,7 +74,7 @@ export function ImageGallery({ images, alt }: ImageGalleryProps) {
               <img 
                 src={image} 
                 alt={`${alt} - Miniatura ${index + 1}`} 
-                className="h-14 w-20 object-cover"
+                className="h-14 w-16 object-cover"
               />
             </div>
           ))}
