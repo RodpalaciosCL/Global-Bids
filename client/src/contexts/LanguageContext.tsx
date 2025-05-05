@@ -374,6 +374,14 @@ const translations: Record<Language, Record<string, string>> = {
     'events.participation': 'Looking to participate in our events or have assets to auction?',
     'events.contactUs': 'Contact us now',
     
+    // Featured
+    'featured.title': 'Featured Auctions',
+    'featured.description': 'Discover some of our most successful auctions and the machinery we have sold for our clients.',
+    'featured.viewAll': 'View All Machinery',
+    'featured.sold': 'Sold',
+    'featured.available': 'Available',
+    'featured.auctionPrice': 'Auction price',
+    
     // Contact
     'contact.title': 'Contact Us',
     'contact.subtitle': 'We\'re here to help you',

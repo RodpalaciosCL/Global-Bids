@@ -1,8 +1,11 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { fadeIn, slideUp } from '@/lib/animations';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 export function AuctionsIframe() {
+  const { t } = useLanguage();
+  
   return (
     <section className="py-12 bg-gray-900" id="subastas">
       <div className="container mx-auto px-4">
@@ -14,7 +17,7 @@ export function AuctionsIframe() {
             whileInView="visible"
             viewport={{ once: true }}
           >
-            Próximos Eventos de Subastas
+            {t('auctions.upcomingAuctions')}
           </motion.h2>
 
           <motion.p 
@@ -25,7 +28,7 @@ export function AuctionsIframe() {
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
           >
-            Explore nuestros eventos con lo más diverso en máquinas, herramientas, repuestos y diversos lotes y familias de productos disponibles, y de primer nivel.
+            {t('auctions.exploreAuctions')}
           </motion.p>
         </div>
         

@@ -4,10 +4,12 @@ import { useInView } from 'framer-motion';
 import { fadeIn, staggerContainer, slideUp } from '@/lib/animations';
 import { Machinery } from '@/types/machinery';
 import { useQuery } from '@tanstack/react-query';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 export function FeaturedAuctions() {
   const sectionRef = useRef(null);
   const isInView = useInView(sectionRef, { once: true, amount: 0.2 });
+  const { t } = useLanguage();
   
   const { data: featuredItems, isLoading } = useQuery({
     queryKey: ['/api/machinery/featured'],
@@ -23,9 +25,9 @@ export function FeaturedAuctions() {
           animate={isInView ? "visible" : "hidden"}
           variants={fadeIn}
         >
-          <h2 className="font-heading text-3xl md:text-4xl font-bold mb-4 text-primary">Remates Destacados</h2>
+          <h2 className="font-heading text-3xl md:text-4xl font-bold mb-4 text-primary">{t('featured.title')}</h2>
           <div className="w-20 h-1 bg-secondary mx-auto mb-6"></div>
-          <p className="max-w-3xl mx-auto text-gray-600">Conoce algunos de nuestros remates más exitosos y las maquinarias que hemos vendido para nuestros clientes.</p>
+          <p className="max-w-3xl mx-auto text-gray-600">{t('featured.description')}</p>
         </motion.div>
         
         <motion.div 
@@ -67,7 +69,7 @@ export function FeaturedAuctions() {
             href="#catalogo" 
             className="inline-block bg-primary hover:bg-primary-light text-white font-semibold px-6 py-3 rounded-lg transition duration-300"
           >
-            Ver Todas las Maquinarias
+            {t('featured.viewAll')}
           </a>
         </motion.div>
       </div>
@@ -81,6 +83,8 @@ interface FeaturedItemCardProps {
 }
 
 function FeaturedItemCard({ item, delay }: FeaturedItemCardProps) {
+  const { t } = useLanguage();
+  
   return (
     <motion.div 
       className="featured-item bg-white rounded-lg overflow-hidden shadow-lg machinery-card"
@@ -94,7 +98,7 @@ function FeaturedItemCard({ item, delay }: FeaturedItemCardProps) {
           className="w-full h-full object-cover transform hover:scale-110 transition duration-300" 
         />
         <div className="absolute top-0 right-0 bg-secondary text-primary font-bold px-3 py-1 m-2 rounded text-sm">
-          {item.isSold ? 'Vendido' : 'Disponible'}
+          {item.isSold ? t('featured.sold') : t('featured.available')}
         </div>
       </div>
       <div className="p-5">
@@ -104,7 +108,7 @@ function FeaturedItemCard({ item, delay }: FeaturedItemCardProps) {
           <span>{item.auctionDate}</span>
         </div>
         <div className="text-gray-600 mb-4">{item.description}</div>
-        <div className="font-bold text-lg text-primary">Precio de remate: ${item.price.toLocaleString()}</div>
+        <div className="font-bold text-lg text-primary">{t('featured.auctionPrice')}: ${item.price.toLocaleString()}</div>
       </div>
     </motion.div>
   );
