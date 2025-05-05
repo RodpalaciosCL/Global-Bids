@@ -137,78 +137,66 @@ export function HeroSection() {
         </div>
       </div>
       
-      {/* Categorías en una sección separada */}
-      <section className="py-5 bg-gradient-to-b from-primary/80 to-primary/90 relative z-10">
+      {/* Categorías en una sección separada - Versión minimalista */}
+      <section className="py-3 bg-black/40 backdrop-blur-sm relative z-10">
         <div className="container mx-auto px-4">
-          <div className="flex justify-center mb-3">
-            <h3 className="text-white text-xl font-bold">{t('hero.findByCategory')}</h3>
-          </div>
-          <div className="grid grid-cols-3 md:grid-cols-6 gap-4 max-w-5xl mx-auto">
-            <motion.a 
-              href="#catalogo" 
-              className="bg-white/10 hover:bg-white/20 text-white p-3 rounded-lg text-center transition-all group"
-              whileHover={{ y: -3 }}
-            >
-              <div className="w-12 h-12 mx-auto bg-white/20 rounded-full flex items-center justify-center mb-2 group-hover:bg-primary/60 transition-all">
-                <i className="fas fa-truck-monster text-white text-lg"></i>
-              </div>
-              <div className="text-xs md:text-sm">{t('hero.miningEquipment')}</div>
-            </motion.a>
-            
-            <motion.a 
-              href="#catalogo" 
-              className="bg-white/10 hover:bg-white/20 text-white p-3 rounded-lg text-center transition-all group"
-              whileHover={{ y: -3 }}
-            >
-              <div className="w-12 h-12 mx-auto bg-white/20 rounded-full flex items-center justify-center mb-2 group-hover:bg-primary/60 transition-all">
-                <i className="fas fa-tree text-white text-lg"></i>
-              </div>
-              <div className="text-xs md:text-sm">{t('hero.forestryEquipment')}</div>
-            </motion.a>
-            
-            <motion.a 
-              href="#catalogo" 
-              className="bg-white/10 hover:bg-white/20 text-white p-3 rounded-lg text-center transition-all group"
-              whileHover={{ y: -3 }}
-            >
-              <div className="w-12 h-12 mx-auto bg-white/20 rounded-full flex items-center justify-center mb-2 group-hover:bg-primary/60 transition-all">
-                <i className="fas fa-truck text-white text-lg"></i>
-              </div>
-              <div className="text-xs md:text-sm">{t('hero.trucksTransport')}</div>
-            </motion.a>
-            
-            <motion.a 
-              href="#catalogo" 
-              className="bg-white/10 hover:bg-white/20 text-white p-3 rounded-lg text-center transition-all group"
-              whileHover={{ y: -3 }}
-            >
-              <div className="w-12 h-12 mx-auto bg-white/20 rounded-full flex items-center justify-center mb-2 group-hover:bg-primary/60 transition-all">
-                <i className="fas fa-tools text-white text-lg"></i>
-              </div>
-              <div className="text-xs md:text-sm">{t('hero.partsTools')}</div>
-            </motion.a>
-            
-            <motion.a 
-              href="#catalogo" 
-              className="bg-white/10 hover:bg-white/20 text-white p-3 rounded-lg text-center transition-all group"
-              whileHover={{ y: -3 }}
-            >
-              <div className="w-12 h-12 mx-auto bg-white/20 rounded-full flex items-center justify-center mb-2 group-hover:bg-primary/60 transition-all">
-                <i className="fas fa-industry text-white text-lg"></i>
-              </div>
-              <div className="text-xs md:text-sm">{t('hero.industrialEquipment')}</div>
-            </motion.a>
-            
-            <motion.a 
-              href="#catalogo" 
-              className="bg-white/10 hover:bg-white/20 text-white p-3 rounded-lg text-center transition-all group"
-              whileHover={{ y: -3 }}
-            >
-              <div className="w-12 h-12 mx-auto bg-white/20 rounded-full flex items-center justify-center mb-2 group-hover:bg-primary/60 transition-all">
-                <i className="fas fa-cubes text-white text-lg"></i>
-              </div>
-              <div className="text-xs md:text-sm">{t('hero.specialLots')}</div>
-            </motion.a>
+          <div className="flex items-center justify-center">
+            <h3 className="text-white/70 text-sm font-medium mr-4 hidden md:block">{t('hero.findByCategory')}:</h3>
+            <div className="flex flex-wrap justify-center gap-2 md:gap-4 max-w-5xl">
+              <motion.a 
+                href="#catalogo" 
+                className="px-3 py-2 bg-black/20 hover:bg-primary/40 text-white rounded-md text-center transition-all text-xs flex items-center border border-white/10"
+                whileHover={{ y: -2 }}
+              >
+                <i className="fas fa-truck-monster text-white text-xs mr-2"></i>
+                {t('hero.miningEquipment')}
+              </motion.a>
+              
+              <motion.a 
+                href="#catalogo" 
+                className="px-3 py-2 bg-black/20 hover:bg-primary/40 text-white rounded-md text-center transition-all text-xs flex items-center border border-white/10"
+                whileHover={{ y: -2 }}
+              >
+                <i className="fas fa-tree text-white text-xs mr-2"></i>
+                {t('hero.forestryEquipment')}
+              </motion.a>
+              
+              <motion.a 
+                href="#catalogo" 
+                className="px-3 py-2 bg-black/20 hover:bg-primary/40 text-white rounded-md text-center transition-all text-xs flex items-center border border-white/10"
+                whileHover={{ y: -2 }}
+              >
+                <i className="fas fa-truck text-white text-xs mr-2"></i>
+                {t('hero.trucksTransport')}
+              </motion.a>
+              
+              <motion.a 
+                href="#catalogo" 
+                className="px-3 py-2 bg-black/20 hover:bg-primary/40 text-white rounded-md text-center transition-all text-xs flex items-center border border-white/10"
+                whileHover={{ y: -2 }}
+              >
+                <i className="fas fa-tools text-white text-xs mr-2"></i>
+                {t('hero.partsTools')}
+              </motion.a>
+              
+              <motion.a 
+                href="#catalogo" 
+                className="px-3 py-2 bg-black/20 hover:bg-primary/40 text-white rounded-md text-center transition-all text-xs flex items-center border border-white/10 hidden md:flex"
+                whileHover={{ y: -2 }}
+              >
+                <i className="fas fa-industry text-white text-xs mr-2"></i>
+                {t('hero.industrialEquipment')}
+              </motion.a>
+              
+              <motion.a 
+                href="#catalogo" 
+                className="px-3 py-2 bg-black/20 hover:bg-primary/40 text-white rounded-md text-center transition-all text-xs flex items-center border border-white/10 hidden md:flex"
+                whileHover={{ y: -2 }}
+              >
+                <i className="fas fa-cubes text-white text-xs mr-2"></i>
+                {t('hero.specialLots')}
+              </motion.a>
+            </div>
           </div>
         </div>
       </section>
