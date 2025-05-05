@@ -6,16 +6,20 @@ import { useLanguage } from '@/contexts/LanguageContext';
 export function AboutSection() {
   const sectionRef = useRef(null);
   const isInView = useInView(sectionRef, { once: true, amount: 0.1 });
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   
   // Contenido de la historia
   const historiaContent = {
-    title: "Una Historia de Excelencia",
+    title: t('about.history'),
     subtitle: "",
-    description: [
+    description: language === 'es' ? [
       "Global Bids nace de un Joint-Venture entre North Country Auction, empresa Americana experta en subastas, y Grupo Prelco, quienes han estado en el rubro de minería más de 20 años.",
       "En Global Bids contamos con acceso a más de 950,000 clientes internacionales a través de nuestras plataformas online, lo que nos permite conectar la oferta sudamericana con la demanda global de manera digital, segmentada y transparente.",
       "Nuestro enfoque garantiza el mejor valor para los consignatarios al encontrar compradores en mercados donde estos activos tienen alta demanda."
+    ] : [
+      "Global Bids was born from a Joint Venture between North Country Auction, an American company expert in auctions, and Grupo Prelco, who have been in the mining business for more than 20 years.",
+      "At Global Bids, we have access to more than 950,000 international clients through our online platforms, which allows us to connect South American supply with global demand in a digital, segmented, and transparent way.",
+      "Our approach guarantees the best value for consignors by finding buyers in markets where these assets are in high demand."
     ],
     image: "https://images.pexels.com/photos/3757226/pexels-photo-3757226.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
     icon: "fa-history"
@@ -25,22 +29,22 @@ export function AboutSection() {
   const keyStats = [
     {
       value: "15+",
-      label: "Años de experiencia",
+      label: t('about.experience'),
       icon: "fa-clock"
     },
     {
       value: "1,500+",
-      label: "Maquinarias vendidas",
+      label: t('about.machinesSold'),
       icon: "fa-truck-monster"
     },
     {
       value: "12",
-      label: "Países cubiertos",
+      label: t('about.countriesCovered'),
       icon: "fa-globe-americas"
     },
     {
       value: "98%",
-      label: "Clientes satisfechos",
+      label: t('about.clients'),
       icon: "fa-smile"
     }
   ];
