@@ -323,16 +323,29 @@ export class MemStorage implements IStorage {
         ]
       },
       {
-        name: "Grúa Torre Liebherr 180HC",
+        name: "2011 Manitex 50155s Mounted On Freightliner - Lote 342",
         type: "crane",
-        brand: "Liebherr",
-        year: 2017,
-        hours: 3800,
-        price: 168000,
-        condition: "good",
-        description: "Grúa torre con alcance de 65 metros y capacidad de carga máxima de 10 toneladas. Incluye documentación técnica.",
-        image: "https://images.pexels.com/photos/532079/pexels-photo-532079.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+        brand: "Manitex",
+        year: 2011,
+        hours: 5670,
+        price: 185000,
+        condition: "excellent",
+        description: "Vin#1fvsc7dv7bhay5364, Meter Reads 5,670 Hours, Detroit Dd13-450 Hp Turbo Diesel, Business Class M2 112 Newer Lmi Screen, Newer Main Winch Cable, Fuller Rio 1690ll 10 Speed Trans, Twin 20,000 Lb Front Steering Axles, 45,000 Lb Air Suspension W/retention Kit,13.200 Lb Steerable Pusher Axle, 13.200 Lb Steerable Tag Axle, Al Aluminum Tags, 50 Ton Rajed Capacity, 39\" One Stage Jib MaxSheave Height 203, Enclosed Operator Cab With Heater Radio Remote Outrigger Controls, 5 Ton Down Haul Hook And Ball, Heavy Duty Icc Bumper, No Jib, Includes Rooster For Dual Winches, Truck Was In Daily Use Until 11/2024 Recently Upgraded.",
+        image: "https://auctiontechupload.s3.amazonaws.com/216/auction/1840/342_1.jpg",
+        gallery: [
+          "https://auctiontechupload.s3.amazonaws.com/216/auction/1840/342_1.jpg",
+          "https://auctiontechupload.s3.amazonaws.com/216/auction/1840/342_3.jpg",
+          "https://auctiontechupload.s3.amazonaws.com/216/auction/1840/342_4.jpg",
+          "https://auctiontechupload.s3.amazonaws.com/216/auction/1840/342_5.jpg",
+          "https://auctiontechupload.s3.amazonaws.com/216/auction/1840/342_6.jpg",
+          "https://auctiontechupload.s3.amazonaws.com/216/auction/1840/342_10.jpg",
+          "https://auctiontechupload.s3.amazonaws.com/216/auction/1840/342_14.jpg",
+          "https://auctiontechupload.s3.amazonaws.com/216/auction/1840/342_19.jpg",
+          "https://auctiontechupload.s3.amazonaws.com/216/auction/1840/342_22.jpg",
+          "https://auctiontechupload.s3.amazonaws.com/216/auction/1840/342_27.jpg"
+        ],
         isSold: false,
+        priority: 1
       },
       {
         name: "2019 Heat King Idf1000 Ground Heater - Lote 88",
