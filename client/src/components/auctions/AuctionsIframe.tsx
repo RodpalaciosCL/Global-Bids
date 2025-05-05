@@ -16,21 +16,74 @@ export function AuctionsIframe() {
         try {
           // Intento de acceder al iframe y manipular su contenido después de cargar
           if (iframe.contentDocument) {
-            // Intentar ocultar elementos no deseados via CSS
+            // Intentar ocultar elementos no deseados y ajustar el iframe para mostrar solo las máquinas
             const style = iframe.contentDocument.createElement('style');
             style.textContent = `
-              header, .main-header, .navbar, .page-header, .footer, .banner, .top-section { 
+              /* Ocultar elementos innecesarios */
+              header, 
+              .main-header, 
+              .navbar, 
+              .page-header, 
+              .banner, 
+              .top-section,
+              footer,
+              .footer,
+              #footer,
+              body > div > div:last-child,
+              body > footer,
+              [class*="footer"],
+              [class*="copyright"] { 
                 display: none !important; 
               }
+              
+              /* Ajustes generales */
               body {
                 padding-top: 0 !important;
                 margin-top: 0 !important;
+                padding-bottom: 0 !important;
+                margin-bottom: 0 !important;
+                overflow: hidden !important;
               }
+              
+              /* Ajustar contenedor principal */
               .auction-listing-container {
                 padding-top: 0 !important;
+                padding-bottom: 0 !important;
+                margin-bottom: 0 !important;
+              }
+              
+              /* Eliminar espacio inferior */
+              .auction-listing {
+                margin-bottom: 0 !important;
+              }
+              
+              /* Título de Auctions y tabs */
+              h1, h1 + div {
+                display: none !important;
+              }
+              
+              /* Ajustar margen superior de los elementos de subasta */
+              .auction-catalog {
+                margin-top: 10px !important;
               }
             `;
             iframe.contentDocument.head.appendChild(style);
+            
+            // Intentar observar cambios en el DOM para mantener el footer oculto
+            const observer = new MutationObserver(function(mutations) {
+              const footer = iframe.contentDocument?.querySelector('footer') || 
+                             iframe.contentDocument?.querySelector('[class*="footer"]') || 
+                             iframe.contentDocument?.querySelector('#footer');
+              
+              if (footer) {
+                footer.style.display = 'none';
+              }
+            });
+            
+            observer.observe(iframe.contentDocument.body, {
+              childList: true,
+              subtree: true
+            });
           }
         } catch (e) {
           console.log('No se pudo acceder al contenido del iframe debido a la política de seguridad del navegador');
