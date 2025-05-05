@@ -14,6 +14,7 @@ export default function MachineryDetail() {
   const [, params] = useRoute('/machinery/:id');
   const machineryId = params?.id ? parseInt(params.id) : null;
   const [activeTab, setActiveTab] = useState('specs');
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
   
   // Scroll to top on page load
   useEffect(() => {
@@ -82,25 +83,23 @@ export default function MachineryDetail() {
                 </div>
                 
                 {/* Main Image Gallery */}
-                <div className="w-full h-[320px] border border-gray-200 rounded-lg overflow-hidden mb-1">
-                  {machinery.gallery && machinery.gallery.length > 0 ? (
-                    <img 
-                      src={machinery.image} 
-                      alt={machinery.name}
-                      className="w-full h-full object-contain"
-                    />
-                  ) : (
-                    <img 
-                      src={machinery.image} 
-                      alt={machinery.name}
-                      className="w-full h-full object-contain"
-                    />
-                  )}
+                <div 
+                  className="w-full h-[340px] border border-gray-200 rounded-lg overflow-hidden mb-1 cursor-pointer" 
+                  onClick={() => setSelectedImage(selectedImage ? null : machinery.image)}
+                >
+                  <img 
+                    src={selectedImage || machinery.image} 
+                    alt={machinery.name}
+                    className="w-full h-full object-contain"
+                  />
                 </div>
                 
                 {/* Image Thumbnails */}
-                <div className="flex gap-2 overflow-x-auto pb-2">
-                  <div className="border-2 border-primary rounded overflow-hidden flex-shrink-0">
+                <div className="flex gap-2 overflow-x-auto pb-2 mb-1">
+                  <div 
+                    className={`${selectedImage === machinery.image || !selectedImage ? 'border-2 border-primary' : 'border border-gray-200'} rounded overflow-hidden flex-shrink-0 cursor-pointer`}
+                    onClick={() => setSelectedImage(machinery.image)}
+                  >
                     <img
                       src={machinery.image}
                       alt={`${machinery.name} - Thumbnail 1`}
@@ -109,7 +108,11 @@ export default function MachineryDetail() {
                   </div>
                   
                   {machinery.gallery && machinery.gallery.map((img, index) => (
-                    <div key={index} className="border border-gray-200 rounded overflow-hidden flex-shrink-0">
+                    <div 
+                      key={index} 
+                      className={`${selectedImage === img ? 'border-2 border-primary' : 'border border-gray-200'} rounded overflow-hidden flex-shrink-0 cursor-pointer`}
+                      onClick={() => setSelectedImage(img)}
+                    >
                       <img
                         src={img}
                         alt={`${machinery.name} - Thumbnail ${index + 2}`}
@@ -118,6 +121,31 @@ export default function MachineryDetail() {
                     </div>
                   ))}
                 </div>
+                
+                {/* Modal para vista ampliada */}
+                {selectedImage && (
+                  <div 
+                    className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center" 
+                    onClick={() => setSelectedImage(null)}
+                  >
+                    <div className="relative max-w-4xl max-h-full p-2">
+                      <img 
+                        src={selectedImage} 
+                        alt={machinery.name} 
+                        className="max-w-full max-h-[90vh] object-contain"
+                      />
+                      <button 
+                        className="absolute top-4 right-4 bg-white/20 hover:bg-white/40 rounded-full p-2 text-white"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setSelectedImage(null);
+                        }}
+                      >
+                        <i className="fas fa-times"></i>
+                      </button>
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
             
@@ -183,7 +211,7 @@ export default function MachineryDetail() {
                 
                 {activeTab === 'specs' && (
                   <div className="p-2">
-                    <table className="w-full text-xs">
+                    <table className="w-full text-sm">
                       <tbody>
                         <tr className="border-b">
                           <td className="py-1 text-gray-600">Marca:</td>
@@ -224,12 +252,12 @@ export default function MachineryDetail() {
                 
                 {activeTab === 'description' && (
                   <div className="p-2">
-                    <p className="text-xs text-gray-700 mb-2">
+                    <p className="text-sm text-gray-700 mb-2">
                       Esta plataforma elevadora JLG 600aj es una excelente opción para trabajos en altura. 
                       Con apenas 326 horas de uso, se encuentra en perfectas condiciones operativas y ha 
                       recibido mantenimiento regular.
                     </p>
-                    <p className="text-xs text-gray-700">
+                    <p className="text-sm text-gray-700">
                       El equipo ofrece un alcance horizontal máximo de 60 pies y una capacidad de carga 
                       de 500 libras, ideal para proyectos de construcción, mantenimiento industrial y 
                       trabajos de instalación en altura.
