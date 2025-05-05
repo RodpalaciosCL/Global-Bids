@@ -8,28 +8,43 @@ export function AuctionsIframe() {
   const { t } = useLanguage();
   const { openForm } = useRegistration();
   
-  // Datos de las subastas (podría venir de una API)
+  // Datos de las subastas
   const auctionItems = [
     {
       id: 1,
       title: "Dighton Spring Auction - Day 1",
-      image: "https://northcountry.auctiontechs.com/_uploads/photos/95-1/thumb_142949_1599234300.jpg",
       date: "05-09-2025",
       location: "Dighton, Massachusetts, United States, 02715"
     },
     {
       id: 2,
       title: "Dighton Spring Auction - Day 2",
-      image: "https://northcountry.auctiontechs.com/_uploads/photos/95-2/thumb_142949_1599234400.jpg",
       date: "05-10-2025",
       location: "Dighton, Massachusetts, United States, 02715"
     },
     {
       id: 3,
       title: "Eastern Panhandle WV Contractors Auction",
-      image: "https://northcountry.auctiontechs.com/_uploads/photos/95-3/thumb_142950_1599234500.jpg",
       date: "05-17-2025",
       location: "Martinsburg, West Virginia, United States, 24405"
+    },
+    {
+      id: 4,
+      title: "Heavy Equipment Online Auction",
+      date: "05-20-2025",
+      location: "Online Only"
+    },
+    {
+      id: 5,
+      title: "Mining Equipment Auction",
+      date: "05-24-2025",
+      location: "Denver, Colorado, United States, 80014"
+    },
+    {
+      id: 6,
+      title: "Construction Equipment Liquidation",
+      date: "05-30-2025",
+      location: "Houston, Texas, United States, 77001"
     }
   ];
   
@@ -90,11 +105,11 @@ export function AuctionsIframe() {
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 {auctionItems.map((auction) => (
                   <div key={auction.id} className="bg-white rounded-lg overflow-hidden shadow-md">
-                    <div className="h-48 overflow-hidden">
+                    <div className="h-48 overflow-hidden bg-gray-200 flex items-center justify-center">
                       <img 
-                        src={auction.image} 
+                        src={`/auction-${auction.id}.svg`} 
                         alt={auction.title} 
-                        className="w-full h-full object-cover"
+                        className="w-full h-full object-contain"
                       />
                     </div>
                     <div className="p-4">
@@ -110,19 +125,16 @@ export function AuctionsIframe() {
                         </div>
                       </div>
                       <div className="mt-3 grid grid-cols-1 gap-2">
-                        <a 
-                          href={`https://northcountry.auctiontechs.com/auctions/detail/${auction.id}`} 
-                          target="_blank"
-                          rel="noopener noreferrer"
+                        <button 
                           className="bg-blue-900 hover:bg-blue-800 text-white text-center py-2 rounded text-sm font-medium"
                         >
-                          AUCTION DETAILS
-                        </a>
+                          {t('auctions.auctionDetails')}
+                        </button>
                         <button 
                           onClick={openForm}
                           className="bg-primary hover:bg-primary/90 text-white text-center py-2 rounded text-sm font-medium"
                         >
-                          REGISTER
+                          {t('auctions.register')}
                         </button>
                       </div>
                     </div>
@@ -131,15 +143,12 @@ export function AuctionsIframe() {
               </div>
               
               <div className="mt-6 text-center">
-                <a 
-                  href="https://northcountry.auctiontechs.com/auctions" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
+                <button 
                   className="inline-flex items-center gap-2 bg-blue-800/40 hover:bg-blue-800/60 text-white py-3 px-6 rounded-full transition-colors"
                 >
-                  <i className="fas fa-external-link-alt"></i>
-                  {t('hero.viewAll')}
-                </a>
+                  <i className="fas fa-plus"></i>
+                  {t('auctions.viewMore')}
+                </button>
               </div>
             </div>
           </div>
