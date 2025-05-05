@@ -32,16 +32,7 @@ export function SoporteSection() {
     }
   ];
 
-  const faqs = [
-    {
-      question: "¿Cómo puedo participar en una subasta?",
-      answer: "Para participar en nuestras subastas, debe registrarse en nuestro sitio web, completar el formulario de verificación y realizar un depósito de garantía. Una vez verificado, podrá acceder a todos nuestros eventos y realizar ofertas."
-    },
-    {
-      question: "¿Qué documentación recibo al adquirir un activo?",
-      answer: "Al adquirir un activo en Global Bids, recibirá toda la documentación legal y técnica del equipo, incluyendo facturas, certificados de propiedad, informes técnicos, manuales de operación y mantenimiento, y un informe de inspección detallado."
-    }
-  ];
+  // Se eliminaron las preguntas frecuentes
 
   return (
     <section id="soporte" className="py-20 bg-white">
@@ -91,52 +82,7 @@ export function SoporteSection() {
           ))}
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start mb-16">
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="bg-white rounded-2xl p-8 border border-gray-200 shadow-sm h-full"
-          >
-            <div className="flex items-center mb-6">
-              <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white mr-4">
-                <i className="fas fa-question-circle"></i>
-              </div>
-              <h3 className="text-2xl font-bold">Preguntas Frecuentes</h3>
-            </div>
-            
-            <div className="space-y-4">
-              {faqs.map((faq, index) => (
-                <motion.div
-                  key={index}
-                  className="bg-gray-50 rounded-xl p-5 border border-gray-100"
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 }}
-                >
-                  <h4 className="font-bold text-lg mb-2 flex items-start">
-                    <span className="bg-primary text-white w-6 h-6 rounded-full flex items-center justify-center text-xs mr-2 flex-shrink-0 mt-1">
-                      Q
-                    </span>
-                    {faq.question}
-                  </h4>
-                  <p className="text-gray-600 pl-8">{faq.answer}</p>
-                </motion.div>
-              ))}
-            </div>
-            
-            <motion.a
-              href="#contacto"
-              className="mt-6 inline-flex items-center text-primary font-medium hover:underline"
-              whileHover={{ x: 5 }}
-            >
-              Ver todas las preguntas frecuentes
-              <i className="fas fa-arrow-right ml-2 text-xs"></i>
-            </motion.a>
-          </motion.div>
-
+        <div className="max-w-2xl mx-auto mb-16">
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}

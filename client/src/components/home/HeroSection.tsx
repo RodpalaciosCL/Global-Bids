@@ -12,7 +12,7 @@ export function HeroSection() {
     {
       title: t('hero.title'),
       subtitle: t('hero.subtitle'),
-      image: "/pexels-ywanphoto-188679.jpg", // Nueva imagen de fondo de la cantera
+      image: "https://images.pexels.com/photos/188679/pexels-photo-188679.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2", // Imagen de fondo actualizada
       icon: "fa-gavel"
     }
   ];

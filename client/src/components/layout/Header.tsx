@@ -22,7 +22,8 @@ export function Header() {
         'inicio', 
         'nosotros', 
         'catalogo',
-        'subastas', 
+        'subastas',
+        'servicios', 
         'soporte', 
         'contacto'
       ];
@@ -52,7 +53,8 @@ export function Header() {
     { href: '#inicio', label: t('nav.home'), icon: 'fa-home' },
     { href: '#nosotros', label: t('nav.about'), icon: 'fa-users' },
     { href: '#catalogo', label: t('nav.catalog'), icon: 'fa-th-large' },
-    { href: '#subastas', label: t('nav.services'), icon: 'fa-gavel' },
+    { href: '#subastas', label: t('nav.auctions'), icon: 'fa-gavel' },
+    { href: '#servicios', label: t('nav.services'), icon: 'fa-wrench' },
     { href: '#soporte', label: t('nav.support'), icon: 'fa-headset' },
     { href: '#contacto', label: t('nav.contact'), icon: 'fa-envelope' }
   ];
@@ -169,7 +171,8 @@ export function Header() {
                         {item.href === '#inicio' ? t('nav.homeDesc') : 
                          item.href === '#nosotros' ? t('nav.aboutDesc') :
                          item.href === '#catalogo' ? t('nav.catalogDesc') :
-                         item.href === '#subastas' ? t('nav.servicesDesc') :
+                         item.href === '#subastas' ? t('nav.auctionsDesc') :
+                         item.href === '#servicios' ? t('nav.servicesDesc') :
                          item.href === '#soporte' ? t('nav.supportDesc') :
                          item.href === '#contacto' ? t('nav.contactDesc') : ''}
                       </div>
