@@ -13,11 +13,11 @@ export function AboutSection() {
     title: "",
     subtitle: "",
     description: language === 'es' ? [
-      "Global Bids nace de un Joint-Venture entre North Country Auction, empresa Americana experta en subastas, y Grupo Prelco, quienes han estado en el rubro de minería más de 20 años.",
+      "Global Bids es líder en subastas y valoración de maquinaria pesada, chatarra, herramientas y repuestos en Latinoamérica, especializados en equipos y lotes para diversos sectores e industrias, tanto en Chile, como en el resto del mundo.",
       "En Global Bids contamos con acceso a más de 950,000 clientes internacionales a través de nuestras plataformas online, lo que nos permite conectar la oferta sudamericana con la demanda global de manera digital, segmentada y transparente.",
       "Nuestro enfoque garantiza el mejor valor para los consignatarios al encontrar compradores en mercados donde estos activos tienen alta demanda."
     ] : [
-      "Global Bids was born from a Joint Venture between North Country Auction, an American company expert in auctions, and Grupo Prelco, who have been in the mining business for more than 20 years.",
+      "Global Bids is a leader in auctions and valuation of heavy machinery, scrap, tools, and spare parts in Latin America, specialized in equipment and lots for various sectors and industries, both in Chile and the rest of the world.",
       "At Global Bids, we have access to more than 950,000 international clients through our online platforms, which allows us to connect South American supply with global demand in a digital, segmented, and transparent way.",
       "Our approach guarantees the best value for consignors by finding buyers in markets where these assets are in high demand."
     ],
@@ -125,25 +125,7 @@ export function AboutSection() {
                 {/* Se eliminó el botón "Conoce nuestra historia" */}
               </div>
               
-              {/* Estadísticas */}
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                {keyStats.map((stat, idx) => (
-                  <motion.div
-                    key={idx}
-                    className="bg-white p-4 rounded-2xl shadow-md text-center border border-gray-100"
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.4, delay: 0.05 * idx + 0.4 }}
-                    whileHover={{ y: -5, boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.1)" }}
-                  >
-                    <div className="w-10 h-10 mx-auto bg-primary/10 rounded-full flex items-center justify-center mb-2 text-primary">
-                      <i className={`fas ${stat.icon}`}></i>
-                    </div>
-                    <div className="text-2xl md:text-3xl font-bold text-primary">{stat.value}</div>
-                    <div className="text-xs md:text-sm text-gray-500">{stat.label}</div>
-                  </motion.div>
-                ))}
-              </div>
+              {/* Se eliminaron las estadísticas ya que aparecen en la sección hero */}
             </div>
           </motion.div>
         </div>
