@@ -53,7 +53,7 @@ export function Header() {
     { href: '#nosotros', label: t('nav.about'), icon: 'fa-users' },
     { href: '#catalogo', label: t('nav.catalog'), icon: 'fa-th-large' },
     { href: '#subastas', label: t('nav.services'), icon: 'fa-gavel' },
-    { href: '#soporte', label: 'Soporte', icon: 'fa-headset' },
+    { href: '#soporte', label: t('nav.support'), icon: 'fa-headset' },
     { href: '#contacto', label: t('nav.contact'), icon: 'fa-envelope' }
   ];
   
@@ -84,7 +84,7 @@ export function Header() {
               <div>
                 <div className="font-heading font-bold text-lg sm:text-xl md:text-2xl text-white tracking-tight">Global Bids</div>
                 <div className="text-xs text-white/90 font-medium hidden xs:block">
-                  {language === 'es' ? 'Marketplace y Subastas' : 'Marketplace & Auctions'}
+                  {t('nav.logoTagline')}
                 </div>
               </div>
             </motion.div>
@@ -166,19 +166,19 @@ export function Header() {
                     <div>
                       <div className="font-medium">{item.label}</div>
                       <div className="text-xs text-gray-500">
-                        {item.href === '#inicio' ? 'Página principal' : 
-                         item.href === '#nosotros' ? 'Sobre nosotros' :
-                         item.href === '#marketplace' ? 'Equipos disponibles' :
-                         item.href === '#subastas' ? 'Eventos exclusivos' :
-                         item.href === '#soporte' ? 'Ayuda y contacto' :
-                         item.href === '#contacto' ? 'Formulario de contacto' : ''}
+                        {item.href === '#inicio' ? t('nav.homeDesc') : 
+                         item.href === '#nosotros' ? t('nav.aboutDesc') :
+                         item.href === '#catalogo' ? t('nav.catalogDesc') :
+                         item.href === '#subastas' ? t('nav.servicesDesc') :
+                         item.href === '#soporte' ? t('nav.supportDesc') :
+                         item.href === '#contacto' ? t('nav.contactDesc') : ''}
                       </div>
                     </div>
                   </a>
                 ))}
                 
                 <div className="px-5 py-4 flex justify-between items-center bg-gray-50 mt-2">
-                  <div className="text-sm text-gray-500">Idioma:</div>
+                  <div className="text-sm text-gray-500">{t('nav.language')}:</div>
                   <LanguageSelector />
                 </div>
               </nav>

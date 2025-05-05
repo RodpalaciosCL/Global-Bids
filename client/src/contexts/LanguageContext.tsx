@@ -24,6 +24,14 @@ const translations: Record<Language, Record<string, string>> = {
     'nav.contact': 'Contacto',
     'nav.login': 'Iniciar Sesión',
     'nav.register': 'Registrarse',
+    'nav.support': 'Soporte',
+    'nav.homeDesc': 'Página principal',
+    'nav.aboutDesc': 'Sobre nosotros',
+    'nav.catalogDesc': 'Equipos disponibles',
+    'nav.servicesDesc': 'Eventos exclusivos',
+    'nav.supportDesc': 'Ayuda y contacto',
+    'nav.contactDesc': 'Formulario de contacto',
+    'nav.language': 'Idioma',
     
     // Hero Section
     'hero.title': 'Marketplace y Subastas de Activos para todo el mundo',
@@ -229,6 +237,14 @@ const translations: Record<Language, Record<string, string>> = {
     'nav.contact': 'Contact',
     'nav.login': 'Log In',
     'nav.register': 'Register',
+    'nav.support': 'Support',
+    'nav.homeDesc': 'Main page',
+    'nav.aboutDesc': 'About us',
+    'nav.catalogDesc': 'Available equipment',
+    'nav.servicesDesc': 'Exclusive events',
+    'nav.supportDesc': 'Help and contact',
+    'nav.contactDesc': 'Contact form',
+    'nav.language': 'Language',
     
     // Hero Section
     'hero.title': 'Marketplace and Asset Auctions for the entire world',
