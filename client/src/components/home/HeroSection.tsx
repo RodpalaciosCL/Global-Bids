@@ -94,7 +94,7 @@ export function HeroSection() {
                           {slide.subtitle}
                         </p>
                         
-                        <div className="flex items-center mb-8 md:mb-10">
+                        <div className="flex items-center mb-12 md:mb-16">
                           <motion.a 
                             href="#subastas" 
                             className="bg-white text-primary px-5 sm:px-6 md:px-8 py-3 md:py-4 rounded-full font-bold transition-all duration-300 text-center shadow-xl flex items-center text-sm sm:text-base"
@@ -104,6 +104,54 @@ export function HeroSection() {
                             <i className="fas fa-gavel mr-2"></i>
                             {t('hero.exploreAuctions')}
                           </motion.a>
+                        </div>
+                        
+                        {/* Categorías integradas directamente bajo el botón */}
+                        <div className="mb-8">
+                          <div className="text-white/80 text-sm mb-2 font-medium">{t('hero.findByCategory')}:</div>
+                          <div className="flex flex-wrap gap-4 max-w-2xl">
+                            <a href="#catalogo" className="flex items-center text-white hover:text-white/80 transition-colors text-sm group">
+                              <div className="w-8 h-8 bg-black/40 border border-white/10 rounded-full flex items-center justify-center mr-2 group-hover:bg-primary/40 transition-colors">
+                                <i className="fas fa-truck-monster text-white text-xs"></i>
+                              </div>
+                              <span>Activos Minería</span>
+                            </a>
+                            
+                            <a href="#catalogo" className="flex items-center text-white hover:text-white/80 transition-colors text-sm group">
+                              <div className="w-8 h-8 bg-black/40 border border-white/10 rounded-full flex items-center justify-center mr-2 group-hover:bg-primary/40 transition-colors">
+                                <i className="fas fa-tree text-white text-xs"></i>
+                              </div>
+                              <span>Activos Forestales</span>
+                            </a>
+                            
+                            <a href="#catalogo" className="flex items-center text-white hover:text-white/80 transition-colors text-sm group">
+                              <div className="w-8 h-8 bg-black/40 border border-white/10 rounded-full flex items-center justify-center mr-2 group-hover:bg-primary/40 transition-colors">
+                                <i className="fas fa-truck text-white text-xs"></i>
+                              </div>
+                              <span>Camiones y Transporte</span>
+                            </a>
+                            
+                            <a href="#catalogo" className="flex items-center text-white hover:text-white/80 transition-colors text-sm group">
+                              <div className="w-8 h-8 bg-black/40 border border-white/10 rounded-full flex items-center justify-center mr-2 group-hover:bg-primary/40 transition-colors">
+                                <i className="fas fa-tools text-white text-xs"></i>
+                              </div>
+                              <span>Repuestos y Partes</span>
+                            </a>
+                            
+                            <a href="#catalogo" className="flex items-center text-white hover:text-white/80 transition-colors text-sm group">
+                              <div className="w-8 h-8 bg-black/40 border border-white/10 rounded-full flex items-center justify-center mr-2 group-hover:bg-primary/40 transition-colors">
+                                <i className="fas fa-industry text-white text-xs"></i>
+                              </div>
+                              <span>Equipos Industriales</span>
+                            </a>
+                            
+                            <a href="#catalogo" className="flex items-center text-white hover:text-white/80 transition-colors text-sm group">
+                              <div className="w-8 h-8 bg-black/40 border border-white/10 rounded-full flex items-center justify-center mr-2 group-hover:bg-primary/40 transition-colors">
+                                <i className="fas fa-cubes text-white text-xs"></i>
+                              </div>
+                              <span>Lotes Especiales</span>
+                            </a>
+                          </div>
                         </div>
                       </motion.div>
                     )
@@ -130,49 +178,6 @@ export function HeroSection() {
                       </motion.div>
                     ))}
                   </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        
-        {/* Barra horizontal de categorías en la parte inferior del hero - exactamente como en la imagen */}
-        <div className="mt-auto relative z-10">
-          <div className="py-2 bg-black/60 backdrop-blur-sm w-full border-t border-b border-white/10">
-            <div className="container mx-auto px-4">
-              <div className="flex items-center justify-center gap-3">
-                <span className="text-white/80 text-sm mr-1 hidden md:inline-block">{t('hero.findByCategory')}:</span>
-                
-                <div className="flex flex-nowrap items-center space-x-4 overflow-x-auto no-scrollbar whitespace-nowrap">
-                  <a href="#catalogo" className="flex items-center text-white hover:text-primary/90 transition-colors text-sm px-1">
-                    <i className="fas fa-truck-monster mr-1.5"></i>
-                    <span>Activos Minería</span>
-                  </a>
-                  
-                  <a href="#catalogo" className="flex items-center text-white hover:text-primary/90 transition-colors text-sm px-1">
-                    <i className="fas fa-tree mr-1.5"></i>
-                    <span>Activos Forestales</span>
-                  </a>
-                  
-                  <a href="#catalogo" className="flex items-center text-white hover:text-primary/90 transition-colors text-sm px-1">
-                    <i className="fas fa-truck mr-1.5"></i>
-                    <span>Camiones y Transporte</span>
-                  </a>
-                  
-                  <a href="#catalogo" className="flex items-center text-white hover:text-primary/90 transition-colors text-sm px-1">
-                    <i className="fas fa-tools mr-1.5"></i>
-                    <span>Repuestos y Partes</span>
-                  </a>
-                  
-                  <a href="#catalogo" className="flex items-center text-white hover:text-primary/90 transition-colors text-sm px-1">
-                    <i className="fas fa-industry mr-1.5"></i>
-                    <span>Equipos Industriales</span>
-                  </a>
-                  
-                  <a href="#catalogo" className="flex items-center text-white hover:text-primary/90 transition-colors text-sm px-1">
-                    <i className="fas fa-cubes mr-1.5"></i>
-                    <span>Lotes Especiales</span>
-                  </a>
                 </div>
               </div>
             </div>
