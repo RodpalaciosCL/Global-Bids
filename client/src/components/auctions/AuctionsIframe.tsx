@@ -45,17 +45,13 @@ const AUCTION_DATA = [
 
 export function AuctionsIframe() {
   const { t, language } = useLanguage();
-  const [activeTab, setActiveTab] = useState('current');
-  const [showIframe, setShowIframe] = useState(false);
-  const [currentAuctionUrl, setCurrentAuctionUrl] = useState('');
   
-  const handleAuctionDetails = (url: string) => {
-    setCurrentAuctionUrl(url);
-    setShowIframe(true);
-  };
-  
-  const closeIframe = () => {
-    setShowIframe(false);
+  // Función para hacer scroll hasta el formulario de registro
+  const scrollToRegistrationForm = () => {
+    const registrationForm = document.getElementById('registration-form');
+    if (registrationForm) {
+      registrationForm.scrollIntoView({ behavior: 'smooth' });
+    }
   };
   
   return (
@@ -92,95 +88,56 @@ export function AuctionsIframe() {
           viewport={{ once: true }}
           transition={{ delay: 0.2 }}
         >
-          {/* Pestañas de navegación */}
-          <div className="flex border-b border-gray-200">
-            <button 
-              className={`px-6 py-4 text-sm font-medium ${activeTab === 'current' ? 'text-primary border-b-2 border-primary' : 'text-gray-500 hover:text-gray-700'}`}
-              onClick={() => setActiveTab('current')}
-            >
-              {language === 'es' ? 'Actuales' : 'Current'}
-            </button>
-            <button 
-              className={`px-6 py-4 text-sm font-medium ${activeTab === 'past' ? 'text-primary border-b-2 border-primary' : 'text-gray-500 hover:text-gray-700'}`}
-              onClick={() => setActiveTab('past')}
-            >
-              {language === 'es' ? 'Pasadas' : 'Past'}
-            </button>
-          </div>
-          
-          {/* Contenido de las subastas */}
+          {/* Contenido de las subastas sin pestañas */}
           <div className="p-6">
-            {/* Mostrar subastas o iframe */}
-            {!showIframe ? (
-              <div className="space-y-6">
-                {AUCTION_DATA.map((auction) => (
-                  <div key={auction.id} className="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow">
-                    <div className="flex flex-col md:flex-row gap-4">
-                      <div className="w-full md:w-1/5">
-                        <div className="h-32 rounded-md overflow-hidden">
-                          <img 
-                            src={auction.image} 
-                            alt={auction.title} 
-                            className="w-full h-full object-cover"
-                            onError={(e) => {
-                              // Si la imagen no carga, usar una imagen por defecto
-                              const target = e.target as HTMLImageElement;
-                              target.onerror = null;
-                              target.src = "/pexels-ywanphoto-188679.jpg";
-                            }}
-                          />
-                        </div>
-                      </div>
-                      <div className="w-full md:w-4/5">
-                        <h3 className="text-lg font-bold text-gray-800">{auction.title}</h3>
-                        <div className="mt-2 space-y-1 text-sm text-gray-600">
-                          <p><span className="inline-block w-5 h-5 mr-2 text-gray-400"><i className="fas fa-calendar"></i></span> {auction.date}</p>
-                          <p><span className="inline-block w-5 h-5 mr-2 text-gray-400"><i className="fas fa-tag"></i></span> {auction.type}</p>
-                          <p><span className="inline-block w-5 h-5 mr-2 text-gray-400"><i className="fas fa-map-marker-alt"></i></span> {auction.location}</p>
-                        </div>
-                        <button 
-                          onClick={() => handleAuctionDetails(auction.url)}
-                          className="mt-3 px-4 py-2 bg-primary text-white text-sm font-medium rounded hover:bg-primary-dark transition-colors"
-                        >
-                          {language === 'es' ? 'DETALLES DE LA SUBASTA' : 'AUCTION DETAILS'}
-                        </button>
+            <div className="space-y-6">
+              {AUCTION_DATA.map((auction) => (
+                <div key={auction.id} className="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow">
+                  <div className="flex flex-col md:flex-row gap-4">
+                    <div className="w-full md:w-1/5">
+                      <div className="h-32 rounded-md overflow-hidden">
+                        <img 
+                          src={auction.image} 
+                          alt={auction.title} 
+                          className="w-full h-full object-cover"
+                          onError={(e) => {
+                            // Si la imagen no carga, usar una imagen por defecto
+                            const target = e.target as HTMLImageElement;
+                            target.onerror = null;
+                            target.src = "/pexels-ywanphoto-188679.jpg";
+                          }}
+                        />
                       </div>
                     </div>
+                    <div className="w-full md:w-4/5">
+                      <h3 className="text-lg font-bold text-gray-800">{auction.title}</h3>
+                      <div className="mt-2 space-y-1 text-sm text-gray-600">
+                        <p><span className="inline-block w-5 h-5 mr-2 text-gray-400"><i className="fas fa-calendar"></i></span> {auction.date}</p>
+                        <p><span className="inline-block w-5 h-5 mr-2 text-gray-400"><i className="fas fa-tag"></i></span> {auction.type}</p>
+                        <p><span className="inline-block w-5 h-5 mr-2 text-gray-400"><i className="fas fa-map-marker-alt"></i></span> {auction.location}</p>
+                      </div>
+                      <button 
+                        onClick={scrollToRegistrationForm}
+                        className="mt-3 px-4 py-2 bg-primary text-white text-sm font-medium rounded hover:bg-primary-dark transition-colors"
+                      >
+                        {language === 'es' ? 'DETALLES DE LA SUBASTA' : 'AUCTION DETAILS'}
+                      </button>
+                    </div>
                   </div>
-                ))}
-              </div>
-            ) : (
-              <div className="relative">
-                <button 
-                  onClick={closeIframe}
-                  className="absolute top-4 right-4 z-10 bg-white rounded-full p-2 shadow-md hover:bg-gray-100 transition-colors"
-                >
-                  <i className="fas fa-times text-gray-600"></i>
-                </button>
-                <div className="aspect-video w-full rounded-lg overflow-hidden">
-                  <iframe 
-                    src={currentAuctionUrl || "https://northcountry.auctiontechs.com/auctions"} 
-                    className="w-full h-full border-0"
-                    style={{ minHeight: '600px' }}
-                    title="Auction Details"
-                    scrolling="auto"
-                  ></iframe>
                 </div>
-              </div>
-            )}
+              ))}
+            </div>
           </div>
           
           {/* Footer con link a más subastas */}
           <div className="bg-gray-100 px-6 py-4 text-center">
-            <a 
-              href="https://northcountry.auctiontechs.com/auctions" 
-              target="_blank"
-              rel="noopener noreferrer"
+            <button 
+              onClick={scrollToRegistrationForm}
               className="text-primary hover:text-primary-dark font-medium inline-flex items-center transition-colors"
             >
-              {language === 'es' ? 'Ver todas las subastas' : 'View all auctions'} 
+              {language === 'es' ? 'Regístrate para todas las subastas' : 'Register for all auctions'} 
               <i className="fas fa-arrow-right ml-2"></i>
-            </a>
+            </button>
           </div>
         </motion.div>
       </div>
