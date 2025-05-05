@@ -3,7 +3,6 @@ import { ActionCTA } from "@/components/home/ActionCTA";
 import { BrandsSection } from "@/components/home/BrandsSection";
 import { ContactSection } from "@/components/home/ContactSection";
 import { HeroSection } from "@/components/home/HeroSection";
-import { MethodFramework } from "@/components/home/MethodFramework";
 import { ServicesSection } from "@/components/home/ServicesSection";
 import { SoporteSection } from "@/components/home/SoporteSection";
 import { TimelineSection } from "@/components/home/TimelineSection";
@@ -18,7 +17,6 @@ export default function Home() {
       <TimelineSection />
       <ServicesSection />
       <BrandsSection />
-      <MethodFramework />
       <CatalogSection />
       <AuctionsIframe />
       <SoporteSection />
