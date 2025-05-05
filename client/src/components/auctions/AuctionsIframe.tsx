@@ -147,19 +147,20 @@ export function AuctionsIframe() {
             <div className="relative w-full h-[600px] overflow-hidden">
               <iframe 
                 ref={iframeRef}
-                src="https://northcountry.auctiontechs.com/auctions" 
+                src="https://northcountry.auctiontechs.com/auction-catalog" 
                 className="w-full h-full"
                 style={{ 
                   border: 'none',
                   position: 'absolute',
-                  top: 0,
+                  top: -80, /* Desplazamiento negativo para ocultar la cabecera */
                   left: 0,
                   width: '100%',
-                  height: '100%'
+                  height: 'calc(100% + 80px)' /* Compensar por el desplazamiento */
                 }}
                 title="North Country Auctions"
                 loading="lazy"
-                sandbox="allow-scripts allow-same-origin allow-forms"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                scrolling="no"
               />
             </div>
           </div>
