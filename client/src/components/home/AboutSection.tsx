@@ -10,7 +10,7 @@ export function AboutSection() {
   
   // Contenido de la historia
   const historiaContent = {
-    title: t('about.history'),
+    title: "",
     subtitle: "",
     description: language === 'es' ? [
       "Global Bids nace de un Joint-Venture entre North Country Auction, empresa Americana experta en subastas, y Grupo Prelco, quienes han estado en el rubro de minería más de 20 años.",
@@ -76,32 +76,7 @@ export function AboutSection() {
           </motion.div>
         </div>
         
-        {/* Botón único de Historia */}
-        <div className="mb-10">
-          <motion.div 
-            className="flex flex-wrap justify-center gap-2 md:gap-4"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-          >
-            <motion.button
-              className="px-6 py-3 rounded-full font-medium text-sm md:text-base relative overflow-hidden text-white shadow-md"
-              whileHover={{ scale: 1.03 }}
-              whileTap={{ scale: 0.98 }}
-            >
-              <motion.div
-                className="absolute inset-0 bg-primary"
-                layoutId="activeBg"
-                initial={false}
-                transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-              />
-              <span className="relative z-10 flex items-center">
-                <i className="fas fa-history mr-2"></i>
-                {t('about.history')}
-              </span>
-            </motion.button>
-          </motion.div>
-        </div>
+        {/* Se eliminó el botón de Historia */}
         
         {/* Contenido principal - Historia de excelencia */}
         <div className="flex-grow">

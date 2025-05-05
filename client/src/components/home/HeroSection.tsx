@@ -12,7 +12,7 @@ export function HeroSection() {
     {
       title: t('hero.title'),
       subtitle: t('hero.subtitle'),
-      image: "https://images.pexels.com/photos/2058128/pexels-photo-2058128.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2", // Imagen de maquinaria más vertical
+      image: "https://images.pexels.com/photos/188679/pexels-photo-188679.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2", // Imagen original como solicitada
       icon: "fa-gavel"
     }
   ];

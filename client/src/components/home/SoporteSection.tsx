@@ -82,63 +82,7 @@ export function SoporteSection() {
           ))}
         </div>
 
-        <div className="max-w-2xl mx-auto mb-16">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="bg-gray-50 rounded-2xl p-8 border border-gray-200 h-full"
-          >
-            <div className="flex items-center mb-6">
-              <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white mr-4">
-                <i className="fas fa-comments"></i>
-              </div>
-              <h3 className="text-2xl font-bold">{t('support.contactUs')}</h3>
-            </div>
-
-            <div className="space-y-4 mb-6">
-              <div className="flex items-start">
-                <div className="w-10 h-10 bg-white rounded-full shadow-sm flex items-center justify-center text-primary mr-4 mt-1">
-                  <i className="fas fa-phone-alt"></i>
-                </div>
-                <div>
-                  <h4 className="font-bold text-lg">{t('support.phone')}</h4>
-                  <p className="text-gray-600">+56 2 2123 4567</p>
-                  <p className="text-sm text-gray-500">{t('support.workingHours')}</p>
-                </div>
-              </div>
-              
-              <div className="flex items-start">
-                <div className="w-10 h-10 bg-white rounded-full shadow-sm flex items-center justify-center text-primary mr-4 mt-1">
-                  <i className="fas fa-envelope"></i>
-                </div>
-                <div>
-                  <h4 className="font-bold text-lg">{t('support.email')}</h4>
-                  <p className="text-gray-600">auctions@theglobalbid.com</p>
-                  <p className="text-sm text-gray-500">{t('support.responseTime')}</p>
-                </div>
-              </div>
-              
-              <div className="flex items-start">
-                <div className="w-10 h-10 bg-white rounded-full shadow-sm flex items-center justify-center text-primary mr-4 mt-1">
-                  <i className="fas fa-map-marker-alt"></i>
-                </div>
-                <div>
-                  <h4 className="font-bold text-lg">{t('support.office')}</h4>
-                  <p className="text-gray-600">Luis Carrera 1263 oficina 301, Vitacura</p>
-                  <p className="text-sm text-gray-500">Santiago, Chile</p>
-                </div>
-              </div>
-            </div>
-
-            {/* Se eliminó el horario de atención */}
-            <div className="mt-4 flex items-center text-sm text-gray-600 bg-gray-50 p-4 rounded-lg">
-              <i className="fas fa-info-circle text-primary mr-2"></i>
-              <span>{t('support.emergency')}</span>
-            </div>
-          </motion.div>
-        </div>
+        {/* Se eliminó la sección de "Contáctenos Directamente" */}
       </div>
     </section>
   );

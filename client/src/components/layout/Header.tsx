@@ -109,7 +109,7 @@ export function Header() {
                 <a 
                   key={item.href}
                   href={item.href} 
-                  className={`relative px-4 py-2 mx-1 font-medium transition-all duration-300 flex items-center ${
+                  className={`relative px-4 py-2 mx-1 font-medium transition-all duration-300 flex items-center justify-center whitespace-nowrap ${
                     activeSection === item.href.substring(1) 
                       ? 'bg-white text-primary rounded-md' 
                       : 'text-white hover:bg-white/10 rounded-md'
