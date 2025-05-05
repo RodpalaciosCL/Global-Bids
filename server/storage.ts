@@ -155,21 +155,28 @@ export class MemStorage implements IStorage {
       filtered = filtered.filter(item => item.condition === condition);
     }
     
-    // Apply sorting
-    switch (sortBy) {
-      case 'price-asc':
-        filtered.sort((a, b) => a.price - b.price);
-        break;
-      case 'price-desc':
-        filtered.sort((a, b) => b.price - a.price);
-        break;
-      case 'year-desc':
-        filtered.sort((a, b) => b.year - a.year);
-        break;
-      case 'year-asc':
-        filtered.sort((a, b) => a.year - b.year);
-        break;
-    }
+    // Primero ordenamos por prioridad si existe (para asegurar que ciertos elementos aparezcan primero)
+    filtered.sort((a, b) => {
+      // Si ambos tienen prioridad o ninguno tiene, usamos el criterio normal
+      if (('priority' in a) === ('priority' in b)) {
+        // Luego aplicamos el criterio de ordenación solicitado
+        switch (sortBy) {
+          case 'price-asc':
+            return a.price - b.price;
+          case 'price-desc':
+            return b.price - a.price;
+          case 'year-desc':
+            return b.year - a.year;
+          case 'year-asc':
+            return a.year - b.year;
+          default:
+            return 0;
+        }
+      }
+      
+      // Si sólo uno tiene prioridad, ese va primero
+      return 'priority' in a ? -1 : 1;
+    });
     
     // Pagination
     const total = filtered.length;
@@ -364,6 +371,8 @@ export class MemStorage implements IStorage {
           "https://auctiontechupload.s3.amazonaws.com/216/auction/1840/301_8.jpg"
         ],
         isSold: false,
+        // Prioridad especial para que aparezca en la primera página
+        priority: 1
       },
       {
         name: "Retroexcavadora John Deere 310SL",

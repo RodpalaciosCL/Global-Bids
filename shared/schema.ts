@@ -30,6 +30,7 @@ export const machinery = pgTable("machinery", {
   gallery: text("gallery").array(),
   isSold: boolean("is_sold").default(false),
   auctionDate: date("auction_date"),
+  priority: integer("priority"), // Higher numbers come first in listings
   createdAt: date("created_at").notNull().defaultNow(),
 });
 
