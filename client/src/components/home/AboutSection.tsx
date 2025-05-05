@@ -112,7 +112,7 @@ export function AboutSection() {
       "At Global Bids, we have access to more than 950,000 international clients through our online platforms, which allows us to connect South American supply with global demand in a digital, segmented, and transparent way.",
       "Our approach guarantees the best value for consignors by finding buyers in markets where these assets are in high demand."
     ],
-    image: "https://images.pexels.com/photos/3757226/pexels-photo-3757226.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+    image: "https://www.cbnme.com/wp-content/uploads/2023/06/Ritchie-Bros.-Jebel-Ali-Yard_June-2023.jpg",
     icon: "fa-history"
   };
   
