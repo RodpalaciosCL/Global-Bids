@@ -161,92 +161,35 @@ export function HeroSection() {
               
               <div className="lg:col-span-2 hidden lg:block">
                 <motion.div
-                  className="bg-white/10 backdrop-blur-md rounded-3xl p-8 border border-white/20"
+                  className="bg-white/10 backdrop-blur-md rounded-3xl p-6 border border-white/20"
                   initial={{ opacity: 0, x: 50 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.7, delay: 0.3 }}
                 >
-                  <h3 className="text-white font-bold text-2xl mb-6">{t('hero.auctions')}</h3>
+                  <h3 className="text-white font-bold text-xl mb-4 flex items-center">
+                    <i className="fas fa-gavel mr-2"></i>
+                    {t('hero.auctions')} - North Country Auction
+                  </h3>
                   
-                  {/* Auction Item 1 */}
-                  <div 
-                    onClick={openRegistration}
-                    className="bg-white/10 rounded-xl p-4 mb-4 hover:bg-white/20 transition-colors cursor-pointer block"
-                  >
-                    <div className="flex justify-between items-start mb-3">
-                      <span className="font-medium text-white text-lg">{language === 'es' ? 'Subasta' : 'Auction'}</span>
-                      <div className="bg-gray-700 text-white text-xs py-1 px-3 rounded-lg">
-                        En 1 día
-                      </div>
-                    </div>
-                    <p className="text-white/80 text-sm mb-2">{t('hero.miningEquipment')}</p>
-                    <div className="flex justify-between items-center">
-                      <span className="text-white/80 text-xs hover:text-white hover:underline transition-colors">
-                        <i className="fas fa-user-plus mr-1"></i>
-                        {t('hero.register')}
-                      </span>
-                      <span className="text-white/80 text-xs">
-                        <i className="fas fa-tag mr-1"></i>
-                        25 {t('hero.lots')}
-                      </span>
-                    </div>
+                  <div className="rounded-2xl overflow-hidden aspect-video bg-black/20">
+                    <iframe 
+                      src="https://northcountry.auctiontechs.com/" 
+                      className="w-full h-full"
+                      style={{ border: 'none' }}
+                      title="North Country Auction"
+                      loading="lazy"
+                    />
                   </div>
                   
-                  {/* Auction Item 2 */}
-                  <div 
-                    onClick={openRegistration}
-                    className="bg-white/10 rounded-xl p-4 mb-4 hover:bg-white/20 transition-colors cursor-pointer block"
-                  >
-                    <div className="flex justify-between items-start mb-3">
-                      <span className="font-medium text-white text-lg">{language === 'es' ? 'Subasta' : 'Auction'}</span>
-                      <div className="bg-gray-700 text-white text-xs py-1 px-3 rounded-lg">
-                        En 1 semana
-                      </div>
-                    </div>
-                    <p className="text-white/80 text-sm mb-2">{t('hero.forestryEquipment')}</p>
-                    <div className="flex justify-between items-center">
-                      <span className="text-white/80 text-xs hover:text-white hover:underline transition-colors">
-                        <i className="fas fa-user-plus mr-1"></i>
-                        {t('hero.register')}
-                      </span>
-                      <span className="text-white/80 text-xs">
-                        <i className="fas fa-tag mr-1"></i>
-                        42 {t('hero.lots')}
-                      </span>
-                    </div>
-                  </div>
-                  
-                  {/* Auction Item 3 */}
-                  <div 
-                    onClick={openRegistration}
-                    className="bg-white/10 rounded-xl p-4 mb-4 hover:bg-white/20 transition-colors cursor-pointer block"
-                  >
-                    <div className="flex justify-between items-start mb-3">
-                      <span className="font-medium text-white text-lg">{language === 'es' ? 'Subasta' : 'Auction'}</span>
-                      <div className="bg-gray-700 text-white text-xs py-1 px-3 rounded-lg">
-                        En 2 semanas
-                      </div>
-                    </div>
-                    <p className="text-white/80 text-sm mb-2">{t('hero.trucksTransport')}</p>
-                    <div className="flex justify-between items-center">
-                      <span className="text-white/80 text-xs hover:text-white hover:underline transition-colors">
-                        <i className="fas fa-user-plus mr-1"></i>
-                        {t('hero.register')}
-                      </span>
-                      <span className="text-white/80 text-xs">
-                        <i className="fas fa-tag mr-1"></i>
-                        38 {t('hero.lots')}
-                      </span>
-                    </div>
-                  </div>
-                  
-                  {/* See All Link */}
+                  {/* Open in new window link */}
                   <a
-                    href="#catalogo"
-                    className="block text-center text-white py-3 rounded-xl border border-white/30 hover:bg-white/10 transition-colors mt-4"
+                    href="https://northcountry.auctiontechs.com/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block text-center text-white py-3 rounded-xl border border-white/30 hover:bg-white/10 transition-colors mt-4 flex items-center justify-center"
                   >
-                    {t('hero.viewAll')}
-                    <i className="fas fa-chevron-right ml-2 text-xs"></i>
+                    <i className="fas fa-external-link-alt mr-2"></i>
+                    {language === 'es' ? 'Abrir en nueva ventana' : 'Open in new window'}
                   </a>
                 </motion.div>
               </div>
