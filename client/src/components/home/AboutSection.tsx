@@ -186,12 +186,6 @@ export function AboutSection() {
                 className="w-full h-full object-cover object-center"
               />
               <div className="absolute bottom-0 left-0 right-0 p-8 z-20 bg-gradient-to-t from-black/70 to-transparent">
-                <div className="flex items-center mb-3">
-                  <div className="w-10 h-10 rounded-full bg-primary/30 backdrop-blur-sm flex items-center justify-center mr-3">
-                    <i className={`fas ${historiaContent.icon} text-white`}></i>
-                  </div>
-                  <div className="text-white/80 text-sm">{historiaContent.subtitle}</div>
-                </div>
                 <h3 className="text-white text-3xl font-bold mb-2">{historiaContent.title}</h3>
               </div>
             </div>
