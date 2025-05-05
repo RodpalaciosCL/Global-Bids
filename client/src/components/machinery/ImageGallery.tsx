@@ -6,9 +6,10 @@ interface ImageGalleryProps {
   images: string[];
   alt: string;
   fullHeight?: boolean;
+  clickToExpand?: boolean;
 }
 
-export function ImageGallery({ images, alt, fullHeight = false }: ImageGalleryProps) {
+export function ImageGallery({ images, alt, fullHeight = false, clickToExpand = false }: ImageGalleryProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isFullscreen, setIsFullscreen] = useState(false);
   
@@ -30,6 +31,12 @@ export function ImageGallery({ images, alt, fullHeight = false }: ImageGalleryPr
   const toggleFullscreen = () => {
     setIsFullscreen((prev) => !prev);
   };
+  
+  const handleImageClick = () => {
+    if (clickToExpand) {
+      toggleFullscreen();
+    }
+  };
 
   return (
     <div className="relative h-full flex flex-col">
@@ -39,8 +46,14 @@ export function ImageGallery({ images, alt, fullHeight = false }: ImageGalleryPr
           <img 
             src={imageList[currentIndex]} 
             alt={`${alt} - Imagen ${currentIndex + 1}`} 
-            className="w-full h-full object-cover"
+            className={`w-full h-full object-cover ${clickToExpand ? 'cursor-pointer' : ''}`}
+            onClick={handleImageClick}
           />
+          {clickToExpand && (
+            <div className="absolute top-2 right-2 bg-black/50 p-1 rounded text-white text-xs">
+              <i className="fas fa-search-plus"></i>
+            </div>
+          )}
           
           {/* Controles laterales */}
           <button 
