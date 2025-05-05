@@ -345,6 +345,27 @@ export class MemStorage implements IStorage {
         isSold: false,
       },
       {
+        name: "2020 Cat 308cr Excavator - Lote 301",
+        type: "excavator",
+        brand: "Caterpillar",
+        year: 2020,
+        hours: 2080,
+        price: 95000,
+        condition: "excellent",
+        description: "Sn/ Cat00308cgw801103, Meter Reads 2080 Hours, 2 Speed, Hyd Blade, Aux Hyd, Hyd Thumb, Quick Coupler, Super Clean Machine! Fully Loaded!",
+        image: "https://auctiontechupload.s3.amazonaws.com/216/auction/1840/301_1.jpg",
+        gallery: [
+          "https://auctiontechupload.s3.amazonaws.com/216/auction/1840/301_1.jpg",
+          "https://auctiontechupload.s3.amazonaws.com/216/auction/1840/301_2.jpg",
+          "https://auctiontechupload.s3.amazonaws.com/216/auction/1840/301_3.jpg",
+          "https://auctiontechupload.s3.amazonaws.com/216/auction/1840/301_5.jpg",
+          "https://auctiontechupload.s3.amazonaws.com/216/auction/1840/301_6.jpg",
+          "https://auctiontechupload.s3.amazonaws.com/216/auction/1840/301_7.jpg",
+          "https://auctiontechupload.s3.amazonaws.com/216/auction/1840/301_8.jpg"
+        ],
+        isSold: false,
+      },
+      {
         name: "Retroexcavadora John Deere 310SL",
         type: "backhoe",
         brand: "John Deere",
