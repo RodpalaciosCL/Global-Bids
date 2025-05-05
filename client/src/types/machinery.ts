@@ -22,7 +22,8 @@ export type MachineryType =
   | 'generator' 
   | 'crane'
   | 'backhoe'
-  | 'manlift';
+  | 'manlift'
+  | 'heater';
 
 export type MachineryCondition = 
   | 'excellent' 
@@ -47,7 +48,8 @@ export const typeLabels: Record<MachineryType, string> = {
   generator: 'Generador',
   crane: 'Grúa',
   backhoe: 'Retroexcavadora',
-  manlift: 'Plataforma Elevadora'
+  manlift: 'Plataforma Elevadora',
+  heater: 'Calentador'
 };
 
 export const conditionLabels: Record<MachineryCondition, string> = {

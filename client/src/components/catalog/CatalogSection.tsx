@@ -402,7 +402,7 @@ export function CatalogSection() {
               ))
             ) : machinery.length > 0 ? (
               machinery.slice(0, 6).map((item: Machinery, index) => (
-                <MachineryCard key={item.id} item={item} index={index} />
+                <MachineryCardCompact key={item.id} item={item} index={index} />
               ))
             ) : (
               <div className="col-span-full py-12 text-center">

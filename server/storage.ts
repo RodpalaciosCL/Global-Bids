@@ -325,6 +325,26 @@ export class MemStorage implements IStorage {
         isSold: false,
       },
       {
+        name: "2019 Heat King Idf1000 Ground Heater - Lote 88",
+        type: "heater",
+        brand: "Heat King",
+        year: 2019,
+        hours: 980,
+        price: 28500,
+        condition: "good",
+        description: "Vin# 2ep330306k1022293, Good Rubber All Around, Diesel Powered, Bill Of Sale Only!",
+        image: "https://auctiontechupload.s3.amazonaws.com/216/auction/1840/88_1.jpg",
+        gallery: [
+          "https://auctiontechupload.s3.amazonaws.com/216/auction/1840/88_1.jpg",
+          "https://auctiontechupload.s3.amazonaws.com/216/auction/1840/88_3.jpg",
+          "https://auctiontechupload.s3.amazonaws.com/216/auction/1840/88_5.jpg",
+          "https://auctiontechupload.s3.amazonaws.com/216/auction/1840/88_6.jpg",
+          "https://auctiontechupload.s3.amazonaws.com/216/auction/1840/88_8.jpg",
+          "https://auctiontechupload.s3.amazonaws.com/216/auction/1840/88_7.jpg"
+        ],
+        isSold: false,
+      },
+      {
         name: "Retroexcavadora John Deere 310SL",
         type: "backhoe",
         brand: "John Deere",
