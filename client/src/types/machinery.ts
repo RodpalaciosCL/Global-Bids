@@ -10,6 +10,7 @@ export interface Machinery {
   condition: MachineryCondition;
   description: string;
   image: string;
+  gallery?: string[];
   isSold: boolean;
   auctionDate?: string;
 }
@@ -20,7 +21,8 @@ export type MachineryType =
   | 'loader' 
   | 'generator' 
   | 'crane'
-  | 'backhoe';
+  | 'backhoe'
+  | 'manlift';
 
 export type MachineryCondition = 
   | 'excellent' 
@@ -44,7 +46,8 @@ export const typeLabels: Record<MachineryType, string> = {
   loader: 'Cargador',
   generator: 'Generador',
   crane: 'Grúa',
-  backhoe: 'Retroexcavadora'
+  backhoe: 'Retroexcavadora',
+  manlift: 'Plataforma Elevadora'
 };
 
 export const conditionLabels: Record<MachineryCondition, string> = {
