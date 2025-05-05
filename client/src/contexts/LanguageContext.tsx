@@ -54,6 +54,9 @@ const translations: Record<Language, Record<string, string>> = {
     'hero.miningEquipment': 'Activos Mineros',
     'hero.forestryEquipment': 'Activos Forestales',
     'hero.trucksTransport': 'Camiones y Transporte',
+    'hero.partsTools': 'Repuestos y Partes',
+    'hero.industrialEquipment': 'Equipos Industriales',
+    'hero.specialLots': 'Lotes Especiales',
     
     // Auction Register Section
     'auctions.exclusiveEvents': 'EVENTOS EXCLUSIVOS',
@@ -306,6 +309,9 @@ const translations: Record<Language, Record<string, string>> = {
     'hero.miningEquipment': 'Mining Equipment',
     'hero.forestryEquipment': 'Forestry Equipment',
     'hero.trucksTransport': 'Trucks and Transport',
+    'hero.partsTools': 'Parts and Components',
+    'hero.industrialEquipment': 'Industrial Equipment',
+    'hero.specialLots': 'Special Lots',
     
     // Auction Register Section
     'auctions.exclusiveEvents': 'EXCLUSIVE EVENTS',

@@ -102,7 +102,7 @@ export function HeroSection() {
                             whileTap={{ scale: 0.95 }}
                           >
                             <i className="fas fa-gavel mr-2"></i>
-                            Explorar Subastas
+                            {t('hero.exploreAuctions')}
                           </motion.a>
                         </div>
                       </motion.div>
@@ -181,7 +181,7 @@ export function HeroSection() {
                 <div className="w-10 h-10 mx-auto bg-white/20 rounded-full flex items-center justify-center mb-2 group-hover:bg-primary/60 transition-all">
                   <i className="fas fa-tools text-white"></i>
                 </div>
-                <div className="text-xs md:text-sm">Repuestos y Partes</div>
+                <div className="text-xs md:text-sm">{t('hero.partsTools')}</div>
               </motion.a>
               
               <motion.a 
@@ -192,7 +192,7 @@ export function HeroSection() {
                 <div className="w-10 h-10 mx-auto bg-white/20 rounded-full flex items-center justify-center mb-2 group-hover:bg-primary/60 transition-all">
                   <i className="fas fa-industry text-white"></i>
                 </div>
-                <div className="text-xs md:text-sm">Equipos Industriales</div>
+                <div className="text-xs md:text-sm">{t('hero.industrialEquipment')}</div>
               </motion.a>
               
               <motion.a 
@@ -203,7 +203,7 @@ export function HeroSection() {
                 <div className="w-10 h-10 mx-auto bg-white/20 rounded-full flex items-center justify-center mb-2 group-hover:bg-primary/60 transition-all">
                   <i className="fas fa-cubes text-white"></i>
                 </div>
-                <div className="text-xs md:text-sm">Lotes Especiales</div>
+                <div className="text-xs md:text-sm">{t('hero.specialLots')}</div>
               </motion.a>
             </div>
           </div>
