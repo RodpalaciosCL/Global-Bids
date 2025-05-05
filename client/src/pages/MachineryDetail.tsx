@@ -198,46 +198,7 @@ export default function MachineryDetail() {
               </table>
             </div>
             
-            {/* Información de contacto */}
-            <div className="bg-gray-50 p-4 rounded-lg shadow-sm">
-              <h3 className="font-medium text-gray-900 mb-2">Información de Contacto</h3>
-              <ul className="space-y-1.5">
-                <li className="flex items-center">
-                  <i className="fas fa-user-tie text-gray-500 mr-2.5 w-4 text-center"></i>
-                  <span className="text-sm">Juan Pérez - Especialista en {typeLabels[machinery.type as keyof typeof typeLabels]}</span>
-                </li>
-                <li className="flex items-center">
-                  <i className="fas fa-phone-alt text-gray-500 mr-2.5 w-4 text-center"></i>
-                  <span className="text-sm">+56 9 8765 4321</span>
-                </li>
-                <li className="flex items-center">
-                  <i className="fas fa-envelope text-gray-500 mr-2.5 w-4 text-center"></i>
-                  <span className="text-sm">ventas@globalbids.com</span>
-                </li>
-              </ul>
-            </div>
-            
-            {/* Garantía */}
-            <div className="border border-yellow-200 p-4 rounded-lg bg-yellow-50 shadow-sm">
-              <h3 className="font-medium text-gray-900 mb-2 flex items-center">
-                <i className="fas fa-shield-alt text-yellow-500 mr-2"></i> 
-                Garantía Global Bids
-              </h3>
-              <ul className="space-y-1 text-sm text-gray-600">
-                <li className="flex items-start">
-                  <i className="fas fa-check text-yellow-500 text-xs mt-1 mr-2"></i>
-                  <span>Inspección técnica certificada</span>
-                </li>
-                <li className="flex items-start">
-                  <i className="fas fa-check text-yellow-500 text-xs mt-1 mr-2"></i>
-                  <span>Historial de mantenimiento verificado</span>
-                </li>
-                <li className="flex items-start">
-                  <i className="fas fa-check text-yellow-500 text-xs mt-1 mr-2"></i>
-                  <span>Garantía de 30 días en componentes principales</span>
-                </li>
-              </ul>
-            </div>
+
           </div>
         </div>
       </div>
