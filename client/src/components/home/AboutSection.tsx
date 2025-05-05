@@ -105,27 +105,100 @@ export function AboutSection() {
               </div>
             </div>
             
-            {/* Contenido textual */}
+            {/* Contenido con íconos visuales */}
             <div className="space-y-6 p-2">
-              <div className="p-6 md:p-8 bg-white rounded-3xl shadow-lg border border-gray-100">
-                <div className="space-y-4">
-                  {historiaContent.description.map((paragraph, idx) => (
-                    <motion.p 
-                      key={idx} 
-                      className="text-gray-600 leading-relaxed"
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.4, delay: 0.1 * idx }}
-                    >
-                      {paragraph}
-                    </motion.p>
-                  ))}
-                </div>
+              <div className="p-8 md:p-10 bg-white rounded-3xl shadow-lg border border-gray-100">
+                {/* Texto introductorio */}
+                <motion.p 
+                  className="text-gray-600 leading-relaxed text-center mb-8"
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.4 }}
+                >
+                  {historiaContent.description[0]}
+                </motion.p>
                 
-                {/* Se eliminó el botón "Conoce nuestra historia" */}
+                {/* Grid de íconos con conceptos */}
+                <div className="grid grid-cols-2 md:grid-cols-3 gap-8 mb-4">
+                  {/* Liderazgo en subastas */}
+                  <motion.div 
+                    className="flex flex-col items-center text-center"
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.4, delay: 0.1 }}
+                  >
+                    <div className="w-14 h-14 bg-primary/10 rounded-full flex items-center justify-center mb-3 text-primary">
+                      <i className="fas fa-crown text-xl"></i>
+                    </div>
+                    <p className="text-sm font-medium text-gray-700">Líderes en subastas de maquinaria en Latinoamérica</p>
+                  </motion.div>
+                  
+                  {/* Presencia Global */}
+                  <motion.div 
+                    className="flex flex-col items-center text-center"
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.4, delay: 0.2 }}
+                  >
+                    <div className="w-14 h-14 bg-primary/10 rounded-full flex items-center justify-center mb-3 text-primary">
+                      <i className="fas fa-globe-americas text-xl"></i>
+                    </div>
+                    <p className="text-sm font-medium text-gray-700">Presencia global en Chile y el mundo</p>
+                  </motion.div>
+                  
+                  {/* Red de clientes */}
+                  <motion.div 
+                    className="flex flex-col items-center text-center"
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.4, delay: 0.3 }}
+                  >
+                    <div className="w-14 h-14 bg-primary/10 rounded-full flex items-center justify-center mb-3 text-primary">
+                      <i className="fas fa-users text-xl"></i>
+                    </div>
+                    <p className="text-sm font-medium text-gray-700">Red de casi 1 millón de clientes internacionales</p>
+                  </motion.div>
+                  
+                  {/* Plataforma digital */}
+                  <motion.div 
+                    className="flex flex-col items-center text-center"
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.4, delay: 0.4 }}
+                  >
+                    <div className="w-14 h-14 bg-primary/10 rounded-full flex items-center justify-center mb-3 text-primary">
+                      <i className="fas fa-laptop text-xl"></i>
+                    </div>
+                    <p className="text-sm font-medium text-gray-700">Plataforma digital transparente y segmentada</p>
+                  </motion.div>
+                  
+                  {/* Conexión oferta-demanda */}
+                  <motion.div 
+                    className="flex flex-col items-center text-center"
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.4, delay: 0.5 }}
+                  >
+                    <div className="w-14 h-14 bg-primary/10 rounded-full flex items-center justify-center mb-3 text-primary">
+                      <i className="fas fa-exchange-alt text-xl"></i>
+                    </div>
+                    <p className="text-sm font-medium text-gray-700">Conexión entre oferta sudamericana y demanda global</p>
+                  </motion.div>
+                  
+                  {/* Mejor valor */}
+                  <motion.div 
+                    className="flex flex-col items-center text-center"
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.4, delay: 0.6 }}
+                  >
+                    <div className="w-14 h-14 bg-primary/10 rounded-full flex items-center justify-center mb-3 text-primary">
+                      <i className="fas fa-chart-line text-xl"></i>
+                    </div>
+                    <p className="text-sm font-medium text-gray-700">Mejor valor para consignatarios en mercados de alta demanda</p>
+                  </motion.div>
+                </div>
               </div>
-              
-              {/* Se eliminaron las estadísticas ya que aparecen en la sección hero */}
             </div>
           </motion.div>
         </div>
