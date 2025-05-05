@@ -155,27 +155,30 @@ export class MemStorage implements IStorage {
       filtered = filtered.filter(item => item.condition === condition);
     }
     
-    // Primero ordenamos por prioridad si existe (para asegurar que ciertos elementos aparezcan primero)
+    // Primero ordenamos por prioridad (para asegurar que ciertos elementos aparezcan primero)
+    // y después por el criterio solicitado
     filtered.sort((a, b) => {
-      // Si ambos tienen prioridad o ninguno tiene, usamos el criterio normal
-      if (('priority' in a) === ('priority' in b)) {
-        // Luego aplicamos el criterio de ordenación solicitado
-        switch (sortBy) {
-          case 'price-asc':
-            return a.price - b.price;
-          case 'price-desc':
-            return b.price - a.price;
-          case 'year-desc':
-            return b.year - a.year;
-          case 'year-asc':
-            return a.year - b.year;
-          default:
-            return 0;
-        }
+      // Compara prioridad primero (elementos con prioridad más alta aparecen primero)
+      const priorityA = (a as any).priority || 0;
+      const priorityB = (b as any).priority || 0;
+      
+      if (priorityA !== priorityB) {
+        return priorityB - priorityA; // Mayor prioridad primero
       }
       
-      // Si sólo uno tiene prioridad, ese va primero
-      return 'priority' in a ? -1 : 1;
+      // Si tienen la misma prioridad, aplicamos el criterio solicitado
+      switch (sortBy) {
+        case 'price-asc':
+          return a.price - b.price;
+        case 'price-desc':
+          return b.price - a.price;
+        case 'year-desc':
+          return b.year - a.year;
+        case 'year-asc':
+          return a.year - b.year;
+        default:
+          return 0;
+      }
     });
     
     // Pagination

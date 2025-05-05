@@ -13,6 +13,7 @@ export interface Machinery {
   gallery?: string[];
   isSold: boolean;
   auctionDate?: string;
+  priority?: number; // Para dar prioridad en los listados
 }
 
 export type MachineryType = 
