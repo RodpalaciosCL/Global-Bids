@@ -64,25 +64,25 @@ export default function MachineryDetail() {
                 </div>
                 
                 {/* Title and Main Details */}
-                <h1 className="text-lg font-bold text-gray-900 mb-2 line-clamp-1">{machinery.name}</h1>
+                <h1 className="text-xl font-bold text-gray-900 mb-2 line-clamp-1">{machinery.name}</h1>
                 
                 <div className="flex flex-wrap gap-2 mb-2 border-b border-gray-200 pb-2">
                   <div className="flex items-center">
-                    <i className="fas fa-calendar-alt mr-1 text-gray-500 text-xs"></i>
-                    <span className="text-gray-900 text-xs">{machinery.year}</span>
+                    <i className="fas fa-calendar-alt mr-1 text-gray-500 text-sm"></i>
+                    <span className="text-gray-900 text-sm">{machinery.year}</span>
                   </div>
                   <div className="flex items-center">
-                    <i className="fas fa-tachometer-alt mr-1 text-gray-500 text-xs"></i>
-                    <span className="text-gray-900 text-xs">{machinery.hours} hrs</span>
+                    <i className="fas fa-tachometer-alt mr-1 text-gray-500 text-sm"></i>
+                    <span className="text-gray-900 text-sm">{machinery.hours} hrs</span>
                   </div>
                   <div className="flex items-center">
-                    <i className="fas fa-tag mr-1 text-gray-500 text-xs"></i>
-                    <span className="text-gray-900 font-bold text-xs">${machinery.price.toLocaleString()}</span>
+                    <i className="fas fa-tag mr-1 text-gray-500 text-sm"></i>
+                    <span className="text-gray-900 font-bold text-sm">${machinery.price.toLocaleString()}</span>
                   </div>
                 </div>
                 
                 {/* Main Image Gallery */}
-                <div className="w-full h-[280px] border border-gray-200 rounded-lg overflow-hidden mb-1">
+                <div className="w-full h-[320px] border border-gray-200 rounded-lg overflow-hidden mb-1">
                   {machinery.gallery && machinery.gallery.length > 0 ? (
                     <img 
                       src={machinery.image} 
@@ -99,12 +99,12 @@ export default function MachineryDetail() {
                 </div>
                 
                 {/* Image Thumbnails */}
-                <div className="flex gap-1 overflow-x-auto pb-1">
+                <div className="flex gap-2 overflow-x-auto pb-2">
                   <div className="border-2 border-primary rounded overflow-hidden flex-shrink-0">
                     <img
                       src={machinery.image}
                       alt={`${machinery.name} - Thumbnail 1`}
-                      className="w-16 h-12 object-cover"
+                      className="w-20 h-16 object-cover"
                     />
                   </div>
                   
@@ -113,7 +113,7 @@ export default function MachineryDetail() {
                       <img
                         src={img}
                         alt={`${machinery.name} - Thumbnail ${index + 2}`}
-                        className="w-16 h-12 object-cover"
+                        className="w-20 h-16 object-cover"
                       />
                     </div>
                   ))}
@@ -140,15 +140,15 @@ export default function MachineryDetail() {
               
               {/* Action Buttons */}
               <div className="grid gap-2 mb-3">
-                <Button className="bg-primary hover:bg-primary/90 w-full py-1.5 h-auto text-sm">
+                <Button className="bg-primary hover:bg-primary/90 w-full py-2 h-auto text-sm">
                   <i className="fas fa-shopping-cart mr-1"></i>
                   Comprar ahora
                 </Button>
-                <Button variant="outline" className="border-gray-300 w-full py-1.5 h-auto text-sm">
+                <Button variant="outline" className="border-gray-300 w-full py-2 h-auto text-sm">
                   <i className="fas fa-phone-alt mr-1"></i>
                   Contactar consultor
                 </Button>
-                <Button asChild variant="ghost" className="text-gray-500 text-xs py-1">
+                <Button asChild variant="ghost" className="text-gray-500 text-sm py-1">
                   <a href="/#catalogo">
                     <i className="fas fa-arrow-left mr-1"></i>
                     Volver al catálogo
