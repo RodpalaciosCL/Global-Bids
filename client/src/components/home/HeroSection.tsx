@@ -172,13 +172,32 @@ export function HeroSection() {
                   </h3>
                   
                   <div className="rounded-2xl overflow-hidden aspect-video bg-black/20">
-                    <iframe 
-                      src="https://northcountry.auctiontechs.com/" 
-                      className="w-full h-full"
-                      style={{ border: 'none' }}
-                      title="North Country Auction"
-                      loading="lazy"
-                    />
+                    <div className="w-full h-full p-4 bg-gradient-to-br from-blue-900 to-blue-950 flex flex-col justify-center items-center">
+                      <div className="text-lg font-bold text-white mb-2">{t('auctions.upcomingEvents')}</div>
+                      <div className="bg-white/10 rounded-lg p-3 mb-3 w-full">
+                        <div className="text-white font-medium">{t('auctions.miningAssets')}</div>
+                        <div className="text-sm text-gray-300 mt-1">15 {t('hero.day')}</div>
+                        <div className="flex justify-between items-center mt-2">
+                          <span className="text-xs text-primary-200">45 {t('hero.lots')}</span>
+                          <button 
+                            onClick={openRegistration}
+                            className="text-xs bg-primary hover:bg-primary/90 px-3 py-1 rounded-full text-white"
+                          >
+                            {t('hero.register')}
+                          </button>
+                        </div>
+                      </div>
+                      
+                      <a 
+                        href="https://northcountry.auctiontechs.com/auctions" 
+                        target="_blank"
+                        rel="noopener noreferrer" 
+                        className="bg-white/10 hover:bg-white/20 text-white text-sm font-medium px-4 py-2 rounded-full mt-2 flex items-center"
+                      >
+                        <i className="fas fa-external-link-alt mr-2"></i>
+                        {t('hero.viewAll')}
+                      </a>
+                    </div>
                   </div>
                 </motion.div>
               </div>

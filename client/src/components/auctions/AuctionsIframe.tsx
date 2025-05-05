@@ -2,9 +2,16 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { fadeIn, slideUp } from '@/lib/animations';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { useRegistration } from '@/contexts/RegistrationContext';
 
 export function AuctionsIframe() {
   const { t, language } = useLanguage();
+  const { openForm } = useRegistration();
+  
+  // Función para registrarse en una subasta
+  const handleRegister = () => {
+    openForm();
+  }
   
   return (
     <section className="py-12 bg-gray-900" id="subastas">
@@ -52,46 +59,49 @@ export function AuctionsIframe() {
         >
           {/* Contenedor con desplazamiento personalizado para mostrar subastas */}
           <div className="relative w-full h-[500px] md:h-[700px] rounded-2xl overflow-hidden">
-            {/* Usamos una imagen de ejemplo de subastas en formato "placeholder" */}
+            {/* Diseño personalizado que evita las franjas problemáticas */}
             <div 
               className="absolute inset-0 flex flex-col items-center justify-center bg-gradient-to-b from-blue-900 to-blue-950 rounded-2xl p-5"
             >
               <div className="w-full max-w-3xl bg-slate-800 rounded-lg p-6 shadow-xl">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="col-span-1">
-                    <h3 className="text-2xl font-bold text-white mb-3">Mining Equipment Auction</h3>
+                    <h3 className="text-2xl font-bold text-white mb-3">{t('auctions.miningAssets')}</h3>
                     <div className="bg-primary/20 text-white text-sm rounded-full px-3 py-1 inline-block mb-2">
-                      June 15, 2025
+                      15 {t('hero.day')}
                     </div>
                     <p className="text-gray-300 text-sm mb-4">
-                      Over 200 items including excavators, trucks, and loaders from major construction sites
+                      {t('auctions.heavyMachineryDesc')}
                     </p>
                     <div className="flex gap-4 mt-3">
-                      <button className="bg-primary hover:bg-primary/90 transition text-white rounded-full px-5 py-2 text-sm font-medium">
-                        Register Now
+                      <button 
+                        onClick={handleRegister}
+                        className="bg-primary hover:bg-primary/90 transition text-white rounded-full px-5 py-2 text-sm font-medium"
+                      >
+                        {t('auctions.registerNow')}
                       </button>
                       <button className="bg-white/10 hover:bg-white/20 transition text-white rounded-full px-5 py-2 text-sm font-medium">
-                        View Details
+                        {t('auctions.moreInfo')}
                       </button>
                     </div>
                   </div>
                   <div className="col-span-1 bg-blue-900/30 rounded-lg p-3 border border-blue-800/50">
-                    <div className="text-sm text-white font-medium mb-2">Featured Items</div>
+                    <div className="text-sm text-white font-medium mb-2">{t('auctions.heavyMachinery')}</div>
                     <ul className="text-sm text-gray-300 space-y-2">
                       <li className="flex justify-between">
-                        <span>CAT 336 Excavator</span>
+                        <span>CAT 336 {t('type.excavator')}</span>
                         <span>2019</span>
                       </li>
                       <li className="flex justify-between">
-                        <span>Komatsu WA500 Loader</span>
+                        <span>Komatsu WA500 {t('type.loader')}</span>
                         <span>2020</span>
                       </li>
                       <li className="flex justify-between">
-                        <span>Hitachi ZX490 Excavator</span>
+                        <span>Hitachi ZX490 {t('type.excavator')}</span>
                         <span>2018</span>
                       </li>
                       <li className="flex justify-between">
-                        <span>Volvo A60H Articulated Truck</span>
+                        <span>Volvo A60H {t('type.truck')}</span>
                         <span>2021</span>
                       </li>
                     </ul>
@@ -100,34 +110,34 @@ export function AuctionsIframe() {
               </div>
               
               <div className="w-full max-w-3xl mt-6">
-                <div className="text-lg font-medium text-white mb-3">Upcoming Auctions</div>
+                <div className="text-lg font-medium text-white mb-3">{t('auctions.upcomingEvents')}</div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="bg-white/5 hover:bg-white/10 transition rounded-lg p-4 cursor-pointer border border-white/10">
-                    <div className="text-white font-bold">Forestry Equipment</div>
-                    <div className="text-sm text-gray-300">July 7, 2025</div>
+                    <div className="text-white font-bold">{t('auctions.forestryAssets')}</div>
+                    <div className="text-sm text-gray-300">30 {t('hero.day')}</div>
                     <div className="flex justify-between mt-2">
-                      <span className="text-xs text-primary-300">75 lots</span>
-                      <span className="text-xs text-gray-400">Registration open</span>
+                      <span className="text-xs text-primary-300">75 {t('hero.lots')}</span>
+                      <span className="text-xs text-gray-400">{t('auctions.openForRegistration')}</span>
                     </div>
                   </div>
                   <div className="bg-white/5 hover:bg-white/10 transition rounded-lg p-4 cursor-pointer border border-white/10">
-                    <div className="text-white font-bold">Construction Parts</div>
-                    <div className="text-sm text-gray-300">August 18, 2025</div>
+                    <div className="text-white font-bold">{t('auctions.industrialParts')}</div>
+                    <div className="text-sm text-gray-300">45 {t('hero.day')}</div>
                     <div className="flex justify-between mt-2">
-                      <span className="text-xs text-primary-300">120+ lots</span>
-                      <span className="text-xs text-gray-400">Coming soon</span>
+                      <span className="text-xs text-primary-300">120+ {t('hero.lots')}</span>
+                      <span className="text-xs text-gray-400">{t('auctions.comingSoon')}</span>
                     </div>
                   </div>
                 </div>
               </div>
               
               <a 
-                href="https://northcountry.auctiontechs.com/auction-catalog" 
+                href="https://northcountry.auctiontechs.com/auctions" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="mt-6 bg-primary/90 hover:bg-primary transition text-white rounded-full px-8 py-3 text-sm font-medium"
               >
-                View All Auctions at North Country
+                {t('hero.viewAll')}
               </a>
             </div>
           </div>
