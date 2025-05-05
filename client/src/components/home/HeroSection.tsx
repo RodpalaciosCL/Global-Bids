@@ -30,9 +30,9 @@ export function HeroSection() {
   };
   
   const stats = [
-    { value: "15+", label: t('about.experience'), icon: "fa-history" },
-    { value: "2,000+", label: t('about.machines'), icon: "fa-tools" },
-    { value: "99%", label: t('about.clients'), icon: "fa-smile" }
+    { value: "+2800", label: "Remates", icon: "fa-gavel" },
+    { value: "75", label: "países", icon: "fa-globe" },
+    { value: "950,300", label: "Clientes pre-validados", icon: "fa-users" }
   ];
 
   const openRegistration = () => {
