@@ -44,9 +44,9 @@ export function AuctionsIframe() {
               className="absolute top-0 left-0 w-full h-full border-0"
               style={{ 
                 minHeight: '600px',
-                marginTop: '-200px', /* Ajuste para ocultar el encabezado de North Country y espacio */
+                marginTop: '-275px', /* Ajuste para ocultar el encabezado y mostrar directamente las pestañas Current-Past */
                 marginBottom: '-50px', /* Ajuste para ocultar el pie de página */
-                height: 'calc(100% + 250px)', /* Compensar los márgenes negativos */
+                height: 'calc(100% + 325px)', /* Compensar los márgenes negativos */
                 width: '100%',
               }}
               title="North Country Auctions"
