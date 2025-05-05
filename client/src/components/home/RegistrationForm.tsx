@@ -48,7 +48,7 @@ export function RegistrationForm() {
     };
   }, []);
 
-  // Mapa de códigos de país a códigos telefónicos
+  // Mapa de códigos de país a códigos telefónicos (ampliado)
   const countryToCode: Record<string, string> = {
     "CL": "+56", // Chile
     "AR": "+54", // Argentina
@@ -71,6 +71,35 @@ export function RegistrationForm() {
     "NL": "+31", // Países Bajos
     "CH": "+41", // Suiza
     "AU": "+61", // Australia
+    "NZ": "+64", // Nueva Zelanda
+    "ZA": "+27", // Sudáfrica
+    "IN": "+91", // India
+    "CN": "+86", // China
+    "JP": "+81", // Japón
+    "KR": "+82", // Corea del Sur
+    "RU": "+7", // Rusia
+    "AE": "+971", // Emiratos Árabes Unidos
+    "SA": "+966", // Arabia Saudita
+    "QA": "+974", // Qatar
+    "EG": "+20", // Egipto
+    "MA": "+212", // Marruecos
+    "NG": "+234", // Nigeria
+    "KE": "+254", // Kenia
+    "GH": "+233", // Ghana
+    "SG": "+65", // Singapur
+    "MY": "+60", // Malasia
+    "TH": "+66", // Tailandia
+    "ID": "+62", // Indonesia
+    "PH": "+63", // Filipinas
+    "PK": "+92", // Pakistán
+    "TR": "+90", // Turquía
+    "DK": "+45", // Dinamarca
+    "SE": "+46", // Suecia
+    "NO": "+47", // Noruega
+    "FI": "+358", // Finlandia
+    "IS": "+354", // Islandia
+    "BE": "+32", // Bélgica
+    "AT": "+43", // Austria
   };
   
   // Obtener el código telefónico actual basado en el país seleccionado
@@ -144,7 +173,7 @@ export function RegistrationForm() {
   }, [isFormOpen]);
   
   return (
-    <div id="registro">
+    <div id="registration-form">
       <motion.button
         onClick={toggleForm}
         className="inline-block bg-secondary hover:bg-secondary-dark text-primary text-lg font-bold px-8 py-4 rounded-lg transition duration-300 shadow-lg"
@@ -252,7 +281,7 @@ export function RegistrationForm() {
                     <div className="flex-1">
                       <Input
                         id="phone"
-                        placeholder="9 XXXX XXXX"
+                        placeholder="XXXX XXXX"
                         value={form.getValues('phone')?.replace(/^\+\d+\s/, '') || ''}
                         onChange={(e) => {
                           // Elimina cualquier código de país existente y agrega el seleccionado
