@@ -129,11 +129,11 @@ export function AuctionRegisterSection() {
               <i className="fas fa-calendar-alt text-sm sm:text-base"></i>
             </div>
             <h3 className="text-base sm:text-xl font-bold text-white">
-              {language === 'es' ? 'Próximos Eventos' : 'Upcoming Events'}
+              {t('auctions.upcomingEvents')}
             </h3>
             <div className="ml-auto">
               <span className="bg-primary/80 text-white text-xs font-bold px-2 sm:px-3 py-1 rounded-full">
-                {language === 'es' ? 'ACCESO EXCLUSIVO' : 'EXCLUSIVE ACCESS'}
+                {t('auctions.exclusiveAccess')}
               </span>
             </div>
           </div>
@@ -142,17 +142,17 @@ export function AuctionRegisterSection() {
             <div className="py-4 flex flex-col md:flex-row items-start md:items-center gap-4">
               <div className="bg-blue-900 text-white rounded-lg p-3 text-center w-16 h-16 flex flex-col items-center justify-center">
                 <div className="text-xs sm:text-sm font-bold">EN</div>
-                <div className="text-lg sm:text-xl font-bold">1 DÍA</div>
+                <div className="text-lg sm:text-xl font-bold">1 {t('auctions.day')}</div>
               </div>
               <div className="flex-grow">
                 <h4 className="font-bold text-white text-sm sm:text-base">
-                  {language === 'es' ? 'Subasta de Activos Mineros' : 'Mining Assets Auction'}
+                  {t('auctions.miningAssets')}
                 </h4>
                 <p className="text-gray-400 text-xs sm:text-sm">Santiago, Chile</p>
               </div>
               <div className="flex flex-wrap mt-2 md:mt-0 items-center">
                 <span className="bg-green-500/20 text-green-400 text-xs px-3 py-1 rounded-full">
-                  {language === 'es' ? 'Abierto para registro' : 'Open for registration'}
+                  {t('auctions.openForRegistration')}
                 </span>
                 <a 
                   href="#subastas"
@@ -160,7 +160,7 @@ export function AuctionRegisterSection() {
                   className="mt-2 md:mt-0 md:ml-4 bg-primary/80 hover:bg-primary text-white px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg text-xs sm:text-sm font-medium transition-colors inline-flex items-center"
                 >
                   <i className="fas fa-user-plus mr-1"></i>
-                  {language === 'es' ? 'Registrar' : 'Register'}
+                  {t('auctions.register')}
                 </a>
               </div>
             </div>
@@ -168,17 +168,17 @@ export function AuctionRegisterSection() {
             <div className="py-4 flex flex-col md:flex-row items-start md:items-center gap-4">
               <div className="bg-blue-900 text-white rounded-lg p-3 text-center w-16 h-16 flex flex-col items-center justify-center">
                 <div className="text-xs sm:text-sm font-bold">EN</div>
-                <div className="text-lg sm:text-xl font-bold">2 SEM</div>
+                <div className="text-lg sm:text-xl font-bold">2 {t('auctions.week')}</div>
               </div>
               <div className="flex-grow">
                 <h4 className="font-bold text-white text-sm sm:text-base">
-                  {language === 'es' ? 'Subasta de Activos Forestales' : 'Forestry Assets Auction'}
+                  {t('auctions.forestryAssets')}
                 </h4>
                 <p className="text-gray-400 text-xs sm:text-sm">Concepción, Chile</p>
               </div>
               <div className="flex flex-wrap mt-2 md:mt-0 items-center">
                 <span className="bg-yellow-500/20 text-yellow-400 text-xs px-3 py-1 rounded-full">
-                  {language === 'es' ? 'Próximamente' : 'Coming soon'}
+                  {t('auctions.comingSoon')}
                 </span>
                 <a 
                   href="#subastas"
@@ -186,7 +186,7 @@ export function AuctionRegisterSection() {
                   className="mt-2 md:mt-0 md:ml-4 bg-primary/80 hover:bg-primary text-white px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg text-xs sm:text-sm font-medium transition-colors inline-flex items-center"
                 >
                   <i className="fas fa-bell mr-1"></i>
-                  {language === 'es' ? 'Notificarme' : 'Notify me'}
+                  {t('auctions.notify')}
                 </a>
               </div>
             </div>
@@ -194,17 +194,17 @@ export function AuctionRegisterSection() {
             <div className="py-4 flex flex-col md:flex-row items-start md:items-center gap-4">
               <div className="bg-blue-900 text-white rounded-lg p-3 text-center w-16 h-16 flex flex-col items-center justify-center">
                 <div className="text-xs sm:text-sm font-bold">EN</div>
-                <div className="text-lg sm:text-xl font-bold">1 MES</div>
+                <div className="text-lg sm:text-xl font-bold">1 {t('auctions.month')}</div>
               </div>
               <div className="flex-grow">
                 <h4 className="font-bold text-white text-sm sm:text-base">
-                  {language === 'es' ? 'Subasta de Repuestos Industriales' : 'Industrial Parts Auction'}
+                  {t('auctions.industrialParts')}
                 </h4>
                 <p className="text-gray-400 text-xs sm:text-sm">Online (Virtual)</p>
               </div>
               <div className="flex flex-wrap mt-2 md:mt-0 items-center">
                 <span className="bg-blue-500/20 text-blue-400 text-xs px-3 py-1 rounded-full">
-                  {language === 'es' ? 'Virtual' : 'Virtual'}
+                  {t('auctions.virtual')}
                 </span>
                 <a 
                   href="#subastas"
@@ -212,7 +212,7 @@ export function AuctionRegisterSection() {
                   className="mt-2 md:mt-0 md:ml-4 bg-primary/80 hover:bg-primary text-white px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg text-xs sm:text-sm font-medium transition-colors inline-flex items-center"
                 >
                   <i className="fas fa-laptop mr-1"></i>
-                  {language === 'es' ? 'Pre-registro' : 'Pre-register'}
+                  {t('auctions.preRegister')}
                 </a>
               </div>
             </div>
