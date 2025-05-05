@@ -1,17 +1,43 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { fadeIn, slideUp } from '@/lib/animations';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { useRegistration } from '@/contexts/RegistrationContext';
 
 export function AuctionsIframe() {
-  const { t, language } = useLanguage();
-  const { openForm } = useRegistration();
+  const { t } = useLanguage();
+  const iframeRef = useRef<HTMLIFrameElement>(null);
   
-  // Función para registrarse en una subasta
-  const handleRegister = () => {
-    openForm();
-  }
+  // Función para manipular el iframe después de que se cargue
+  useEffect(() => {
+    const iframe = iframeRef.current;
+    
+    if (iframe) {
+      iframe.onload = function() {
+        try {
+          // Intento de acceder al iframe y manipular su contenido después de cargar
+          if (iframe.contentDocument) {
+            // Intentar ocultar elementos no deseados via CSS
+            const style = iframe.contentDocument.createElement('style');
+            style.textContent = `
+              header, .main-header, .navbar, .page-header, .footer, .banner, .top-section { 
+                display: none !important; 
+              }
+              body {
+                padding-top: 0 !important;
+                margin-top: 0 !important;
+              }
+              .auction-listing-container {
+                padding-top: 0 !important;
+              }
+            `;
+            iframe.contentDocument.head.appendChild(style);
+          }
+        } catch (e) {
+          console.log('No se pudo acceder al contenido del iframe debido a la política de seguridad del navegador');
+        }
+      };
+    }
+  }, []);
   
   return (
     <section className="py-12 bg-gray-900" id="subastas">
@@ -50,95 +76,38 @@ export function AuctionsIframe() {
         </div>
         
         <motion.div 
-          className="bg-white/5 backdrop-blur-sm rounded-3xl p-4 border border-white/10 shadow-lg overflow-hidden max-w-5xl mx-auto"
+          className="bg-white/5 backdrop-blur-sm rounded-3xl p-3 border border-white/10 shadow-lg overflow-hidden max-w-5xl mx-auto"
           variants={fadeIn}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
           transition={{ delay: 0.2 }}
         >
-          {/* Contenedor con desplazamiento personalizado para mostrar subastas */}
-          <div className="relative w-full h-[500px] md:h-[700px] rounded-2xl overflow-hidden">
-            {/* Diseño personalizado que evita las franjas problemáticas */}
-            <div 
-              className="absolute inset-0 flex flex-col items-center justify-center bg-gradient-to-b from-blue-900 to-blue-950 rounded-2xl p-5"
-            >
-              <div className="w-full max-w-3xl bg-slate-800 rounded-lg p-6 shadow-xl">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div className="col-span-1">
-                    <h3 className="text-2xl font-bold text-white mb-3">{t('auctions.miningAssets')}</h3>
-                    <div className="bg-primary/20 text-white text-sm rounded-full px-3 py-1 inline-block mb-2">
-                      15 {t('hero.day')}
-                    </div>
-                    <p className="text-gray-300 text-sm mb-4">
-                      {t('auctions.heavyMachineryDesc')}
-                    </p>
-                    <div className="flex gap-4 mt-3">
-                      <button 
-                        onClick={handleRegister}
-                        className="bg-primary hover:bg-primary/90 transition text-white rounded-full px-5 py-2 text-sm font-medium"
-                      >
-                        {t('auctions.registerNow')}
-                      </button>
-                      <button className="bg-white/10 hover:bg-white/20 transition text-white rounded-full px-5 py-2 text-sm font-medium">
-                        {t('auctions.moreInfo')}
-                      </button>
-                    </div>
-                  </div>
-                  <div className="col-span-1 bg-blue-900/30 rounded-lg p-3 border border-blue-800/50">
-                    <div className="text-sm text-white font-medium mb-2">{t('auctions.heavyMachinery')}</div>
-                    <ul className="text-sm text-gray-300 space-y-2">
-                      <li className="flex justify-between">
-                        <span>CAT 336 {t('type.excavator')}</span>
-                        <span>2019</span>
-                      </li>
-                      <li className="flex justify-between">
-                        <span>Komatsu WA500 {t('type.loader')}</span>
-                        <span>2020</span>
-                      </li>
-                      <li className="flex justify-between">
-                        <span>Hitachi ZX490 {t('type.excavator')}</span>
-                        <span>2018</span>
-                      </li>
-                      <li className="flex justify-between">
-                        <span>Volvo A60H {t('type.truck')}</span>
-                        <span>2021</span>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-              
-              <div className="w-full max-w-3xl mt-6">
-                <div className="text-lg font-medium text-white mb-3">{t('auctions.upcomingEvents')}</div>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div className="bg-white/5 hover:bg-white/10 transition rounded-lg p-4 cursor-pointer border border-white/10">
-                    <div className="text-white font-bold">{t('auctions.forestryAssets')}</div>
-                    <div className="text-sm text-gray-300">30 {t('hero.day')}</div>
-                    <div className="flex justify-between mt-2">
-                      <span className="text-xs text-primary-300">75 {t('hero.lots')}</span>
-                      <span className="text-xs text-gray-400">{t('auctions.openForRegistration')}</span>
-                    </div>
-                  </div>
-                  <div className="bg-white/5 hover:bg-white/10 transition rounded-lg p-4 cursor-pointer border border-white/10">
-                    <div className="text-white font-bold">{t('auctions.industrialParts')}</div>
-                    <div className="text-sm text-gray-300">45 {t('hero.day')}</div>
-                    <div className="flex justify-between mt-2">
-                      <span className="text-xs text-primary-300">120+ {t('hero.lots')}</span>
-                      <span className="text-xs text-gray-400">{t('auctions.comingSoon')}</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              
-              <a 
-                href="https://northcountry.auctiontechs.com/auctions" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="mt-6 bg-primary/90 hover:bg-primary transition text-white rounded-full px-8 py-3 text-sm font-medium"
-              >
-                {t('hero.viewAll')}
-              </a>
+          <div className="bg-slate-100/5 backdrop-blur-sm p-4 flex items-center gap-3 rounded-t-2xl">
+            <i className="fas fa-gavel text-white"></i>
+            <h3 className="text-xl font-medium text-white">
+              {t('auctions.upcomingEvents')}
+            </h3>
+          </div>
+          
+          <div className="rounded-b-2xl overflow-hidden bg-blue-900">
+            <div className="relative w-full h-[600px] overflow-hidden">
+              <iframe 
+                ref={iframeRef}
+                src="https://northcountry.auctiontechs.com/auctions" 
+                className="w-full h-full"
+                style={{ 
+                  border: 'none',
+                  position: 'absolute',
+                  top: 0,
+                  left: 0,
+                  width: '100%',
+                  height: '100%'
+                }}
+                title="North Country Auctions"
+                loading="lazy"
+                sandbox="allow-scripts allow-same-origin allow-forms"
+              />
             </div>
           </div>
         </motion.div>
