@@ -83,7 +83,7 @@ export function MethodFramework() {
   ];
   
   return (
-    <section className="py-12 bg-white" ref={sectionRef}>
+    <section id="metodo" className="py-12 bg-white" ref={sectionRef}>
       <div className="container mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
