@@ -139,9 +139,9 @@ export function Header() {
             >
               <nav className="flex flex-col">
                 <div className="bg-primary text-white p-4">
-                  <div className="font-heading font-bold text-xl tracking-tight mb-1">Menú Principal</div>
+                  <div className="font-heading font-bold text-xl tracking-tight mb-1">{t('nav.mainMenu')}</div>
                   <div className="text-xs text-white/80">
-                    {language === 'es' ? 'Navegación del sitio' : 'Site navigation'}
+                    {t('nav.siteNavigation')}
                   </div>
                 </div>
                 
