@@ -111,25 +111,21 @@ export function AuctionsIframe() {
             </h3>
           </div>
           
-          <div className="rounded-b-2xl overflow-hidden bg-blue-900">
+          <div className="rounded-b-2xl overflow-hidden bg-blue-950">
             <div className="p-6">
               {/* Contenido personalizado que simula la página de subastas */}
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 {auctionItems.slice(0, visibleItems).map((auction) => (
                   <div key={auction.id} className="bg-white rounded-lg overflow-hidden shadow-md">
-                    <div className="h-48 overflow-hidden bg-gray-200 flex items-center justify-center">
-                      <img 
-                        src={`/auction-${auction.id}.svg`} 
-                        alt={auction.title} 
-                        className="w-full h-full object-contain"
-                      />
+                    <div className="h-36 overflow-hidden bg-gray-100 flex items-center justify-center relative">
+                      {/* Área de imagen sin imagen real */}
                     </div>
                     <div className="p-4">
                       <h4 className="font-bold text-gray-800 mb-2">{auction.title}</h4>
                       <div className="text-sm text-gray-600 mb-2">
                         <div className="flex items-center gap-1 mb-1">
                           <i className="fas fa-calendar-alt text-primary"></i>
-                          <span>Auction Date: {auction.date}</span>
+                          <span>{auction.date}</span>
                         </div>
                         <div className="flex items-center gap-1">
                           <i className="fas fa-map-marker-alt text-primary"></i>
@@ -141,13 +137,13 @@ export function AuctionsIframe() {
                           onClick={() => viewAuctionDetails(auction.id)}
                           className="bg-blue-900 hover:bg-blue-800 text-white text-center py-2 rounded text-sm font-medium"
                         >
-                          {t('auctions.auctionDetails')}
+                          DETALLES DEL EVENTO
                         </button>
                         <button 
                           onClick={openForm}
-                          className="bg-primary hover:bg-primary/90 text-white text-center py-2 rounded text-sm font-medium"
+                          className="bg-gray-900 hover:bg-gray-800 text-white text-center py-2 rounded text-sm font-medium"
                         >
-                          {t('auctions.register')}
+                          REGISTRARSE
                         </button>
                       </div>
                     </div>
@@ -155,17 +151,16 @@ export function AuctionsIframe() {
                 ))}
               </div>
               
-              {visibleItems < auctionItems.length && (
-                <div className="mt-6 text-center">
-                  <button 
-                    onClick={showMoreItems}
-                    className="inline-flex items-center gap-2 bg-blue-800/40 hover:bg-blue-800/60 text-white py-3 px-6 rounded-full transition-colors"
-                  >
-                    <i className="fas fa-plus"></i>
-                    {t('auctions.viewMore')}
-                  </button>
-                </div>
-              )}
+              {/* Botón "Ver todas las subastas" */}
+              <div className="mt-6 text-center">
+                <button 
+                  onClick={showMoreItems}
+                  className="inline-flex items-center gap-2 text-white py-2 px-4 transition-colors text-sm"
+                >
+                  <i className="fas fa-external-link-alt"></i>
+                  Ver todas las subastas
+                </button>
+              </div>
             </div>
           </div>
         </motion.div>
