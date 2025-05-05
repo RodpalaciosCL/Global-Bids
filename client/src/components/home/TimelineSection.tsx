@@ -124,11 +124,11 @@ export function TimelineSection() {
         >
           <h3 className="text-xl font-bold text-blue-600 mb-3">Hoy en Global Bids</h3>
           <p className="text-lg text-gray-700 mb-4">
-            Conectamos la oferta sudamericana con la demanda global a través de nuestra plataforma digital, con presencia en 12 países.
+            Conectamos la oferta sudamericana con la demanda global, a través de nuestra plataforma digital, con presencia en más de 12 países y con una base de cerca de 1 millón de compradores activos.
           </p>
           <div className="inline-block bg-blue-500/10 px-6 py-3 rounded-full">
             <span className="text-lg text-blue-600 font-bold">
-              Acceso a más de 950,000 clientes internacionales
+              Chile - USA - Worldwide
             </span>
           </div>
         </motion.div>
