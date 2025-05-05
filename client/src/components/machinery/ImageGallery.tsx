@@ -42,7 +42,7 @@ export function ImageGallery({ images, alt, fullHeight = false, clickToExpand = 
     <div className="relative h-full flex flex-col">
       {/* Vista principal con imagen grande */}
       <div className="relative flex-1">
-        <div className={`relative bg-gray-100 ${fullHeight ? 'h-full' : 'h-[320px]'} overflow-hidden`}>
+        <div className={`relative bg-gray-100 ${fullHeight ? 'h-[250px]' : 'h-[320px]'} overflow-hidden`}>
           <img 
             src={imageList[currentIndex]} 
             alt={`${alt} - Imagen ${currentIndex + 1}`} 
@@ -77,18 +77,18 @@ export function ImageGallery({ images, alt, fullHeight = false, clickToExpand = 
       </div>
       
       {/* Miniaturas en fila simple */}
-      <div className="bg-gray-800 py-1 overflow-x-auto">
+      <div className="bg-gray-800 py-0.5 overflow-x-auto">
         <div className="flex gap-1 px-1">
           {imageList.map((image, index) => (
             <div 
               key={index}
-              className={`relative flex-shrink-0 cursor-pointer transition-opacity ${index === currentIndex ? 'opacity-100 outline outline-2 outline-white' : 'opacity-70 hover:opacity-90'}`}
+              className={`relative flex-shrink-0 cursor-pointer transition-opacity ${index === currentIndex ? 'opacity-100 outline outline-1 outline-white' : 'opacity-70 hover:opacity-90'}`}
               onClick={() => handleThumbnailClick(index)}
             >
               <img 
                 src={image} 
                 alt={`${alt} - Miniatura ${index + 1}`} 
-                className="h-14 w-20 object-cover"
+                className="h-10 w-16 object-cover"
               />
             </div>
           ))}
