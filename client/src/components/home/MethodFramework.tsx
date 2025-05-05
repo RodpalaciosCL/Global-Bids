@@ -151,35 +151,81 @@ export function MethodFramework() {
             
             {/* Línea conectora horizontal primera fila */}
             <motion.div 
-              className="absolute bottom-[-40px] left-[10%] right-[10%] h-0.5 hidden md:block"
+              className="absolute bottom-[-40px] left-[10%] right-[10%] h-1.5 hidden md:block"
               initial={{ opacity: 0, scaleX: 0 }}
               animate={isInView ? { opacity: 1, scaleX: 1 } : { opacity: 0, scaleX: 0 }}
               transition={{ duration: 0.8, delay: 0.6 }}
               style={{ backgroundColor: '#FFC832', transformOrigin: 'center' }}
             />
             
-            {/* Líneas verticales hacia la segunda fila */}
+            {/* Flechas indicadoras de dirección en la línea horizontal */}
             <motion.div 
-              className="absolute h-10 w-0.5 bottom-[-40px] left-[25%] hidden md:block"
-              initial={{ opacity: 0, scaleY: 0 }}
-              animate={isInView ? { opacity: 1, scaleY: 1 } : { opacity: 0, scaleY: 0 }}
-              transition={{ duration: 0.5, delay: 0.8 }}
-              style={{ backgroundColor: '#FFC832', transformOrigin: 'top' }}
+              className="absolute bottom-[-40px] left-[35%] w-3 h-3 border-t-2 border-r-2 hidden md:block rotate-45"
+              initial={{ opacity: 0 }}
+              animate={isInView ? { opacity: 1 } : { opacity: 0 }}
+              transition={{ duration: 0.5, delay: 0.9 }}
+              style={{ borderColor: '#FFC832', transformOrigin: 'center' }}
             />
+            
             <motion.div 
-              className="absolute h-10 w-0.5 bottom-[-40px] left-[50%] hidden md:block"
-              initial={{ opacity: 0, scaleY: 0 }}
-              animate={isInView ? { opacity: 1, scaleY: 1 } : { opacity: 0, scaleY: 0 }}
-              transition={{ duration: 0.5, delay: 1 }}
-              style={{ backgroundColor: '#FFC832', transformOrigin: 'top' }}
+              className="absolute bottom-[-40px] left-[65%] w-3 h-3 border-t-2 border-r-2 hidden md:block rotate-45"
+              initial={{ opacity: 0 }}
+              animate={isInView ? { opacity: 1 } : { opacity: 0 }}
+              transition={{ duration: 0.5, delay: 1.1 }}
+              style={{ borderColor: '#FFC832', transformOrigin: 'center' }}
             />
-            <motion.div 
-              className="absolute h-10 w-0.5 bottom-[-40px] left-[75%] hidden md:block"
-              initial={{ opacity: 0, scaleY: 0 }}
-              animate={isInView ? { opacity: 1, scaleY: 1 } : { opacity: 0, scaleY: 0 }}
-              transition={{ duration: 0.5, delay: 1.2 }}
-              style={{ backgroundColor: '#FFC832', transformOrigin: 'top' }}
-            />
+            
+            {/* Líneas verticales hacia la segunda fila con flechas */}
+            <div className="absolute bottom-[-54px] left-[25%] hidden md:flex flex-col items-center">
+              <motion.div 
+                className="h-16 w-1.5 bg-yellow-400"
+                initial={{ opacity: 0, scaleY: 0 }}
+                animate={isInView ? { opacity: 1, scaleY: 1 } : { opacity: 0, scaleY: 0 }}
+                transition={{ duration: 0.5, delay: 0.8 }}
+                style={{ transformOrigin: 'top' }}
+              />
+              <motion.div 
+                className="w-3 h-3 border-b-2 border-r-2 rotate-45 -mt-1.5"
+                initial={{ opacity: 0 }}
+                animate={isInView ? { opacity: 1 } : { opacity: 0 }}
+                transition={{ duration: 0.5, delay: 1.2 }}
+                style={{ borderColor: '#FFC832' }}
+              />
+            </div>
+            
+            <div className="absolute bottom-[-54px] left-[50%] hidden md:flex flex-col items-center">
+              <motion.div 
+                className="h-16 w-1.5 bg-yellow-400"
+                initial={{ opacity: 0, scaleY: 0 }}
+                animate={isInView ? { opacity: 1, scaleY: 1 } : { opacity: 0, scaleY: 0 }}
+                transition={{ duration: 0.5, delay: 1 }}
+                style={{ transformOrigin: 'top' }}
+              />
+              <motion.div 
+                className="w-3 h-3 border-b-2 border-r-2 rotate-45 -mt-1.5"
+                initial={{ opacity: 0 }}
+                animate={isInView ? { opacity: 1 } : { opacity: 0 }}
+                transition={{ duration: 0.5, delay: 1.4 }}
+                style={{ borderColor: '#FFC832' }}
+              />
+            </div>
+            
+            <div className="absolute bottom-[-54px] left-[75%] hidden md:flex flex-col items-center">
+              <motion.div 
+                className="h-16 w-1.5 bg-yellow-400"
+                initial={{ opacity: 0, scaleY: 0 }}
+                animate={isInView ? { opacity: 1, scaleY: 1 } : { opacity: 0, scaleY: 0 }}
+                transition={{ duration: 0.5, delay: 1.2 }}
+                style={{ transformOrigin: 'top' }}
+              />
+              <motion.div 
+                className="w-3 h-3 border-b-2 border-r-2 rotate-45 -mt-1.5"
+                initial={{ opacity: 0 }}
+                animate={isInView ? { opacity: 1 } : { opacity: 0 }}
+                transition={{ duration: 0.5, delay: 1.6 }}
+                style={{ borderColor: '#FFC832' }}
+              />
+            </div>
           </div>
           
           {/* Segunda fila */}
@@ -200,35 +246,81 @@ export function MethodFramework() {
             
             {/* Línea conectora horizontal segunda fila */}
             <motion.div 
-              className="absolute bottom-[-40px] left-[16.5%] right-[16.5%] h-0.5 hidden md:block"
+              className="absolute bottom-[-40px] left-[16.5%] right-[16.5%] h-1.5 hidden md:block"
               initial={{ opacity: 0, scaleX: 0 }}
               animate={isInView ? { opacity: 1, scaleX: 1 } : { opacity: 0, scaleX: 0 }}
               transition={{ duration: 0.8, delay: 1.4 }}
               style={{ backgroundColor: '#FFC832', transformOrigin: 'center' }}
             />
             
-            {/* Líneas verticales hacia la tercera fila */}
+            {/* Flechas indicadoras de dirección en la línea horizontal */}
             <motion.div 
-              className="absolute h-10 w-0.5 bottom-[-40px] left-[16.5%] hidden md:block"
-              initial={{ opacity: 0, scaleY: 0 }}
-              animate={isInView ? { opacity: 1, scaleY: 1 } : { opacity: 0, scaleY: 0 }}
-              transition={{ duration: 0.5, delay: 1.6 }}
-              style={{ backgroundColor: '#FFC832', transformOrigin: 'top' }}
+              className="absolute bottom-[-40px] left-[35%] w-3 h-3 border-t-2 border-r-2 hidden md:block rotate-45"
+              initial={{ opacity: 0 }}
+              animate={isInView ? { opacity: 1 } : { opacity: 0 }}
+              transition={{ duration: 0.5, delay: 1.7 }}
+              style={{ borderColor: '#FFC832', transformOrigin: 'center' }}
             />
+            
             <motion.div 
-              className="absolute h-10 w-0.5 bottom-[-40px] left-[50%] hidden md:block"
-              initial={{ opacity: 0, scaleY: 0 }}
-              animate={isInView ? { opacity: 1, scaleY: 1 } : { opacity: 0, scaleY: 0 }}
-              transition={{ duration: 0.5, delay: 1.8 }}
-              style={{ backgroundColor: '#FFC832', transformOrigin: 'top' }}
+              className="absolute bottom-[-40px] left-[65%] w-3 h-3 border-t-2 border-r-2 hidden md:block rotate-45"
+              initial={{ opacity: 0 }}
+              animate={isInView ? { opacity: 1 } : { opacity: 0 }}
+              transition={{ duration: 0.5, delay: 2.0 }}
+              style={{ borderColor: '#FFC832', transformOrigin: 'center' }}
             />
-            <motion.div 
-              className="absolute h-10 w-0.5 bottom-[-40px] left-[83.5%] hidden md:block"
-              initial={{ opacity: 0, scaleY: 0 }}
-              animate={isInView ? { opacity: 1, scaleY: 1 } : { opacity: 0, scaleY: 0 }}
-              transition={{ duration: 0.5, delay: 2 }}
-              style={{ backgroundColor: '#FFC832', transformOrigin: 'top' }}
-            />
+            
+            {/* Líneas verticales hacia la tercera fila con flechas */}
+            <div className="absolute bottom-[-54px] left-[16.5%] hidden md:flex flex-col items-center">
+              <motion.div 
+                className="h-16 w-1.5 bg-yellow-400"
+                initial={{ opacity: 0, scaleY: 0 }}
+                animate={isInView ? { opacity: 1, scaleY: 1 } : { opacity: 0, scaleY: 0 }}
+                transition={{ duration: 0.5, delay: 1.6 }}
+                style={{ transformOrigin: 'top' }}
+              />
+              <motion.div 
+                className="w-3 h-3 border-b-2 border-r-2 rotate-45 -mt-1.5"
+                initial={{ opacity: 0 }}
+                animate={isInView ? { opacity: 1 } : { opacity: 0 }}
+                transition={{ duration: 0.5, delay: 2.0 }}
+                style={{ borderColor: '#FFC832' }}
+              />
+            </div>
+            
+            <div className="absolute bottom-[-54px] left-[50%] hidden md:flex flex-col items-center">
+              <motion.div 
+                className="h-16 w-1.5 bg-yellow-400"
+                initial={{ opacity: 0, scaleY: 0 }}
+                animate={isInView ? { opacity: 1, scaleY: 1 } : { opacity: 0, scaleY: 0 }}
+                transition={{ duration: 0.5, delay: 1.8 }}
+                style={{ transformOrigin: 'top' }}
+              />
+              <motion.div 
+                className="w-3 h-3 border-b-2 border-r-2 rotate-45 -mt-1.5"
+                initial={{ opacity: 0 }}
+                animate={isInView ? { opacity: 1 } : { opacity: 0 }}
+                transition={{ duration: 0.5, delay: 2.2 }}
+                style={{ borderColor: '#FFC832' }}
+              />
+            </div>
+            
+            <div className="absolute bottom-[-54px] left-[83.5%] hidden md:flex flex-col items-center">
+              <motion.div 
+                className="h-16 w-1.5 bg-yellow-400"
+                initial={{ opacity: 0, scaleY: 0 }}
+                animate={isInView ? { opacity: 1, scaleY: 1 } : { opacity: 0, scaleY: 0 }}
+                transition={{ duration: 0.5, delay: 2.0 }}
+                style={{ transformOrigin: 'top' }}
+              />
+              <motion.div 
+                className="w-3 h-3 border-b-2 border-r-2 rotate-45 -mt-1.5"
+                initial={{ opacity: 0 }}
+                animate={isInView ? { opacity: 1 } : { opacity: 0 }}
+                transition={{ duration: 0.5, delay: 2.4 }}
+                style={{ borderColor: '#FFC832' }}
+              />
+            </div>
           </div>
           
           {/* Tercera fila */}
@@ -246,6 +338,39 @@ export function MethodFramework() {
                 onMouseLeave={() => setActiveStep(null)}
               />
             ))}
+            
+            {/* Flechas conectoras horizontales en la tercera fila */}
+            {/* De paso 1 a paso 2 */}
+            <motion.div 
+              className="absolute top-[50%] left-[27%] w-[12%] h-1.5 hidden md:block"
+              initial={{ opacity: 0, scaleX: 0 }}
+              animate={isInView ? { opacity: 1, scaleX: 1 } : { opacity: 0, scaleX: 0 }}
+              transition={{ duration: 0.8, delay: 2.2 }}
+              style={{ backgroundColor: '#FFC832', transformOrigin: 'left' }}
+            />
+            <motion.div 
+              className="absolute top-[50%] left-[35%] w-3 h-3 border-t-2 border-r-2 hidden md:block rotate-45"
+              initial={{ opacity: 0 }}
+              animate={isInView ? { opacity: 1 } : { opacity: 0 }}
+              transition={{ duration: 0.5, delay: 2.6 }}
+              style={{ borderColor: '#FFC832', transformOrigin: 'center' }}
+            />
+            
+            {/* De paso 2 a paso 3 */}
+            <motion.div 
+              className="absolute top-[50%] left-[60%] w-[12%] h-1.5 hidden md:block"
+              initial={{ opacity: 0, scaleX: 0 }}
+              animate={isInView ? { opacity: 1, scaleX: 1 } : { opacity: 0, scaleX: 0 }}
+              transition={{ duration: 0.8, delay: 2.6 }}
+              style={{ backgroundColor: '#FFC832', transformOrigin: 'left' }}
+            />
+            <motion.div 
+              className="absolute top-[50%] left-[68%] w-3 h-3 border-t-2 border-r-2 hidden md:block rotate-45"
+              initial={{ opacity: 0 }}
+              animate={isInView ? { opacity: 1 } : { opacity: 0 }}
+              transition={{ duration: 0.5, delay: 3.0 }}
+              style={{ borderColor: '#FFC832', transformOrigin: 'center' }}
+            />
           </div>
         </div>
       </div>
