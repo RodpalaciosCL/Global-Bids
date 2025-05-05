@@ -68,8 +68,8 @@ export function HeroSection() {
       <div className="min-h-[80vh] md:min-h-screen flex flex-col">
         <div className="flex-grow flex items-center relative z-10 pt-14 md:pt-0">
           <div className="container mx-auto px-3 sm:px-4 py-6 md:py-0">
-            <div className="grid grid-cols-1 lg:grid-cols-5 gap-3 md:gap-8 items-center">
-              <div className="lg:col-span-3">
+            <div className="grid grid-cols-1 gap-3 md:gap-8 items-center">
+              <div className="w-full">
                 <AnimatePresence mode="wait">
                   {slides.map((slide, index) => (
                     index === currentSlide && (
@@ -159,48 +159,7 @@ export function HeroSection() {
                 </div>
               </div>
               
-              <div className="lg:col-span-2 hidden lg:block">
-                <motion.div
-                  className="bg-white/10 backdrop-blur-md rounded-3xl p-6 border border-white/20 w-full"
-                  initial={{ opacity: 0, x: 50 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.7, delay: 0.3 }}
-                >
-                  <h3 className="text-white font-bold text-xl mb-4 flex items-center">
-                    <i className="fas fa-gavel mr-2"></i>
-                    {t('hero.auctions')}
-                  </h3>
-                  
-                  <div className="rounded-2xl overflow-hidden aspect-video bg-black/20">
-                    <div className="w-full h-full p-4 bg-gradient-to-br from-blue-900 to-blue-950 flex flex-col justify-center items-center">
-                      <div className="text-lg font-bold text-white mb-2">{t('auctions.upcomingEvents')}</div>
-                      <div className="bg-white/10 rounded-lg p-3 mb-3 w-full">
-                        <div className="text-white font-medium">{t('auctions.miningAssets')}</div>
-                        <div className="text-sm text-gray-300 mt-1">15 {t('hero.day')}</div>
-                        <div className="flex justify-between items-center mt-2">
-                          <span className="text-xs text-primary-200">45 {t('hero.lots')}</span>
-                          <button 
-                            onClick={openRegistration}
-                            className="text-xs bg-primary hover:bg-primary/90 px-3 py-1 rounded-full text-white"
-                          >
-                            {t('hero.register')}
-                          </button>
-                        </div>
-                      </div>
-                      
-                      <a 
-                        href="https://northcountry.auctiontechs.com/auctions" 
-                        target="_blank"
-                        rel="noopener noreferrer" 
-                        className="bg-white/10 hover:bg-white/20 text-white text-sm font-medium px-4 py-2 rounded-full mt-2 flex items-center"
-                      >
-                        <i className="fas fa-external-link-alt mr-2"></i>
-                        {t('hero.viewAll')}
-                      </a>
-                    </div>
-                  </div>
-                </motion.div>
-              </div>
+              {/* El recuadro de subastas se ha eliminado de esta sección */}
             </div>
           </div>
         </div>
