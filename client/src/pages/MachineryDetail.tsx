@@ -49,10 +49,10 @@ export default function MachineryDetail() {
         
         <div className="bg-white rounded-lg shadow-sm overflow-hidden mb-2">
           {/* Main Content Grid */}
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-2">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-0">
             {/* Left Column - Gallery and Basic Info */}
             <div className="lg:col-span-2">
-              <div className="p-2">
+              <div className="p-3">
                 {/* Equipment Type & Status */}
                 <div className="flex flex-wrap justify-between items-center mb-1">
                   <span className="text-xs text-gray-600 bg-gray-100 px-1.5 py-0.5 rounded">
@@ -93,9 +93,11 @@ export default function MachineryDetail() {
                     className="w-full h-full object-contain"
                   />
                 </div>
-                
-                {/* Image Thumbnails */}
-                <div className="flex gap-2 overflow-x-auto pb-2 mb-1">
+              </div>
+              
+              {/* Image Thumbnails - Full width */}
+              <div className="px-3 w-full">
+                <div className="flex gap-2 overflow-x-auto pb-3 w-full">
                   <div 
                     className={`${selectedImage === machinery.image || !selectedImage ? 'border-2 border-primary' : 'border border-gray-200'} rounded overflow-hidden flex-shrink-0 cursor-pointer`}
                     onClick={() => setSelectedImage(machinery.image)}
@@ -121,31 +123,6 @@ export default function MachineryDetail() {
                     </div>
                   ))}
                 </div>
-                
-                {/* Modal para vista ampliada */}
-                {selectedImage && (
-                  <div 
-                    className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center" 
-                    onClick={() => setSelectedImage(null)}
-                  >
-                    <div className="relative max-w-4xl max-h-full p-2">
-                      <img 
-                        src={selectedImage} 
-                        alt={machinery.name} 
-                        className="max-w-full max-h-[90vh] object-contain"
-                      />
-                      <button 
-                        className="absolute top-4 right-4 bg-white/20 hover:bg-white/40 rounded-full p-2 text-white"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          setSelectedImage(null);
-                        }}
-                      >
-                        <i className="fas fa-times"></i>
-                      </button>
-                    </div>
-                  </div>
-                )}
               </div>
             </div>
             
@@ -269,6 +246,31 @@ export default function MachineryDetail() {
           </div>
         </div>
       </div>
+      
+      {/* Modal para vista ampliada */}
+      {selectedImage && (
+        <div 
+          className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center" 
+          onClick={() => setSelectedImage(null)}
+        >
+          <div className="relative max-w-4xl max-h-full p-2">
+            <img 
+              src={selectedImage} 
+              alt={machinery.name} 
+              className="max-w-full max-h-[90vh] object-contain"
+            />
+            <button 
+              className="absolute top-4 right-4 bg-white/20 hover:bg-white/40 rounded-full p-2 text-white"
+              onClick={(e) => {
+                e.stopPropagation();
+                setSelectedImage(null);
+              }}
+            >
+              <i className="fas fa-times"></i>
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
