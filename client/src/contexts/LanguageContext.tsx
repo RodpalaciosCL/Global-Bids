@@ -211,6 +211,14 @@ const translations: Record<Language, Record<string, string>> = {
     'detail.loading': 'Cargando...',
     'detail.error': 'Error al cargar la información',
     
+    // Featured
+    'featured.title': 'Remates Destacados',
+    'featured.description': 'Conoce algunos de nuestros remates más exitosos y las maquinarias que hemos vendido para nuestros clientes.',
+    'featured.viewAll': 'Ver Todas las Maquinarias',
+    'featured.sold': 'Vendido',
+    'featured.available': 'Disponible',
+    'featured.auctionPrice': 'Precio de remate',
+    
     // Soporte
     'support.title': 'Soporte y Ayuda',
     'support.subtitle': 'Estamos comprometidos con brindarle el mejor servicio y respaldo en todas sus operaciones',
@@ -340,6 +348,7 @@ const translations: Record<Language, Record<string, string>> = {
     'about.title': 'Who We',
     'about.titleHighlight': 'Are',
     'about.subtitle': 'Leaders in industrial auctions in Latin America',
+    'about.history': 'A History of Excellence',
     'about.description': 'Global Bids is a leader in auctions and valuation of heavy machinery, scrap, tools, and spare parts in Latin America, specializing in equipment and lots for the',
     'about.descriptionHighlight': 'mining, forestry and industrial sectors',
     'about.experience': 'Years of experience',

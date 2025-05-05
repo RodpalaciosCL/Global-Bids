@@ -93,7 +93,7 @@ export function AboutSection() {
               />
               <span className="relative z-10 flex items-center">
                 <i className="fas fa-history mr-2"></i>
-                Una Historia de Excelencia
+                {t('about.history')}
               </span>
             </motion.button>
           </motion.div>
