@@ -40,14 +40,6 @@ export function SoporteSection() {
     {
       question: "¿Qué documentación recibo al adquirir un activo?",
       answer: "Al adquirir un activo en Global Bids, recibirá toda la documentación legal y técnica del equipo, incluyendo facturas, certificados de propiedad, informes técnicos, manuales de operación y mantenimiento, y un informe de inspección detallado."
-    },
-    {
-      question: "¿Ofrecen financiamiento para las compras?",
-      answer: "Sí, contamos con alianzas estratégicas con entidades financieras que pueden ofrecer opciones de financiamiento para sus adquisiciones. Nuestro equipo puede guiarlo en el proceso de solicitud y aprobación."
-    },
-    {
-      question: "¿Cómo se coordina el transporte de los equipos adquiridos?",
-      answer: "Global Bids ofrece servicios logísticos completos que incluyen desmontaje, carga, transporte nacional e internacional, y entrega en su ubicación. También puede utilizar su propio servicio de transporte si lo prefiere."
     }
   ];
 

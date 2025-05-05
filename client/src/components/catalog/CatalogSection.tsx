@@ -11,10 +11,12 @@ import {
   MachineryCondition,
 } from "@/types/machinery";
 import { CurrencySelector } from "@/components/ui/CurrencySelector";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export function CatalogSection() {
   const sectionRef = useRef(null);
   const isInView = useInView(sectionRef, { once: true, amount: 0.1 });
+  const { t, language } = useLanguage();
 
   const [filters, setFilters] = useState<MachineryFilters>({});
   const [currentPage, setCurrentPage] = useState(1);
@@ -260,7 +262,7 @@ export function CatalogSection() {
                   htmlFor="condition-filter"
                   className="block text-sm font-medium text-gray-700 mb-1"
                 >
-                  Estado
+                  Familia de equipos
                 </label>
                 <select
                   id="condition-filter"
@@ -268,7 +270,7 @@ export function CatalogSection() {
                   onChange={handleSelectChange}
                   value={filters.condition || ""}
                 >
-                  <option value="">Todos los estados</option>
+                  <option value="">Todas las familias</option>
                   <option value="excellent">Excelente</option>
                   <option value="good">Bueno</option>
                   <option value="fair">Regular</option>
