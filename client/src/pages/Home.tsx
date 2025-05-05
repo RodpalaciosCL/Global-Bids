@@ -5,7 +5,7 @@ import { ContactSection } from "@/components/home/ContactSection";
 import { HeroSection } from "@/components/home/HeroSection";
 import { ServicesSection } from "@/components/home/ServicesSection";
 import { SoporteSection } from "@/components/home/SoporteSection";
-import { StatsSection } from "@/components/home/StatsSection";
+
 import { TimelineSection } from "@/components/home/TimelineSection";
 import { CatalogSection } from "@/components/catalog/CatalogSection";
 import { AuctionsIframe } from "@/components/auctions/AuctionsIframe";
@@ -18,7 +18,7 @@ export default function Home() {
       <TimelineSection />
       <ServicesSection />
       <BrandsSection />
-      <StatsSection />
+
       <CatalogSection />
       <AuctionsIframe />
       <SoporteSection />
