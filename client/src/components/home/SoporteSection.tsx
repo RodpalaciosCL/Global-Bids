@@ -32,8 +32,6 @@ export function SoporteSection() {
     }
   ];
 
-  // Se eliminaron las preguntas frecuentes
-
   return (
     <section id="soporte" className="py-20 bg-white">
       <div className="container mx-auto px-4">
@@ -84,10 +82,10 @@ export function SoporteSection() {
 
         <div className="max-w-2xl mx-auto mb-16">
           <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.2 }}
+            transition={{ duration: 0.5 }}
             className="bg-gray-50 rounded-2xl p-8 border border-gray-200 h-full"
           >
             <div className="flex items-center mb-6">
@@ -159,8 +157,6 @@ export function SoporteSection() {
             </div>
           </motion.div>
         </div>
-
-        {/* Se eliminó el recuadro de ayuda personalizada a petición del cliente */}
       </div>
     </section>
   );
