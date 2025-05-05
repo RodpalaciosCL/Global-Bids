@@ -17,8 +17,7 @@ export function AboutSection() {
       "En Global Bids contamos con acceso a más de 950,000 clientes internacionales a través de nuestras plataformas online, lo que nos permite conectar la oferta sudamericana con la demanda global de manera digital, segmentada y transparente.",
       "Nuestro enfoque garantiza el mejor valor para los consignatarios al encontrar compradores en mercados donde estos activos tienen alta demanda."
     ],
-    cta: "Conoce nuestra historia",
-    image: "https://images.pexels.com/photos/1216589/pexels-photo-1216589.jpeg?auto=compress&cs=tinysrgb&w=1600",
+    image: "https://images.pexels.com/photos/3757226/pexels-photo-3757226.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
     icon: "fa-history"
   };
   
@@ -144,16 +143,7 @@ export function AboutSection() {
                   ))}
                 </div>
                 
-                <div className="mt-8 flex justify-between items-center">
-                  <motion.a
-                    href="#contacto"
-                    className="inline-flex items-center text-primary font-medium hover:underline group"
-                    whileHover={{ x: 4 }}
-                  >
-                    {historiaContent.cta}
-                    <i className="fas fa-arrow-right ml-2 transition-transform group-hover:translate-x-1"></i>
-                  </motion.a>
-                </div>
+                {/* Se eliminó el botón "Conoce nuestra historia" */}
               </div>
               
               {/* Estadísticas */}
