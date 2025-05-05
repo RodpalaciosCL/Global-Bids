@@ -4,22 +4,22 @@ export function CurrencySelector() {
   const { currency, setCurrency } = useCurrency();
   
   return (
-    <div className="flex items-center space-x-2 p-1 bg-gray-100 rounded-lg">
+    <div className="flex items-center p-1 bg-gray-900 rounded-md">
       <button
-        className={`px-3 py-1 rounded-md text-sm font-medium transition-colors ${
+        className={`px-3 py-1 rounded-md text-xs font-semibold transition-colors ${
           currency === 'USD' 
-            ? 'bg-primary text-white' 
-            : 'bg-transparent text-gray-600 hover:bg-gray-200'
+            ? 'bg-gray-900 text-white' 
+            : 'bg-gray-100 text-gray-900'
         }`}
         onClick={() => setCurrency('USD')}
       >
         USD
       </button>
       <button
-        className={`px-3 py-1 rounded-md text-sm font-medium transition-colors ${
+        className={`px-3 py-1 rounded-md text-xs font-semibold transition-colors ${
           currency === 'CLP' 
-            ? 'bg-primary text-white' 
-            : 'bg-transparent text-gray-600 hover:bg-gray-200'
+            ? 'bg-gray-900 text-white' 
+            : 'bg-gray-100 text-gray-900'
         }`}
         onClick={() => setCurrency('CLP')}
       >

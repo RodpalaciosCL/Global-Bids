@@ -204,29 +204,27 @@ export function CatalogSection() {
                   <label className="block text-sm font-medium text-gray-700 mb-1">
                     {language === 'es' ? 'Rango de Precio' : 'Price Range'}
                   </label>
-                  <div className="flex flex-col space-y-2">
-                    <div className="flex items-center space-x-2">
-                      <input
-                        type="number"
-                        id="price-min"
-                        placeholder={language === 'es' ? "Mínimo" : "Minimum"}
-                        className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary focus:border-secondary transition"
-                        onChange={handleInputChange}
-                        value={filters.minPrice || ""}
-                      />
-                      <span className="text-gray-500">{language === 'es' ? "a" : "to"}</span>
-                      <input
-                        type="number"
-                        id="price-max"
-                        placeholder={language === 'es' ? "Máximo" : "Maximum"}
-                        className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary focus:border-secondary transition"
-                        onChange={handleInputChange}
-                        value={filters.maxPrice || ""}
-                      />
-                    </div>
-                    <div className="self-end">
-                      <CurrencySelector />
-                    </div>
+                  <div className="flex items-center space-x-2 mb-2">
+                    <input
+                      type="number"
+                      id="price-min"
+                      placeholder={language === 'es' ? "Mínimo" : "Minimum"}
+                      className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary focus:border-secondary transition"
+                      onChange={handleInputChange}
+                      value={filters.minPrice || ""}
+                    />
+                    <span className="text-gray-500">{language === 'es' ? "a" : "to"}</span>
+                    <input
+                      type="number"
+                      id="price-max"
+                      placeholder={language === 'es' ? "Máximo" : "Maximum"}
+                      className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary focus:border-secondary transition"
+                      onChange={handleInputChange}
+                      value={filters.maxPrice || ""}
+                    />
+                  </div>
+                  <div className="flex justify-end">
+                    <CurrencySelector />
                   </div>
                 </div>
                 
@@ -293,7 +291,7 @@ export function CatalogSection() {
                     htmlFor="condition-filter"
                     className="block text-sm font-medium text-gray-700 mb-1"
                   >
-                    {t('catalog.equipmentFamily')}
+                    {language === 'es' ? 'Familia de equipos' : 'Equipment Family'}
                   </label>
                   <select
                     id="condition-filter"
@@ -311,12 +309,9 @@ export function CatalogSection() {
                 
                 {/* Price range */}
                 <div>
-                  <div className="flex justify-between items-center mb-1">
-                    <label className="block text-sm font-medium text-gray-700">
-                      {t('catalog.priceRange')}
-                    </label>
-                    <CurrencySelector />
-                  </div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    {language === 'es' ? 'Rango de Precio' : 'Price Range'}
+                  </label>
                   <div className="flex items-center space-x-2">
                     <input
                       type="number"
