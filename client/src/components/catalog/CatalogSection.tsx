@@ -130,9 +130,10 @@ export function CatalogSection() {
             className="filters mb-8 p-6 bg-white rounded-lg shadow-md"
             variants={slideUp}
           >
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
+            {/* Mobile view */}
+            <div className="md:hidden">
               {/* Search */}
-              <div className="lg:col-span-2">
+              <div className="mb-4">
                 <label className="block text-sm font-medium text-gray-700 mb-1">
                   {t('catalog.search')}
                 </label>
@@ -141,7 +142,7 @@ export function CatalogSection() {
                     type="text"
                     id="search"
                     className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary focus:border-secondary transition"
-                    placeholder={language === 'es' ? "Buscar activo..." : "Search asset..."}
+                    placeholder={language === 'es' ? "Buscar por palabra clave..." : "Search by keyword..."}
                     onChange={handleInputChange}
                     value={filters.search || ""}
                   />
@@ -150,136 +151,196 @@ export function CatalogSection() {
                   </div>
                 </div>
               </div>
-
-              {/* Type filter */}
-              <div>
-                <label
-                  htmlFor="type-filter"
-                  className="block text-sm font-medium text-gray-700 mb-1"
+              
+              <div className="flex flex-col gap-4">
+                {/* Type filter */}
+                <div>
+                  <label
+                    htmlFor="type-filter"
+                    className="block text-sm font-medium text-gray-700 mb-1"
+                  >
+                    {t('catalog.type')}
+                  </label>
+                  <select
+                    id="type-filter"
+                    className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary focus:border-secondary transition"
+                    onChange={handleSelectChange}
+                    value={filters.type || ""}
+                  >
+                    <option value="">{language === 'es' ? 'Todos los tipos' : 'All types'}</option>
+                    <option value="excavator">{t('type.excavator')}</option>
+                    <option value="truck">{t('type.truck')}</option>
+                    <option value="loader">{t('type.loader')}</option>
+                    <option value="generator">{t('type.generator')}</option>
+                    <option value="crane">{t('type.crane')}</option>
+                    <option value="backhoe">{t('type.backhoe')}</option>
+                  </select>
+                </div>
+                
+                {/* Condition filter */}
+                <div>
+                  <label
+                    htmlFor="condition-filter"
+                    className="block text-sm font-medium text-gray-700 mb-1"
+                  >
+                    {t('catalog.equipmentFamily')}
+                  </label>
+                  <select
+                    id="condition-filter"
+                    className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary focus:border-secondary transition"
+                    onChange={handleSelectChange}
+                    value={filters.condition || ""}
+                  >
+                    <option value="">{language === 'es' ? 'Todas las familias' : 'All families'}</option>
+                    <option value="excellent">{language === 'es' ? 'Excelente' : 'Excellent'}</option>
+                    <option value="good">{language === 'es' ? 'Bueno' : 'Good'}</option>
+                    <option value="fair">{language === 'es' ? 'Regular' : 'Fair'}</option>
+                    <option value="repair">{language === 'es' ? 'Para reparar' : 'For repair'}</option>
+                  </select>
+                </div>
+                
+                {/* Price range */}
+                <div>
+                  <div className="flex justify-between items-center mb-1">
+                    <label className="block text-sm font-medium text-gray-700">
+                      {t('catalog.priceRange')}
+                    </label>
+                    <CurrencySelector />
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <input
+                      type="number"
+                      id="price-min"
+                      placeholder={language === 'es' ? "Mínimo" : "Minimum"}
+                      className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary focus:border-secondary transition"
+                      onChange={handleInputChange}
+                      value={filters.minPrice || ""}
+                    />
+                    <span className="text-gray-500">{language === 'es' ? "a" : "to"}</span>
+                    <input
+                      type="number"
+                      id="price-max"
+                      placeholder={language === 'es' ? "Máximo" : "Maximum"}
+                      className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary focus:border-secondary transition"
+                      onChange={handleInputChange}
+                      value={filters.maxPrice || ""}
+                    />
+                  </div>
+                </div>
+                
+                {/* Filter button */}
+                <button
+                  className="w-full bg-primary hover:bg-primary-light text-white font-semibold px-4 py-3 rounded-lg transition duration-300 mt-2"
+                  onClick={handleApplyFilters}
                 >
-                  {t('catalog.type')}
-                </label>
-                <select
-                  id="type-filter"
-                  className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary focus:border-secondary transition"
-                  onChange={handleSelectChange}
-                  value={filters.type || ""}
-                >
-                  <option value="">{language === 'es' ? 'Todos los tipos' : 'All types'}</option>
-                  <option value="excavator">{t('type.excavator')}</option>
-                  <option value="truck">{t('type.truck')}</option>
-                  <option value="loader">{t('type.loader')}</option>
-                  <option value="generator">{t('type.generator')}</option>
-                  <option value="crane">{t('type.crane')}</option>
-                  <option value="backhoe">{t('type.backhoe')}</option>
-                </select>
-              </div>
-
-              {/* Brand filter */}
-              <div>
-                <label
-                  htmlFor="brand-filter"
-                  className="block text-sm font-medium text-gray-700 mb-1"
-                >
-                  {t('catalog.brand')}
-                </label>
-                <select
-                  id="brand-filter"
-                  className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary focus:border-secondary transition"
-                  onChange={handleSelectChange}
-                  value={filters.brand || ""}
-                >
-                  <option value="">{language === 'es' ? 'Todas las marcas' : 'All brands'}</option>
-                  <option value="caterpillar">Caterpillar</option>
-                  <option value="volvo">Volvo</option>
-                  <option value="komatsu">Komatsu</option>
-                  <option value="john-deere">John Deere</option>
-                  <option value="hitachi">Hitachi</option>
-                  <option value="liebherr">Liebherr</option>
-                </select>
-              </div>
-
-              {/* Year filter */}
-              <div>
-                <label
-                  htmlFor="year-filter"
-                  className="block text-sm font-medium text-gray-700 mb-1"
-                >
-                  {t('catalog.year')}
-                </label>
-                <select
-                  id="year-filter"
-                  className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary focus:border-secondary transition"
-                  onChange={handleSelectChange}
-                  value={filters.year || ""}
-                >
-                  <option value="">{language === 'es' ? 'Todos los años' : 'All years'}</option>
-                  <option value="2023">2023</option>
-                  <option value="2022">2022</option>
-                  <option value="2021">2021</option>
-                  <option value="2020">2020</option>
-                  <option value="2019">2019</option>
-                  <option value="older">{language === 'es' ? '2018 y anteriores' : '2018 and older'}</option>
-                </select>
+                  <i className="fas fa-filter mr-2"></i>{language === 'es' ? 'Aplicar Filtros' : 'Apply Filters'}
+                </button>
               </div>
             </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 mt-4">
-              {/* Price range */}
-              <div className="lg:col-span-2">
-                <div className="flex justify-between items-center mb-1">
-                  <label className="block text-sm font-medium text-gray-700">
-                    {t('catalog.priceRange')}
+            
+            {/* Desktop view */}
+            <div className="hidden md:block">
+              <div className="grid md:grid-cols-4 gap-4">
+                {/* Search */}
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    {t('catalog.search')}
                   </label>
-                  <CurrencySelector />
+                  <div className="relative">
+                    <input
+                      type="text"
+                      id="search"
+                      className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary focus:border-secondary transition"
+                      placeholder={language === 'es' ? "Buscar por palabra clave..." : "Search by keyword..."}
+                      onChange={handleInputChange}
+                      value={filters.search || ""}
+                    />
+                    <div className="absolute left-3 top-2.5 text-gray-400">
+                      <i className="fas fa-search"></i>
+                    </div>
+                  </div>
                 </div>
-                <div className="flex items-center space-x-2">
-                  <input
-                    type="number"
-                    id="price-min"
-                    placeholder={language === 'es' ? "Mínimo" : "Minimum"}
+
+                {/* Type filter */}
+                <div>
+                  <label
+                    htmlFor="type-filter"
+                    className="block text-sm font-medium text-gray-700 mb-1"
+                  >
+                    {t('catalog.type')}
+                  </label>
+                  <select
+                    id="type-filter"
                     className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary focus:border-secondary transition"
-                    onChange={handleInputChange}
-                    value={filters.minPrice || ""}
-                  />
-                  <span className="text-gray-500">{language === 'es' ? "a" : "to"}</span>
-                  <input
-                    type="number"
-                    id="price-max"
-                    placeholder={language === 'es' ? "Máximo" : "Maximum"}
+                    onChange={handleSelectChange}
+                    value={filters.type || ""}
+                  >
+                    <option value="">{language === 'es' ? 'Todos los tipos' : 'All types'}</option>
+                    <option value="excavator">{t('type.excavator')}</option>
+                    <option value="truck">{t('type.truck')}</option>
+                    <option value="loader">{t('type.loader')}</option>
+                    <option value="generator">{t('type.generator')}</option>
+                    <option value="crane">{t('type.crane')}</option>
+                    <option value="backhoe">{t('type.backhoe')}</option>
+                  </select>
+                </div>
+
+                {/* Equipment Family filter */}
+                <div>
+                  <label
+                    htmlFor="condition-filter"
+                    className="block text-sm font-medium text-gray-700 mb-1"
+                  >
+                    {t('catalog.equipmentFamily')}
+                  </label>
+                  <select
+                    id="condition-filter"
                     className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary focus:border-secondary transition"
-                    onChange={handleInputChange}
-                    value={filters.maxPrice || ""}
-                  />
+                    onChange={handleSelectChange}
+                    value={filters.condition || ""}
+                  >
+                    <option value="">{language === 'es' ? 'Todas las familias' : 'All families'}</option>
+                    <option value="excellent">{language === 'es' ? 'Excelente' : 'Excellent'}</option>
+                    <option value="good">{language === 'es' ? 'Bueno' : 'Good'}</option>
+                    <option value="fair">{language === 'es' ? 'Regular' : 'Fair'}</option>
+                    <option value="repair">{language === 'es' ? 'Para reparar' : 'For repair'}</option>
+                  </select>
+                </div>
+                
+                {/* Price range */}
+                <div>
+                  <div className="flex justify-between items-center mb-1">
+                    <label className="block text-sm font-medium text-gray-700">
+                      {t('catalog.priceRange')}
+                    </label>
+                    <CurrencySelector />
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <input
+                      type="number"
+                      id="price-min"
+                      placeholder={language === 'es' ? "Mínimo" : "Minimum"}
+                      className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary focus:border-secondary transition"
+                      onChange={handleInputChange}
+                      value={filters.minPrice || ""}
+                    />
+                    <span className="text-gray-500">{language === 'es' ? "a" : "to"}</span>
+                    <input
+                      type="number"
+                      id="price-max"
+                      placeholder={language === 'es' ? "Máximo" : "Maximum"}
+                      className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary focus:border-secondary transition"
+                      onChange={handleInputChange}
+                      value={filters.maxPrice || ""}
+                    />
+                  </div>
                 </div>
               </div>
-
-              {/* Condition filter */}
-              <div className="lg:col-span-1">
-                <label
-                  htmlFor="condition-filter"
-                  className="block text-sm font-medium text-gray-700 mb-1"
-                >
-                  {t('catalog.equipmentFamily')}
-                </label>
-                <select
-                  id="condition-filter"
-                  className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary focus:border-secondary transition"
-                  onChange={handleSelectChange}
-                  value={filters.condition || ""}
-                >
-                  <option value="">{language === 'es' ? 'Todas las familias' : 'All families'}</option>
-                  <option value="excellent">{language === 'es' ? 'Excelente' : 'Excellent'}</option>
-                  <option value="good">{language === 'es' ? 'Bueno' : 'Good'}</option>
-                  <option value="fair">{language === 'es' ? 'Regular' : 'Fair'}</option>
-                  <option value="repair">{language === 'es' ? 'Para reparar' : 'For repair'}</option>
-                </select>
-              </div>
-
-              {/* Filter button */}
-              <div className="lg:col-span-2 flex items-end">
+              
+              <div className="mt-4 flex justify-end">
+                {/* Filter button */}
                 <button
-                  className="w-full bg-primary hover:bg-primary-light text-white font-semibold px-4 py-2 rounded-lg transition duration-300"
+                  className="bg-primary hover:bg-primary-light text-white font-semibold px-4 py-2 rounded-lg transition duration-300 w-full md:w-auto"
                   onClick={handleApplyFilters}
                 >
                   <i className="fas fa-filter mr-2"></i>{language === 'es' ? 'Aplicar Filtros' : 'Apply Filters'}
