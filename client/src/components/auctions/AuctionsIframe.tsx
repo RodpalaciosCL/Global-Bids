@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { fadeIn, slideUp } from '@/lib/animations';
 import { useLanguage } from '@/contexts/LanguageContext';
@@ -7,6 +7,7 @@ import { useRegistration } from '@/contexts/RegistrationContext';
 export function AuctionsIframe() {
   const { t } = useLanguage();
   const { openForm } = useRegistration();
+  const [visibleItems, setVisibleItems] = useState(3);
   
   // Datos de las subastas
   const auctionItems = [
@@ -47,6 +48,17 @@ export function AuctionsIframe() {
       location: "Houston, Texas, United States, 77001"
     }
   ];
+  
+  // Función para mostrar más elementos
+  const showMoreItems = () => {
+    setVisibleItems(prev => Math.min(prev + 3, auctionItems.length));
+  };
+  
+  // Función para simular ver los detalles de una subasta
+  const viewAuctionDetails = (id: number) => {
+    console.log(`Viewing details for auction ${id}`);
+    // Aquí podrías navegar a una página de detalles o abrir un modal
+  };
   
   return (
     <section className="py-12 bg-gray-900" id="subastas">
@@ -103,7 +115,7 @@ export function AuctionsIframe() {
             <div className="p-6">
               {/* Contenido personalizado que simula la página de subastas */}
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                {auctionItems.map((auction) => (
+                {auctionItems.slice(0, visibleItems).map((auction) => (
                   <div key={auction.id} className="bg-white rounded-lg overflow-hidden shadow-md">
                     <div className="h-48 overflow-hidden bg-gray-200 flex items-center justify-center">
                       <img 
@@ -126,6 +138,7 @@ export function AuctionsIframe() {
                       </div>
                       <div className="mt-3 grid grid-cols-1 gap-2">
                         <button 
+                          onClick={() => viewAuctionDetails(auction.id)}
                           className="bg-blue-900 hover:bg-blue-800 text-white text-center py-2 rounded text-sm font-medium"
                         >
                           {t('auctions.auctionDetails')}
@@ -142,14 +155,17 @@ export function AuctionsIframe() {
                 ))}
               </div>
               
-              <div className="mt-6 text-center">
-                <button 
-                  className="inline-flex items-center gap-2 bg-blue-800/40 hover:bg-blue-800/60 text-white py-3 px-6 rounded-full transition-colors"
-                >
-                  <i className="fas fa-plus"></i>
-                  {t('auctions.viewMore')}
-                </button>
-              </div>
+              {visibleItems < auctionItems.length && (
+                <div className="mt-6 text-center">
+                  <button 
+                    onClick={showMoreItems}
+                    className="inline-flex items-center gap-2 bg-blue-800/40 hover:bg-blue-800/60 text-white py-3 px-6 rounded-full transition-colors"
+                  >
+                    <i className="fas fa-plus"></i>
+                    {t('auctions.viewMore')}
+                  </button>
+                </div>
+              )}
             </div>
           </div>
         </motion.div>

@@ -75,12 +75,14 @@ const translations: Record<Language, Record<string, string>> = {
     'auctions.openForRegistration': 'Abierto para registro',
     'auctions.comingSoon': 'Próximamente',
     'auctions.virtual': 'Virtual',
-    'auctions.register': 'Registrar',
+    'auctions.register': 'REGISTRARSE',
     'auctions.notify': 'Notificarme',
     'auctions.preRegister': 'Pre-registro',
-    'auctions.liveAuctions': 'SUBASTAS EN VIVO',
-    'auctions.upcomingAuctions': 'Próximas Subastas',
-    'auctions.exploreAuctions': 'Explore las subastas en vivo de nuestro socio North Country Auction. Vea equipos, herramientas y activos disponibles para remate.',
+    'auctions.liveAuctions': 'EVENTOS EN VIVO',
+    'auctions.upcomingAuctions': 'Próximos Eventos de Subastas',
+    'auctions.exploreAuctions': 'Explore nuestros eventos exclusivos con maquinaria pesada y equipamiento industrial de las mejores marcas',
+    'auctions.auctionDetails': 'DETALLES DEL EVENTO',
+    'auctions.viewMore': 'Ver más eventos',
     
     // Servicios
     'services.title': 'Nuestros Servicios',
@@ -296,7 +298,9 @@ const translations: Record<Language, Record<string, string>> = {
     'auctions.preRegister': 'Pre-register',
     'auctions.liveAuctions': 'LIVE AUCTIONS',
     'auctions.upcomingAuctions': 'Upcoming Auctions',
-    'auctions.exploreAuctions': 'Explore live auctions from our partner North Country Auction. View equipment, tools and assets available for auction.',
+    'auctions.exploreAuctions': 'Explore our exclusive events with heavy machinery and industrial equipment from the best brands',
+    'auctions.auctionDetails': 'AUCTION DETAILS',
+    'auctions.viewMore': 'View more events',
     
     // Services
     'services.title': 'Our Services',
