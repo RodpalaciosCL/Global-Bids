@@ -33,8 +33,14 @@ export function CatalogSection() {
     staleTime: 300000, // 5 minutes
   });
 
-  const machinery = machineryData?.items || [];
-  const totalPages = machineryData?.totalPages || 1;
+  // Define and type the result properly
+  interface MachineryResponse {
+    items: Machinery[];
+    totalPages: number;
+  }
+  
+  const machinery = machineryData ? (machineryData as MachineryResponse).items || [] : [];
+  const totalPages = machineryData ? (machineryData as MachineryResponse).totalPages || 1 : 1;
 
   // Apply filters handler
   const handleApplyFilters = () => {
@@ -401,7 +407,7 @@ export function CatalogSection() {
                 </div>
               ))
             ) : machinery.length > 0 ? (
-              machinery.slice(0, 6).map((item: Machinery, index) => (
+              machinery.slice(0, 6).map((item: Machinery, index: number) => (
                 <MachineryCardCompact key={item.id} item={item} index={index} />
               ))
             ) : (
