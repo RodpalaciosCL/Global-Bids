@@ -28,8 +28,8 @@ export function AuctionsIframe() {
             viewport={{ once: true }}
           >
             {language === 'es' 
-              ? 'North Country Auction' 
-              : 'North Country Auction'}
+              ? 'Próximas Subastas' 
+              : 'Upcoming Auctions'}
           </motion.h2>
 
           <motion.p 
@@ -56,7 +56,7 @@ export function AuctionsIframe() {
         >
           <div className="aspect-video w-full rounded-2xl overflow-hidden">
             <iframe 
-              src="https://northcountry.auctiontechs.com/auctions/catalog/id/6425/active-auctions" 
+              src="https://northcountry.auctiontechs.com/" 
               className="w-full h-full"
               style={{ border: 'none' }}
               title="North Country Auction"
@@ -64,25 +64,6 @@ export function AuctionsIframe() {
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             />
           </div>
-        </motion.div>
-        
-        <motion.div 
-          className="mt-8 text-center"
-          variants={fadeIn}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          transition={{ delay: 0.3 }}
-        >
-          <a 
-            href="https://northcountry.auctiontechs.com/auctions/catalog/id/6425/active-auctions" 
-            target="_blank" 
-            rel="noopener noreferrer" 
-            className="inline-flex items-center justify-center bg-primary hover:bg-primary/90 text-white font-medium py-3 px-6 rounded-full transition-colors"
-          >
-            <i className="fas fa-external-link-alt mr-2"></i>
-            {language === 'es' ? 'Abrir en nueva ventana' : 'Open in new window'}
-          </a>
         </motion.div>
       </div>
     </section>

@@ -168,30 +168,17 @@ export function HeroSection() {
                 >
                   <h3 className="text-white font-bold text-xl mb-4 flex items-center">
                     <i className="fas fa-gavel mr-2"></i>
-                    {t('hero.auctions')} - North Country Auction
+                    {t('hero.auctions')}
                   </h3>
                   
                   <div className="rounded-2xl overflow-hidden aspect-video bg-black/20">
                     <iframe 
-                      src="https://northcountry.auctiontechs.com/auctions/catalog/id/6425/active-auctions" 
+                      src="https://northcountry.auctiontechs.com/" 
                       className="w-full h-full"
                       style={{ border: 'none' }}
                       title="North Country Auction"
                       loading="lazy"
                     />
-                  </div>
-                  
-                  {/* Open in new window link */}
-                  <div className="w-full flex justify-center">
-                    <a
-                      href="https://northcountry.auctiontechs.com/auctions/catalog/id/6425/active-auctions"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-center text-white py-3 px-6 rounded-xl border border-white/30 hover:bg-white/10 transition-colors mt-4 flex items-center justify-center"
-                    >
-                      <i className="fas fa-external-link-alt mr-2"></i>
-                      {language === 'es' ? 'Abrir en nueva ventana' : 'Open in new window'}
-                    </a>
                   </div>
                 </motion.div>
               </div>
