@@ -146,39 +146,142 @@ export function AboutSection() {
             </p>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-            <div className="bg-white/10 backdrop-blur-sm rounded-xl p-5 text-center">
-              <div className="w-12 h-12 mx-auto bg-white/20 rounded-full flex items-center justify-center mb-3">
-                <span className="text-white font-bold text-xl">1</span>
-              </div>
-              <h4 className="font-bold text-xl mb-2">{t('about.profitability')}</h4>
-              <p className="text-white/70 text-sm">
-                {t('about.profitabilityDesc')}
-              </p>
-            </div>
-            
-            <div className="bg-white/10 backdrop-blur-sm rounded-xl p-5 text-center">
-              <div className="w-12 h-12 mx-auto bg-white/20 rounded-full flex items-center justify-center mb-3">
-                <span className="text-white font-bold text-xl">2</span>
-              </div>
-              <h4 className="font-bold text-xl mb-2">{t('about.speed')}</h4>
-              <p className="text-white/70 text-sm">
-                {t('about.speedDesc')}
-              </p>
-            </div>
-            
-            <div className="bg-white/10 backdrop-blur-sm rounded-xl p-5 text-center">
-              <div className="w-12 h-12 mx-auto bg-white/20 rounded-full flex items-center justify-center mb-3">
-                <span className="text-white font-bold text-xl">3</span>
-              </div>
-              <h4 className="font-bold text-xl mb-2">{t('about.transparency')}</h4>
-              <p className="text-white/70 text-sm">
-                {t('about.transparencyDesc')}
-              </p>
+          {/* Botón con países */}
+          <div className="text-center mb-8">
+            <div className="inline-block bg-white/20 backdrop-blur-sm px-6 py-3 rounded-full border border-white/30 font-bold text-white">
+              {t('about.worldPresence')}
             </div>
           </div>
           
-          {/* Se eliminaron los botones de acción a petición del cliente */}
+          {/* Sección de Modelo 360 */}
+          <div className="mb-8">
+            <h3 className="text-center text-2xl font-bold mb-8">{t('about.model360')}</h3>
+            
+            <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 md:p-8 border border-white/20">
+              {/* Primera fila - Proceso inicial */}
+              <div className="grid grid-cols-7 gap-0 mb-8 items-center">
+                <div className="text-center col-span-1">
+                  <div className="w-16 h-16 mx-auto bg-white/20 rounded-full flex items-center justify-center mb-3 shadow-lg">
+                    <i className="fas fa-clipboard-list text-white text-xl"></i>
+                  </div>
+                  <div className="text-white text-sm font-medium">Activos a rematar</div>
+                </div>
+                
+                <div className="flex justify-center items-center">
+                  <i className="fas fa-long-arrow-alt-right text-white/60 text-xl"></i>
+                </div>
+                
+                <div className="text-center col-span-1">
+                  <div className="w-16 h-16 mx-auto bg-white/20 rounded-full flex items-center justify-center mb-3 shadow-lg">
+                    <i className="fas fa-camera text-white text-xl"></i>
+                  </div>
+                  <div className="text-white text-sm font-medium">Material gráfico en terreno</div>
+                </div>
+                
+                <div className="flex justify-center items-center">
+                  <i className="fas fa-long-arrow-alt-right text-white/60 text-xl"></i>
+                </div>
+                
+                <div className="text-center col-span-1">
+                  <div className="w-16 h-16 mx-auto bg-white/20 rounded-full flex items-center justify-center mb-3 shadow-lg">
+                    <i className="fas fa-desktop text-white text-xl"></i>
+                  </div>
+                  <div className="text-white text-sm font-medium">Plataforma</div>
+                </div>
+                
+                <div className="flex justify-center items-center">
+                  <i className="fas fa-long-arrow-alt-right text-white/60 text-xl"></i>
+                </div>
+                
+                <div className="text-center col-span-1">
+                  <div className="w-16 h-16 mx-auto bg-white/20 rounded-full flex items-center justify-center mb-3 shadow-lg">
+                    <i className="fas fa-bullhorn text-white text-xl"></i>
+                  </div>
+                  <div className="text-white text-sm font-medium">Marketing<br/>950k clientes globales</div>
+                </div>
+              </div>
+              
+              {/* Flecha conectora vertical */}
+              <div className="flex justify-center mb-6">
+                <div className="flex flex-col items-center">
+                  <div className="h-10 border-l-2 border-dashed border-white/40"></div>
+                  <i className="fas fa-chevron-down text-white/60 -mt-1"></i>
+                </div>
+              </div>
+              
+              {/* Segunda fila - Proceso medio */}
+              <div className="grid grid-cols-5 gap-0 mb-8 items-center">
+                <div className="text-center col-span-1">
+                  <div className="w-16 h-16 mx-auto bg-white/20 rounded-full flex items-center justify-center mb-3 shadow-lg">
+                    <i className="fas fa-video text-white text-xl"></i>
+                  </div>
+                  <div className="text-white text-sm font-medium">Evento Remate<br/>Presencial y online</div>
+                </div>
+                
+                <div className="flex justify-center items-center">
+                  <i className="fas fa-long-arrow-alt-right text-white/60 text-xl"></i>
+                </div>
+                
+                <div className="text-center col-span-1">
+                  <div className="w-16 h-16 mx-auto bg-white/20 rounded-full flex items-center justify-center mb-3 shadow-lg">
+                    <i className="fas fa-gavel text-white text-xl"></i>
+                  </div>
+                  <div className="text-white text-sm font-medium">Comprador paga el<br/>lote adjudicado</div>
+                </div>
+                
+                <div className="flex justify-center items-center">
+                  <i className="fas fa-long-arrow-alt-right text-white/60 text-xl"></i>
+                </div>
+                
+                <div className="text-center col-span-1">
+                  <div className="w-16 h-16 mx-auto bg-white/20 rounded-full flex items-center justify-center mb-3 shadow-lg">
+                    <i className="fas fa-hand-holding-usd text-white text-xl"></i>
+                  </div>
+                  <div className="text-white text-sm font-medium">Pago a consignatario</div>
+                </div>
+              </div>
+              
+              {/* Flecha conectora vertical */}
+              <div className="flex justify-center mb-6">
+                <div className="flex flex-col items-center">
+                  <div className="h-10 border-l-2 border-dashed border-white/40"></div>
+                  <i className="fas fa-chevron-down text-white/60 -mt-1"></i>
+                </div>
+              </div>
+              
+              {/* Tercera fila - Proceso final */}
+              <div className="grid grid-cols-5 gap-0 items-center">
+                <div className="text-center col-span-1">
+                  <div className="w-16 h-16 mx-auto bg-white/20 rounded-full flex items-center justify-center mb-3 shadow-lg">
+                    <i className="fas fa-file-invoice text-white text-xl"></i>
+                  </div>
+                  <div className="text-white text-sm font-medium">Certificado de pago<br/>para liberar carga</div>
+                </div>
+                
+                <div className="flex justify-center items-center">
+                  <i className="fas fa-long-arrow-alt-right text-white/60 text-xl"></i>
+                </div>
+                
+                <div className="text-center col-span-1">
+                  <div className="w-16 h-16 mx-auto bg-white/20 rounded-full flex items-center justify-center mb-3 shadow-lg">
+                    <i className="fas fa-truck text-white text-xl"></i>
+                  </div>
+                  <div className="text-white text-sm font-medium">Logística de retiro<br/>y despacho</div>
+                </div>
+                
+                <div className="flex justify-center items-center">
+                  <i className="fas fa-long-arrow-alt-right text-white/60 text-xl"></i>
+                </div>
+                
+                <div className="text-center col-span-1">
+                  <div className="w-16 h-16 mx-auto bg-white/20 rounded-full flex items-center justify-center mb-3 shadow-lg">
+                    <i className="fas fa-map-marker-alt text-white text-xl"></i>
+                  </div>
+                  <div className="text-white text-sm font-medium">Entrega en destino</div>
+                </div>
+              </div>
+            </div>
+          </div>
         </motion.div>
       </div>
     </section>
