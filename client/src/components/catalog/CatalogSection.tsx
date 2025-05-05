@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { fadeIn, staggerContainer, slideUp } from "@/lib/animations";
 import { MachineryCard } from "./MachineryCard";
+import { MachineryCardCompact } from "./MachineryCardCompact";
 import { useQuery } from "@tanstack/react-query";
 import {
   Machinery,
