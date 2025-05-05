@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { fadeIn, slideUp } from '@/lib/animations';
 import { useLanguage } from '@/contexts/LanguageContext';
 
-// Subastas dinámicas basadas en la imagen compartida
+// Subastas dinámicas basadas en las imágenes reales proporcionadas
 const AUCTION_DATA = [
   {
     id: 1,
@@ -11,7 +11,7 @@ const AUCTION_DATA = [
     date: "05-09-2025 09:00:00 AM EDT",
     type: "Webcast Auction",
     location: "1892 County St, Dighton, Massachusetts, United States, 02715",
-    image: "/pexels-ywanphoto-188679.jpg",
+    image: "https://auctiontechupload.s3.amazonaws.com/216/auction-admin/1917/85594361742569925.jpg",
     url: "https://northcountry.auctiontechs.com/auctions/detail/id/16290/",
   },
   {
@@ -20,7 +20,7 @@ const AUCTION_DATA = [
     date: "05-10-2025 09:00:00 AM EDT",
     type: "Webcast Auction",
     location: "1892 County St, Dighton, Massachusetts, United States, 02715",
-    image: "/pexels-ywanphoto-188679.jpg",
+    image: "https://auctiontechupload.s3.amazonaws.com/216/auction-admin/1918/13082973631742570022.jpg",
     url: "https://northcountry.auctiontechs.com/auctions/detail/id/16291/",
   },
   {
@@ -29,7 +29,7 @@ const AUCTION_DATA = [
     date: "05-14-2025 09:00:00 AM EDT",
     type: "Webcast Auction",
     location: "743 W King St, Martinsburg, West Virginia, United States, 25401",
-    image: "/pexels-ywanphoto-188679.jpg",
+    image: "https://auctiontechupload.s3.amazonaws.com/216/auction-admin/2061/18243931761744910961.jpg",
     url: "https://northcountry.auctiontechs.com/auctions/detail/id/16292/",
   },
   {
@@ -38,7 +38,7 @@ const AUCTION_DATA = [
     date: "05-16-2025 09:00:00 AM EDT",
     type: "Webcast Auction",
     location: "1001 Integrity Dr, Walpole, New Hampshire, United States, 03608",
-    image: "/pexels-ywanphoto-188679.jpg",
+    image: "https://auctiontechupload.s3.amazonaws.com/216/auction-admin/2060/6526074331742569850.JPG",
     url: "https://northcountry.auctiontechs.com/auctions/detail/id/16293/",
   }
 ];
@@ -117,11 +117,19 @@ export function AuctionsIframe() {
                   <div key={auction.id} className="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow">
                     <div className="flex flex-col md:flex-row gap-4">
                       <div className="w-full md:w-1/5">
-                        <img 
-                          src={auction.image} 
-                          alt={auction.title} 
-                          className="w-full h-32 object-cover rounded-md"
-                        />
+                        <div className="h-32 rounded-md overflow-hidden">
+                          <img 
+                            src={auction.image} 
+                            alt={auction.title} 
+                            className="w-full h-full object-cover"
+                            onError={(e) => {
+                              // Si la imagen no carga, usar una imagen por defecto
+                              const target = e.target as HTMLImageElement;
+                              target.onerror = null;
+                              target.src = "/pexels-ywanphoto-188679.jpg";
+                            }}
+                          />
+                        </div>
                       </div>
                       <div className="w-full md:w-4/5">
                         <h3 className="text-lg font-bold text-gray-800">{auction.title}</h3>
