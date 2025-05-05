@@ -17,7 +17,7 @@ export function AuctionsIframe() {
             viewport={{ once: true }}
             className="inline-block mb-4 rounded-full px-4 py-1.5 bg-primary/30 backdrop-blur-md text-white text-sm font-medium"
           >
-            {language === 'es' ? 'SUBASTAS EN VIVO' : 'LIVE AUCTIONS'}
+            {t('auctions.liveAuctions')}
           </motion.div>
           
           <motion.h2 
@@ -27,9 +27,7 @@ export function AuctionsIframe() {
             whileInView="visible"
             viewport={{ once: true }}
           >
-            {language === 'es' 
-              ? 'Próximas Subastas' 
-              : 'Upcoming Auctions'}
+            {t('auctions.upcomingAuctions')}
           </motion.h2>
 
           <motion.p 
@@ -40,9 +38,7 @@ export function AuctionsIframe() {
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
           >
-            {language === 'es'
-              ? 'Explore las subastas en vivo de nuestro socio North Country Auction. Vea equipos, herramientas y activos disponibles para remate.'
-              : 'Explore live auctions from our partner North Country Auction. View equipment, tools and assets available for auction.'}
+            {t('auctions.exploreAuctions')}
           </motion.p>
         </div>
         

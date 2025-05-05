@@ -5,7 +5,7 @@ import { useLanguage } from '@/contexts/LanguageContext';
 
 export function AuctionRegisterSection() {
   const { openForm } = useRegistration();
-  const { language } = useLanguage();
+  const { t } = useLanguage();
 
   return (
     <section className="relative py-16 overflow-hidden bg-gray-900" id="subastas">
@@ -21,7 +21,7 @@ export function AuctionRegisterSection() {
             viewport={{ once: true }}
             className="inline-block mb-6 rounded-full px-4 py-1.5 bg-primary/30 backdrop-blur-md text-white text-sm font-medium"
           >
-            {language === 'es' ? 'EVENTOS EXCLUSIVOS' : 'EXCLUSIVE EVENTS'}
+            {t('auctions.exclusiveEvents')}
           </motion.div>
 
           <motion.h2 
@@ -31,9 +31,7 @@ export function AuctionRegisterSection() {
             whileInView="visible"
             viewport={{ once: true }}
           >
-            {language === 'es' 
-              ? 'Subastas de activos con oportunidades únicas' 
-              : 'Asset auctions with unique opportunities'}
+            {t('auctions.title')}
           </motion.h2>
 
           <motion.p 
@@ -44,9 +42,7 @@ export function AuctionRegisterSection() {
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
           >
-            {language === 'es'
-              ? 'Regístrese ahora para acceder a nuestras subastas exclusivas de maquinaria, repuestos, herramientas y lotes especiales. Sea el primero en recibir notificaciones sobre nuevos eventos.'
-              : 'Register now to access our exclusive auctions of machinery, parts, tools and special lots. Be the first to receive notifications about new events.'}
+            {t('auctions.description')}
           </motion.p>
 
           <motion.div
@@ -62,12 +58,10 @@ export function AuctionRegisterSection() {
                 <i className="fas fa-truck-monster text-xl"></i>
               </div>
               <h3 className="font-bold text-white text-lg mb-2">
-                {language === 'es' ? 'Maquinaria Pesada' : 'Heavy Machinery'}
+                {t('auctions.heavyMachinery')}
               </h3>
               <p className="text-gray-300 text-sm">
-                {language === 'es' 
-                  ? 'Excavadoras, cargadores, camiones y más activos para minería y construcción.'
-                  : 'Excavators, loaders, trucks and more assets for mining and construction.'}
+                {t('auctions.heavyMachineryDesc')}
               </p>
             </div>
 
@@ -76,12 +70,10 @@ export function AuctionRegisterSection() {
                 <i className="fas fa-tools text-xl"></i>
               </div>
               <h3 className="font-bold text-white text-lg mb-2">
-                {language === 'es' ? 'Repuestos y Herramientas' : 'Parts & Tools'}
+                {t('auctions.partsTools')}
               </h3>
               <p className="text-gray-300 text-sm">
-                {language === 'es'
-                  ? 'Componentes originales, herramientas especializadas y accesorios para activos.'
-                  : 'Original components, specialized tools and accessories for assets.'}
+                {t('auctions.partsToolsDesc')}
               </p>
             </div>
 
@@ -90,12 +82,10 @@ export function AuctionRegisterSection() {
                 <i className="fas fa-box-open text-xl"></i>
               </div>
               <h3 className="font-bold text-white text-lg mb-2">
-                {language === 'es' ? 'Lotes Especiales' : 'Special Lots'}
+                {t('auctions.specialLots')}
               </h3>
               <p className="text-gray-300 text-sm">
-                {language === 'es'
-                  ? 'Lotes completos de activos, flotas y elementos de proyectos completos.'
-                  : 'Complete lots of assets, fleets and elements from complete projects.'}
+                {t('auctions.specialLotsDesc')}
               </p>
             </div>
           </motion.div>
@@ -113,7 +103,7 @@ export function AuctionRegisterSection() {
               className="px-6 sm:px-8 py-3 sm:py-4 bg-primary hover:bg-primary-dark text-white text-sm sm:text-base font-bold rounded-lg shadow-lg hover:shadow-xl transition duration-300 transform hover:-translate-y-1 flex items-center justify-center"
             >
               <i className="fas fa-user-plus mr-2"></i>
-              {language === 'es' ? 'Registrarse Ahora' : 'Register Now'}
+              {t('auctions.registerNow')}
             </button>
             
             <a 
@@ -121,7 +111,7 @@ export function AuctionRegisterSection() {
               className="px-6 sm:px-8 py-3 sm:py-4 bg-white/10 backdrop-blur-md hover:bg-white/20 text-white text-sm sm:text-base font-medium rounded-lg border border-white/30 transition duration-300 flex items-center justify-center"
             >
               <i className="fas fa-info-circle mr-2"></i>
-              {language === 'es' ? 'Más Información' : 'More Information'}
+              {t('auctions.moreInfo')}
             </a>
           </motion.div>
         </div>
