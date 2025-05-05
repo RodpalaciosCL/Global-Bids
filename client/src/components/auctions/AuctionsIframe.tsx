@@ -1,43 +1,17 @@
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
 import { fadeIn, slideUp } from '@/lib/animations';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { useRegistration } from '@/contexts/RegistrationContext';
 
 export function AuctionsIframe() {
   const { t } = useLanguage();
-  const iframeRef = useRef<HTMLIFrameElement>(null);
+  const { openForm } = useRegistration();
   
-  // Función para manipular el iframe después de que se cargue
-  useEffect(() => {
-    const iframe = iframeRef.current;
-    
-    if (iframe) {
-      iframe.onload = function() {
-        try {
-          // Intento de acceder al iframe y manipular su contenido después de cargar
-          if (iframe.contentDocument) {
-            // Intentar ocultar elementos no deseados via CSS
-            const style = iframe.contentDocument.createElement('style');
-            style.textContent = `
-              header, .main-header, .navbar, .page-header, .footer, .banner, .top-section { 
-                display: none !important; 
-              }
-              body {
-                padding-top: 0 !important;
-                margin-top: 0 !important;
-              }
-              .auction-listing-container {
-                padding-top: 0 !important;
-              }
-            `;
-            iframe.contentDocument.head.appendChild(style);
-          }
-        } catch (e) {
-          console.log('No se pudo acceder al contenido del iframe debido a la política de seguridad del navegador');
-        }
-      };
-    }
-  }, []);
+  // Apertura del formulario de registro
+  const handleRegister = () => {
+    openForm();
+  };
   
   return (
     <section className="py-12 bg-gray-900" id="subastas">
@@ -75,42 +49,64 @@ export function AuctionsIframe() {
           </motion.p>
         </div>
         
-        <motion.div 
-          className="bg-white/5 backdrop-blur-sm rounded-3xl p-3 border border-white/10 shadow-lg overflow-hidden max-w-5xl mx-auto"
-          variants={fadeIn}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          transition={{ delay: 0.2 }}
-        >
-          <div className="bg-slate-100/5 backdrop-blur-sm p-4 flex items-center gap-3 rounded-t-2xl">
-            <i className="fas fa-gavel text-white"></i>
-            <h3 className="text-xl font-medium text-white">
-              {t('auctions.upcomingEvents')}
-            </h3>
-          </div>
-          
-          <div className="rounded-b-2xl overflow-hidden bg-blue-900">
-            <div className="relative w-full h-[600px] overflow-hidden">
-              <iframe 
-                ref={iframeRef}
-                src="https://northcountry.auctiontechs.com/auctions" 
-                className="w-full h-full"
-                style={{ 
-                  border: 'none',
-                  position: 'absolute',
-                  top: 0,
-                  left: 0,
-                  width: '100%',
-                  height: '100%'
-                }}
-                title="North Country Auctions"
-                loading="lazy"
-                sandbox="allow-scripts allow-same-origin allow-forms"
-              />
+        {/* Panel de próximas subastas */}
+        <div className="h-hero"> 
+          <motion.div 
+            className="bg-white/5 backdrop-blur-sm rounded-3xl border border-white/10 shadow-lg overflow-hidden max-w-lg md:max-w-md lg:max-w-lg xl:max-w-md mx-auto"
+            variants={fadeIn}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            transition={{ delay: 0.2 }}
+          >
+            {/* Cabecera con título e ícono */}
+            <div className="flex items-center gap-2 p-4">
+              <i className="fas fa-gavel text-white"></i>
+              <h3 className="text-lg font-medium text-white">
+                {t('auctions.upcomingEvents')}
+              </h3>
             </div>
-          </div>
-        </motion.div>
+            
+            {/* Contenido del panel de subastas */}
+            <div className="bg-blue-900 p-6 rounded-b-2xl">
+              <div className="text-center mb-6">
+                <h3 className="text-xl font-medium text-white mb-3">{t('auctions.upcomingEvents')}</h3>
+              </div>
+              
+              {/* Detalle de la subasta */}
+              <div className="mx-auto max-w-xs">
+                <div className="text-white text-left">
+                  <div className="font-medium">{t('auctions.miningAssets')}</div>
+                  <div className="text-sm mt-1">15 {t('hero.day')}</div>
+                  <div className="text-sm mt-1">45 {t('hero.lots')}</div>
+                </div>
+                
+                {/* Botón de registro */}
+                <div className="mt-3 text-right">
+                  <button 
+                    onClick={handleRegister} 
+                    className="bg-slate-800 hover:bg-slate-700 text-white text-sm py-1.5 px-4 rounded-full"
+                  >
+                    {t('auctions.register')}
+                  </button>
+                </div>
+              </div>
+              
+              {/* Enlace para ver todas las subastas */}
+              <div className="mt-6 flex justify-center">
+                <a 
+                  href="https://northcountry.auctiontechs.com/auctions"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 text-white text-sm hover:underline"
+                >
+                  <i className="fas fa-external-link-alt"></i>
+                  {t('hero.viewAll')}
+                </a>
+              </div>
+            </div>
+          </motion.div>
+        </div>
       </div>
     </section>
   );
