@@ -27,6 +27,7 @@ export const machinery = pgTable("machinery", {
   condition: text("condition").notNull(), // excellent, good, fair, repair
   description: text("description").notNull(),
   image: text("image").notNull(),
+  gallery: text("gallery").array(),
   isSold: boolean("is_sold").default(false),
   auctionDate: date("auction_date"),
   createdAt: date("created_at").notNull().defaultNow(),
