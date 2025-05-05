@@ -32,58 +32,49 @@ export function ImageGallery({ images, alt }: ImageGalleryProps) {
 
   return (
     <div className="relative">
-      {/* Vista principal con imagen grande - altura reducida */}
+      {/* Vista principal con imagen grande */}
       <div className="relative">
-        <div className="relative bg-gray-100 h-[240px] overflow-hidden">
+        <div className="relative bg-gray-100 h-[280px] overflow-hidden">
           <img 
             src={imageList[currentIndex]} 
             alt={`${alt} - Imagen ${currentIndex + 1}`} 
-            className="w-full h-full object-contain"
-            style={{ maxHeight: '240px', margin: '0 auto', objectFit: 'cover', objectPosition: 'center' }}
+            className="w-full h-full object-cover"
           />
           
-          {/* Controles laterales más pequeños */}
+          {/* Controles laterales */}
           <button 
-            className="absolute left-1 top-1/2 transform -translate-y-1/2 h-8 w-8 rounded-full bg-black/20 text-white hover:bg-black/40 flex items-center justify-center focus:outline-none transition-colors"
+            className="absolute left-2 top-1/2 transform -translate-y-1/2 h-8 w-8 rounded-full bg-black/20 text-white hover:bg-black/40 flex items-center justify-center focus:outline-none transition-colors"
             onClick={handlePrev}
           >
-            <i className="fas fa-chevron-left text-xs"></i>
+            <i className="fas fa-chevron-left"></i>
           </button>
           <button 
-            className="absolute right-1 top-1/2 transform -translate-y-1/2 h-8 w-8 rounded-full bg-black/20 text-white hover:bg-black/40 flex items-center justify-center focus:outline-none transition-colors"
+            className="absolute right-2 top-1/2 transform -translate-y-1/2 h-8 w-8 rounded-full bg-black/20 text-white hover:bg-black/40 flex items-center justify-center focus:outline-none transition-colors"
             onClick={handleNext}
           >
-            <i className="fas fa-chevron-right text-xs"></i>
+            <i className="fas fa-chevron-right"></i>
           </button>
           
           {/* Contador de imágenes */}
-          <div className="absolute bottom-1 right-1 bg-black/50 px-1.5 py-0.5 rounded text-white text-xs font-medium">
+          <div className="absolute bottom-2 right-2 bg-black/50 px-2 py-1 rounded text-white text-xs">
             {currentIndex + 1} / {imageList.length}
           </div>
-          
-          {/* Botón para expandir */}
-          <button 
-            className="absolute top-1 right-1 h-6 w-6 rounded bg-black/50 text-white hover:bg-black/70 flex items-center justify-center focus:outline-none transition-colors"
-            onClick={toggleFullscreen}
-          >
-            <i className={`fas ${isFullscreen ? 'fa-compress' : 'fa-expand'} text-xs`}></i>
-          </button>
         </div>
       </div>
       
-      {/* Miniaturas en fila simple - más pequeñas */}
+      {/* Miniaturas en fila simple */}
       <div className="bg-gray-800 py-1 overflow-x-auto">
-        <div className="flex px-1 space-x-0.5">
+        <div className="flex gap-1 px-1">
           {imageList.map((image, index) => (
             <div 
               key={index}
-              className={`relative flex-shrink-0 cursor-pointer transition-opacity ${index === currentIndex ? 'opacity-100 outline outline-1 outline-white' : 'opacity-60 hover:opacity-90'}`}
+              className={`relative flex-shrink-0 cursor-pointer transition-opacity ${index === currentIndex ? 'opacity-100 outline outline-2 outline-white' : 'opacity-70 hover:opacity-90'}`}
               onClick={() => handleThumbnailClick(index)}
             >
               <img 
                 src={image} 
                 alt={`${alt} - Miniatura ${index + 1}`} 
-                className="h-10 w-14 object-cover"
+                className="h-14 w-20 object-cover"
               />
             </div>
           ))}

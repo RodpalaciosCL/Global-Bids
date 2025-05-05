@@ -34,11 +34,10 @@ export default function MachineryDetail() {
   }
   
   return (
-    <div className="bg-white" style={{height: '100vh', overflow: 'hidden'}}>
-      {/* Layout principal - Contenedor con altura fija */}
-      <div className="container mx-auto px-2 h-screen flex flex-col">
+    <div className="bg-white min-h-screen">
+      <div className="container mx-auto px-4 py-2">
         {/* Navegación simple */}
-        <div className="flex items-center text-xs py-0.5">
+        <div className="flex items-center text-xs py-1 mb-1">
           <a href="/" className="text-gray-500 hover:text-primary">Inicio</a>
           <span className="mx-1 text-gray-400">/</span>
           <a href="/#catalogo" className="text-gray-500 hover:text-primary">Catálogo</a>
@@ -46,34 +45,34 @@ export default function MachineryDetail() {
           <span className="text-primary font-medium truncate">{machinery.name}</span>
         </div>
         
-        {/* Contenedor principal flex */}
-        <div className="flex-1 flex flex-row space-x-3">
-          {/* Columna izquierda: categoría, título y galería */}
-          <div className="w-3/5 flex flex-col">
-            <div className="inline-block bg-gray-100 text-primary font-medium px-2 py-0.5 rounded text-xs">
-              {typeLabels[machinery.type as keyof typeof typeLabels]}
-            </div>
-            
-            <h1 className="text-lg font-bold text-gray-900 mt-0.5 mb-1">{machinery.name}</h1>
-            
-            {/* Atributos básicos */}
-            <div className="flex flex-wrap gap-x-3 text-xs text-gray-600 mb-1">
-              <div className="flex items-center">
-                <i className="fas fa-calendar-alt mr-1 text-gray-500"></i>
-                <span>{machinery.year}</span>
-              </div>
-              <div className="flex items-center">
-                <i className="fas fa-tachometer-alt mr-1 text-gray-500"></i>
-                <span>{machinery.hours ? `${machinery.hours} hrs` : 'N/A'}</span>
-              </div>
-              <div className="flex items-center">
-                <i className="fas fa-check-circle mr-1 text-gray-500"></i>
-                <span>{conditionLabels[machinery.condition as keyof typeof conditionLabels]}</span>
-              </div>
-            </div>
-            
+        <div className="mb-1">
+          <div className="text-xs text-gray-600">
+            Plataforma Elevadora
+          </div>
+          <h1 className="text-xl font-bold text-gray-900 leading-tight">{machinery.name}</h1>
+        </div>
+        
+        <div className="flex flex-wrap items-center gap-x-4 text-xs text-gray-600 mb-2">
+          <div className="flex items-center">
+            <i className="fas fa-calendar-alt mr-1 text-gray-500"></i>
+            <span>{machinery.year}</span>
+          </div>
+          <div className="flex items-center">
+            <i className="fas fa-tachometer-alt mr-1 text-gray-500"></i>
+            <span>{machinery.hours} hrs</span>
+          </div>
+          <div className="flex items-center">
+            <i className="fas fa-check-circle mr-1 text-gray-500"></i>
+            <span>Buen estado</span>
+          </div>
+        </div>
+        
+        {/* Contenido principal en dos columnas */}
+        <div className="flex flex-col md:flex-row gap-4">
+          {/* Columna izquierda: galería */}
+          <div className="md:w-3/5">
             {/* Galería de fotos */}
-            <div className="border border-gray-200 rounded overflow-hidden flex-1">
+            <div className="border border-gray-200 rounded-md overflow-hidden mb-4">
               {machinery.gallery && machinery.gallery.length > 0 ? (
                 <ImageGallery 
                   images={[machinery.image, ...(machinery.gallery || [])]} 
@@ -86,106 +85,87 @@ export default function MachineryDetail() {
                 />
               )}
             </div>
-            
-            {/* Botones de acción */}
-            <div className="grid grid-cols-2 gap-2 my-1">
-              <Button className="bg-gray-900 hover:bg-gray-800 text-white py-1 h-9 rounded-sm text-xs" size="default">
-                <i className="fas fa-shopping-cart mr-1"></i>
-                Comprar ahora
-              </Button>
-              <Button className="bg-white border border-gray-300 text-gray-700 hover:bg-gray-50 py-1 h-9 rounded-sm text-xs" variant="outline" size="default">
-                <i className="fas fa-phone-alt mr-1"></i>
-                Contactar consultor
-              </Button>
-            </div>
           </div>
           
-          {/* Columna derecha: paneles de información */}
-          <div className="w-2/5 flex flex-col space-y-2">
+          {/* Columna derecha: detalles y precio */}
+          <div className="md:w-2/5 space-y-4">
             {/* Panel de precio */}
-            <div className="bg-gray-50 p-2 rounded-md shadow-sm">
-              <h3 className="text-base font-bold text-gray-900">Precio</h3>
-              <div className="flex items-baseline mb-1">
-                <div className="text-xl font-bold text-gray-900">${machinery.price.toLocaleString()}</div>
-                <p className="text-gray-500 text-xs ml-1">Precio final</p>
+            <div>
+              <h3 className="font-medium text-gray-900 mb-2">Precio</h3>
+              <div className="mb-1">
+                <div className="text-2xl font-bold text-gray-900">${machinery.price.toLocaleString()}</div>
+                <p className="text-gray-500 text-sm">
+                  Precio final
+                </p>
               </div>
               
-              <div className="border-t border-gray-200 pt-1">
-                <h4 className="font-medium text-gray-700 text-xs">Fecha de subasta</h4>
-                <p className="text-gray-600 text-xs">
-                  {machinery.auctionDate ? 
-                    new Date(machinery.auctionDate).toLocaleDateString('es-ES', {
-                      day: 'numeric', 
-                      month: 'short'
-                    }) : 
-                    'Venta directa (sin subasta)'}
+              <div className="mt-3">
+                <h4 className="font-medium text-gray-700 text-sm mb-1">Fecha de subasta</h4>
+                <p className="text-gray-600 text-sm">
+                  Venta directa (sin subasta)
                 </p>
               </div>
             </div>
             
-            {/* Información combinada */}
-            <div className="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-2 flex-1">
-              {/* Descripción y especificaciones en pestañas */}
-              <div className="bg-gray-50 p-2 rounded-md shadow-sm flex-1">
-                <div className="flex border-b border-gray-200">
-                  <div className="w-1/2 px-2 py-1 text-center text-xs font-medium text-primary bg-white border-t border-l border-r border-gray-200 rounded-t-md">
-                    Datos técnicos
-                  </div>
-                  <div className="w-1/2 px-2 py-1 text-center text-xs text-gray-500 bg-transparent">
-                    Descripción
-                  </div>
+            {/* Tabs de especificaciones y descripción */}
+            <div>
+              <div className="flex border-b">
+                <div className="px-4 py-2 text-center border-b-2 border-primary font-medium text-primary">
+                  Datos técnicos
                 </div>
-                
-                {/* Tabla de especificaciones técnicas */}
-                <table className="w-full text-xs mt-1">
-                  <tbody className="divide-y divide-gray-100">
-                    <tr>
-                      <td className="py-0.5 text-gray-600">Marca:</td>
-                      <td className="py-0.5 text-right font-medium">JLG</td>
-                    </tr>
-                    <tr>
-                      <td className="py-0.5 text-gray-600">Modelo:</td>
-                      <td className="py-0.5 text-right font-medium">600aj Manlift</td>
-                    </tr>
-                    <tr>
-                      <td className="py-0.5 text-gray-600">Año:</td>
-                      <td className="py-0.5 text-right font-medium">{machinery.year}</td>
-                    </tr>
-                    <tr>
-                      <td className="py-0.5 text-gray-600">Horas:</td>
-                      <td className="py-0.5 text-right font-medium">326 hrs</td>
-                    </tr>
-                    <tr>
-                      <td className="py-0.5 text-gray-600">Condición:</td>
-                      <td className="py-0.5 text-right font-medium">{conditionLabels[machinery.condition as keyof typeof conditionLabels]}</td>
-                    </tr>
-                    <tr>
-                      <td className="py-0.5 text-gray-600">Potencia:</td>
-                      <td className="py-0.5 text-right font-medium">375 HP</td>
-                    </tr>
-                    <tr>
-                      <td className="py-0.5 text-gray-600">Capacidad:</td>
-                      <td className="py-0.5 text-right font-medium">500 lbs</td>
-                    </tr>
-                    <tr>
-                      <td className="py-0.5 text-gray-600">Alcance:</td>
-                      <td className="py-0.5 text-right font-medium">60 ft</td>
-                    </tr>
-                  </tbody>
-                </table>
+                <div className="px-4 py-2 text-center text-gray-500">
+                  Descripción
+                </div>
+              </div>
+              
+              <div className="py-2">
+                <div className="flex justify-between py-1.5 border-b">
+                  <span className="text-gray-600">Marca:</span>
+                  <span className="font-medium">JLG</span>
+                </div>
+                <div className="flex justify-between py-1.5 border-b">
+                  <span className="text-gray-600">Modelo:</span>
+                  <span className="font-medium">600aj Manlift</span>
+                </div>
+                <div className="flex justify-between py-1.5 border-b">
+                  <span className="text-gray-600">Año:</span>
+                  <span className="font-medium">2016</span>
+                </div>
+                <div className="flex justify-between py-1.5 border-b">
+                  <span className="text-gray-600">Horas:</span>
+                  <span className="font-medium">326 hrs</span>
+                </div>
+                <div className="flex justify-between py-1.5 border-b">
+                  <span className="text-gray-600">Condición:</span>
+                  <span className="font-medium">Buen estado</span>
+                </div>
+                <div className="flex justify-between py-1.5 border-b">
+                  <span className="text-gray-600">Potencia:</span>
+                  <span className="font-medium">375 HP</span>
+                </div>
+                <div className="flex justify-between py-1.5 border-b">
+                  <span className="text-gray-600">Capacidad:</span>
+                  <span className="font-medium">500 lbs</span>
+                </div>
+                <div className="flex justify-between py-1.5">
+                  <span className="text-gray-600">Alcance:</span>
+                  <span className="font-medium">60 ft</span>
+                </div>
               </div>
             </div>
-            
-            {/* Botón volver */}
-            <div>
-              <Button asChild variant="outline" size="sm" className="text-xs w-full py-0.5 h-6">
-                <a href="/#catalogo">
-                  <i className="fas fa-arrow-left mr-1"></i>
-                  Volver al catálogo
-                </a>
-              </Button>
-            </div>
           </div>
+        </div>
+        
+        {/* Botones de acción */}
+        <div className="grid grid-cols-2 gap-3 mt-4 mb-6">
+          <Button className="bg-gray-900 hover:bg-gray-800 text-white py-2 rounded-sm h-12" size="lg">
+            <i className="fas fa-shopping-cart mr-2"></i>
+            Comprar ahora
+          </Button>
+          <Button className="bg-white border border-gray-300 text-gray-700 hover:bg-gray-50 py-2 rounded-sm h-12" variant="outline" size="lg">
+            <i className="fas fa-phone-alt mr-2"></i>
+            Contactar consultor
+          </Button>
         </div>
       </div>
     </div>
