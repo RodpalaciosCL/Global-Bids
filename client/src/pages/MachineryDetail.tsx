@@ -7,6 +7,7 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { Machinery, typeLabels, conditionLabels } from '@/types/machinery';
 import { useEffect } from 'react';
 import { apiRequest } from '@/lib/queryClient';
+import { ImageGallery } from '@/components/machinery/ImageGallery';
 
 export default function MachineryDetail() {
   // Extract the ID from the URL
@@ -67,69 +68,64 @@ export default function MachineryDetail() {
                 SUBASTA: {new Date(machinery.auctionDate).toLocaleDateString('es-ES', {day: '2-digit', month: 'short', year: 'numeric'})}
               </div>
             )}
-            {/* Galería de fotos */}
-            <div className="relative">
-              {/* Imagen principal */}
-              <div className="w-full h-64 md:h-96 relative">
-                <img 
-                  src={machinery.image || 'https://images.pexels.com/photos/1882537/pexels-photo-1882537.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'} 
-                  alt={machinery.name} 
-                  className="w-full h-full object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
-                <div className="absolute bottom-0 left-0 p-6 md:p-10">
-                  <div className="inline-block bg-secondary text-primary font-bold px-3 py-1 rounded text-sm mb-3">
-                    {typeLabels[machinery.type as keyof typeof typeLabels]}
-                  </div>
-                  <h1 className="text-white text-2xl md:text-4xl font-bold mb-2 font-heading">{machinery.name}</h1>
-                  <div className="flex flex-wrap gap-4 text-white/90 text-sm">
-                    <div className="flex items-center">
-                      <i className="fas fa-calendar-alt mr-2"></i>
-                      <span>{machinery.year}</span>
-                    </div>
-                    <div className="flex items-center">
-                      <i className="fas fa-tag mr-2"></i>
-                      <span>{machinery.brand}</span>
-                    </div>
-                    <div className="flex items-center">
-                      <i className="fas fa-tachometer-alt mr-2"></i>
-                      <span>
-                        {machinery.hours ? `${machinery.hours.toLocaleString()} hrs` : 
-                        machinery.kilometers ? `${machinery.kilometers.toLocaleString()} km` : 'N/A'}
-                      </span>
-                    </div>
-                    <div className="flex items-center">
-                      <i className="fas fa-check-circle mr-2"></i>
-                      <span>{conditionLabels[machinery.condition as keyof typeof conditionLabels]}</span>
-                    </div>
-                  </div>
+            {/* Header con información básica */}
+            <div className="bg-gradient-to-r from-primary to-primary-dark p-6 md:p-8 rounded-t-lg">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="inline-block bg-white text-primary font-bold px-3 py-1 rounded text-sm">
+                  {typeLabels[machinery.type as keyof typeof typeLabels]}
                 </div>
+                {machinery.isSold && (
+                  <div className="inline-block bg-red-600 text-white font-bold px-3 py-1 rounded text-sm">
+                    VENDIDO
+                  </div>
+                )}
+                {machinery.auctionDate && !machinery.isSold && (
+                  <div className="inline-block bg-secondary text-primary font-bold px-3 py-1 rounded text-sm">
+                    SUBASTA: {new Date(machinery.auctionDate).toLocaleDateString('es-ES', {day: '2-digit', month: 'short', year: 'numeric'})}
+                  </div>
+                )}
               </div>
               
-              {/* Miniaturas de galería */}
-              <div className="bg-gray-900 p-4">
-                <h3 className="text-white text-sm font-medium mb-3">Galería de fotos</h3>
-                <div className="grid grid-cols-5 gap-2">
-                  {/* Imagen principal en miniatura */}
-                  <div className="relative border-2 border-secondary">
-                    <img 
-                      src={machinery.image || 'https://images.pexels.com/photos/1882537/pexels-photo-1882537.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'} 
-                      alt={`${machinery.name} - Vista principal`} 
-                      className="w-full h-14 object-cover"
-                    />
-                  </div>
-                  
-                  {/* Miniaturas adicionales */}
-                  {[1, 2, 3, 4].map((idx) => (
-                    <div key={idx} className="relative border border-gray-700 hover:border-gray-500 cursor-pointer transition-colors">
-                      <img 
-                        src={`https://images.pexels.com/photos/${2760240 + idx}/pexels-photo-${2760240 + idx}.jpeg?auto=compress&cs=tinysrgb&w=300`} 
-                        alt={`${machinery.name} - Vista ${idx + 1}`} 
-                        className="w-full h-14 object-cover"
-                      />
-                    </div>
-                  ))}
+              <h1 className="text-white text-2xl md:text-4xl font-bold mb-4 font-heading">{machinery.name}</h1>
+              
+              <div className="flex flex-wrap gap-6 text-white/90 text-sm md:text-base">
+                <div className="flex items-center">
+                  <i className="fas fa-calendar-alt mr-2"></i>
+                  <span>{machinery.year}</span>
                 </div>
+                <div className="flex items-center">
+                  <i className="fas fa-tag mr-2"></i>
+                  <span>{machinery.brand}</span>
+                </div>
+                <div className="flex items-center">
+                  <i className="fas fa-tachometer-alt mr-2"></i>
+                  <span>
+                    {machinery.hours ? `${machinery.hours.toLocaleString()} hrs` : 
+                    machinery.kilometers ? `${machinery.kilometers.toLocaleString()} km` : 'N/A'}
+                  </span>
+                </div>
+                <div className="flex items-center">
+                  <i className="fas fa-check-circle mr-2"></i>
+                  <span>{conditionLabels[machinery.condition as keyof typeof conditionLabels]}</span>
+                </div>
+              </div>
+            </div>
+            
+            {/* Galería de fotos */}
+            <div className="relative">
+              {/* Importar el componente de galería */}
+              <div className="border-b border-gray-200">
+                {machinery.gallery && machinery.gallery.length > 0 ? (
+                  <ImageGallery 
+                    images={[machinery.image, ...(machinery.gallery || [])]} 
+                    alt={machinery.name} 
+                  />
+                ) : (
+                  <ImageGallery 
+                    images={[machinery.image]} 
+                    alt={machinery.name} 
+                  />
+                )}
               </div>
             </div>
           </motion.div>
