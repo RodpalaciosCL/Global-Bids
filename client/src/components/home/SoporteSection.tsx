@@ -1,32 +1,34 @@
 import { motion } from 'framer-motion';
 import { fadeIn, slideUp } from '@/lib/animations';
 import { useIsMobile } from '@/hooks/use-mobile';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 export function SoporteSection() {
   const isMobile = useIsMobile();
+  const { t } = useLanguage();
 
   const supportCategories = [
     {
-      title: "Servicio al Cliente",
-      description: "Soporte personalizado para todas sus consultas sobre nuestros servicios",
+      title: t('support.customerService'),
+      description: t('support.customerServiceDesc'),
       icon: "fa-headset",
       color: "bg-blue-500"
     },
     {
-      title: "Asistencia Técnica",
-      description: "Asesoramiento especializado para maquinaria y equipos industriales",
+      title: t('support.technicalAssistance'),
+      description: t('support.technicalAssistanceDesc'),
       icon: "fa-tools",
       color: "bg-green-500"
     },
     {
-      title: "Ayuda con Subasta",
-      description: "Guía completa para participar eficientemente en nuestros eventos",
+      title: t('support.auctionHelp'),
+      description: t('support.auctionHelpDesc'),
       icon: "fa-gavel",
       color: "bg-primary"
     },
     {
-      title: "Documentación",
-      description: "Acceso a toda la documentación técnica y legal de los activos",
+      title: t('support.documentation'),
+      description: t('support.documentationDesc'),
       icon: "fa-file-alt",
       color: "bg-purple-500"
     }
@@ -42,9 +44,9 @@ export function SoporteSection() {
           viewport={{ once: true, margin: "-100px" }}
           variants={slideUp}
         >
-          <h2 className="text-4xl md:text-5xl font-bold font-heading mb-4">Soporte y Ayuda</h2>
+          <h2 className="text-4xl md:text-5xl font-bold font-heading mb-4">{t('support.title')}</h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Estamos comprometidos con brindarle el mejor servicio y respaldo en todas sus operaciones
+            {t('support.subtitle')}
           </p>
           <div className="flex justify-center mt-6">
             <div className="h-1 w-20 bg-primary rounded-full"></div>
@@ -73,7 +75,7 @@ export function SoporteSection() {
                 className="text-primary font-medium flex items-center text-sm hover:underline"
                 whileHover={{ x: 5 }}
               >
-                Solicitar ayuda
+                {t('support.requestHelp')}
                 <i className="fas fa-chevron-right ml-2 text-xs"></i>
               </motion.a>
             </motion.div>
@@ -92,7 +94,7 @@ export function SoporteSection() {
               <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white mr-4">
                 <i className="fas fa-comments"></i>
               </div>
-              <h3 className="text-2xl font-bold">Contáctenos Directamente</h3>
+              <h3 className="text-2xl font-bold">{t('support.contactUs')}</h3>
             </div>
 
             <div className="space-y-4 mb-6">
@@ -101,9 +103,9 @@ export function SoporteSection() {
                   <i className="fas fa-phone-alt"></i>
                 </div>
                 <div>
-                  <h4 className="font-bold text-lg">Teléfono de Contacto</h4>
+                  <h4 className="font-bold text-lg">{t('support.phone')}</h4>
                   <p className="text-gray-600">+56 2 2123 4567</p>
-                  <p className="text-sm text-gray-500">Lunes a Viernes 9:00 - 18:00</p>
+                  <p className="text-sm text-gray-500">{t('support.workingHours')}</p>
                 </div>
               </div>
               
@@ -112,9 +114,9 @@ export function SoporteSection() {
                   <i className="fas fa-envelope"></i>
                 </div>
                 <div>
-                  <h4 className="font-bold text-lg">Correo Electrónico</h4>
+                  <h4 className="font-bold text-lg">{t('support.email')}</h4>
                   <p className="text-gray-600">auctions@theglobalbid.com</p>
-                  <p className="text-sm text-gray-500">Respuesta en menos de 24 horas</p>
+                  <p className="text-sm text-gray-500">{t('support.responseTime')}</p>
                 </div>
               </div>
               
@@ -123,37 +125,17 @@ export function SoporteSection() {
                   <i className="fas fa-map-marker-alt"></i>
                 </div>
                 <div>
-                  <h4 className="font-bold text-lg">Oficina Central</h4>
+                  <h4 className="font-bold text-lg">{t('support.office')}</h4>
                   <p className="text-gray-600">Luis Carrera 1263 oficina 301, Vitacura</p>
                   <p className="text-sm text-gray-500">Santiago, Chile</p>
                 </div>
               </div>
             </div>
 
-            <div className="bg-white rounded-xl p-6 shadow-sm">
-              <h4 className="font-bold text-lg mb-4">Horario de Atención</h4>
-              
-              <div className="space-y-2">
-                <div className="flex justify-between">
-                  <span className="text-gray-600">Lunes - Viernes</span>
-                  <span className="font-medium">9:00 - 18:00</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-gray-600">Sábado</span>
-                  <span className="font-medium">10:00 - 14:00</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-gray-600">Domingo</span>
-                  <span className="font-medium text-gray-500">Cerrado</span>
-                </div>
-              </div>
-              
-              <div className="mt-4 pt-4 border-t border-dashed border-gray-200">
-                <div className="flex items-center text-sm text-gray-600">
-                  <i className="fas fa-info-circle text-primary mr-2"></i>
-                  <span>Soporte de emergencia disponible 24/7 para clientes premium</span>
-                </div>
-              </div>
+            {/* Se eliminó el horario de atención */}
+            <div className="mt-4 flex items-center text-sm text-gray-600 bg-gray-50 p-4 rounded-lg">
+              <i className="fas fa-info-circle text-primary mr-2"></i>
+              <span>{t('support.emergency')}</span>
             </div>
           </motion.div>
         </div>

@@ -211,6 +211,26 @@ const translations: Record<Language, Record<string, string>> = {
     'detail.loading': 'Cargando...',
     'detail.error': 'Error al cargar la información',
     
+    // Soporte
+    'support.title': 'Soporte y Ayuda',
+    'support.subtitle': 'Estamos comprometidos con brindarle el mejor servicio y respaldo en todas sus operaciones',
+    'support.customerService': 'Servicio al Cliente',
+    'support.customerServiceDesc': 'Soporte personalizado para todas sus consultas sobre nuestros servicios',
+    'support.technicalAssistance': 'Asistencia Técnica',
+    'support.technicalAssistanceDesc': 'Asesoramiento especializado para maquinaria y equipos industriales',
+    'support.auctionHelp': 'Ayuda con Subasta',
+    'support.auctionHelpDesc': 'Guía completa para participar eficientemente en nuestros eventos',
+    'support.documentation': 'Documentación',
+    'support.documentationDesc': 'Acceso a toda la documentación técnica y legal de los activos',
+    'support.requestHelp': 'Solicitar ayuda',
+    'support.contactUs': 'Contáctenos Directamente',
+    'support.phone': 'Teléfono de Contacto',
+    'support.workingHours': 'Lunes a Viernes 9:00 - 18:00',
+    'support.email': 'Correo Electrónico',
+    'support.responseTime': 'Respuesta en menos de 24 horas',
+    'support.office': 'Oficina Central',
+    'support.emergency': 'Soporte de emergencia disponible 24/7 para clientes premium',
+    
     // Footer
     'footer.company': 'Compañía',
     'footer.services': 'Servicios',
@@ -430,6 +450,26 @@ const translations: Record<Language, Record<string, string>> = {
     'detail.contact': 'Contact seller',
     'detail.loading': 'Loading...',
     'detail.error': 'Error loading information',
+    
+    // Soporte
+    'support.title': 'Support and Help',
+    'support.subtitle': 'We are committed to providing you with the best service and support in all your operations',
+    'support.customerService': 'Customer Service',
+    'support.customerServiceDesc': 'Personalized support for all your inquiries about our services',
+    'support.technicalAssistance': 'Technical Assistance',
+    'support.technicalAssistanceDesc': 'Specialized advice for machinery and industrial equipment',
+    'support.auctionHelp': 'Auction Help',
+    'support.auctionHelpDesc': 'Complete guide to efficiently participate in our events',
+    'support.documentation': 'Documentation',
+    'support.documentationDesc': 'Access to all technical and legal documentation of the assets',
+    'support.requestHelp': 'Request help',
+    'support.contactUs': 'Contact Us Directly',
+    'support.phone': 'Contact Phone',
+    'support.workingHours': 'Monday to Friday 9:00 - 18:00',
+    'support.email': 'Email',
+    'support.responseTime': 'Response in less than 24 hours',
+    'support.office': 'Main Office',
+    'support.emergency': 'Emergency support available 24/7 for premium clients',
     
     // Footer
     'footer.company': 'Company',
