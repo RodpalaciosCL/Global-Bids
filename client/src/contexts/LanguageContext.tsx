@@ -90,6 +90,14 @@ const translations: Record<Language, Record<string, string>> = {
     'about.experience': 'Años de experiencia',
     'about.clients': 'Clientes satisfechos',
     'about.machines': 'Máquinas en catálogo',
+    'about.ctaTitle': 'Abrimos el Mercado Latinoamericano',
+    'about.ctaDescription': 'Global Bids ofrece soluciones premium para equipos, piezas, partes y otros activos con respaldo y experiencia comprobada.',
+    'about.profitability': 'Rentabilidad',
+    'about.profitabilityDesc': 'Maximizamos el valor de sus activos mediante nuestra extensa red global de compradores y expertos en valoración.',
+    'about.speed': 'Rapidez',
+    'about.speedDesc': 'Procesos optimizados y eficientes que garantizan transacciones ágiles y una rotación efectiva de sus activos.',
+    'about.transparency': 'Transparencia',
+    'about.transparencyDesc': 'Información completa y detallada en cada operación, con documentación certificada y procesos auditables.',
     
     // Eventos
     'events.title': 'Nuestros Eventos',
@@ -287,6 +295,14 @@ const translations: Record<Language, Record<string, string>> = {
     'about.experience': 'Years of experience',
     'about.clients': 'Satisfied clients',
     'about.machines': 'Machines in catalog',
+    'about.ctaTitle': 'Opening the Latin American Market',
+    'about.ctaDescription': 'Global Bids offers premium solutions for equipment, parts, and other assets with proven expertise and backing.',
+    'about.profitability': 'Profitability',
+    'about.profitabilityDesc': 'We maximize the value of your assets through our extensive global network of buyers and valuation experts.',
+    'about.speed': 'Speed',
+    'about.speedDesc': 'Optimized, efficient processes that guarantee agile transactions and effective asset turnover.',
+    'about.transparency': 'Transparency',
+    'about.transparencyDesc': 'Complete and detailed information in each operation, with certified documentation and auditable processes.',
     
     // Events
     'events.title': 'Our Events',

@@ -251,10 +251,10 @@ export function AboutSection() {
         >
           <div className="text-center mb-8">
             <h3 className="text-2xl md:text-3xl font-bold mb-4">
-              Abrimos el Mercado Latinoamericano
+              {t('about.ctaTitle')}
             </h3>
             <p className="text-white/80 max-w-2xl mx-auto">
-              Global Bids ofrece soluciones premium para equipos, piezas, partes y otros activos con respaldo y experiencia comprobada.
+              {t('about.ctaDescription')}
             </p>
           </div>
           
@@ -263,9 +263,9 @@ export function AboutSection() {
               <div className="w-12 h-12 mx-auto bg-white/20 rounded-full flex items-center justify-center mb-3">
                 <span className="text-white font-bold text-xl">1</span>
               </div>
-              <h4 className="font-bold text-xl mb-2">Rentabilidad</h4>
+              <h4 className="font-bold text-xl mb-2">{t('about.profitability')}</h4>
               <p className="text-white/70 text-sm">
-                Maximizamos el valor de sus activos mediante nuestra extensa red global de compradores y expertos en valoración.
+                {t('about.profitabilityDesc')}
               </p>
             </div>
             
@@ -273,9 +273,9 @@ export function AboutSection() {
               <div className="w-12 h-12 mx-auto bg-white/20 rounded-full flex items-center justify-center mb-3">
                 <span className="text-white font-bold text-xl">2</span>
               </div>
-              <h4 className="font-bold text-xl mb-2">Rapidez</h4>
+              <h4 className="font-bold text-xl mb-2">{t('about.speed')}</h4>
               <p className="text-white/70 text-sm">
-                Procesos optimizados y eficientes que garantizan transacciones ágiles y una rotación efectiva de sus activos.
+                {t('about.speedDesc')}
               </p>
             </div>
             
@@ -283,9 +283,9 @@ export function AboutSection() {
               <div className="w-12 h-12 mx-auto bg-white/20 rounded-full flex items-center justify-center mb-3">
                 <span className="text-white font-bold text-xl">3</span>
               </div>
-              <h4 className="font-bold text-xl mb-2">Transparencia</h4>
+              <h4 className="font-bold text-xl mb-2">{t('about.transparency')}</h4>
               <p className="text-white/70 text-sm">
-                Información completa y detallada en cada operación, con documentación certificada y procesos auditables.
+                {t('about.transparencyDesc')}
               </p>
             </div>
           </div>
