@@ -161,7 +161,7 @@ export function HeroSection() {
               
               <div className="lg:col-span-2 hidden lg:block">
                 <motion.div
-                  className="bg-white/10 backdrop-blur-md rounded-3xl p-6 border border-white/20"
+                  className="bg-white/10 backdrop-blur-md rounded-3xl p-6 border border-white/20 w-full"
                   initial={{ opacity: 0, x: 50 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.7, delay: 0.3 }}
@@ -173,7 +173,7 @@ export function HeroSection() {
                   
                   <div className="rounded-2xl overflow-hidden aspect-video bg-black/20">
                     <iframe 
-                      src="https://northcountry.auctiontechs.com/" 
+                      src="https://northcountry.auctiontechs.com/auctions/catalog/id/6425/active-auctions" 
                       className="w-full h-full"
                       style={{ border: 'none' }}
                       title="North Country Auction"
@@ -182,15 +182,17 @@ export function HeroSection() {
                   </div>
                   
                   {/* Open in new window link */}
-                  <a
-                    href="https://northcountry.auctiontechs.com/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="block text-center text-white py-3 rounded-xl border border-white/30 hover:bg-white/10 transition-colors mt-4 flex items-center justify-center"
-                  >
-                    <i className="fas fa-external-link-alt mr-2"></i>
-                    {language === 'es' ? 'Abrir en nueva ventana' : 'Open in new window'}
-                  </a>
+                  <div className="w-full flex justify-center">
+                    <a
+                      href="https://northcountry.auctiontechs.com/auctions/catalog/id/6425/active-auctions"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-center text-white py-3 px-6 rounded-xl border border-white/30 hover:bg-white/10 transition-colors mt-4 flex items-center justify-center"
+                    >
+                      <i className="fas fa-external-link-alt mr-2"></i>
+                      {language === 'es' ? 'Abrir en nueva ventana' : 'Open in new window'}
+                    </a>
+                  </div>
                 </motion.div>
               </div>
             </div>

@@ -47,7 +47,7 @@ export function AuctionsIframe() {
         </div>
         
         <motion.div 
-          className="bg-white/5 backdrop-blur-sm rounded-3xl p-4 border border-white/10 shadow-lg overflow-hidden"
+          className="bg-white/5 backdrop-blur-sm rounded-3xl p-4 border border-white/10 shadow-lg overflow-hidden max-w-5xl mx-auto"
           variants={fadeIn}
           initial="hidden"
           whileInView="visible"
@@ -56,7 +56,7 @@ export function AuctionsIframe() {
         >
           <div className="aspect-video w-full rounded-2xl overflow-hidden">
             <iframe 
-              src="https://northcountry.auctiontechs.com/" 
+              src="https://northcountry.auctiontechs.com/auctions/catalog/id/6425/active-auctions" 
               className="w-full h-full"
               style={{ border: 'none' }}
               title="North Country Auction"
@@ -75,7 +75,7 @@ export function AuctionsIframe() {
           transition={{ delay: 0.3 }}
         >
           <a 
-            href="https://northcountry.auctiontechs.com/" 
+            href="https://northcountry.auctiontechs.com/auctions/catalog/id/6425/active-auctions" 
             target="_blank" 
             rel="noopener noreferrer" 
             className="inline-flex items-center justify-center bg-primary hover:bg-primary/90 text-white font-medium py-3 px-6 rounded-full transition-colors"
