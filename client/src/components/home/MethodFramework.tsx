@@ -2,11 +2,11 @@ import { useState, useRef } from 'react';
 import { motion, useInView, AnimatePresence } from 'framer-motion';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { 
-  FileText, Camera, Monitor, Users, Video, CreditCard, 
-  FileCheck, Truck, MapPin
+  FileText, Camera, Monitor, Users, Video, 
+  FileCheck, Truck, MapPin, CreditCard
 } from 'lucide-react';
 
-interface StepProps {
+interface ProcessStepProps {
   icon: React.ReactNode;
   titleKey: string;
   descriptionKey: string;
@@ -17,368 +17,276 @@ interface StepProps {
   onMouseLeave: () => void;
 }
 
-interface StepData {
-  icon: React.ReactNode;
-  titleKey: string;
-  descriptionKey: string;
-  row: number;
-  col: number;
-}
-
 export function MethodFramework() {
   const { t } = useLanguage();
   const sectionRef = useRef(null);
   const isInView = useInView(sectionRef, { once: true, amount: 0.2 });
   const [activeStep, setActiveStep] = useState<number | null>(null);
   
-  const steps: StepData[] = [
-    // Primera fila
+  const firstRowSteps = [
     { 
-      icon: <FileText size={20} className="text-gray-600" />, 
+      icon: <FileText size={24} className="text-gray-700" />, 
       titleKey: 'method.step1.title',
-      descriptionKey: 'method.step1.desc',
-      row: 1,
-      col: 1
+      descriptionKey: 'method.step1.desc'
     },
     { 
-      icon: <Camera size={20} className="text-gray-600" />, 
+      icon: <Camera size={24} className="text-gray-700" />, 
       titleKey: 'method.step2.title',
-      descriptionKey: 'method.step2.desc',
-      row: 1,
-      col: 2
+      descriptionKey: 'method.step2.desc'
     },
     { 
-      icon: <Monitor size={20} className="text-gray-600" />, 
+      icon: <Monitor size={24} className="text-gray-700" />, 
       titleKey: 'method.step3.title',
-      descriptionKey: 'method.step3.desc',
-      row: 1,
-      col: 3
+      descriptionKey: 'method.step3.desc'
     },
     { 
-      icon: <Users size={20} className="text-gray-600" />, 
+      icon: <Users size={24} className="text-gray-700" />, 
       titleKey: 'method.step4.title',
-      descriptionKey: 'method.step4.desc',
-      row: 1,
-      col: 4
-    },
-    
-    // Segunda fila
-    { 
-      icon: <Video size={20} className="text-gray-600" />, 
-      titleKey: 'method.step5.title',
-      descriptionKey: 'method.step5.desc',
-      row: 2,
-      col: 1
-    },
-    { 
-      icon: <FileText size={20} className="text-gray-600" />, 
-      titleKey: 'method.step6.title',
-      descriptionKey: 'method.step6.desc',
-      row: 2,
-      col: 2
-    },
-    { 
-      icon: <CreditCard size={20} className="text-gray-600" />, 
-      titleKey: 'method.step7.title',
-      descriptionKey: 'method.step7.desc',
-      row: 2,
-      col: 3
-    },
-    
-    // Tercera fila
-    { 
-      icon: <FileCheck size={20} className="text-gray-600" />, 
-      titleKey: 'method.step8.title',
-      descriptionKey: 'method.step8.desc',
-      row: 3,
-      col: 1
-    },
-    { 
-      icon: <Truck size={20} className="text-gray-600" />, 
-      titleKey: 'method.step9.title',
-      descriptionKey: 'method.step9.desc',
-      row: 3,
-      col: 2
-    },
-    { 
-      icon: <MapPin size={20} className="text-gray-600" />, 
-      titleKey: 'method.step10.title',
-      descriptionKey: 'method.step10.desc',
-      row: 3,
-      col: 3
+      descriptionKey: 'method.step4.desc'
     }
   ];
-
-  // Agrupar los pasos por fila
-  const firstRow = steps.filter(step => step.row === 1);
-  const secondRow = steps.filter(step => step.row === 2);
-  const thirdRow = steps.filter(step => step.row === 3);
+  
+  const secondRowSteps = [
+    { 
+      icon: <Video size={24} className="text-gray-700" />, 
+      titleKey: 'method.step5.title',
+      descriptionKey: 'method.step5.desc'
+    },
+    { 
+      icon: <CreditCard size={24} className="text-gray-700" />, 
+      titleKey: 'method.step6.title',
+      descriptionKey: 'method.step6.desc'
+    },
+    { 
+      icon: <FileText size={24} className="text-gray-700" />, 
+      titleKey: 'method.step7.title',
+      descriptionKey: 'method.step7.desc'
+    }
+  ];
+  
+  const thirdRowSteps = [
+    { 
+      icon: <FileCheck size={24} className="text-gray-700" />, 
+      titleKey: 'method.step8.title',
+      descriptionKey: 'method.step8.desc'
+    },
+    { 
+      icon: <Truck size={24} className="text-gray-700" />, 
+      titleKey: 'method.step9.title',
+      descriptionKey: 'method.step9.desc'
+    },
+    { 
+      icon: <MapPin size={24} className="text-gray-700" />, 
+      titleKey: 'method.step10.title',
+      descriptionKey: 'method.step10.desc'
+    }
+  ];
   
   return (
-    <section className="py-16 bg-white" ref={sectionRef}>
+    <section className="py-12 bg-white" ref={sectionRef}>
       <div className="container mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-12"
+          className="text-center mb-10"
         >
           <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-800">
             {t('method.title')} <span className="text-primary">{t('method.subtitle')}</span>
           </h2>
-          <div className="w-16 h-1 bg-primary mx-auto mb-6"></div>
+          <div className="w-16 h-1 bg-primary mx-auto mb-4"></div>
           <p className="max-w-2xl mx-auto text-gray-600">
             {t('method.description')}
           </p>
         </motion.div>
-
-        <div className="max-w-5xl mx-auto">
+        
+        {/* Proceso completo con un diseño similar a la imagen de referencia */}
+        <div className="max-w-4xl mx-auto">
           {/* Primera fila */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-16 md:gap-8 mb-20 relative">
-            {firstRow.map((step, index) => (
-              <Step 
-                key={`row1-${index}`}
-                icon={step.icon}
-                titleKey={step.titleKey}
-                descriptionKey={step.descriptionKey}
-                index={index}
-                isInView={isInView}
-                isActive={activeStep === index}
-                onMouseEnter={() => setActiveStep(index)}
-                onMouseLeave={() => setActiveStep(null)}
-              />
-            ))}
-            
-            {/* Línea conectora horizontal primera fila */}
-            <motion.div 
-              className="absolute bottom-[-40px] left-[10%] right-[10%] h-1.5 hidden md:block"
-              initial={{ opacity: 0, scaleX: 0 }}
-              animate={isInView ? { opacity: 1, scaleX: 1 } : { opacity: 0, scaleX: 0 }}
-              transition={{ duration: 0.8, delay: 0.6 }}
-              style={{ backgroundColor: '#FFC832', transformOrigin: 'center' }}
-            />
-            
-            {/* Flechas indicadoras de dirección en la línea horizontal */}
-            <motion.div 
-              className="absolute bottom-[-40px] left-[35%] w-3 h-3 border-t-2 border-r-2 hidden md:block rotate-45"
-              initial={{ opacity: 0 }}
-              animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-              transition={{ duration: 0.5, delay: 0.9 }}
-              style={{ borderColor: '#FFC832', transformOrigin: 'center' }}
-            />
-            
-            <motion.div 
-              className="absolute bottom-[-40px] left-[65%] w-3 h-3 border-t-2 border-r-2 hidden md:block rotate-45"
-              initial={{ opacity: 0 }}
-              animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-              transition={{ duration: 0.5, delay: 1.1 }}
-              style={{ borderColor: '#FFC832', transformOrigin: 'center' }}
-            />
-            
-            {/* Líneas verticales hacia la segunda fila con flechas */}
-            <div className="absolute bottom-[-54px] left-[25%] hidden md:flex flex-col items-center">
-              <motion.div 
-                className="h-16 w-1.5 bg-yellow-400"
-                initial={{ opacity: 0, scaleY: 0 }}
-                animate={isInView ? { opacity: 1, scaleY: 1 } : { opacity: 0, scaleY: 0 }}
-                transition={{ duration: 0.5, delay: 0.8 }}
-                style={{ transformOrigin: 'top' }}
-              />
-              <motion.div 
-                className="w-3 h-3 border-b-2 border-r-2 rotate-45 -mt-1.5"
-                initial={{ opacity: 0 }}
-                animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-                transition={{ duration: 0.5, delay: 1.2 }}
-                style={{ borderColor: '#FFC832' }}
-              />
+          <div className="relative mb-14">
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+              {firstRowSteps.map((step, idx) => (
+                <ProcessStep
+                  key={`step-1-${idx}`}
+                  icon={step.icon}
+                  titleKey={step.titleKey}
+                  descriptionKey={step.descriptionKey}
+                  index={idx}
+                  isInView={isInView}
+                  isActive={activeStep === idx}
+                  onMouseEnter={() => setActiveStep(idx)}
+                  onMouseLeave={() => setActiveStep(null)}
+                />
+              ))}
             </div>
             
-            <div className="absolute bottom-[-54px] left-[50%] hidden md:flex flex-col items-center">
-              <motion.div 
-                className="h-16 w-1.5 bg-yellow-400"
-                initial={{ opacity: 0, scaleY: 0 }}
-                animate={isInView ? { opacity: 1, scaleY: 1 } : { opacity: 0, scaleY: 0 }}
-                transition={{ duration: 0.5, delay: 1 }}
-                style={{ transformOrigin: 'top' }}
-              />
-              <motion.div 
-                className="w-3 h-3 border-b-2 border-r-2 rotate-45 -mt-1.5"
-                initial={{ opacity: 0 }}
-                animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-                transition={{ duration: 0.5, delay: 1.4 }}
-                style={{ borderColor: '#FFC832' }}
-              />
-            </div>
-            
-            <div className="absolute bottom-[-54px] left-[75%] hidden md:flex flex-col items-center">
-              <motion.div 
-                className="h-16 w-1.5 bg-yellow-400"
-                initial={{ opacity: 0, scaleY: 0 }}
-                animate={isInView ? { opacity: 1, scaleY: 1 } : { opacity: 0, scaleY: 0 }}
-                transition={{ duration: 0.5, delay: 1.2 }}
-                style={{ transformOrigin: 'top' }}
-              />
-              <motion.div 
-                className="w-3 h-3 border-b-2 border-r-2 rotate-45 -mt-1.5"
-                initial={{ opacity: 0 }}
-                animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-                transition={{ duration: 0.5, delay: 1.6 }}
-                style={{ borderColor: '#FFC832' }}
-              />
-            </div>
+            {/* Línea horizontal conectora en primera fila */}
+            <motion.div
+              initial={{ scaleX: 0 }}
+              animate={isInView ? { scaleX: 1 } : { scaleX: 0 }}
+              transition={{ duration: 0.7, delay: 0.3 }}
+              className="hidden md:block absolute left-[12%] right-[12%] h-[2px] bg-yellow-400 bottom-[-25px]"
+              style={{ transformOrigin: 'center' }}
+            />
           </div>
           
           {/* Segunda fila */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-16 md:gap-8 mb-20 relative">
-            {secondRow.map((step, index) => (
-              <Step 
-                key={`row2-${index}`}
-                icon={step.icon}
-                titleKey={step.titleKey}
-                descriptionKey={step.descriptionKey}
-                index={index + 4}
-                isInView={isInView}
-                isActive={activeStep === index + 4}
-                onMouseEnter={() => setActiveStep(index + 4)}
-                onMouseLeave={() => setActiveStep(null)}
-              />
-            ))}
-            
-            {/* Línea conectora horizontal segunda fila */}
-            <motion.div 
-              className="absolute bottom-[-40px] left-[16.5%] right-[16.5%] h-1.5 hidden md:block"
-              initial={{ opacity: 0, scaleX: 0 }}
-              animate={isInView ? { opacity: 1, scaleX: 1 } : { opacity: 0, scaleX: 0 }}
-              transition={{ duration: 0.8, delay: 1.4 }}
-              style={{ backgroundColor: '#FFC832', transformOrigin: 'center' }}
-            />
-            
-            {/* Flechas indicadoras de dirección en la línea horizontal */}
-            <motion.div 
-              className="absolute bottom-[-40px] left-[35%] w-3 h-3 border-t-2 border-r-2 hidden md:block rotate-45"
-              initial={{ opacity: 0 }}
-              animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-              transition={{ duration: 0.5, delay: 1.7 }}
-              style={{ borderColor: '#FFC832', transformOrigin: 'center' }}
-            />
-            
-            <motion.div 
-              className="absolute bottom-[-40px] left-[65%] w-3 h-3 border-t-2 border-r-2 hidden md:block rotate-45"
-              initial={{ opacity: 0 }}
-              animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-              transition={{ duration: 0.5, delay: 2.0 }}
-              style={{ borderColor: '#FFC832', transformOrigin: 'center' }}
-            />
-            
-            {/* Líneas verticales hacia la tercera fila con flechas */}
-            <div className="absolute bottom-[-54px] left-[16.5%] hidden md:flex flex-col items-center">
-              <motion.div 
-                className="h-16 w-1.5 bg-yellow-400"
-                initial={{ opacity: 0, scaleY: 0 }}
-                animate={isInView ? { opacity: 1, scaleY: 1 } : { opacity: 0, scaleY: 0 }}
-                transition={{ duration: 0.5, delay: 1.6 }}
-                style={{ transformOrigin: 'top' }}
-              />
-              <motion.div 
-                className="w-3 h-3 border-b-2 border-r-2 rotate-45 -mt-1.5"
-                initial={{ opacity: 0 }}
-                animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-                transition={{ duration: 0.5, delay: 2.0 }}
-                style={{ borderColor: '#FFC832' }}
-              />
+          <div className="relative mb-14">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              {secondRowSteps.map((step, idx) => (
+                <ProcessStep
+                  key={`step-2-${idx}`}
+                  icon={step.icon}
+                  titleKey={step.titleKey}
+                  descriptionKey={step.descriptionKey}
+                  index={idx + 4}
+                  isInView={isInView}
+                  isActive={activeStep === (idx + 4)}
+                  onMouseEnter={() => setActiveStep(idx + 4)}
+                  onMouseLeave={() => setActiveStep(null)}
+                />
+              ))}
             </div>
             
-            <div className="absolute bottom-[-54px] left-[50%] hidden md:flex flex-col items-center">
-              <motion.div 
-                className="h-16 w-1.5 bg-yellow-400"
-                initial={{ opacity: 0, scaleY: 0 }}
-                animate={isInView ? { opacity: 1, scaleY: 1 } : { opacity: 0, scaleY: 0 }}
-                transition={{ duration: 0.5, delay: 1.8 }}
-                style={{ transformOrigin: 'top' }}
-              />
-              <motion.div 
-                className="w-3 h-3 border-b-2 border-r-2 rotate-45 -mt-1.5"
-                initial={{ opacity: 0 }}
-                animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-                transition={{ duration: 0.5, delay: 2.2 }}
-                style={{ borderColor: '#FFC832' }}
-              />
-            </div>
-            
-            <div className="absolute bottom-[-54px] left-[83.5%] hidden md:flex flex-col items-center">
-              <motion.div 
-                className="h-16 w-1.5 bg-yellow-400"
-                initial={{ opacity: 0, scaleY: 0 }}
-                animate={isInView ? { opacity: 1, scaleY: 1 } : { opacity: 0, scaleY: 0 }}
-                transition={{ duration: 0.5, delay: 2.0 }}
-                style={{ transformOrigin: 'top' }}
-              />
-              <motion.div 
-                className="w-3 h-3 border-b-2 border-r-2 rotate-45 -mt-1.5"
-                initial={{ opacity: 0 }}
-                animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-                transition={{ duration: 0.5, delay: 2.4 }}
-                style={{ borderColor: '#FFC832' }}
-              />
-            </div>
+            {/* Línea horizontal conectora en segunda fila */}
+            <motion.div
+              initial={{ scaleX: 0 }}
+              animate={isInView ? { scaleX: 1 } : { scaleX: 0 }}
+              transition={{ duration: 0.7, delay: 0.6 }}
+              className="hidden md:block absolute left-[16%] right-[16%] h-[2px] bg-yellow-400 bottom-[-25px]"
+              style={{ transformOrigin: 'center' }}
+            />
           </div>
           
           {/* Tercera fila */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-16 md:gap-8 relative">
-            {thirdRow.map((step, index) => (
-              <Step 
-                key={`row3-${index}`}
-                icon={step.icon}
-                titleKey={step.titleKey}
-                descriptionKey={step.descriptionKey}
-                index={index + 7}
-                isInView={isInView}
-                isActive={activeStep === index + 7}
-                onMouseEnter={() => setActiveStep(index + 7)}
-                onMouseLeave={() => setActiveStep(null)}
-              />
-            ))}
+          <div className="relative">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              {thirdRowSteps.map((step, idx) => (
+                <ProcessStep
+                  key={`step-3-${idx}`}
+                  icon={step.icon}
+                  titleKey={step.titleKey}
+                  descriptionKey={step.descriptionKey}
+                  index={idx + 7}
+                  isInView={isInView}
+                  isActive={activeStep === (idx + 7)}
+                  onMouseEnter={() => setActiveStep(idx + 7)}
+                  onMouseLeave={() => setActiveStep(null)}
+                />
+              ))}
+            </div>
             
-            {/* Flechas conectoras horizontales en la tercera fila */}
-            {/* De paso 1 a paso 2 */}
-            <motion.div 
-              className="absolute top-[50%] left-[27%] w-[12%] h-1.5 hidden md:block"
-              initial={{ opacity: 0, scaleX: 0 }}
-              animate={isInView ? { opacity: 1, scaleX: 1 } : { opacity: 0, scaleX: 0 }}
-              transition={{ duration: 0.8, delay: 2.2 }}
-              style={{ backgroundColor: '#FFC832', transformOrigin: 'left' }}
-            />
-            <motion.div 
-              className="absolute top-[50%] left-[35%] w-3 h-3 border-t-2 border-r-2 hidden md:block rotate-45"
-              initial={{ opacity: 0 }}
-              animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-              transition={{ duration: 0.5, delay: 2.6 }}
-              style={{ borderColor: '#FFC832', transformOrigin: 'center' }}
+            {/* Líneas horizontales conectoras entre pasos */}
+            <motion.div
+              initial={{ scaleX: 0 }}
+              animate={isInView ? { scaleX: 1 } : { scaleX: 0 }}
+              transition={{ duration: 0.4, delay: 1.0 }}
+              className="hidden md:block absolute left-[22%] w-[12%] h-[2px] bg-yellow-400 top-[30px]"
+              style={{ transformOrigin: 'left' }}
             />
             
-            {/* De paso 2 a paso 3 */}
-            <motion.div 
-              className="absolute top-[50%] left-[60%] w-[12%] h-1.5 hidden md:block"
-              initial={{ opacity: 0, scaleX: 0 }}
-              animate={isInView ? { opacity: 1, scaleX: 1 } : { opacity: 0, scaleX: 0 }}
-              transition={{ duration: 0.8, delay: 2.6 }}
-              style={{ backgroundColor: '#FFC832', transformOrigin: 'left' }}
-            />
-            <motion.div 
-              className="absolute top-[50%] left-[68%] w-3 h-3 border-t-2 border-r-2 hidden md:block rotate-45"
-              initial={{ opacity: 0 }}
-              animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-              transition={{ duration: 0.5, delay: 3.0 }}
-              style={{ borderColor: '#FFC832', transformOrigin: 'center' }}
+            <motion.div
+              initial={{ scaleX: 0 }}
+              animate={isInView ? { scaleX: 1 } : { scaleX: 0 }}
+              transition={{ duration: 0.4, delay: 1.2 }}
+              className="hidden md:block absolute left-[56%] w-[12%] h-[2px] bg-yellow-400 top-[30px]"
+              style={{ transformOrigin: 'left' }}
             />
           </div>
+          
+          {/* Conectores verticales entre filas */}
+          {/* De la primera a la segunda fila */}
+          <motion.div
+            initial={{ scaleY: 0 }}
+            animate={isInView ? { scaleY: 1 } : { scaleY: 0 }}
+            transition={{ duration: 0.5, delay: 0.5 }}
+            className="hidden md:block absolute h-[30px] w-[2px] bg-yellow-400"
+            style={{ 
+              transformOrigin: 'top',
+              top: '145px',
+              left: '25%'
+            }}
+          />
+          
+          <motion.div
+            initial={{ scaleY: 0 }}
+            animate={isInView ? { scaleY: 1 } : { scaleY: 0 }}
+            transition={{ duration: 0.5, delay: 0.5 }}
+            className="hidden md:block absolute h-[30px] w-[2px] bg-yellow-400"
+            style={{ 
+              transformOrigin: 'top',
+              top: '145px',
+              left: '50%'
+            }}
+          />
+          
+          <motion.div
+            initial={{ scaleY: 0 }}
+            animate={isInView ? { scaleY: 1 } : { scaleY: 0 }}
+            transition={{ duration: 0.5, delay: 0.5 }}
+            className="hidden md:block absolute h-[30px] w-[2px] bg-yellow-400"
+            style={{ 
+              transformOrigin: 'top',
+              top: '145px',
+              left: '75%'
+            }}
+          />
+          
+          {/* De la segunda a la tercera fila */}
+          <motion.div
+            initial={{ scaleY: 0 }}
+            animate={isInView ? { scaleY: 1 } : { scaleY: 0 }}
+            transition={{ duration: 0.5, delay: 0.8 }}
+            className="hidden md:block absolute h-[30px] w-[2px] bg-yellow-400"
+            style={{ 
+              transformOrigin: 'top',
+              top: '285px',
+              left: '17%'
+            }}
+          />
+          
+          <motion.div
+            initial={{ scaleY: 0 }}
+            animate={isInView ? { scaleY: 1 } : { scaleY: 0 }}
+            transition={{ duration: 0.5, delay: 0.8 }}
+            className="hidden md:block absolute h-[30px] w-[2px] bg-yellow-400"
+            style={{ 
+              transformOrigin: 'top',
+              top: '285px',
+              left: '50%'
+            }}
+          />
+          
+          <motion.div
+            initial={{ scaleY: 0 }}
+            animate={isInView ? { scaleY: 1 } : { scaleY: 0 }}
+            transition={{ duration: 0.5, delay: 0.8 }}
+            className="hidden md:block absolute h-[30px] w-[2px] bg-yellow-400"
+            style={{ 
+              transformOrigin: 'top',
+              top: '285px',
+              left: '83%'
+            }}
+          />
+          
+          {/* Flechas de dirección (triángulos) */}
+          <div className="hidden md:block absolute w-0 h-0 border-t-0 border-b-[6px] border-b-yellow-400 border-l-[6px] border-l-transparent border-r-[6px] border-r-transparent" style={{ top: '285px', left: '16.5%', transform: 'rotate(180deg)' }} />
+          <div className="hidden md:block absolute w-0 h-0 border-t-0 border-b-[6px] border-b-yellow-400 border-l-[6px] border-l-transparent border-r-[6px] border-r-transparent" style={{ top: '285px', left: '49.5%', transform: 'rotate(180deg)' }} />
+          <div className="hidden md:block absolute w-0 h-0 border-t-0 border-b-[6px] border-b-yellow-400 border-l-[6px] border-l-transparent border-r-[6px] border-r-transparent" style={{ top: '285px', left: '82.5%', transform: 'rotate(180deg)' }} />
+          
+          <div className="hidden md:block absolute w-0 h-0 border-t-0 border-b-[6px] border-b-yellow-400 border-l-[6px] border-l-transparent border-r-[6px] border-r-transparent" style={{ top: '145px', left: '24.5%', transform: 'rotate(180deg)' }} />
+          <div className="hidden md:block absolute w-0 h-0 border-t-0 border-b-[6px] border-b-yellow-400 border-l-[6px] border-l-transparent border-r-[6px] border-r-transparent" style={{ top: '145px', left: '49.5%', transform: 'rotate(180deg)' }} />
+          <div className="hidden md:block absolute w-0 h-0 border-t-0 border-b-[6px] border-b-yellow-400 border-l-[6px] border-l-transparent border-r-[6px] border-r-transparent" style={{ top: '145px', left: '74.5%', transform: 'rotate(180deg)' }} />
+          
+          <div className="hidden md:block absolute w-0 h-0 border-t-0 border-b-[6px] border-b-yellow-400 border-l-[6px] border-l-transparent border-r-[6px] border-r-transparent" style={{ top: '29px', left: '33.5%', transform: 'rotate(270deg)' }} />
+          <div className="hidden md:block absolute w-0 h-0 border-t-0 border-b-[6px] border-b-yellow-400 border-l-[6px] border-l-transparent border-r-[6px] border-r-transparent" style={{ top: '29px', left: '67.5%', transform: 'rotate(270deg)' }} />
         </div>
       </div>
     </section>
   );
 }
 
-function Step({ 
+function ProcessStep({ 
   icon, 
   titleKey, 
   descriptionKey, 
@@ -387,64 +295,39 @@ function Step({
   isActive,
   onMouseEnter,
   onMouseLeave
-}: StepProps) {
+}: ProcessStepProps) {
   const { t } = useLanguage();
-  
-  // Calcular retraso basado en el índice para la animación escalonada
-  const delay = index * 0.15;
+  const delay = index * 0.1;
   
   return (
     <motion.div
-      className="flex flex-col items-center text-center relative z-10"
-      initial={{ opacity: 0, y: 20 }}
-      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-      transition={{ duration: 0.5, delay }}
+      className="flex flex-col items-center relative z-10"
+      initial={{ opacity: 0, y: 10 }}
+      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
+      transition={{ duration: 0.4, delay }}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
     >
-      <motion.div
-        className="relative flex items-center justify-center mb-4 cursor-pointer"
-        animate={isActive ? { y: -4 } : { y: 0 }}
-        transition={{ duration: 0.2 }}
+      <motion.div 
+        className={`w-[60px] h-[60px] flex items-center justify-center rounded-full 
+                    ${isActive ? 'bg-yellow-50 border-yellow-400' : 'bg-gray-50 border-gray-200'} 
+                    border p-1 shadow-sm mb-3 transition-colors duration-200`}
+        whileHover={{ scale: 1.05 }}
       >
-        {/* Círculo exterior con borde */}
-        <motion.div 
-          className="absolute inset-0 w-[60px] h-[60px] rounded-full border-[1px] border-gray-300"
-          animate={isActive ? { scale: 1.1, borderColor: "#FFC832" } : { scale: 1, borderColor: "#d1d5db" }}
-          transition={{ duration: 0.3 }}
-        />
-        
-        {/* Círculo intermedio con sombra */}
-        <motion.div 
-          className="absolute w-[48px] h-[48px] rounded-full bg-gray-100 shadow-sm"
-          animate={isActive ? { backgroundColor: "#FFF8E0" } : { backgroundColor: "#f3f4f6" }}
-          transition={{ duration: 0.3 }}
-        />
-        
-        {/* Círculo interior con icono */}
-        <div className="relative w-[60px] h-[60px] flex items-center justify-center">
-          <motion.div 
-            className="relative z-20"
-            animate={isActive ? { scale: 1.1 } : { scale: 1 }}
-            transition={{ duration: 0.3 }}
-          >
-            {icon}
-          </motion.div>
+        <div className={`w-full h-full rounded-full flex items-center justify-center 
+                         ${isActive ? 'bg-yellow-100' : 'bg-white'}`}>
+          {icon}
         </div>
       </motion.div>
       
-      <motion.h3 
-        className="text-sm font-semibold mb-1 text-gray-800"
-        animate={isActive ? { color: "#FFC832" } : { color: "#1F2937" }}
-        transition={{ duration: 0.3 }}
-      >
+      <h3 className={`text-sm font-semibold ${isActive ? 'text-yellow-500' : 'text-gray-700'} text-center max-w-[120px] transition-colors duration-200`}>
         {t(titleKey)}
-      </motion.h3>
+      </h3>
       
       <AnimatePresence>
         {isActive && (
           <motion.div
-            className="absolute -bottom-16 left-0 right-0 mx-auto z-20 w-[180px] bg-white shadow-md rounded-md p-2 text-xs text-gray-700 border border-gray-100"
+            className="absolute -bottom-14 left-0 right-0 mx-auto z-20 w-[180px] bg-white shadow-sm rounded-md p-2 text-xs text-gray-600 border border-gray-100"
             initial={{ opacity: 0, y: -5 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -5 }}
