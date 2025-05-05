@@ -4,7 +4,7 @@ import { useInView } from 'framer-motion';
 import { fadeIn, staggerContainer, scaleIn } from '@/lib/animations';
 
 interface StatItem {
-  icon: string;
+  icon?: string;
   value: number;
   label: string;
   suffix?: string;
@@ -16,10 +16,10 @@ export function StatsSection() {
   const isInView = useInView(sectionRef, { once: true, amount: 0.3 });
   
   const stats: StatItem[] = [
-    { icon: 'fa-clock', value: 15, label: 'Años de experiencia', suffix: '+' },
-    { icon: 'fa-truck-monster', value: 1500, label: 'Maquinarias vendidas', suffix: '+' },
-    { icon: 'fa-globe', value: 12, label: 'Países cubiertos' },
-    { icon: 'fa-smile', value: 98, label: 'Clientes satisfechos', suffix: '%' }
+    { icon: 'fa-gavel', prefix: '+', value: 2800, label: 'Remates' },
+    { icon: 'fa-globe', value: 75, label: 'países' },
+    { icon: 'fa-dollar-sign', prefix: 'USD ', value: 450, label: 'Ventas en los últimos 24 meses', suffix: 'M' },
+    { icon: 'fa-users', value: 950300, label: 'Clientes pre-validados en todo el mundo' }
   ];
   
   return (
@@ -89,9 +89,11 @@ function StatCard({ stat, index, isVisible }: StatCardProps) {
       className="text-center bg-primary-light p-6 rounded-lg transition-all duration-300 hover:transform hover:scale-105"
       variants={scaleIn}
     >
-      <div className="text-secondary text-4xl mb-2">
-        <i className={`fas ${stat.icon}`}></i>
-      </div>
+      {stat.icon && (
+        <div className="text-secondary text-4xl mb-2">
+          <i className={`fas ${stat.icon}`}></i>
+        </div>
+      )}
       <div className="flex justify-center items-center mb-2">
         {stat.prefix && <span className="text-2xl font-bold mr-1">{stat.prefix}</span>}
         <div className="text-4xl font-bold">{count.toLocaleString()}</div>
