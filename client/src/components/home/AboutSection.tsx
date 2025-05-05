@@ -1,64 +1,25 @@
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
-import { useRef, useEffect, useState } from 'react';
+import { useRef } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { fadeIn, slideUp } from '@/lib/animations';
 
 export function AboutSection() {
   const sectionRef = useRef(null);
   const isInView = useInView(sectionRef, { once: true, amount: 0.1 });
   const { t } = useLanguage();
   
-  // Contenido de los tabs
-  const tabContent = {
-    historia: {
-      title: "Una Historia de Excelencia",
-      subtitle: "",
-      description: [
-        "Global Bids nace de un Joint-Venture entre North Country Auction, empresa Americana experta en subastas, y Grupo Prelco, quienes han estado en el rubro de minería más de 20 años.",
-        "En Global Bids contamos con acceso a más de 950,000 clientes internacionales a través de nuestras plataformas online, lo que nos permite conectar la oferta sudamericana con la demanda global de manera digital, segmentada y transparente.",
-        "Nuestro enfoque garantiza el mejor valor para los consignatarios al encontrar compradores en mercados donde estos activos tienen alta demanda."
-      ],
-      cta: "Conoce nuestra historia",
-      image: "https://images.pexels.com/photos/1216589/pexels-photo-1216589.jpeg?auto=compress&cs=tinysrgb&w=1600",
-      icon: "fa-history"
-    },
-    mision: {
-      title: "Nuestra Misión",
-      subtitle: "Compromiso con la excelencia",
-      description: [
-        "Proporcionar un servicio integral de valoración y comercialización de maquinaria pesada que garantice transparencia, valor justo y satisfacción para todas las partes involucradas.",
-        "Nos comprometemos a mantener los más altos estándares de profesionalismo en cada operación, aportando valor tanto a compradores como a vendedores.",
-        "Trabajamos constantemente para innovar y mejorar nuestros procesos, incorporando nuevas tecnologías y metodologías que beneficien a nuestros clientes."
-      ],
-      cta: "Conoce nuestra misión",
-      image: "https://images.pexels.com/photos/2760243/pexels-photo-2760243.jpeg?auto=compress&cs=tinysrgb&w=1600",
-      icon: "fa-bullseye"
-    },
-    presencia: {
-      title: "Presencia Internacional",
-      subtitle: "Operaciones en 12 países",
-      description: [
-        "Actualmente, Global Bids tiene presencia en 12 países de Latinoamérica, con oficinas principales en Chile, Perú, Colombia, México y Estados Unidos.",
-        "Nuestra sede central en Boston coordina las operaciones globales, mientras que nuestros centros operativos en Antofagasta, La Negra y Sierra Gorda atienden al sector minero chileno.",
-        "La oficina de Vitacura en Santiago funciona como nuestro principal centro comercial y administrativo para la región sur."
-      ],
-      cta: "Ver nuestras sedes",
-      image: "https://images.pexels.com/photos/1642125/pexels-photo-1642125.jpeg?auto=compress&cs=tinysrgb&w=1600",
-      icon: "fa-globe-americas"
-    },
-    expertise: {
-      title: "Áreas de Experticia",
-      subtitle: "Especialistas en equipos industriales",
-      description: [
-        "Nuestro equipo multidisciplinario incluye ingenieros mecánicos, tasadores certificados, especialistas en comercio internacional y expertos en logística.",
-        "Nos especializamos en maquinaria minera, forestal e industrial, cubriendo excavadoras, camiones, cargadores, equipos de generación eléctrica, grúas y más.",
-        "Cada pieza de maquinaria es evaluada mediante un riguroso proceso que incluye inspección técnica, valoración de mercado y documentación completa."
-      ],
-      cta: "Conoce nuestros servicios",
-      image: "https://images.pexels.com/photos/2760250/pexels-photo-2760250.jpeg?auto=compress&cs=tinysrgb&w=1600",
-      icon: "fa-tools"
-    }
+  // Contenido de la historia
+  const historiaContent = {
+    title: "Una Historia de Excelencia",
+    subtitle: "",
+    description: [
+      "Global Bids nace de un Joint-Venture entre North Country Auction, empresa Americana experta en subastas, y Grupo Prelco, quienes han estado en el rubro de minería más de 20 años.",
+      "En Global Bids contamos con acceso a más de 950,000 clientes internacionales a través de nuestras plataformas online, lo que nos permite conectar la oferta sudamericana con la demanda global de manera digital, segmentada y transparente.",
+      "Nuestro enfoque garantiza el mejor valor para los consignatarios al encontrar compradores en mercados donde estos activos tienen alta demanda."
+    ],
+    cta: "Conoce nuestra historia",
+    image: "https://images.pexels.com/photos/1216589/pexels-photo-1216589.jpeg?auto=compress&cs=tinysrgb&w=1600",
+    icon: "fa-history"
   };
   
   // Estadísticas clave
@@ -151,18 +112,18 @@ export function AboutSection() {
             <div className="h-[400px] md:h-[500px] rounded-3xl overflow-hidden shadow-xl relative order-1 lg:order-none">
               <div className="absolute inset-0 bg-gradient-to-br from-primary/30 to-primary/70 mix-blend-multiply z-10"></div>
               <img 
-                src={tabContent.historia.image}
-                alt={tabContent.historia.title}
+                src={historiaContent.image}
+                alt={historiaContent.title}
                 className="w-full h-full object-cover object-center"
               />
               <div className="absolute bottom-0 left-0 right-0 p-8 z-20 bg-gradient-to-t from-black/70 to-transparent">
                 <div className="flex items-center mb-3">
                   <div className="w-10 h-10 rounded-full bg-primary/30 backdrop-blur-sm flex items-center justify-center mr-3">
-                    <i className={`fas ${tabContent.historia.icon} text-white`}></i>
+                    <i className={`fas ${historiaContent.icon} text-white`}></i>
                   </div>
-                  <div className="text-white/80 text-sm">{tabContent.historia.subtitle}</div>
+                  <div className="text-white/80 text-sm">{historiaContent.subtitle}</div>
                 </div>
-                <h3 className="text-white text-3xl font-bold mb-2">{tabContent.historia.title}</h3>
+                <h3 className="text-white text-3xl font-bold mb-2">{historiaContent.title}</h3>
               </div>
             </div>
             
@@ -170,7 +131,7 @@ export function AboutSection() {
             <div className="space-y-6 p-2">
               <div className="p-6 md:p-8 bg-white rounded-3xl shadow-lg border border-gray-100">
                 <div className="space-y-4">
-                  {tabContent.historia.description.map((paragraph, idx) => (
+                  {historiaContent.description.map((paragraph, idx) => (
                     <motion.p 
                       key={idx} 
                       className="text-gray-600 leading-relaxed"
@@ -189,7 +150,7 @@ export function AboutSection() {
                     className="inline-flex items-center text-primary font-medium hover:underline group"
                     whileHover={{ x: 4 }}
                   >
-                    {tabContent.historia.cta}
+                    {historiaContent.cta}
                     <i className="fas fa-arrow-right ml-2 transition-transform group-hover:translate-x-1"></i>
                   </motion.a>
                 </div>
