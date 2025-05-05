@@ -164,7 +164,7 @@ export function AboutSection() {
                   <div className="w-16 h-16 mx-auto bg-white/20 rounded-full flex items-center justify-center mb-3 shadow-lg">
                     <i className="fas fa-clipboard-list text-white text-xl"></i>
                   </div>
-                  <div className="text-white text-sm font-medium">Activos a rematar</div>
+                  <div className="text-white text-sm font-medium">{t('about.assets')}</div>
                 </div>
                 
                 <div className="flex justify-center items-center">
@@ -175,7 +175,7 @@ export function AboutSection() {
                   <div className="w-16 h-16 mx-auto bg-white/20 rounded-full flex items-center justify-center mb-3 shadow-lg">
                     <i className="fas fa-camera text-white text-xl"></i>
                   </div>
-                  <div className="text-white text-sm font-medium">Material gráfico en terreno</div>
+                  <div className="text-white text-sm font-medium">{t('about.material')}</div>
                 </div>
                 
                 <div className="flex justify-center items-center">
@@ -186,7 +186,7 @@ export function AboutSection() {
                   <div className="w-16 h-16 mx-auto bg-white/20 rounded-full flex items-center justify-center mb-3 shadow-lg">
                     <i className="fas fa-desktop text-white text-xl"></i>
                   </div>
-                  <div className="text-white text-sm font-medium">Plataforma</div>
+                  <div className="text-white text-sm font-medium">{t('about.platform')}</div>
                 </div>
                 
                 <div className="flex justify-center items-center">
@@ -197,7 +197,7 @@ export function AboutSection() {
                   <div className="w-16 h-16 mx-auto bg-white/20 rounded-full flex items-center justify-center mb-3 shadow-lg">
                     <i className="fas fa-bullhorn text-white text-xl"></i>
                   </div>
-                  <div className="text-white text-sm font-medium">Marketing<br/>950k clientes globales</div>
+                  <div className="text-white text-sm font-medium">{t('about.marketing')}<br/>{t('about.clients950k')}</div>
                 </div>
               </div>
               
@@ -215,7 +215,7 @@ export function AboutSection() {
                   <div className="w-16 h-16 mx-auto bg-white/20 rounded-full flex items-center justify-center mb-3 shadow-lg">
                     <i className="fas fa-video text-white text-xl"></i>
                   </div>
-                  <div className="text-white text-sm font-medium">Evento Remate<br/>Presencial y online</div>
+                  <div className="text-white text-sm font-medium">{t('about.event')}<br/>{t('about.eventDesc')}</div>
                 </div>
                 
                 <div className="flex justify-center items-center">
@@ -226,7 +226,7 @@ export function AboutSection() {
                   <div className="w-16 h-16 mx-auto bg-white/20 rounded-full flex items-center justify-center mb-3 shadow-lg">
                     <i className="fas fa-gavel text-white text-xl"></i>
                   </div>
-                  <div className="text-white text-sm font-medium">Comprador paga el<br/>lote adjudicado</div>
+                  <div className="text-white text-sm font-medium">{t('about.buyerPays')}</div>
                 </div>
                 
                 <div className="flex justify-center items-center">
@@ -237,7 +237,7 @@ export function AboutSection() {
                   <div className="w-16 h-16 mx-auto bg-white/20 rounded-full flex items-center justify-center mb-3 shadow-lg">
                     <i className="fas fa-hand-holding-usd text-white text-xl"></i>
                   </div>
-                  <div className="text-white text-sm font-medium">Pago a consignatario</div>
+                  <div className="text-white text-sm font-medium">{t('about.payment')}</div>
                 </div>
               </div>
               
@@ -255,7 +255,7 @@ export function AboutSection() {
                   <div className="w-16 h-16 mx-auto bg-white/20 rounded-full flex items-center justify-center mb-3 shadow-lg">
                     <i className="fas fa-file-invoice text-white text-xl"></i>
                   </div>
-                  <div className="text-white text-sm font-medium">Certificado de pago<br/>para liberar carga</div>
+                  <div className="text-white text-sm font-medium">{t('about.certificate')}</div>
                 </div>
                 
                 <div className="flex justify-center items-center">
@@ -266,7 +266,7 @@ export function AboutSection() {
                   <div className="w-16 h-16 mx-auto bg-white/20 rounded-full flex items-center justify-center mb-3 shadow-lg">
                     <i className="fas fa-truck text-white text-xl"></i>
                   </div>
-                  <div className="text-white text-sm font-medium">Logística de retiro<br/>y despacho</div>
+                  <div className="text-white text-sm font-medium">{t('about.logistics')}</div>
                 </div>
                 
                 <div className="flex justify-center items-center">
@@ -277,7 +277,7 @@ export function AboutSection() {
                   <div className="w-16 h-16 mx-auto bg-white/20 rounded-full flex items-center justify-center mb-3 shadow-lg">
                     <i className="fas fa-map-marker-alt text-white text-xl"></i>
                   </div>
-                  <div className="text-white text-sm font-medium">Entrega en destino</div>
+                  <div className="text-white text-sm font-medium">{t('about.delivery')}</div>
                 </div>
               </div>
             </div>
