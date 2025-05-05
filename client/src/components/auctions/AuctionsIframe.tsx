@@ -37,14 +37,20 @@ export function AuctionsIframe() {
           viewport={{ once: true }}
           transition={{ delay: 0.2 }}
         >
-          {/* Iframe directo a la página de subastas */}
-          <div className="relative pt-0 pb-[56.25%] h-0 overflow-hidden">
+          {/* Iframe directo a la página de subastas con ajustes de posición */}
+          <div className="relative pt-0 pb-[56.25%] h-0 overflow-hidden rounded-3xl">
             <iframe 
               src="https://northcountry.auctiontechs.com/auctions" 
-              className="absolute top-0 left-0 w-full h-full border-0" 
-              style={{ minHeight: '600px' }}
+              className="absolute top-0 left-0 w-full h-full border-0"
+              style={{ 
+                minHeight: '600px',
+                marginTop: '-115px', /* Ajuste para ocultar el encabezado de North Country */
+                marginBottom: '-50px', /* Ajuste para ocultar el pie de página */
+                height: 'calc(100% + 165px)', /* Compensar los márgenes negativos */
+                width: '100%',
+              }}
               title="North Country Auctions"
-              allowFullScreen
+              scrolling="no"
             ></iframe>
           </div>
         </motion.div>
