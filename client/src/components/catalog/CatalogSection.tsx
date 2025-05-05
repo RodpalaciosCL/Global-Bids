@@ -111,13 +111,11 @@ export function CatalogSection() {
           variants={fadeIn}
         >
           <h2 className="font-heading text-3xl md:text-4xl font-bold mb-4 text-primary">
-            Marketplace
+            {t('catalog.title')}
           </h2>
           <div className="w-20 h-1 bg-secondary mx-auto mb-6"></div>
           <p className="max-w-3xl mx-auto text-gray-600">
-            Explora nuestra amplia selección de maquinaria industrial, chatarra, 
-            herramientas y repuestos disponibles para remate. Utiliza los filtros 
-            para encontrar exactamente lo que necesitas.
+            {t('catalog.subtitle')}
           </p>
         </motion.div>
 
@@ -136,14 +134,14 @@ export function CatalogSection() {
               {/* Search */}
               <div className="lg:col-span-2">
                 <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Buscar por palabra clave
+                  {t('catalog.search')}
                 </label>
                 <div className="relative">
                   <input
                     type="text"
                     id="search"
                     className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary focus:border-secondary transition"
-                    placeholder="Buscar equipo..."
+                    placeholder={language === 'es' ? "Buscar activo..." : "Search asset..."}
                     onChange={handleInputChange}
                     value={filters.search || ""}
                   />
@@ -159,7 +157,7 @@ export function CatalogSection() {
                   htmlFor="type-filter"
                   className="block text-sm font-medium text-gray-700 mb-1"
                 >
-                  Tipo de Equipo
+                  {t('catalog.type')}
                 </label>
                 <select
                   id="type-filter"
@@ -167,13 +165,13 @@ export function CatalogSection() {
                   onChange={handleSelectChange}
                   value={filters.type || ""}
                 >
-                  <option value="">Todos los tipos</option>
-                  <option value="excavator">Excavadoras</option>
-                  <option value="truck">Camiones</option>
-                  <option value="loader">Cargadores</option>
-                  <option value="generator">Generadores</option>
-                  <option value="crane">Grúas</option>
-                  <option value="backhoe">Retroexcavadoras</option>
+                  <option value="">{language === 'es' ? 'Todos los tipos' : 'All types'}</option>
+                  <option value="excavator">{t('type.excavator')}</option>
+                  <option value="truck">{t('type.truck')}</option>
+                  <option value="loader">{t('type.loader')}</option>
+                  <option value="generator">{t('type.generator')}</option>
+                  <option value="crane">{t('type.crane')}</option>
+                  <option value="backhoe">{t('type.backhoe')}</option>
                 </select>
               </div>
 
@@ -183,7 +181,7 @@ export function CatalogSection() {
                   htmlFor="brand-filter"
                   className="block text-sm font-medium text-gray-700 mb-1"
                 >
-                  Marca
+                  {t('catalog.brand')}
                 </label>
                 <select
                   id="brand-filter"
@@ -191,7 +189,7 @@ export function CatalogSection() {
                   onChange={handleSelectChange}
                   value={filters.brand || ""}
                 >
-                  <option value="">Todas las marcas</option>
+                  <option value="">{language === 'es' ? 'Todas las marcas' : 'All brands'}</option>
                   <option value="caterpillar">Caterpillar</option>
                   <option value="volvo">Volvo</option>
                   <option value="komatsu">Komatsu</option>
@@ -207,7 +205,7 @@ export function CatalogSection() {
                   htmlFor="year-filter"
                   className="block text-sm font-medium text-gray-700 mb-1"
                 >
-                  Año
+                  {t('catalog.year')}
                 </label>
                 <select
                   id="year-filter"
@@ -215,13 +213,13 @@ export function CatalogSection() {
                   onChange={handleSelectChange}
                   value={filters.year || ""}
                 >
-                  <option value="">Todos los años</option>
+                  <option value="">{language === 'es' ? 'Todos los años' : 'All years'}</option>
                   <option value="2023">2023</option>
                   <option value="2022">2022</option>
                   <option value="2021">2021</option>
                   <option value="2020">2020</option>
                   <option value="2019">2019</option>
-                  <option value="older">2018 y anteriores</option>
+                  <option value="older">{language === 'es' ? '2018 y anteriores' : '2018 and older'}</option>
                 </select>
               </div>
             </div>
@@ -231,7 +229,7 @@ export function CatalogSection() {
               <div className="lg:col-span-2">
                 <div className="flex justify-between items-center mb-1">
                   <label className="block text-sm font-medium text-gray-700">
-                    Rango de Precio
+                    {t('catalog.priceRange')}
                   </label>
                   <CurrencySelector />
                 </div>
@@ -239,16 +237,16 @@ export function CatalogSection() {
                   <input
                     type="number"
                     id="price-min"
-                    placeholder="Mínimo"
+                    placeholder={language === 'es' ? "Mínimo" : "Minimum"}
                     className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary focus:border-secondary transition"
                     onChange={handleInputChange}
                     value={filters.minPrice || ""}
                   />
-                  <span className="text-gray-500">a</span>
+                  <span className="text-gray-500">{language === 'es' ? "a" : "to"}</span>
                   <input
                     type="number"
                     id="price-max"
-                    placeholder="Máximo"
+                    placeholder={language === 'es' ? "Máximo" : "Maximum"}
                     className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary focus:border-secondary transition"
                     onChange={handleInputChange}
                     value={filters.maxPrice || ""}
@@ -262,7 +260,7 @@ export function CatalogSection() {
                   htmlFor="condition-filter"
                   className="block text-sm font-medium text-gray-700 mb-1"
                 >
-                  Familia de equipos
+                  {t('catalog.equipmentFamily')}
                 </label>
                 <select
                   id="condition-filter"
@@ -270,11 +268,11 @@ export function CatalogSection() {
                   onChange={handleSelectChange}
                   value={filters.condition || ""}
                 >
-                  <option value="">Todas las familias</option>
-                  <option value="excellent">Excelente</option>
-                  <option value="good">Bueno</option>
-                  <option value="fair">Regular</option>
-                  <option value="repair">Para reparar</option>
+                  <option value="">{language === 'es' ? 'Todas las familias' : 'All families'}</option>
+                  <option value="excellent">{language === 'es' ? 'Excelente' : 'Excellent'}</option>
+                  <option value="good">{language === 'es' ? 'Bueno' : 'Good'}</option>
+                  <option value="fair">{language === 'es' ? 'Regular' : 'Fair'}</option>
+                  <option value="repair">{language === 'es' ? 'Para reparar' : 'For repair'}</option>
                 </select>
               </div>
 
@@ -284,7 +282,7 @@ export function CatalogSection() {
                   className="w-full bg-primary hover:bg-primary-light text-white font-semibold px-4 py-2 rounded-lg transition duration-300"
                   onClick={handleApplyFilters}
                 >
-                  <i className="fas fa-filter mr-2"></i>Aplicar Filtros
+                  <i className="fas fa-filter mr-2"></i>{language === 'es' ? 'Aplicar Filtros' : 'Apply Filters'}
                 </button>
               </div>
             </div>
@@ -296,13 +294,13 @@ export function CatalogSection() {
             variants={slideUp}
           >
             <div className="text-gray-600 mb-3 md:mb-0">
-              Mostrando{" "}
+              {language === 'es' ? 'Mostrando' : 'Showing'}{" "}
               <span className="font-semibold">{machinery.length}</span>{" "}
-              resultados
+              {language === 'es' ? 'resultados' : 'results'}
             </div>
             <div className="flex items-center">
               <label htmlFor="sort-by" className="mr-2 text-gray-600">
-                Ordenar por:
+                {language === 'es' ? 'Ordenar por:' : 'Sort by:'}
               </label>
               <select
                 id="sort-by"
@@ -310,10 +308,10 @@ export function CatalogSection() {
                 onChange={handleSelectChange}
                 value={sortOrder}
               >
-                <option value="price-asc">Precio: menor a mayor</option>
-                <option value="price-desc">Precio: mayor a menor</option>
-                <option value="year-desc">Año: más reciente</option>
-                <option value="year-asc">Año: más antiguo</option>
+                <option value="price-asc">{language === 'es' ? 'Precio: menor a mayor' : 'Price: low to high'}</option>
+                <option value="price-desc">{language === 'es' ? 'Precio: mayor a menor' : 'Price: high to low'}</option>
+                <option value="year-desc">{language === 'es' ? 'Año: más reciente' : 'Year: newest'}</option>
+                <option value="year-asc">{language === 'es' ? 'Año: más antiguo' : 'Year: oldest'}</option>
               </select>
             </div>
           </motion.div>
@@ -351,10 +349,10 @@ export function CatalogSection() {
               <div className="col-span-full py-12 text-center">
                 <i className="fas fa-search text-gray-400 text-5xl mb-4"></i>
                 <h3 className="text-xl font-semibold text-gray-600">
-                  No se encontraron resultados
+                  {language === 'es' ? 'No se encontraron resultados' : 'No results found'}
                 </h3>
                 <p className="text-gray-500 mt-2">
-                  Intenta con otros filtros de búsqueda
+                  {language === 'es' ? 'Intenta con otros filtros de búsqueda' : 'Try with different search filters'}
                 </p>
               </div>
             )}
