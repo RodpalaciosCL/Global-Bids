@@ -12,7 +12,7 @@ export function HeroSection() {
     {
       title: t('hero.title'),
       subtitle: t('hero.subtitle'),
-      image: "https://images.pexels.com/photos/188679/pexels-photo-188679.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2", // Imagen de fondo actualizada
+      image: "https://images.pexels.com/photos/2058128/pexels-photo-2058128.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2", // Imagen de maquinaria más vertical
       icon: "fa-gavel"
     }
   ];
@@ -53,7 +53,7 @@ export function HeroSection() {
                 exit={{ opacity: 0 }}
                 transition={{ duration: 1 }}
               >
-                <div className="absolute inset-0 bg-gradient-to-r from-primary/80 to-primary/40 z-10"></div>
+                <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-primary/70 to-primary/40 z-10"></div>
                 <img 
                   src={slide.image} 
                   alt={slide.title} 
@@ -65,7 +65,7 @@ export function HeroSection() {
         </AnimatePresence>
       </div>
       
-      <div className="min-h-[80vh] md:min-h-screen flex flex-col">
+      <div className="min-h-[70vh] md:min-h-[85vh] flex flex-col">
         <div className="flex-grow flex items-center relative z-10 pt-14 md:pt-0">
           <div className="container mx-auto px-3 sm:px-4 py-6 md:py-0">
             <div className="grid grid-cols-1 gap-3 md:gap-8 items-center">
