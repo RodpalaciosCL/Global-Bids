@@ -34,56 +34,41 @@ export default function MachineryDetail() {
   }
   
   return (
-    <div className="bg-white min-h-screen">
-      <div className="container mx-auto px-4 py-2">
+    <div className="bg-white">
+      <div className="container mx-auto px-4 pb-2">
         {/* Navegación simple */}
-        <div className="flex items-center text-sm mb-3">
+        <div className="flex items-center text-xs py-1">
           <a href="/" className="text-gray-500 hover:text-primary">Inicio</a>
-          <span className="mx-2 text-gray-400">/</span>
+          <span className="mx-1 text-gray-400">/</span>
           <a href="/#catalogo" className="text-gray-500 hover:text-primary">Catálogo</a>
-          <span className="mx-2 text-gray-400">/</span>
+          <span className="mx-1 text-gray-400">/</span>
           <span className="text-primary font-medium truncate">{machinery.name}</span>
         </div>
         
-        {/* Sección superior */}
-        <div className="mb-3">
-          {/* Categoría y título */}
-          <div className="mb-2">
+        {/* Layout principal - todo en una sola fila */}
+        <div className="flex flex-col md:flex-row md:space-x-4">
+          {/* Columna izquierda: categoría, título y galería */}
+          <div className="md:w-3/5">
             <div className="inline-block bg-gray-100 text-primary font-medium px-2 py-0.5 rounded text-xs">
               {typeLabels[machinery.type as keyof typeof typeLabels]}
             </div>
             
-            <h1 className="text-xl sm:text-2xl font-bold text-gray-900 mt-1 mb-2">{machinery.name}</h1>
-          </div>
-          
-          {/* Atributos básicos */}
-          <div className="flex flex-wrap gap-x-4 gap-y-1 text-sm text-gray-600 mb-3">
-            <div className="flex items-center">
-              <i className="fas fa-calendar-alt mr-1.5 text-gray-500"></i>
-              <span>{machinery.year}</span>
+            <h1 className="text-xl font-bold text-gray-900 mt-1 mb-2">{machinery.name}</h1>
+            
+            {/* Atributos básicos en línea - solo para móvil */}
+            <div className="md:hidden flex flex-wrap gap-x-4 gap-y-0 text-sm text-gray-600 mb-2">
+              <div className="flex items-center">
+                <i className="fas fa-calendar-alt mr-1 text-gray-500"></i>
+                <span>{machinery.year}</span>
+              </div>
+              <div className="flex items-center">
+                <i className="fas fa-tachometer-alt mr-1 text-gray-500"></i>
+                <span>{machinery.hours ? `${machinery.hours.toLocaleString()} hrs` : 'N/A'}</span>
+              </div>
             </div>
-            <div className="flex items-center">
-              <i className="fas fa-tag mr-1.5 text-gray-500"></i>
-              <span>{machinery.brand}</span>
-            </div>
-            <div className="flex items-center">
-              <i className="fas fa-tachometer-alt mr-1.5 text-gray-500"></i>
-              <span>{machinery.hours ? `${machinery.hours.toLocaleString()} hrs` : 
-                machinery.kilometers ? `${machinery.kilometers.toLocaleString()} km` : 'N/A'}</span>
-            </div>
-            <div className="flex items-center">
-              <i className="fas fa-check-circle mr-1.5 text-gray-500"></i>
-              <span>{conditionLabels[machinery.condition as keyof typeof conditionLabels]}</span>
-            </div>
-          </div>
-        </div>
-        
-        {/* Panel principal */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
-          {/* Columna izquierda con galería */}
-          <div className="md:col-span-2">
-            {/* Galería de fotos */}
-            <div className="border border-gray-200 rounded-lg overflow-hidden">
+            
+            {/* Galería de fotos más compacta */}
+            <div className="border border-gray-200 rounded overflow-hidden mb-2">
               {machinery.gallery && machinery.gallery.length > 0 ? (
                 <ImageGallery 
                   images={[machinery.image, ...(machinery.gallery || [])]} 
@@ -98,127 +83,134 @@ export default function MachineryDetail() {
             </div>
             
             {/* Botones de acción */}
-            <div className="grid grid-cols-2 gap-3 mt-3 mb-3">
-              <Button className="bg-gray-900 hover:bg-gray-800 text-white py-2 rounded-sm h-12" size="lg">
+            <div className="grid grid-cols-2 gap-2 mb-2">
+              <Button className="bg-gray-900 hover:bg-gray-800 text-white py-1.5 rounded-sm text-sm" size="default">
                 <i className="fas fa-shopping-cart mr-2"></i>
                 Comprar ahora
               </Button>
-              <Button className="bg-white border border-gray-300 text-gray-700 hover:bg-gray-50 py-2 rounded-sm h-12" variant="outline" size="lg">
+              <Button className="bg-white border border-gray-300 text-gray-700 hover:bg-gray-50 py-1.5 rounded-sm text-sm" variant="outline" size="default">
                 <i className="fas fa-phone-alt mr-2"></i>
                 Contactar consultor
               </Button>
             </div>
             
-            {/* Botón volver en versión móvil */}
-            <div className="md:hidden text-center mb-3">
-              <Button asChild variant="outline" size="sm" className="w-full">
+            {/* Volver al catálogo - versión móvil */}
+            <div className="md:hidden text-center">
+              <Button asChild variant="outline" size="sm" className="text-xs py-1 h-7">
                 <a href="/#catalogo">
-                  <i className="fas fa-arrow-left mr-2"></i>
+                  <i className="fas fa-arrow-left mr-1"></i>
                   Volver al catálogo
                 </a>
               </Button>
-            </div>
-            
-            {/* Descripción en dispositivos móviles */}
-            <div className="md:hidden bg-gray-50 p-3 rounded-lg shadow-sm mb-3">
-              <h3 className="font-medium text-gray-900 mb-1 text-sm">Descripción</h3>
-              <p className="text-gray-700 text-xs">
-                {machinery.description || `${machinery.name} en ${conditionLabels[machinery.condition as keyof typeof conditionLabels].toLowerCase()} estado de funcionamiento. Con su potente motor y estructura robusta, esta máquina es ideal para proyectos de construcción, minería o forestales que requieren equipos confiables y de alto rendimiento.`}
-              </p>
             </div>
           </div>
           
-          {/* Columna derecha con detalles */}
-          <div className="md:col-span-1 space-y-4">
-            {/* Precio */}
-            <div className="bg-gray-50 p-4 rounded-lg shadow-sm">
-              <h3 className="text-lg font-bold text-gray-900 mb-1">Precio</h3>
-              <div className="flex items-baseline">
-                <div className="text-3xl font-bold text-gray-900">${machinery.price.toLocaleString()}</div>
-                <p className="text-gray-500 text-sm ml-2">
-                  {machinery.auctionDate && !machinery.isSold ? 'Precio de apertura' : 'Precio final'}
+          {/* Columna derecha: información de precio y especificaciones */}
+          <div className="md:w-2/5 md:flex md:flex-col">
+            {/* Panel superior - precio y detalles básicos */}
+            <div className="flex flex-col md:flex-row mt-2 md:mt-0 gap-2">
+              {/* Panel de precio */}
+              <div className="md:w-1/2 bg-gray-50 p-3 rounded-lg shadow-sm">
+                <h3 className="text-lg font-bold text-gray-900">Precio</h3>
+                <div className="flex items-baseline">
+                  <div className="text-2xl font-bold text-gray-900">${machinery.price.toLocaleString()}</div>
+                  <p className="text-gray-500 text-xs ml-1">Precio final</p>
+                </div>
+                
+                <div className="border-t border-gray-200 my-1 pt-1">
+                  <h4 className="font-medium text-gray-700 text-xs">Fecha de subasta</h4>
+                  <p className="text-gray-600 text-xs">
+                    {machinery.auctionDate ? 
+                      new Date(machinery.auctionDate).toLocaleDateString('es-ES', {
+                        day: 'numeric', 
+                        month: 'long'
+                      }) : 
+                      'Venta directa (sin subasta)'}
+                  </p>
+                </div>
+              </div>
+              
+              {/* Información básica en columna para desktop */}
+              <div className="hidden md:block md:w-1/2">
+                <div className="bg-gray-50 p-3 rounded-lg shadow-sm h-full">
+                  <h3 className="font-medium text-gray-900 text-sm mb-1">Información básica</h3>
+                  <table className="w-full text-xs">
+                    <tbody>
+                      <tr className="border-b border-gray-200">
+                        <td className="py-1 text-gray-600">Marca:</td>
+                        <td className="py-1 text-right font-medium">{machinery.brand}</td>
+                      </tr>
+                      <tr className="border-b border-gray-200">
+                        <td className="py-1 text-gray-600">Año:</td>
+                        <td className="py-1 text-right font-medium">{machinery.year}</td>
+                      </tr>
+                      <tr className="border-b border-gray-200">
+                        <td className="py-1 text-gray-600">Horas:</td>
+                        <td className="py-1 text-right font-medium">{machinery.hours ? `${machinery.hours.toLocaleString()} hrs` : 'N/A'}</td>
+                      </tr>
+                      <tr>
+                        <td className="py-1 text-gray-600">Condición:</td>
+                        <td className="py-1 text-right font-medium">{conditionLabels[machinery.condition as keyof typeof conditionLabels]}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+            
+            {/* Descripción y especificaciones completas */}
+            <div className="flex flex-col md:flex-row mt-2 gap-2">
+              {/* Descripción */}
+              <div className="md:w-1/2 bg-gray-50 p-3 rounded-lg shadow-sm">
+                <h3 className="font-medium text-gray-900 text-sm mb-1">Descripción</h3>
+                <p className="text-gray-700 text-xs leading-tight line-clamp-6">
+                  {machinery.description || `SN 0300221374, Meter Reads 326 Hours! Diesel Powered, 4x4, 500lbs Capacity, 60ft Max Reach, 39ft Outreach, Fleet Maintained, Good Rubber All Around.`}
                 </p>
               </div>
               
-              <div className="border-t border-gray-200 my-2 pt-2">
-                <h4 className="font-medium text-gray-700 text-sm mb-1">Fecha de subasta</h4>
-                <p className="text-gray-600 text-sm">
-                  {machinery.auctionDate ? 
-                    new Date(machinery.auctionDate).toLocaleDateString('es-ES', {
-                      day: 'numeric', 
-                      month: 'long', 
-                      year: 'numeric'
-                    }) : 
-                    'Venta directa (sin subasta)'}
-                </p>
+              {/* Especificaciones */}
+              <div className="md:w-1/2 bg-gray-50 p-3 rounded-lg shadow-sm">
+                <h3 className="font-medium text-gray-900 text-sm mb-1">Especificaciones</h3>
+                <table className="w-full text-xs">
+                  <tbody>
+                    <tr className="border-b border-gray-200">
+                      <td className="py-1 text-gray-600">Marca:</td>
+                      <td className="py-1 text-right font-medium">JLG</td>
+                    </tr>
+                    <tr className="border-b border-gray-200">
+                      <td className="py-1 text-gray-600">Modelo:</td>
+                      <td className="py-1 text-right font-medium">600aj Manlift</td>
+                    </tr>
+                    <tr className="border-b border-gray-200">
+                      <td className="py-1 text-gray-600">Horas:</td>
+                      <td className="py-1 text-right font-medium">326 hrs</td>
+                    </tr>
+                    <tr className="border-b border-gray-200">
+                      <td className="py-1 text-gray-600">Potencia:</td>
+                      <td className="py-1 text-right font-medium">375 HP</td>
+                    </tr>
+                    <tr className="border-b border-gray-200">
+                      <td className="py-1 text-gray-600">Capacidad:</td>
+                      <td className="py-1 text-right font-medium">500 lbs</td>
+                    </tr>
+                    <tr>
+                      <td className="py-1 text-gray-600">Alcance:</td>
+                      <td className="py-1 text-right font-medium">60 ft</td>
+                    </tr>
+                  </tbody>
+                </table>
               </div>
             </div>
             
-            {/* Descripción en desktop */}
-            <div className="hidden md:block bg-gray-50 p-4 rounded-lg shadow-sm">
-              <h3 className="font-medium text-gray-900 mb-2">Descripción</h3>
-              <p className="text-gray-700 text-sm">
-                {machinery.description || `${machinery.name} en ${conditionLabels[machinery.condition as keyof typeof conditionLabels].toLowerCase()} estado de funcionamiento. Con su potente motor y estructura robusta, esta máquina es ideal para proyectos de construcción, minería o forestales que requieren equipos confiables y de alto rendimiento.`}
-              </p>
-            </div>
-            
-            {/* Especificaciones */}
-            <div className="bg-gray-50 p-4 rounded-lg shadow-sm">
-              <h3 className="font-medium text-gray-900 mb-2">Especificaciones</h3>
-              <table className="w-full text-sm">
-                <tbody>
-                  <tr className="border-b border-gray-200">
-                    <td className="py-1.5 text-gray-600">Marca:</td>
-                    <td className="py-1.5 text-right font-medium">{machinery.brand}</td>
-                  </tr>
-                  <tr className="border-b border-gray-200">
-                    <td className="py-1.5 text-gray-600">Modelo:</td>
-                    <td className="py-1.5 text-right font-medium">{machinery.name.split(' ').slice(1).join(' ')}</td>
-                  </tr>
-                  <tr className="border-b border-gray-200">
-                    <td className="py-1.5 text-gray-600">Año:</td>
-                    <td className="py-1.5 text-right font-medium">{machinery.year}</td>
-                  </tr>
-                  <tr className="border-b border-gray-200">
-                    <td className="py-1.5 text-gray-600">Condición:</td>
-                    <td className="py-1.5 text-right font-medium">{conditionLabels[machinery.condition as keyof typeof conditionLabels]}</td>
-                  </tr>
-                  <tr className="border-b border-gray-200">
-                    <td className="py-1.5 text-gray-600">Horas:</td>
-                    <td className="py-1.5 text-right font-medium">{machinery.hours ? `${machinery.hours.toLocaleString()} hrs` : 'N/A'}</td>
-                  </tr>
-                  <tr className="border-b border-gray-200">
-                    <td className="py-1.5 text-gray-600">Kilometraje:</td>
-                    <td className="py-1.5 text-right font-medium">{machinery.kilometers ? `${machinery.kilometers.toLocaleString()} km` : 'N/A'}</td>
-                  </tr>
-                  <tr className="border-b border-gray-200">
-                    <td className="py-1.5 text-gray-600">Potencia:</td>
-                    <td className="py-1.5 text-right font-medium">375 HP</td>
-                  </tr>
-                  <tr>
-                    <td className="py-1.5 text-gray-600">Capacidad:</td>
-                    <td className="py-1.5 text-right font-medium">{
-                      machinery.type === 'manlift' ? '500 lbs' :
-                      machinery.type === 'excavator' ? '2.1 m³' : 
-                      machinery.type === 'loader' ? '3.5 m³' : 
-                      machinery.type === 'truck' ? '20 ton' : 'N/A'
-                    }</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-            
             {/* Botón volver en desktop */}
-            <div className="hidden md:block">
-              <Button asChild variant="outline" size="sm" className="w-full">
+            <div className="hidden md:block mt-2">
+              <Button asChild variant="outline" size="sm" className="text-xs w-full py-1 h-7">
                 <a href="/#catalogo">
-                  <i className="fas fa-arrow-left mr-2"></i>
+                  <i className="fas fa-arrow-left mr-1"></i>
                   Volver al catálogo
                 </a>
               </Button>
             </div>
-            
-
           </div>
         </div>
       </div>
