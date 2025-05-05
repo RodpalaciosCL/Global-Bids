@@ -40,7 +40,7 @@ export function HeroSection() {
   };
   
   return (
-    <section id="inicio" className="relative overflow-hidden bg-white">
+    <section id="inicio" className="relative overflow-hidden bg-white h-screen">
       <div className="absolute inset-0 z-0">
         <AnimatePresence mode="wait">
           {slides.map((slide, index) => (
@@ -65,7 +65,7 @@ export function HeroSection() {
         </AnimatePresence>
       </div>
       
-      <div className="min-h-[80vh] flex flex-col">
+      <div className="h-full flex flex-col">
         <div className="flex-grow flex items-center relative z-10 pt-14 md:pt-0">
           <div className="container mx-auto px-3 sm:px-4 py-6 md:py-0">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-8 items-center">
@@ -94,7 +94,7 @@ export function HeroSection() {
                           {slide.subtitle}
                         </p>
                         
-                        <div className="flex items-center mb-16 md:mb-24">
+                        <div className="flex items-center mb-8 md:mb-10">
                           <motion.a 
                             href="#subastas" 
                             className="bg-white text-primary px-5 sm:px-6 md:px-8 py-3 md:py-4 rounded-full font-bold transition-all duration-300 text-center shadow-xl flex items-center text-sm sm:text-base"
