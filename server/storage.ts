@@ -285,16 +285,25 @@ export class MemStorage implements IStorage {
         isSold: false,
       },
       {
-        name: "Camión Volquete Volvo FMX",
+        name: "Cat 725 Articulated Haul Truck - Lote 397",
         type: "truck",
-        brand: "Volvo",
-        year: 2021,
-        kilometers: 45000,
-        price: 78000,
-        condition: "excellent",
-        description: "Camión volquete 6x4 con capacidad de carga de 20 toneladas y sistema hidráulico completo.",
-        image: "https://images.unsplash.com/photo-1627121374573-05a9b0b25927?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+        brand: "Caterpillar",
+        year: 2019,
+        hours: 10831,
+        price: 135000,
+        condition: "good",
+        description: "Sn/ cat00725hb1l02380, Meter Reads 10831 Hours, Fleet Maintained, 4 speed automatic, Heat And Air, full glass, new rubber all around, runs and operates as it should.",
+        image: "https://auctiontechupload.s3.amazonaws.com/216/auction/1840/397_1.jpg",
+        gallery: [
+          "https://auctiontechupload.s3.amazonaws.com/216/auction/1840/397_1.jpg",
+          "https://auctiontechupload.s3.amazonaws.com/216/auction/1840/397_2.jpg",
+          "https://auctiontechupload.s3.amazonaws.com/216/auction/1840/397_6.jpg",
+          "https://auctiontechupload.s3.amazonaws.com/216/auction/1840/397_7.jpg",
+          "https://auctiontechupload.s3.amazonaws.com/216/auction/1840/397_11.jpg",
+          "https://auctiontechupload.s3.amazonaws.com/216/auction/1840/397_12.jpg"
+        ],
         isSold: false,
+        priority: 1
       },
       {
         name: "2016 Jlg 600aj Manlift - Lote 94",
