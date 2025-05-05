@@ -57,6 +57,7 @@ const translations: Record<Language, Record<string, string>> = {
     'hero.partsTools': 'Repuestos y Partes',
     'hero.industrialEquipment': 'Equipos Industriales',
     'hero.specialLots': 'Lotes Especiales',
+    'hero.findByCategory': 'Encuentra por categoría',
     
     // Auction Register Section
     'auctions.exclusiveEvents': 'EVENTOS EXCLUSIVOS',
@@ -312,6 +313,7 @@ const translations: Record<Language, Record<string, string>> = {
     'hero.partsTools': 'Parts and Components',
     'hero.industrialEquipment': 'Industrial Equipment',
     'hero.specialLots': 'Special Lots',
+    'hero.findByCategory': 'Find by category',
     
     // Auction Register Section
     'auctions.exclusiveEvents': 'EXCLUSIVE EVENTS',
