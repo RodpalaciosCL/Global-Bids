@@ -136,60 +136,42 @@ export function HeroSection() {
           </div>
         </div>
         
-        {/* Barra horizontal de categorías en la parte inferior del hero */}
+        {/* Barra horizontal de categorías en la parte inferior del hero - exactamente como en la imagen */}
         <div className="mt-auto relative z-10">
-          <div className="py-3 bg-black/50 backdrop-blur-sm border-t border-white/10 w-full">
+          <div className="py-2 bg-black/60 backdrop-blur-sm w-full border-t border-b border-white/10">
             <div className="container mx-auto px-4">
-              <div className="flex items-center justify-center gap-1">
+              <div className="flex items-center justify-center gap-3">
                 <span className="text-white/80 text-sm mr-1 hidden md:inline-block">{t('hero.findByCategory')}:</span>
                 
-                <div className="flex flex-nowrap md:flex-wrap gap-2 md:gap-3 overflow-x-auto no-scrollbar md:overflow-visible pb-0.5 md:pb-0 px-0.5">
-                  <a 
-                    href="#catalogo" 
-                    className="flex items-center justify-center gap-2 bg-black/40 hover:bg-primary/40 px-3 md:px-4 py-2 md:py-2.5 rounded-md text-white text-xs md:text-sm font-medium transition-all duration-200 border border-white/10 whitespace-nowrap flex-shrink-0"
-                  >
-                    <i className="fas fa-truck-monster"></i>
-                    <span>{t('hero.miningEquipment')}</span>
+                <div className="flex flex-nowrap items-center space-x-4 overflow-x-auto no-scrollbar whitespace-nowrap">
+                  <a href="#catalogo" className="flex items-center text-white hover:text-primary/90 transition-colors text-sm px-1">
+                    <i className="fas fa-truck-monster mr-1.5"></i>
+                    <span>Activos Minería</span>
                   </a>
                   
-                  <a 
-                    href="#catalogo" 
-                    className="flex items-center justify-center gap-2 bg-black/40 hover:bg-primary/40 px-3 md:px-4 py-2 md:py-2.5 rounded-md text-white text-xs md:text-sm font-medium transition-all duration-200 border border-white/10 whitespace-nowrap flex-shrink-0"
-                  >
-                    <i className="fas fa-tree"></i>
-                    <span>{t('hero.forestryEquipment')}</span>
+                  <a href="#catalogo" className="flex items-center text-white hover:text-primary/90 transition-colors text-sm px-1">
+                    <i className="fas fa-tree mr-1.5"></i>
+                    <span>Activos Forestales</span>
                   </a>
                   
-                  <a 
-                    href="#catalogo" 
-                    className="flex items-center justify-center gap-2 bg-black/40 hover:bg-primary/40 px-3 md:px-4 py-2 md:py-2.5 rounded-md text-white text-xs md:text-sm font-medium transition-all duration-200 border border-white/10 whitespace-nowrap flex-shrink-0"
-                  >
-                    <i className="fas fa-truck"></i>
-                    <span>{t('hero.trucksTransport')}</span>
+                  <a href="#catalogo" className="flex items-center text-white hover:text-primary/90 transition-colors text-sm px-1">
+                    <i className="fas fa-truck mr-1.5"></i>
+                    <span>Camiones y Transporte</span>
                   </a>
                   
-                  <a 
-                    href="#catalogo" 
-                    className="flex items-center justify-center gap-2 bg-black/40 hover:bg-primary/40 px-3 md:px-4 py-2 md:py-2.5 rounded-md text-white text-xs md:text-sm font-medium transition-all duration-200 border border-white/10 whitespace-nowrap flex-shrink-0"
-                  >
-                    <i className="fas fa-tools"></i>
-                    <span>{t('hero.partsTools')}</span>
+                  <a href="#catalogo" className="flex items-center text-white hover:text-primary/90 transition-colors text-sm px-1">
+                    <i className="fas fa-tools mr-1.5"></i>
+                    <span>Repuestos y Partes</span>
                   </a>
                   
-                  <a 
-                    href="#catalogo" 
-                    className="hidden md:flex items-center justify-center gap-2 bg-black/40 hover:bg-primary/40 px-3 md:px-4 py-2 md:py-2.5 rounded-md text-white text-xs md:text-sm font-medium transition-all duration-200 border border-white/10 whitespace-nowrap flex-shrink-0"
-                  >
-                    <i className="fas fa-industry"></i>
-                    <span>{t('hero.industrialEquipment')}</span>
+                  <a href="#catalogo" className="flex items-center text-white hover:text-primary/90 transition-colors text-sm px-1">
+                    <i className="fas fa-industry mr-1.5"></i>
+                    <span>Equipos Industriales</span>
                   </a>
                   
-                  <a 
-                    href="#catalogo" 
-                    className="hidden md:flex items-center justify-center gap-2 bg-black/40 hover:bg-primary/40 px-3 md:px-4 py-2 md:py-2.5 rounded-md text-white text-xs md:text-sm font-medium transition-all duration-200 border border-white/10 whitespace-nowrap flex-shrink-0"
-                  >
-                    <i className="fas fa-cubes"></i>
-                    <span>{t('hero.specialLots')}</span>
+                  <a href="#catalogo" className="flex items-center text-white hover:text-primary/90 transition-colors text-sm px-1">
+                    <i className="fas fa-cubes mr-1.5"></i>
+                    <span>Lotes Especiales</span>
                   </a>
                 </div>
               </div>
