@@ -389,6 +389,30 @@ export class MemStorage implements IStorage {
         image: "https://images.pexels.com/photos/259966/pexels-photo-259966.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
         isSold: false,
       },
+      {
+        name: "2002 Komatsu Wa500-3h Wheel Loader - Lote 339",
+        type: "loader",
+        brand: "Komatsu",
+        year: 2002,
+        hours: 4639,
+        price: 82000,
+        condition: "good",
+        description: "Sn/ Wa500h30122, Meter Reads 4639 Hours, Fleet Maintained, Ready For Work, Full Glass, Heat/ac, 4 Speed Automatic.",
+        image: "https://auctiontechupload.s3.amazonaws.com/216/auction/1840/339_1.jpg",
+        gallery: [
+          "https://auctiontechupload.s3.amazonaws.com/216/auction/1840/339_1.jpg",
+          "https://auctiontechupload.s3.amazonaws.com/216/auction/1840/339_2.jpg",
+          "https://auctiontechupload.s3.amazonaws.com/216/auction/1840/339_3.jpg",
+          "https://auctiontechupload.s3.amazonaws.com/216/auction/1840/339_6.jpg",
+          "https://auctiontechupload.s3.amazonaws.com/216/auction/1840/339_8.jpg",
+          "https://auctiontechupload.s3.amazonaws.com/216/auction/1840/339_10.jpg",
+          "https://auctiontechupload.s3.amazonaws.com/216/auction/1840/339_9.jpg",
+          "https://auctiontechupload.s3.amazonaws.com/216/auction/1840/339_11.jpg",
+          "https://auctiontechupload.s3.amazonaws.com/216/auction/1840/339_12.jpg"
+        ],
+        isSold: false,
+        priority: 1
+      },
       // Featured/sold items
       {
         name: "Excavadora CAT 320",
