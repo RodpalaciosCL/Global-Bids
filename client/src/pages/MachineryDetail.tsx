@@ -35,46 +35,47 @@ export default function MachineryDetail() {
   
   return (
     <div className="bg-white min-h-screen">
-      <div className="container mx-auto px-4 py-4">
-        {/* Navegación simple con más espacio */}
-        <div className="flex items-center text-xs mb-2">
+      <div className="container mx-auto px-4 py-2">
+        {/* Navegación simple */}
+        <div className="flex items-center text-xs py-1 mb-1">
           <a href="/" className="text-gray-500 hover:text-primary">Inicio</a>
-          <span className="mx-2 text-gray-400">/</span>
+          <span className="mx-1 text-gray-400">/</span>
           <a href="/#catalogo" className="text-gray-500 hover:text-primary">Catálogo</a>
-          <span className="mx-2 text-gray-400">/</span>
+          <span className="mx-1 text-gray-400">/</span>
           <span className="text-gray-700 font-medium truncate">{machinery.name}</span>
         </div>
         
-        <div className="mb-2">
-          <div className="text-xs text-gray-600">
-            Plataforma Elevadora
+        {/* Info de plataforma */}
+        <div className="text-xs text-gray-600 mb-1">
+          Plataforma Elevadora
+        </div>
+        
+        {/* Título y datos básicos */}
+        <div className="mb-3 border-b border-gray-200 pb-2">
+          <h1 className="text-2xl font-bold text-gray-900 mb-2">{machinery.name}</h1>
+          
+          <div className="flex items-center gap-x-6 text-sm text-gray-600">
+            <div className="flex items-center">
+              <i className="fas fa-calendar-alt mr-2 text-gray-500"></i>
+              <span>{machinery.year}</span>
+            </div>
+            <div className="flex items-center">
+              <i className="fas fa-tachometer-alt mr-2 text-gray-500"></i>
+              <span>{machinery.hours} hrs</span>
+            </div>
+            <div className="flex items-center">
+              <i className="fas fa-check-circle mr-2 text-gray-500"></i>
+              <span>Buen estado</span>
+            </div>
           </div>
         </div>
         
-        {/* Título principal con más espacio y sin borde */}
-        <h1 className="text-2xl font-bold text-gray-900 mb-3">{machinery.name}</h1>
-        
-        {/* Iconos básicos en línea horizontal con separación */}
-        <div className="flex items-center gap-8 mb-4 text-sm text-gray-600">
-          <div className="flex items-center">
-            <i className="fas fa-calendar-alt mr-2 text-gray-500"></i>
-            <span>{machinery.year}</span>
-          </div>
-          <div className="flex items-center">
-            <i className="fas fa-tachometer-alt mr-2 text-gray-500"></i>
-            <span>{machinery.hours} hrs</span>
-          </div>
-          <div className="flex items-center">
-            <i className="fas fa-check-circle mr-2 text-gray-500"></i>
-            <span>Buen estado</span>
-          </div>
-        </div>
-        
-        {/* Contenido principal en dos columnas con más espacio */}
-        <div className="flex flex-col md:flex-row gap-8">
-          {/* Columna izquierda: galería más grande */}
-          <div className="md:w-7/12">
-            <div className="border border-gray-200 rounded overflow-hidden mb-4">
+        {/* Contenido principal en dos columnas */}
+        <div className="flex flex-col md:flex-row gap-4">
+          {/* Columna izquierda: galería */}
+          <div className="md:w-3/5">
+            {/* Galería de fotos */}
+            <div className="border border-gray-200 rounded-md overflow-hidden mb-4">
               {machinery.gallery && machinery.gallery.length > 0 ? (
                 <ImageGallery 
                   images={[machinery.image, ...(machinery.gallery || [])]} 
@@ -87,33 +88,21 @@ export default function MachineryDetail() {
                 />
               )}
             </div>
-            
-            {/* Botones de acción */}
-            <div className="grid grid-cols-2 gap-4 mt-4">
-              <Button className="bg-gray-900 hover:bg-gray-800 text-white py-3 rounded-sm" size="lg">
-                <i className="fas fa-shopping-cart mr-2"></i>
-                Comprar ahora
-              </Button>
-              <Button className="bg-white border border-gray-300 text-gray-700 hover:bg-gray-50 py-3 rounded-sm" variant="outline" size="lg">
-                <i className="fas fa-phone-alt mr-2"></i>
-                Contactar consultor
-              </Button>
-            </div>
           </div>
           
-          {/* Columna derecha: datos de precio y especificaciones */}
-          <div className="md:w-5/12 space-y-6">
+          {/* Columna derecha: detalles y precio */}
+          <div className="md:w-2/5 space-y-4">
             {/* Panel de precio */}
             <div>
-              <h3 className="text-base font-medium text-gray-900 mb-1">Precio</h3>
+              <h3 className="font-medium text-gray-900 mb-2">Precio</h3>
               <div className="mb-1">
-                <div className="text-3xl font-bold text-gray-900">${machinery.price.toLocaleString()}</div>
+                <div className="text-2xl font-bold text-gray-900">${machinery.price.toLocaleString()}</div>
                 <p className="text-gray-500 text-sm">
                   Precio final
                 </p>
               </div>
               
-              <div className="mt-4">
+              <div className="mt-3">
                 <h4 className="font-medium text-gray-700 text-sm mb-1">Fecha de subasta</h4>
                 <p className="text-gray-600 text-sm">
                   Venta directa (sin subasta)
@@ -132,42 +121,54 @@ export default function MachineryDetail() {
                 </div>
               </div>
               
-              <div className="py-3">
-                <div className="flex justify-between py-2 border-b">
+              <div className="py-2">
+                <div className="flex justify-between py-1.5 border-b">
                   <span className="text-gray-600">Marca:</span>
                   <span className="font-medium">JLG</span>
                 </div>
-                <div className="flex justify-between py-2 border-b">
+                <div className="flex justify-between py-1.5 border-b">
                   <span className="text-gray-600">Modelo:</span>
                   <span className="font-medium">600aj Manlift</span>
                 </div>
-                <div className="flex justify-between py-2 border-b">
+                <div className="flex justify-between py-1.5 border-b">
                   <span className="text-gray-600">Año:</span>
                   <span className="font-medium">2016</span>
                 </div>
-                <div className="flex justify-between py-2 border-b">
+                <div className="flex justify-between py-1.5 border-b">
                   <span className="text-gray-600">Horas:</span>
                   <span className="font-medium">326 hrs</span>
                 </div>
-                <div className="flex justify-between py-2 border-b">
+                <div className="flex justify-between py-1.5 border-b">
                   <span className="text-gray-600">Condición:</span>
                   <span className="font-medium">Buen estado</span>
                 </div>
-                <div className="flex justify-between py-2 border-b">
+                <div className="flex justify-between py-1.5 border-b">
                   <span className="text-gray-600">Potencia:</span>
                   <span className="font-medium">375 HP</span>
                 </div>
-                <div className="flex justify-between py-2 border-b">
+                <div className="flex justify-between py-1.5 border-b">
                   <span className="text-gray-600">Capacidad:</span>
                   <span className="font-medium">500 lbs</span>
                 </div>
-                <div className="flex justify-between py-2">
+                <div className="flex justify-between py-1.5">
                   <span className="text-gray-600">Alcance:</span>
                   <span className="font-medium">60 ft</span>
                 </div>
               </div>
             </div>
           </div>
+        </div>
+        
+        {/* Botones de acción */}
+        <div className="grid grid-cols-2 gap-3 mt-4 mb-6">
+          <Button className="bg-gray-900 hover:bg-gray-800 text-white py-2 rounded-sm h-12" size="lg">
+            <i className="fas fa-shopping-cart mr-2"></i>
+            Comprar ahora
+          </Button>
+          <Button className="bg-white border border-gray-300 text-gray-700 hover:bg-gray-50 py-2 rounded-sm h-12" variant="outline" size="lg">
+            <i className="fas fa-phone-alt mr-2"></i>
+            Contactar consultor
+          </Button>
         </div>
       </div>
     </div>
