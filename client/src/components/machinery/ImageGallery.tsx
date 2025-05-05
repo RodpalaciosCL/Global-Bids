@@ -5,9 +5,10 @@ import { Button } from '@/components/ui/button';
 interface ImageGalleryProps {
   images: string[];
   alt: string;
+  fullHeight?: boolean;
 }
 
-export function ImageGallery({ images, alt }: ImageGalleryProps) {
+export function ImageGallery({ images, alt, fullHeight = false }: ImageGalleryProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isFullscreen, setIsFullscreen] = useState(false);
   
@@ -31,10 +32,10 @@ export function ImageGallery({ images, alt }: ImageGalleryProps) {
   };
 
   return (
-    <div className="relative">
+    <div className="relative h-full flex flex-col">
       {/* Vista principal con imagen grande */}
-      <div className="relative">
-        <div className="relative bg-gray-100 h-[280px] overflow-hidden">
+      <div className="relative flex-1">
+        <div className={`relative bg-gray-100 ${fullHeight ? 'h-full' : 'h-[320px]'} overflow-hidden`}>
           <img 
             src={imageList[currentIndex]} 
             alt={`${alt} - Imagen ${currentIndex + 1}`} 

@@ -71,28 +71,42 @@ export default function MachineryDetail() {
         
         {/* Contenido principal en dos columnas */}
         <div className="flex flex-col md:flex-row gap-4">
-          {/* Columna izquierda: galería */}
-          <div className="md:w-3/5">
-            {/* Galería de fotos */}
-            <div className="border border-gray-200 rounded-md overflow-hidden mb-4">
+          {/* Panel izquierdo: galería y botones */}
+          <div className="md:w-3/5 flex flex-col">
+            {/* Galería de fotos - ocupa el espacio superior */}
+            <div className="border border-gray-200 rounded-md overflow-hidden flex-1 mb-2">
               {machinery.gallery && machinery.gallery.length > 0 ? (
                 <ImageGallery 
                   images={[machinery.image, ...(machinery.gallery || [])]} 
                   alt={machinery.name} 
+                  fullHeight={true}
                 />
               ) : (
                 <ImageGallery 
                   images={[machinery.image]} 
                   alt={machinery.name} 
+                  fullHeight={true}
                 />
               )}
+            </div>
+            
+            {/* Botones de acción - ocupan el espacio inferior */}
+            <div className="grid grid-cols-2 gap-3">
+              <Button className="bg-gray-900 hover:bg-gray-800 text-white py-1.5 rounded-sm h-10 text-sm" size="default">
+                <i className="fas fa-shopping-cart mr-2"></i>
+                Comprar ahora
+              </Button>
+              <Button className="bg-white border border-gray-300 text-gray-700 hover:bg-gray-50 py-1.5 rounded-sm h-10 text-sm" variant="outline" size="default">
+                <i className="fas fa-phone-alt mr-2"></i>
+                Contactar consultor
+              </Button>
             </div>
           </div>
           
           {/* Columna derecha: detalles y precio */}
-          <div className="md:w-2/5 space-y-4">
+          <div className="md:w-2/5">
             {/* Panel de precio */}
-            <div>
+            <div className="mb-4">
               <h3 className="font-medium text-gray-900 mb-2">Precio</h3>
               <div className="mb-1">
                 <div className="text-2xl font-bold text-gray-900">${machinery.price.toLocaleString()}</div>
@@ -156,18 +170,6 @@ export default function MachineryDetail() {
               </div>
             </div>
           </div>
-        </div>
-        
-        {/* Botones de acción */}
-        <div className="grid grid-cols-2 gap-3 mt-4 mb-6">
-          <Button className="bg-gray-900 hover:bg-gray-800 text-white py-2 rounded-sm h-12" size="lg">
-            <i className="fas fa-shopping-cart mr-2"></i>
-            Comprar ahora
-          </Button>
-          <Button className="bg-white border border-gray-300 text-gray-700 hover:bg-gray-50 py-2 rounded-sm h-12" variant="outline" size="lg">
-            <i className="fas fa-phone-alt mr-2"></i>
-            Contactar consultor
-          </Button>
         </div>
       </div>
     </div>
