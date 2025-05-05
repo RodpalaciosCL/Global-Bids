@@ -37,36 +37,35 @@ export default function MachineryDetail() {
     <div className="bg-white min-h-screen">
       <div className="container mx-auto px-4 py-2">
         {/* Navegación simple */}
-        <div className="flex items-center text-xs py-1 mb-1">
+        <div className="flex items-center text-xs py-2">
           <a href="/" className="text-gray-500 hover:text-primary">Inicio</a>
-          <span className="mx-1 text-gray-400">/</span>
+          <span className="mx-2 text-gray-400">/</span>
           <a href="/#catalogo" className="text-gray-500 hover:text-primary">Catálogo</a>
-          <span className="mx-1 text-gray-400">/</span>
-          <span className="text-gray-700 font-medium truncate">{machinery.name}</span>
+          <span className="mx-2 text-gray-400">/</span>
+          <span className="text-gray-700 truncate">{machinery.name}</span>
         </div>
         
         {/* Info de plataforma */}
-        <div className="text-xs text-gray-600 mb-1">
+        <div className="text-sm text-gray-600 mt-2">
           Plataforma Elevadora
         </div>
         
-        {/* Título y datos básicos */}
-        <div className="mb-3 border-b border-gray-200 pb-2">
-          <h1 className="text-2xl font-bold text-gray-900 mb-2">{machinery.name}</h1>
-          
-          <div className="flex items-center gap-x-6 text-sm text-gray-600">
-            <div className="flex items-center">
-              <i className="fas fa-calendar-alt mr-2 text-gray-500"></i>
-              <span>{machinery.year}</span>
-            </div>
-            <div className="flex items-center">
-              <i className="fas fa-tachometer-alt mr-2 text-gray-500"></i>
-              <span>{machinery.hours} hrs</span>
-            </div>
-            <div className="flex items-center">
-              <i className="fas fa-check-circle mr-2 text-gray-500"></i>
-              <span>Buen estado</span>
-            </div>
+        {/* Título */}
+        <h1 className="text-2xl font-bold text-gray-900 mt-1 mb-3">{machinery.name}</h1>
+        
+        {/* Datos básicos en línea con íconos */}
+        <div className="flex items-center border-b border-gray-200 pb-4 mb-4 gap-x-8">
+          <div className="flex items-center">
+            <i className="fas fa-calendar-alt mr-2 text-gray-600"></i>
+            <span className="text-gray-900">{machinery.year}</span>
+          </div>
+          <div className="flex items-center">
+            <i className="fas fa-tachometer-alt mr-2 text-gray-600"></i>
+            <span className="text-gray-900">{machinery.hours} hrs</span>
+          </div>
+          <div className="flex items-center">
+            <i className="fas fa-check-circle mr-2 text-gray-600"></i>
+            <span className="text-gray-900">Buen estado</span>
           </div>
         </div>
         
