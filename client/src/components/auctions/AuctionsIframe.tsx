@@ -50,15 +50,22 @@ export function AuctionsIframe() {
           viewport={{ once: true }}
           transition={{ delay: 0.2 }}
         >
-          <div className="aspect-video w-full rounded-2xl overflow-hidden">
-            <iframe 
-              src="https://northcountry.auctiontechs.com/" 
-              className="w-full h-full"
-              style={{ border: 'none' }}
-              title="North Country Auction"
-              loading="lazy"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            />
+          <div className="rounded-2xl overflow-hidden relative">
+            <div className="aspect-[16/9] w-full">
+              <iframe 
+                src="https://northcountry.auctiontechs.com/auction-catalog" 
+                className="w-full h-full absolute inset-0 rounded-2xl"
+                style={{ 
+                  border: 'none',
+                  overflow: 'hidden',
+                  margin: '0 auto'
+                }}
+                title="North Country Auction"
+                loading="lazy"
+                scrolling="yes"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              />
+            </div>
           </div>
         </motion.div>
       </div>
