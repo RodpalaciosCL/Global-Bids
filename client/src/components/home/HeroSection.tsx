@@ -32,6 +32,7 @@ export function HeroSection() {
   const stats = [
     { value: "+2800", label: "Remates", icon: "fa-gavel" },
     { value: "75", label: "países", icon: "fa-globe" },
+    { value: "USD 450M", label: "Ventas en los últimos 24 meses", icon: "fa-dollar-sign" },
     { value: "950,300", label: "Clientes pre-validados", icon: "fa-users" }
   ];
 
@@ -161,20 +162,20 @@ export function HeroSection() {
               
               <div className="hidden md:block">
                 <div className="bg-white/10 backdrop-blur-md p-6 rounded-xl border border-white/20 shadow-2xl">
-                  <div className="grid grid-cols-3 gap-4">
+                  <div className="grid grid-cols-4 gap-3">
                     {stats.map((stat, index) => (
                       <motion.div 
                         key={index}
-                        className="text-center p-3"
+                        className="text-center p-2"
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: index * 0.1 + 0.3, duration: 0.5 }}
                       >
-                        <div className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-2">
-                          <i className={`fas ${stat.icon} text-white text-xl`}></i>
+                        <div className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-2">
+                          <i className={`fas ${stat.icon} text-white text-lg`}></i>
                         </div>
-                        <div className="text-white text-2xl font-bold">{stat.value}</div>
-                        <div className="text-white/70 text-sm">{stat.label}</div>
+                        <div className="text-white text-lg font-bold">{stat.value}</div>
+                        <div className="text-white/70 text-xs">{stat.label}</div>
                       </motion.div>
                     ))}
                   </div>
