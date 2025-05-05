@@ -12,7 +12,7 @@ export function HeroSection() {
     {
       title: t('hero.title'),
       subtitle: t('hero.subtitle'),
-      image: "https://images.pexels.com/photos/2760243/pexels-photo-2760243.jpeg?auto=compress&cs=tinysrgb&w=1600",
+      image: "/pexels-ywanphoto-188679.jpg", // Nueva imagen de fondo de la cantera
       icon: "fa-gavel"
     }
   ];
@@ -119,44 +119,7 @@ export function HeroSection() {
                   ))}
                 </AnimatePresence>
                 
-                {/* Carousel Controls */}
-                <div className="mt-8 md:mt-16 flex items-center">
-                  <div className="flex space-x-1 sm:space-x-2">
-                    {slides.map((_, index) => (
-                      <button
-                        key={index}
-                        className={`w-2 sm:w-3 h-2 sm:h-3 rounded-full transition-all duration-300 ${
-                          index === currentSlide 
-                            ? 'bg-white w-8 sm:w-10' 
-                            : 'bg-white/40 hover:bg-white/60'
-                        }`}
-                        onClick={() => handleDotClick(index)}
-                        aria-label={`Go to slide ${index + 1}`}
-                      />
-                    ))}
-                  </div>
-                  
-                  <div className="ml-auto flex space-x-1 sm:space-x-2">
-                    <motion.button
-                      className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white"
-                      onClick={() => setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length)}
-                      whileHover={{ scale: 1.1 }}
-                      whileTap={{ scale: 0.9 }}
-                      aria-label="Previous slide"
-                    >
-                      <i className="fas fa-chevron-left text-xs sm:text-base"></i>
-                    </motion.button>
-                    <motion.button
-                      className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white"
-                      onClick={() => setCurrentSlide((prev) => (prev + 1) % slides.length)}
-                      whileHover={{ scale: 1.1 }}
-                      whileTap={{ scale: 0.9 }}
-                      aria-label="Next slide"
-                    >
-                      <i className="fas fa-chevron-right text-xs sm:text-base"></i>
-                    </motion.button>
-                  </div>
-                </div>
+                {/* Se han eliminado los controles de navegación del carrusel */}
               </div>
               
               {/* El recuadro de subastas se ha eliminado de esta sección */}
