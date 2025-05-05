@@ -146,195 +146,39 @@ export function AboutSection() {
             </p>
           </div>
           
-          {/* Botón con países */}
-          <div className="text-center mb-8">
-            <div className="inline-block bg-white/20 backdrop-blur-sm px-6 py-3 rounded-full border border-white/30 font-bold text-white">
-              {t('about.worldPresence')}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            <div className="bg-white/10 backdrop-blur-sm rounded-xl p-5 text-center">
+              <div className="w-12 h-12 mx-auto bg-white/20 rounded-full flex items-center justify-center mb-3">
+                <span className="text-white font-bold text-xl">1</span>
+              </div>
+              <h4 className="font-bold text-xl mb-2">{t('about.profitability')}</h4>
+              <p className="text-white/70 text-sm">
+                {t('about.profitabilityDesc')}
+              </p>
+            </div>
+            
+            <div className="bg-white/10 backdrop-blur-sm rounded-xl p-5 text-center">
+              <div className="w-12 h-12 mx-auto bg-white/20 rounded-full flex items-center justify-center mb-3">
+                <span className="text-white font-bold text-xl">2</span>
+              </div>
+              <h4 className="font-bold text-xl mb-2">{t('about.speed')}</h4>
+              <p className="text-white/70 text-sm">
+                {t('about.speedDesc')}
+              </p>
+            </div>
+            
+            <div className="bg-white/10 backdrop-blur-sm rounded-xl p-5 text-center">
+              <div className="w-12 h-12 mx-auto bg-white/20 rounded-full flex items-center justify-center mb-3">
+                <span className="text-white font-bold text-xl">3</span>
+              </div>
+              <h4 className="font-bold text-xl mb-2">{t('about.transparency')}</h4>
+              <p className="text-white/70 text-sm">
+                {t('about.transparencyDesc')}
+              </p>
             </div>
           </div>
           
-          {/* Sección de Modelo 360 */}
-          <div className="mb-12">
-            <h3 className="text-center text-3xl font-bold mb-3">{t('about.model360')}</h3>
-            <p className="text-center text-white/80 mb-10 max-w-3xl mx-auto">
-              {t('about.model360Desc')}
-            </p>
-            
-            <div className="bg-gradient-to-br from-white/5 to-white/10 backdrop-blur-sm rounded-2xl p-10 border border-white/10 shadow-2xl relative overflow-hidden">
-              {/* Elementos decorativos de fondo */}
-              <div className="absolute top-0 right-0 w-40 h-40 bg-primary/20 rounded-full blur-3xl -mr-20 -mt-20"></div>
-              <div className="absolute bottom-0 left-0 w-40 h-40 bg-primary/10 rounded-full blur-3xl -ml-20 -mb-20"></div>
-              
-              {/* Fase 1: Preparación */}
-              <div className="relative z-10 mb-16">
-                <div className="flex justify-between items-center mb-6">
-                  <h4 className="text-white text-xl font-semibold bg-primary/20 px-6 py-2 rounded-full inline-block backdrop-blur-sm">{t('about.phase1')}</h4>
-                  <div className="h-0.5 bg-gradient-to-r from-primary/60 to-transparent flex-grow mx-4"></div>
-                </div>
-                
-                <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-                  <div className="relative group">
-                    <div className="bg-white/10 hover:bg-white/15 transition-all duration-300 rounded-xl p-6 border border-white/10 h-full flex flex-col items-center text-center hover:shadow-lg hover:-translate-y-1">
-                      <div className="bg-gradient-to-br from-primary/20 to-primary/40 w-20 h-20 rounded-2xl flex items-center justify-center mb-4 shadow-lg transform group-hover:scale-110 transition-transform">
-                        <i className="fas fa-clipboard-list text-white text-2xl"></i>
-                      </div>
-                      <h5 className="text-white font-bold mb-2">{t('about.assets')}</h5>
-                      <p className="text-white/70 text-sm">{t('about.assetsDesc')}</p>
-                    </div>
-                    <div className="absolute -right-4 top-1/2 transform -translate-y-1/2 text-white/60 hidden md:block">
-                      <i className="fas fa-chevron-right"></i>
-                    </div>
-                  </div>
-                  
-                  <div className="relative group">
-                    <div className="bg-white/10 hover:bg-white/15 transition-all duration-300 rounded-xl p-6 border border-white/10 h-full flex flex-col items-center text-center hover:shadow-lg hover:-translate-y-1">
-                      <div className="bg-gradient-to-br from-primary/20 to-primary/40 w-20 h-20 rounded-2xl flex items-center justify-center mb-4 shadow-lg transform group-hover:scale-110 transition-transform">
-                        <i className="fas fa-camera text-white text-2xl"></i>
-                      </div>
-                      <h5 className="text-white font-bold mb-2">{t('about.material')}</h5>
-                      <p className="text-white/70 text-sm">{t('about.materialDesc')}</p>
-                    </div>
-                    <div className="absolute -right-4 top-1/2 transform -translate-y-1/2 text-white/60 hidden md:block">
-                      <i className="fas fa-chevron-right"></i>
-                    </div>
-                  </div>
-                  
-                  <div className="relative group">
-                    <div className="bg-white/10 hover:bg-white/15 transition-all duration-300 rounded-xl p-6 border border-white/10 h-full flex flex-col items-center text-center hover:shadow-lg hover:-translate-y-1">
-                      <div className="bg-gradient-to-br from-primary/20 to-primary/40 w-20 h-20 rounded-2xl flex items-center justify-center mb-4 shadow-lg transform group-hover:scale-110 transition-transform">
-                        <i className="fas fa-desktop text-white text-2xl"></i>
-                      </div>
-                      <h5 className="text-white font-bold mb-2">{t('about.platform')}</h5>
-                      <p className="text-white/70 text-sm">{t('about.platformDesc')}</p>
-                    </div>
-                    <div className="absolute -right-4 top-1/2 transform -translate-y-1/2 text-white/60 hidden md:block">
-                      <i className="fas fa-chevron-right"></i>
-                    </div>
-                  </div>
-                  
-                  <div className="group">
-                    <div className="bg-white/10 hover:bg-white/15 transition-all duration-300 rounded-xl p-6 border border-white/10 h-full flex flex-col items-center text-center hover:shadow-lg hover:-translate-y-1">
-                      <div className="bg-gradient-to-br from-primary/20 to-primary/40 w-20 h-20 rounded-2xl flex items-center justify-center mb-4 shadow-lg transform group-hover:scale-110 transition-transform">
-                        <i className="fas fa-bullhorn text-white text-2xl"></i>
-                      </div>
-                      <h5 className="text-white font-bold mb-2">{t('about.marketing')}</h5>
-                      <p className="text-white/70 text-sm">{t('about.marketingDesc')}</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              
-              {/* Conector entre fases */}
-              <div className="flex justify-center mb-16">
-                <div className="h-16 border-l-2 border-primary/30 relative">
-                  <div className="absolute h-6 w-6 rounded-full bg-primary/30 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex items-center justify-center">
-                    <i className="fas fa-chevron-down text-white text-sm"></i>
-                  </div>
-                </div>
-              </div>
-              
-              {/* Fase 2: Transacción */}
-              <div className="relative z-10 mb-16">
-                <div className="flex justify-between items-center mb-6">
-                  <h4 className="text-white text-xl font-semibold bg-primary/20 px-6 py-2 rounded-full inline-block backdrop-blur-sm">Fase 2: Transacción</h4>
-                  <div className="h-0.5 bg-gradient-to-r from-primary/60 to-transparent flex-grow mx-4"></div>
-                </div>
-                
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                  <div className="relative group">
-                    <div className="bg-white/10 hover:bg-white/15 transition-all duration-300 rounded-xl p-6 border border-white/10 h-full flex flex-col items-center text-center hover:shadow-lg hover:-translate-y-1">
-                      <div className="bg-gradient-to-br from-primary/20 to-primary/40 w-20 h-20 rounded-2xl flex items-center justify-center mb-4 shadow-lg transform group-hover:scale-110 transition-transform">
-                        <i className="fas fa-video text-white text-2xl"></i>
-                      </div>
-                      <h5 className="text-white font-bold mb-2">{t('about.event')}</h5>
-                      <p className="text-white/70 text-sm">Realización del evento con participación presencial y virtual simultánea</p>
-                    </div>
-                    <div className="absolute -right-4 top-1/2 transform -translate-y-1/2 text-white/60 hidden md:block">
-                      <i className="fas fa-chevron-right"></i>
-                    </div>
-                  </div>
-                  
-                  <div className="relative group">
-                    <div className="bg-white/10 hover:bg-white/15 transition-all duration-300 rounded-xl p-6 border border-white/10 h-full flex flex-col items-center text-center hover:shadow-lg hover:-translate-y-1">
-                      <div className="bg-gradient-to-br from-primary/20 to-primary/40 w-20 h-20 rounded-2xl flex items-center justify-center mb-4 shadow-lg transform group-hover:scale-110 transition-transform">
-                        <i className="fas fa-gavel text-white text-2xl"></i>
-                      </div>
-                      <h5 className="text-white font-bold mb-2">{t('about.buyerPays')}</h5>
-                      <p className="text-white/70 text-sm">Proceso de pago seguro para el comprador con múltiples opciones</p>
-                    </div>
-                    <div className="absolute -right-4 top-1/2 transform -translate-y-1/2 text-white/60 hidden md:block">
-                      <i className="fas fa-chevron-right"></i>
-                    </div>
-                  </div>
-                  
-                  <div className="group">
-                    <div className="bg-white/10 hover:bg-white/15 transition-all duration-300 rounded-xl p-6 border border-white/10 h-full flex flex-col items-center text-center hover:shadow-lg hover:-translate-y-1">
-                      <div className="bg-gradient-to-br from-primary/20 to-primary/40 w-20 h-20 rounded-2xl flex items-center justify-center mb-4 shadow-lg transform group-hover:scale-110 transition-transform">
-                        <i className="fas fa-hand-holding-usd text-white text-2xl"></i>
-                      </div>
-                      <h5 className="text-white font-bold mb-2">{t('about.payment')}</h5>
-                      <p className="text-white/70 text-sm">Transferencia rápida y segura de fondos al consignatario del activo</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              
-              {/* Conector entre fases */}
-              <div className="flex justify-center mb-16">
-                <div className="h-16 border-l-2 border-primary/30 relative">
-                  <div className="absolute h-6 w-6 rounded-full bg-primary/30 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex items-center justify-center">
-                    <i className="fas fa-chevron-down text-white text-sm"></i>
-                  </div>
-                </div>
-              </div>
-              
-              {/* Fase 3: Logística */}
-              <div className="relative z-10">
-                <div className="flex justify-between items-center mb-6">
-                  <h4 className="text-white text-xl font-semibold bg-primary/20 px-6 py-2 rounded-full inline-block backdrop-blur-sm">Fase 3: Logística</h4>
-                  <div className="h-0.5 bg-gradient-to-r from-primary/60 to-transparent flex-grow mx-4"></div>
-                </div>
-                
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                  <div className="relative group">
-                    <div className="bg-white/10 hover:bg-white/15 transition-all duration-300 rounded-xl p-6 border border-white/10 h-full flex flex-col items-center text-center hover:shadow-lg hover:-translate-y-1">
-                      <div className="bg-gradient-to-br from-primary/20 to-primary/40 w-20 h-20 rounded-2xl flex items-center justify-center mb-4 shadow-lg transform group-hover:scale-110 transition-transform">
-                        <i className="fas fa-file-invoice text-white text-2xl"></i>
-                      </div>
-                      <h5 className="text-white font-bold mb-2">{t('about.certificate')}</h5>
-                      <p className="text-white/70 text-sm">Emisión de documentación certificada para autorizar el retiro del activo</p>
-                    </div>
-                    <div className="absolute -right-4 top-1/2 transform -translate-y-1/2 text-white/60 hidden md:block">
-                      <i className="fas fa-chevron-right"></i>
-                    </div>
-                  </div>
-                  
-                  <div className="relative group">
-                    <div className="bg-white/10 hover:bg-white/15 transition-all duration-300 rounded-xl p-6 border border-white/10 h-full flex flex-col items-center text-center hover:shadow-lg hover:-translate-y-1">
-                      <div className="bg-gradient-to-br from-primary/20 to-primary/40 w-20 h-20 rounded-2xl flex items-center justify-center mb-4 shadow-lg transform group-hover:scale-110 transition-transform">
-                        <i className="fas fa-truck text-white text-2xl"></i>
-                      </div>
-                      <h5 className="text-white font-bold mb-2">{t('about.logistics')}</h5>
-                      <p className="text-white/70 text-sm">Coordinación de transporte especializado nacional e internacional</p>
-                    </div>
-                    <div className="absolute -right-4 top-1/2 transform -translate-y-1/2 text-white/60 hidden md:block">
-                      <i className="fas fa-chevron-right"></i>
-                    </div>
-                  </div>
-                  
-                  <div className="group">
-                    <div className="bg-white/10 hover:bg-white/15 transition-all duration-300 rounded-xl p-6 border border-white/10 h-full flex flex-col items-center text-center hover:shadow-lg hover:-translate-y-1">
-                      <div className="bg-gradient-to-br from-primary/20 to-primary/40 w-20 h-20 rounded-2xl flex items-center justify-center mb-4 shadow-lg transform group-hover:scale-110 transition-transform">
-                        <i className="fas fa-map-marker-alt text-white text-2xl"></i>
-                      </div>
-                      <h5 className="text-white font-bold mb-2">{t('about.delivery')}</h5>
-                      <p className="text-white/70 text-sm">Entrega verificada en la ubicación designada por el comprador</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+          {/* Se eliminaron los botones de acción a petición del cliente */}
         </motion.div>
       </div>
     </section>
