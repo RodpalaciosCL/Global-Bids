@@ -324,12 +324,17 @@ export function AboutSection() {
               {/* Años de experiencia */}
               <motion.div 
                 className="text-center group cursor-pointer"
-                whileHover={{ scale: 1.05 }}
+                whileHover={{ scale: 1.05, y: -5 }}
+                whileTap={{ scale: 0.95 }}
                 transition={{ type: "spring", stiffness: 400, damping: 10 }}
               >
-                <div className="w-20 h-20 bg-primary rounded-full flex items-center justify-center mx-auto mb-4 group-hover:shadow-[0_0_30px_rgba(255,200,50,0.3)] transition-all duration-300">
+                <motion.div 
+                  className="w-20 h-20 bg-primary rounded-full flex items-center justify-center mx-auto mb-4 group-hover:shadow-[0_0_30px_rgba(255,200,50,0.4)] transition-all duration-300"
+                  whileHover={{ rotate: [0, -10, 10, -10, 0] }}
+                  transition={{ duration: 0.5 }}
+                >
                   <i className="fas fa-clock text-gray-900 text-2xl"></i>
-                </div>
+                </motion.div>
                 <div className="text-5xl font-bold text-white mb-2 flex items-center justify-center">
                   <span className="counter-value">{experienceCount}</span>
                   <span className="text-primary ml-1">+</span>
@@ -340,12 +345,17 @@ export function AboutSection() {
               {/* Maquinarias vendidas */}
               <motion.div 
                 className="text-center group cursor-pointer"
-                whileHover={{ scale: 1.05 }}
+                whileHover={{ scale: 1.05, y: -5 }}
+                whileTap={{ scale: 0.95 }}
                 transition={{ type: "spring", stiffness: 400, damping: 10 }}
               >
-                <div className="w-20 h-20 bg-primary rounded-full flex items-center justify-center mx-auto mb-4 group-hover:shadow-[0_0_30px_rgba(255,200,50,0.3)] transition-all duration-300">
+                <motion.div 
+                  className="w-20 h-20 bg-primary rounded-full flex items-center justify-center mx-auto mb-4 group-hover:shadow-[0_0_30px_rgba(255,200,50,0.4)] transition-all duration-300"
+                  whileHover={{ scale: [1, 1.2, 1] }}
+                  transition={{ duration: 0.6 }}
+                >
                   <i className="fas fa-truck-monster text-gray-900 text-2xl"></i>
-                </div>
+                </motion.div>
                 <div className="text-5xl font-bold text-white mb-2 flex items-center justify-center">
                   <span className="counter-value">{machinesCount.toLocaleString()}</span>
                   <span className="text-primary ml-1">+</span>
@@ -356,12 +366,17 @@ export function AboutSection() {
               {/* Países cubiertos */}
               <motion.div 
                 className="text-center group cursor-pointer"
-                whileHover={{ scale: 1.05 }}
+                whileHover={{ scale: 1.05, y: -5 }}
+                whileTap={{ scale: 0.95 }}
                 transition={{ type: "spring", stiffness: 400, damping: 10 }}
               >
-                <div className="w-20 h-20 bg-primary rounded-full flex items-center justify-center mx-auto mb-4 group-hover:shadow-[0_0_30px_rgba(255,200,50,0.3)] transition-all duration-300">
+                <motion.div 
+                  className="w-20 h-20 bg-primary rounded-full flex items-center justify-center mx-auto mb-4 group-hover:shadow-[0_0_30px_rgba(255,200,50,0.4)] transition-all duration-300"
+                  animate={{ rotateY: [0, 360] }}
+                  transition={{ duration: 2.5, repeat: Infinity, repeatDelay: 5 }}
+                >
                   <i className="fas fa-globe-americas text-gray-900 text-2xl"></i>
-                </div>
+                </motion.div>
                 <div className="text-5xl font-bold text-white mb-2">
                   <span className="counter-value">{countriesCount}</span>
                 </div>
@@ -371,14 +386,22 @@ export function AboutSection() {
               {/* Clientes satisfechos */}
               <motion.div 
                 className="text-center group cursor-pointer"
-                whileHover={{ scale: 1.05 }}
+                whileHover={{ scale: 1.05, y: -5 }}
+                whileTap={{ scale: 0.95 }}
                 transition={{ type: "spring", stiffness: 400, damping: 10 }}
               >
-                <div className="w-20 h-20 bg-primary rounded-full flex items-center justify-center mx-auto mb-4 group-hover:shadow-[0_0_30px_rgba(255,200,50,0.3)] transition-all duration-300">
+                <motion.div 
+                  className="w-20 h-20 bg-primary rounded-full flex items-center justify-center mx-auto mb-4 group-hover:shadow-[0_0_30px_rgba(255,200,50,0.4)] transition-all duration-300"
+                  whileHover={{ 
+                    rotate: [0, 5, -5, 5, 0],
+                    scale: [1, 1.1, 1]
+                  }}
+                  transition={{ duration: 0.5 }}
+                >
                   <i className="fas fa-smile text-gray-900 text-2xl"></i>
-                </div>
+                </motion.div>
                 <div className="text-5xl font-bold text-white mb-2 flex items-center justify-center">
-                  <span className="counter-value">98</span>
+                  <span className="counter-value">{satisfactionCount}</span>
                   <span className="text-primary ml-1">%</span>
                 </div>
                 <div className="uppercase text-xs tracking-widest text-white/70">CLIENTES SATISFECHOS</div>
