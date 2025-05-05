@@ -1,96 +1,37 @@
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
 import { fadeIn, slideUp } from '@/lib/animations';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { useRegistration } from '@/contexts/RegistrationContext';
 
 export function AuctionsIframe() {
   const { t } = useLanguage();
-  const iframeRef = useRef<HTMLIFrameElement>(null);
+  const { openForm } = useRegistration();
   
-  // Función para manipular el iframe después de que se cargue
-  useEffect(() => {
-    const iframe = iframeRef.current;
-    
-    if (iframe) {
-      iframe.onload = function() {
-        try {
-          // Intento de acceder al iframe y manipular su contenido después de cargar
-          if (iframe.contentDocument) {
-            // Intentar ocultar elementos no deseados y ajustar el iframe para mostrar solo las máquinas
-            const style = iframe.contentDocument.createElement('style');
-            style.textContent = `
-              /* Ocultar elementos innecesarios */
-              header, 
-              .main-header, 
-              .navbar, 
-              .page-header, 
-              .banner, 
-              .top-section,
-              footer,
-              .footer,
-              #footer,
-              body > div > div:last-child,
-              body > footer,
-              [class*="footer"],
-              [class*="copyright"] { 
-                display: none !important; 
-              }
-              
-              /* Ajustes generales */
-              body {
-                padding-top: 0 !important;
-                margin-top: 0 !important;
-                padding-bottom: 0 !important;
-                margin-bottom: 0 !important;
-                overflow: hidden !important;
-              }
-              
-              /* Ajustar contenedor principal */
-              .auction-listing-container {
-                padding-top: 0 !important;
-                padding-bottom: 0 !important;
-                margin-bottom: 0 !important;
-              }
-              
-              /* Eliminar espacio inferior */
-              .auction-listing {
-                margin-bottom: 0 !important;
-              }
-              
-              /* Título de Auctions y tabs */
-              h1, h1 + div {
-                display: none !important;
-              }
-              
-              /* Ajustar margen superior de los elementos de subasta */
-              .auction-catalog {
-                margin-top: 10px !important;
-              }
-            `;
-            iframe.contentDocument.head.appendChild(style);
-            
-            // Intentar observar cambios en el DOM para mantener el footer oculto
-            const observer = new MutationObserver(function(mutations) {
-              const footer = iframe.contentDocument?.querySelector('footer') || 
-                             iframe.contentDocument?.querySelector('[class*="footer"]') || 
-                             iframe.contentDocument?.querySelector('#footer');
-              
-              if (footer) {
-                footer.style.display = 'none';
-              }
-            });
-            
-            observer.observe(iframe.contentDocument.body, {
-              childList: true,
-              subtree: true
-            });
-          }
-        } catch (e) {
-          console.log('No se pudo acceder al contenido del iframe debido a la política de seguridad del navegador');
-        }
-      };
+  // Datos de las subastas (podría venir de una API)
+  const auctionItems = [
+    {
+      id: 1,
+      title: "Dighton Spring Auction - Day 1",
+      image: "https://northcountry.auctiontechs.com/_uploads/photos/95-1/thumb_142949_1599234300.jpg",
+      date: "05-09-2025",
+      location: "Dighton, Massachusetts, United States, 02715"
+    },
+    {
+      id: 2,
+      title: "Dighton Spring Auction - Day 2",
+      image: "https://northcountry.auctiontechs.com/_uploads/photos/95-2/thumb_142949_1599234400.jpg",
+      date: "05-10-2025",
+      location: "Dighton, Massachusetts, United States, 02715"
+    },
+    {
+      id: 3,
+      title: "Eastern Panhandle WV Contractors Auction",
+      image: "https://northcountry.auctiontechs.com/_uploads/photos/95-3/thumb_142950_1599234500.jpg",
+      date: "05-17-2025",
+      location: "Martinsburg, West Virginia, United States, 24405"
     }
-  }, []);
+  ];
   
   return (
     <section className="py-12 bg-gray-900" id="subastas">
@@ -144,24 +85,62 @@ export function AuctionsIframe() {
           </div>
           
           <div className="rounded-b-2xl overflow-hidden bg-blue-900">
-            <div className="relative w-full h-[600px] overflow-hidden">
-              <iframe 
-                ref={iframeRef}
-                src="https://northcountry.auctiontechs.com/auction-catalog" 
-                className="w-full h-full"
-                style={{ 
-                  border: 'none',
-                  position: 'absolute',
-                  top: -80, /* Desplazamiento negativo para ocultar la cabecera */
-                  left: 0,
-                  width: '100%',
-                  height: 'calc(100% + 80px)' /* Compensar por el desplazamiento */
-                }}
-                title="North Country Auctions"
-                loading="lazy"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                scrolling="no"
-              />
+            <div className="p-6">
+              {/* Contenido personalizado que simula la página de subastas */}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                {auctionItems.map((auction) => (
+                  <div key={auction.id} className="bg-white rounded-lg overflow-hidden shadow-md">
+                    <div className="h-48 overflow-hidden">
+                      <img 
+                        src={auction.image} 
+                        alt={auction.title} 
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                    <div className="p-4">
+                      <h4 className="font-bold text-gray-800 mb-2">{auction.title}</h4>
+                      <div className="text-sm text-gray-600 mb-2">
+                        <div className="flex items-center gap-1 mb-1">
+                          <i className="fas fa-calendar-alt text-primary"></i>
+                          <span>Auction Date: {auction.date}</span>
+                        </div>
+                        <div className="flex items-center gap-1">
+                          <i className="fas fa-map-marker-alt text-primary"></i>
+                          <span>{auction.location}</span>
+                        </div>
+                      </div>
+                      <div className="mt-3 grid grid-cols-1 gap-2">
+                        <a 
+                          href={`https://northcountry.auctiontechs.com/auctions/detail/${auction.id}`} 
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="bg-blue-900 hover:bg-blue-800 text-white text-center py-2 rounded text-sm font-medium"
+                        >
+                          AUCTION DETAILS
+                        </a>
+                        <button 
+                          onClick={openForm}
+                          className="bg-primary hover:bg-primary/90 text-white text-center py-2 rounded text-sm font-medium"
+                        >
+                          REGISTER
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              
+              <div className="mt-6 text-center">
+                <a 
+                  href="https://northcountry.auctiontechs.com/auctions" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 bg-blue-800/40 hover:bg-blue-800/60 text-white py-3 px-6 rounded-full transition-colors"
+                >
+                  <i className="fas fa-external-link-alt"></i>
+                  {t('hero.viewAll')}
+                </a>
+              </div>
             </div>
           </div>
         </motion.div>
