@@ -273,16 +273,25 @@ export class MemStorage implements IStorage {
         isSold: false,
       },
       {
-        name: "Cargador Frontal Komatsu WA200",
-        type: "loader",
+        name: "2007 Komatsu Pc300lc-7e0 Excavator - Lote 479",
+        type: "excavator",
         brand: "Komatsu",
-        year: 2019,
-        hours: 3100,
+        year: 2007,
+        hours: 8500,
         price: 62000,
-        condition: "excellent",
-        description: "Cargador frontal con capacidad de 2.0 m³, dirección articulada y control por joystick.",
-        image: "https://images.unsplash.com/photo-1595842936365-1fabba86da27?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+        condition: "good",
+        description: "Sn/ 143t54a88319, Display Does Not Illuminated For Hours, 3 Speed, Heat/ac, Aux Hyd, Lemac Digging Bucket, Hyd Quick Coupler.",
+        image: "https://auctiontechupload.s3.amazonaws.com/216/auction/1840/479_1.jpg",
+        gallery: [
+          "https://auctiontechupload.s3.amazonaws.com/216/auction/1840/479_1.jpg",
+          "https://auctiontechupload.s3.amazonaws.com/216/auction/1840/479_2.jpg",
+          "https://auctiontechupload.s3.amazonaws.com/216/auction/1840/479_7.jpg",
+          "https://auctiontechupload.s3.amazonaws.com/216/auction/1840/479_11.jpg",
+          "https://auctiontechupload.s3.amazonaws.com/216/auction/1840/479_15.jpg",
+          "https://auctiontechupload.s3.amazonaws.com/216/auction/1840/479_14.jpg"
+        ],
         isSold: false,
+        priority: 1
       },
       {
         name: "Cat 725 Articulated Haul Truck - Lote 397",
