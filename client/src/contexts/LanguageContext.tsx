@@ -82,9 +82,11 @@ const translations: Record<Language, Record<string, string>> = {
     'services.logistics.description': 'Soluciones de transporte y entrega en todo el mundo',
     
     // Sobre Nosotros
-    'about.title': 'Quiénes Somos',
+    'about.title': 'Quiénes',
+    'about.titleHighlight': 'Somos',
     'about.subtitle': 'Líderes en remates industriales en Latinoamérica',
-    'about.description': 'Global Bids es una empresa especializada en la comercialización de activos industriales, mineros y forestales con más de 15 años de experiencia en el mercado latinoamericano.',
+    'about.description': 'Global Bids es líder en subastas y valoración de maquinaria pesada, chatarra, herramientas y repuestos en Latinoamérica, especializados en equipos y lotes para los sectores',
+    'about.descriptionHighlight': 'minero, forestal e industrial',
     'about.experience': 'Años de experiencia',
     'about.clients': 'Clientes satisfechos',
     'about.machines': 'Máquinas en catálogo',
@@ -277,9 +279,11 @@ const translations: Record<Language, Record<string, string>> = {
     'services.logistics.description': 'Transport and delivery solutions worldwide',
     
     // About Us
-    'about.title': 'Who We Are',
+    'about.title': 'Who We',
+    'about.titleHighlight': 'Are',
     'about.subtitle': 'Leaders in industrial auctions in Latin America',
-    'about.description': 'Global Bids is a company specialized in the commercialization of industrial, mining, and forestry assets with over 15 years of experience in the Latin American market.',
+    'about.description': 'Global Bids is a leader in auctions and valuation of heavy machinery, scrap, tools, and spare parts in Latin America, specializing in equipment and lots for the',
+    'about.descriptionHighlight': 'mining, forestry and industrial sectors',
     'about.experience': 'Years of experience',
     'about.clients': 'Satisfied clients',
     'about.machines': 'Machines in catalog',

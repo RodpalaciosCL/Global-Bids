@@ -49,12 +49,12 @@ export function Header() {
   }, []);
   
   const menuItems = [
-    { href: '#inicio', label: 'Inicio', icon: 'fa-home' },
-    { href: '#nosotros', label: 'Nosotros', icon: 'fa-users' },
-    { href: '#catalogo', label: 'Marketplace', icon: 'fa-th-large' },
-    { href: '#subastas', label: 'Subastas', icon: 'fa-gavel' },
+    { href: '#inicio', label: t('nav.home'), icon: 'fa-home' },
+    { href: '#nosotros', label: t('nav.about'), icon: 'fa-users' },
+    { href: '#catalogo', label: t('nav.catalog'), icon: 'fa-th-large' },
+    { href: '#subastas', label: t('nav.services'), icon: 'fa-gavel' },
     { href: '#soporte', label: 'Soporte', icon: 'fa-headset' },
-    { href: '#contacto', label: 'Contacto', icon: 'fa-envelope' }
+    { href: '#contacto', label: t('nav.contact'), icon: 'fa-envelope' }
   ];
   
   return (

@@ -1,12 +1,14 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { useInView } from 'framer-motion';
 import { useRef, useEffect, useState } from 'react';
+import { useLanguage } from '@/contexts/LanguageContext';
 import { fadeIn, slideUp } from '@/lib/animations';
 
 export function AboutSection() {
   const sectionRef = useRef(null);
   const isInView = useInView(sectionRef, { once: true, amount: 0.1 });
   const [activeTab, setActiveTab] = useState('historia');
+  const { t } = useLanguage();
   
   // Manejar el cambio de tabs
   const handleTabChange = (tab: string) => {
@@ -107,11 +109,11 @@ export function AboutSection() {
             transition={{ duration: 0.6 }}
           >
             <h2 className="text-4xl md:text-5xl font-bold font-heading mb-5 text-gray-900">
-              Quiénes <span className="text-primary">Somos</span>
+              {t('about.title')} <span className="text-primary">{t('about.titleHighlight')}</span>
             </h2>
             <div className="w-28 h-1.5 bg-primary mx-auto mb-6"></div>
             <p className="max-w-3xl mx-auto text-lg text-gray-600 leading-relaxed">
-              Global Bids es líder en subastas y valoración de maquinaria pesada, chatarra, herramientas y repuestos en Latinoamérica, especializados en equipos y lotes para los sectores <span className="font-medium text-gray-800">minero, forestal e industrial</span>.
+              {t('about.description')} <span className="font-medium text-gray-800">{t('about.descriptionHighlight')}</span>.
             </p>
           </motion.div>
         </div>
