@@ -76,9 +76,13 @@ export function EventosSection() {
           viewport={{ once: true, margin: "-100px" }}
           variants={slideUp}
         >
-          <h2 className="text-4xl md:text-5xl font-bold font-heading mb-4">Nuestros Eventos</h2>
+          <h2 className="text-4xl md:text-5xl font-bold font-heading mb-4">
+            {language === 'es' ? 'Nuestros Eventos' : 'Our Events'}
+          </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Participe en nuestras exclusivas subastas y remates de activos premium verificados por expertos
+            {language === 'es'
+              ? 'Participe en nuestras exclusivas subastas y remates de activos premium verificados por expertos'
+              : 'Participate in our exclusive auctions of premium assets verified by experts'}
           </p>
           <div className="flex justify-center mt-6">
             <div className="h-1 w-20 bg-primary rounded-full"></div>
@@ -110,7 +114,7 @@ export function EventosSection() {
                 />
                 {event.isHighlighted && (
                   <div className="absolute top-4 right-4 bg-primary text-white text-xs font-bold px-3 py-1 rounded-full z-20">
-                    DESTACADO
+                    {language === 'es' ? 'DESTACADO' : 'FEATURED'}
                   </div>
                 )}
               </div>
@@ -131,17 +135,19 @@ export function EventosSection() {
                 <div className="flex justify-between text-sm text-gray-600 mb-4">
                   <div className="flex items-center">
                     <i className="fas fa-box mr-1"></i>
-                    <span>{event.items} lotes</span>
+                    <span>{event.items} {language === 'es' ? 'lotes' : 'lots'}</span>
                   </div>
                   <div className="flex items-center">
                     <i className="fas fa-users mr-1"></i>
-                    <span>{event.registeredUsers} inscritos</span>
+                    <span>{event.registeredUsers} {language === 'es' ? 'inscritos' : 'registered'}</span>
                   </div>
                 </div>
                 
                 <div className="mb-4">
                   <div className="flex justify-between text-sm mb-1">
-                    <span className="font-medium">Capacidad de inscripción</span>
+                    <span className="font-medium">
+                      {language === 'es' ? 'Capacidad de inscripción' : 'Registration capacity'}
+                    </span>
                     <span className="text-primary font-bold">{Math.floor((event.registeredUsers / 500) * 100)}%</span>
                   </div>
                   <div className="w-full bg-gray-200 rounded-full h-2">
@@ -158,7 +164,7 @@ export function EventosSection() {
                     className="text-primary font-medium text-sm hover:underline flex items-center"
                     whileHover={{ x: 3 }}
                   >
-                    Ver detalles
+                    {language === 'es' ? 'Ver detalles' : 'View details'}
                     <i className="fas fa-arrow-right ml-1 text-xs"></i>
                   </motion.a>
                   
@@ -171,7 +177,7 @@ export function EventosSection() {
                     whileTap={{ scale: 0.95 }}
                   >
                     <i className="fas fa-user-plus mr-1"></i>
-                    Inscribirse
+                    {language === 'es' ? 'Inscribirse' : 'Register'}
                   </motion.button>
                 </div>
               </div>
@@ -186,30 +192,44 @@ export function EventosSection() {
                 <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white mr-4">
                   <i className="fas fa-video"></i>
                 </div>
-                <h3 className="text-2xl font-bold">Eventos Premium con Transmisión en Vivo</h3>
+                <h3 className="text-2xl font-bold">
+                  {language === 'es' ? 'Eventos Premium con Transmisión en Vivo' : 'Premium Live Streaming Events'}
+                </h3>
               </div>
               
               <p className="text-gray-600 mb-6">
-                Global Bids ofrece una experiencia única con subastas transmitidas en tiempo real. 
-                Contamos con tecnología avanzada que incluye transmisión en 4K, drones para visualización 
-                completa de activos y sistemas de puja en tiempo real con interfaz intuitiva.
+                {language === 'es' 
+                  ? 'Global Bids ofrece una experiencia única con subastas transmitidas en tiempo real. Contamos con tecnología avanzada que incluye transmisión en 4K, drones para visualización completa de activos y sistemas de puja en tiempo real con interfaz intuitiva.'
+                  : 'Global Bids offers a unique experience with real-time streamed auctions. We have advanced technology that includes 4K streaming, drones for complete asset visualization, and real-time bidding systems with an intuitive interface.'}
               </p>
               
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
                 <div className="bg-gray-50 p-4 rounded-lg">
                   <div className="flex items-center mb-2">
                     <i className="fas fa-globe text-primary mr-2"></i>
-                    <span className="font-bold">Acceso Global</span>
+                    <span className="font-bold">
+                      {language === 'es' ? 'Acceso Global' : 'Global Access'}
+                    </span>
                   </div>
-                  <p className="text-sm text-gray-600">Participe desde cualquier lugar del mundo en nuestros eventos</p>
+                  <p className="text-sm text-gray-600">
+                    {language === 'es'
+                      ? 'Participe desde cualquier lugar del mundo en nuestros eventos'
+                      : 'Participate from anywhere in the world in our events'}
+                  </p>
                 </div>
                 
                 <div className="bg-gray-50 p-4 rounded-lg">
                   <div className="flex items-center mb-2">
                     <i className="fas fa-shield-alt text-primary mr-2"></i>
-                    <span className="font-bold">Seguridad Garantizada</span>
+                    <span className="font-bold">
+                      {language === 'es' ? 'Seguridad Garantizada' : 'Guaranteed Security'}
+                    </span>
                   </div>
-                  <p className="text-sm text-gray-600">Transacciones seguras con blockchain y protección al comprador</p>
+                  <p className="text-sm text-gray-600">
+                    {language === 'es'
+                      ? 'Transacciones seguras con blockchain y protección al comprador'
+                      : 'Secure transactions with blockchain and buyer protection'}
+                  </p>
                 </div>
               </div>
               
@@ -221,7 +241,7 @@ export function EventosSection() {
                   whileTap={{ scale: 0.95 }}
                 >
                   <i className="fas fa-calendar-plus mr-2"></i>
-                  Ver calendario completo
+                  {language === 'es' ? 'Ver calendario completo' : 'View full calendar'}
                 </motion.a>
                 
                 <motion.a
@@ -233,7 +253,7 @@ export function EventosSection() {
                   whileTap={{ scale: 0.95 }}
                 >
                   <i className="fas fa-play mr-2"></i>
-                  Ver demo en vivo
+                  {language === 'es' ? 'Ver demo en vivo' : 'Watch live demo'}
                 </motion.a>
               </div>
             </div>
@@ -258,7 +278,11 @@ export function EventosSection() {
                   className="h-full w-full object-cover"
                 />
                 <div className="absolute bottom-0 left-0 right-0 p-4 z-30">
-                  <p className="text-white font-medium">Construcción de infraestructura industrial - Último remate</p>
+                  <p className="text-white font-medium">
+                    {language === 'es'
+                      ? 'Construcción de infraestructura industrial - Último remate'
+                      : 'Industrial infrastructure construction - Latest auction'}
+                  </p>
                 </div>
               </div>
             </div>
@@ -273,7 +297,9 @@ export function EventosSection() {
           transition={{ delay: 0.2 }}
         >
           <p className="text-lg text-gray-600 mb-6">
-            ¿Buscas participar en nuestros eventos o tienes activos para subastar?
+            {language === 'es'
+              ? '¿Buscas participar en nuestros eventos o tienes activos para subastar?'
+              : 'Looking to participate in our events or have assets to auction?'}
           </p>
           <motion.a
             href="#contacto"
@@ -282,7 +308,7 @@ export function EventosSection() {
             whileTap={{ scale: 0.95 }}
           >
             <i className="fas fa-handshake mr-2"></i>
-            Contáctanos ahora
+            {language === 'es' ? 'Contáctanos ahora' : 'Contact us now'}
           </motion.a>
         </motion.div>
       </div>
