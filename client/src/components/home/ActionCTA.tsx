@@ -4,6 +4,7 @@ import { RegistrationForm } from './RegistrationForm';
 import { useLanguage } from '@/contexts/LanguageContext';
 
 export function ActionCTA() {
+  const { language } = useLanguage();
   return (
     <section className="py-16 bg-primary text-white relative overflow-hidden">
       <div className="absolute inset-0 z-0 opacity-20">
@@ -25,13 +26,17 @@ export function ActionCTA() {
             className="font-heading text-3xl md:text-4xl font-bold mb-4"
             variants={slideUp}
           >
-            ¿Listo para participar en nuestros eventos?
+            {language === 'es' 
+              ? '¿Listo para participar en nuestros eventos?' 
+              : 'Ready to participate in our events?'}
           </motion.h2>
           <motion.p 
             className="text-gray-300 mb-8"
             variants={slideUp}
           >
-            Accede a nuestra plataforma de remates en vivo para pujar por la maquinaria que necesitas a precios competitivos. Regístrate gratis hoy mismo.
+            {language === 'es'
+              ? 'Accede a nuestra plataforma de remates en vivo para pujar por la maquinaria que necesitas a precios competitivos. Regístrate gratis hoy mismo.'
+              : 'Access our live auction platform to bid on the machinery you need at competitive prices. Register for free today.'}
           </motion.p>
           <RegistrationForm />
         </motion.div>

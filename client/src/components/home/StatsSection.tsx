@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
 import { fadeIn, staggerContainer, scaleIn } from '@/lib/animations';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 interface StatItem {
   icon?: string;
@@ -14,13 +15,21 @@ interface StatItem {
 export function StatsSection() {
   const sectionRef = useRef(null);
   const isInView = useInView(sectionRef, { once: true, amount: 0.3 });
+  const { language } = useLanguage();
   
-  const stats: StatItem[] = [
-    { icon: 'fa-gavel', prefix: '+', value: 2800, label: 'Remates' },
-    { icon: 'fa-globe', value: 75, label: 'países' },
-    { icon: 'fa-dollar-sign', prefix: 'USD ', value: 450, label: 'Ventas en los últimos 24 meses', suffix: 'M' },
-    { icon: 'fa-users', value: 950300, label: 'Clientes pre-validados en todo el mundo' }
-  ];
+  const stats: StatItem[] = language === 'es' 
+    ? [
+        { icon: 'fa-gavel', prefix: '+', value: 2800, label: 'Remates' },
+        { icon: 'fa-globe', value: 75, label: 'países' },
+        { icon: 'fa-dollar-sign', prefix: 'USD ', value: 450, label: 'Ventas en los últimos 24 meses', suffix: 'M' },
+        { icon: 'fa-users', value: 950300, label: 'Clientes pre-validados en todo el mundo' }
+      ]
+    : [
+        { icon: 'fa-gavel', prefix: '+', value: 2800, label: 'Auctions' },
+        { icon: 'fa-globe', value: 75, label: 'countries' },
+        { icon: 'fa-dollar-sign', prefix: 'USD ', value: 450, label: 'Sales in the last 24 months', suffix: 'M' },
+        { icon: 'fa-users', value: 950300, label: 'Pre-validated clients worldwide' }
+      ];
   
   return (
     <section className="py-16 bg-primary text-white" ref={sectionRef}>
@@ -31,9 +40,15 @@ export function StatsSection() {
           animate={isInView ? "visible" : "hidden"}
           variants={fadeIn}
         >
-          <h2 className="font-heading text-3xl md:text-4xl font-bold mb-4">Nuestros Números</h2>
+          <h2 className="font-heading text-3xl md:text-4xl font-bold mb-4">
+            {language === 'es' ? 'Nuestros Números' : 'Our Numbers'}
+          </h2>
           <div className="w-20 h-1 bg-secondary mx-auto mb-6"></div>
-          <p className="max-w-2xl mx-auto text-gray-300">Dejamos que los resultados hablen por nosotros. Estos son algunos de nuestros logros a lo largo de nuestra trayectoria.</p>
+          <p className="max-w-2xl mx-auto text-gray-300">
+            {language === 'es'
+              ? 'Dejamos que los resultados hablen por nosotros. Estos son algunos de nuestros logros a lo largo de nuestra trayectoria.'
+              : 'We let the results speak for themselves. These are some of our achievements throughout our journey.'}
+          </p>
         </motion.div>
         
         <motion.div 
