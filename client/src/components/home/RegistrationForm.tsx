@@ -13,17 +13,37 @@ import { Input } from '@/components/ui/input';
 import { Checkbox } from '@/components/ui/checkbox';
 import { LoadingOverlay } from '@/components/ui/LoadingOverlay';
 import ReactFlagsSelect from 'react-flags-select';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 // Extend the registration schema with additional validation
-const registrationFormSchema = insertRegistrationSchema.extend({
-  firstName: z.string().min(2, "El nombre debe tener al menos 2 caracteres"),
-  lastName: z.string().min(2, "El apellido debe tener al menos 2 caracteres"),
-  email: z.string().email("Ingresa un email válido"),
-  phone: z.string().min(8, "Ingresa un número de teléfono válido"),
-  interestedIn: z.array(z.string()).min(1, "Selecciona al menos un tipo de maquinaria"),
-});
+const getRegistrationFormSchema = (language: 'es' | 'en') => {
+  const errorMessages = {
+    es: {
+      firstName: "El nombre debe tener al menos 2 caracteres",
+      lastName: "El apellido debe tener al menos 2 caracteres",
+      email: "Ingresa un email válido",
+      phone: "Ingresa un número de teléfono válido",
+      interestedIn: "Selecciona al menos un tipo de maquinaria"
+    },
+    en: {
+      firstName: "First name must have at least 2 characters",
+      lastName: "Last name must have at least 2 characters",
+      email: "Please enter a valid email",
+      phone: "Please enter a valid phone number",
+      interestedIn: "Please select at least one type of machinery"
+    }
+  };
+  
+  return insertRegistrationSchema.extend({
+    firstName: z.string().min(2, errorMessages[language].firstName),
+    lastName: z.string().min(2, errorMessages[language].lastName),
+    email: z.string().email(errorMessages[language].email),
+    phone: z.string().min(8, errorMessages[language].phone),
+    interestedIn: z.array(z.string()).min(1, errorMessages[language].interestedIn),
+  });
+};
 
-type RegistrationFormData = z.infer<typeof registrationFormSchema>;
+type RegistrationFormData = z.infer<ReturnType<typeof getRegistrationFormSchema>>;
 
 // Estado global para controlar la apertura del formulario desde cualquier componente
 let formOpenCallback: ((open: boolean) => void) | null = null;
@@ -39,6 +59,7 @@ export function RegistrationForm() {
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [selectedCountry, setSelectedCountry] = useState("CL"); // Chile por defecto
   const { toast } = useToast();
+  const { t, language } = useLanguage();
   
   // Establecer el callback para abrir el formulario
   useEffect(() => {
@@ -106,8 +127,15 @@ export function RegistrationForm() {
   const getCountryCode = () => countryToCode[selectedCountry] || "+56";
   
   // Form with validation
+  const [schema, setSchema] = useState(() => getRegistrationFormSchema(language));
+  
+  // Actualizar el esquema cuando cambie el idioma
+  useEffect(() => {
+    setSchema(getRegistrationFormSchema(language));
+  }, [language]);
+  
   const form = useForm<RegistrationFormData>({
-    resolver: zodResolver(registrationFormSchema),
+    resolver: zodResolver(schema),
     defaultValues: {
       firstName: '',
       lastName: '',
@@ -124,16 +152,16 @@ export function RegistrationForm() {
     },
     onSuccess: () => {
       toast({
-        title: "Registro enviado",
-        description: "Gracias por registrarte. Te contactaremos pronto.",
+        title: t('registration.successTitle'),
+        description: t('registration.successMsg'),
       });
       form.reset();
       setIsFormOpen(false);
     },
     onError: (error) => {
       toast({
-        title: "Error",
-        description: "Hubo un problema al enviar tu registro. Por favor intenta nuevamente.",
+        title: t('registration.errorTitle'),
+        description: t('registration.errorMsg'),
         variant: "destructive",
       });
       console.error("Registration error:", error);
@@ -181,7 +209,7 @@ export function RegistrationForm() {
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
       >
-        Registrate en nuestra plataforma de remates
+        {t('registration.button')}
         <i className="fas fa-arrow-right ml-2"></i>
       </motion.button>
       
@@ -201,7 +229,7 @@ export function RegistrationForm() {
               transition={{ duration: 0.3 }}
             >
               <div className="flex justify-between items-center mb-4">
-                <h3 className="text-xl font-bold text-gray-900">Inscríbete en nuestra plataforma</h3>
+                <h3 className="text-xl font-bold text-gray-900">{t('registration.title')}</h3>
                 <Button
                   variant="ghost"
                   size="sm"
@@ -211,15 +239,15 @@ export function RegistrationForm() {
                   ✕
                 </Button>
               </div>
-              <p className="text-gray-600 mb-4">Regístrate para recibir notificaciones sobre subastas</p>
+              <p className="text-gray-600 mb-4">{t('registration.description')}</p>
 
               <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
-                    <label htmlFor="firstName" className="block text-sm font-medium text-gray-700 mb-1">Nombre</label>
+                    <label htmlFor="firstName" className="block text-sm font-medium text-gray-700 mb-1">{t('registration.firstName')}</label>
                     <Input
                       id="firstName"
-                      placeholder="Ingresa tu nombre"
+                      placeholder={language === 'es' ? "Ingresa tu nombre" : "Enter your first name"}
                       {...form.register('firstName')}
                       className={form.formState.errors.firstName ? 'border-red-500' : ''}
                     />
@@ -229,10 +257,10 @@ export function RegistrationForm() {
                   </div>
 
                   <div>
-                    <label htmlFor="lastName" className="block text-sm font-medium text-gray-700 mb-1">Apellido</label>
+                    <label htmlFor="lastName" className="block text-sm font-medium text-gray-700 mb-1">{t('registration.lastName')}</label>
                     <Input
                       id="lastName"
-                      placeholder="Ingresa tu apellido"
+                      placeholder={language === 'es' ? "Ingresa tu apellido" : "Enter your last name"}
                       {...form.register('lastName')}
                       className={form.formState.errors.lastName ? 'border-red-500' : ''}
                     />
@@ -243,11 +271,11 @@ export function RegistrationForm() {
                 </div>
 
                 <div>
-                  <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">Email</label>
+                  <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">{t('registration.email')}</label>
                   <Input
                     id="email"
                     type="email"
-                    placeholder="tucorreo@ejemplo.com"
+                    placeholder={language === 'es' ? "tucorreo@ejemplo.com" : "your.email@example.com"}
                     {...form.register('email')}
                     className={form.formState.errors.email ? 'border-red-500' : ''}
                   />
@@ -257,7 +285,7 @@ export function RegistrationForm() {
                 </div>
 
                 <div>
-                  <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">Teléfono</label>
+                  <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">{t('registration.phone')}</label>
                   <div className="flex gap-2">
                     <div className="w-2/5">
                       <ReactFlagsSelect
@@ -273,7 +301,7 @@ export function RegistrationForm() {
                           acc[code] = `${countryToCode[code]} ${code}`;
                           return acc;
                         }, {} as Record<string, string>)}
-                        placeholder="Selecciona"
+                        placeholder={language === 'es' ? "Selecciona" : "Select"}
                         searchable={true}
                         selectButtonClassName="!border-gray-300 rounded-md h-10 !bg-white w-full"
                       />
@@ -298,7 +326,7 @@ export function RegistrationForm() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Interesado en</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">{t('registration.interested')}</label>
                   <div className="grid grid-cols-2 gap-2">
                     {machineryTypes.map((type) => (
                       <div key={type.id} className="flex items-center space-x-2">
@@ -316,7 +344,7 @@ export function RegistrationForm() {
                             }
                           }}
                         />
-                        <label htmlFor={type.id} className="text-sm text-gray-700">{type.label}</label>
+                        <label htmlFor={type.id} className="text-sm text-gray-700">{t(`registration.${type.id}s`)}</label>
                       </div>
                     ))}
                   </div>
@@ -330,11 +358,13 @@ export function RegistrationForm() {
                   className="w-full bg-primary hover:bg-primary-dark text-white font-bold py-2"
                   disabled={mutation.isPending}
                 >
-                  {mutation.isPending ? 'Enviando...' : 'Registrarme'}
+                  {mutation.isPending ? 
+                    (language === 'es' ? 'Enviando...' : 'Sending...') : 
+                    t('registration.register')}
                 </Button>
 
                 <p className="text-xs text-gray-500 text-center mt-2">
-                  Al registrarte, aceptas nuestra Política de Privacidad y Términos de Servicio.
+                  {t('registration.terms')}
                 </p>
               </form>
 

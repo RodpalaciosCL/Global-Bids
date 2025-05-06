@@ -120,7 +120,7 @@ export function AuctionsIframe() {
                         onClick={scrollToRegistrationForm}
                         className="mt-3 px-4 py-2 bg-primary text-white text-sm font-medium rounded hover:bg-primary-dark transition-colors"
                       >
-                        {language === 'es' ? 'DETALLES DE LA SUBASTA' : 'AUCTION DETAILS'}
+                        {t('auctions.auctionDetails')}
                       </button>
                     </div>
                   </div>
@@ -135,7 +135,7 @@ export function AuctionsIframe() {
               onClick={scrollToRegistrationForm}
               className="text-primary hover:text-primary-dark font-medium inline-flex items-center transition-colors"
             >
-              {language === 'es' ? 'Regístrate para todas las subastas' : 'Register for all auctions'} 
+              {t('auctions.register')}
               <i className="fas fa-arrow-right ml-2"></i>
             </button>
           </div>
