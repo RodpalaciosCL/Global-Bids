@@ -6,7 +6,7 @@ import { useLanguage } from '@/contexts/LanguageContext';
 export function ActionCTA() {
   const { language } = useLanguage();
   return (
-    <section className="py-16 bg-primary text-white relative overflow-hidden">
+    <section className="py-10 sm:py-16 bg-primary text-white relative overflow-hidden">
       <div className="absolute inset-0 z-0 opacity-20">
         <img 
           src="https://images.unsplash.com/photo-1541783273000-f5c4d4fa9ee5?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80" 
@@ -23,7 +23,7 @@ export function ActionCTA() {
           variants={fadeIn}
         >
           <motion.h2 
-            className="font-heading text-3xl md:text-4xl font-bold mb-4"
+            className="font-heading text-2xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-4"
             variants={slideUp}
           >
             {language === 'es' 
@@ -31,7 +31,7 @@ export function ActionCTA() {
               : 'Ready to participate in our events?'}
           </motion.h2>
           <motion.p 
-            className="text-gray-300 mb-8"
+            className="text-gray-300 text-sm sm:text-base mb-6 sm:mb-8 px-2 sm:px-0"
             variants={slideUp}
           >
             {language === 'es'

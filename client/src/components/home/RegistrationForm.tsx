@@ -204,7 +204,7 @@ export function RegistrationForm() {
     <div id="registration-form">
       <motion.button
         onClick={toggleForm}
-        className="inline-block bg-secondary hover:bg-secondary-dark text-primary text-lg font-bold px-8 py-4 rounded-lg transition duration-300 shadow-lg"
+        className="inline-block bg-secondary hover:bg-secondary-dark text-primary text-sm sm:text-base md:text-lg font-bold px-6 sm:px-8 py-3 sm:py-4 rounded-lg transition duration-300 shadow-lg"
         variants={slideUp}
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
@@ -222,14 +222,14 @@ export function RegistrationForm() {
             exit={{ opacity: 0 }}
           >
             <motion.div 
-              className="bg-white rounded-lg p-6 shadow-xl max-w-lg w-full text-left relative z-20 my-8"
+              className="bg-white rounded-lg p-4 sm:p-6 shadow-xl max-w-lg w-full text-left relative z-20 my-4 sm:my-8"
               initial={{ opacity: 0, scale: 0.9, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.9, y: -20 }}
               transition={{ duration: 0.3 }}
             >
-              <div className="flex justify-between items-center mb-4">
-                <h3 className="text-xl font-bold text-gray-900">{t('registration.title')}</h3>
+              <div className="flex justify-between items-center mb-3 sm:mb-4">
+                <h3 className="text-lg sm:text-xl font-bold text-gray-900">{t('registration.title')}</h3>
                 <Button
                   variant="ghost"
                   size="sm"
@@ -239,7 +239,7 @@ export function RegistrationForm() {
                   ✕
                 </Button>
               </div>
-              <p className="text-gray-600 mb-4">{t('registration.description')}</p>
+              <p className="text-gray-600 text-sm sm:text-base mb-3 sm:mb-4">{t('registration.description')}</p>
 
               <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
