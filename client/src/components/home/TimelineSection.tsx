@@ -1,33 +1,43 @@
 import { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 export function TimelineSection() {
   const sectionRef = useRef(null);
   const isInView = useInView(sectionRef, { once: true, amount: 0.2 });
-
-  const timelineEvents = [
+  const { t, language } = useLanguage();
+  
+  const getTimelineEvents = () => [
     {
       id: 1,
-      year: 'Fase 1',
+      year: t('timeline.phase1'),
       title: 'North Country Auction',
-      description: 'Fundación de North Country Auction, empresa americana experta en subastas con amplia experiencia en el sector industrial.',
+      description: language === 'es' 
+        ? 'Fundación de North Country Auction, empresa americana experta en subastas con amplia experiencia en el sector industrial.'
+        : 'Founding of North Country Auction, an American company expert in auctions with extensive experience in the industrial sector.',
       icon: 'fa-building'
     },
     {
       id: 2,
-      year: 'Fase 2',
-      title: 'Asociación con Prelco Auctions',
-      description: 'Formación de una alianza estratégica con Grupo Prelco, expertos con más de 20 años en el sector minero latinoamericano.',
+      year: t('timeline.phase2'),
+      title: language === 'es' ? 'Asociación con Prelco Auctions' : 'Partnership with Prelco Auctions',
+      description: language === 'es'
+        ? 'Formación de una alianza estratégica con Grupo Prelco, expertos con más de 20 años en el sector minero latinoamericano.'
+        : 'Formation of a strategic alliance with Grupo Prelco, experts with more than 20 years in the Latin American mining sector.',
       icon: 'fa-handshake'
     },
     {
       id: 3,
-      year: 'Fase 3',
-      title: 'Nace Global Bids',
-      description: 'Surge Global Bids como resultado del Joint-Venture, combinando experiencia en subastas y conocimiento del mercado latinoamericano.',
+      year: t('timeline.phase3'),
+      title: language === 'es' ? 'Nace Global Bids' : 'Global Bids is Born',
+      description: language === 'es'
+        ? 'Surge Global Bids como resultado del Joint-Venture, combinando experiencia en subastas y conocimiento del mercado latinoamericano.'
+        : 'Global Bids emerges as a result of the Joint-Venture, combining auction experience and knowledge of the Latin American market.',
       icon: 'fa-globe'
     }
   ];
+  
+  const timelineEvents = getTimelineEvents();
 
   return (
     <section ref={sectionRef} className="py-12 bg-gradient-to-b from-gray-50 to-white overflow-hidden">
@@ -39,12 +49,14 @@ export function TimelineSection() {
           transition={{ duration: 0.6 }}
         >
           <div className="inline-block bg-blue-600/10 px-4 py-2 rounded-full mb-3">
-            <span className="text-blue-600 font-semibold">Nuestra Historia</span>
+            <span className="text-blue-600 font-semibold">{language === 'es' ? 'Nuestra Historia' : 'Our History'}</span>
           </div>
-          <h2 className="text-3xl md:text-4xl font-bold font-heading mb-3">Nuestra Evolución</h2>
+          <h2 className="text-3xl md:text-4xl font-bold font-heading mb-3">{language === 'es' ? 'Nuestra Evolución' : 'Our Evolution'}</h2>
           <div className="w-24 h-1.5 bg-blue-500 mx-auto mb-4"></div>
           <p className="max-w-2xl mx-auto text-gray-600 text-lg">
-            Descubre la historia detrás de Global Bids y cómo hemos evolucionado para convertirnos en líderes del mercado.
+            {language === 'es' 
+              ? 'Descubre la historia detrás de Global Bids y cómo hemos evolucionado para convertirnos en líderes del mercado.'
+              : 'Discover the story behind Global Bids and how we have evolved to become market leaders.'}
           </p>
         </motion.div>
 
@@ -122,9 +134,11 @@ export function TimelineSection() {
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
           transition={{ duration: 0.7, delay: timelineEvents.length * 0.3 + 0.4 }}
         >
-          <h3 className="text-lg font-bold text-blue-600 mb-2">Hoy en Global Bids</h3>
+          <h3 className="text-lg font-bold text-blue-600 mb-2">{language === 'es' ? 'Hoy en Global Bids' : 'Global Bids Today'}</h3>
           <p className="text-base text-gray-700 mb-3">
-            Conectamos la oferta sudamericana con la demanda global, a través de nuestra plataforma digital, con presencia en más de 12 países y con una base de cerca de 1 millón de compradores activos.
+            {language === 'es' 
+              ? 'Conectamos la oferta sudamericana con la demanda global, a través de nuestra plataforma digital, con presencia en más de 12 países y con una base de cerca de 1 millón de compradores activos.'
+              : 'We connect South American supply with global demand through our digital platform, with presence in more than 12 countries and a base of nearly 1 million active buyers.'}
           </p>
           <div className="inline-block bg-blue-500/10 px-4 py-2 rounded-full">
             <span className="text-base text-blue-600 font-bold">

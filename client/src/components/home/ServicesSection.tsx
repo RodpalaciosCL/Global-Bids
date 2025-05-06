@@ -2,55 +2,71 @@ import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
 import { useRef } from 'react';
 import { fadeIn, staggerContainer, slideUp } from '@/lib/animations';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 export function ServicesSection() {
   const sectionRef = useRef(null);
   const isInView = useInView(sectionRef, { once: true, amount: 0.2 });
+  const { language } = useLanguage();
   
-  const services = [
+  const getServices = () => [
     {
       icon: 'fa-gavel',
       color: 'from-blue-500 to-blue-600',
-      title: 'Subastas de Equipos',
-      subtitle: 'Gestión especializada de remates',
-      description: 'Organizamos y gestionamos subastas especializadas de equipos mineros, forestales e industriales, alcanzando una audiencia global de compradores calificados para maximizar el valor de sus activos.'
+      title: language === 'es' ? 'Subastas de Equipos' : 'Equipment Auctions',
+      subtitle: language === 'es' ? 'Gestión especializada de remates' : 'Specialized auction management',
+      description: language === 'es'
+        ? 'Organizamos y gestionamos subastas especializadas de equipos mineros, forestales e industriales, alcanzando una audiencia global de compradores calificados para maximizar el valor de sus activos.'
+        : 'We organize and manage specialized auctions of mining, forestry and industrial equipment, reaching a global audience of qualified buyers to maximize the value of your assets.'
     },
     {
       icon: 'fa-database',
       color: 'from-green-500 to-green-600',
-      title: 'Gestión de Obsoletos',
-      subtitle: 'Tecnología de punta',
-      description: 'Pioneros en tecnología de punta para detección, inspección, visualización y contabilización de assets y equipos con AI y Visión Computacional.'
+      title: language === 'es' ? 'Gestión de Obsoletos' : 'Obsolete Management',
+      subtitle: language === 'es' ? 'Tecnología de punta' : 'Cutting-edge technology',
+      description: language === 'es'
+        ? 'Pioneros en tecnología de punta para detección, inspección, visualización y contabilización de assets y equipos con AI y Visión Computacional.'
+        : 'Pioneers in cutting-edge technology for detection, inspection, visualization and accounting of assets and equipment with AI and Computer Vision.'
     },
     {
       icon: 'fa-search',
       color: 'from-purple-500 to-purple-600',
       title: 'Marketing Intelligence',
-      subtitle: 'Estrategias 1:1 personalizadas',
-      description: 'Desarrollamos campañas especializadas para el sector de maquinaria pesada, conectando vendedores con compradores específicos y satisfaciendo necesidades 1:1 en tiempo récord.'
+      subtitle: language === 'es' ? 'Estrategias 1:1 personalizadas' : 'Personalized 1:1 strategies',
+      description: language === 'es'
+        ? 'Desarrollamos campañas especializadas para el sector de maquinaria pesada, conectando vendedores con compradores específicos y satisfaciendo necesidades 1:1 en tiempo récord.'
+        : 'We develop specialized campaigns for the heavy machinery sector, connecting sellers with specific buyers and satisfying 1:1 needs in record time.'
     },
     {
       icon: 'fa-calculator',
       color: 'from-red-500 to-red-600',
-      title: 'Tasación de Activos',
-      subtitle: 'Valoración especializada',
-      description: 'Equipo especializado en tasación de equipos y activos mineros, forestales e industriales, utilizando metodologías avanzadas y conocimiento profundo del mercado internacional.'
+      title: language === 'es' ? 'Tasación de Activos' : 'Asset Valuation',
+      subtitle: language === 'es' ? 'Valoración especializada' : 'Specialized valuation',
+      description: language === 'es'
+        ? 'Equipo especializado en tasación de equipos y activos mineros, forestales e industriales, utilizando metodologías avanzadas y conocimiento profundo del mercado internacional.'
+        : 'Specialized team in the valuation of mining, forestry and industrial equipment and assets, using advanced methodologies and deep knowledge of the international market.'
     },
     {
       icon: 'fa-truck',
       color: 'from-orange-500 to-orange-600',
-      title: 'Apoyo Logístico',
-      subtitle: 'Soporte en transporte',
-      description: 'Brindamos apoyo en servicios logísticos para el transporte nacional e internacional de equipos pesados, facilitando la documentación, permisos y seguros necesarios.'
+      title: language === 'es' ? 'Apoyo Logístico' : 'Logistic Support',
+      subtitle: language === 'es' ? 'Soporte en transporte' : 'Transport support',
+      description: language === 'es'
+        ? 'Brindamos apoyo en servicios logísticos para el transporte nacional e internacional de equipos pesados, facilitando la documentación, permisos y seguros necesarios.'
+        : 'We provide support in logistics services for national and international transportation of heavy equipment, facilitating documentation, permits and necessary insurance.'
     },
     {
       icon: 'fa-camera',
       color: 'from-cyan-500 to-cyan-600',
-      title: 'Documentación Visual',
-      subtitle: 'Tecnología avanzada',
-      description: 'Servicio de fotografía 360, videos interactivos, modelos 3D y acceso remoto al asset, entre otras soluciones que potencian la visibilidad y ventas de equipos.'
+      title: language === 'es' ? 'Documentación Visual' : 'Visual Documentation',
+      subtitle: language === 'es' ? 'Tecnología avanzada' : 'Advanced technology',
+      description: language === 'es'
+        ? 'Servicio de fotografía 360, videos interactivos, modelos 3D y acceso remoto al asset, entre otras soluciones que potencian la visibilidad y ventas de equipos.'
+        : '360 photography service, interactive videos, 3D models and remote access to the asset, among other solutions that enhance the visibility and sales of equipment.'
     }
   ];
+  
+  const services = getServices();
 
   return (
     <section id="servicios" className="py-24 bg-white relative" ref={sectionRef}>
