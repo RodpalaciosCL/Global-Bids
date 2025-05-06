@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { fadeIn, slideUp } from '@/lib/animations';
 import { RegistrationForm } from './RegistrationForm';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 export function ActionCTA() {
   return (

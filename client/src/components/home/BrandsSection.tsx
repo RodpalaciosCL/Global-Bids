@@ -2,10 +2,12 @@ import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
 import { useRef } from 'react';
 import { fadeIn, staggerContainer } from '@/lib/animations';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 export function BrandsSection() {
   const sectionRef = useRef(null);
   const isInView = useInView(sectionRef, { once: true, amount: 0.3 });
+  const { language } = useLanguage();
   
   const brands = [
     {
@@ -46,11 +48,16 @@ export function BrandsSection() {
           transition={{ duration: 0.7 }}
         >
           <h3 className="font-heading text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-            Las Principales Marcas <span className="text-primary">del Mercado</span>
+            {language === 'es' 
+              ? <>Las Principales Marcas <span className="text-primary">del Mercado</span></>
+              : <>Main <span className="text-primary">Market Brands</span></>
+            }
           </h3>
           <div className="w-24 h-1.5 bg-primary mx-auto mb-6 rounded-full"></div>
           <p className="max-w-3xl mx-auto text-gray-600 text-lg">
-            Vasta experiencia certificando y validando equipos de las mejores marcas del mundo, para los mercados y clientes más exigentes de las industrias que operamos.
+            {language === 'es'
+              ? 'Vasta experiencia certificando y validando equipos de las mejores marcas del mundo, para los mercados y clientes más exigentes de las industrias que operamos.'
+              : 'Extensive experience certifying and validating equipment from the best brands in the world, for the most demanding markets and clients in the industries we operate in.'}
           </p>
         </motion.div>
         
@@ -98,7 +105,9 @@ export function BrandsSection() {
           transition={{ duration: 0.5, delay: 0.8 }}
         >
           <p className="text-gray-700 text-lg font-medium italic">
-            "Más de 15 años de experiencia trabajando con los principales fabricantes de maquinaria pesada"
+            {language === 'es'
+              ? '"Más de 15 años de experiencia trabajando con los principales fabricantes de maquinaria pesada"'
+              : '"More than 15 years of experience working with the main heavy machinery manufacturers"'}
           </p>
         </motion.div>
       </div>

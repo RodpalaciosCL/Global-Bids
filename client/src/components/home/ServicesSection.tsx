@@ -82,12 +82,18 @@ export function ServicesSection() {
           variants={fadeIn}
         >
           <div className="inline-block bg-secondary/10 px-4 sm:px-6 py-2 rounded-full mb-4">
-            <span className="text-primary font-semibold text-sm sm:text-base">Soluciones Especializadas</span>
+            <span className="text-primary font-semibold text-sm sm:text-base">
+              {language === 'es' ? 'Soluciones Especializadas' : 'Specialized Solutions'}
+            </span>
           </div>
-          <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold mb-4 md:mb-6 text-primary px-2">Nuestros Servicios</h2>
+          <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold mb-4 md:mb-6 text-primary px-2">
+            {language === 'es' ? 'Nuestros Servicios' : 'Our Services'}
+          </h2>
           <div className="w-16 md:w-24 h-1 md:h-1.5 bg-secondary mx-auto mb-6 md:mb-8"></div>
           <p className="max-w-3xl mx-auto text-gray-600 text-base md:text-lg leading-relaxed px-4">
-            Ofrecemos soluciones integrales para la gestión y comercialización de activos de maquinaria minera, forestal e industrial.
+            {language === 'es' 
+              ? 'Ofrecemos soluciones integrales para la gestión y comercialización de activos de maquinaria minera, forestal e industrial.'
+              : 'We offer comprehensive solutions for the management and commercialization of mining, forestry and industrial machinery assets.'}
           </p>
         </motion.div>
         
