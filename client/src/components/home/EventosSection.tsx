@@ -119,20 +119,20 @@ export function EventosSection() {
                 )}
               </div>
 
-              <div className="p-6">
+              <div className="p-4 sm:p-6">
                 <div className="flex items-center mb-3">
-                  <div className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center text-primary mr-3">
-                    <i className="fas fa-calendar-alt"></i>
+                  <div className="w-8 h-8 sm:w-10 sm:h-10 bg-primary/10 rounded-full flex items-center justify-center text-primary mr-2 sm:mr-3">
+                    <i className="fas fa-calendar-alt text-sm sm:text-base"></i>
                   </div>
-                  <div className="text-sm">
+                  <div className="text-xs sm:text-sm">
                     <div className="font-bold">{event.date}</div>
                     <div className="text-gray-500">{event.location}</div>
                   </div>
                 </div>
                 
-                <h3 className="font-bold text-xl mb-3">{event.title}</h3>
+                <h3 className="font-bold text-base sm:text-xl mb-3 line-clamp-2">{event.title}</h3>
                 
-                <div className="flex justify-between text-sm text-gray-600 mb-4">
+                <div className="flex justify-between text-xs sm:text-sm text-gray-600 mb-3 sm:mb-4">
                   <div className="flex items-center">
                     <i className="fas fa-box mr-1"></i>
                     <span>{event.items} {language === 'es' ? 'lotes' : 'lots'}</span>
@@ -143,25 +143,25 @@ export function EventosSection() {
                   </div>
                 </div>
                 
-                <div className="mb-4">
-                  <div className="flex justify-between text-sm mb-1">
+                <div className="mb-3 sm:mb-4">
+                  <div className="flex justify-between text-xs sm:text-sm mb-1">
                     <span className="font-medium">
                       {language === 'es' ? 'Capacidad de inscripción' : 'Registration capacity'}
                     </span>
                     <span className="text-primary font-bold">{Math.floor((event.registeredUsers / 500) * 100)}%</span>
                   </div>
-                  <div className="w-full bg-gray-200 rounded-full h-2">
+                  <div className="w-full bg-gray-200 rounded-full h-1.5 sm:h-2">
                     <div 
-                      className="bg-primary h-2 rounded-full" 
+                      className="bg-primary h-1.5 sm:h-2 rounded-full" 
                       style={{width: `${Math.floor((event.registeredUsers / 500) * 100)}%`}}
                     ></div>
                   </div>
                 </div>
                 
-                <div className="flex justify-between mt-6">
+                <div className="flex justify-between mt-4 sm:mt-6">
                   <motion.a
                     href="#contacto"
-                    className="text-primary font-medium text-sm hover:underline flex items-center"
+                    className="text-primary font-medium text-xs sm:text-sm hover:underline flex items-center"
                     whileHover={{ x: 3 }}
                   >
                     {language === 'es' ? 'Ver detalles' : 'View details'}
@@ -170,7 +170,7 @@ export function EventosSection() {
                   
                   <motion.button
                     onClick={openRegistrationForm}
-                    className={`py-2 px-4 rounded-full text-white text-sm font-bold flex items-center ${
+                    className={`py-1.5 sm:py-2 px-3 sm:px-4 rounded-full text-white text-xs sm:text-sm font-bold flex items-center ${
                       event.isHighlighted ? 'bg-primary' : 'bg-gray-700'
                     }`}
                     whileHover={{ scale: 1.05 }}
@@ -185,47 +185,47 @@ export function EventosSection() {
           ))}
         </div>
 
-        <div className="bg-white rounded-2xl shadow-lg p-8 border border-gray-100 mb-8">
+        <div className="bg-white rounded-2xl shadow-lg p-4 sm:p-6 md:p-8 border border-gray-100 mb-8">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="col-span-1 md:col-span-2">
-              <div className="flex items-center mb-4">
-                <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white mr-4">
+              <div className="flex flex-col sm:flex-row sm:items-center mb-4">
+                <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white mb-3 sm:mb-0 sm:mr-4">
                   <i className="fas fa-video"></i>
                 </div>
-                <h3 className="text-2xl font-bold">
+                <h3 className="text-xl sm:text-2xl font-bold">
                   {language === 'es' ? 'Eventos Premium con Transmisión en Vivo' : 'Premium Live Streaming Events'}
                 </h3>
               </div>
               
-              <p className="text-gray-600 mb-6">
+              <p className="text-gray-600 mb-6 text-sm sm:text-base">
                 {language === 'es' 
                   ? 'Global Bids ofrece una experiencia única con subastas transmitidas en tiempo real. Contamos con tecnología avanzada que incluye transmisión en 4K, drones para visualización completa de activos y sistemas de puja en tiempo real con interfaz intuitiva.'
                   : 'Global Bids offers a unique experience with real-time streamed auctions. We have advanced technology that includes 4K streaming, drones for complete asset visualization, and real-time bidding systems with an intuitive interface.'}
               </p>
               
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
-                <div className="bg-gray-50 p-4 rounded-lg">
+                <div className="bg-gray-50 p-3 sm:p-4 rounded-lg">
                   <div className="flex items-center mb-2">
                     <i className="fas fa-globe text-primary mr-2"></i>
-                    <span className="font-bold">
+                    <span className="font-bold text-sm sm:text-base">
                       {language === 'es' ? 'Acceso Global' : 'Global Access'}
                     </span>
                   </div>
-                  <p className="text-sm text-gray-600">
+                  <p className="text-xs sm:text-sm text-gray-600">
                     {language === 'es'
                       ? 'Participe desde cualquier lugar del mundo en nuestros eventos'
                       : 'Participate from anywhere in the world in our events'}
                   </p>
                 </div>
                 
-                <div className="bg-gray-50 p-4 rounded-lg">
+                <div className="bg-gray-50 p-3 sm:p-4 rounded-lg">
                   <div className="flex items-center mb-2">
                     <i className="fas fa-shield-alt text-primary mr-2"></i>
-                    <span className="font-bold">
+                    <span className="font-bold text-sm sm:text-base">
                       {language === 'es' ? 'Seguridad Garantizada' : 'Guaranteed Security'}
                     </span>
                   </div>
-                  <p className="text-sm text-gray-600">
+                  <p className="text-xs sm:text-sm text-gray-600">
                     {language === 'es'
                       ? 'Transacciones seguras con blockchain y protección al comprador'
                       : 'Secure transactions with blockchain and buyer protection'}
@@ -233,10 +233,10 @@ export function EventosSection() {
                 </div>
               </div>
               
-              <div className="flex space-x-4">
+              <div className="flex flex-col sm:flex-row sm:space-x-4 space-y-3 sm:space-y-0">
                 <motion.a
                   href="#catalogo"
-                  className="bg-primary text-white px-6 py-3 rounded-full font-bold flex items-center shadow-md"
+                  className="bg-primary text-white px-4 sm:px-6 py-3 rounded-full font-bold flex items-center justify-center sm:justify-start shadow-md text-sm sm:text-base"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
@@ -248,7 +248,7 @@ export function EventosSection() {
                   href="https://www.globalbids.com"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="bg-gray-800 text-white px-6 py-3 rounded-full font-bold flex items-center shadow-md"
+                  className="bg-gray-800 text-white px-4 sm:px-6 py-3 rounded-full font-bold flex items-center justify-center sm:justify-start shadow-md text-sm sm:text-base"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
@@ -258,17 +258,17 @@ export function EventosSection() {
               </div>
             </div>
             
-            <div className="relative">
+            <div className="relative mt-6 md:mt-0 h-48 md:h-auto">
               <div className="bg-gray-800 rounded-xl overflow-hidden shadow-xl h-full">
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent z-10"></div>
                 <div className="absolute inset-0 flex items-center justify-center z-20">
                   <motion.div
-                    className="bg-white/20 backdrop-blur-md w-16 h-16 rounded-full flex items-center justify-center cursor-pointer"
+                    className="bg-white/20 backdrop-blur-md w-12 h-12 sm:w-16 sm:h-16 rounded-full flex items-center justify-center cursor-pointer"
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.9 }}
                   >
-                    <div className="bg-white w-14 h-14 rounded-full flex items-center justify-center">
-                      <i className="fas fa-play text-primary text-xl"></i>
+                    <div className="bg-white w-10 h-10 sm:w-14 sm:h-14 rounded-full flex items-center justify-center">
+                      <i className="fas fa-play text-primary text-base sm:text-xl"></i>
                     </div>
                   </motion.div>
                 </div>
@@ -278,7 +278,7 @@ export function EventosSection() {
                   className="h-full w-full object-cover"
                 />
                 <div className="absolute bottom-0 left-0 right-0 p-4 z-30">
-                  <p className="text-white font-medium">
+                  <p className="text-white font-medium text-xs sm:text-sm">
                     {language === 'es'
                       ? 'Construcción de infraestructura industrial - Último remate'
                       : 'Industrial infrastructure construction - Latest auction'}
@@ -290,20 +290,20 @@ export function EventosSection() {
         </div>
 
         <motion.div 
-          className="text-center"
+          className="text-center px-4 sm:px-0"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.2 }}
         >
-          <p className="text-lg text-gray-600 mb-6">
+          <p className="text-base sm:text-lg text-gray-600 mb-4 sm:mb-6">
             {language === 'es'
               ? '¿Buscas participar en nuestros eventos o tienes activos para subastar?'
               : 'Looking to participate in our events or have assets to auction?'}
           </p>
           <motion.a
             href="#contacto"
-            className="bg-primary text-white px-8 py-4 rounded-full font-bold inline-flex items-center shadow-lg hover:shadow-xl"
+            className="bg-primary text-white px-6 sm:px-8 py-3 sm:py-4 rounded-full font-bold text-sm sm:text-base inline-flex items-center shadow-lg hover:shadow-xl"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
