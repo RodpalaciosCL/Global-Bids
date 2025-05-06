@@ -2,11 +2,13 @@ import { motion } from 'framer-motion';
 import { fadeIn, slideUp } from '@/lib/animations';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { openRegistrationForm } from './RegistrationForm';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 export function EventosSection() {
   const isMobile = useIsMobile();
+  const { language } = useLanguage();
 
-  const events = [
+  const events = language === 'es' ? [
     {
       title: "Subasta Premium - Maquinaria Minera",
       date: "25 de Mayo, 2025",
@@ -29,6 +31,34 @@ export function EventosSection() {
       title: "Subasta Online Internacional",
       date: "30 de Junio, 2025",
       location: "Evento Virtual",
+      image: "https://images.pexels.com/photos/9660/business-money-pink-coins.jpg?auto=compress&cs=tinysrgb&w=1600",
+      items: 85,
+      registeredUsers: 342,
+      isHighlighted: false
+    }
+  ] : [
+    {
+      title: "Premium Auction - Mining Machinery",
+      date: "May 25, 2025",
+      location: "Santiago, Chile",
+      image: "https://images.pexels.com/photos/2760243/pexels-photo-2760243.jpeg?auto=compress&cs=tinysrgb&w=1600",
+      items: 42,
+      registeredUsers: 215,
+      isHighlighted: true
+    },
+    {
+      title: "Forestry Equipment Auction",
+      date: "June 12, 2025",
+      location: "Concepción, Chile",
+      image: "https://images.pexels.com/photos/2219024/pexels-photo-2219024.jpeg?auto=compress&cs=tinysrgb&w=1600",
+      items: 36,
+      registeredUsers: 178,
+      isHighlighted: false
+    },
+    {
+      title: "International Online Auction",
+      date: "June 30, 2025",
+      location: "Virtual Event",
       image: "https://images.pexels.com/photos/9660/business-money-pink-coins.jpg?auto=compress&cs=tinysrgb&w=1600",
       items: 85,
       registeredUsers: 342,

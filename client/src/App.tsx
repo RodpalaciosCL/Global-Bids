@@ -9,6 +9,7 @@ import { LanguageProvider } from "@/contexts/LanguageContext";
 import { CurrencyProvider } from "@/contexts/CurrencyContext";
 import { RegistrationProvider } from "@/contexts/RegistrationContext";
 import { RegistrationForm } from "@/components/registration/RegistrationForm";
+import { useHtmlLang } from "@/hooks/useHtmlLang";
 
 function Router() {
   return (
@@ -20,18 +21,30 @@ function Router() {
   );
 }
 
+// Componente interno que usa el hook
+function AppContent() {
+  // Este hook se encarga de actualizar el lang del HTML basado en el idioma seleccionado
+  useHtmlLang();
+  
+  return (
+    <>
+      <Header />
+      <main>
+        <Router />
+      </main>
+      <Footer />
+      <BackToTop />
+      <RegistrationForm />
+    </>
+  );
+}
+
 function App() {
   return (
     <LanguageProvider>
       <CurrencyProvider>
         <RegistrationProvider>
-          <Header />
-          <main>
-            <Router />
-          </main>
-          <Footer />
-          <BackToTop />
-          <RegistrationForm />
+          <AppContent />
         </RegistrationProvider>
       </CurrencyProvider>
     </LanguageProvider>
