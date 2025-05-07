@@ -79,7 +79,7 @@ export function ContactSection() {
     },
     {
       name: "Oficina Massachusetts",
-      address: "Boston, Massachusetts, USA"
+      address: "Dighton, Massachusetts, USA"
     }
   ] : [
     {
@@ -96,7 +96,7 @@ export function ContactSection() {
     },
     {
       name: "Massachusetts Office",
-      address: "Boston, Massachusetts, USA"
+      address: "Dighton, Massachusetts, USA"
     }
   ];
 
