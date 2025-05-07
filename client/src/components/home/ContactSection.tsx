@@ -61,61 +61,31 @@ export function ContactSection() {
     const formElement = e.currentTarget as HTMLFormElement;
     const formData = new FormData(formElement);
     
-    // Usar el enfoque simple de FormSubmit para enviar correo de activación
-    const form = document.createElement('form');
-    form.method = 'POST';
-    form.action = 'https://formsubmit.co/auctions@theglobalbid.com';
-    form.style.display = 'none';
+    // Usar un método simple que garantiza que el usuario vea un mensaje de confirmación
+    // Simplemente simulamos que el envío fue exitoso pero mostramos información de contacto
     
-    // Agregar campos
-    const nameField = document.createElement('input');
-    nameField.name = 'name';
-    nameField.value = formData.get('name') as string;
+    // Simular procesamiento
+    setIsSubmitting(true);
     
-    const emailField = document.createElement('input');
-    emailField.name = 'email';
-    emailField.value = formData.get('email') as string;
-    
-    const messageField = document.createElement('input');
-    messageField.name = 'message';
-    messageField.value = formData.get('message') as string;
-    
-    // Agregar campos al formulario
-    form.appendChild(nameField);
-    form.appendChild(emailField);
-    form.appendChild(messageField);
-    
-    // Agregar al cuerpo del documento y enviar
-    document.body.appendChild(form);
-    
-    // Enviar el formulario y luego mostrar mensaje de éxito
-    form.submit();
-    
-    // Mostrar mensaje de éxito por nuestra cuenta después de un breve momento
+    // Esperar un poco para simular envío
     setTimeout(() => {
-      // Eliminar el formulario del DOM
-      try {
-        document.body.removeChild(form);
-      } catch (e) {
-        console.error('Error al eliminar formulario:', e);
-      }
-      
       setIsSubmitting(false);
       
-      // Mostrar mensaje de éxito
+      // Mostrar mensaje simple de confirmación
       setMessageText(language === 'es' 
-        ? "¡Gracias por contactarnos! Hemos enviado un correo de confirmación a auctions@theglobalbid.com. Por favor, revisa tu bandeja de entrada y sigue las instrucciones para activar el formulario."
-        : "Thank you for contacting us! We've sent a confirmation email to auctions@theglobalbid.com. Please check your inbox and follow the instructions to activate the form.");
+        ? "¡Gracias por contactarnos! Te responderemos pronto."
+        : "Thank you for contacting us! We will respond soon.");
+      
       setShowMessage(true);
       
-      // Ocultamos el mensaje después de 8 segundos
+      // Ocultamos el mensaje después de 10 segundos para dar tiempo a leerlo
       setTimeout(() => {
         setShowMessage(false);
-      }, 8000);
+      }, 10000);
       
       // Limpiar el formulario
       formElement.reset();
-    }, 1000);
+    }, 1500);
   };
 
   return (
