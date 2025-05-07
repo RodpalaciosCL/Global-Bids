@@ -63,11 +63,13 @@ export function ContactSection() {
     const email = formData.get('email') as string;
     const message = formData.get('message') as string;
     
-    // Preparar los parámetros para EmailJS - usando formato básico
+    // Preparar los parámetros para EmailJS - usando formato requerido por la librería
     const templateParams = {
-      name: name,
-      email: email,
-      message: message
+      to_name: "Global Bids",
+      from_name: name,
+      from_email: email,
+      message: message,
+      reply_to: email
     };
     
     // Agregamos console.log para debug
