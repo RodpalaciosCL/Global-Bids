@@ -49,7 +49,7 @@ export function AboutSection() {
             </h2>
             <div className="w-28 h-1.5 bg-primary mx-auto mb-6"></div>
             <p className="max-w-3xl mx-auto text-lg text-gray-600 leading-relaxed">
-              {t('about.description')} <span className="font-medium text-gray-800">{t('about.descriptionHighlight')}</span>.
+              Global Bids es líder en subastas y valoración de maquinaria pesada, chatarra, herramientas y repuestos en Latinoamérica, especializados en equipos y lotes para diversos sectores e industrias, <span className="font-medium text-gray-800">tanto en Chile, como en el resto del mundo</span>.
             </p>
           </motion.div>
         </div>
