@@ -2,6 +2,7 @@ import { useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { fadeIn, staggerContainer, slideUp } from "@/lib/animations";
 import { useLanguage } from "@/contexts/LanguageContext";
+import emailjs from 'emailjs-com';
 
 export function ContactSection() {
   const sectionRef = useRef(null);
