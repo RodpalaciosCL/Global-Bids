@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Contacto</title>
+  </head>
+  <body>
+    <h2>Formulario de contacto</h2>
+    <form action="/api/contact" method="POST">
+      <label>
+        Nombre:
+        <input type="text" name="name" required />
+      </label>
+      <br />
+      <label>
+        Email:
+        <input type="email" name="email" required />
+      </label>
+      <br />
+      <label>
+        Asunto:
+        <input type="text" name="subject" required />
+      </label>
+      <br />
+      <label>
+        Mensaje:
+        <textarea name="message" required></textarea>
+      </label>
+      <br />
+      <button type="submit">Enviar</button>
+    </form>
+  </body>
+</html>

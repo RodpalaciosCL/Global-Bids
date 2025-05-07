@@ -1,7 +1,9 @@
-// /server/server.js
 const express = require("express");
 const nodemailer = require("nodemailer");
 const cors = require("cors");
+const path = require("path");
+require("dotenv").config();
+
 const app = express();
 const PORT = process.env.PORT || 3000;
 
@@ -10,7 +12,10 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Ruta que recibe los datos del formulario
+// Servir archivos estáticos desde la carpeta 'public'
+app.use(express.static(path.join(__dirname, "..", "public")));
+
+// Ruta para manejar envío del formulario
 app.post("/api/contact", async (req, res) => {
   const { name, email, phone, subject, message } = req.body;
 
@@ -19,24 +24,20 @@ app.post("/api/contact", async (req, res) => {
     port: 465,
     secure: true,
     auth: {
-      user: "mensaje@theglobalbid.com",
+      user: "mensajes@theglobalbid.com",
       pass: process.env.EMAIL_PASS,
     },
   });
 
   const mailOptions = {
-    from: '"GlobalBids Web" <mensaje@theglobalbid.com>',
-    to: "auctions@theglobalbid.com", // <-- cámbialo si quieres
-    subject: `Nuevo contacto: ${subject}`,
-    text: `
-📩 NUEVO MENSAJE DESDE EL FORMULARIO
-
-👤 Nombre: ${name}
-📧 Correo: ${email}
-📱 Teléfono: ${phone || "No indicado"}
-
-📨 Mensaje:
-${message}
+    from: `"Formulario GlobalBids" <mensajes@theglobalbid.com>`,
+    to: "auctions@theglobalbid.com",
+    subject: `Nuevo contacto desde Web - ${subject || "Sin asunto"}`,
+    html: `
+      <p><strong>Nombre:</strong> ${name}</p>
+      <p><strong>Email:</strong> ${email}</p>
+      <p><strong>Teléfono:</strong> ${phone || "No indicado"}</p>
+      <p><strong>Mensaje:</strong><br>${message}</p>
     `,
   };
 
@@ -45,12 +46,12 @@ ${message}
     console.log("✅ Correo enviado correctamente");
     res.status(200).json({ message: "Correo enviado correctamente" });
   } catch (error) {
-    console.error("❌ Error al enviar correo:", error);
+    console.error("❌ Error al enviar:", error);
     res.status(500).json({ message: "Error al enviar el correo" });
   }
 });
 
 // Iniciar servidor
 app.listen(PORT, () => {
-  console.log(`Servidor backend corriendo en http://localhost:${PORT}`);
+  console.log(`✅ Servidor backend activo en http://localhost:${PORT}`);
 });
