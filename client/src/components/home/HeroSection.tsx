@@ -150,7 +150,7 @@ export function HeroSection() {
                               <div className="w-6 h-6 sm:w-8 sm:h-8 bg-black/40 border border-white/10 rounded-full flex items-center justify-center mr-1 sm:mr-2 group-hover:bg-primary/40 transition-colors">
                                 <i className="fas fa-cubes text-white text-xs"></i>
                               </div>
-                              <span>Lotes</span>
+                              <span>Chatarra, generadores y más</span>
                             </a>
                           </div>
                         </div>
