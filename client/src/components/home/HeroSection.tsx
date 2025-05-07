@@ -29,12 +29,20 @@ export function HeroSection() {
     setCurrentSlide(index);
   };
   
-  const stats = [
-    { value: "+2800", label: "Remates", icon: "fa-gavel" },
-    { value: "75", label: "países", icon: "fa-globe" },
-    { value: "USD 450M", label: "Ventas en los últimos 24 meses", icon: "fa-dollar-sign" },
-    { value: "950,300", label: "Clientes pre-validados", icon: "fa-users" }
-  ];
+  // Stats dependiendo del idioma
+  const stats = language === 'es' 
+    ? [
+        { value: "+2800", label: "Remates", icon: "fa-gavel" },
+        { value: "75", label: "países", icon: "fa-globe" },
+        { value: "USD 450M", label: "Ventas en los últimos 24 meses", icon: "fa-dollar-sign" },
+        { value: "950,300", label: "Clientes pre-validados", icon: "fa-users" }
+      ]
+    : [
+        { value: "+2800", label: "Auctions", icon: "fa-gavel" },
+        { value: "75", label: "countries", icon: "fa-globe" },
+        { value: "USD 450M", label: "Sales in the last 24 months", icon: "fa-dollar-sign" },
+        { value: "950,300", label: "Pre-validated clients", icon: "fa-users" }
+      ];
 
   const openRegistration = () => {
     openRegistrationForm();
@@ -115,56 +123,56 @@ export function HeroSection() {
                               <div className="w-6 h-6 sm:w-8 sm:h-8 bg-black/40 border border-white/10 rounded-full flex items-center justify-center mr-1 sm:mr-2 group-hover:bg-primary/40 transition-colors">
                                 <i className="fas fa-truck-monster text-white text-xs"></i>
                               </div>
-                              <span>Activos Minería</span>
+                              <span>{language === 'es' ? 'Activos Minería' : 'Mining Assets'}</span>
                             </a>
                             
                             <a href="#catalogo" className="flex items-center text-white hover:text-white/80 transition-colors text-xs sm:text-sm group">
                               <div className="w-6 h-6 sm:w-8 sm:h-8 bg-black/40 border border-white/10 rounded-full flex items-center justify-center mr-1 sm:mr-2 group-hover:bg-primary/40 transition-colors">
                                 <i className="fas fa-tree text-white text-xs"></i>
                               </div>
-                              <span>Activos Forestales</span>
+                              <span>{language === 'es' ? 'Activos Forestales' : 'Forestry Assets'}</span>
                             </a>
                             
                             <a href="#catalogo" className="flex items-center text-white hover:text-white/80 transition-colors text-xs sm:text-sm group">
                               <div className="w-6 h-6 sm:w-8 sm:h-8 bg-black/40 border border-white/10 rounded-full flex items-center justify-center mr-1 sm:mr-2 group-hover:bg-primary/40 transition-colors">
                                 <i className="fas fa-truck text-white text-xs"></i>
                               </div>
-                              <span>Camiones</span>
+                              <span>{language === 'es' ? 'Camiones' : 'Trucks'}</span>
                             </a>
                             
                             <a href="#catalogo" className="flex items-center text-white hover:text-white/80 transition-colors text-xs sm:text-sm group">
                               <div className="w-6 h-6 sm:w-8 sm:h-8 bg-black/40 border border-white/10 rounded-full flex items-center justify-center mr-1 sm:mr-2 group-hover:bg-primary/40 transition-colors">
                                 <i className="fas fa-tools text-white text-xs"></i>
                               </div>
-                              <span>Repuestos</span>
+                              <span>{language === 'es' ? 'Repuestos' : 'Spare Parts'}</span>
                             </a>
                             
                             <a href="#catalogo" className="flex items-center text-white hover:text-white/80 transition-colors text-xs sm:text-sm group">
                               <div className="w-6 h-6 sm:w-8 sm:h-8 bg-black/40 border border-white/10 rounded-full flex items-center justify-center mr-1 sm:mr-2 group-hover:bg-primary/40 transition-colors">
                                 <i className="fas fa-industry text-white text-xs"></i>
                               </div>
-                              <span>Industrial</span>
+                              <span>{language === 'es' ? 'Industrial' : 'Industrial'}</span>
                             </a>
                             
                             <a href="#catalogo" className="flex items-center text-white hover:text-white/80 transition-colors text-xs sm:text-sm group">
                               <div className="w-6 h-6 sm:w-8 sm:h-8 bg-black/40 border border-white/10 rounded-full flex items-center justify-center mr-1 sm:mr-2 group-hover:bg-primary/40 transition-colors">
                                 <i className="fas fa-recycle text-white text-xs"></i>
                               </div>
-                              <span>Chatarra</span>
+                              <span>{language === 'es' ? 'Chatarra' : 'Scrap'}</span>
                             </a>
                             
                             <a href="#catalogo" className="flex items-center text-white hover:text-white/80 transition-colors text-xs sm:text-sm group">
                               <div className="w-6 h-6 sm:w-8 sm:h-8 bg-black/40 border border-white/10 rounded-full flex items-center justify-center mr-1 sm:mr-2 group-hover:bg-primary/40 transition-colors">
                                 <i className="fas fa-bolt text-white text-xs"></i>
                               </div>
-                              <span>Generadores</span>
+                              <span>{language === 'es' ? 'Generadores' : 'Generators'}</span>
                             </a>
                             
                             <a href="#catalogo" className="flex items-center text-white hover:text-white/80 transition-colors text-xs sm:text-sm group">
                               <div className="w-6 h-6 sm:w-8 sm:h-8 bg-black/40 border border-white/10 rounded-full flex items-center justify-center mr-1 sm:mr-2 group-hover:bg-primary/40 transition-colors">
                                 <i className="fas fa-ellipsis-h text-white text-xs"></i>
                               </div>
-                              <span>Y mucho más</span>
+                              <span>{language === 'es' ? 'Y mucho más' : 'And much more'}</span>
                             </a>
                           </div>
                         </div>
