@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { motion } from 'framer-motion';
-import { useRoute } from 'wouter';
+import { useRoute, Link } from 'wouter';
 import { fadeIn, slideUp, staggerContainer } from '@/lib/animations';
 import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
@@ -42,9 +42,9 @@ export default function MachineryDetail() {
       <div className="container mx-auto p-2">
         {/* Breadcrumb Navigation */}
         <div className="flex items-center text-xs mb-1">
-          <a href="/" className="text-gray-500 hover:text-primary">{t('nav.home')}</a>
+          <Link href="/" className="text-gray-500 hover:text-primary">{t('nav.home')}</Link>
           <span className="mx-1 text-gray-400">/</span>
-          <a href="/#catalogo" className="text-gray-500 hover:text-primary">{t('nav.catalog')}</a>
+          <Link href="/marketplace" className="text-gray-500 hover:text-primary">{t('nav.catalog')}</Link>
           <span className="mx-1 text-gray-400">/</span>
           <span className="text-gray-700 truncate">{machinery.name}</span>
         </div>
@@ -156,10 +156,10 @@ export default function MachineryDetail() {
                   {language === 'en' ? 'Contact consultant' : 'Contactar consultor'}
                 </Button>
                 <Button asChild variant="ghost" className="text-gray-500 text-sm py-1">
-                  <a href="/#catalogo">
+                  <Link href="/marketplace">
                     <i className="fas fa-arrow-left mr-1"></i>
                     {t('detail.back')}
-                  </a>
+                  </Link>
                 </Button>
               </div>
               
@@ -301,10 +301,10 @@ function ErrorState() {
               : 'No pudimos encontrar la máquina que estás buscando. Puede que haya sido vendida o retirada de nuestra base de datos.'}
           </p>
           <Button asChild>
-            <a href="/#catalogo">
+            <Link href="/marketplace">
               <i className="fas fa-arrow-left mr-2"></i>
               {t('detail.back')}
-            </a>
+            </Link>
           </Button>
         </motion.div>
       </div>
