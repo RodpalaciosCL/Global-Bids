@@ -304,6 +304,9 @@ const translations: Record<Language, Record<string, string>> = {
     'nav.catalog': 'Marketplace',
     'nav.auctions': 'Auctions',
     'nav.contact': 'Contact',
+    
+    // About section text (primera imagen)
+    'about.leadingText': 'Global Bids is a leader in auctions and valuation of heavy machinery, scrap, tools and spare parts in Latin America, specializing in equipment and lots for various sectors and industries, both in Chile and the rest of the world.',
     'nav.login': 'Log In',
     'nav.register': 'Register',
     'nav.support': 'Support',

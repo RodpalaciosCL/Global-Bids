@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import { slideUp } from '@/lib/animations';
 import { Machinery, typeLabels, conditionLabels } from '@/types/machinery';
 import { useCurrency } from '@/contexts/CurrencyContext';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 interface MachineryCardProps {
   item: Machinery;
@@ -79,13 +80,13 @@ export function MachineryCard({ item, index }: MachineryCardProps) {
         
         <div className="flex justify-between items-center">
           <button className="text-primary hover:text-secondary font-medium transition">
-            <i className="far fa-heart mr-1"></i> Guardar
+            <i className="far fa-heart mr-1"></i> {language === 'en' ? 'Save' : 'Guardar'}
           </button>
           <a 
             href={`/machinery/${id}`} 
             className="inline-block bg-primary hover:bg-primary-light text-white font-medium px-4 py-2 rounded transition duration-300"
           >
-            Ver más
+            {language === 'en' ? 'View more' : 'Ver más'}
           </a>
         </div>
       </div>
