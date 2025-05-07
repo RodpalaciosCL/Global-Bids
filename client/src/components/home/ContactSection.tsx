@@ -50,7 +50,7 @@ export function ContactSection() {
           },
         ];
 
-  // Inicializar EmailJS directamente en el componente
+  // Inicializar EmailJS - no es necesario hacerlo, ya que lo pasamos como 4to parámetro en emailjs.send
 
   // Manejar el envío del formulario
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -66,10 +66,13 @@ export function ContactSection() {
     // Preparar los parámetros para EmailJS
     const templateParams = {
       from_name: name,
-      reply_to: email,
-      message: message,
-      to_email: 'auctions@theglobalbid.com'
+      from_email: email,  // Cambiado de reply_to a from_email
+      message: message
+      // no necesitamos to_email ya que debe estar configurado en la plantilla
     };
+    
+    // Agregamos console.log para debug
+    console.log('Enviando con estos parámetros:', templateParams);
     
     // Enviar el correo con EmailJS
     emailjs.send(
