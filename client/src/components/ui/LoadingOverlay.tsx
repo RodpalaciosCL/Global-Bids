@@ -1,25 +1,18 @@
-import { motion, AnimatePresence } from 'framer-motion';
+import React from 'react';
 
 interface LoadingOverlayProps {
   isLoading: boolean;
 }
 
 export function LoadingOverlay({ isLoading }: LoadingOverlayProps) {
+  if (!isLoading) return null;
+  
   return (
-    <AnimatePresence>
-      {isLoading && (
-        <motion.div 
-          className="fixed inset-0 bg-primary flex items-center justify-center z-50"
-          initial={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.5 }}
-        >
-          <div className="text-center">
-            <div className="w-12 h-12 border-4 border-white border-b-secondary rounded-full animate-spin mx-auto mb-4"></div>
-            <div className="text-white font-heading font-semibold text-xl animate-pulse">Cargando Global Bids...</div>
-          </div>
-        </motion.div>
-      )}
-    </AnimatePresence>
+    <div className="absolute inset-0 bg-white/70 flex items-center justify-center z-50">
+      <div className="relative flex items-center justify-center">
+        <div className="absolute animate-ping h-8 w-8 rounded-full bg-primary opacity-75"></div>
+        <div className="relative h-6 w-6 rounded-full bg-primary"></div>
+      </div>
+    </div>
   );
 }

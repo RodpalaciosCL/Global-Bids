@@ -50,8 +50,17 @@ let formOpenCallback: ((open: boolean) => void) | null = null;
 
 // Función expuesta para abrir el formulario desde cualquier parte
 export function openRegistrationForm() {
+  console.log("Función openRegistrationForm ejecutada");
   if (formOpenCallback) {
+    console.log("Callback encontrado, abriendo formulario");
     formOpenCallback(true);
+  } else {
+    console.error("No hay callback para abrir el formulario");
+    // Intentar volver a registrar el callback
+    setTimeout(() => {
+      const formElements = document.querySelectorAll('#registration-form');
+      console.log("Elementos de formulario encontrados:", formElements.length);
+    }, 500);
   }
 }
 

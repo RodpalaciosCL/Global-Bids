@@ -48,9 +48,16 @@ export function AuctionsIframe() {
   const { t, language } = useLanguage();
   
   // Función para abrir el formulario de registro directamente
-  const scrollToRegistrationForm = () => {
-    // En lugar de hacer scroll, abrimos directamente el formulario
-    openRegistrationForm();
+  const openForm = () => {
+    try {
+      console.log("Intentando abrir el formulario de registro...");
+      // Asegurarse de que el formulario se abra correctamente
+      setTimeout(() => {
+        openRegistrationForm();
+      }, 100);
+    } catch (error) {
+      console.error("Error al abrir el formulario:", error);
+    }
   };
   
   return (
@@ -116,7 +123,7 @@ export function AuctionsIframe() {
                         <p><span className="inline-block w-5 h-5 mr-2 text-gray-400"><i className="fas fa-map-marker-alt"></i></span> {auction.location}</p>
                       </div>
                       <button 
-                        onClick={scrollToRegistrationForm}
+                        onClick={openForm}
                         className="mt-3 px-4 py-2 bg-primary text-white text-sm font-medium rounded hover:bg-primary-dark transition-colors"
                       >
                         {t('auctions.auctionDetails')}
@@ -131,7 +138,7 @@ export function AuctionsIframe() {
           {/* Footer con link a más subastas */}
           <div className="bg-gray-100 px-6 py-4 text-center">
             <button 
-              onClick={scrollToRegistrationForm}
+              onClick={openForm}
               className="text-primary hover:text-primary-dark font-medium inline-flex items-center transition-colors"
             >
               {t('auctions.register')}
