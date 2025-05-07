@@ -52,38 +52,22 @@ export function ContactSection() {
 
   // Inicializar EmailJS - no es necesario hacerlo, ya que lo pasamos como 4to parámetro en emailjs.send
 
-  // Manejar el envío del formulario y enviar los datos al servidor
+  // Manejar el envío del formulario y enviar los datos usando EmailJS
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
     
     const formElement = e.currentTarget as HTMLFormElement;
-    const formData = new FormData(formElement);
     
-    // Preparar datos para enviar a la API
-    const contactData = {
-      name: formData.get('name') as string,
-      email: formData.get('email') as string,
-      subject: "Contacto desde web",
-      message: formData.get('message') as string
-    };
-    
-    // Enviar al endpoint del servidor
-    fetch('/api/contact', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(contactData),
-    })
-    .then(response => {
-      if (!response.ok) {
-        throw new Error('Error en el servidor');
-      }
-      return response.json();
-    })
-    .then(data => {
-      console.log('Contacto enviado exitosamente:', data);
+    // Usar EmailJS para enviar el correo directamente desde el navegador
+    emailjs.sendForm(
+      'service_nk3ijyi', // EMAILJS_SERVICE_ID
+      'template_kq93c3o', // EMAILJS_TEMPLATE_ID
+      formElement,
+      'BmzpAL5qsxXCk9eoI' // EMAILJS_USER_ID
+    )
+    .then((result) => {
+      console.log('EmailJS resultado exitoso:', result.text);
       setIsSubmitting(false);
       
       // Mostrar mensaje de éxito
@@ -98,11 +82,32 @@ export function ContactSection() {
         setShowMessage(false);
       }, 10000);
       
+      // También almacenar en la base de datos
+      const formData = new FormData(formElement);
+      const contactData = {
+        name: formData.get('name') as string,
+        email: formData.get('email') as string,
+        subject: "Contacto desde web",
+        message: formData.get('message') as string
+      };
+      
+      // Enviar al endpoint del servidor para guardar en BD
+      fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(contactData),
+      })
+      .then(response => response.json())
+      .then(data => console.log('Contacto guardado en BD:', data))
+      .catch(error => console.error('Error guardando contacto en BD:', error));
+      
       // Limpiar el formulario
       formElement.reset();
     })
-    .catch(error => {
-      console.error('Error enviando contacto:', error);
+    .catch((error) => {
+      console.error('Error con EmailJS:', error);
       setIsSubmitting(false);
       
       // Mostrar mensaje de error
