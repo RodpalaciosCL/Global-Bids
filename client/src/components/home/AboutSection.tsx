@@ -80,18 +80,10 @@ export function AboutSection() {
             {/* Contenido con íconos visuales */}
             <div className="space-y-6 p-2">
               <div className="p-8 md:p-10 bg-white rounded-3xl shadow-lg border border-gray-100">
-                {/* Texto introductorio */}
-                <motion.p 
-                  className="text-gray-600 leading-relaxed text-center mb-8"
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.4 }}
-                >
-                  {historiaContent.description[0]}
-                </motion.p>
+                {/* Se eliminó el texto introductorio a petición del cliente */}
                 
                 {/* Grid de íconos con conceptos */}
-                <div className="grid grid-cols-2 md:grid-cols-3 gap-8 mb-4">
+                <div className="grid grid-cols-2 md:grid-cols-3 gap-6 md:gap-8 mt-2 mb-4">
                   {/* Liderazgo en subastas */}
                   <motion.div 
                     className="flex flex-col items-center text-center"
@@ -99,14 +91,9 @@ export function AboutSection() {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.4, delay: 0.1 }}
                   >
-                    <div className="w-14 h-14 bg-primary/10 rounded-full flex items-center justify-center mb-3 text-primary">
-                      <i className="fas fa-crown text-xl"></i>
+                    <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center text-primary">
+                      <i className="fas fa-crown text-2xl"></i>
                     </div>
-                    <p className="text-sm font-medium text-gray-700">
-                      {language === 'es' 
-                        ? 'Líderes en subastas de maquinaria en Latinoamérica'
-                        : 'Leaders in machinery auctions in Latin America'}
-                    </p>
                   </motion.div>
                   
                   {/* Presencia Global */}
@@ -116,14 +103,9 @@ export function AboutSection() {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.4, delay: 0.2 }}
                   >
-                    <div className="w-14 h-14 bg-primary/10 rounded-full flex items-center justify-center mb-3 text-primary">
-                      <i className="fas fa-globe-americas text-xl"></i>
+                    <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center text-primary">
+                      <i className="fas fa-globe-americas text-2xl"></i>
                     </div>
-                    <p className="text-sm font-medium text-gray-700">
-                      {language === 'es'
-                        ? 'Presencia global en Chile y el mundo'
-                        : 'Global presence in Chile and worldwide'}
-                    </p>
                   </motion.div>
                   
                   {/* Red de clientes */}
@@ -133,14 +115,9 @@ export function AboutSection() {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.4, delay: 0.3 }}
                   >
-                    <div className="w-14 h-14 bg-primary/10 rounded-full flex items-center justify-center mb-3 text-primary">
-                      <i className="fas fa-users text-xl"></i>
+                    <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center text-primary">
+                      <i className="fas fa-users text-2xl"></i>
                     </div>
-                    <p className="text-sm font-medium text-gray-700">
-                      {language === 'es'
-                        ? 'Red de casi 1 millón de clientes internacionales'
-                        : 'Network of nearly 1 million international clients'}
-                    </p>
                   </motion.div>
                   
                   {/* Plataforma digital */}
@@ -150,14 +127,9 @@ export function AboutSection() {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.4, delay: 0.4 }}
                   >
-                    <div className="w-14 h-14 bg-primary/10 rounded-full flex items-center justify-center mb-3 text-primary">
-                      <i className="fas fa-laptop text-xl"></i>
+                    <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center text-primary">
+                      <i className="fas fa-laptop text-2xl"></i>
                     </div>
-                    <p className="text-sm font-medium text-gray-700">
-                      {language === 'es'
-                        ? 'Plataforma digital transparente y segmentada'
-                        : 'Transparent and segmented digital platform'}
-                    </p>
                   </motion.div>
                   
                   {/* Conexión oferta-demanda */}
@@ -167,14 +139,9 @@ export function AboutSection() {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.4, delay: 0.5 }}
                   >
-                    <div className="w-14 h-14 bg-primary/10 rounded-full flex items-center justify-center mb-3 text-primary">
-                      <i className="fas fa-exchange-alt text-xl"></i>
+                    <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center text-primary">
+                      <i className="fas fa-exchange-alt text-2xl"></i>
                     </div>
-                    <p className="text-sm font-medium text-gray-700">
-                      {language === 'es'
-                        ? 'Conexión entre oferta sudamericana y demanda global'
-                        : 'Connection between South American supply and global demand'}
-                    </p>
                   </motion.div>
                   
                   {/* Mejor valor */}
@@ -184,14 +151,9 @@ export function AboutSection() {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.4, delay: 0.6 }}
                   >
-                    <div className="w-14 h-14 bg-primary/10 rounded-full flex items-center justify-center mb-3 text-primary">
-                      <i className="fas fa-chart-line text-xl"></i>
+                    <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center text-primary">
+                      <i className="fas fa-chart-line text-2xl"></i>
                     </div>
-                    <p className="text-sm font-medium text-gray-700">
-                      {language === 'es'
-                        ? 'Mejor valor para consignatarios en mercados de alta demanda'
-                        : 'Best value for consignors in high-demand markets'}
-                    </p>
                   </motion.div>
                 </div>
               </div>
