@@ -16,7 +16,18 @@ function Router() {
     <Switch>
       <Route path="/" component={Home} />
       <Route path="/machinery/:id" component={MachineryDetail} />
-      <Route path="/marketplace" component={Home} />
+      <Route path="/marketplace/">
+        {() => {
+          window.location.href = '/#catalogo';
+          return null;
+        }}
+      </Route>
+      <Route path="/marketplace">
+        {() => {
+          window.location.href = '/#catalogo';
+          return null;
+        }}
+      </Route>
       <Route component={NotFound} />
     </Switch>
   );
