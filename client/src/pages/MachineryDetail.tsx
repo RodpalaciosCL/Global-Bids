@@ -149,16 +149,16 @@ export default function MachineryDetail() {
               <div className="grid gap-2 mb-3">
                 <Button className="bg-primary hover:bg-primary/90 w-full py-2 h-auto text-sm">
                   <i className="fas fa-shopping-cart mr-1"></i>
-                  Comprar ahora
+                  {language === 'en' ? 'Buy now' : 'Comprar ahora'}
                 </Button>
                 <Button variant="outline" className="border-gray-300 w-full py-2 h-auto text-sm">
                   <i className="fas fa-phone-alt mr-1"></i>
-                  Contactar consultor
+                  {language === 'en' ? 'Contact consultant' : 'Contactar consultor'}
                 </Button>
                 <Button asChild variant="ghost" className="text-gray-500 text-sm py-1">
                   <a href="/#catalogo">
                     <i className="fas fa-arrow-left mr-1"></i>
-                    Volver al catálogo
+                    {t('detail.back')}
                   </a>
                 </Button>
               </div>
@@ -174,7 +174,7 @@ export default function MachineryDetail() {
                         : 'text-gray-500 hover:text-gray-700'
                     }`}
                   >
-                    Especificaciones
+                    {t('detail.specs')}
                   </button>
                   <button
                     onClick={() => setActiveTab('description')}
@@ -184,7 +184,7 @@ export default function MachineryDetail() {
                         : 'text-gray-500 hover:text-gray-700'
                     }`}
                   >
-                    Descripción
+                    {t('detail.description')}
                   </button>
                 </div>
                 
@@ -193,35 +193,35 @@ export default function MachineryDetail() {
                     <table className="w-full text-sm">
                       <tbody>
                         <tr className="border-b">
-                          <td className="py-1 text-gray-600">Marca:</td>
+                          <td className="py-1 text-gray-600">{t('detail.brand')}:</td>
                           <td className="py-1 text-gray-900 font-medium">JLG</td>
                         </tr>
                         <tr className="border-b">
-                          <td className="py-1 text-gray-600">Modelo:</td>
+                          <td className="py-1 text-gray-600">{language === 'en' ? 'Model' : 'Modelo'}:</td>
                           <td className="py-1 text-gray-900 font-medium">600aj Manlift</td>
                         </tr>
                         <tr className="border-b">
-                          <td className="py-1 text-gray-600">Año:</td>
+                          <td className="py-1 text-gray-600">{t('detail.year')}:</td>
                           <td className="py-1 text-gray-900 font-medium">2016</td>
                         </tr>
                         <tr className="border-b">
-                          <td className="py-1 text-gray-600">Horas:</td>
+                          <td className="py-1 text-gray-600">{t('detail.hours')}:</td>
                           <td className="py-1 text-gray-900 font-medium">326 hrs</td>
                         </tr>
                         <tr className="border-b">
-                          <td className="py-1 text-gray-600">Condición:</td>
-                          <td className="py-1 text-gray-900 font-medium">Buen estado</td>
+                          <td className="py-1 text-gray-600">{t('detail.condition')}:</td>
+                          <td className="py-1 text-gray-900 font-medium">{language === 'en' ? 'Good condition' : 'Buen estado'}</td>
                         </tr>
                         <tr className="border-b">
-                          <td className="py-1 text-gray-600">Potencia:</td>
+                          <td className="py-1 text-gray-600">{language === 'en' ? 'Power' : 'Potencia'}:</td>
                           <td className="py-1 text-gray-900 font-medium">375 HP</td>
                         </tr>
                         <tr className="border-b">
-                          <td className="py-1 text-gray-600">Capacidad:</td>
+                          <td className="py-1 text-gray-600">{language === 'en' ? 'Capacity' : 'Capacidad'}:</td>
                           <td className="py-1 text-gray-900 font-medium">500 lbs</td>
                         </tr>
                         <tr>
-                          <td className="py-1 text-gray-600">Alcance:</td>
+                          <td className="py-1 text-gray-600">{language === 'en' ? 'Reach' : 'Alcance'}:</td>
                           <td className="py-1 text-gray-900 font-medium">60 ft</td>
                         </tr>
                       </tbody>
@@ -232,14 +232,14 @@ export default function MachineryDetail() {
                 {activeTab === 'description' && (
                   <div className="p-2">
                     <p className="text-sm text-gray-700 mb-2">
-                      Esta plataforma elevadora JLG 600aj es una excelente opción para trabajos en altura. 
-                      Con apenas 326 horas de uso, se encuentra en perfectas condiciones operativas y ha 
-                      recibido mantenimiento regular.
+                      {language === 'en' 
+                        ? 'This JLG 600aj man lift is an excellent option for working at height. With only 326 hours of use, it is in perfect operating condition and has received regular maintenance.'
+                        : 'Esta plataforma elevadora JLG 600aj es una excelente opción para trabajos en altura. Con apenas 326 horas de uso, se encuentra en perfectas condiciones operativas y ha recibido mantenimiento regular.'}
                     </p>
                     <p className="text-sm text-gray-700">
-                      El equipo ofrece un alcance horizontal máximo de 60 pies y una capacidad de carga 
-                      de 500 libras, ideal para proyectos de construcción, mantenimiento industrial y 
-                      trabajos de instalación en altura.
+                      {language === 'en'
+                        ? 'The equipment offers a maximum horizontal reach of 60 feet and a load capacity of 500 pounds, ideal for construction projects, industrial maintenance, and high-altitude installation work.'
+                        : 'El equipo ofrece un alcance horizontal máximo de 60 pies y una capacidad de carga de 500 libras, ideal para proyectos de construcción, mantenimiento industrial y trabajos de instalación en altura.'}
                     </p>
                   </div>
                 )}
@@ -278,6 +278,8 @@ export default function MachineryDetail() {
 }
 
 function ErrorState() {
+  const { language, t } = useLanguage();
+  
   return (
     <div className="py-16 bg-accent min-h-screen">
       <div className="container mx-auto px-4 text-center">
@@ -290,14 +292,18 @@ function ErrorState() {
           <div className="text-red-500 text-5xl mb-6">
             <i className="fas fa-exclamation-circle"></i>
           </div>
-          <h1 className="text-2xl md:text-3xl font-bold text-primary mb-4">Máquina no encontrada</h1>
+          <h1 className="text-2xl md:text-3xl font-bold text-primary mb-4">
+            {language === 'en' ? 'Machine not found' : 'Máquina no encontrada'}
+          </h1>
           <p className="text-gray-600 mb-8">
-            No pudimos encontrar la máquina que estás buscando. Puede que haya sido vendida o retirada de nuestra base de datos.
+            {language === 'en' 
+              ? 'We could not find the machine you are looking for. It may have been sold or removed from our database.'
+              : 'No pudimos encontrar la máquina que estás buscando. Puede que haya sido vendida o retirada de nuestra base de datos.'}
           </p>
           <Button asChild>
             <a href="/#catalogo">
               <i className="fas fa-arrow-left mr-2"></i>
-              Volver al catálogo
+              {t('detail.back')}
             </a>
           </Button>
         </motion.div>
@@ -307,6 +313,7 @@ function ErrorState() {
 }
 
 function LoadingSkeleton() {
+  const { t } = useLanguage();
   return (
     <div className="bg-accent h-screen flex flex-col overflow-y-auto">
       <div className="flex-grow container mx-auto px-4 py-4 md:py-6">
