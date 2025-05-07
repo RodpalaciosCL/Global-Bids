@@ -63,13 +63,11 @@ export function ContactSection() {
     const email = formData.get('email') as string;
     const message = formData.get('message') as string;
     
-    // Preparar los parámetros para EmailJS - usando formato requerido por la librería
+    // Preparar los parámetros según la estructura exacta que se ve en la plantilla
     const templateParams = {
-      to_name: "Global Bids",
       from_name: name,
       from_email: email,
-      message: message,
-      reply_to: email
+      message: message
     };
     
     // Agregamos console.log para debug
@@ -104,10 +102,11 @@ export function ContactSection() {
       console.error('FAILED...', error);
       setIsSubmitting(false);
       
-      // Mostrar mensaje de error
+      // Mostrar mensaje de error con más detalles
+      console.log("ERROR DETALLADO:", error);
       setMessageText(language === 'es' 
-        ? "Ha ocurrido un error. Por favor, intenta nuevamente o escríbenos directamente a auctions@theglobalbid.com."
-        : "An error occurred. Please try again or email us directly at auctions@theglobalbid.com.");
+        ? `Error: ${error.text || 'Desconocido'}. Por favor, intenta nuevamente o escríbenos directamente a auctions@theglobalbid.com.`
+        : `Error: ${error.text || 'Unknown'}. Please try again or email us directly at auctions@theglobalbid.com.`);
       setShowMessage(true);
       
       // Ocultamos el mensaje después de 5 segundos
