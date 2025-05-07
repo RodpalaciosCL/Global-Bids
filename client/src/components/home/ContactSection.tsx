@@ -61,10 +61,18 @@ export function ContactSection() {
     const formElement = e.currentTarget as HTMLFormElement;
     const formData = new FormData(formElement);
     
-    // Enviar a FormSubmit usando fetch
-    fetch('https://formsubmit.co/el/wamuve', {
+    // Usar FormSubmit directo - servicio más estable
+    fetch('https://formsubmit.co/ajax/auctions@theglobalbid.com', {
       method: 'POST',
-      body: formData
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify({
+        name: formData.get('name'),
+        email: formData.get('email'),
+        message: formData.get('message')
+      })
     })
     .then(response => {
       console.log('FormSubmit response:', response);
