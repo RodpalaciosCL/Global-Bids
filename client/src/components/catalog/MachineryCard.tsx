@@ -36,7 +36,7 @@ export function MachineryCard({ item, index }: MachineryCardProps) {
           }}
         />
         <div className="absolute top-3 left-3 bg-primary text-white font-bold px-2 py-1 rounded-md text-xs">
-          {typeLabels[type]}
+          {typeLabels[type][language]}
         </div>
         {isSold && (
           <div className="absolute top-3 right-3 bg-red-600 text-white font-bold px-2 py-1 rounded-md text-xs">
@@ -72,7 +72,7 @@ export function MachineryCard({ item, index }: MachineryCardProps) {
             </div>
             <div className="flex items-center text-gray-600">
               <i className="fas fa-check-circle mr-2"></i>
-              <span>{conditionLabels[condition]}</span>
+              <span>{conditionLabels[condition][language]}</span>
             </div>
           </div>
         </div>
