@@ -11,6 +11,7 @@ interface MachineryCardProps {
 
 export function MachineryCard({ item, index }: MachineryCardProps) {
   const { convertPrice, formatPrice } = useCurrency();
+  const { language, t } = useLanguage();
   const { 
     id, name, price, type, brand, year, hours, 
     kilometers, condition, description, image, isSold 
@@ -80,13 +81,13 @@ export function MachineryCard({ item, index }: MachineryCardProps) {
         
         <div className="flex justify-between items-center">
           <button className="text-primary hover:text-secondary font-medium transition">
-            <i className="far fa-heart mr-1"></i> {language === 'en' ? 'Save' : 'Guardar'}
+            <i className="far fa-heart mr-1"></i> {t('catalog.save')}
           </button>
           <a 
             href={`/machinery/${id}`} 
             className="inline-block bg-primary hover:bg-primary-light text-white font-medium px-4 py-2 rounded transition duration-300"
           >
-            {language === 'en' ? 'View more' : 'Ver más'}
+            {t('catalog.viewMore')}
           </a>
         </div>
       </div>

@@ -203,6 +203,8 @@ const translations: Record<Language, Record<string, string>> = {
     'catalog.viewDetails': 'Ver Detalles',
     'catalog.hours': 'Horas',
     'catalog.kilometers': 'Kilómetros',
+    'catalog.save': 'Guardar',
+    'catalog.viewMore': 'Ver más',
     
     // Método 360
     'method.title': 'Método 360',
@@ -495,6 +497,8 @@ const translations: Record<Language, Record<string, string>> = {
     'catalog.viewDetails': 'View Details',
     'catalog.hours': 'Hours',
     'catalog.kilometers': 'Kilometers',
+    'catalog.save': 'Save',
+    'catalog.viewMore': 'View more',
     
     // Method 360
     'method.title': 'Method 360',

@@ -8,6 +8,7 @@ import { Machinery, typeLabels, conditionLabels } from '@/types/machinery';
 import { useEffect, useState } from 'react';
 import { apiRequest } from '@/lib/queryClient';
 import { ImageGallery } from '@/components/machinery/ImageGallery';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 export default function MachineryDetail() {
   // Extract the ID from the URL
@@ -15,6 +16,7 @@ export default function MachineryDetail() {
   const machineryId = params?.id ? parseInt(params.id) : null;
   const [activeTab, setActiveTab] = useState('specs');
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const { language, t } = useLanguage();
   
   // Scroll to top on page load
   useEffect(() => {
@@ -40,9 +42,9 @@ export default function MachineryDetail() {
       <div className="container mx-auto p-2">
         {/* Breadcrumb Navigation */}
         <div className="flex items-center text-xs mb-1">
-          <a href="/" className="text-gray-500 hover:text-primary">Inicio</a>
+          <a href="/" className="text-gray-500 hover:text-primary">{t('nav.home')}</a>
           <span className="mx-1 text-gray-400">/</span>
-          <a href="/#catalogo" className="text-gray-500 hover:text-primary">Catálogo</a>
+          <a href="/#catalogo" className="text-gray-500 hover:text-primary">{t('nav.catalog')}</a>
           <span className="mx-1 text-gray-400">/</span>
           <span className="text-gray-700 truncate">{machinery.name}</span>
         </div>
@@ -130,15 +132,15 @@ export default function MachineryDetail() {
             <div className="bg-gray-50 p-3">
               {/* Price Information */}
               <div className="bg-white p-3 rounded-lg shadow-sm mb-3">
-                <h2 className="text-base font-bold text-gray-900 mb-1">Información de precio</h2>
+                <h2 className="text-base font-bold text-gray-900 mb-1">{t('detail.price')}</h2>
                 <div className="text-2xl font-bold text-primary mb-1">${machinery.price.toLocaleString()}</div>
-                <p className="text-xs text-gray-500 mb-2">Precio final (impuestos incluidos)</p>
+                <p className="text-xs text-gray-500 mb-2">{language === 'en' ? 'Final price (taxes included)' : 'Precio final (impuestos incluidos)'}</p>
                 
                 <div className="border-t border-gray-100 pt-2">
-                  <h3 className="text-xs font-medium text-gray-700 mb-0.5">Tipo de oferta</h3>
+                  <h3 className="text-xs font-medium text-gray-700 mb-0.5">{language === 'en' ? 'Offer type' : 'Tipo de oferta'}</h3>
                   <p className="text-xs text-gray-600">
                     <i className="fas fa-tag mr-1 text-gray-400"></i>
-                    Venta directa (sin subasta)
+                    {language === 'en' ? 'Direct sale (no auction)' : 'Venta directa (sin subasta)'}
                   </p>
                 </div>
               </div>
