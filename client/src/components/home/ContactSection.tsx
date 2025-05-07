@@ -52,8 +52,7 @@ export function ContactSection() {
 
   // Inicializar EmailJS - no es necesario hacerlo, ya que lo pasamos como 4to parámetro en emailjs.send
 
-  // Manejar el envío del formulario
-  // Manejar el envío del formulario para mostrar mensaje de confirmación local
+  // Manejar el envío del formulario y enviar los datos al servidor
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
@@ -61,31 +60,63 @@ export function ContactSection() {
     const formElement = e.currentTarget as HTMLFormElement;
     const formData = new FormData(formElement);
     
-    // Usar un método simple que garantiza que el usuario vea un mensaje de confirmación
-    // Simplemente simulamos que el envío fue exitoso pero mostramos información de contacto
+    // Preparar datos para enviar a la API
+    const contactData = {
+      name: formData.get('name') as string,
+      email: formData.get('email') as string,
+      subject: "Contacto desde web",
+      message: formData.get('message') as string
+    };
     
-    // Simular procesamiento
-    setIsSubmitting(true);
-    
-    // Esperar un poco para simular envío
-    setTimeout(() => {
+    // Enviar al endpoint del servidor
+    fetch('/api/contact', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(contactData),
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Error en el servidor');
+      }
+      return response.json();
+    })
+    .then(data => {
+      console.log('Contacto enviado exitosamente:', data);
       setIsSubmitting(false);
       
-      // Mostrar mensaje simple de confirmación
+      // Mostrar mensaje de éxito
       setMessageText(language === 'es' 
         ? "¡Gracias por contactarnos! Te responderemos pronto."
         : "Thank you for contacting us! We will respond soon.");
       
       setShowMessage(true);
       
-      // Ocultamos el mensaje después de 10 segundos para dar tiempo a leerlo
+      // Ocultamos el mensaje después de 10 segundos
       setTimeout(() => {
         setShowMessage(false);
       }, 10000);
       
       // Limpiar el formulario
       formElement.reset();
-    }, 1500);
+    })
+    .catch(error => {
+      console.error('Error enviando contacto:', error);
+      setIsSubmitting(false);
+      
+      // Mostrar mensaje de error
+      setMessageText(language === 'es' 
+        ? "Hubo un problema al enviar tu mensaje. Por favor, intenta nuevamente."
+        : "There was a problem sending your message. Please try again.");
+      
+      setShowMessage(true);
+      
+      // Ocultar después de 10 segundos
+      setTimeout(() => {
+        setShowMessage(false);
+      }, 10000);
+    });
   };
 
   return (
