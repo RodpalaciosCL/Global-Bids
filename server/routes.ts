@@ -3,6 +3,7 @@ import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { z } from "zod";
 import { insertContactSchema, insertRegistrationSchema } from "@shared/schema";
+import { sendEmailWithEmailJS } from "./services/emailjsService";
 
 export async function registerRoutes(app: Express): Promise<Server> {
   // Prefix all API routes with /api
@@ -80,8 +81,26 @@ export async function registerRoutes(app: Express): Promise<Server> {
       console.log(`De: ${contact.name} (${contact.email})`);
       console.log(`Asunto: ${contact.subject}`);
       console.log(`Mensaje: ${contact.message}`);
-      console.log(`👉 Este mensaje debería enviarse a: framirez@theglobalbid.com, ffaundez@theglobalbid.com`);
+      console.log(`👉 Este mensaje debería enviarse a: auctions@theglobalbid.com`);
       console.log("-----------------------------------");
+      
+      // Intentar enviar correo electrónico usando EmailJS
+      try {
+        const emailSent = await sendEmailWithEmailJS({
+          name: contact.name,
+          email: contact.email,
+          subject: contact.subject,
+          message: contact.message
+        });
+        
+        if (emailSent) {
+          console.log("✅ Correo enviado exitosamente a auctions@theglobalbid.com");
+        } else {
+          console.log("⚠️ No se pudo enviar el correo a auctions@theglobalbid.com");
+        }
+      } catch (emailError) {
+        console.error("❌ Error al intentar enviar correo:", emailError);
+      }
       
       // Simular un pequeño retraso para mejor experiencia de usuario
       await new Promise(resolve => setTimeout(resolve, 800));
