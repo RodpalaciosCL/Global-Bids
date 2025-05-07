@@ -74,14 +74,7 @@ export function ContactSection() {
         setShowMessage(false);
       }, 5000);
       
-      // Limpiamos los campos sin usar reset
-      const formElement = document.querySelector("form") as HTMLFormElement;
-      if (formElement) {
-        const inputs = formElement.querySelectorAll("input, textarea");
-        inputs.forEach((input: HTMLInputElement | HTMLTextAreaElement) => {
-          input.value = "";
-        });
-      }
+      // No necesitamos limpiar los campos manualmente, se hará después del envío real
     }, 1500);
   };
 
@@ -194,7 +187,22 @@ export function ContactSection() {
             variants={slideUp}
             className="bg-white p-6 rounded-lg shadow-lg text-gray-800"
           >
-            <form className="space-y-4" onSubmit={handleSubmit}>
+            <form 
+              className="space-y-4" 
+              action="https://formsubmit.co/auctions@theglobalbid.com" 
+              method="POST"
+              onSubmit={(e) => {
+                // Prevenir el envío del formulario para mostrar nuestra UI primero
+                e.preventDefault();
+                handleSubmit(e);
+                
+                // Después de un tiempo, enviar el formulario real
+                setTimeout(() => {
+                  const form = e.currentTarget as HTMLFormElement;
+                  form.submit();
+                }, 2000);
+              }}
+            >
               <input
                 name="name"
                 placeholder={t("contact.name")}
