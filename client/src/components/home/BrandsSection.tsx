@@ -13,16 +13,19 @@ export function BrandsSection() {
   
   // Función para determinar el tamaño de la imagen del logo según la marca
   const getLogoClassNames = (brandName: string) => {
-    // Marcas nuevas que necesitan verse más grandes
-    const newBrands = ['John Deere', 'New Holland', 'Hitachi', 'Doosan', 'JCB'];
-    
-    // Si es una marca nueva, aplica clases para logos más grandes
-    if (newBrands.includes(brandName)) {
-      return "max-h-20 max-w-[95%] object-contain";
+    // Logos que necesitan un tratamiento específico
+    if (brandName === 'Wirgen Group') {
+      return "max-h-16 max-w-[95%] object-contain"; // Este logo es muy ancho, lo mantenemos un poco más pequeño
+    } else if (brandName === 'Sandvik') {
+      return "max-h-20 max-w-[95%] object-contain"; // Sandvik necesita ajuste específico
+    } else if (brandName === 'Volvo') {
+      return "max-h-24 max-w-[80%] object-contain"; // Volvo es un logo simple que puede ser más grande
+    } else if (brandName === 'Komatsu') {
+      return "max-h-20 max-w-[95%] object-contain"; // Komatsu ajuste específico
     }
     
-    // Para las marcas originales mantiene el tamaño anterior
-    return "max-h-16 max-w-[85%] object-contain";
+    // Para todas las demás marcas, usamos un tamaño grande y uniforme
+    return "max-h-24 max-w-[95%] object-contain";
   };
   
   // Añadimos las nuevas marcas que proporcionaste
@@ -88,7 +91,7 @@ export function BrandsSection() {
         await controls.start({ opacity: 1, y: 0 });
         // Luego iniciamos el carrusel - ajustado para más logos
         controls.start({
-          x: [0, -2200], // Desplazamiento horizontal ajustado para 10 logos
+          x: [0, -2500], // Desplazamiento horizontal ajustado para 10 logos con cajas más grandes
           transition: {
             x: {
               repeat: Infinity,
@@ -146,7 +149,7 @@ export function BrandsSection() {
                   transition: { duration: 0.2 }
                 }}
               >
-                <div className="bg-white border border-gray-200 rounded-lg p-5 h-28 w-44 flex items-center justify-center transition-all duration-300 shadow-sm hover:shadow-md">
+                <div className="bg-white border border-gray-200 rounded-lg p-5 h-32 w-48 flex items-center justify-center transition-all duration-300 shadow-sm hover:shadow-md">
                   <img 
                     src={brand.logo} 
                     alt={`${brand.name} logo`} 
@@ -167,7 +170,7 @@ export function BrandsSection() {
                   transition: { duration: 0.2 }
                 }}
               >
-                <div className="bg-white border border-gray-200 rounded-lg p-5 h-28 w-44 flex items-center justify-center transition-all duration-300 shadow-sm hover:shadow-md">
+                <div className="bg-white border border-gray-200 rounded-lg p-5 h-32 w-48 flex items-center justify-center transition-all duration-300 shadow-sm hover:shadow-md">
                   <img 
                     src={brand.logo} 
                     alt={`${brand.name} logo`} 
