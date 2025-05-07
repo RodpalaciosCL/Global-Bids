@@ -76,6 +76,15 @@ export function CatalogSection() {
       return;
     }
 
+    // Handle equipment family filters (both mobile and desktop)
+    if (id === "type-filter-mobile" || id === "type-filter-desktop") {
+      setFilters((prev) => ({
+        ...prev,
+        type: (value as MachineryType) || undefined,
+      }));
+      return;
+    }
+
     const filterKey = id.split("-")[0];
     if (filterKey === "type") {
       setFilters((prev) => ({
@@ -184,25 +193,33 @@ export function CatalogSection() {
                   </select>
                 </div>
                 
-                {/* Condition filter */}
+                {/* Equipment Family filter */}
                 <div>
                   <label
-                    htmlFor="condition-filter"
+                    htmlFor="type-filter-mobile"
                     className="block text-sm font-medium text-gray-700 mb-1"
                   >
                     {language === 'es' ? 'Familia de equipos' : 'Equipment Family'}
                   </label>
                   <select
-                    id="condition-filter"
+                    id="type-filter-mobile"
                     className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary focus:border-secondary transition"
                     onChange={handleSelectChange}
-                    value={filters.condition || ""}
+                    value={filters.type || ""}
                   >
                     <option value="">{language === 'es' ? 'Todas las familias' : 'All families'}</option>
-                    <option value="excellent">{language === 'es' ? 'Excelente' : 'Excellent'}</option>
-                    <option value="good">{language === 'es' ? 'Bueno' : 'Good'}</option>
-                    <option value="fair">{language === 'es' ? 'Regular' : 'Fair'}</option>
-                    <option value="repair">{language === 'es' ? 'Para reparar' : 'For repair'}</option>
+                    <option value="excavator">{language === 'es' ? 'Excavadora' : 'Excavator'}</option>
+                    <option value="truck">{language === 'es' ? 'Camión' : 'Truck'}</option>
+                    <option value="loader">{language === 'es' ? 'Cargador' : 'Loader'}</option>
+                    <option value="generator">{language === 'es' ? 'Generador' : 'Generator'}</option>
+                    <option value="crane">{language === 'es' ? 'Grúa' : 'Crane'}</option>
+                    <option value="backhoe">{language === 'es' ? 'Retroexcavadora' : 'Backhoe'}</option>
+                    <option value="bulldozer">{language === 'es' ? 'Bulldozer' : 'Bulldozer'}</option>
+                    <option value="manlift">{language === 'es' ? 'Plataforma Elevadora' : 'Manlift'}</option>
+                    <option value="forklift">{language === 'es' ? 'Montacargas' : 'Forklift'}</option>
+                    <option value="telehandler">{language === 'es' ? 'Manipulador Telescópico' : 'Telehandler'}</option>
+                    <option value="compactor">{language === 'es' ? 'Compactador' : 'Compactor'}</option>
+                    <option value="grader">{language === 'es' ? 'Motoniveladora' : 'Grader'}</option>
                   </select>
                 </div>
                 
@@ -295,22 +312,30 @@ export function CatalogSection() {
                 {/* Equipment Family filter */}
                 <div>
                   <label
-                    htmlFor="condition-filter"
+                    htmlFor="type-filter-desktop"
                     className="block text-sm font-medium text-gray-700 mb-1"
                   >
                     {language === 'es' ? 'Familia de equipos' : 'Equipment Family'}
                   </label>
                   <select
-                    id="condition-filter"
+                    id="type-filter-desktop"
                     className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary focus:border-secondary transition"
                     onChange={handleSelectChange}
-                    value={filters.condition || ""}
+                    value={filters.type || ""}
                   >
                     <option value="">{language === 'es' ? 'Todas las familias' : 'All families'}</option>
-                    <option value="excellent">{language === 'es' ? 'Excelente' : 'Excellent'}</option>
-                    <option value="good">{language === 'es' ? 'Bueno' : 'Good'}</option>
-                    <option value="fair">{language === 'es' ? 'Regular' : 'Fair'}</option>
-                    <option value="repair">{language === 'es' ? 'Para reparar' : 'For repair'}</option>
+                    <option value="excavator">{language === 'es' ? 'Excavadora' : 'Excavator'}</option>
+                    <option value="truck">{language === 'es' ? 'Camión' : 'Truck'}</option>
+                    <option value="loader">{language === 'es' ? 'Cargador' : 'Loader'}</option>
+                    <option value="generator">{language === 'es' ? 'Generador' : 'Generator'}</option>
+                    <option value="crane">{language === 'es' ? 'Grúa' : 'Crane'}</option>
+                    <option value="backhoe">{language === 'es' ? 'Retroexcavadora' : 'Backhoe'}</option>
+                    <option value="bulldozer">{language === 'es' ? 'Bulldozer' : 'Bulldozer'}</option>
+                    <option value="manlift">{language === 'es' ? 'Plataforma Elevadora' : 'Manlift'}</option>
+                    <option value="forklift">{language === 'es' ? 'Montacargas' : 'Forklift'}</option>
+                    <option value="telehandler">{language === 'es' ? 'Manipulador Telescópico' : 'Telehandler'}</option>
+                    <option value="compactor">{language === 'es' ? 'Compactador' : 'Compactor'}</option>
+                    <option value="grader">{language === 'es' ? 'Motoniveladora' : 'Grader'}</option>
                   </select>
                 </div>
                 

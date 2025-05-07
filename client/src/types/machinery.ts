@@ -17,14 +17,32 @@ export interface Machinery {
 }
 
 export type MachineryType = 
-  | 'excavator' 
-  | 'truck' 
-  | 'loader' 
-  | 'generator' 
-  | 'crane'
-  | 'backhoe'
-  | 'manlift'
-  | 'heater';
+  | 'excavator'      // Excavadora
+  | 'truck'          // Camión
+  | 'loader'         // Cargador frontal
+  | 'generator'      // Generador
+  | 'crane'          // Grúa
+  | 'backhoe'        // Retroexcavadora
+  | 'manlift'        // Plataforma Elevadora
+  | 'heater'         // Calentador
+  | 'bulldozer'      // Bulldozer
+  | 'compactor'      // Compactador
+  | 'driller'        // Perforadora
+  | 'grader'         // Motoniveladora
+  | 'scraper'        // Mototraílla
+  | 'skidsteer'      // Minicargador
+  | 'telehandler'    // Manipulador telescópico
+  | 'dumper'         // Volquete
+  | 'forklift'       // Montacargas
+  | 'mixer'          // Mezcladora de concreto
+  | 'paver'          // Pavimentadora
+  | 'trencher'       // Zanjadora
+  | 'welder'         // Soldadora
+  | 'lightTower'     // Torre de Iluminación
+  | 'pump'           // Bomba
+  | 'compressor'     // Compresor
+  | 'trailer'        // Remolque
+  | 'attachment';    // Implemento/Accesorio
 
 export type MachineryCondition = 
   | 'excellent' 
@@ -50,7 +68,25 @@ export const typeLabels: Record<MachineryType, string> = {
   crane: 'Grúa',
   backhoe: 'Retroexcavadora',
   manlift: 'Plataforma Elevadora',
-  heater: 'Calentador'
+  heater: 'Calentador',
+  bulldozer: 'Bulldozer',
+  compactor: 'Compactador',
+  driller: 'Perforadora',
+  grader: 'Motoniveladora',
+  scraper: 'Mototraílla',
+  skidsteer: 'Minicargador',
+  telehandler: 'Manipulador Telescópico',
+  dumper: 'Volquete',
+  forklift: 'Montacargas',
+  mixer: 'Mezcladora de Concreto',
+  paver: 'Pavimentadora',
+  trencher: 'Zanjadora',
+  welder: 'Soldadora',
+  lightTower: 'Torre de Iluminación',
+  pump: 'Bomba',
+  compressor: 'Compresor',
+  trailer: 'Remolque',
+  attachment: 'Implemento/Accesorio'
 };
 
 export const conditionLabels: Record<MachineryCondition, string> = {
