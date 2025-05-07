@@ -10,7 +10,7 @@ export function TimelineSection() {
   const getTimelineEvents = () => [
     {
       id: 1,
-      year: t('timeline.phase1'),
+      year: 'FASE 1',
       title: 'North Country Auction',
       description: language === 'es' 
         ? 'Fundación de North Country Auction, empresa americana experta en subastas con amplia experiencia en el sector industrial.'
@@ -19,7 +19,16 @@ export function TimelineSection() {
     },
     {
       id: 2,
-      year: t('timeline.phase2'),
+      year: 'FASE 2',
+      title: 'Global Bids USA',
+      description: language === 'es'
+        ? 'Empresa de subastas y logística norteamericana con larga trayectoria y especialización de logística para maquinaria en todo el mundo.'
+        : 'American auction and logistics company with extensive experience specializing in machinery logistics worldwide.',
+      icon: 'fa-truck'
+    },
+    {
+      id: 3,
+      year: 'FASE 3',
       title: language === 'es' ? 'Asociación con Prelco Auctions' : 'Partnership with Prelco Auctions',
       description: language === 'es'
         ? 'Formación de una alianza estratégica con Grupo Prelco, expertos con más de 20 años en el sector minero latinoamericano.'
@@ -27,12 +36,12 @@ export function TimelineSection() {
       icon: 'fa-handshake'
     },
     {
-      id: 3,
-      year: t('timeline.phase3'),
+      id: 4,
+      year: 'FASE 4',
       title: language === 'es' ? 'Nace Global Bids' : 'Global Bids is Born',
       description: language === 'es'
-        ? 'Surge Global Bids como resultado del Joint-Venture, combinando experiencia en subastas y conocimiento del mercado latinoamericano.'
-        : 'Global Bids emerges as a result of the Joint-Venture, combining auction experience and knowledge of the Latin American market.',
+        ? 'Surge Global Bids como resultado del Joint Venture, combinando experiencia en subastas y conocimiento del mercado latinoamericano.'
+        : 'Global Bids emerges as a result of the Joint Venture, combining auction experience and knowledge of the Latin American market.',
       icon: 'fa-globe'
     }
   ];
@@ -66,7 +75,7 @@ export function TimelineSection() {
           <div className="absolute left-0 md:left-1/2 h-full w-0.5 bg-gradient-to-b from-blue-600 via-blue-500 to-blue-400 transform md:-translate-x-1/2"></div>
           
           {/* Eventos de la línea de tiempo */}
-          <div className="space-y-6 md:space-y-12 relative">
+          <div className="space-y-12 md:space-y-24 relative pb-16">
             {timelineEvents.map((event, index) => (
               <motion.div 
                 key={event.id}
@@ -104,7 +113,7 @@ export function TimelineSection() {
                 {/* Punto central con ícono (visible solo en desktop) */}
                 <div className="hidden md:flex w-2/12 justify-center items-center">
                   <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-blue-700 rounded-full flex items-center justify-center shadow-lg z-20 border-2 border-white">
-                    <i className={`fas ${event.icon} text-white text-xs`}></i>
+                    <i className={`fas ${event.icon} text-white text-sm`}></i>
                   </div>
                 </div>
 
@@ -113,37 +122,34 @@ export function TimelineSection() {
               </motion.div>
             ))}
           </div>
-
-          {/* Punto final */}
-          <motion.div 
-            className="absolute bottom-0 left-0 md:left-1/2 transform md:-translate-x-1/2 translate-y-1/2 z-20"
-            initial={{ opacity: 0, scale: 0 }}
-            animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0 }}
-            transition={{ duration: 0.8, delay: timelineEvents.length * 0.3 }}
-          >
-            <div className="w-12 h-12 bg-gradient-to-br from-blue-600 to-blue-800 rounded-full flex items-center justify-center shadow-xl border-2 border-white">
-              <i className="fas fa-check text-white text-sm"></i>
-            </div>
-          </motion.div>
         </div>
 
-        {/* Mensaje final */}
+        {/* Mensaje final con el estado actual */}
         <motion.div 
-          className="text-center mt-16 max-w-3xl mx-auto bg-white p-5 rounded-xl shadow-lg border border-gray-100"
+          className="text-center mt-32 max-w-3xl mx-auto bg-white p-5 rounded-xl shadow-lg border border-gray-100 relative"
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
           transition={{ duration: 0.7, delay: timelineEvents.length * 0.3 + 0.4 }}
         >
-          <h3 className="text-lg font-bold text-blue-600 mb-2">{language === 'es' ? 'Hoy en Global Bids' : 'Global Bids Today'}</h3>
-          <p className="text-base text-gray-700 mb-3">
-            {language === 'es' 
-              ? 'Conectamos la oferta sudamericana con la demanda global, a través de nuestra plataforma digital, con presencia en más de 12 países y con una base de cerca de 1 millón de compradores activos.'
-              : 'We connect South American supply with global demand through our digital platform, with presence in more than 12 countries and a base of nearly 1 million active buyers.'}
-          </p>
-          <div className="inline-block bg-blue-500/10 px-4 py-2 rounded-full">
-            <span className="text-base text-blue-600 font-bold">
-              Chile - USA - Worldwide
-            </span>
+          {/* Ícono superior */}
+          <div className="absolute -top-8 left-1/2 transform -translate-x-1/2">
+            <div className="w-16 h-16 bg-gradient-to-br from-blue-600 to-blue-800 rounded-full flex items-center justify-center shadow-xl border-4 border-white">
+              <i className="fas fa-check text-white text-lg"></i>
+            </div>
+          </div>
+          
+          <div className="pt-8">
+            <h3 className="text-xl font-bold text-blue-600 mb-3">{language === 'es' ? 'Hoy en Global Bids' : 'Global Bids Today'}</h3>
+            <p className="text-base text-gray-700 mb-4">
+              {language === 'es' 
+                ? 'Conectamos la oferta nacional con la demanda global, a través de nuestra plataforma digital, con presencia en más de 12 países y con una base de cerca de 1 millón de compradores activos.'
+                : 'We connect national supply with global demand through our digital platform, with presence in more than 12 countries and a base of nearly 1 million active buyers.'}
+            </p>
+            <div className="inline-block bg-blue-500/10 px-5 py-2 rounded-full">
+              <span className="text-base text-blue-600 font-bold">
+                Chile - USA - Worldwide
+              </span>
+            </div>
           </div>
         </motion.div>
       </div>

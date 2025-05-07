@@ -85,6 +85,14 @@ export function CatalogSection() {
       return;
     }
 
+    if (id === "condition-filter-desktop") {
+      setFilters((prev) => ({
+        ...prev,
+        condition: (value as MachineryCondition) || undefined,
+      }));
+      return;
+    }
+
     const filterKey = id.split("-")[0];
     if (filterKey === "type") {
       setFilters((prev) => ({
@@ -169,30 +177,6 @@ export function CatalogSection() {
               </div>
               
               <div className="flex flex-col gap-4">
-                {/* Type filter */}
-                <div>
-                  <label
-                    htmlFor="type-filter"
-                    className="block text-sm font-medium text-gray-700 mb-1"
-                  >
-                    {t('catalog.type')}
-                  </label>
-                  <select
-                    id="type-filter"
-                    className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary focus:border-secondary transition"
-                    onChange={handleSelectChange}
-                    value={filters.type || ""}
-                  >
-                    <option value="">{language === 'es' ? 'Todos los tipos' : 'All types'}</option>
-                    <option value="excavator">{t('type.excavator')}</option>
-                    <option value="truck">{t('type.truck')}</option>
-                    <option value="loader">{t('type.loader')}</option>
-                    <option value="generator">{t('type.generator')}</option>
-                    <option value="crane">{t('type.crane')}</option>
-                    <option value="backhoe">{t('type.backhoe')}</option>
-                  </select>
-                </div>
-                
                 {/* Equipment Family filter */}
                 <div>
                   <label
@@ -220,6 +204,18 @@ export function CatalogSection() {
                     <option value="telehandler">{language === 'es' ? 'Manipulador Telescópico' : 'Telehandler'}</option>
                     <option value="compactor">{language === 'es' ? 'Compactador' : 'Compactor'}</option>
                     <option value="grader">{language === 'es' ? 'Motoniveladora' : 'Grader'}</option>
+                    <option value="scraper">{language === 'es' ? 'Mototraílla' : 'Scraper'}</option>
+                    <option value="skidsteer">{language === 'es' ? 'Minicargador' : 'Skid Steer'}</option>
+                    <option value="dumper">{language === 'es' ? 'Volquete' : 'Dumper'}</option>
+                    <option value="mixer">{language === 'es' ? 'Mezcladora de Concreto' : 'Concrete Mixer'}</option>
+                    <option value="paver">{language === 'es' ? 'Pavimentadora' : 'Paver'}</option>
+                    <option value="trencher">{language === 'es' ? 'Zanjadora' : 'Trencher'}</option>
+                    <option value="welder">{language === 'es' ? 'Soldadora' : 'Welder'}</option>
+                    <option value="lightTower">{language === 'es' ? 'Torre de Iluminación' : 'Light Tower'}</option>
+                    <option value="pump">{language === 'es' ? 'Bomba' : 'Pump'}</option>
+                    <option value="compressor">{language === 'es' ? 'Compresor' : 'Compressor'}</option>
+                    <option value="trailer">{language === 'es' ? 'Remolque' : 'Trailer'}</option>
+                    <option value="attachment">{language === 'es' ? 'Implemento/Accesorio' : 'Attachment'}</option>
                   </select>
                 </div>
                 
@@ -285,30 +281,6 @@ export function CatalogSection() {
                   </div>
                 </div>
 
-                {/* Type filter */}
-                <div>
-                  <label
-                    htmlFor="type-filter"
-                    className="block text-sm font-medium text-gray-700 mb-1"
-                  >
-                    {t('catalog.type')}
-                  </label>
-                  <select
-                    id="type-filter"
-                    className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary focus:border-secondary transition"
-                    onChange={handleSelectChange}
-                    value={filters.type || ""}
-                  >
-                    <option value="">{language === 'es' ? 'Todos los tipos' : 'All types'}</option>
-                    <option value="excavator">{t('type.excavator')}</option>
-                    <option value="truck">{t('type.truck')}</option>
-                    <option value="loader">{t('type.loader')}</option>
-                    <option value="generator">{t('type.generator')}</option>
-                    <option value="crane">{t('type.crane')}</option>
-                    <option value="backhoe">{t('type.backhoe')}</option>
-                  </select>
-                </div>
-
                 {/* Equipment Family filter */}
                 <div>
                   <label
@@ -336,6 +308,40 @@ export function CatalogSection() {
                     <option value="telehandler">{language === 'es' ? 'Manipulador Telescópico' : 'Telehandler'}</option>
                     <option value="compactor">{language === 'es' ? 'Compactador' : 'Compactor'}</option>
                     <option value="grader">{language === 'es' ? 'Motoniveladora' : 'Grader'}</option>
+                    <option value="scraper">{language === 'es' ? 'Mototraílla' : 'Scraper'}</option>
+                    <option value="skidsteer">{language === 'es' ? 'Minicargador' : 'Skid Steer'}</option>
+                    <option value="dumper">{language === 'es' ? 'Volquete' : 'Dumper'}</option>
+                    <option value="mixer">{language === 'es' ? 'Mezcladora de Concreto' : 'Concrete Mixer'}</option>
+                    <option value="paver">{language === 'es' ? 'Pavimentadora' : 'Paver'}</option>
+                    <option value="trencher">{language === 'es' ? 'Zanjadora' : 'Trencher'}</option>
+                    <option value="welder">{language === 'es' ? 'Soldadora' : 'Welder'}</option>
+                    <option value="lightTower">{language === 'es' ? 'Torre de Iluminación' : 'Light Tower'}</option>
+                    <option value="pump">{language === 'es' ? 'Bomba' : 'Pump'}</option>
+                    <option value="compressor">{language === 'es' ? 'Compresor' : 'Compressor'}</option>
+                    <option value="trailer">{language === 'es' ? 'Remolque' : 'Trailer'}</option>
+                    <option value="attachment">{language === 'es' ? 'Implemento/Accesorio' : 'Attachment'}</option>
+                  </select>
+                </div>
+
+                {/* Condition filter */}
+                <div>
+                  <label
+                    htmlFor="condition-filter-desktop"
+                    className="block text-sm font-medium text-gray-700 mb-1"
+                  >
+                    {language === 'es' ? 'Condición' : 'Condition'}
+                  </label>
+                  <select
+                    id="condition-filter-desktop"
+                    className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary focus:border-secondary transition"
+                    onChange={handleSelectChange}
+                    value={filters.condition || ""}
+                  >
+                    <option value="">{language === 'es' ? 'Todas las condiciones' : 'All conditions'}</option>
+                    <option value="excellent">{language === 'es' ? 'Excelente' : 'Excellent'}</option>
+                    <option value="good">{language === 'es' ? 'Bueno' : 'Good'}</option>
+                    <option value="fair">{language === 'es' ? 'Regular' : 'Fair'}</option>
+                    <option value="repair">{language === 'es' ? 'Para reparar' : 'For repair'}</option>
                   </select>
                 </div>
                 
