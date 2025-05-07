@@ -49,6 +49,14 @@ export default function MachineryDetail() {
           <span className="text-gray-700 truncate">{machinery.name}</span>
         </div>
         
+        {/* Back to catalog button */}
+        <div className="flex mb-4 mt-2">
+          <Link href="/marketplace" className="text-gray-600 hover:text-primary flex items-center text-sm font-medium">
+            <i className="fas fa-arrow-left mr-2"></i>
+            {language === 'es' ? 'Volver al catálogo' : 'Back to catalog'}
+          </Link>
+        </div>
+        
         <div className="bg-white rounded-lg shadow-sm overflow-hidden mb-2">
           {/* Main Content Grid */}
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-0">
