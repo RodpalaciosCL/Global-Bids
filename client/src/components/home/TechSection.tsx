@@ -34,13 +34,8 @@ export function TechSection() {
 
   return (
     <section id="tech" className="py-20 relative overflow-hidden">
-      {/* Background Pattern */}
-      <div className="absolute inset-0 z-0 opacity-5">
-        <div className="absolute inset-0" style={{ 
-          backgroundImage: 'url("data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%239C92AC" fill-opacity="0.4"%3E%3Cpath d="M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")',
-          backgroundSize: '24px 24px'
-        }}></div>
-      </div>
+      {/* Fondo sólido con color sutil */}
+      <div className="absolute inset-0 z-0 bg-gray-50"></div>
 
       <div className="container mx-auto px-4 relative z-10">
         <motion.div 
@@ -157,22 +152,14 @@ export function TechSection() {
             transition={{ duration: 0.6, delay: 0.2 }}
           >
             <div className="bg-gray-800 rounded-2xl shadow-2xl overflow-hidden">
-              <video 
-                className="w-full h-auto"
-                autoPlay 
-                loop 
-                muted 
-                playsInline
-                poster="https://images.pexels.com/photos/3861969/pexels-photo-3861969.jpeg?auto=compress&cs=tinysrgb&w=1600"
-              >
-                <source src="https://mazwai.com/videvo_files/video/free/2014-07/small_watermarked/simon_george--drone_flying_over_a_building_site_preview.webm" type="video/webm" />
-                {/* Fallback image if video doesn't load */}
-                <img 
-                  src="https://images.pexels.com/photos/3861969/pexels-photo-3861969.jpeg?auto=compress&cs=tinysrgb&w=1600" 
-                  alt="Technology Demo"
-                  className="w-full h-auto"
-                />
-              </video>
+              {/* Reemplazado video con imagen estática */}
+              <div className="bg-gray-700 h-[300px] flex items-center justify-center">
+                <div className="text-white text-center p-8">
+                  <i className="fas fa-drone text-4xl mb-4"></i>
+                  <h4 className="text-xl font-bold">Tecnología de Drones</h4>
+                  <p className="mt-2 text-gray-300">Captura aérea avanzada con drones especializados</p>
+                </div>
+              </div>
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end">
                 <div className="p-6 text-white">
                   <h4 className="font-bold text-xl mb-2">Relevamiento con Drones</h4>

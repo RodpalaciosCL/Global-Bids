@@ -7,13 +7,8 @@ export function ActionCTA() {
   const { language } = useLanguage();
   return (
     <section className="py-10 sm:py-16 bg-primary text-white relative overflow-hidden">
-      <div className="absolute inset-0 z-0 opacity-20">
-        <img 
-          src="https://images.unsplash.com/photo-1541783273000-f5c4d4fa9ee5?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80" 
-          alt="" 
-          className="w-full h-full object-cover" 
-        />
-      </div>
+      {/* Fondo sólido con gradiente sutil */}
+      <div className="absolute inset-0 z-0 bg-gradient-to-b from-primary to-[#0B3146]"></div>
       <div className="container mx-auto px-4 relative z-10">
         <motion.div 
           className="max-w-xl mx-auto text-center"
