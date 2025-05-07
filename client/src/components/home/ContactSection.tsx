@@ -53,68 +53,16 @@ export function ContactSection() {
   // Inicializar EmailJS - no es necesario hacerlo, ya que lo pasamos como 4to parámetro en emailjs.send
 
   // Manejar el envío del formulario
+  // Ya no necesitamos la función handleSubmit porque usaremos FormSubmit
+  // Este código se mantiene comentado para referencia futura
+  /*
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
     
-    const formElement = e.currentTarget as HTMLFormElement;
-    const formData = new FormData(formElement);
-    const name = formData.get('name') as string;
-    const email = formData.get('email') as string;
-    const message = formData.get('message') as string;
-    
-    // Preparar los parámetros según la estructura exacta que se ve en la plantilla
-    const templateParams = {
-      from_name: name,
-      from_email: email,
-      message: message
-    };
-    
-    // Agregamos console.log para debug
-    console.log('Enviando con estos parámetros:', templateParams);
-    
-    // Enviar el correo con EmailJS - usando IDs de la URL directamente
-    emailjs.send(
-      'service_vn1k23r', // ID del servicio
-      'template_o1soeo', // ID de la plantilla (sin el 0 final)
-      templateParams,
-      'qAsFTYM6kobHlsv5e' // ID de usuario (API Key)
-    )
-    .then((response) => {
-      console.log('SUCCESS!', response.status, response.text);
-      setIsSubmitting(false);
-      
-      // Mostrar mensaje de éxito
-      setMessageText(language === 'es' 
-        ? "¡Gracias por contactarnos! Te responderemos pronto."
-        : "Thank you for contacting us! We will respond soon.");
-      setShowMessage(true);
-      
-      // Ocultamos el mensaje después de 5 segundos
-      setTimeout(() => {
-        setShowMessage(false);
-      }, 5000);
-      
-      // Limpiar el formulario
-      formElement.reset();
-    })
-    .catch((error) => {
-      console.error('FAILED...', error);
-      setIsSubmitting(false);
-      
-      // Mostrar mensaje de error con más detalles
-      console.log("ERROR DETALLADO:", error);
-      setMessageText(language === 'es' 
-        ? `Error: ${error.text || 'Desconocido'}. Por favor, intenta nuevamente o escríbenos directamente a auctions@theglobalbid.com.`
-        : `Error: ${error.text || 'Unknown'}. Please try again or email us directly at auctions@theglobalbid.com.`);
-      setShowMessage(true);
-      
-      // Ocultamos el mensaje después de 5 segundos
-      setTimeout(() => {
-        setShowMessage(false);
-      }, 5000);
-    });
+    // ... Código de envío de correo con EmailJS ...
   };
+  */
 
   return (
     <section
@@ -227,11 +175,10 @@ export function ContactSection() {
           >
             <form 
               className="space-y-4" 
-              // Comentamos temporalmente la acción para evitar errores
-              // action="https://formsubmit.co/auctions@theglobalbid.com" 
-              // method="POST"
-              // target="_blank"
-              onSubmit={handleSubmit}
+              // Utilizamos formsubmit.co en lugar de EmailJS
+              action="https://formsubmit.co/auctions@theglobalbid.com" 
+              method="POST"
+              target="_blank"
             >
               <input
                 name="name"
@@ -256,25 +203,18 @@ export function ContactSection() {
                 className="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary focus:border-secondary transition"
               ></textarea>
 
+              {/* Campos ocultos para FormSubmit */}
+              <input type="hidden" name="_next" value={window.location.href} />
+              <input type="hidden" name="_subject" value={`Nuevo mensaje de contacto - Global Bids`} />
+              <input type="hidden" name="_captcha" value="false" />
+              <input type="hidden" name="_template" value="table" />
+              
               <button
                 type="submit"
-                disabled={isSubmitting}
-                className="w-full bg-secondary hover:bg-secondary-dark text-primary font-semibold px-6 py-4 rounded-lg transition duration-300 flex items-center justify-center disabled:opacity-70"
+                className="w-full bg-secondary hover:bg-secondary-dark text-primary font-semibold px-6 py-4 rounded-lg transition duration-300 flex items-center justify-center"
               >
-                {isSubmitting ? (
-                  <>
-                    <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-primary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                    </svg>
-                    {language === 'es' ? 'Enviando...' : 'Sending...'}
-                  </>
-                ) : (
-                  <>
-                    <i className="fas fa-paper-plane mr-2"></i>
-                    {t("contact.send")}
-                  </>
-                )}
+                <i className="fas fa-paper-plane mr-2"></i>
+                {t("contact.send")}
               </button>
             </form>
           </motion.div>
