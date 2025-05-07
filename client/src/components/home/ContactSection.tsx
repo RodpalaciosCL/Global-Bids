@@ -178,7 +178,6 @@ export function ContactSection() {
               // Utilizamos formsubmit.co en lugar de EmailJS
               action="https://formsubmit.co/el/wamuve" 
               method="POST"
-              target="_blank"
             >
               <input
                 name="name"
@@ -204,7 +203,8 @@ export function ContactSection() {
               ></textarea>
 
               {/* Campos ocultos para FormSubmit */}
-              <input type="hidden" name="_next" value={window.location.href} />
+              {/* Redirección al mismo sitio pero con un hash para evitar problemas */}
+              <input type="hidden" name="_next" value="https://a6481a0e-1b17-48e5-925f-133729b45681-00-1ypwsu92tle9.worf.replit.dev/#contacto" />
               <input type="hidden" name="_subject" value={`Nuevo mensaje de contacto - Global Bids`} />
               <input type="hidden" name="_captcha" value="false" />
               <input type="hidden" name="_template" value="table" />
