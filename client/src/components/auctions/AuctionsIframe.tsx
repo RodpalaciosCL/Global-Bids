@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { fadeIn, slideUp } from '@/lib/animations';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { openRegistrationForm } from '@/components/home/RegistrationForm';
 
 // Subastas dinámicas basadas en las imágenes reales proporcionadas
 const AUCTION_DATA = [
@@ -46,12 +47,10 @@ const AUCTION_DATA = [
 export function AuctionsIframe() {
   const { t, language } = useLanguage();
   
-  // Función para hacer scroll hasta el formulario de registro
+  // Función para abrir el formulario de registro directamente
   const scrollToRegistrationForm = () => {
-    const registrationForm = document.getElementById('registration-form');
-    if (registrationForm) {
-      registrationForm.scrollIntoView({ behavior: 'smooth' });
-    }
+    // En lugar de hacer scroll, abrimos directamente el formulario
+    openRegistrationForm();
   };
   
   return (
