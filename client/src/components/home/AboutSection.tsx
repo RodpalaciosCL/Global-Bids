@@ -25,7 +25,58 @@ export function AboutSection() {
     icon: "fa-history"
   };
   
-
+  // Timeline de la historia de Global Bids
+  const timelineItems = language === 'es' ? [
+    {
+      phase: 'phase1',
+      title: 'North Country Auction',
+      description: 'Fundación de North Country Auction, empresa americana experta en subastas con amplia experiencia en el sector industrial.',
+      year: ''
+    },
+    {
+      phase: 'phase2',
+      title: 'Global Bids USA',
+      description: 'Empresa de subastas y logística norteamericana con larga trayectoria y especialización de logística para maquinaria en todo el mundo.',
+      year: ''
+    },
+    {
+      phase: 'phase3',
+      title: 'Asociación con Prelco Auctions',
+      description: 'Formación de una alianza estratégica con Grupo Prelco, expertos con más de 20 años en el sector minero latinoamericano.',
+      year: ''
+    },
+    {
+      phase: 'phase4',
+      title: 'Nace Global Bids',
+      description: 'Surge Global Bids como resultado del Joint Venture, combinando experiencia en subastas y conocimiento del mercado latinoamericano.',
+      year: ''
+    }
+  ] : [
+    {
+      phase: 'phase1',
+      title: 'North Country Auction',
+      description: 'Foundation of North Country Auction, an American company expert in auctions with extensive experience in the industrial sector.',
+      year: ''
+    },
+    {
+      phase: 'phase2',
+      title: 'Global Bids USA',
+      description: 'American auction and logistics company with extensive experience and specialization in machinery logistics worldwide.',
+      year: ''
+    },
+    {
+      phase: 'phase3',
+      title: 'Partnership with Prelco Auctions',
+      description: 'Formation of a strategic alliance with Prelco Group, experts with over 20 years in the Latin American mining sector.',
+      year: ''
+    },
+    {
+      phase: 'phase4',
+      title: 'Global Bids is Born',
+      description: 'Global Bids emerges as a result of the Joint Venture, combining auction expertise and knowledge of the Latin American market.',
+      year: ''
+    }
+  ];
   
   return (
     <section id="nosotros" className="min-h-screen flex flex-col bg-white relative overflow-hidden" ref={sectionRef}>
@@ -161,7 +212,75 @@ export function AboutSection() {
           </motion.div>
         </div>
         
+        {/* Timeline de Historia */}
+        <motion.div 
+          className="my-16 md:my-24"
+          initial={{ opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+          transition={{ duration: 0.6, delay: 0.3 }}
+        >
+          <div className="text-center mb-12">
+            <h3 className="text-3xl md:text-4xl font-bold mb-4 text-gray-900">
+              {language === 'es' ? 'Nuestra Historia' : 'Our History'}
+            </h3>
+            <div className="w-20 h-1.5 bg-primary mx-auto mb-6"></div>
+            <p className="text-gray-600 max-w-2xl mx-auto">
+              {language === 'es' 
+                ? 'Descubre cómo hemos evolucionado hasta convertirnos en líderes del mercado latinoamericano de subastas de maquinaria pesada.'
+                : 'Discover how we have evolved to become leaders in the Latin American heavy machinery auction market.'}
+            </p>
+          </div>
 
+          {/* Línea de Tiempo Vertical */}
+          <div className="max-w-4xl mx-auto relative min-h-[600px]">
+            {/* Línea central */}
+            <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-primary/30 z-0"></div>
+            
+            {/* Elementos de la línea de tiempo */}
+            {timelineItems.map((item, index) => (
+              <motion.div 
+                key={item.phase}
+                className={`flex items-center mb-16 ${index % 2 === 0 ? 'flex-row-reverse' : ''}`}
+                initial={{ opacity: 0, x: index % 2 === 0 ? 50 : -50 }}
+                animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: index % 2 === 0 ? 50 : -50 }}
+                transition={{ duration: 0.5, delay: 0.2 + (index * 0.1) }}
+              >
+                {/* Contenido */}
+                <div className={`w-1/2 px-4 ${index % 2 === 0 ? 'text-right' : 'text-left'}`}>
+                  <div className="bg-white p-6 rounded-xl shadow-lg border border-gray-100">
+                    <div className="text-xs text-primary/80 font-semibold uppercase mb-1">
+                      {language === 'es' ? 'Fase ' + (index + 1) : 'Phase ' + (index + 1)}
+                    </div>
+                    <h4 className="text-xl font-bold mb-2 text-gray-900">{item.title}</h4>
+                    <p className="text-gray-600 text-sm">{item.description}</p>
+                  </div>
+                </div>
+                
+                {/* Indicador central */}
+                <div className="absolute left-1/2 transform -translate-x-1/2 w-12 h-12 bg-primary rounded-full border-4 border-white shadow-md z-10 flex items-center justify-center">
+                  <span className="text-white font-bold">{index + 1}</span>
+                </div>
+                
+                {/* Espacio para el otro lado */}
+                <div className="w-1/2"></div>
+              </motion.div>
+            ))}
+            
+            {/* Punto final */}
+            <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-10 h-10 bg-primary/80 rounded-full border-4 border-white shadow-md z-10 flex items-center justify-center">
+              <span className="text-white font-bold">
+                <i className="fas fa-check"></i>
+              </span>
+            </div>
+            
+            {/* Indicador "Hoy" */}
+            <div className="text-center mt-6">
+              <span className="inline-block bg-primary text-white px-6 py-2 rounded-full shadow-md font-medium">
+                {language === 'es' ? 'Hoy en Global Bids' : 'Today at Global Bids'}
+              </span>
+            </div>
+          </div>
+        </motion.div>
         
         {/* CTA final */}
         <motion.div 
