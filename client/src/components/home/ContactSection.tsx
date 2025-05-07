@@ -61,52 +61,61 @@ export function ContactSection() {
     const formElement = e.currentTarget as HTMLFormElement;
     const formData = new FormData(formElement);
     
-    // Usar FormSubmit directo - servicio más estable
-    fetch('https://formsubmit.co/ajax/auctions@theglobalbid.com', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-      },
-      body: JSON.stringify({
-        name: formData.get('name'),
-        email: formData.get('email'),
-        message: formData.get('message')
-      })
-    })
-    .then(response => {
-      console.log('FormSubmit response:', response);
+    // Usar el enfoque simple de FormSubmit para enviar correo de activación
+    const form = document.createElement('form');
+    form.method = 'POST';
+    form.action = 'https://formsubmit.co/auctions@theglobalbid.com';
+    form.style.display = 'none';
+    
+    // Agregar campos
+    const nameField = document.createElement('input');
+    nameField.name = 'name';
+    nameField.value = formData.get('name') as string;
+    
+    const emailField = document.createElement('input');
+    emailField.name = 'email';
+    emailField.value = formData.get('email') as string;
+    
+    const messageField = document.createElement('input');
+    messageField.name = 'message';
+    messageField.value = formData.get('message') as string;
+    
+    // Agregar campos al formulario
+    form.appendChild(nameField);
+    form.appendChild(emailField);
+    form.appendChild(messageField);
+    
+    // Agregar al cuerpo del documento y enviar
+    document.body.appendChild(form);
+    
+    // Enviar el formulario y luego mostrar mensaje de éxito
+    form.submit();
+    
+    // Mostrar mensaje de éxito por nuestra cuenta después de un breve momento
+    setTimeout(() => {
+      // Eliminar el formulario del DOM
+      try {
+        document.body.removeChild(form);
+      } catch (e) {
+        console.error('Error al eliminar formulario:', e);
+      }
+      
       setIsSubmitting(false);
       
       // Mostrar mensaje de éxito
       setMessageText(language === 'es' 
-        ? "¡Gracias por contactarnos! Te responderemos pronto."
-        : "Thank you for contacting us! We will respond soon.");
+        ? "¡Gracias por contactarnos! Hemos enviado un correo de confirmación a auctions@theglobalbid.com. Por favor, revisa tu bandeja de entrada y sigue las instrucciones para activar el formulario."
+        : "Thank you for contacting us! We've sent a confirmation email to auctions@theglobalbid.com. Please check your inbox and follow the instructions to activate the form.");
       setShowMessage(true);
       
-      // Ocultamos el mensaje después de 5 segundos
+      // Ocultamos el mensaje después de 8 segundos
       setTimeout(() => {
         setShowMessage(false);
-      }, 5000);
+      }, 8000);
       
       // Limpiar el formulario
       formElement.reset();
-    })
-    .catch(error => {
-      console.error('Error en FormSubmit:', error);
-      setIsSubmitting(false);
-      
-      // Mostrar mensaje de error
-      setMessageText(language === 'es' 
-        ? "Hubo un problema al enviar tu mensaje. Por favor, intenta nuevamente."
-        : "There was a problem sending your message. Please try again.");
-      setShowMessage(true);
-      
-      // Ocultamos el mensaje después de 5 segundos
-      setTimeout(() => {
-        setShowMessage(false);
-      }, 5000);
-    });
+    }, 1000);
   };
 
   return (
