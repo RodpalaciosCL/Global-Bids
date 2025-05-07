@@ -79,7 +79,7 @@ export function AboutSection() {
   ];
   
   return (
-    <section id="nosotros" className="min-h-screen flex flex-col bg-white relative overflow-hidden" ref={sectionRef}>
+    <section id="nosotros" className="min-h-screen flex flex-col bg-white relative overflow-hidden py-20" ref={sectionRef}>
       {/* Fondo con gradiente */}
       <div className="absolute inset-0 bg-gradient-to-br from-gray-50 via-white to-gray-50 z-0"></div>
       

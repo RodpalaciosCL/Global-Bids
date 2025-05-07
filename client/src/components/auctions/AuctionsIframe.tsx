@@ -51,12 +51,13 @@ export function AuctionsIframe() {
   const openForm = () => {
     try {
       console.log("Intentando abrir el formulario de registro...");
-      // Asegurarse de que el formulario se abra correctamente
-      setTimeout(() => {
-        openRegistrationForm();
-      }, 100);
+      // Llamar directamente sin timeout para evitar problemas de sincronización
+      openRegistrationForm();
     } catch (error) {
       console.error("Error al abrir el formulario:", error);
+      // Intento alternativo en caso de error
+      const event = new CustomEvent('openRegistrationForm');
+      document.dispatchEvent(event);
     }
   };
   

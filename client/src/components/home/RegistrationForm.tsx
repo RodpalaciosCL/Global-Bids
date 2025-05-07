@@ -56,11 +56,9 @@ export function openRegistrationForm() {
     formOpenCallback(true);
   } else {
     console.error("No hay callback para abrir el formulario");
-    // Intentar volver a registrar el callback
-    setTimeout(() => {
-      const formElements = document.querySelectorAll('#registration-form');
-      console.log("Elementos de formulario encontrados:", formElements.length);
-    }, 500);
+    // Crear un elemento para que lo encuentre el useEffect
+    const event = new CustomEvent('tryOpenRegistrationForm');
+    document.dispatchEvent(event);
   }
 }
 
@@ -70,11 +68,23 @@ export function RegistrationForm() {
   const { toast } = useToast();
   const { t, language } = useLanguage();
   
-  // Establecer el callback para abrir el formulario
+  // Establecer el callback para abrir el formulario y escuchar el evento personalizado
   useEffect(() => {
     formOpenCallback = setIsFormOpen;
+    
+    // Agregar un listener para el evento personalizado como alternativa
+    const handleOpenForm = () => {
+      console.log("Evento personalizado detectado, abriendo formulario");
+      setIsFormOpen(true);
+    };
+    
+    document.addEventListener('tryOpenRegistrationForm', handleOpenForm);
+    document.addEventListener('openRegistrationForm', handleOpenForm);
+    
     return () => {
       formOpenCallback = null;
+      document.removeEventListener('tryOpenRegistrationForm', handleOpenForm);
+      document.removeEventListener('openRegistrationForm', handleOpenForm);
     };
   }, []);
 
