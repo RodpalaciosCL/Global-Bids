@@ -72,8 +72,8 @@ export function ContactSection() {
       
       // Mostrar mensaje de éxito
       setMessageText(language === 'es' 
-        ? "¡Gracias por contactarnos! Te responderemos pronto. El correo será enviado a auctions@theglobalbid.com."
-        : "Thank you for contacting us! We will respond soon. The email will be sent to auctions@theglobalbid.com.");
+        ? "¡Gracias por contactarnos! Te responderemos pronto."
+        : "Thank you for contacting us! We will respond soon.");
       setShowMessage(true);
       
       // Ocultamos el mensaje después de 5 segundos
@@ -90,8 +90,8 @@ export function ContactSection() {
       
       // Mostrar mensaje de error
       setMessageText(language === 'es' 
-        ? "Hubo un problema al enviar tu mensaje. Por favor, intenta nuevamente o escríbenos directamente a auctions@theglobalbid.com."
-        : "There was a problem sending your message. Please try again or email us directly at auctions@theglobalbid.com.");
+        ? "Hubo un problema al enviar tu mensaje. Por favor, intenta nuevamente."
+        : "There was a problem sending your message. Please try again.");
       setShowMessage(true);
       
       // Ocultamos el mensaje después de 5 segundos
