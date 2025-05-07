@@ -148,9 +148,23 @@ export function HeroSection() {
                             
                             <a href="#catalogo" className="flex items-center text-white hover:text-white/80 transition-colors text-xs sm:text-sm group">
                               <div className="w-6 h-6 sm:w-8 sm:h-8 bg-black/40 border border-white/10 rounded-full flex items-center justify-center mr-1 sm:mr-2 group-hover:bg-primary/40 transition-colors">
-                                <i className="fas fa-cubes text-white text-xs"></i>
+                                <i className="fas fa-recycle text-white text-xs"></i>
                               </div>
-                              <span>Chatarra, generadores y más</span>
+                              <span>Chatarra</span>
+                            </a>
+                            
+                            <a href="#catalogo" className="flex items-center text-white hover:text-white/80 transition-colors text-xs sm:text-sm group">
+                              <div className="w-6 h-6 sm:w-8 sm:h-8 bg-black/40 border border-white/10 rounded-full flex items-center justify-center mr-1 sm:mr-2 group-hover:bg-primary/40 transition-colors">
+                                <i className="fas fa-bolt text-white text-xs"></i>
+                              </div>
+                              <span>Generadores</span>
+                            </a>
+                            
+                            <a href="#catalogo" className="flex items-center text-white hover:text-white/80 transition-colors text-xs sm:text-sm group">
+                              <div className="w-6 h-6 sm:w-8 sm:h-8 bg-black/40 border border-white/10 rounded-full flex items-center justify-center mr-1 sm:mr-2 group-hover:bg-primary/40 transition-colors">
+                                <i className="fas fa-ellipsis-h text-white text-xs"></i>
+                              </div>
+                              <span>Y mucho más</span>
                             </a>
                           </div>
                         </div>
