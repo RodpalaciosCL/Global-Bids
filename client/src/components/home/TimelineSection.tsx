@@ -124,22 +124,23 @@ export function TimelineSection() {
           </div>
         </div>
 
-        {/* Mensaje final con el estado actual */}
+        {/* Bloque adicional para separar completamente la fase 4 del estado final */}
+        <div className="h-24 md:h-36"></div>
+        
+        {/* Bloque final con el estado actual */}
         <motion.div 
-          className="text-center mt-32 max-w-3xl mx-auto bg-white p-5 rounded-xl shadow-lg border border-gray-100 relative"
+          className="text-center max-w-3xl mx-auto"
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
           transition={{ duration: 0.7, delay: timelineEvents.length * 0.3 + 0.4 }}
         >
-          {/* Ícono superior */}
-          <div className="absolute -top-8 left-1/2 transform -translate-x-1/2">
-            <div className="w-16 h-16 bg-gradient-to-br from-blue-600 to-blue-800 rounded-full flex items-center justify-center shadow-xl border-4 border-white">
-              <i className="fas fa-check text-white text-lg"></i>
-            </div>
-          </div>
+          {/* Botón principal */}
+          <button className="mb-6 bg-blue-800 text-white px-8 py-3 rounded-full text-lg font-semibold shadow-lg">
+            {language === 'es' ? 'Hoy en Global Bids' : 'Global Bids Today'}
+          </button>
           
-          <div className="pt-8">
-            <h3 className="text-xl font-bold text-blue-600 mb-3">{language === 'es' ? 'Hoy en Global Bids' : 'Global Bids Today'}</h3>
+          {/* Contenido final */}
+          <div className="bg-white p-6 rounded-xl shadow-lg border border-gray-100">
             <p className="text-base text-gray-700 mb-4">
               {language === 'es' 
                 ? 'Conectamos la oferta nacional con la demanda global, a través de nuestra plataforma digital, con presencia en más de 12 países y con una base de cerca de 1 millón de compradores activos.'
