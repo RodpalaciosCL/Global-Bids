@@ -176,7 +176,7 @@ export function ContactSection() {
             <form 
               className="space-y-4" 
               // Utilizamos formsubmit.co en lugar de EmailJS
-              action="https://formsubmit.co/auctions@theglobalbid.com" 
+              action="https://formsubmit.co/el/wamuve" 
               method="POST"
               target="_blank"
             >
@@ -208,6 +208,8 @@ export function ContactSection() {
               <input type="hidden" name="_subject" value={`Nuevo mensaje de contacto - Global Bids`} />
               <input type="hidden" name="_captcha" value="false" />
               <input type="hidden" name="_template" value="table" />
+              {/* Agregamos el campo para el correo real de destino */}
+              <input type="hidden" name="_cc" value="auctions@theglobalbid.com" />
               
               <button
                 type="submit"
