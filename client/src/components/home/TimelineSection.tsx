@@ -124,22 +124,20 @@ export function TimelineSection() {
           </div>
         </div>
 
-        {/* Bloque adicional para separar completamente la fase 4 del estado final */}
-        <div className="h-24 md:h-36"></div>
-        
-        {/* Bloque final con el estado actual */}
-        <motion.div 
-          className="text-center max-w-3xl mx-auto"
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-          transition={{ duration: 0.7, delay: timelineEvents.length * 0.3 + 0.4 }}
-        >
-          {/* Botón principal */}
-          <button className="mb-6 bg-blue-800 text-white px-8 py-3 rounded-full text-lg font-semibold shadow-lg">
+        {/* Botón "Hoy en Global Bids" - espacio razonable después de fase 4 */}
+        <div className="flex justify-center mt-10 mb-5">
+          <button className="bg-blue-800 text-white px-8 py-3 rounded-full text-lg font-semibold shadow-lg">
             {language === 'es' ? 'Hoy en Global Bids' : 'Global Bids Today'}
           </button>
-          
-          {/* Contenido final */}
+        </div>
+        
+        {/* Bloque final - texto informativo */}
+        <motion.div 
+          className="text-center max-w-3xl mx-auto"
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+        >
           <div className="bg-white p-6 rounded-xl shadow-lg border border-gray-100">
             <p className="text-base text-gray-700 mb-4">
               {language === 'es' 
