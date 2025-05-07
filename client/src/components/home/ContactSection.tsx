@@ -73,10 +73,10 @@ export function ContactSection() {
     // Agregamos console.log para debug
     console.log('Enviando con estos parámetros:', templateParams);
     
-    // Enviar el correo con EmailJS - usando IDs directamente
+    // Enviar el correo con EmailJS - usando IDs de la URL directamente
     emailjs.send(
       'service_vn1k23r', // ID del servicio
-      'template_o1soeo0', // ID de la plantilla
+      'template_o1soeo', // ID de la plantilla (sin el 0 final)
       templateParams,
       'qAsFTYM6kobHlsv5e' // ID de usuario (API Key)
     )
