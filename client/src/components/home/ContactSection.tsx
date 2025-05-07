@@ -75,12 +75,12 @@ export function ContactSection() {
     // Agregamos console.log para debug
     console.log('Enviando con estos parámetros:', templateParams);
     
-    // Enviar el correo con EmailJS - usando la plantilla correcta
+    // Enviar el correo con EmailJS - usando las variables de entorno o valores por defecto
     emailjs.send(
-      'service_vn1k23r',
-      'template_rj5tg22',  // ID correcto de la plantilla
+      process.env.EMAILJS_SERVICE_ID || 'service_vn1k23r',
+      process.env.EMAILJS_TEMPLATE_ID || 'template_o1soeo0',  // Template ID correcto
       templateParams,
-      'qAsFTYM6kobHlsv5e'
+      process.env.EMAILJS_USER_ID || 'qAsFTYM6kobHlsv5e'
     )
     .then((response) => {
       console.log('SUCCESS!', response.status, response.text);
