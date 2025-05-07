@@ -11,6 +11,20 @@ export function BrandsSection() {
   const { language } = useLanguage();
   const controls = useAnimation();
   
+  // Función para determinar el tamaño de la imagen del logo según la marca
+  const getLogoClassNames = (brandName: string) => {
+    // Marcas nuevas que necesitan verse más grandes
+    const newBrands = ['John Deere', 'New Holland', 'Hitachi', 'Doosan', 'JCB'];
+    
+    // Si es una marca nueva, aplica clases para logos más grandes
+    if (newBrands.includes(brandName)) {
+      return "max-h-20 max-w-[95%] object-contain";
+    }
+    
+    // Para las marcas originales mantiene el tamaño anterior
+    return "max-h-16 max-w-[85%] object-contain";
+  };
+  
   // Añadimos las nuevas marcas que proporcionaste
   const brands = [
     {
@@ -136,7 +150,7 @@ export function BrandsSection() {
                   <img 
                     src={brand.logo} 
                     alt={`${brand.name} logo`} 
-                    className="max-h-16 max-w-[85%] object-contain"
+                    className={getLogoClassNames(brand.name)}
                   />
                 </div>
               </motion.div>
@@ -157,7 +171,7 @@ export function BrandsSection() {
                   <img 
                     src={brand.logo} 
                     alt={`${brand.name} logo`} 
-                    className="max-h-16 max-w-[85%] object-contain"
+                    className={getLogoClassNames(brand.name)}
                   />
                 </div>
               </motion.div>
