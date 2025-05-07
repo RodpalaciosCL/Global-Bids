@@ -75,6 +75,17 @@ export async function registerRoutes(app: Express): Promise<Server> {
       // Store contact submission
       const contact = await storage.createContact(validatedData);
       
+      // Log the contact information for admin review
+      console.log("😊 NUEVO MENSAJE DE CONTACTO RECIBIDO:");
+      console.log(`De: ${contact.name} (${contact.email})`);
+      console.log(`Asunto: ${contact.subject}`);
+      console.log(`Mensaje: ${contact.message}`);
+      console.log(`👉 Este mensaje debería enviarse a: framirez@theglobalbid.com, ffaundez@theglobalbid.com`);
+      console.log("-----------------------------------");
+      
+      // Simular un pequeño retraso para mejor experiencia de usuario
+      await new Promise(resolve => setTimeout(resolve, 800));
+      
       res.status(201).json({ 
         message: "Contact form submitted successfully", 
         contactId: contact.id 

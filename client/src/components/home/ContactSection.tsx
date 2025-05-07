@@ -44,18 +44,30 @@ export function ContactSection() {
       return apiRequest('POST', '/api/contact', data);
     },
     onSuccess: () => {
+      // Mostrar un toast con el mensaje de éxito
       toast({
         title: t('contact.successTitle'),
         description: t('contact.successMsg'),
+        variant: "default",
+        className: "bg-green-50 border border-green-200 text-green-800",
       });
+      
+      // Mostrar un mensaje adicional en la consola (para propósitos de depuración)
+      console.log("✅ Mensaje de contacto enviado correctamente");
+      
+      // Reiniciar el formulario
       reset();
     },
     onError: (error) => {
+      // Mostrar un toast con el mensaje de error
       toast({
         title: t('contact.errorTitle'),
         description: error.message || t('contact.errorMsg'),
         variant: "destructive"
       });
+      
+      // Mostrar detalles del error en la consola
+      console.error("❌ Error al enviar el mensaje de contacto:", error);
     }
   });
   
