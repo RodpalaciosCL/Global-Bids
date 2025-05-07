@@ -74,9 +74,14 @@ export function ContactSection() {
         setShowMessage(false);
       }, 5000);
       
-      // Limpiamos el formulario
-      const form = e.currentTarget as HTMLFormElement;
-      form.reset();
+      // Limpiamos los campos sin usar reset
+      const formElement = document.querySelector("form") as HTMLFormElement;
+      if (formElement) {
+        const inputs = formElement.querySelectorAll("input, textarea");
+        inputs.forEach((input: HTMLInputElement | HTMLTextAreaElement) => {
+          input.value = "";
+        });
+      }
     }, 1500);
   };
 
