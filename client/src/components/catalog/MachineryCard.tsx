@@ -3,6 +3,7 @@ import { slideUp } from '@/lib/animations';
 import { Machinery, typeLabels, conditionLabels } from '@/types/machinery';
 import { useCurrency } from '@/contexts/CurrencyContext';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { ReactNode } from 'react';
 
 interface MachineryCardProps {
   item: Machinery;
@@ -40,7 +41,7 @@ export function MachineryCard({ item, index }: MachineryCardProps) {
         </div>
         {isSold && (
           <div className="absolute top-3 right-3 bg-red-600 text-white font-bold px-2 py-1 rounded-md text-xs">
-            VENDIDO
+            {language === 'es' ? 'VENDIDO' : 'SOLD'}
           </div>
         )}
       </div>
