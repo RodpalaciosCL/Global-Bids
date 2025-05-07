@@ -50,18 +50,36 @@ export function ContactSection() {
           },
         ];
 
+  // Inicializar EmailJS directamente en el componente
+
   // Manejar el envío del formulario
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
     
-    const formData = new FormData(e.currentTarget);
+    const formElement = e.currentTarget as HTMLFormElement;
+    const formData = new FormData(formElement);
     const name = formData.get('name') as string;
     const email = formData.get('email') as string;
     const message = formData.get('message') as string;
     
-    // Simulamos el envío y mostramos un mensaje de éxito
-    setTimeout(() => {
+    // Preparar los parámetros para EmailJS
+    const templateParams = {
+      from_name: name,
+      reply_to: email,
+      message: message,
+      to_email: 'auctions@theglobalbid.com'
+    };
+    
+    // Enviar el correo con EmailJS
+    emailjs.send(
+      'service_vn1k23r',
+      'template_4wyjuhq',
+      templateParams,
+      'qAsFTYM6kobHlsv5e'
+    )
+    .then((response) => {
+      console.log('SUCCESS!', response.status, response.text);
       setIsSubmitting(false);
       
       // Mostrar mensaje de éxito
@@ -75,8 +93,24 @@ export function ContactSection() {
         setShowMessage(false);
       }, 5000);
       
-      // No necesitamos limpiar los campos manualmente, se hará después del envío real
-    }, 1500);
+      // Limpiar el formulario
+      formElement.reset();
+    })
+    .catch((error) => {
+      console.error('FAILED...', error);
+      setIsSubmitting(false);
+      
+      // Mostrar mensaje de error
+      setMessageText(language === 'es' 
+        ? "Ha ocurrido un error. Por favor, intenta nuevamente o escríbenos directamente a auctions@theglobalbid.com."
+        : "An error occurred. Please try again or email us directly at auctions@theglobalbid.com.");
+      setShowMessage(true);
+      
+      // Ocultamos el mensaje después de 5 segundos
+      setTimeout(() => {
+        setShowMessage(false);
+      }, 5000);
+    });
   };
 
   return (
@@ -194,26 +228,7 @@ export function ContactSection() {
               // action="https://formsubmit.co/auctions@theglobalbid.com" 
               // method="POST"
               // target="_blank"
-              onSubmit={(e) => {
-                // Prevenir el envío del formulario para mostrar nuestra UI primero
-                e.preventDefault();
-                handleSubmit(e);
-                
-                // Mostrar nuestro mensaje de confirmación
-                // pero sin enviar realmente el formulario a FormSubmit
-                // ya que estamos teniendo problemas técnicos
-                
-                // Simplemente vamos a limpiar el formulario después de un tiempo
-                setTimeout(() => {
-                  const form = e.currentTarget as HTMLFormElement;
-                  const inputs = form.querySelectorAll('input, textarea');
-                  inputs.forEach((input) => {
-                    if (input instanceof HTMLInputElement || input instanceof HTMLTextAreaElement) {
-                      input.value = '';
-                    }
-                  });
-                }, 2000);
-              }}
+              onSubmit={handleSubmit}
             >
               <input
                 name="name"
