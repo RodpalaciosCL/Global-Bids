@@ -262,9 +262,9 @@ export function AboutSection() {
           </div>
 
           {/* Línea de Tiempo Vertical */}
-          <div className="max-w-4xl mx-auto relative min-h-[600px]">
-            {/* Línea central */}
-            <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-primary/30 z-0"></div>
+          <div className="max-w-4xl mx-auto relative min-h-[600px] mb-40">
+            {/* Línea central - solo llega hasta el último elemento de la línea de tiempo */}
+            <div className="absolute left-1/2 transform -translate-x-1/2 h-[85%] w-1 bg-primary/30 z-0"></div>
             
             {/* Elementos de la línea de tiempo */}
             {timelineItems.map((item, index) => (
@@ -296,17 +296,14 @@ export function AboutSection() {
               </motion.div>
             ))}
             
-            {/* Punto final y texto "Hoy" */}
-            <div className="relative pb-20">
-              {/* Punto final (circulo con check) */}
-              <div className="absolute bottom-20 left-1/2 transform -translate-x-1/2 w-10 h-10 bg-primary/80 rounded-full border-4 border-white shadow-md z-10 flex items-center justify-center">
+            {/* Punto final con botón "Hoy" */}
+            <div className="absolute bottom-[-20px] left-1/2 transform -translate-x-1/2 z-10">
+              <div className="w-12 h-12 bg-primary/80 rounded-full border-4 border-white shadow-md flex items-center justify-center mb-4">
                 <span className="text-white font-bold">
                   <i className="fas fa-check"></i>
                 </span>
               </div>
-              
-              {/* Indicador "Hoy" */}
-              <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 text-center">
+              <div className="text-center">
                 <span className="inline-block bg-primary text-white px-6 py-2 rounded-full shadow-md font-medium">
                   {language === 'es' ? 'Hoy en Global Bids' : 'Today at Global Bids'}
                 </span>
@@ -314,10 +311,7 @@ export function AboutSection() {
             </div>
             
             {/* Estado actual de Global Bids */}
-            <div className="mt-10 bg-white rounded-xl p-8 shadow-lg border border-gray-100 max-w-3xl mx-auto">
-              <h4 className="text-center text-xl font-bold text-gray-900 mb-4">
-                {language === 'es' ? 'Hoy en Global Bids' : 'Today at Global Bids'}
-              </h4>
+            <div className="absolute bottom-[-160px] left-0 right-0 bg-white rounded-xl p-8 shadow-lg border border-gray-100 max-w-3xl mx-auto">
               <p className="text-center text-gray-600 mb-4">
                 {language === 'es'
                   ? 'Conectamos la oferta nacional con la demanda global, a través de nuestra plataforma digital, con presencia en más de 12 países y con una base de cerca de 1 millón de compradores activos.'
