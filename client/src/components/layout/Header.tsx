@@ -21,9 +21,10 @@ export function Header() {
       const sections = [
         'inicio', 
         'nosotros', 
+        'servicios',
+        'marcas',
         'catalogo',
         'subastas',
-        'servicios', 
         'soporte', 
         'contacto'
       ];
@@ -52,9 +53,10 @@ export function Header() {
   const menuItems = [
     { href: '#inicio', label: t('nav.home'), icon: 'fa-home' },
     { href: '#nosotros', label: t('nav.about'), icon: 'fa-users' },
+    { href: '#servicios', label: t('nav.services'), icon: 'fa-wrench' },
+    { href: '#marcas', label: t('nav.brands'), icon: 'fa-building' },
     { href: '#catalogo', label: t('nav.catalog'), icon: 'fa-th-large' },
     { href: '#subastas', label: t('nav.auctions'), icon: 'fa-gavel' },
-    { href: '#servicios', label: t('nav.services'), icon: 'fa-wrench' },
     { href: '#soporte', label: t('nav.support'), icon: 'fa-headset' },
     { href: '#contacto', label: t('nav.contact'), icon: 'fa-envelope' }
   ];
