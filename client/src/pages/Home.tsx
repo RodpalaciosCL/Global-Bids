@@ -19,8 +19,8 @@ export default function Home() {
       <BrandsSection />
       <CatalogSection />
       <AuctionsIframe />
-      <SoporteSection />
       <ActionCTA />
+      <SoporteSection />
       <ContactSection />
     </>
   );
