@@ -53,16 +53,53 @@ export function ContactSection() {
   // Inicializar EmailJS - no es necesario hacerlo, ya que lo pasamos como 4to parámetro en emailjs.send
 
   // Manejar el envío del formulario
-  // Ya no necesitamos la función handleSubmit porque usaremos FormSubmit
-  // Este código se mantiene comentado para referencia futura
-  /*
+  // Manejar el envío del formulario para mostrar mensaje de confirmación local
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
     
-    // ... Código de envío de correo con EmailJS ...
+    const formElement = e.currentTarget as HTMLFormElement;
+    const formData = new FormData(formElement);
+    
+    // Enviar a FormSubmit usando fetch
+    fetch('https://formsubmit.co/el/wamuve', {
+      method: 'POST',
+      body: formData
+    })
+    .then(response => {
+      console.log('FormSubmit response:', response);
+      setIsSubmitting(false);
+      
+      // Mostrar mensaje de éxito
+      setMessageText(language === 'es' 
+        ? "¡Gracias por contactarnos! Te responderemos pronto. El correo será enviado a auctions@theglobalbid.com."
+        : "Thank you for contacting us! We will respond soon. The email will be sent to auctions@theglobalbid.com.");
+      setShowMessage(true);
+      
+      // Ocultamos el mensaje después de 5 segundos
+      setTimeout(() => {
+        setShowMessage(false);
+      }, 5000);
+      
+      // Limpiar el formulario
+      formElement.reset();
+    })
+    .catch(error => {
+      console.error('Error en FormSubmit:', error);
+      setIsSubmitting(false);
+      
+      // Mostrar mensaje de error
+      setMessageText(language === 'es' 
+        ? "Hubo un problema al enviar tu mensaje. Por favor, intenta nuevamente o escríbenos directamente a auctions@theglobalbid.com."
+        : "There was a problem sending your message. Please try again or email us directly at auctions@theglobalbid.com.");
+      setShowMessage(true);
+      
+      // Ocultamos el mensaje después de 5 segundos
+      setTimeout(() => {
+        setShowMessage(false);
+      }, 5000);
+    });
   };
-  */
 
   return (
     <section
@@ -175,9 +212,7 @@ export function ContactSection() {
           >
             <form 
               className="space-y-4" 
-              // Utilizamos formsubmit.co en lugar de EmailJS
-              action="https://formsubmit.co/el/wamuve" 
-              method="POST"
+              onSubmit={handleSubmit}
             >
               <input
                 name="name"
