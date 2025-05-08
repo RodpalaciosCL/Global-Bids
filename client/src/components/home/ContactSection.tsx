@@ -2,29 +2,27 @@ import { useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { fadeIn, staggerContainer, slideUp } from "@/lib/animations";
 import { useLanguage } from "@/contexts/LanguageContext";
-import emailjs from 'emailjs-com';
 
 export function ContactSection() {
-  const sectionRef = useRef(null);
+  const sectionRef = useRef<HTMLElement>(null);
   const { t, language } = useLanguage();
+
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showMessage, setShowMessage] = useState(false);
   const [messageText, setMessageText] = useState("");
 
+  /* ───────────────────────── Locations ───────────────────────── */
   const locations =
     language === "es"
       ? [
-          {
-            name: "Centro Logístico",
-            address: "La Negra, Antofagasta, Chile",
-          },
+          { name: "Centro Logístico", address: "La Negra, Antofagasta, Chile" },
           {
             name: "Casa Matriz",
-            address: "Luis Carrera 1263 oficina 301, Vitacura, Chile",
+            address: "Luis Carrera 1263 of 301, Vitacura, Chile",
           },
           {
             name: "Centro Operaciones Norte",
-            address: "Sierra Gorda, Antofagasta, Chile",
+            address: "Sierra Gorda, Antofagasta, Chile",
           },
           {
             name: "Oficina Massachusetts",
@@ -32,17 +30,14 @@ export function ContactSection() {
           },
         ]
       : [
-          {
-            name: "Logistics Center",
-            address: "La Negra, Antofagasta, Chile",
-          },
+          { name: "Logistics Center", address: "La Negra, Antofagasta, Chile" },
           {
             name: "Headquarters",
-            address: "Luis Carrera 1263 office 301, Vitacura, Chile",
+            address: "Luis Carrera 1263 office 301, Vitacura, Chile",
           },
           {
-            name: "Northern Operations Center",
-            address: "Sierra Gorda, Antofagasta, Chile",
+            name: "Northern Ops Center",
+            address: "Sierra Gorda, Antofagasta, Chile",
           },
           {
             name: "Massachusetts Office",
@@ -50,175 +45,131 @@ export function ContactSection() {
           },
         ];
 
-  // Inicializar EmailJS - no es necesario hacerlo, ya que lo pasamos como 4to parámetro en emailjs.send
-
-  // Manejar el envío del formulario y mostrar confirmación
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  /* ───────────────────── Submit handler (FIX) ─────────────────── */
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
-    const formElement = e.currentTarget as HTMLFormElement;
-    const formData = new FormData(formElement);
-    
-    // Obtener datos del formulario
-    const name = formData.get('name') as string;
-    const email = formData.get('email') as string;
-    const message = formData.get('message') as string;
-    
-    // Imprimir en consola para propósitos de prueba
-    console.log("Datos del formulario:");
-    console.log("Nombre:", name);
-    console.log("Email:", email);
-    console.log("Mensaje:", message);
-    
-    // Enviar al endpoint del servidor para guardar en BD
-    fetch('/api/contact', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        name,
-        email,
-        subject: "Contacto desde web",
-        message
-      }),
-    })
-    .then(response => {
-      if (!response.ok) {
-        throw new Error('Error en el servidor');
-      }
-      return response.json();
-    })
-    .then(data => {
-      console.log('Contacto guardado en BD:', data);
-      setIsSubmitting(false);
-      
-      // Mostrar mensaje de éxito
-      setMessageText(language === 'es' 
-        ? "¡Gracias por contactarnos! Te responderemos pronto."
-        : "Thank you for contacting us! We will respond soon.");
-      
+
+    const form = e.currentTarget; // ← guarda referencia segura
+    const data = new FormData(form);
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: data.get("name"),
+          email: data.get("email"),
+          phone: data.get("phone"),
+          subject: "Contacto desde web",
+          message: data.get("message"),
+        }),
+      });
+
+      if (!res.ok) throw new Error("Server error");
+
+      setMessageText(
+        language === "es"
+          ? "¡Gracias por contactarnos! Te responderemos pronto."
+          : "Thank you for contacting us! We will respond soon.",
+      );
+    } catch (err) {
+      console.error(err);
+      setMessageText(
+        language === "es"
+          ? "Hubo un problema al enviar tu mensaje. Intenta nuevamente."
+          : "There was a problem sending your message. Please try again.",
+      );
+    } finally {
       setShowMessage(true);
-      
-      // Ocultamos el mensaje después de 10 segundos
-      setTimeout(() => {
-        setShowMessage(false);
-      }, 10000);
-      
-      // Limpiar el formulario
-      formElement.reset();
-    })
-    .catch(error => {
-      console.error('Error enviando contacto:', error);
       setIsSubmitting(false);
-      
-      // Mostrar mensaje de error
-      setMessageText(language === 'es' 
-        ? "Hubo un problema al enviar tu mensaje. Por favor, intenta nuevamente."
-        : "There was a problem sending your message. Please try again.");
-      
-      setShowMessage(true);
-      
-      // Ocultar después de 10 segundos
-      setTimeout(() => {
-        setShowMessage(false);
-      }, 10000);
-    });
+      form.reset(); // ← usa la referencia
+      setTimeout(() => setShowMessage(false), 10000);
+    }
   };
 
+  /* ─────────────────────────── Render ─────────────────────────── */
   return (
     <section
       id="contacto"
-      className="py-16 bg-primary text-white relative"
       ref={sectionRef}
+      className="py-16 bg-primary text-white relative"
     >
-      {/* Mensaje de éxito */}
+      {/* Overlay + modal */}
       {showMessage && (
-        <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 
-                       bg-white text-gray-800 p-6 rounded-lg shadow-xl border-2 border-secondary
-                       w-full max-w-md">
-          <div className="text-center">
-            <div className="flex justify-center mb-4">
-              <div className="bg-secondary rounded-full p-3">
-                <svg className="h-10 w-10 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                </svg>
-              </div>
+        <>
+          <div
+            className="fixed inset-0 bg-black/70 z-40"
+            onClick={() => setShowMessage(false)}
+          ></div>
+          <div className="fixed z-50 inset-0 flex items-center justify-center">
+            <div className="bg-white text-gray-800 w-full max-w-md p-6 rounded-lg shadow-xl">
+              <h3 className="text-2xl font-bold mb-4 text-center">
+                {language === "es" ? "Mensaje enviado" : "Message Sent"}
+              </h3>
+              <p className="mb-6 text-center">{messageText}</p>
+              <button
+                onClick={() => setShowMessage(false)}
+                className="w-full bg-secondary hover:bg-secondary-dark text-primary font-semibold py-3 rounded-lg transition"
+              >
+                {language === "es" ? "Cerrar" : "Close"}
+              </button>
             </div>
-            <h3 className="text-2xl font-bold mb-2">
-              {language === 'es' ? 'Mensaje enviado' : 'Message sent'}
-            </h3>
-            <p className="mb-6">{messageText}</p>
-            <button 
-              onClick={() => setShowMessage(false)}
-              className="w-full bg-secondary hover:bg-secondary-dark text-primary font-semibold px-6 py-3 rounded-lg transition duration-300"
-            >
-              {language === 'es' ? 'Cerrar' : 'Close'}
-            </button>
           </div>
-        </div>
-      )}
-      
-      {/* Overlay oscuro cuando se muestra el mensaje */}
-      {showMessage && (
-        <div 
-          className="fixed inset-0 bg-black bg-opacity-70 z-40"
-          onClick={() => setShowMessage(false)}
-        ></div>
+        </>
       )}
 
       <div className="container mx-auto px-4">
+        {/* Título */}
         <motion.div
-          className="text-center mb-12"
+          variants={fadeIn}
           initial="hidden"
           animate="visible"
-          variants={fadeIn}
+          className="text-center mb-12"
         >
           <h2 className="font-heading text-3xl md:text-4xl font-bold mb-4">
             {t("contact.title")}
           </h2>
-          <div className="w-20 h-1 bg-secondary mx-auto mb-6"></div>
+          <div className="w-20 h-1 bg-secondary mx-auto mb-6" />
           <p className="max-w-3xl mx-auto">{t("contact.subtitle")}</p>
         </motion.div>
 
+        {/* Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-          {/* Locations */}
+          {/* ── Locations ── */}
           <motion.div
+            variants={staggerContainer}
             initial="hidden"
             animate="visible"
-            variants={staggerContainer}
             className="space-y-8"
           >
-            {locations.map((location, index) => (
-              <motion.div
-                key={index}
-                className="flex items-start"
-                variants={slideUp}
-              >
+            {locations.map((loc, i) => (
+              <motion.div key={i} variants={slideUp} className="flex">
                 <div className="text-secondary text-xl mt-1 mr-4">
-                  <i className="fas fa-map-marker-alt"></i>
+                  <i className="fas fa-map-marker-alt" />
                 </div>
                 <div>
-                  <h4 className="font-medium text-lg">{location.name}</h4>
-                  <p className="text-gray-300">{location.address}</p>
+                  <h4 className="font-medium text-lg">{loc.name}</h4>
+                  <p className="text-gray-300">{loc.address}</p>
                 </div>
               </motion.div>
             ))}
 
-            <motion.div className="flex items-start" variants={slideUp}>
+            {/* Teléfono */}
+            <motion.div variants={slideUp} className="flex">
               <div className="text-secondary text-xl mt-1 mr-4">
-                <i className="fas fa-phone-alt"></i>
+                <i className="fas fa-phone-alt" />
               </div>
               <div>
                 <h4 className="font-medium text-lg">{t("contact.phone")}</h4>
-                <p className="text-gray-300">+56 2 2756 9900</p>
+                <p className="text-gray-300">+56 2 2756 9900</p>
               </div>
             </motion.div>
 
-            <motion.div className="flex items-start" variants={slideUp}>
+            {/* Correo */}
+            <motion.div variants={slideUp} className="flex">
               <div className="text-secondary text-xl mt-1 mr-4">
-                <i className="fas fa-envelope"></i>
+                <i className="fas fa-envelope" />
               </div>
               <div>
                 <h4 className="font-medium text-lg">
@@ -229,55 +180,50 @@ export function ContactSection() {
             </motion.div>
           </motion.div>
 
-          {/* Contact Form */}
+          {/* ── Formulario ── */}
           <motion.div
+            variants={slideUp}
             initial="hidden"
             animate="visible"
-            variants={slideUp}
             className="bg-white p-6 rounded-lg shadow-lg text-gray-800"
           >
-            <form 
-              className="space-y-4" 
-              onSubmit={handleSubmit}
-            >
+            <form className="space-y-4" onSubmit={handleSubmit}>
               <input
                 name="name"
                 placeholder={t("contact.name")}
                 required
-                className="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary focus:border-secondary transition"
+                className="w-full p-4 border rounded-lg focus:ring-2 focus:ring-secondary"
               />
-
               <input
                 type="email"
                 name="email"
                 placeholder={t("contact.email")}
                 required
-                className="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary focus:border-secondary transition"
+                className="w-full p-4 border rounded-lg focus:ring-2 focus:ring-secondary"
               />
-
+              <input
+                name="phone"
+                placeholder={t("contact.phone")}
+                className="w-full p-4 border rounded-lg focus:ring-2 focus:ring-secondary"
+              />
               <textarea
                 name="message"
                 rows={5}
                 placeholder={t("contact.message")}
                 required
-                className="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary focus:border-secondary transition"
-              ></textarea>
-
-              {/* Campos ocultos para FormSubmit */}
-              {/* Redirección al mismo sitio pero con un hash para evitar problemas */}
-              <input type="hidden" name="_next" value="https://a6481a0e-1b17-48e5-925f-133729b45681-00-1ypwsu92tle9.worf.replit.dev/#contacto" />
-              <input type="hidden" name="_subject" value={`Nuevo mensaje de contacto - Global Bids`} />
-              <input type="hidden" name="_captcha" value="false" />
-              <input type="hidden" name="_template" value="table" />
-              {/* Agregamos el campo para el correo real de destino */}
-              <input type="hidden" name="_cc" value="auctions@theglobalbid.com" />
-              
+                className="w-full p-4 border rounded-lg focus:ring-2 focus:ring-secondary"
+              />
               <button
                 type="submit"
-                className="w-full bg-secondary hover:bg-secondary-dark text-primary font-semibold px-6 py-4 rounded-lg transition duration-300 flex items-center justify-center"
+                disabled={isSubmitting}
+                className="w-full bg-secondary hover:bg-secondary-dark text-primary font-semibold py-4 rounded-lg transition flex items-center justify-center"
               >
-                <i className="fas fa-paper-plane mr-2"></i>
-                {t("contact.send")}
+                <i className="fas fa-paper-plane mr-2" />
+                {isSubmitting
+                  ? language === "es"
+                    ? "Enviando…"
+                    : "Sending…"
+                  : t("contact.send")}
               </button>
             </form>
           </motion.div>

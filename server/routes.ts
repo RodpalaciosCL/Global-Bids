@@ -3,22 +3,42 @@ import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { z } from "zod";
 import { insertContactSchema, insertRegistrationSchema } from "@shared/schema";
-import { sendEmailWithEmailJS } from "./services/emailjsService";
+
+import nodemailer from "nodemailer";
+import "dotenv/config";
+
+/* ─────────── Nodemailer (Office 365) ─────────── */
+const smtp = nodemailer.createTransport({
+  host: "smtp.office365.com",
+  port: 587,
+  secure: false, // STARTTLS
+  auth: {
+    user: "auctions@theglobalbid.com",
+    pass: process.env.EMAIL_PASS, // ← APP‑PASSWORD
+  },
+  tls: { ciphers: "SSLv3" },
+});
 
 export async function registerRoutes(app: Express): Promise<Server> {
-  // Prefix all API routes with /api
-  
-  // Get all machinery with filters
+  /* Prefix all API routes with /api
+     (en tu index de Express ya montas esto) */
+
+  // ─────────────── MACHINERY ENDPOINTS (igual) ───────────────
   app.get("/api/machinery", async (req, res) => {
     try {
-      const { 
-        search, type, brand, year, 
-        minPrice, maxPrice, condition, 
-        sort = 'price-asc',
-        page = '1',
-        limit = '6'
+      const {
+        search,
+        type,
+        brand,
+        year,
+        minPrice,
+        maxPrice,
+        condition,
+        sort = "price-asc",
+        page = "1",
+        limit = "6",
       } = req.query;
-      
+
       const result = await storage.searchMachinery(
         search as string | undefined,
         type as string | undefined,
@@ -29,18 +49,17 @@ export async function registerRoutes(app: Express): Promise<Server> {
         condition as string | undefined,
         sort as string,
         parseInt(page as string),
-        parseInt(limit as string)
+        parseInt(limit as string),
       );
-      
+
       res.json(result);
     } catch (error) {
       console.error("Error fetching machinery:", error);
       res.status(500).json({ message: "Failed to fetch machinery" });
     }
   });
-  
-  // Get featured machinery
-  app.get("/api/machinery/featured", async (req, res) => {
+
+  app.get("/api/machinery/featured", async (_req, res) => {
     try {
       const featuredMachinery = await storage.getFeaturedMachinery();
       res.json(featuredMachinery);
@@ -49,106 +68,91 @@ export async function registerRoutes(app: Express): Promise<Server> {
       res.status(500).json({ message: "Failed to fetch featured machinery" });
     }
   });
-  
-  // Get machinery by ID
+
   app.get("/api/machinery/:id", async (req, res) => {
     try {
       const id = parseInt(req.params.id);
       const machinery = await storage.getMachinery(id);
-      
+
       if (!machinery) {
         return res.status(404).json({ message: "Machinery not found" });
       }
-      
+
       res.json(machinery);
     } catch (error) {
       console.error("Error fetching machinery:", error);
       res.status(500).json({ message: "Failed to fetch machinery" });
     }
   });
-  
-  // Contact form submission
+
+  // ─────────────── CONTACT FORM ───────────────
   app.post("/api/contact", async (req, res) => {
     try {
-      // Validate request body
+      // 1. Validate body
       const validatedData = insertContactSchema.parse(req.body);
-      
-      // Store contact submission
+
+      // 2. Store in DB
       const contact = await storage.createContact(validatedData);
-      
-      // Log the contact information for admin review
-      console.log("😊 NUEVO MENSAJE DE CONTACTO RECIBIDO:");
-      console.log(`De: ${contact.name} (${contact.email})`);
-      console.log(`Asunto: ${contact.subject}`);
-      console.log(`Mensaje: ${contact.message}`);
-      console.log(`👉 Este mensaje debería enviarse a: auctions@theglobalbid.com`);
-      console.log("-----------------------------------");
-      
-      // Intentar enviar correo electrónico usando EmailJS
-      try {
-        const emailSent = await sendEmailWithEmailJS({
-          name: contact.name,
-          email: contact.email,
-          subject: contact.subject,
-          message: contact.message
-        });
-        
-        if (emailSent) {
-          console.log("✅ Correo enviado exitosamente a auctions@theglobalbid.com");
-        } else {
-          console.log("⚠️ No se pudo enviar el correo a auctions@theglobalbid.com");
-        }
-      } catch (emailError) {
-        console.error("❌ Error al intentar enviar correo:", emailError);
-      }
-      
-      // Simular un pequeño retraso para mejor experiencia de usuario
-      await new Promise(resolve => setTimeout(resolve, 800));
-      
-      res.status(201).json({ 
-        message: "Contact form submitted successfully", 
-        contactId: contact.id 
+
+      // 3. Compose HTML email
+      const htmlBody = `
+        <h2>Nuevo mensaje desde el formulario</h2>
+        <p><strong>Nombre:</strong> ${contact.name}</p>
+        <p><strong>Email:</strong> ${contact.email}</p>
+        <p><strong>Teléfono:</strong> ${contact.phone || "No indicado"}</p>
+        <p><strong>Mensaje:</strong><br>${contact.message}</p>
+      `;
+
+      // 4. Send through Office 365
+      const info = await smtp.sendMail({
+        from: '"Global Bids Web" <auctions@theglobalbid.com>',
+        to: "auctions@theglobalbid.com",
+        subject: `Nuevo contacto – ${contact.subject ?? "Sin asunto"}`,
+        html: htmlBody,
+      });
+
+      console.log(`✅ Correo enviado → ${info.messageId}`);
+
+      // Pequeño delay UX
+      await new Promise((r) => setTimeout(r, 800));
+
+      res.status(201).json({
+        message: "Contact form submitted successfully",
+        contactId: contact.id,
       });
     } catch (error) {
       if (error instanceof z.ZodError) {
-        return res.status(400).json({ 
-          message: "Validation error", 
-          errors: error.errors 
-        });
+        return res
+          .status(400)
+          .json({ message: "Validation error", errors: error.errors });
       }
-      
-      console.error("Error submitting contact form:", error);
+      console.error("❌ Error al enviar contacto:", error);
       res.status(500).json({ message: "Failed to submit contact form" });
     }
   });
-  
-  // Registration form submission
+
+  // ─────────────── REGISTRATION FORM (igual) ───────────────
   app.post("/api/register", async (req, res) => {
     try {
-      // Validate request body
       const validatedData = insertRegistrationSchema.parse(req.body);
-      
-      // Store registration submission
       const registration = await storage.createRegistration(validatedData);
-      
-      res.status(201).json({ 
-        message: "Registration submitted successfully", 
-        registrationId: registration.id 
+
+      res.status(201).json({
+        message: "Registration submitted successfully",
+        registrationId: registration.id,
       });
     } catch (error) {
       if (error instanceof z.ZodError) {
-        return res.status(400).json({ 
-          message: "Validation error", 
-          errors: error.errors 
-        });
+        return res
+          .status(400)
+          .json({ message: "Validation error", errors: error.errors });
       }
-      
       console.error("Error submitting registration form:", error);
       res.status(500).json({ message: "Failed to submit registration form" });
     }
   });
 
+  // ─────────────── HTTP SERVER ───────────────
   const httpServer = createServer(app);
-
   return httpServer;
 }
