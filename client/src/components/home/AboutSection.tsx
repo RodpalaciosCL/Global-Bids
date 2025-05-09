@@ -79,7 +79,7 @@ export function AboutSection() {
   ];
   
   return (
-    <section id="nosotros" className="min-h-screen flex flex-col bg-white relative overflow-hidden py-20" ref={sectionRef}>
+    <section id="nosotros" className="py-16 bg-white relative overflow-hidden" ref={sectionRef}>
       {/* Fondo con gradiente */}
       <div className="absolute inset-0 bg-gradient-to-br from-gray-50 via-white to-gray-50 z-0"></div>
       
@@ -87,9 +87,9 @@ export function AboutSection() {
       <div className="absolute top-[20%] right-[5%] w-[500px] h-[500px] bg-primary/5 rounded-full blur-3xl"></div>
       <div className="absolute bottom-[10%] left-[5%] w-[500px] h-[500px] bg-primary/5 rounded-full blur-3xl"></div>
       
-      <div className="container mx-auto px-4 py-16 relative z-10 flex-grow flex flex-col">
+      <div className="container mx-auto px-4 relative z-10">
         {/* Encabezado de sección con animación */}
-        <div className="text-center mb-12">
+        <div className="text-center mb-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -108,18 +108,16 @@ export function AboutSection() {
           </motion.div>
         </div>
         
-        {/* Se eliminó el botón de Historia */}
-        
-        {/* Contenido principal - Historia de excelencia */}
-        <div className="flex-grow">
+        {/* Contenido principal */}
+        <div className="mt-8">
           <motion.div
-            className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center h-full"
+            className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center"
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5 }}
           >
             {/* Imagen con overlay */}
-            <div className="h-[400px] md:h-[500px] rounded-3xl overflow-hidden shadow-xl relative order-1 lg:order-none">
+            <div className="h-[350px] rounded-3xl overflow-hidden shadow-xl relative order-1 lg:order-none">
               <div className="absolute inset-0 bg-gradient-to-br from-primary/30 to-primary/70 mix-blend-multiply z-10"></div>
               <img 
                 src={historiaContent.image}
@@ -132,8 +130,8 @@ export function AboutSection() {
             </div>
             
             {/* Contenido con íconos visuales */}
-            <div className="space-y-6 p-2">
-              <div className="p-8 md:p-10 bg-white rounded-3xl shadow-lg border border-gray-100">
+            <div className="p-2">
+              <div className="p-6 md:p-8 bg-white rounded-3xl shadow-lg border border-gray-100">
                 {/* Se eliminó el texto introductorio a petición del cliente */}
                 
                 {/* Grid de íconos con conceptos */}
@@ -249,12 +247,12 @@ export function AboutSection() {
         
         {/* CTA final */}
         <motion.div 
-          className="mt-16 md:mt-24 p-8 md:p-10 bg-gradient-to-br from-primary to-primary/80 rounded-3xl shadow-xl text-white"
+          className="mt-12 p-8 md:p-10 bg-gradient-to-br from-primary to-primary/80 rounded-3xl shadow-xl text-white"
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
           transition={{ duration: 0.6, delay: 0.5 }}
         >
-          <div className="text-center mb-8">
+          <div className="text-center mb-6">
             <h3 className="text-2xl md:text-3xl font-bold mb-4">
               {t('about.ctaTitle')}
             </h3>
@@ -263,7 +261,7 @@ export function AboutSection() {
             </p>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-4">
             <div className="bg-white/10 backdrop-blur-sm rounded-xl p-5 text-center">
               <div className="w-12 h-12 mx-auto bg-white/20 rounded-full flex items-center justify-center mb-3">
                 <span className="text-white font-bold text-xl">1</span>
