@@ -13,6 +13,11 @@
     -ms-overflow-style: none;  /* IE and Edge */
     scrollbar-width: none;  /* Firefox */
   }
+  
+  /* Scroll padding for anchor links (offset for header) */
+  html {
+    scroll-padding-top: 6rem; /* Esto ajusta la posición del scroll al hacer clic en los enlaces de anclaje */
+  }
 }
 
 @layer base {
