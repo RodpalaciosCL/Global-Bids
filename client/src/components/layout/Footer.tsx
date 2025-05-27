@@ -24,7 +24,7 @@ export function Footer() {
               <span>&copy; {currentYear} Global Bids</span>
               <span className="hidden sm:inline">|</span>
               <span>
-                Developed by <a href="#" className="text-blue-400 hover:text-white transition-colors">AIrontech</a>
+                Developed by <a href="https://www.airontechs.com" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-white transition-colors">AIrontech</a>
               </span>
             </div>
           </div>
