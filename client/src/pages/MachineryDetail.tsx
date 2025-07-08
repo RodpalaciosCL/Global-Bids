@@ -66,7 +66,7 @@ export default function MachineryDetail() {
                 {/* Equipment Type & Status */}
                 <div className="flex flex-wrap justify-between items-center mb-1">
                   <span className="text-xs text-gray-600 bg-gray-100 px-1.5 py-0.5 rounded">
-                    {language === 'es' ? 'Plataforma Elevadora' : 'Manlift'}
+                    {typeLabels[machinery.type][language]}
                   </span>
                   <span className="text-xs font-medium text-green-600 bg-green-50 px-1.5 py-0.5 rounded">
                     <i className="fas fa-check-circle mr-0.5"></i>

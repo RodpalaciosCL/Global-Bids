@@ -22,6 +22,24 @@ export function CatalogSection() {
   const [filters, setFilters] = useState<MachineryFilters>({});
   const [currentPage, setCurrentPage] = useState(1);
   const [sortOrder, setSortOrder] = useState("price-asc");
+  const [limit] = useState(10);
+
+  // Build query URL with parameters
+  const buildQueryUrl = () => {
+    const params = new URLSearchParams();
+    if (filters.search) params.append('search', filters.search);
+    if (filters.type) params.append('type', filters.type);
+    if (filters.brand) params.append('brand', filters.brand);
+    if (filters.year) params.append('year', filters.year);
+    if (filters.minPrice) params.append('minPrice', filters.minPrice.toString());
+    if (filters.maxPrice) params.append('maxPrice', filters.maxPrice.toString());
+    if (filters.condition) params.append('condition', filters.condition);
+    params.append('sort', sortOrder);
+    params.append('page', currentPage.toString());
+    params.append('limit', limit.toString());
+    
+    return `/api/machinery?${params.toString()}`;
+  };
 
   // Query for machinery with filters
   const {
@@ -29,7 +47,7 @@ export function CatalogSection() {
     isLoading,
     refetch,
   } = useQuery({
-    queryKey: ["/api/machinery", filters, currentPage, sortOrder],
+    queryKey: [buildQueryUrl()],
     staleTime: 300000, // 5 minutes
   });
 
