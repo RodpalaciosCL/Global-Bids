@@ -42,19 +42,19 @@ export default function MachineryDetail() {
       <div className="container mx-auto p-2">
         {/* Breadcrumb Navigation */}
         <div className="flex items-center text-xs mb-1">
-          <Link href="/" className="text-gray-500 hover:text-primary">{t('nav.home')}</Link>
+          <a href="/" className="text-gray-500 hover:text-primary">{t('nav.home')}</a>
           <span className="mx-1 text-gray-400">/</span>
-          <Link href="/marketplace" className="text-gray-500 hover:text-primary">{t('nav.catalog')}</Link>
+          <a href="/#catalogo" className="text-gray-500 hover:text-primary">{t('nav.catalog')}</a>
           <span className="mx-1 text-gray-400">/</span>
           <span className="text-gray-700 truncate">{machinery.name}</span>
         </div>
         
         {/* Back to catalog button */}
         <div className="flex mb-4 mt-2">
-          <Link href="/marketplace" className="text-gray-600 hover:text-primary flex items-center text-sm font-medium">
+          <a href="/#catalogo" className="text-gray-600 hover:text-primary flex items-center text-sm font-medium">
             <i className="fas fa-arrow-left mr-2"></i>
             {language === 'es' ? 'Volver al catálogo' : 'Back to catalog'}
-          </Link>
+          </a>
         </div>
         
         <div className="bg-white rounded-lg shadow-sm overflow-hidden mb-2">
