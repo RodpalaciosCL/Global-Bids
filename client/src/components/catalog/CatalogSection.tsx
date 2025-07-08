@@ -22,7 +22,7 @@ export function CatalogSection() {
   const [filters, setFilters] = useState<MachineryFilters>({});
   const [currentPage, setCurrentPage] = useState(1);
   const [sortOrder, setSortOrder] = useState("price-asc");
-  const [limit] = useState(10);
+  const [limit] = useState(12);
 
   // Build query URL with parameters
   const buildQueryUrl = () => {
