@@ -2,6 +2,36 @@ import { db } from '../server/db';
 import { machinery } from '../shared/schema';
 import * as cheerio from 'cheerio';
 
+// Function to detect how many images each lot has
+async function checkImageExists(url: string): Promise<boolean> {
+  try {
+    const response = await fetch(url, { method: 'HEAD' });
+    return response.ok;
+  } catch {
+    return false;
+  }
+}
+
+async function detectImagesForLot(lotNumber: number): Promise<string[]> {
+  const images: string[] = [];
+  let imageNumber = 1;
+  
+  while (imageNumber <= 20) { // Max 20 images per lot
+    const imageUrl = `https://auctiontechupload.s3.amazonaws.com/216/auction/2187/${lotNumber}_${imageNumber}.jpg`;
+    const exists = await checkImageExists(imageUrl);
+    
+    if (exists) {
+      images.push(imageUrl);
+    } else {
+      break;
+    }
+    
+    imageNumber++;
+  }
+  
+  return images;
+}
+
 // Function to scrape a single lot from NorthCountry
 async function scrapeLot(lotNumber: number) {
   try {
@@ -110,6 +140,17 @@ const knownLots = [
     price: 8500,
     condition: "excellent",
     description: "Located in Colina, Chile. External Dimensions(mm):1800x900x1500, Tire Specifications: Front 3.00-8 Rear 3.00-8, Type Of Fuel: Battery, Preparation Mass (kg): 116, Passenger Rating: 2, Maximum Speed(km/h): 15.5, Steering Form: Handle. Located in Colina, Chile."
+  },
+  {
+    id: 77,
+    name: "2022 Peugeot Landtrek Action 4 Hdi - Lote 077",
+    type: "Truck",
+    brand: "Peugeot",
+    year: 2022,
+    hours: 87220,
+    price: 185000,
+    condition: "good",
+    description: "Located in Viña Del Mar, Chile. Vin# Vf3wdp300n1159, Motor Dv5ru 87220 Km, 1900cc Diesel Powered, 6 Speed Transmission, 4x4, 4 Wheel Disc Brakes, Luxury Interior, Push To Start, Clean Inside And Out. Located in Viña Del Mar, Chile."
   }
 ];
 
@@ -122,16 +163,17 @@ async function scrapeAllLots() {
 
     console.log('📦 Loading known lot data first...');
     
-    // Load known lots
+    // Load known lots with dynamic galleries
     for (const lot of knownLots) {
+      const gallery = await detectImagesForLot(lot.id);
       await db.insert(machinery).values({
         ...lot,
-        image: `https://auctiontechupload.s3.amazonaws.com/216/auction/2187/${lot.id}_1.jpg`,
-        gallery: [`https://auctiontechupload.s3.amazonaws.com/216/auction/2187/${lot.id}_1.jpg`],
+        image: gallery[0] || `https://auctiontechupload.s3.amazonaws.com/216/auction/2187/${lot.id}_1.jpg`,
+        gallery: gallery.length > 0 ? gallery : [`https://auctiontechupload.s3.amazonaws.com/216/auction/2187/${lot.id}_1.jpg`],
         priority: 100 - lot.id,
         auctionDate: new Date('2025-07-15')
       });
-      console.log(`✅ ${lot.name} - $${lot.price.toLocaleString()}`);
+      console.log(`✅ ${lot.name} - $${lot.price.toLocaleString()} (${gallery.length} images)`);
     }
 
     // Fill remaining slots with similar equipment
