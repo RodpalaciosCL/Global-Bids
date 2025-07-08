@@ -1,6 +1,7 @@
 import { Switch, Route } from "wouter";
 import Home from "@/pages/Home";
 import MachineryDetail from "@/pages/MachineryDetail";
+import Marketplace from "@/pages/Marketplace";
 import NotFound from "@/pages/not-found";
 import { BackToTop } from "@/components/ui/BackToTop";
 import { Header } from "@/components/layout/Header";
@@ -16,18 +17,7 @@ function Router() {
     <Switch>
       <Route path="/" component={Home} />
       <Route path="/machinery/:id" component={MachineryDetail} />
-      <Route path="/marketplace/">
-        {() => {
-          window.location.href = '/#catalogo';
-          return null;
-        }}
-      </Route>
-      <Route path="/marketplace">
-        {() => {
-          window.location.href = '/#catalogo';
-          return null;
-        }}
-      </Route>
+      <Route path="/marketplace" component={Marketplace} />
       <Route component={NotFound} />
     </Switch>
   );
