@@ -31,7 +31,7 @@ export function MachineryCard({ item, index }: MachineryCardProps) {
         <img 
           src={image || 'https://images.pexels.com/photos/2760242/pexels-photo-2760242.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'} 
           alt={name} 
-          className="w-full h-48 object-cover" 
+          className="w-full h-64 object-cover" 
           onError={(e) => {
             e.currentTarget.src = 'https://images.pexels.com/photos/2760242/pexels-photo-2760242.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1';
           }}

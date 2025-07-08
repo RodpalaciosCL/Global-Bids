@@ -36,7 +36,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         condition,
         sort = "price-asc",
         page = "1",
-        limit = "6",
+        limit = "10",
       } = req.query;
 
       const result = await storage.searchMachinery(

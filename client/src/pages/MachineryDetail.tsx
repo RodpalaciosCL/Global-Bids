@@ -94,7 +94,7 @@ export default function MachineryDetail() {
                 
                 {/* Main Image Gallery */}
                 <div 
-                  className="w-full h-[340px] border border-gray-200 rounded-lg overflow-hidden mb-1 cursor-pointer" 
+                  className="w-full h-[450px] border border-gray-200 rounded-lg overflow-hidden mb-1 cursor-pointer" 
                   onClick={() => setSelectedImage(selectedImage ? null : machinery.image)}
                 >
                   <img 
