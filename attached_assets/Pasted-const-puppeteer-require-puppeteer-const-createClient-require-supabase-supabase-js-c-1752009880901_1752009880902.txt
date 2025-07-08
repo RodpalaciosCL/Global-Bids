@@ -1,0 +1,75 @@
+const puppeteer = require('puppeteer');
+const { createClient } = require('@supabase/supabase-js');
+const cloudinary = require('cloudinary').v2;
+
+const SUPABASE_URL = process.env.SUPABASE_URL;
+const SUPABASE_KEY = process.env.SUPABASE_KEY;
+const CLOUDINARY_FOLDER = 'remate';
+const AUCTION_URL = 'https://northcountry.auctiontechs.com/auction-detail/174912699568418f53a4cac';
+
+const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
+
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD,
+  api_key: process.env.CLOUDINARY_KEY,
+  api_secret: process.env.CLOUDINARY_SECRET,
+});
+
+(async () => {
+  const browser = await puppeteer.launch({
+    headless: true,
+    args: ['--no-sandbox']
+  });
+
+  const page = await browser.newPage();
+  await page.goto(AUCTION_URL, { waitUntil: 'networkidle2' });
+
+  // Simula scroll para cargar más productos
+  for (let i = 0; i < 10; i++) {
+    await page.evaluate(() => window.scrollBy(0, window.innerHeight));
+    await new Promise(resolve => setTimeout(resolve, 800));
+  }
+
+  const items = await page.$$eval('a[href*="/item-detail/"]', links => {
+    const seen = new Set();
+    return links
+      .map(link => {
+        const href = link.getAttribute('href');
+        const img = link.querySelector('img');
+        const title = link.innerText || '';
+        const image = img?.src || '';
+        const id = href?.split('/item-detail/')[1]?.split('?')[0];
+        if (id && !seen.has(id)) {
+          seen.add(id);
+          return { id, href, title, image };
+        }
+        return null;
+      })
+      .filter(Boolean);
+  });
+
+  console.log(`Found ${items.length} products.`);
+
+  // Limpiar Supabase
+  await supabase.from('marketplace').delete().neq('id', '');
+
+  for (const item of items) {
+    const imageRes = await cloudinary.uploader.upload(item.image, {
+      folder: CLOUDINARY_FOLDER,
+      public_id: item.id,
+    });
+
+    await supabase.from('marketplace').insert({
+      id: item.id,
+      title: item.title.trim(),
+      description: '',
+      image_url: imageRes.secure_url,
+      price: null,
+      origin: 'remate-northcountry',
+    });
+
+    console.log(`Subido: ${item.title}`);
+  }
+
+  await browser.close();
+})();
