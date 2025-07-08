@@ -48,7 +48,8 @@ export function CatalogSection() {
     refetch,
   } = useQuery({
     queryKey: [buildQueryUrl()],
-    staleTime: 300000, // 5 minutes
+    staleTime: 60000,
+    refetchOnWindowFocus: false,
   });
 
   // Define and type the result properly
