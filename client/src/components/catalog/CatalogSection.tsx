@@ -22,9 +22,8 @@ export function CatalogSection() {
 
   const [filters, setFilters] = useState<MachineryFilters>({});
   const [currentPage, setCurrentPage] = useState(1);
-  const [auctionPage, setAuctionPage] = useState(1); // Página de subasta (1 o 2)
   const [sortOrder, setSortOrder] = useState("name-asc");
-  const [limit] = useState(40);
+  const [limit] = useState(25); // 25 lotes por página
 
   const [refreshKey] = useState(Date.now());
 
@@ -39,7 +38,7 @@ export function CatalogSection() {
     params.append('sort', sortOrder);
     params.append('page', currentPage.toString());
     params.append('limit', limit.toString());
-    params.append('auctionPage', auctionPage.toString()); // Filtro por página de subasta
+
     
     return `/api/machinery?${params.toString()}`;
   };
@@ -250,40 +249,7 @@ export function CatalogSection() {
                 
 
                 
-                {/* Auction Page Selector */}
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    {language === 'es' ? 'Página de Subasta' : 'Auction Page'}
-                  </label>
-                  <div className="grid grid-cols-2 gap-2">
-                    <button
-                      className={`px-4 py-2 rounded-lg font-semibold transition ${
-                        auctionPage === 1 
-                          ? 'bg-primary text-white' 
-                          : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
-                      }`}
-                      onClick={() => {
-                        setAuctionPage(1);
-                        setCurrentPage(1);
-                      }}
-                    >
-                      {language === 'es' ? 'Página 1' : 'Page 1'}
-                    </button>
-                    <button
-                      className={`px-4 py-2 rounded-lg font-semibold transition ${
-                        auctionPage === 2 
-                          ? 'bg-primary text-white' 
-                          : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
-                      }`}
-                      onClick={() => {
-                        setAuctionPage(2);
-                        setCurrentPage(1);
-                      }}
-                    >
-                      {language === 'es' ? 'Página 2' : 'Page 2'}
-                    </button>
-                  </div>
-                </div>
+
 
                 {/* Filter button */}
                 <button
@@ -385,40 +351,7 @@ export function CatalogSection() {
 
               </div>
               
-              {/* Auction Page Selector - Desktop */}
-              <div className="mt-4">
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  {language === 'es' ? 'Página de Subasta' : 'Auction Page'}
-                </label>
-                <div className="flex gap-2 mb-4">
-                  <button
-                    className={`px-6 py-2 rounded-lg font-semibold transition ${
-                      auctionPage === 1 
-                        ? 'bg-primary text-white' 
-                        : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
-                    }`}
-                    onClick={() => {
-                      setAuctionPage(1);
-                      setCurrentPage(1);
-                    }}
-                  >
-                    {language === 'es' ? 'Página 1' : 'Page 1'}
-                  </button>
-                  <button
-                    className={`px-6 py-2 rounded-lg font-semibold transition ${
-                      auctionPage === 2 
-                        ? 'bg-primary text-white' 
-                        : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
-                    }`}
-                    onClick={() => {
-                      setAuctionPage(2);
-                      setCurrentPage(1);
-                    }}
-                  >
-                    {language === 'es' ? 'Página 2' : 'Page 2'}
-                  </button>
-                </div>
-              </div>
+
 
               <div className="mt-4 flex justify-end">
                 {/* Filter button */}
@@ -501,7 +434,62 @@ export function CatalogSection() {
             )}
           </motion.div>
 
-          {/* Sin paginación por solicitud del cliente */}
+          {/* Paginación normal con números */}
+          {totalPages > 1 && (
+            <motion.div 
+              className="flex justify-center items-center space-x-2 mt-8"
+              variants={slideUp}
+            >
+              {/* Botón anterior */}
+              <button
+                onClick={() => {
+                  if (currentPage > 1) {
+                    setCurrentPage(currentPage - 1);
+                  }
+                }}
+                disabled={currentPage === 1}
+                className={`px-3 py-2 rounded-lg ${
+                  currentPage === 1
+                    ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
+                    : 'bg-white text-gray-700 hover:bg-gray-50 border border-gray-300'
+                }`}
+              >
+                ‹
+              </button>
+
+              {/* Números de página */}
+              {Array.from({ length: totalPages }, (_, i) => i + 1).map((pageNumber) => (
+                <button
+                  key={pageNumber}
+                  onClick={() => setCurrentPage(pageNumber)}
+                  className={`px-3 py-2 rounded-lg ${
+                    currentPage === pageNumber
+                      ? 'bg-primary text-white'
+                      : 'bg-white text-gray-700 hover:bg-gray-50 border border-gray-300'
+                  }`}
+                >
+                  {pageNumber}
+                </button>
+              ))}
+
+              {/* Botón siguiente */}
+              <button
+                onClick={() => {
+                  if (currentPage < totalPages) {
+                    setCurrentPage(currentPage + 1);
+                  }
+                }}
+                disabled={currentPage === totalPages}
+                className={`px-3 py-2 rounded-lg ${
+                  currentPage === totalPages
+                    ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
+                    : 'bg-white text-gray-700 hover:bg-gray-50 border border-gray-300'
+                }`}
+              >
+                ›
+              </button>
+            </motion.div>
+          )}
         </motion.div>
       </div>
     </section>

@@ -546,7 +546,7 @@ export class DatabaseStorage implements IStorage {
     condition?: string,
     sortBy: string = 'price-asc',
     page: number = 1,
-    limit: number = 6,
+    limit: number = 25,
     auctionPage?: number
   ): Promise<{ items: Machinery[], total: number, totalPages: number }> {
     // Build where conditions

@@ -36,7 +36,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         condition,
         sort = "price-asc",
         page = "1",
-        limit = "10",
+        limit = "25",
         auctionPage = "1", // New: auction page filter
       } = req.query;
 
