@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Link, useLocation } from 'wouter';
+import { useLocation } from 'wouter';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { Button } from '@/components/ui/button';
@@ -79,7 +79,7 @@ export function Header() {
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center">
           {/* Logo & Brand Name */}
-          <Link href="/">
+          <a href="/#inicio">
             <motion.div 
               className="flex items-center cursor-pointer"
               whileHover={{ scale: 1.03 }}
@@ -101,7 +101,7 @@ export function Header() {
                 </div>
               </div>
             </motion.div>
-          </Link>
+          </a>
           
           {/* Mobile menu toggle */}
           <motion.button 

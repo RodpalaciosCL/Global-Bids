@@ -16,7 +16,7 @@
   
   /* Scroll padding for anchor links (offset for header) */
   html {
-    scroll-padding-top: 6rem; /* Esto ajusta la posición del scroll al hacer clic en los enlaces de anclaje */
+    scroll-padding-top: 4rem; /* Esto ajusta la posición del scroll al hacer clic en los enlaces de anclaje */
   }
 }
 
