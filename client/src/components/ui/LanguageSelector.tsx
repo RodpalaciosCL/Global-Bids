@@ -18,9 +18,9 @@ export function LanguageSelector() {
         {language === 'es' && (
           <motion.div 
             className="absolute inset-0 bg-primary rounded-full" 
-            layoutId="langIndicator"
+            layoutId="langIndicatorES"
             initial={false}
-            transition={{ type: 'spring', damping: 20, stiffness: 300 }}
+            transition={{ type: 'spring', damping: 30, stiffness: 400 }}
           />
         )}
         <div className="relative z-10 px-2 sm:px-3 py-1 sm:py-1.5 flex items-center space-x-1">
@@ -44,9 +44,9 @@ export function LanguageSelector() {
         {language === 'en' && (
           <motion.div 
             className="absolute inset-0 bg-primary rounded-full" 
-            layoutId="langIndicator"
+            layoutId="langIndicatorEN"
             initial={false}
-            transition={{ type: 'spring', damping: 20, stiffness: 300 }}
+            transition={{ type: 'spring', damping: 30, stiffness: 400 }}
           />
         )}
         <div className="relative z-10 px-2 sm:px-3 py-1 sm:py-1.5 flex items-center space-x-1">

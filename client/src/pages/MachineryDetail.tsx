@@ -18,10 +18,10 @@ export default function MachineryDetail() {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const { language, t } = useLanguage();
   
-  // Scroll to top on page load
+  // Scroll to top on page load - smooth scroll to prevent jarring movement
   useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [machineryId]);
   
   // Fetch the machinery data
   const { data: machinery, isLoading, isError } = useQuery<Machinery>({
