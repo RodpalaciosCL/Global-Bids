@@ -177,13 +177,9 @@ export function Header() {
                   </div>
                 </div>
                 
-                {/* Mobile hash links */}
+                {/* Mobile hash links - Pure hash links */}
                 <a href="/#inicio" 
-                   onClick={(e) => {
-                     e.preventDefault();
-                     setIsMenuOpen(false);
-                     window.location.href = '/#inicio';
-                   }} 
+                   onClick={() => setIsMenuOpen(false)} 
                    className="px-5 py-4 transition flex items-center w-full text-gray-700 hover:bg-gray-50 border-l-4 border-transparent">
                   <div className="w-8 h-8 rounded-lg flex items-center justify-center mr-3 bg-gray-100 text-gray-500">
                     <i className="fas fa-home"></i>
@@ -195,11 +191,7 @@ export function Header() {
                 </a>
                 
                 <a href="/#nosotros" 
-                   onClick={(e) => {
-                     e.preventDefault();
-                     setIsMenuOpen(false);
-                     window.location.href = '/#nosotros';
-                   }} 
+                   onClick={() => setIsMenuOpen(false)} 
                    className="px-5 py-4 transition flex items-center w-full text-gray-700 hover:bg-gray-50 border-l-4 border-transparent">
                   <div className="w-8 h-8 rounded-lg flex items-center justify-center mr-3 bg-gray-100 text-gray-500">
                     <i className="fas fa-users"></i>
@@ -211,11 +203,7 @@ export function Header() {
                 </a>
                 
                 <a href="/#servicios" 
-                   onClick={(e) => {
-                     e.preventDefault();
-                     setIsMenuOpen(false);
-                     window.location.href = '/#servicios';
-                   }} 
+                   onClick={() => setIsMenuOpen(false)} 
                    className="px-5 py-4 transition flex items-center w-full text-gray-700 hover:bg-gray-50 border-l-4 border-transparent">
                   <div className="w-8 h-8 rounded-lg flex items-center justify-center mr-3 bg-gray-100 text-gray-500">
                     <i className="fas fa-wrench"></i>
@@ -227,11 +215,7 @@ export function Header() {
                 </a>
                 
                 <a href="/#subastas" 
-                   onClick={(e) => {
-                     e.preventDefault();
-                     setIsMenuOpen(false);
-                     window.location.href = '/#subastas';
-                   }} 
+                   onClick={() => setIsMenuOpen(false)} 
                    className="px-5 py-4 transition flex items-center w-full text-gray-700 hover:bg-gray-50 border-l-4 border-transparent">
                   <div className="w-8 h-8 rounded-lg flex items-center justify-center mr-3 bg-gray-100 text-gray-500">
                     <i className="fas fa-gavel"></i>
@@ -243,11 +227,7 @@ export function Header() {
                 </a>
                 
                 <a href="/#soporte" 
-                   onClick={(e) => {
-                     e.preventDefault();
-                     setIsMenuOpen(false);
-                     window.location.href = '/#soporte';
-                   }} 
+                   onClick={() => setIsMenuOpen(false)} 
                    className="px-5 py-4 transition flex items-center w-full text-gray-700 hover:bg-gray-50 border-l-4 border-transparent">
                   <div className="w-8 h-8 rounded-lg flex items-center justify-center mr-3 bg-gray-100 text-gray-500">
                     <i className="fas fa-headset"></i>
@@ -259,11 +239,7 @@ export function Header() {
                 </a>
                 
                 <a href="/#contacto" 
-                   onClick={(e) => {
-                     e.preventDefault();
-                     setIsMenuOpen(false);
-                     window.location.href = '/#contacto';
-                   }} 
+                   onClick={() => setIsMenuOpen(false)} 
                    className="px-5 py-4 transition flex items-center w-full text-gray-700 hover:bg-gray-50 border-l-4 border-transparent">
                   <div className="w-8 h-8 rounded-lg flex items-center justify-center mr-3 bg-gray-100 text-gray-500">
                     <i className="fas fa-envelope"></i>
