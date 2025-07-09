@@ -62,6 +62,28 @@ export function Header() {
     }
   }, [location]);
   
+  const handleNavClick = (href: string) => {
+    if (href.startsWith('/#')) {
+      // For hash links, navigate to home and then scroll
+      const hash = href.substring(1); // Remove the leading /
+      if (window.location.pathname !== '/') {
+        window.location.href = '/' + hash;
+      } else {
+        // Already on home, just scroll
+        const element = document.querySelector(hash);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }
+    } else if (href === '/marketplace') {
+      // For marketplace, use regular navigation
+      window.location.href = href;
+    } else {
+      // For other links, use regular navigation
+      window.location.href = href;
+    }
+  };
+
   const menuItems = [
     { href: '/', label: t('nav.home'), icon: 'fa-home', section: 'inicio' },
     { href: '/#nosotros', label: t('nav.about'), icon: 'fa-users', section: 'nosotros' },
@@ -119,37 +141,20 @@ export function Header() {
           <div className="hidden md:flex items-center space-x-4">
             <nav className="flex items-center">
               {menuItems.map((item) => (
-                item.href.startsWith('/marketplace') ? (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    className={`relative px-4 py-2 mx-1 font-medium transition-all duration-300 flex items-center justify-center whitespace-nowrap ${
-                      activeSection === item.section 
-                        ? 'bg-white text-primary rounded-md' 
-                        : 'text-white hover:bg-white/10 rounded-md'
-                    }`}
-                  >
-                    <i className={`fas ${item.icon} mr-2 ${
-                      activeSection === item.section ? 'text-primary' : 'text-white/80'
-                    }`}></i>
-                    <span>{item.label}</span>
-                  </Link>
-                ) : (
-                  <a 
-                    key={item.href}
-                    href={item.href} 
-                    className={`relative px-4 py-2 mx-1 font-medium transition-all duration-300 flex items-center justify-center whitespace-nowrap ${
-                      activeSection === item.section 
-                        ? 'bg-white text-primary rounded-md' 
-                        : 'text-white hover:bg-white/10 rounded-md'
-                    }`}
-                  >
-                    <i className={`fas ${item.icon} mr-2 ${
-                      activeSection === item.section ? 'text-primary' : 'text-white/80'
-                    }`}></i>
-                    <span>{item.label}</span>
-                  </a>
-                )
+                <button
+                  key={item.href}
+                  onClick={() => handleNavClick(item.href)}
+                  className={`relative px-4 py-2 mx-1 font-medium transition-all duration-300 flex items-center justify-center whitespace-nowrap ${
+                    activeSection === item.section 
+                      ? 'bg-white text-primary rounded-md' 
+                      : 'text-white hover:bg-white/10 rounded-md'
+                  }`}
+                >
+                  <i className={`fas ${item.icon} mr-2 ${
+                    activeSection === item.section ? 'text-primary' : 'text-white/80'
+                  }`}></i>
+                  <span>{item.label}</span>
+                </button>
               ))}
             </nav>
             
@@ -178,48 +183,18 @@ export function Header() {
                 </div>
                 
                 {menuItems.map((item) => (
-                  item.href.startsWith('/marketplace') ? (
-                    <Link
-                      key={item.href}
-                      href={item.href}
-                      className={`px-5 py-4 transition flex items-center ${
-                        activeSection === item.section
-                          ? 'bg-primary/10 text-primary font-medium border-l-4 border-primary'
-                          : 'text-gray-700 hover:bg-gray-50 border-l-4 border-transparent'
-                      }`}
-                      onClick={() => setIsMenuOpen(false)}
-                    >
-                      <div className={`w-8 h-8 rounded-lg flex items-center justify-center mr-3 ${
-                        activeSection === item.section 
-                        ? 'bg-primary/10 text-primary' 
-                        : 'bg-gray-100 text-gray-500'
-                      }`}>
-                        <i className={`fas ${item.icon}`}></i>
-                      </div>
-                      <div>
-                        <div className="font-medium">{item.label}</div>
-                        <div className="text-xs text-gray-500">
-                          {item.section === 'inicio' ? t('nav.homeDesc') : 
-                           item.section === 'nosotros' ? t('nav.aboutDesc') :
-                           item.section === 'catalogo' ? t('nav.catalogDesc') :
-                           item.section === 'subastas' ? t('nav.auctionsDesc') :
-                           item.section === 'servicios' ? t('nav.servicesDesc') :
-                           item.section === 'soporte' ? t('nav.supportDesc') :
-                           item.section === 'contacto' ? t('nav.contactDesc') : ''}
-                        </div>
-                      </div>
-                    </Link>
-                  ) : (
-                    <a 
-                      key={item.href}
-                      href={item.href} 
-                      className={`px-5 py-4 transition flex items-center ${
-                        activeSection === item.section
-                          ? 'bg-primary/10 text-primary font-medium border-l-4 border-primary'
-                          : 'text-gray-700 hover:bg-gray-50 border-l-4 border-transparent'
-                      }`}
-                      onClick={() => setIsMenuOpen(false)}
-                    >
+                  <button
+                    key={item.href}
+                    onClick={() => {
+                      handleNavClick(item.href);
+                      setIsMenuOpen(false);
+                    }}
+                    className={`px-5 py-4 transition flex items-center w-full text-left ${
+                      activeSection === item.section
+                        ? 'bg-primary/10 text-primary font-medium border-l-4 border-primary'
+                        : 'text-gray-700 hover:bg-gray-50 border-l-4 border-transparent'
+                    }`}
+                  >
                     <div className={`w-8 h-8 rounded-lg flex items-center justify-center mr-3 ${
                       activeSection === item.section 
                       ? 'bg-primary/10 text-primary' 
@@ -227,20 +202,19 @@ export function Header() {
                     }`}>
                       <i className={`fas ${item.icon}`}></i>
                     </div>
-                      <div>
-                        <div className="font-medium">{item.label}</div>
-                        <div className="text-xs text-gray-500">
-                          {item.section === 'inicio' ? t('nav.homeDesc') : 
-                           item.section === 'nosotros' ? t('nav.aboutDesc') :
-                           item.section === 'catalogo' ? t('nav.catalogDesc') :
-                           item.section === 'subastas' ? t('nav.auctionsDesc') :
-                           item.section === 'servicios' ? t('nav.servicesDesc') :
-                           item.section === 'soporte' ? t('nav.supportDesc') :
-                           item.section === 'contacto' ? t('nav.contactDesc') : ''}
-                        </div>
+                    <div>
+                      <div className="font-medium">{item.label}</div>
+                      <div className="text-xs text-gray-500">
+                        {item.section === 'inicio' ? t('nav.homeDesc') : 
+                         item.section === 'nosotros' ? t('nav.aboutDesc') :
+                         item.section === 'catalogo' ? t('nav.catalogDesc') :
+                         item.section === 'subastas' ? t('nav.auctionsDesc') :
+                         item.section === 'servicios' ? t('nav.servicesDesc') :
+                         item.section === 'soporte' ? t('nav.supportDesc') :
+                         item.section === 'contacto' ? t('nav.contactDesc') : ''}
                       </div>
-                    </a>
-                  )
+                    </div>
+                  </button>
                 ))}
                 
                 <div className="px-5 py-4 flex justify-between items-center bg-gray-50 mt-2">

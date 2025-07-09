@@ -88,9 +88,9 @@ export function AuctionsIframe() {
           </motion.p>
         </div>
         
-        {/* Grid de 3 columnas: 2 botones + 1 registro */}
+        {/* Grid de 3 columnas centrado perfectamente */}
         <motion.div 
-          className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-6"
+          className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch"
           variants={fadeIn}
           initial="hidden"
           whileInView="visible"
@@ -99,19 +99,19 @@ export function AuctionsIframe() {
         >
           {/* Botón Subastas Nacionales */}
           <motion.div
-            className="group relative overflow-hidden bg-gradient-to-br from-primary to-primary-dark rounded-2xl p-6 shadow-2xl hover:shadow-3xl transition-all duration-300 transform hover:-translate-y-1"
+            className="group relative overflow-hidden bg-gradient-to-br from-primary to-primary-dark rounded-2xl p-6 shadow-2xl hover:shadow-3xl transition-all duration-300 transform hover:-translate-y-1 h-full flex flex-col"
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
           >
             <div className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-            <div className="relative z-10 text-center">
+            <div className="relative z-10 text-center flex flex-col h-full">
               <div className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-white/30 transition-colors duration-300">
                 <i className="fas fa-flag text-lg text-white"></i>
               </div>
               <h3 className="text-xl font-bold text-white mb-3">
                 {language === 'es' ? 'Subastas Nacionales' : 'National Auctions'}
               </h3>
-              <p className="text-white/90 mb-4 text-xs leading-relaxed">
+              <p className="text-white/90 mb-4 text-xs leading-relaxed flex-grow">
                 {language === 'es' 
                   ? 'Participa en subastas de maquinaria pesada en Chile y América Latina'
                   : 'Participate in heavy machinery auctions in Chile and Latin America'
@@ -121,7 +121,7 @@ export function AuctionsIframe() {
                 onClick={() => {
                   console.log('Subastas Nacionales clicked');
                 }}
-                className="w-full bg-white text-primary font-bold py-2.5 px-4 rounded-lg hover:bg-gray-100 transition-colors duration-300 flex items-center justify-center group-hover:shadow-lg text-sm"
+                className="w-full bg-white text-primary font-bold py-2.5 px-4 rounded-lg hover:bg-gray-100 transition-colors duration-300 flex items-center justify-center group-hover:shadow-lg text-sm mt-auto"
               >
                 <i className="fas fa-gavel mr-2"></i>
                 {language === 'es' ? 'Ver Subastas' : 'View Auctions'}
@@ -132,19 +132,19 @@ export function AuctionsIframe() {
 
           {/* Botón Subastas Internacionales */}
           <motion.div
-            className="group relative overflow-hidden bg-gradient-to-br from-primary to-primary-dark rounded-2xl p-6 shadow-2xl hover:shadow-3xl transition-all duration-300 transform hover:-translate-y-1"
+            className="group relative overflow-hidden bg-gradient-to-br from-primary to-primary-dark rounded-2xl p-6 shadow-2xl hover:shadow-3xl transition-all duration-300 transform hover:-translate-y-1 h-full flex flex-col"
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
           >
             <div className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-            <div className="relative z-10 text-center">
+            <div className="relative z-10 text-center flex flex-col h-full">
               <div className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-white/30 transition-colors duration-300">
                 <i className="fas fa-globe text-lg text-white"></i>
               </div>
               <h3 className="text-xl font-bold text-white mb-3">
                 {language === 'es' ? 'Subastas Internacionales' : 'International Auctions'}
               </h3>
-              <p className="text-white/90 mb-4 text-xs leading-relaxed">
+              <p className="text-white/90 mb-4 text-xs leading-relaxed flex-grow">
                 {language === 'es' 
                   ? 'Accede a subastas globales de equipos especializados y maquinaria internacional'
                   : 'Access global auctions for specialized equipment and international machinery'
@@ -154,7 +154,7 @@ export function AuctionsIframe() {
                 onClick={() => {
                   console.log('Subastas Internacionales clicked');
                 }}
-                className="w-full bg-white text-primary font-bold py-2.5 px-4 rounded-lg hover:bg-gray-100 transition-colors duration-300 flex items-center justify-center group-hover:shadow-lg text-sm"
+                className="w-full bg-white text-primary font-bold py-2.5 px-4 rounded-lg hover:bg-gray-100 transition-colors duration-300 flex items-center justify-center group-hover:shadow-lg text-sm mt-auto"
               >
                 <i className="fas fa-globe-americas mr-2"></i>
                 {language === 'es' ? 'Ver Subastas' : 'View Auctions'}
@@ -165,7 +165,7 @@ export function AuctionsIframe() {
 
           {/* Sección de Registro */}
           <motion.div
-            className="bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/20 text-center"
+            className="bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/20 text-center h-full flex flex-col"
             variants={fadeIn}
             initial="hidden"
             whileInView="visible"
@@ -178,7 +178,7 @@ export function AuctionsIframe() {
             <h3 className="text-xl font-bold text-white mb-3">
               {language === 'es' ? '¿Listo para participar?' : 'Ready to participate?'}
             </h3>
-            <p className="text-gray-300 mb-4 text-xs leading-relaxed">
+            <p className="text-gray-300 mb-4 text-xs leading-relaxed flex-grow">
               {language === 'es' 
                 ? 'Accede a nuestra plataforma de remates en vivo para pujar por la maquinaria que necesitas a precios competitivos'
                 : 'Access our live auction platform to bid on the machinery you need at competitive prices'
@@ -186,7 +186,7 @@ export function AuctionsIframe() {
             </p>
             <button 
               onClick={openForm}
-              className="w-full bg-black hover:bg-gray-800 text-white font-bold py-2.5 px-4 rounded-lg transition-colors duration-300 flex items-center justify-center text-sm"
+              className="w-full bg-black hover:bg-gray-800 text-white font-bold py-2.5 px-4 rounded-lg transition-colors duration-300 flex items-center justify-center text-sm mt-auto"
             >
               <i className="fas fa-sign-in-alt mr-2"></i>
               {language === 'es' ? 'Regístrate Gratis' : 'Register Free'}
