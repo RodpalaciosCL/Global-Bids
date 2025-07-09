@@ -19,9 +19,14 @@
     scroll-padding-top: var(--header-height, 5rem);
   }
   
-  /* Padding top para secciones */
-  section[id] {
+  /* Padding top solo para secciones que no son inicio */
+  section[id]:not(#inicio) {
     padding-top: 3rem;
+  }
+  
+  /* Inicio sin padding extra */
+  section#inicio {
+    padding-top: 0;
   }
 }
 
