@@ -64,12 +64,12 @@ export function Header() {
   
   const menuItems = [
     { href: '/', label: t('nav.home'), icon: 'fa-home', section: 'inicio' },
-    { href: '#nosotros', label: t('nav.about'), icon: 'fa-users', section: 'nosotros' },
-    { href: '#servicios', label: t('nav.services'), icon: 'fa-wrench', section: 'servicios' },
+    { href: '/#nosotros', label: t('nav.about'), icon: 'fa-users', section: 'nosotros' },
+    { href: '/#servicios', label: t('nav.services'), icon: 'fa-wrench', section: 'servicios' },
     { href: '/marketplace', label: t('nav.catalog'), icon: 'fa-th-large', section: 'catalogo' },
-    { href: '#subastas', label: t('nav.auctions'), icon: 'fa-gavel', section: 'subastas' },
-    { href: '#soporte', label: t('nav.support'), icon: 'fa-headset', section: 'soporte' },
-    { href: '#contacto', label: t('nav.contact'), icon: 'fa-envelope', section: 'contacto' }
+    { href: '/#subastas', label: t('nav.auctions'), icon: 'fa-gavel', section: 'subastas' },
+    { href: '/#soporte', label: t('nav.support'), icon: 'fa-headset', section: 'soporte' },
+    { href: '/#contacto', label: t('nav.contact'), icon: 'fa-envelope', section: 'contacto' }
   ];
   
   return (
