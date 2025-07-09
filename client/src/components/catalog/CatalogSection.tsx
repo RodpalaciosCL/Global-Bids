@@ -16,6 +16,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 
 export function CatalogSection() {
   const sectionRef = useRef(null);
+  const catalogStartRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(sectionRef, { once: true, amount: 0.1 });
   const { t, language } = useLanguage();
   const queryClient = useQueryClient();
@@ -26,6 +27,16 @@ export function CatalogSection() {
   const [limit] = useState(40); // 40 lotes por página
 
   const [refreshKey] = useState(Date.now());
+
+  // Scroll to top of catalog when page changes
+  useEffect(() => {
+    if (catalogStartRef.current) {
+      catalogStartRef.current.scrollIntoView({ 
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }
+  }, [currentPage]);
 
   // Build query URL with parameters (removed price filters)
   const buildQueryUrl = () => {
@@ -365,8 +376,9 @@ export function CatalogSection() {
             </div>
           </motion.div>
 
-          {/* Results info */}
+          {/* Results info - Scroll anchor point */}
           <motion.div
+            ref={catalogStartRef}
             className="flex flex-col md:flex-row justify-between items-center mb-6"
             variants={slideUp}
           >
