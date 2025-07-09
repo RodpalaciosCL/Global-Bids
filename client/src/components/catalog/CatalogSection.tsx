@@ -169,7 +169,7 @@ export function CatalogSection() {
   }
 
   return (
-    <section id="catalogo" className="py-20 bg-accent" ref={sectionRef}>
+    <section id="marketplace" className="py-20 bg-accent" ref={sectionRef}>
       <div className="container mx-auto px-4">
         <motion.div
           className="text-center mb-12"
