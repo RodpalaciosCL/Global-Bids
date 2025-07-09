@@ -63,25 +63,8 @@ export function Header() {
   }, [location]);
   
   const handleNavClick = (href: string) => {
-    if (href.startsWith('/#')) {
-      // For hash links, navigate to home and then scroll
-      const hash = href.substring(1); // Remove the leading /
-      if (window.location.pathname !== '/') {
-        window.location.href = '/' + hash;
-      } else {
-        // Already on home, just scroll
-        const element = document.querySelector(hash);
-        if (element) {
-          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-      }
-    } else if (href === '/marketplace') {
-      // For marketplace, use regular navigation
-      window.location.href = href;
-    } else {
-      // For other links, use regular navigation
-      window.location.href = href;
-    }
+    // Simple navigation - just go to the URL
+    window.location.href = href;
   };
 
   const menuItems = [
