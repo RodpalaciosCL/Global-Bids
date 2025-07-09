@@ -122,8 +122,18 @@ function extractSpecsFromDescription(description: string, name: string) {
   // PRECISE CLASSIFICATION - Title has priority
   const titleWords = name.toLowerCase();
   
+  // Spanish titles FIRST (highest priority)
+  if (titleWords.includes('camión tolva')) {
+    specs.correctType = 'camion-tolva';
+  }
+  else if (titleWords.includes('camión')) {
+    specs.correctType = 'camion';
+  }
+  else if (titleWords.includes('tractor') && !titleWords.includes('camión')) {
+    specs.correctType = 'tractor'; // Real tractors like John Deere
+  }
   // Excavators - HIGHEST PRIORITY  
-  if (titleWords.includes('excavator')) {
+  else if (titleWords.includes('excavator')) {
     specs.correctType = 'excavadora';
   }
   // Concrete Mixer Trucks
@@ -138,12 +148,9 @@ function extractSpecsFromDescription(description: string, name: string) {
   else if (titleWords.includes('crawler dumper') || titleWords.includes('crawler dump')) {
     specs.correctType = 'tolva';
   }
-  // Tractors - multiple types
+  // English truck types - multiple types
   else if (titleWords.includes('sleeper tractor')) {
     specs.correctType = 'camion'; // These are trucks, not tractors
-  }
-  else if (titleWords.includes('tractor') && !titleWords.includes('dump')) {
-    specs.correctType = 'camion'; // Most "tractors" in images are actually trucks
   }
   // Vehicles
   else if (titleWords.includes('cherokee') || titleWords.includes('explorer') || 

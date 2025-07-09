@@ -17,6 +17,17 @@ function getCorrectType(name: string, description: string): string {
   
   // ABSOLUTE PRIORITY: Title keywords are FINAL authority
   
+  // Spanish titles FIRST (highest priority)
+  if (titleWords.includes('camión tolva')) {
+    return 'camion-tolva';
+  }
+  if (titleWords.includes('camión')) {
+    return 'camion';
+  }
+  if (titleWords.includes('tractor') && !titleWords.includes('camión')) {
+    return 'tractor'; // Real tractors like John Deere
+  }
+  
   // Excavators - HIGHEST PRIORITY  
   if (titleWords.includes('excavator')) {
     return 'excavadora';
@@ -37,12 +48,9 @@ function getCorrectType(name: string, description: string): string {
     return 'tolva';
   }
   
-  // Tractors - must be explicit and different types
+  // English truck types - must be explicit and different types
   if (titleWords.includes('sleeper tractor')) {
     return 'camion'; // These are trucks, not tractors
-  }
-  if (titleWords.includes('tractor') && !titleWords.includes('dump')) {
-    return 'camion'; // Most "tractors" in images are actually trucks
   }
   
   // Vehicles - Cherokee, Explorer, etc.
