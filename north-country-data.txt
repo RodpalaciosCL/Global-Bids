@@ -1,139 +1,133 @@
-// Pega aquí todo el contenido que encontraste del sitio North Country
-// Incluye la API endpoint, datos JSON, o cualquier información relevante que necesite para obtener los datos auténticos
-
-gpt dice esto:
-
-
-e propongo una solución “SPA-pura” que unifica todo en React y evita recargas en blanco, saltos raros, duplicados de “Marketplace” y problemas con el header fijo. Consiste en:
-
-Usar siempre <Link> de Wouter (o React Router) para TODOS los menús, incluidos los hash (/#subastas, /#servicios…).
-
-Añadir un hook global que, al cambiar de ruta, detecte el hash y haga scroll manualmente (con offset para el header).
-
-Quitar por completo los <a href> y recargas de página.
-
-1) Define tus rutas de menú en dos arrays limpios
-tsx
-Copiar
-Editar
-// src/components/layout/Header.tsx
-import { Link, useLocation } from "wouter";
-
-const hashRoutes = [
-  { href: "/#inicio", label: t("nav.home"), icon: "fa-home", id: "inicio" },
-  { href: "/#nosotros", label: t("nav.about"), icon: "fa-users", id: "nosotros" },
-  { href: "/#servicios", label: t("nav.services"), icon: "fa-wrench", id: "servicios" },
-  { href: "/#subastas", label: t("nav.auctions"), icon: "fa-gavel", id: "subastas" },
-];
-
-const spaRoutes = [
-  { href: "/marketplace", label: t("nav.catalog"), icon: "fa-th-large" },
-  { href: "/soporte",   label: t("nav.support"), icon: "fa-headset" },
-  { href: "/contacto",  label: t("nav.contact"), icon: "fa-envelope" },
-];
-
-// Luego los pintas en orden:
-<nav className="flex items-center space-x-4">
-  {hashRoutes.map(item => (
-    <Link key={item.href} href={item.href}>
-      <button className="px-4 py-2 hover:bg-white/10 rounded-md flex items-center">
-        <i className={`fas ${item.icon} mr-2`}/>
-        {item.label}
-      </button>
-    </Link>
-  ))}
-  {spaRoutes.map(item => (
-    <Link key={item.href} href={item.href}>
-      <button className="px-4 py-2 hover:bg-white/10 rounded-md flex items-center">
-        <i className={`fas ${item.icon} mr-2`}/>
-        {item.label}
-      </button>
-    </Link>
-  ))}
-</nav>
-Punto crítico: No pongas /marketplace dentro de los hashRoutes ni nada duplicado. Así evitas confusiones y rutas malinterpretadas.
-
-2) Hook global para scroll al hash
-Agrega este componente justo dentro de tu <App> o Layout principal:
+1. Asegurar tu enrutador
+En src/App.tsx envuelve todo en un <Router> de Wouter y declara dos rutas claras:
 
 tsx
 Copiar
 Editar
-// src/components/ScrollToHash.tsx
-import { useEffect } from "react";
-import { useLocation } from "wouter";
+import { Router, Route } from 'wouter';
+import Home from './pages/Home';
+import Marketplace from './pages/Marketplace';
 
-export function ScrollToHash() {
-  const [location] = useLocation();
-  useEffect(() => {
-    const hash = window.location.hash;
-    if (!hash) return;
-    // Dale tiempo a que React pinte la sección
-    setTimeout(() => {
-      const id = hash.replace("#", "");
-      const el = document.getElementById(id);
-      if (el) {
-        // offset para header fijo de 80px (ajusta a tu altura)
-        const y = el.getBoundingClientRect().top + window.pageYOffset - 80;
-        window.scrollTo({ top: y, behavior: "smooth" });
-      }
-    }, 50);
-  }, [location]);
-  return null;
+export default function App() {
+  return (
+    <Router>
+      <Route path="/marketplace" component={Marketplace} />
+      <Route path="/" component={Home} />
+    </Router>
+  );
 }
-E insértalo en el árbol de componentes:
+De este modo / siempre carga Home y /marketplace el catálogo.
+
+2. Darle IDs directos a cada sección del Home
+En src/pages/Home.tsx (y en cada sección de la página):
 
 tsx
 Copiar
 Editar
-// src/App.tsx
-import { ScrollToHash } from "@/components/ScrollToHash";
-
-function App() {
+export default function Home() {
   return (
     <>
-      <Header />
-      <ScrollToHash />
-      <Routes>
-        <Route path="/" component={Home} />
-        <Route path="/marketplace" component={Marketplace} />
-        {/* ... */}
-      </Routes>
+      <header id="inicio">…</header>
+      <section id="nosotros">…</section>
+      <section id="servicios">…</section>
+      <section id="subastas">…</section>
+      …
     </>
   );
 }
-3) Asegúrate de que cada sección tenga su id
-En tu Home.tsx y secciones:
+Esto le dice al navegador exactamente dónde hacer scroll cuando vaya a /​#subastas, etc.
+
+3. Simplificar el Header: enlaces HTML para hashes, Link para SPA
+En src/components/layout/Header.tsx reemplaza toda la lógica extraña por dos listados:
+
+Enlaces “hash” (recarga de página + scroll automático del navegador)
+
+Enlaces SPA (Wouter Link → /marketplace)
 
 tsx
 Copiar
 Editar
-// Home.tsx
-export function Home() {
+import { Link } from 'wouter';
+
+export function Header() {
+  const linksHash = [
+    { href: '/#inicio', label: 'Inicio',    icon: 'fa-home' },
+    { href: '/#nosotros', label: 'Nosotros', icon: 'fa-users' },
+    { href: '/#servicios', label: 'Servicios', icon: 'fa-wrench' },
+    { href: '/#subastas', label: 'Subastas',  icon: 'fa-gavel' },
+    { href: '/#soporte', label: 'Soporte',   icon: 'fa-headset' },
+    { href: '/#contacto', label: 'Contacto', icon: 'fa-envelope' },
+  ];
+
+  const linksSPA = [
+    { href: '/marketplace', label: 'Marketplace', icon: 'fa-th-large' },
+  ];
+
   return (
-    <main>
-      <section id="inicio">…</section>
-      <section id="nosotros"><AboutSection/></section>
-      <section id="servicios"><ServicesSection/></section>
-      <section id="subastas"><AuctionsIframe/></section>
-      {/* … */}
-    </main>
+    <nav className="flex items-center space-x-4">
+      {/* Hash links: recarga + scroll */}
+      {linksHash.map((i) => (
+        <a
+          key={i.href}
+          href={i.href}
+          className="text-white hover:bg-white/10 px-3 py-2 rounded-md flex items-center"
+        >
+          <i className={`fas ${i.icon} mr-1`}></i>
+          {i.label}
+        </a>
+      ))}
+
+      {/* SPA links: sin recarga */}
+      {linksSPA.map((i) => (
+        <Link
+          key={i.href}
+          href={i.href}
+          className="text-white hover:bg-white/10 px-3 py-2 rounded-md flex items-center"
+        >
+          <i className={`fas ${i.icon} mr-1`}></i>
+          {i.label}
+        </Link>
+      ))}
+    </nav>
   );
 }
-Eso es todo. Con esto:
+Los <a href="/#foo"> dejan al navegador saltar y hacer scroll sin código extra.
 
-“Marketplace” ya no pertenece a los hash, es una ruta SPA con <Link>.
+Los <Link href="/marketplace"> usan Wouter para no recargar al entrar al catálogo.
 
-“Subastas”, “Servicios”… usan SPA + hash, sin recarga total, y el hook gestiona el scroll con offset.
+4. Quitar TODO JavaScript de “scroll”
+Busca y elimina cualquier useEffect u listener que intente “detectar hash y hacer scroll” en tu Home o en tu Header. Con los IDs y los <a> basta: el navegador salta automáticamente.
 
-No hay más doble lógica, no hay mezcla de <a> vs <Link> fuera de lugar, y tu menú será predictible y suave.
+5. Probar paso a paso
+Desde /marketplace→ clic en “Subastas”
 
-Prueba ahora:
+Debería recargar a /​#subastas y posicionarte en esa sección sin volver al inicio.
 
-Click en Subastas desde cualquier ruta → URL / con #subastas y scroll suave
+Desde cualquier /#servicios o /#nosotros → clic en “Marketplace”
 
-Click en Marketplace → sin recarga en blanco, cambia a /marketplace
+Debería ir a /marketplace sin recarga extra de header ni scroll raro.
 
-Click en Inicio → scroll al top de Home
+Desde Home → clic en “Subastas” o “Nosotros”
 
-Avísame si con esto ya todo se comporta al 100%.
+Sin paso intermedio, saltas directo a la sección correcta.
+
+Si después de esto sigue sin funcionar, revisa en DevTools la URL y el ID de destino: si coinciden, el navegador está habilitado para hacerlo.
+
+Con esto eliminas cualquier lógica extra y dejas que el navegador haga su trabajo de manera “HTML básica”. Copia y pega al ingeniero de Replit; no hay nada más allá de un par de rutas y enlaces estándar. ¡Avísame si te queda alguna duda!
+
+
+
+
+
+
+
+
+Fuentes
+
+Preguntar a ChatGPT
+
+
+
+Herramientas
+
+
