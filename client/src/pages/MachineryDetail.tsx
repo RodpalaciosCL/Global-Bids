@@ -4,7 +4,7 @@ import { useRoute, Link } from 'wouter';
 import { fadeIn, slideUp, staggerContainer } from '@/lib/animations';
 import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
-import { Machinery, typeLabels, conditionLabels } from '@/types/machinery';
+import { Machinery } from '@shared/schema';
 import { useEffect, useState } from 'react';
 import { apiRequest } from '@/lib/queryClient';
 import { ImageGallery } from '@/components/machinery/ImageGallery';
@@ -66,7 +66,7 @@ export default function MachineryDetail() {
                 {/* Equipment Type & Status */}
                 <div className="flex flex-wrap justify-between items-center mb-1">
                   <span className="text-xs text-gray-600 bg-gray-100 px-1.5 py-0.5 rounded">
-                    {typeLabels[machinery.type][language]}
+                    {machinery.type}
                   </span>
                   <span className="text-xs font-medium text-green-600 bg-green-50 px-1.5 py-0.5 rounded">
                     <i className="fas fa-check-circle mr-0.5"></i>
