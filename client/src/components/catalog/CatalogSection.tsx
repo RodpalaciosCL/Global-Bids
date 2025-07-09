@@ -477,7 +477,7 @@ export function CatalogSection() {
                 </div>
               ))
             ) : machinery.length > 0 ? (
-              machinery.slice(0, 6).map((item: Machinery, index: number) => (
+              machinery.map((item: Machinery, index: number) => (
                 <MachineryCardCompact key={item.id} item={item} index={index} />
               ))
             ) : (
