@@ -89,16 +89,16 @@ export function CatalogSection() {
     refetch();
   };
 
-  // Handle page change with scroll to marketplace top
+  // Handle page change with instant scroll to marketplace top
   const handlePageChange = (newPage: number) => {
+    // Instant scroll to avoid any visual flash or bounce
+    const marketplaceSection = document.getElementById('marketplace');
+    if (marketplaceSection) {
+      // Instant scroll without animation
+      marketplaceSection.scrollIntoView({ behavior: 'instant', block: 'start' });
+    }
+    // Then change page
     setCurrentPage(newPage);
-    // Scroll to marketplace section top smoothly
-    setTimeout(() => {
-      const marketplaceSection = document.getElementById('marketplace');
-      if (marketplaceSection) {
-        marketplaceSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
-    }, 100);
   };
 
   // Handle input change for search only (removed price filters)
