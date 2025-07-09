@@ -155,7 +155,6 @@ export function Header() {
 
           {/* Right Side: Language Selector - More space from center */}
           <div className="hidden md:flex items-center ml-6">
-            <div className="text-white/30 mr-4">|</div>
             <LanguageSelector />
           </div>
         </div>
