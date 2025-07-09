@@ -116,66 +116,30 @@ export function Header() {
           {/* Desktop Menu */}
           <div className="hidden md:flex items-center space-x-4">
             <nav className="flex items-center">
-              {/* Hash routes usando enlaces normales */}
-              {hashRoutes.map(item => (
-                <a
-                  key={item.href}
-                  href={item.href}
-                  className={`relative px-4 py-2 mx-1 font-medium transition-all duration-300 flex items-center justify-center whitespace-nowrap ${
-                    activeSection === item.id 
-                      ? 'bg-white text-primary rounded-md' 
-                      : 'text-white hover:bg-white/10 rounded-md'
-                  }`}
-                >
-                  <i className={`fas ${item.icon} mr-2 ${
-                    activeSection === item.id ? 'text-primary' : 'text-white/80'
-                  }`}></i>
-                  <span>{item.label}</span>
-                </a>
-              ))}
-              
-              {/* Marketplace mantiene como Link independiente */}
-              <Link href="/marketplace">
-                <button className={`relative px-4 py-2 mx-1 font-medium transition-all duration-300 flex items-center justify-center whitespace-nowrap ${
-                  location === '/marketplace' 
-                    ? 'bg-white text-primary rounded-md' 
-                    : 'text-white hover:bg-white/10 rounded-md'
-                }`}>
-                  <i className={`fas fa-th-large mr-2 ${
-                    location === '/marketplace' ? 'text-primary' : 'text-white/80'
-                  }`}></i>
-                  <span>{t('nav.catalog')}</span>
-                </button>
+              {/* Hash links */}
+              <a href="/#inicio" className="text-white hover:bg-white/10 px-3 py-2 rounded-md flex items-center">
+                <i className="fas fa-home mr-1"></i>{t('nav.home')}
+              </a>
+              <a href="/#nosotros" className="text-white hover:bg-white/10 px-3 py-2 rounded-md flex items-center">
+                <i className="fas fa-users mr-1"></i>{t('nav.about')}
+              </a>
+              <a href="/#servicios" className="text-white hover:bg-white/10 px-3 py-2 rounded-md flex items-center">
+                <i className="fas fa-wrench mr-1"></i>{t('nav.services')}
+              </a>
+              <a href="/#subastas" className="text-white hover:bg-white/10 px-3 py-2 rounded-md flex items-center">
+                <i className="fas fa-gavel mr-1"></i>{t('nav.auctions')}
+              </a>
+              <a href="/#soporte" className="text-white hover:bg-white/10 px-3 py-2 rounded-md flex items-center">
+                <i className="fas fa-headset mr-1"></i>{t('nav.support')}
+              </a>
+              <a href="/#contacto" className="text-white hover:bg-white/10 px-3 py-2 rounded-md flex items-center">
+                <i className="fas fa-envelope mr-1"></i>{t('nav.contact')}
+              </a>
+
+              {/* SPA link */}
+              <Link href="/marketplace" className="text-white hover:bg-white/10 px-3 py-2 rounded-md flex items-center">
+                <i className="fas fa-th-large mr-1"></i>{t('nav.catalog')}
               </Link>
-              
-              {/* Resto de hash routes - forzar navegación a home */}
-              <a
-                href="/#soporte"
-                className={`relative px-4 py-2 mx-1 font-medium transition-all duration-300 flex items-center justify-center whitespace-nowrap ${
-                  activeSection === 'soporte' 
-                    ? 'bg-white text-primary rounded-md' 
-                    : 'text-white hover:bg-white/10 rounded-md'
-                }`}
-              >
-                <i className={`fas fa-headset mr-2 ${
-                  activeSection === 'soporte' ? 'text-primary' : 'text-white/80'
-                }`}></i>
-                <span>{t('nav.support')}</span>
-              </a>
-              
-              <a
-                href="/#contacto"
-                className={`relative px-4 py-2 mx-1 font-medium transition-all duration-300 flex items-center justify-center whitespace-nowrap ${
-                  activeSection === 'contacto' 
-                    ? 'bg-white text-primary rounded-md' 
-                    : 'text-white hover:bg-white/10 rounded-md'
-                }`}
-              >
-                <i className={`fas fa-envelope mr-2 ${
-                  activeSection === 'contacto' ? 'text-primary' : 'text-white/80'
-                }`}></i>
-                <span>{t('nav.contact')}</span>
-              </a>
             </nav>
             
             <div className="pl-2 border-l border-white/20">
@@ -202,76 +166,49 @@ export function Header() {
                   </div>
                 </div>
                 
-                {/* Hash routes for mobile usando enlaces normales */}
-                {hashRoutes.map(item => (
-                  <a
-                    key={item.href}
-                    href={item.href}
-                    onClick={() => setIsMenuOpen(false)}
-                    className={`px-5 py-4 transition flex items-center w-full ${
-                      activeSection === item.id
-                        ? 'bg-primary/10 text-primary font-medium border-l-4 border-primary'
-                        : 'text-gray-700 hover:bg-gray-50 border-l-4 border-transparent'
-                    }`}
-                  >
-                    <div className={`w-8 h-8 rounded-lg flex items-center justify-center mr-3 ${
-                      activeSection === item.id 
-                      ? 'bg-primary/10 text-primary' 
-                      : 'bg-gray-100 text-gray-500'
-                    }`}>
-                      <i className={`fas ${item.icon}`}></i>
-                    </div>
-                    <div>
-                      <div className="font-medium">{item.label}</div>
-                      <div className="text-xs text-gray-500">
-                        {item.id === 'inicio' ? t('nav.homeDesc') : 
-                         item.id === 'nosotros' ? t('nav.aboutDesc') :
-                         item.id === 'servicios' ? t('nav.servicesDesc') :
-                         item.id === 'subastas' ? t('nav.auctionsDesc') : ''}
-                      </div>
-                    </div>
-                  </a>
-                ))}
+                {/* Mobile hash links */}
+                <a href="/#inicio" onClick={() => setIsMenuOpen(false)} className="px-5 py-4 transition flex items-center w-full text-gray-700 hover:bg-gray-50 border-l-4 border-transparent">
+                  <div className="w-8 h-8 rounded-lg flex items-center justify-center mr-3 bg-gray-100 text-gray-500">
+                    <i className="fas fa-home"></i>
+                  </div>
+                  <div>
+                    <div className="font-medium">{t('nav.home')}</div>
+                    <div className="text-xs text-gray-500">{t('nav.homeDesc')}</div>
+                  </div>
+                </a>
                 
-                {/* Solo Marketplace usa Link */}
-                <Link href="/marketplace">
-                  <button
-                    onClick={() => setIsMenuOpen(false)}
-                    className={`px-5 py-4 transition flex items-center w-full ${
-                      activeSection === 'catalogo'
-                        ? 'bg-primary/10 text-primary font-medium border-l-4 border-primary'
-                        : 'text-gray-700 hover:bg-gray-50 border-l-4 border-transparent'
-                    }`}
-                  >
-                    <div className={`w-8 h-8 rounded-lg flex items-center justify-center mr-3 ${
-                      activeSection === 'catalogo'
-                      ? 'bg-primary/10 text-primary' 
-                      : 'bg-gray-100 text-gray-500'
-                    }`}>
-                      <i className="fas fa-th-large"></i>
-                    </div>
-                    <div>
-                      <div className="font-medium">{t('nav.catalog')}</div>
-                      <div className="text-xs text-gray-500">{t('nav.catalogDesc')}</div>
-                    </div>
-                  </button>
-                </Link>
+                <a href="/#nosotros" onClick={() => setIsMenuOpen(false)} className="px-5 py-4 transition flex items-center w-full text-gray-700 hover:bg-gray-50 border-l-4 border-transparent">
+                  <div className="w-8 h-8 rounded-lg flex items-center justify-center mr-3 bg-gray-100 text-gray-500">
+                    <i className="fas fa-users"></i>
+                  </div>
+                  <div>
+                    <div className="font-medium">{t('nav.about')}</div>
+                    <div className="text-xs text-gray-500">{t('nav.aboutDesc')}</div>
+                  </div>
+                </a>
                 
-                {/* Resto de hash routes */}
-                <a
-                  href="/#soporte"
-                  onClick={() => setIsMenuOpen(false)}
-                  className={`px-5 py-4 transition flex items-center w-full ${
-                    activeSection === 'soporte'
-                      ? 'bg-primary/10 text-primary font-medium border-l-4 border-primary'
-                      : 'text-gray-700 hover:bg-gray-50 border-l-4 border-transparent'
-                  }`}
-                >
-                  <div className={`w-8 h-8 rounded-lg flex items-center justify-center mr-3 ${
-                    activeSection === 'soporte'
-                    ? 'bg-primary/10 text-primary' 
-                    : 'bg-gray-100 text-gray-500'
-                  }`}>
+                <a href="/#servicios" onClick={() => setIsMenuOpen(false)} className="px-5 py-4 transition flex items-center w-full text-gray-700 hover:bg-gray-50 border-l-4 border-transparent">
+                  <div className="w-8 h-8 rounded-lg flex items-center justify-center mr-3 bg-gray-100 text-gray-500">
+                    <i className="fas fa-wrench"></i>
+                  </div>
+                  <div>
+                    <div className="font-medium">{t('nav.services')}</div>
+                    <div className="text-xs text-gray-500">{t('nav.servicesDesc')}</div>
+                  </div>
+                </a>
+                
+                <a href="/#subastas" onClick={() => setIsMenuOpen(false)} className="px-5 py-4 transition flex items-center w-full text-gray-700 hover:bg-gray-50 border-l-4 border-transparent">
+                  <div className="w-8 h-8 rounded-lg flex items-center justify-center mr-3 bg-gray-100 text-gray-500">
+                    <i className="fas fa-gavel"></i>
+                  </div>
+                  <div>
+                    <div className="font-medium">{t('nav.auctions')}</div>
+                    <div className="text-xs text-gray-500">{t('nav.auctionsDesc')}</div>
+                  </div>
+                </a>
+                
+                <a href="/#soporte" onClick={() => setIsMenuOpen(false)} className="px-5 py-4 transition flex items-center w-full text-gray-700 hover:bg-gray-50 border-l-4 border-transparent">
+                  <div className="w-8 h-8 rounded-lg flex items-center justify-center mr-3 bg-gray-100 text-gray-500">
                     <i className="fas fa-headset"></i>
                   </div>
                   <div>
@@ -280,20 +217,8 @@ export function Header() {
                   </div>
                 </a>
                 
-                <a
-                  href="/#contacto"
-                  onClick={() => setIsMenuOpen(false)}
-                  className={`px-5 py-4 transition flex items-center w-full ${
-                    activeSection === 'contacto'
-                      ? 'bg-primary/10 text-primary font-medium border-l-4 border-primary'
-                      : 'text-gray-700 hover:bg-gray-50 border-l-4 border-transparent'
-                  }`}
-                >
-                  <div className={`w-8 h-8 rounded-lg flex items-center justify-center mr-3 ${
-                    activeSection === 'contacto'
-                    ? 'bg-primary/10 text-primary' 
-                    : 'bg-gray-100 text-gray-500'
-                  }`}>
+                <a href="/#contacto" onClick={() => setIsMenuOpen(false)} className="px-5 py-4 transition flex items-center w-full text-gray-700 hover:bg-gray-50 border-l-4 border-transparent">
+                  <div className="w-8 h-8 rounded-lg flex items-center justify-center mr-3 bg-gray-100 text-gray-500">
                     <i className="fas fa-envelope"></i>
                   </div>
                   <div>
@@ -301,6 +226,19 @@ export function Header() {
                     <div className="text-xs text-gray-500">{t('nav.contactDesc')}</div>
                   </div>
                 </a>
+
+                {/* SPA link for mobile */}
+                <Link href="/marketplace">
+                  <button onClick={() => setIsMenuOpen(false)} className="px-5 py-4 transition flex items-center w-full text-gray-700 hover:bg-gray-50 border-l-4 border-transparent">
+                    <div className="w-8 h-8 rounded-lg flex items-center justify-center mr-3 bg-gray-100 text-gray-500">
+                      <i className="fas fa-th-large"></i>
+                    </div>
+                    <div>
+                      <div className="font-medium">{t('nav.catalog')}</div>
+                      <div className="text-xs text-gray-500">{t('nav.catalogDesc')}</div>
+                    </div>
+                  </button>
+                </Link>
                 
                 <div className="px-5 py-4 flex justify-between items-center bg-gray-50 mt-2">
                   <div className="text-sm text-gray-500">{t('nav.language')}:</div>

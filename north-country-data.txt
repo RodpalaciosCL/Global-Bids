@@ -1,25 +1,27 @@
-1. Asegurar tu enrutador
-En src/App.tsx envuelve todo en un <Router> de Wouter y declara dos rutas claras:
+Asunto: Corrección definitiva de navegación hash en React + Wouter
+
+1. App.tsx – Router limpio
 
 tsx
 Copiar
 Editar
 import { Router, Route } from 'wouter';
+import Header from './components/layout/Header';
 import Home from './pages/Home';
 import Marketplace from './pages/Marketplace';
 
 export default function App() {
   return (
     <Router>
+      <Header />
       <Route path="/marketplace" component={Marketplace} />
       <Route path="/" component={Home} />
     </Router>
   );
 }
-De este modo / siempre carga Home y /marketplace el catálogo.
+Así garantizas que / cargue siempre Home y /marketplace siempre Marketplace.
 
-2. Darle IDs directos a cada sección del Home
-En src/pages/Home.tsx (y en cada sección de la página):
+2. Home.tsx – IDs exactos y offset para header fijo
 
 tsx
 Copiar
@@ -27,22 +29,26 @@ Editar
 export default function Home() {
   return (
     <>
-      <header id="inicio">…</header>
-      <section id="nosotros">…</section>
-      <section id="servicios">…</section>
-      <section id="subastas">…</section>
-      …
+      <section id="inicio"   className="scroll-mt-20">…</section>
+      <section id="nosotros" className="scroll-mt-20">…</section>
+      <section id="servicios"className="scroll-mt-20">…</section>
+      <section id="subastas" className="scroll-mt-20">…</section>
+      <section id="soporte"  className="scroll-mt-20">…</section>
+      <section id="contacto" className="scroll-mt-20">…</section>
     </>
   );
 }
-Esto le dice al navegador exactamente dónde hacer scroll cuando vaya a /​#subastas, etc.
+scroll-mt-20 (Tailwind) o scroll-margin-top en CSS compensa la altura del header fijo.
 
-3. Simplificar el Header: enlaces HTML para hashes, Link para SPA
-En src/components/layout/Header.tsx reemplaza toda la lógica extraña por dos listados:
+Añade en tu CSS global:
 
-Enlaces “hash” (recarga de página + scroll automático del navegador)
-
-Enlaces SPA (Wouter Link → /marketplace)
+css
+Copiar
+Editar
+html {
+  scroll-behavior: smooth;
+}
+3. Header.tsx – sólo <a> para hashes, <Link> para SPA
 
 tsx
 Copiar
@@ -50,70 +56,58 @@ Editar
 import { Link } from 'wouter';
 
 export function Header() {
-  const linksHash = [
-    { href: '/#inicio', label: 'Inicio',    icon: 'fa-home' },
-    { href: '/#nosotros', label: 'Nosotros', icon: 'fa-users' },
-    { href: '/#servicios', label: 'Servicios', icon: 'fa-wrench' },
-    { href: '/#subastas', label: 'Subastas',  icon: 'fa-gavel' },
-    { href: '/#soporte', label: 'Soporte',   icon: 'fa-headset' },
-    { href: '/#contacto', label: 'Contacto', icon: 'fa-envelope' },
-  ];
-
-  const linksSPA = [
-    { href: '/marketplace', label: 'Marketplace', icon: 'fa-th-large' },
+  const hashLinks = [
+    ['/#inicio',   'Inicio',    'fa-home'],
+    ['/#nosotros','Nosotros', 'fa-users'],
+    ['/#servicios','Servicios','fa-wrench'],
+    ['/#subastas', 'Subastas',  'fa-gavel'],
+    ['/#soporte',  'Soporte',   'fa-headset'],
+    ['/#contacto','Contacto',  'fa-envelope'],
   ];
 
   return (
     <nav className="flex items-center space-x-4">
-      {/* Hash links: recarga + scroll */}
-      {linksHash.map((i) => (
-        <a
-          key={i.href}
-          href={i.href}
-          className="text-white hover:bg-white/10 px-3 py-2 rounded-md flex items-center"
+      {hashLinks.map(([href, label, icon]) => (
+        <a key={href}
+           href={href}
+           className="text-white hover:bg-white/10 px-3 py-2 rounded-md flex items-center"
         >
-          <i className={`fas ${i.icon} mr-1`}></i>
-          {i.label}
+          <i className={`fas ${icon} mr-1`} />{label}
         </a>
       ))}
 
-      {/* SPA links: sin recarga */}
-      {linksSPA.map((i) => (
-        <Link
-          key={i.href}
-          href={i.href}
-          className="text-white hover:bg-white/10 px-3 py-2 rounded-md flex items-center"
-        >
-          <i className={`fas ${i.icon} mr-1`}></i>
-          {i.label}
-        </Link>
-      ))}
+      <Link href="/marketplace"
+            className="text-white hover:bg-white/10 px-3 py-2 rounded-md flex items-center"
+      >
+        <i className="fas fa-th-large mr-1" />Marketplace
+      </Link>
     </nav>
   );
 }
-Los <a href="/#foo"> dejan al navegador saltar y hacer scroll sin código extra.
+No uses onClick, preventDefault(), ni window.location para hashes.
 
-Los <Link href="/marketplace"> usan Wouter para no recargar al entrar al catálogo.
+El navegador recarga (o navega) y hace scroll automático a #subastas, etc.
 
-4. Quitar TODO JavaScript de “scroll”
-Busca y elimina cualquier useEffect u listener que intente “detectar hash y hacer scroll” en tu Home o en tu Header. Con los IDs y los <a> basta: el navegador salta automáticamente.
+4. Elimina cualquier código extra de “scroll”
+Borra todo useEffect o listener que intente capturar window.location.hash y desplazar manualmente. Con los enlaces y los IDs basta.
 
-5. Probar paso a paso
-Desde /marketplace→ clic en “Subastas”
+5. Pruebas finales
 
-Debería recargar a /​#subastas y posicionarte en esa sección sin volver al inicio.
+Desde /marketplace → clic en “Subastas” → la URL pasa a /#subastas y scroll al bloque correspondiente.
 
-Desde cualquier /#servicios o /#nosotros → clic en “Marketplace”
+Desde cualquier sección de Home → clic en “Marketplace” → navega a /marketplace sin salto extraño.
 
-Debería ir a /marketplace sin recarga extra de header ni scroll raro.
+Desde Home → clic en “Servicios” → scroll suave a #servicios, cubierto por scroll-margin-top.
 
-Desde Home → clic en “Subastas” o “Nosotros”
+Si tras esto sigue fallando, comprueba en DevTools que:
 
-Sin paso intermedio, saltas directo a la sección correcta.
+El <a> apunta a la ruta correcta (/#subastas).
 
-Si después de esto sigue sin funcionar, revisa en DevTools la URL y el ID de destino: si coinciden, el navegador está habilitado para hacerlo.
+El elemento destino tiene exactamente id="subastas".
 
-Con esto eliminas cualquier lógica extra y dejas que el navegador haga su trabajo de manera “HTML básica”. Copia y pega al ingeniero de Replit; no hay nada más allá de un par de rutas y enlaces estándar. ¡Avísame si te queda alguna duda!
+No hay otro CSS que oculte o desplace el ancla.
+
+Con estos 5 pasos eliminas toda lógica superflua y dejas al navegador manejar hash y rutas SPA de forma nativa.
 
 
 
@@ -125,9 +119,3 @@ Con esto eliminas cualquier lógica extra y dejas que el navegador haga su traba
 Fuentes
 
 Preguntar a ChatGPT
-
-
-
-Herramientas
-
-
