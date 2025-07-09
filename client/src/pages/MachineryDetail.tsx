@@ -173,7 +173,7 @@ export default function MachineryDetail() {
         {/* Back to catalog button */}
         <div className="flex mb-4 mt-2">
           <button 
-            onClick={() => window.location.hash = '#marketplace'}
+            onClick={() => window.location.href = '/#marketplace'}
             className="text-gray-600 hover:text-primary flex items-center text-sm font-medium"
           >
             <i className="fas fa-arrow-left mr-2"></i>
