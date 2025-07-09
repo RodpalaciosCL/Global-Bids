@@ -67,10 +67,22 @@ export function MachineryCardCompact({ item, index }: MachineryCardCompactProps)
           </div>
         </div>
         
-        {/* Description (truncated) */}
-        <p className="text-sm text-gray-700 line-clamp-3 mb-3">
-          {description}
-        </p>
+        {/* Key specifications */}
+        <div className="text-sm text-gray-700 mb-3">
+          <div className="flex items-center gap-2 mb-1">
+            <i className="fas fa-map-marker-alt text-gray-400"></i>
+            <span>{description.includes('Located in') ? 
+              description.split('Located in ')[1].split('.')[0] : 
+              'Chile'}</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <i className="fas fa-info-circle text-gray-400"></i>
+            <span className="line-clamp-2">
+              {description.split(' - ')[1]?.split('.')[0] || 
+               'Authentic auction item from International Global Bids And Prelco Auctions'}
+            </span>
+          </div>
+        </div>
         
         {/* Actions */}
         <div className="flex justify-end items-center">

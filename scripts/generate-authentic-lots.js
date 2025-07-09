@@ -119,7 +119,7 @@ const lots = generateLots();
 // Generate SQL statements
 const sqlStatements = lots.map(lot => {
   const galleryStr = lot.gallery.map(url => `"${url}"`).join(',');
-  return `INSERT INTO machinery (id, name, type, brand, year, hours, kilometers, price, condition, description, image, gallery, "auctionDate", priority, page, "createdAt") VALUES (${lot.id}, '${lot.name.replace(/'/g, "''")}', '${lot.type}', '${lot.brand}', ${lot.year}, ${lot.hours}, null, ${lot.price}, '${lot.condition}', '${lot.description.replace(/'/g, "''")}', '${lot.image}', '{${galleryStr}}', null, null, ${lot.page}, '${lot.createdAt}') ON CONFLICT (id) DO UPDATE SET name = EXCLUDED.name, type = EXCLUDED.type, brand = EXCLUDED.brand, year = EXCLUDED.year, hours = EXCLUDED.hours, condition = EXCLUDED.condition, description = EXCLUDED.description, image = EXCLUDED.image, gallery = EXCLUDED.gallery, page = EXCLUDED.page;`;
+  return `INSERT INTO machinery (id, name, type, brand, year, hours, kilometers, price, condition, description, image, gallery, auction_date, priority, page, created_at) VALUES (${lot.id}, '${lot.name.replace(/'/g, "''")}', '${lot.type}', '${lot.brand}', ${lot.year}, ${lot.hours}, null, ${lot.price}, '${lot.condition}', '${lot.description.replace(/'/g, "''")}', '${lot.image}', '{${galleryStr}}', null, null, ${lot.page}, '${lot.createdAt}') ON CONFLICT (id) DO UPDATE SET name = EXCLUDED.name, type = EXCLUDED.type, brand = EXCLUDED.brand, year = EXCLUDED.year, hours = EXCLUDED.hours, condition = EXCLUDED.condition, description = EXCLUDED.description, image = EXCLUDED.image, gallery = EXCLUDED.gallery, page = EXCLUDED.page;`;
 });
 
 console.log('-- Clear existing machinery data');

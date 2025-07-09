@@ -313,9 +313,47 @@ export default function MachineryDetail() {
                 
                 {activeTab === 'description' && (
                   <div className="p-2">
-                    <p className="text-sm text-gray-700 leading-relaxed">
-                      {machinery.description}
-                    </p>
+                    <div className="space-y-3">
+                      {/* Location */}
+                      {machinery.description.includes('Located in') && (
+                        <div className="flex items-start gap-2">
+                          <i className="fas fa-map-marker-alt text-primary mt-1"></i>
+                          <div>
+                            <p className="font-medium text-gray-900">Ubicación</p>
+                            <p className="text-sm text-gray-600">
+                              {machinery.description.split('Located in ')[1].split('.')[0]}
+                            </p>
+                          </div>
+                        </div>
+                      )}
+                      
+                      {/* Equipment Details */}
+                      <div className="flex items-start gap-2">
+                        <i className="fas fa-cogs text-primary mt-1"></i>
+                        <div>
+                          <p className="font-medium text-gray-900">Detalles del Equipo</p>
+                          <p className="text-sm text-gray-600 leading-relaxed">
+                            {machinery.description.split(' - ')[1]?.split('. Located')[0] || 
+                             machinery.description.split(' - ')[1] || 
+                             machinery.description}
+                          </p>
+                        </div>
+                      </div>
+                      
+                      {/* Auction Info */}
+                      <div className="flex items-start gap-2">
+                        <i className="fas fa-gavel text-primary mt-1"></i>
+                        <div>
+                          <p className="font-medium text-gray-900">Información de Subasta</p>
+                          <p className="text-sm text-gray-600">
+                            Artículo auténtico de subasta de International Global Bids And Prelco Auctions
+                          </p>
+                          <p className="text-xs text-gray-500 mt-1">
+                            Fecha de subasta: 15 de julio, 2025
+                          </p>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 )}
               </div>
