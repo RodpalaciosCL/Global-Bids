@@ -86,18 +86,22 @@ export async function registerRoutes(app: Express): Promise<Server> {
   });
 
   // Image proxy endpoint
-  app.get("/api/images/:lotId/:imageNum", async (req, res) => {
+  app.get("/api/images/*", async (req, res) => {
     try {
-      const { lotId, imageNum } = req.params;
-      const imageUrl = `https://auctiontechupload.s3.amazonaws.com/216/auction/2187/${lotId}_${imageNum}.jpg`;
+      // Extract the full path after /api/images/
+      const imagePath = req.params[0];
+      const imageUrl = `https://auctiontechupload.s3.amazonaws.com/216/auction/2187/${imagePath}`;
+      
+      console.log('Proxying image:', imageUrl);
       
       const response = await fetch(imageUrl);
       
       if (!response.ok) {
+        console.log('Image not found:', imageUrl, 'Status:', response.status);
         return res.status(404).json({ message: "Image not found" });
       }
       
-      const imageBuffer = await response.buffer();
+      const imageBuffer = Buffer.from(await response.arrayBuffer());
       res.set('Content-Type', 'image/jpeg');
       res.set('Cache-Control', 'public, max-age=86400'); // Cache for 24 hours
       res.send(imageBuffer);

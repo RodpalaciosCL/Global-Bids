@@ -24,7 +24,7 @@ export function MachineryCardCompact({ item, index }: MachineryCardCompactProps)
       {/* Type Badge */}
       <div className="relative">
         <img 
-          src={image.replace('https://auctiontechupload.s3.amazonaws.com/216/auction/2187/', '/api/images/').replace('_', '/').replace('.jpg', '')} 
+          src={image.replace('https://auctiontechupload.s3.amazonaws.com/216/auction/2187/', '/api/images/')} 
           alt={name} 
           className="w-full h-44 object-cover"
           onError={(e) => {
