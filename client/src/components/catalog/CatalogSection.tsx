@@ -28,9 +28,10 @@ export function CatalogSection() {
 
   const [refreshKey] = useState(Date.now());
 
-  // Scroll to top of catalog when page changes
+  // Only scroll when explicitly on marketplace page, not from home
   useEffect(() => {
-    if (catalogStartRef.current) {
+    // Only scroll if we're on the marketplace page (not home page)
+    if (catalogStartRef.current && window.location.pathname === '/marketplace') {
       catalogStartRef.current.scrollIntoView({ 
         behavior: 'smooth',
         block: 'start'

@@ -186,7 +186,7 @@ export function AuctionsIframe() {
             </p>
             <button 
               onClick={openForm}
-              className="w-full bg-secondary hover:bg-secondary-dark text-white font-bold py-2.5 px-4 rounded-lg transition-colors duration-300 flex items-center justify-center text-sm"
+              className="w-full bg-black hover:bg-gray-800 text-white font-bold py-2.5 px-4 rounded-lg transition-colors duration-300 flex items-center justify-center text-sm"
             >
               <i className="fas fa-sign-in-alt mr-2"></i>
               {language === 'es' ? 'Regístrate Gratis' : 'Register Free'}
