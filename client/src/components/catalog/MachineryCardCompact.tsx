@@ -1,4 +1,4 @@
-import { Link } from 'wouter';
+import { Link, useLocation } from 'wouter';
 import { Machinery } from '@/types/machinery';
 import { Button } from '@/components/ui/button';
 import { motion } from 'framer-motion';
@@ -80,6 +80,7 @@ interface MachineryCardCompactProps {
 }
 
 export function MachineryCardCompact({ item, index }: MachineryCardCompactProps) {
+  const [, setLocation] = useLocation();
   const { 
     id, name, type, brand, year, hours, 
     kilometers, condition, description, image 
@@ -122,26 +123,18 @@ export function MachineryCardCompact({ item, index }: MachineryCardCompactProps)
         {/* Title */}
         <h3 className="text-lg font-bold text-gray-900 mb-2 line-clamp-1">{name}</h3>
         
-        {/* Specs Grid - Marca, Modelo, Año, Kms, Horas */}
-        <div className="grid grid-cols-2 gap-1 mb-3">
-          <div className="flex items-center text-sm text-gray-600">
-            <i className="fas fa-tag mr-1.5"></i>
-            <span>{displayBrand}</span>
+        {/* Specs - Marca, Kms, Horas (formato móvil) */}
+        <div className="flex flex-wrap gap-3 mb-3 text-sm">
+          <div className="flex items-center text-gray-600">
+            <i className="fas fa-industry mr-1"></i>
+            <span>{displayBrand || 'N/A'}</span>
           </div>
-          <div className="flex items-center text-sm text-gray-600">
-            <i className="fas fa-cog mr-1.5"></i>
-            <span className="truncate">{realSpecs.model || type}</span>
-          </div>
-          <div className="flex items-center text-sm text-gray-600">
-            <i className="far fa-calendar-alt mr-1.5"></i>
-            <span>{displayYear || 'N/A'}</span>
-          </div>
-          <div className="flex items-center text-sm text-gray-600">
-            <i className="fas fa-road mr-1.5"></i>
+          <div className="flex items-center text-gray-600">
+            <i className="fas fa-road mr-1"></i>
             <span>{displayKilometers ? `${displayKilometers.toLocaleString()} km` : 'N/A'}</span>
           </div>
-          <div className="flex items-center text-sm text-gray-600 col-span-2">
-            <i className="fas fa-clock mr-1.5"></i>
+          <div className="flex items-center text-gray-600">
+            <i className="fas fa-clock mr-1"></i>
             <span>{displayHours ? `${displayHours} hrs` : 'N/A'}</span>
           </div>
         </div>
@@ -174,14 +167,12 @@ export function MachineryCardCompact({ item, index }: MachineryCardCompactProps)
               <i className="far fa-heart"></i> Guardar
             </Button>
             <Button 
-              asChild
               variant="default"
               size="sm"
               className="bg-gray-900 hover:bg-gray-800"
+              onClick={() => setLocation(`/machinery/${id}`)}
             >
-              <Link href={`/machinery/${id}`}>
-                Ver más
-              </Link>
+              Ver más
             </Button>
           </div>
         </div>
