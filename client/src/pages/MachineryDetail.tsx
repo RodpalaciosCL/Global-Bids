@@ -202,35 +202,35 @@ export default function MachineryDetail() {
                       <tbody>
                         <tr className="border-b">
                           <td className="py-1 text-gray-600">{t('detail.brand')}:</td>
-                          <td className="py-1 text-gray-900 font-medium">JLG</td>
+                          <td className="py-1 text-gray-900 font-medium">{machinery.brand}</td>
                         </tr>
                         <tr className="border-b">
                           <td className="py-1 text-gray-600">{language === 'en' ? 'Model' : 'Modelo'}:</td>
-                          <td className="py-1 text-gray-900 font-medium">600aj Manlift</td>
+                          <td className="py-1 text-gray-900 font-medium">{machinery.name}</td>
                         </tr>
                         <tr className="border-b">
                           <td className="py-1 text-gray-600">{t('detail.year')}:</td>
-                          <td className="py-1 text-gray-900 font-medium">2016</td>
+                          <td className="py-1 text-gray-900 font-medium">{machinery.year}</td>
                         </tr>
                         <tr className="border-b">
                           <td className="py-1 text-gray-600">{t('detail.hours')}:</td>
-                          <td className="py-1 text-gray-900 font-medium">326 hrs</td>
+                          <td className="py-1 text-gray-900 font-medium">{machinery.hours} hrs</td>
                         </tr>
                         <tr className="border-b">
                           <td className="py-1 text-gray-600">{t('detail.condition')}:</td>
-                          <td className="py-1 text-gray-900 font-medium">{language === 'en' ? 'Good condition' : 'Buen estado'}</td>
-                        </tr>
-                        <tr className="border-b">
-                          <td className="py-1 text-gray-600">{language === 'en' ? 'Power' : 'Potencia'}:</td>
-                          <td className="py-1 text-gray-900 font-medium">375 HP</td>
-                        </tr>
-                        <tr className="border-b">
-                          <td className="py-1 text-gray-600">{language === 'en' ? 'Capacity' : 'Capacidad'}:</td>
-                          <td className="py-1 text-gray-900 font-medium">500 lbs</td>
+                          <td className="py-1 text-gray-900 font-medium">
+                            {machinery.condition === 'excellent' 
+                              ? (language === 'en' ? 'Excellent' : 'Excelente')
+                              : machinery.condition === 'good'
+                              ? (language === 'en' ? 'Good' : 'Bueno')
+                              : machinery.condition === 'fair'
+                              ? (language === 'en' ? 'Fair' : 'Regular')
+                              : machinery.condition}
+                          </td>
                         </tr>
                         <tr>
-                          <td className="py-1 text-gray-600">{language === 'en' ? 'Reach' : 'Alcance'}:</td>
-                          <td className="py-1 text-gray-900 font-medium">60 ft</td>
+                          <td className="py-1 text-gray-600">{language === 'en' ? 'Type' : 'Tipo'}:</td>
+                          <td className="py-1 text-gray-900 font-medium">{machinery.type}</td>
                         </tr>
                       </tbody>
                     </table>
@@ -239,15 +239,8 @@ export default function MachineryDetail() {
                 
                 {activeTab === 'description' && (
                   <div className="p-2">
-                    <p className="text-sm text-gray-700 mb-2">
-                      {language === 'en' 
-                        ? 'This JLG 600aj man lift is an excellent option for working at height. With only 326 hours of use, it is in perfect operating condition and has received regular maintenance.'
-                        : 'Esta plataforma elevadora JLG 600aj es una excelente opción para trabajos en altura. Con apenas 326 horas de uso, se encuentra en perfectas condiciones operativas y ha recibido mantenimiento regular.'}
-                    </p>
-                    <p className="text-sm text-gray-700">
-                      {language === 'en'
-                        ? 'The equipment offers a maximum horizontal reach of 60 feet and a load capacity of 500 pounds, ideal for construction projects, industrial maintenance, and high-altitude installation work.'
-                        : 'El equipo ofrece un alcance horizontal máximo de 60 pies y una capacidad de carga de 500 libras, ideal para proyectos de construcción, mantenimiento industrial y trabajos de instalación en altura.'}
+                    <p className="text-sm text-gray-700 leading-relaxed">
+                      {machinery.description}
                     </p>
                   </div>
                 )}
