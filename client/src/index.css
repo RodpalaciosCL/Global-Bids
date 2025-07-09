@@ -19,10 +19,10 @@
     scroll-padding-top: 5rem; /* Esto ajusta la posición del scroll al hacer clic en los enlaces de anclaje */
   }
   
-  /* Específico para móvil - reduce scroll padding */
+  /* Específico para móvil - scroll exacto sin offset extra */
   @media (max-width: 768px) {
     html {
-      scroll-padding-top: 3.5rem;
+      scroll-padding-top: 3.2rem;
     }
   }
 }
