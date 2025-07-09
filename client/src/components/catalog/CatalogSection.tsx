@@ -22,20 +22,18 @@ export function CatalogSection() {
 
   const [filters, setFilters] = useState<MachineryFilters>({});
   const [currentPage, setCurrentPage] = useState(1);
-  const [sortOrder, setSortOrder] = useState("price-asc");
+  const [sortOrder, setSortOrder] = useState("year-desc");
   const [limit] = useState(40);
 
   const [refreshKey] = useState(Date.now());
 
-  // Build query URL with parameters
+  // Build query URL with parameters (removed price filters)
   const buildQueryUrl = () => {
     const params = new URLSearchParams();
     if (filters.search) params.append('search', filters.search);
     if (filters.type) params.append('type', filters.type);
     if (filters.brand) params.append('brand', filters.brand);
     if (filters.year) params.append('year', filters.year);
-    if (filters.minPrice) params.append('minPrice', filters.minPrice.toString());
-    if (filters.maxPrice) params.append('maxPrice', filters.maxPrice.toString());
     if (filters.condition) params.append('condition', filters.condition);
     params.append('sort', sortOrder);
     params.append('page', currentPage.toString());
@@ -87,22 +85,12 @@ export function CatalogSection() {
     refetch();
   };
 
-  // Handle input change for search and price range
+  // Handle input change for search only (removed price filters)
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { id, value } = e.target;
 
     if (id === "search") {
       setFilters((prev) => ({ ...prev, search: value }));
-    } else if (id === "price-min") {
-      setFilters((prev) => ({
-        ...prev,
-        minPrice: value ? parseInt(value) : undefined,
-      }));
-    } else if (id === "price-max") {
-      setFilters((prev) => ({
-        ...prev,
-        maxPrice: value ? parseInt(value) : undefined,
-      }));
     }
   };
 
@@ -258,34 +246,7 @@ export function CatalogSection() {
                   </select>
                 </div>
                 
-                {/* Price range */}
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    {language === 'es' ? 'Rango de Precio' : 'Price Range'}
-                  </label>
-                  <div className="flex items-center space-x-2 mb-2">
-                    <input
-                      type="number"
-                      id="price-min"
-                      placeholder={language === 'es' ? "Mínimo" : "Minimum"}
-                      className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary focus:border-secondary transition"
-                      onChange={handleInputChange}
-                      value={filters.minPrice || ""}
-                    />
-                    <span className="text-gray-500">{language === 'es' ? "a" : "to"}</span>
-                    <input
-                      type="number"
-                      id="price-max"
-                      placeholder={language === 'es' ? "Máximo" : "Maximum"}
-                      className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary focus:border-secondary transition"
-                      onChange={handleInputChange}
-                      value={filters.maxPrice || ""}
-                    />
-                  </div>
-                  <div className="flex justify-end">
-                    <CurrencySelector />
-                  </div>
-                </div>
+
                 
                 {/* Filter button */}
                 <button
@@ -299,7 +260,7 @@ export function CatalogSection() {
             
             {/* Desktop view */}
             <div className="hidden md:block">
-              <div className="grid md:grid-cols-4 gap-4">
+              <div className="grid md:grid-cols-3 gap-4">
                 {/* Search */}
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">
@@ -384,31 +345,7 @@ export function CatalogSection() {
                   </select>
                 </div>
                 
-                {/* Price range */}
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    {language === 'es' ? 'Rango de Precio' : 'Price Range'}
-                  </label>
-                  <div className="flex items-center space-x-2">
-                    <input
-                      type="number"
-                      id="price-min"
-                      placeholder={language === 'es' ? "Mínimo" : "Minimum"}
-                      className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary focus:border-secondary transition"
-                      onChange={handleInputChange}
-                      value={filters.minPrice || ""}
-                    />
-                    <span className="text-gray-500">{language === 'es' ? "a" : "to"}</span>
-                    <input
-                      type="number"
-                      id="price-max"
-                      placeholder={language === 'es' ? "Máximo" : "Maximum"}
-                      className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary focus:border-secondary transition"
-                      onChange={handleInputChange}
-                      value={filters.maxPrice || ""}
-                    />
-                  </div>
-                </div>
+
               </div>
               
               <div className="mt-4 flex justify-end">
@@ -443,8 +380,6 @@ export function CatalogSection() {
                 onChange={handleSelectChange}
                 value={sortOrder}
               >
-                <option value="price-asc">{language === 'es' ? 'Precio: menor a mayor' : 'Price: low to high'}</option>
-                <option value="price-desc">{language === 'es' ? 'Precio: mayor a menor' : 'Price: high to low'}</option>
                 <option value="year-desc">{language === 'es' ? 'Año: más reciente' : 'Year: newest'}</option>
                 <option value="year-asc">{language === 'es' ? 'Año: más antiguo' : 'Year: oldest'}</option>
               </select>

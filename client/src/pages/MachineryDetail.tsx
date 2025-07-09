@@ -128,8 +128,8 @@ export default function MachineryDetail() {
                     <span className="text-gray-900 text-sm">{machinery.hours} hrs</span>
                   </div>
                   <div className="flex items-center">
-                    <i className="fas fa-tag mr-1 text-gray-500 text-sm"></i>
-                    <span className="text-gray-900 font-bold text-sm">${machinery.price.toLocaleString()}</span>
+                    <i className="fas fa-industry mr-1 text-gray-500 text-sm"></i>
+                    <span className="text-gray-900 text-sm">{machinery.brand}</span>
                   </div>
                 </div>
                 
@@ -202,18 +202,28 @@ export default function MachineryDetail() {
             
             {/* Right Column - Pricing and Details */}
             <div className="bg-gray-50 p-3">
-              {/* Price Information */}
+              {/* Auction Information */}
               <div className="bg-white p-3 rounded-lg shadow-sm mb-3">
-                <h2 className="text-base font-bold text-gray-900 mb-1">{t('detail.price')}</h2>
-                <div className="text-2xl font-bold text-primary mb-1">${machinery.price.toLocaleString()}</div>
-                <p className="text-xs text-gray-500 mb-2">{language === 'en' ? 'Final price (taxes included)' : 'Precio final (impuestos incluidos)'}</p>
+                <h2 className="text-base font-bold text-gray-900 mb-2">{language === 'en' ? 'Auction Information' : 'Información de Subasta'}</h2>
                 
-                <div className="border-t border-gray-100 pt-2">
-                  <h3 className="text-xs font-medium text-gray-700 mb-0.5">{language === 'en' ? 'Auction date' : 'Fecha de subasta'}</h3>
-                  <p className="text-xs text-gray-600">
-                    <i className="fas fa-calendar mr-1 text-gray-400"></i>
-                    {language === 'en' ? 'July 15, 2025' : '15 de julio, 2025'}
-                  </p>
+                <div className="space-y-2">
+                  <div>
+                    <h3 className="text-xs font-medium text-gray-700 mb-0.5">{language === 'en' ? 'Auction date' : 'Fecha de subasta'}</h3>
+                    <p className="text-sm text-gray-800 font-medium">
+                      <i className="fas fa-calendar mr-1 text-gray-400"></i>
+                      {language === 'en' ? 'July 15, 2025' : '15 de julio, 2025'}
+                    </p>
+                  </div>
+                  
+                  <div>
+                    <h3 className="text-xs font-medium text-gray-700 mb-0.5">{language === 'en' ? 'Auction house' : 'Casa de subastas'}</h3>
+                    <p className="text-sm text-gray-800">North Country Auctions</p>
+                  </div>
+                  
+                  <div>
+                    <h3 className="text-xs font-medium text-gray-700 mb-0.5">{language === 'en' ? 'Location' : 'Ubicación'}</h3>
+                    <p className="text-sm text-gray-800">Chile</p>
+                  </div>
                 </div>
               </div>
               
