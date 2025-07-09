@@ -32,7 +32,6 @@ function AppContent() {
   return (
     <>
       <Header />
-      <ScrollToHash />
       <main>
         <Router />
       </main>
