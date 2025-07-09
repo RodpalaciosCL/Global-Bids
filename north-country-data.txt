@@ -1,3 +1,139 @@
 // Pega aquí todo el contenido que encontraste del sitio North Country
 // Incluye la API endpoint, datos JSON, o cualquier información relevante que necesite para obtener los datos auténticos
 
+gpt dice esto:
+
+
+e propongo una solución “SPA-pura” que unifica todo en React y evita recargas en blanco, saltos raros, duplicados de “Marketplace” y problemas con el header fijo. Consiste en:
+
+Usar siempre <Link> de Wouter (o React Router) para TODOS los menús, incluidos los hash (/#subastas, /#servicios…).
+
+Añadir un hook global que, al cambiar de ruta, detecte el hash y haga scroll manualmente (con offset para el header).
+
+Quitar por completo los <a href> y recargas de página.
+
+1) Define tus rutas de menú en dos arrays limpios
+tsx
+Copiar
+Editar
+// src/components/layout/Header.tsx
+import { Link, useLocation } from "wouter";
+
+const hashRoutes = [
+  { href: "/#inicio", label: t("nav.home"), icon: "fa-home", id: "inicio" },
+  { href: "/#nosotros", label: t("nav.about"), icon: "fa-users", id: "nosotros" },
+  { href: "/#servicios", label: t("nav.services"), icon: "fa-wrench", id: "servicios" },
+  { href: "/#subastas", label: t("nav.auctions"), icon: "fa-gavel", id: "subastas" },
+];
+
+const spaRoutes = [
+  { href: "/marketplace", label: t("nav.catalog"), icon: "fa-th-large" },
+  { href: "/soporte",   label: t("nav.support"), icon: "fa-headset" },
+  { href: "/contacto",  label: t("nav.contact"), icon: "fa-envelope" },
+];
+
+// Luego los pintas en orden:
+<nav className="flex items-center space-x-4">
+  {hashRoutes.map(item => (
+    <Link key={item.href} href={item.href}>
+      <button className="px-4 py-2 hover:bg-white/10 rounded-md flex items-center">
+        <i className={`fas ${item.icon} mr-2`}/>
+        {item.label}
+      </button>
+    </Link>
+  ))}
+  {spaRoutes.map(item => (
+    <Link key={item.href} href={item.href}>
+      <button className="px-4 py-2 hover:bg-white/10 rounded-md flex items-center">
+        <i className={`fas ${item.icon} mr-2`}/>
+        {item.label}
+      </button>
+    </Link>
+  ))}
+</nav>
+Punto crítico: No pongas /marketplace dentro de los hashRoutes ni nada duplicado. Así evitas confusiones y rutas malinterpretadas.
+
+2) Hook global para scroll al hash
+Agrega este componente justo dentro de tu <App> o Layout principal:
+
+tsx
+Copiar
+Editar
+// src/components/ScrollToHash.tsx
+import { useEffect } from "react";
+import { useLocation } from "wouter";
+
+export function ScrollToHash() {
+  const [location] = useLocation();
+  useEffect(() => {
+    const hash = window.location.hash;
+    if (!hash) return;
+    // Dale tiempo a que React pinte la sección
+    setTimeout(() => {
+      const id = hash.replace("#", "");
+      const el = document.getElementById(id);
+      if (el) {
+        // offset para header fijo de 80px (ajusta a tu altura)
+        const y = el.getBoundingClientRect().top + window.pageYOffset - 80;
+        window.scrollTo({ top: y, behavior: "smooth" });
+      }
+    }, 50);
+  }, [location]);
+  return null;
+}
+E insértalo en el árbol de componentes:
+
+tsx
+Copiar
+Editar
+// src/App.tsx
+import { ScrollToHash } from "@/components/ScrollToHash";
+
+function App() {
+  return (
+    <>
+      <Header />
+      <ScrollToHash />
+      <Routes>
+        <Route path="/" component={Home} />
+        <Route path="/marketplace" component={Marketplace} />
+        {/* ... */}
+      </Routes>
+    </>
+  );
+}
+3) Asegúrate de que cada sección tenga su id
+En tu Home.tsx y secciones:
+
+tsx
+Copiar
+Editar
+// Home.tsx
+export function Home() {
+  return (
+    <main>
+      <section id="inicio">…</section>
+      <section id="nosotros"><AboutSection/></section>
+      <section id="servicios"><ServicesSection/></section>
+      <section id="subastas"><AuctionsIframe/></section>
+      {/* … */}
+    </main>
+  );
+}
+Eso es todo. Con esto:
+
+“Marketplace” ya no pertenece a los hash, es una ruta SPA con <Link>.
+
+“Subastas”, “Servicios”… usan SPA + hash, sin recarga total, y el hook gestiona el scroll con offset.
+
+No hay más doble lógica, no hay mezcla de <a> vs <Link> fuera de lugar, y tu menú será predictible y suave.
+
+Prueba ahora:
+
+Click en Subastas desde cualquier ruta → URL / con #subastas y scroll suave
+
+Click en Marketplace → sin recarga en blanco, cambia a /marketplace
+
+Click en Inicio → scroll al top de Home
+
+Avísame si con esto ya todo se comporta al 100%.

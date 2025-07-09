@@ -64,19 +64,17 @@ export function Header() {
   
 
 
-  // SPA routes (using Link)
-  const spaRoutes = [
-    { href: '/marketplace', label: t('nav.catalog'), icon: 'fa-th-large', section: 'catalogo' },
+  const hashRoutes = [
+    { href: "/#inicio", label: t("nav.home"), icon: "fa-home", id: "inicio" },
+    { href: "/#nosotros", label: t("nav.about"), icon: "fa-users", id: "nosotros" },
+    { href: "/#servicios", label: t("nav.services"), icon: "fa-wrench", id: "servicios" },
+    { href: "/#subastas", label: t("nav.auctions"), icon: "fa-gavel", id: "subastas" },
   ];
 
-  // Home sections (using <a> with full reload)
-  const homeSections = [
-    { href: '/', label: t('nav.home'), icon: 'fa-home', section: 'inicio' },
-    { href: '/#nosotros', label: t('nav.about'), icon: 'fa-users', section: 'nosotros' },
-    { href: '/#servicios', label: t('nav.services'), icon: 'fa-wrench', section: 'servicios' },
-    { href: '/#subastas', label: t('nav.auctions'), icon: 'fa-gavel', section: 'subastas' },
-    { href: '/#soporte', label: t('nav.support'), icon: 'fa-headset', section: 'soporte' },
-    { href: '/#contacto', label: t('nav.contact'), icon: 'fa-envelope', section: 'contacto' }
+  const spaRoutes = [
+    { href: "/marketplace", label: t("nav.catalog"), icon: "fa-th-large" },
+    { href: "/#soporte", label: t("nav.support"), icon: "fa-headset", id: "soporte" },
+    { href: "/#contacto", label: t("nav.contact"), icon: "fa-envelope", id: "contacto" },
   ];
   
   return (
@@ -125,109 +123,39 @@ export function Header() {
           {/* Desktop Menu */}
           <div className="hidden md:flex items-center space-x-4">
             <nav className="flex items-center">
-              {/* Home link */}
-              <a
-                href="/"
-                className={`relative px-4 py-2 mx-1 font-medium transition-all duration-300 flex items-center justify-center whitespace-nowrap ${
-                  activeSection === 'inicio' 
-                    ? 'bg-white text-primary rounded-md' 
-                    : 'text-white hover:bg-white/10 rounded-md'
-                }`}
-              >
-                <i className={`fas fa-home mr-2 ${
-                  activeSection === 'inicio' ? 'text-primary' : 'text-white/80'
-                }`}></i>
-                <span>{t('nav.home')}</span>
-              </a>
+              {/* Hash routes */}
+              {hashRoutes.map(item => (
+                <Link key={item.href} href={item.href}>
+                  <button className={`relative px-4 py-2 mx-1 font-medium transition-all duration-300 flex items-center justify-center whitespace-nowrap ${
+                    activeSection === item.id 
+                      ? 'bg-white text-primary rounded-md' 
+                      : 'text-white hover:bg-white/10 rounded-md'
+                  }`}>
+                    <i className={`fas ${item.icon} mr-2 ${
+                      activeSection === item.id ? 'text-primary' : 'text-white/80'
+                    }`}></i>
+                    <span>{item.label}</span>
+                  </button>
+                </Link>
+              ))}
               
-              {/* About section */}
-              <a
-                href="/#nosotros"
-                className={`relative px-4 py-2 mx-1 font-medium transition-all duration-300 flex items-center justify-center whitespace-nowrap ${
-                  activeSection === 'nosotros' 
-                    ? 'bg-white text-primary rounded-md' 
-                    : 'text-white hover:bg-white/10 rounded-md'
-                }`}
-              >
-                <i className={`fas fa-users mr-2 ${
-                  activeSection === 'nosotros' ? 'text-primary' : 'text-white/80'
-                }`}></i>
-                <span>{t('nav.about')}</span>
-              </a>
-              
-              {/* Services section */}
-              <a
-                href="/#servicios"
-                className={`relative px-4 py-2 mx-1 font-medium transition-all duration-300 flex items-center justify-center whitespace-nowrap ${
-                  activeSection === 'servicios' 
-                    ? 'bg-white text-primary rounded-md' 
-                    : 'text-white hover:bg-white/10 rounded-md'
-                }`}
-              >
-                <i className={`fas fa-wrench mr-2 ${
-                  activeSection === 'servicios' ? 'text-primary' : 'text-white/80'
-                }`}></i>
-                <span>{t('nav.services')}</span>
-              </a>
-              
-              {/* Marketplace - SPA route using Link */}
-              <Link href="/marketplace">
-                <button className={`relative px-4 py-2 mx-1 font-medium transition-all duration-300 flex items-center justify-center whitespace-nowrap ${
-                  activeSection === 'catalogo' 
-                    ? 'bg-white text-primary rounded-md' 
-                    : 'text-white hover:bg-white/10 rounded-md'
-                }`}>
-                  <i className={`fas fa-th-large mr-2 ${
-                    activeSection === 'catalogo' ? 'text-primary' : 'text-white/80'
-                  }`}></i>
-                  <span>{t('nav.catalog')}</span>
-                </button>
-              </Link>
-              
-              {/* Auctions section */}
-              <a
-                href="/#subastas"
-                className={`relative px-4 py-2 mx-1 font-medium transition-all duration-300 flex items-center justify-center whitespace-nowrap ${
-                  activeSection === 'subastas' 
-                    ? 'bg-white text-primary rounded-md' 
-                    : 'text-white hover:bg-white/10 rounded-md'
-                }`}
-              >
-                <i className={`fas fa-gavel mr-2 ${
-                  activeSection === 'subastas' ? 'text-primary' : 'text-white/80'
-                }`}></i>
-                <span>{t('nav.auctions')}</span>
-              </a>
-              
-              {/* Support section */}
-              <a
-                href="/#soporte"
-                className={`relative px-4 py-2 mx-1 font-medium transition-all duration-300 flex items-center justify-center whitespace-nowrap ${
-                  activeSection === 'soporte' 
-                    ? 'bg-white text-primary rounded-md' 
-                    : 'text-white hover:bg-white/10 rounded-md'
-                }`}
-              >
-                <i className={`fas fa-headset mr-2 ${
-                  activeSection === 'soporte' ? 'text-primary' : 'text-white/80'
-                }`}></i>
-                <span>{t('nav.support')}</span>
-              </a>
-              
-              {/* Contact section */}
-              <a
-                href="/#contacto"
-                className={`relative px-4 py-2 mx-1 font-medium transition-all duration-300 flex items-center justify-center whitespace-nowrap ${
-                  activeSection === 'contacto' 
-                    ? 'bg-white text-primary rounded-md' 
-                    : 'text-white hover:bg-white/10 rounded-md'
-                }`}
-              >
-                <i className={`fas fa-envelope mr-2 ${
-                  activeSection === 'contacto' ? 'text-primary' : 'text-white/80'
-                }`}></i>
-                <span>{t('nav.contact')}</span>
-              </a>
+              {/* SPA routes */}
+              {spaRoutes.map(item => (
+                <Link key={item.href} href={item.href}>
+                  <button className={`relative px-4 py-2 mx-1 font-medium transition-all duration-300 flex items-center justify-center whitespace-nowrap ${
+                    (item.href === '/marketplace' && activeSection === 'catalogo') || 
+                    (item.id && activeSection === item.id)
+                      ? 'bg-white text-primary rounded-md' 
+                      : 'text-white hover:bg-white/10 rounded-md'
+                  }`}>
+                    <i className={`fas ${item.icon} mr-2 ${
+                      (item.href === '/marketplace' && activeSection === 'catalogo') || 
+                      (item.id && activeSection === item.id) ? 'text-primary' : 'text-white/80'
+                    }`}></i>
+                    <span>{item.label}</span>
+                  </button>
+                </Link>
+              ))}
             </nav>
             
             <div className="pl-2 border-l border-white/20">
@@ -254,167 +182,68 @@ export function Header() {
                   </div>
                 </div>
                 
-                {/* Home */}
-                <a
-                  href="/"
-                  onClick={() => setIsMenuOpen(false)}
-                  className={`px-5 py-4 transition flex items-center w-full ${
-                    activeSection === 'inicio'
-                      ? 'bg-primary/10 text-primary font-medium border-l-4 border-primary'
-                      : 'text-gray-700 hover:bg-gray-50 border-l-4 border-transparent'
-                  }`}
-                >
-                  <div className={`w-8 h-8 rounded-lg flex items-center justify-center mr-3 ${
-                    activeSection === 'inicio' 
-                    ? 'bg-primary/10 text-primary' 
-                    : 'bg-gray-100 text-gray-500'
-                  }`}>
-                    <i className="fas fa-home"></i>
-                  </div>
-                  <div>
-                    <div className="font-medium">{t('nav.home')}</div>
-                    <div className="text-xs text-gray-500">{t('nav.homeDesc')}</div>
-                  </div>
-                </a>
+                {/* Hash routes for mobile */}
+                {hashRoutes.map(item => (
+                  <Link key={item.href} href={item.href}>
+                    <button
+                      onClick={() => setIsMenuOpen(false)}
+                      className={`px-5 py-4 transition flex items-center w-full ${
+                        activeSection === item.id
+                          ? 'bg-primary/10 text-primary font-medium border-l-4 border-primary'
+                          : 'text-gray-700 hover:bg-gray-50 border-l-4 border-transparent'
+                      }`}
+                    >
+                      <div className={`w-8 h-8 rounded-lg flex items-center justify-center mr-3 ${
+                        activeSection === item.id 
+                        ? 'bg-primary/10 text-primary' 
+                        : 'bg-gray-100 text-gray-500'
+                      }`}>
+                        <i className={`fas ${item.icon}`}></i>
+                      </div>
+                      <div>
+                        <div className="font-medium">{item.label}</div>
+                        <div className="text-xs text-gray-500">
+                          {item.id === 'inicio' ? t('nav.homeDesc') : 
+                           item.id === 'nosotros' ? t('nav.aboutDesc') :
+                           item.id === 'servicios' ? t('nav.servicesDesc') :
+                           item.id === 'subastas' ? t('nav.auctionsDesc') : ''}
+                        </div>
+                      </div>
+                    </button>
+                  </Link>
+                ))}
                 
-                {/* About */}
-                <a
-                  href="/#nosotros"
-                  onClick={() => setIsMenuOpen(false)}
-                  className={`px-5 py-4 transition flex items-center w-full ${
-                    activeSection === 'nosotros'
-                      ? 'bg-primary/10 text-primary font-medium border-l-4 border-primary'
-                      : 'text-gray-700 hover:bg-gray-50 border-l-4 border-transparent'
-                  }`}
-                >
-                  <div className={`w-8 h-8 rounded-lg flex items-center justify-center mr-3 ${
-                    activeSection === 'nosotros' 
-                    ? 'bg-primary/10 text-primary' 
-                    : 'bg-gray-100 text-gray-500'
-                  }`}>
-                    <i className="fas fa-users"></i>
-                  </div>
-                  <div>
-                    <div className="font-medium">{t('nav.about')}</div>
-                    <div className="text-xs text-gray-500">{t('nav.aboutDesc')}</div>
-                  </div>
-                </a>
-                
-                {/* Services */}
-                <a
-                  href="/#servicios"
-                  onClick={() => setIsMenuOpen(false)}
-                  className={`px-5 py-4 transition flex items-center w-full ${
-                    activeSection === 'servicios'
-                      ? 'bg-primary/10 text-primary font-medium border-l-4 border-primary'
-                      : 'text-gray-700 hover:bg-gray-50 border-l-4 border-transparent'
-                  }`}
-                >
-                  <div className={`w-8 h-8 rounded-lg flex items-center justify-center mr-3 ${
-                    activeSection === 'servicios' 
-                    ? 'bg-primary/10 text-primary' 
-                    : 'bg-gray-100 text-gray-500'
-                  }`}>
-                    <i className="fas fa-wrench"></i>
-                  </div>
-                  <div>
-                    <div className="font-medium">{t('nav.services')}</div>
-                    <div className="text-xs text-gray-500">{t('nav.servicesDesc')}</div>
-                  </div>
-                </a>
-                
-                {/* Marketplace - SPA route using Link for mobile */}
-                <Link href="/marketplace">
-                  <button
-                    onClick={() => setIsMenuOpen(false)}
-                    className={`px-5 py-4 transition flex items-center w-full ${
-                      activeSection === 'catalogo'
-                        ? 'bg-primary/10 text-primary font-medium border-l-4 border-primary'
-                        : 'text-gray-700 hover:bg-gray-50 border-l-4 border-transparent'
-                    }`}
-                  >
-                    <div className={`w-8 h-8 rounded-lg flex items-center justify-center mr-3 ${
-                      activeSection === 'catalogo' 
-                      ? 'bg-primary/10 text-primary' 
-                      : 'bg-gray-100 text-gray-500'
-                    }`}>
-                      <i className="fas fa-th-large"></i>
-                    </div>
-                    <div>
-                      <div className="font-medium">{t('nav.catalog')}</div>
-                      <div className="text-xs text-gray-500">{t('nav.catalogDesc')}</div>
-                    </div>
-                  </button>
-                </Link>
-                
-                {/* Auctions */}
-                <a
-                  href="/#subastas"
-                  onClick={() => setIsMenuOpen(false)}
-                  className={`px-5 py-4 transition flex items-center w-full ${
-                    activeSection === 'subastas'
-                      ? 'bg-primary/10 text-primary font-medium border-l-4 border-primary'
-                      : 'text-gray-700 hover:bg-gray-50 border-l-4 border-transparent'
-                  }`}
-                >
-                  <div className={`w-8 h-8 rounded-lg flex items-center justify-center mr-3 ${
-                    activeSection === 'subastas' 
-                    ? 'bg-primary/10 text-primary' 
-                    : 'bg-gray-100 text-gray-500'
-                  }`}>
-                    <i className="fas fa-gavel"></i>
-                  </div>
-                  <div>
-                    <div className="font-medium">{t('nav.auctions')}</div>
-                    <div className="text-xs text-gray-500">{t('nav.auctionsDesc')}</div>
-                  </div>
-                </a>
-                
-                {/* Support */}
-                <a
-                  href="/#soporte"
-                  onClick={() => setIsMenuOpen(false)}
-                  className={`px-5 py-4 transition flex items-center w-full ${
-                    activeSection === 'soporte'
-                      ? 'bg-primary/10 text-primary font-medium border-l-4 border-primary'
-                      : 'text-gray-700 hover:bg-gray-50 border-l-4 border-transparent'
-                  }`}
-                >
-                  <div className={`w-8 h-8 rounded-lg flex items-center justify-center mr-3 ${
-                    activeSection === 'soporte' 
-                    ? 'bg-primary/10 text-primary' 
-                    : 'bg-gray-100 text-gray-500'
-                  }`}>
-                    <i className="fas fa-headset"></i>
-                  </div>
-                  <div>
-                    <div className="font-medium">{t('nav.support')}</div>
-                    <div className="text-xs text-gray-500">{t('nav.supportDesc')}</div>
-                  </div>
-                </a>
-                
-                {/* Contact */}
-                <a
-                  href="/#contacto"
-                  onClick={() => setIsMenuOpen(false)}
-                  className={`px-5 py-4 transition flex items-center w-full ${
-                    activeSection === 'contacto'
-                      ? 'bg-primary/10 text-primary font-medium border-l-4 border-primary'
-                      : 'text-gray-700 hover:bg-gray-50 border-l-4 border-transparent'
-                  }`}
-                >
-                  <div className={`w-8 h-8 rounded-lg flex items-center justify-center mr-3 ${
-                    activeSection === 'contacto' 
-                    ? 'bg-primary/10 text-primary' 
-                    : 'bg-gray-100 text-gray-500'
-                  }`}>
-                    <i className="fas fa-envelope"></i>
-                  </div>
-                  <div>
-                    <div className="font-medium">{t('nav.contact')}</div>
-                    <div className="text-xs text-gray-500">{t('nav.contactDesc')}</div>
-                  </div>
-                </a>
+                {/* SPA routes for mobile */}
+                {spaRoutes.map(item => (
+                  <Link key={item.href} href={item.href}>
+                    <button
+                      onClick={() => setIsMenuOpen(false)}
+                      className={`px-5 py-4 transition flex items-center w-full ${
+                        (item.href === '/marketplace' && activeSection === 'catalogo') || 
+                        (item.id && activeSection === item.id)
+                          ? 'bg-primary/10 text-primary font-medium border-l-4 border-primary'
+                          : 'text-gray-700 hover:bg-gray-50 border-l-4 border-transparent'
+                      }`}
+                    >
+                      <div className={`w-8 h-8 rounded-lg flex items-center justify-center mr-3 ${
+                        (item.href === '/marketplace' && activeSection === 'catalogo') || 
+                        (item.id && activeSection === item.id)
+                        ? 'bg-primary/10 text-primary' 
+                        : 'bg-gray-100 text-gray-500'
+                      }`}>
+                        <i className={`fas ${item.icon}`}></i>
+                      </div>
+                      <div>
+                        <div className="font-medium">{item.label}</div>
+                        <div className="text-xs text-gray-500">
+                          {item.href === '/marketplace' ? t('nav.catalogDesc') :
+                           item.id === 'soporte' ? t('nav.supportDesc') :
+                           item.id === 'contacto' ? t('nav.contactDesc') : ''}
+                        </div>
+                      </div>
+                    </button>
+                  </Link>
+                ))}
                 
                 <div className="px-5 py-4 flex justify-between items-center bg-gray-50 mt-2">
                   <div className="text-sm text-gray-500">{t('nav.language')}:</div>

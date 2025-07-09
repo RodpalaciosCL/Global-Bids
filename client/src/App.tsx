@@ -6,6 +6,7 @@ import NotFound from "@/pages/not-found";
 import { BackToTop } from "@/components/ui/BackToTop";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
+import { ScrollToHash } from "@/components/ScrollToHash";
 import { LanguageProvider } from "@/contexts/LanguageContext";
 import { CurrencyProvider } from "@/contexts/CurrencyContext";
 import { RegistrationProvider } from "@/contexts/RegistrationContext";
@@ -31,6 +32,7 @@ function AppContent() {
   return (
     <>
       <Header />
+      <ScrollToHash />
       <main>
         <Router />
       </main>
