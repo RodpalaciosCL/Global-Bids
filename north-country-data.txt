@@ -1,121 +1,72 @@
-Asunto: Corrección definitiva de navegación hash en React + Wouter
+Aquí va de nuevo, con foco absoluto en el fallo “desde /marketplace” → hash links se van a “/” en vez de “/#contacto”:
 
-1. App.tsx – Router limpio
+1️. Asegúrate de que el Router esté bien ordenado
+En App.tsx pon primero la ruta "/marketplace" y luego la raíz "/":
 
 tsx
 Copiar
 Editar
-import { Router, Route } from 'wouter';
-import Header from './components/layout/Header';
-import Home from './pages/Home';
-import Marketplace from './pages/Marketplace';
+import { Router, Route } from 'wouter'
 
 export default function App() {
   return (
     <Router>
       <Header />
+      {/* IMPORTANTE: marketplace antes de la ruta "/" */}
       <Route path="/marketplace" component={Marketplace} />
       <Route path="/" component={Home} />
     </Router>
-  );
+  )
 }
-Así garantizas que / cargue siempre Home y /marketplace siempre Marketplace.
+Si el "/" viene primero, Wouter castea también /marketplace como home y «se traga» el hash.
 
-2. Home.tsx – IDs exactos y offset para header fijo
+2️. Usa enlaces HTML puros con recarga completa desde /marketplace
+En Header.tsx, para las secciones de la home NUNCA uses <Link> de Wouter, ni onClick, ni JS extra. Esto obliga a que el navegador haga full reload y salte al ancla:
 
 tsx
+Copiar
+Editar
+<nav className="…">
+  {/* 👉 SECCIONES HOME (recarga + scroll automático) */}
+  <a href="/#inicio"    target="_self" className="px-6 py-3">Inicio</a>
+  <a href="/#nosotros"  target="_self" className="px-6 py-3">Nosotros</a>
+  <a href="/#servicios" target="_self" className="px-6 py-3">Servicios</a>
+  <a href="/#subastas"  target="_self" className="px-6 py-3">Subastas</a>
+  <a href="/#soporte"   target="_self" className="px-6 py-3">Soporte</a>
+  <a href="/#contacto"  target="_self" className="px-6 py-3">Contacto</a>
+
+  {/* 👉 SPA route independiente */}
+  <Link href="/marketplace" className="px-6 py-3">Marketplace</Link>
+</nav>
+target="_self": fuerza recarga completa y evita que Wouter intercepte.
+
+El href debe empezar con / para apuntar siempre a /#contacto, no a /marketplace#contacto.
+
+3️. Verifica los IDs en Home.tsx
+Cada sección de la home debe existir con el id exacto:
+
+jsx
 Copiar
 Editar
 export default function Home() {
   return (
     <>
-      <section id="inicio"   className="scroll-mt-20">…</section>
-      <section id="nosotros" className="scroll-mt-20">…</section>
-      <section id="servicios"className="scroll-mt-20">…</section>
-      <section id="subastas" className="scroll-mt-20">…</section>
-      <section id="soporte"  className="scroll-mt-20">…</section>
-      <section id="contacto" className="scroll-mt-20">…</section>
+      <section id="inicio">…</section>
+      <section id="nosotros">…</section>
+      <section id="servicios">…</section>
+      <section id="subastas">…</section>
+      <section id="soporte">…</section>
+      <section id="contacto">…</section>
     </>
-  );
+  )
 }
-scroll-mt-20 (Tailwind) o scroll-margin-top en CSS compensa la altura del header fijo.
+Si hay un typo en cualquiera de esos id no va a hacer scroll.
 
-Añade en tu CSS global:
+Prueba final
+Sitio arranca en / → clic “Marketplace” → /marketplace.
 
-css
-Copiar
-Editar
-html {
-  scroll-behavior: smooth;
-}
-3. Header.tsx – sólo <a> para hashes, <Link> para SPA
+Desde /marketplace → clic “Contacto” → debe recargar en /#contacto y bajar al <section id="contacto">.
 
-tsx
-Copiar
-Editar
-import { Link } from 'wouter';
+Igual con cualquier otra sección: “Servicios”, “Subastas”, etc.
 
-export function Header() {
-  const hashLinks = [
-    ['/#inicio',   'Inicio',    'fa-home'],
-    ['/#nosotros','Nosotros', 'fa-users'],
-    ['/#servicios','Servicios','fa-wrench'],
-    ['/#subastas', 'Subastas',  'fa-gavel'],
-    ['/#soporte',  'Soporte',   'fa-headset'],
-    ['/#contacto','Contacto',  'fa-envelope'],
-  ];
-
-  return (
-    <nav className="flex items-center space-x-4">
-      {hashLinks.map(([href, label, icon]) => (
-        <a key={href}
-           href={href}
-           className="text-white hover:bg-white/10 px-3 py-2 rounded-md flex items-center"
-        >
-          <i className={`fas ${icon} mr-1`} />{label}
-        </a>
-      ))}
-
-      <Link href="/marketplace"
-            className="text-white hover:bg-white/10 px-3 py-2 rounded-md flex items-center"
-      >
-        <i className="fas fa-th-large mr-1" />Marketplace
-      </Link>
-    </nav>
-  );
-}
-No uses onClick, preventDefault(), ni window.location para hashes.
-
-El navegador recarga (o navega) y hace scroll automático a #subastas, etc.
-
-4. Elimina cualquier código extra de “scroll”
-Borra todo useEffect o listener que intente capturar window.location.hash y desplazar manualmente. Con los enlaces y los IDs basta.
-
-5. Pruebas finales
-
-Desde /marketplace → clic en “Subastas” → la URL pasa a /#subastas y scroll al bloque correspondiente.
-
-Desde cualquier sección de Home → clic en “Marketplace” → navega a /marketplace sin salto extraño.
-
-Desde Home → clic en “Servicios” → scroll suave a #servicios, cubierto por scroll-margin-top.
-
-Si tras esto sigue fallando, comprueba en DevTools que:
-
-El <a> apunta a la ruta correcta (/#subastas).
-
-El elemento destino tiene exactamente id="subastas".
-
-No hay otro CSS que oculte o desplace el ancla.
-
-Con estos 5 pasos eliminas toda lógica superflua y dejas al navegador manejar hash y rutas SPA de forma nativa.
-
-
-
-
-
-
-
-
-Fuentes
-
-Preguntar a ChatGPT
+Si sigues estos 3 pasos al pie de la letra, no habrá más saltos a “Inicio” ni comportamientos extraños.

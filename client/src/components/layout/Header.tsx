@@ -117,39 +117,27 @@ export function Header() {
           <div className="hidden md:flex items-center space-x-4">
             <nav className="flex items-center">
               {/* Hash links */}
-              <a href="/#inicio" className="relative px-4 py-2 mx-1 font-medium transition-all duration-300 flex items-center justify-center whitespace-nowrap text-white hover:bg-white/10 rounded-md">
+              <a href="/#inicio" target="_self" className="relative px-4 py-2 mx-1 font-medium transition-all duration-300 flex items-center justify-center whitespace-nowrap text-white hover:bg-white/10 rounded-md">
                 <i className="fas fa-home mr-2 text-white/80"></i>
                 <span>{t('nav.home')}</span>
               </a>
-              <a href="/#nosotros" className="relative px-4 py-2 mx-1 font-medium transition-all duration-300 flex items-center justify-center whitespace-nowrap text-white hover:bg-white/10 rounded-md">
+              <a href="/#nosotros" target="_self" className="relative px-4 py-2 mx-1 font-medium transition-all duration-300 flex items-center justify-center whitespace-nowrap text-white hover:bg-white/10 rounded-md">
                 <i className="fas fa-users mr-2 text-white/80"></i>
                 <span>{t('nav.about')}</span>
               </a>
-              <a href="/#servicios" className="relative px-4 py-2 mx-1 font-medium transition-all duration-300 flex items-center justify-center whitespace-nowrap text-white hover:bg-white/10 rounded-md">
+              <a href="/#servicios" target="_self" className="relative px-4 py-2 mx-1 font-medium transition-all duration-300 flex items-center justify-center whitespace-nowrap text-white hover:bg-white/10 rounded-md">
                 <i className="fas fa-wrench mr-2 text-white/80"></i>
                 <span>{t('nav.services')}</span>
               </a>
-              <a href="/#subastas" className="relative px-4 py-2 mx-1 font-medium transition-all duration-300 flex items-center justify-center whitespace-nowrap text-white hover:bg-white/10 rounded-md">
+              <a href="/#subastas" target="_self" className="relative px-4 py-2 mx-1 font-medium transition-all duration-300 flex items-center justify-center whitespace-nowrap text-white hover:bg-white/10 rounded-md">
                 <i className="fas fa-gavel mr-2 text-white/80"></i>
                 <span>{t('nav.auctions')}</span>
               </a>
-              <a href="/#soporte" className="relative px-4 py-2 mx-1 font-medium transition-all duration-300 flex items-center justify-center whitespace-nowrap text-white hover:bg-white/10 rounded-md">
+              <a href="/#soporte" target="_self" className="relative px-4 py-2 mx-1 font-medium transition-all duration-300 flex items-center justify-center whitespace-nowrap text-white hover:bg-white/10 rounded-md">
                 <i className="fas fa-headset mr-2 text-white/80"></i>
                 <span>{t('nav.support')}</span>
               </a>
-              <a href="/#contacto" 
-                 onClick={() => {
-                   console.log('Contacto clicked, current location:', window.location.href);
-                   setTimeout(() => {
-                     console.log('After navigation, location:', window.location.href);
-                     const contactEl = document.getElementById('contacto');
-                     console.log('Contact element found:', contactEl);
-                     if (contactEl) {
-                       contactEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                     }
-                   }, 100);
-                 }}
-                 className="relative px-4 py-2 mx-1 font-medium transition-all duration-300 flex items-center justify-center whitespace-nowrap text-white hover:bg-white/10 rounded-md">
+              <a href="/#contacto" target="_self" className="relative px-4 py-2 mx-1 font-medium transition-all duration-300 flex items-center justify-center whitespace-nowrap text-white hover:bg-white/10 rounded-md">
                 <i className="fas fa-envelope mr-2 text-white/80"></i>
                 <span>{t('nav.contact')}</span>
               </a>
@@ -189,7 +177,7 @@ export function Header() {
                 </div>
                 
                 {/* Mobile hash links */}
-                <a href="/#inicio" onClick={() => setIsMenuOpen(false)} className="px-5 py-4 transition flex items-center w-full text-gray-700 hover:bg-gray-50 border-l-4 border-transparent">
+                <a href="/#inicio" target="_self" onClick={() => setIsMenuOpen(false)} className="px-5 py-4 transition flex items-center w-full text-gray-700 hover:bg-gray-50 border-l-4 border-transparent">
                   <div className="w-8 h-8 rounded-lg flex items-center justify-center mr-3 bg-gray-100 text-gray-500">
                     <i className="fas fa-home"></i>
                   </div>
@@ -199,7 +187,7 @@ export function Header() {
                   </div>
                 </a>
                 
-                <a href="/#nosotros" onClick={() => setIsMenuOpen(false)} className="px-5 py-4 transition flex items-center w-full text-gray-700 hover:bg-gray-50 border-l-4 border-transparent">
+                <a href="/#nosotros" target="_self" onClick={() => setIsMenuOpen(false)} className="px-5 py-4 transition flex items-center w-full text-gray-700 hover:bg-gray-50 border-l-4 border-transparent">
                   <div className="w-8 h-8 rounded-lg flex items-center justify-center mr-3 bg-gray-100 text-gray-500">
                     <i className="fas fa-users"></i>
                   </div>
@@ -209,7 +197,7 @@ export function Header() {
                   </div>
                 </a>
                 
-                <a href="/#servicios" onClick={() => setIsMenuOpen(false)} className="px-5 py-4 transition flex items-center w-full text-gray-700 hover:bg-gray-50 border-l-4 border-transparent">
+                <a href="/#servicios" target="_self" onClick={() => setIsMenuOpen(false)} className="px-5 py-4 transition flex items-center w-full text-gray-700 hover:bg-gray-50 border-l-4 border-transparent">
                   <div className="w-8 h-8 rounded-lg flex items-center justify-center mr-3 bg-gray-100 text-gray-500">
                     <i className="fas fa-wrench"></i>
                   </div>
@@ -219,7 +207,7 @@ export function Header() {
                   </div>
                 </a>
                 
-                <a href="/#subastas" onClick={() => setIsMenuOpen(false)} className="px-5 py-4 transition flex items-center w-full text-gray-700 hover:bg-gray-50 border-l-4 border-transparent">
+                <a href="/#subastas" target="_self" onClick={() => setIsMenuOpen(false)} className="px-5 py-4 transition flex items-center w-full text-gray-700 hover:bg-gray-50 border-l-4 border-transparent">
                   <div className="w-8 h-8 rounded-lg flex items-center justify-center mr-3 bg-gray-100 text-gray-500">
                     <i className="fas fa-gavel"></i>
                   </div>
@@ -229,7 +217,7 @@ export function Header() {
                   </div>
                 </a>
                 
-                <a href="/#soporte" onClick={() => setIsMenuOpen(false)} className="px-5 py-4 transition flex items-center w-full text-gray-700 hover:bg-gray-50 border-l-4 border-transparent">
+                <a href="/#soporte" target="_self" onClick={() => setIsMenuOpen(false)} className="px-5 py-4 transition flex items-center w-full text-gray-700 hover:bg-gray-50 border-l-4 border-transparent">
                   <div className="w-8 h-8 rounded-lg flex items-center justify-center mr-3 bg-gray-100 text-gray-500">
                     <i className="fas fa-headset"></i>
                   </div>
@@ -239,7 +227,7 @@ export function Header() {
                   </div>
                 </a>
                 
-                <a href="/#contacto" onClick={() => setIsMenuOpen(false)} className="px-5 py-4 transition flex items-center w-full text-gray-700 hover:bg-gray-50 border-l-4 border-transparent">
+                <a href="/#contacto" target="_self" onClick={() => setIsMenuOpen(false)} className="px-5 py-4 transition flex items-center w-full text-gray-700 hover:bg-gray-50 border-l-4 border-transparent">
                   <div className="w-8 h-8 rounded-lg flex items-center justify-center mr-3 bg-gray-100 text-gray-500">
                     <i className="fas fa-envelope"></i>
                   </div>
