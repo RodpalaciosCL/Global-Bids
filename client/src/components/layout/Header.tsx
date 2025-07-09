@@ -123,9 +123,15 @@ export function Header() {
                   key={item.href}
                   href={item.href}
                   onClick={(e) => {
+                    e.preventDefault();
                     if (location !== '/') {
-                      e.preventDefault();
                       window.location.href = item.href;
+                    } else {
+                      const element = document.getElementById(item.id);
+                      if (element) {
+                        const y = element.getBoundingClientRect().top + window.pageYOffset - 100;
+                        window.scrollTo({ top: y, behavior: 'smooth' });
+                      }
                     }
                   }}
                   className={`relative px-4 py-2 mx-1 font-medium transition-all duration-300 flex items-center justify-center whitespace-nowrap ${
@@ -159,9 +165,15 @@ export function Header() {
               <a
                 href="/#soporte"
                 onClick={(e) => {
+                  e.preventDefault();
                   if (location !== '/') {
-                    e.preventDefault();
                     window.location.href = '/#soporte';
+                  } else {
+                    const element = document.getElementById('soporte');
+                    if (element) {
+                      const y = element.getBoundingClientRect().top + window.pageYOffset - 100;
+                      window.scrollTo({ top: y, behavior: 'smooth' });
+                    }
                   }
                 }}
                 className={`relative px-4 py-2 mx-1 font-medium transition-all duration-300 flex items-center justify-center whitespace-nowrap ${
@@ -179,9 +191,15 @@ export function Header() {
               <a
                 href="/#contacto"
                 onClick={(e) => {
+                  e.preventDefault();
                   if (location !== '/') {
-                    e.preventDefault();
                     window.location.href = '/#contacto';
+                  } else {
+                    const element = document.getElementById('contacto');
+                    if (element) {
+                      const y = element.getBoundingClientRect().top + window.pageYOffset - 100;
+                      window.scrollTo({ top: y, behavior: 'smooth' });
+                    }
                   }
                 }}
                 className={`relative px-4 py-2 mx-1 font-medium transition-all duration-300 flex items-center justify-center whitespace-nowrap ${
@@ -227,10 +245,16 @@ export function Header() {
                     key={item.href}
                     href={item.href}
                     onClick={(e) => {
+                      e.preventDefault();
                       setIsMenuOpen(false);
                       if (location !== '/') {
-                        e.preventDefault();
                         window.location.href = item.href;
+                      } else {
+                        const element = document.getElementById(item.id);
+                        if (element) {
+                          const y = element.getBoundingClientRect().top + window.pageYOffset - 100;
+                          window.scrollTo({ top: y, behavior: 'smooth' });
+                        }
                       }
                     }}
                     className={`px-5 py-4 transition flex items-center w-full ${
@@ -286,10 +310,16 @@ export function Header() {
                 <a
                   href="/#soporte"
                   onClick={(e) => {
+                    e.preventDefault();
                     setIsMenuOpen(false);
                     if (location !== '/') {
-                      e.preventDefault();
                       window.location.href = '/#soporte';
+                    } else {
+                      const element = document.getElementById('soporte');
+                      if (element) {
+                        const y = element.getBoundingClientRect().top + window.pageYOffset - 100;
+                        window.scrollTo({ top: y, behavior: 'smooth' });
+                      }
                     }
                   }}
                   className={`px-5 py-4 transition flex items-center w-full ${
@@ -314,10 +344,16 @@ export function Header() {
                 <a
                   href="/#contacto"
                   onClick={(e) => {
+                    e.preventDefault();
                     setIsMenuOpen(false);
                     if (location !== '/') {
-                      e.preventDefault();
                       window.location.href = '/#contacto';
+                    } else {
+                      const element = document.getElementById('contacto');
+                      if (element) {
+                        const y = element.getBoundingClientRect().top + window.pageYOffset - 100;
+                        window.scrollTo({ top: y, behavior: 'smooth' });
+                      }
                     }
                   }}
                   className={`px-5 py-4 transition flex items-center w-full ${
