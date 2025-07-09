@@ -7,6 +7,7 @@ import { BackToTop } from "@/components/ui/BackToTop";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { ScrollToHash } from "@/components/ScrollToHash";
+import { useEffect } from "react";
 import { LanguageProvider } from "@/contexts/LanguageContext";
 import { CurrencyProvider } from "@/contexts/CurrencyContext";
 import { RegistrationProvider } from "@/contexts/RegistrationContext";
@@ -29,6 +30,20 @@ function Router() {
 function AppContent() {
   // Este hook se encarga de actualizar el lang del HTML basado en el idioma seleccionado
   useHtmlLang();
+  
+  // Preservar hash en carga inicial
+  useEffect(() => {
+    const hash = window.location.hash;
+    if (hash && hash.length > 1) {
+      // Esperar a que el DOM se renderice
+      setTimeout(() => {
+        const element = document.getElementById(hash.substring(1));
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 500);
+    }
+  }, []);
   
   return (
     <>
