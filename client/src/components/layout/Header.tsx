@@ -123,16 +123,8 @@ export function Header() {
                   key={item.href}
                   href={item.href}
                   onClick={(e) => {
-                    e.preventDefault();
-                    if (location !== '/') {
-                      window.location.href = item.href;
-                    } else {
-                      const element = document.getElementById(item.id);
-                      if (element) {
-                        const y = element.getBoundingClientRect().top + window.pageYOffset - 100;
-                        window.scrollTo({ top: y, behavior: 'smooth' });
-                      }
-                    }
+                    // Siempre usar navegación estándar del navegador para enlaces hash
+                    // No prevenir el comportamiento por defecto
                   }}
                   className={`relative px-4 py-2 mx-1 font-medium transition-all duration-300 flex items-center justify-center whitespace-nowrap ${
                     activeSection === item.id 
@@ -165,16 +157,7 @@ export function Header() {
               <a
                 href="/#soporte"
                 onClick={(e) => {
-                  e.preventDefault();
-                  if (location !== '/') {
-                    window.location.href = '/#soporte';
-                  } else {
-                    const element = document.getElementById('soporte');
-                    if (element) {
-                      const y = element.getBoundingClientRect().top + window.pageYOffset - 100;
-                      window.scrollTo({ top: y, behavior: 'smooth' });
-                    }
-                  }
+                  // Usar navegación estándar del navegador
                 }}
                 className={`relative px-4 py-2 mx-1 font-medium transition-all duration-300 flex items-center justify-center whitespace-nowrap ${
                   activeSection === 'soporte' 
@@ -191,16 +174,7 @@ export function Header() {
               <a
                 href="/#contacto"
                 onClick={(e) => {
-                  e.preventDefault();
-                  if (location !== '/') {
-                    window.location.href = '/#contacto';
-                  } else {
-                    const element = document.getElementById('contacto');
-                    if (element) {
-                      const y = element.getBoundingClientRect().top + window.pageYOffset - 100;
-                      window.scrollTo({ top: y, behavior: 'smooth' });
-                    }
-                  }
+                  // Usar navegación estándar del navegador
                 }}
                 className={`relative px-4 py-2 mx-1 font-medium transition-all duration-300 flex items-center justify-center whitespace-nowrap ${
                   activeSection === 'contacto' 
@@ -245,17 +219,8 @@ export function Header() {
                     key={item.href}
                     href={item.href}
                     onClick={(e) => {
-                      e.preventDefault();
                       setIsMenuOpen(false);
-                      if (location !== '/') {
-                        window.location.href = item.href;
-                      } else {
-                        const element = document.getElementById(item.id);
-                        if (element) {
-                          const y = element.getBoundingClientRect().top + window.pageYOffset - 100;
-                          window.scrollTo({ top: y, behavior: 'smooth' });
-                        }
-                      }
+                      // Usar navegación estándar del navegador
                     }}
                     className={`px-5 py-4 transition flex items-center w-full ${
                       activeSection === item.id
@@ -310,17 +275,8 @@ export function Header() {
                 <a
                   href="/#soporte"
                   onClick={(e) => {
-                    e.preventDefault();
                     setIsMenuOpen(false);
-                    if (location !== '/') {
-                      window.location.href = '/#soporte';
-                    } else {
-                      const element = document.getElementById('soporte');
-                      if (element) {
-                        const y = element.getBoundingClientRect().top + window.pageYOffset - 100;
-                        window.scrollTo({ top: y, behavior: 'smooth' });
-                      }
-                    }
+                    // Usar navegación estándar del navegador
                   }}
                   className={`px-5 py-4 transition flex items-center w-full ${
                     activeSection === 'soporte'
@@ -344,17 +300,8 @@ export function Header() {
                 <a
                   href="/#contacto"
                   onClick={(e) => {
-                    e.preventDefault();
                     setIsMenuOpen(false);
-                    if (location !== '/') {
-                      window.location.href = '/#contacto';
-                    } else {
-                      const element = document.getElementById('contacto');
-                      if (element) {
-                        const y = element.getBoundingClientRect().top + window.pageYOffset - 100;
-                        window.scrollTo({ top: y, behavior: 'smooth' });
-                      }
-                    }
+                    // Usar navegación estándar del navegador
                   }}
                   className={`px-5 py-4 transition flex items-center w-full ${
                     activeSection === 'contacto'
