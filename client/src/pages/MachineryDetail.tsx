@@ -136,9 +136,13 @@ export default function MachineryDetail() {
                 {/* Main Image Gallery */}
                 <div className="relative w-full h-[450px] border border-gray-200 rounded-lg overflow-hidden mb-1">
                   <img 
-                    src={selectedImage || machinery.image} 
+                    src={(selectedImage || machinery.image).replace('https://auctiontechupload.s3.amazonaws.com/216/auction/2187/', '/api/images/').replace('_', '/').replace('.jpg', '')}
                     alt={machinery.name}
                     className="w-full h-full object-contain"
+                    onError={(e) => {
+                      console.log('Error loading image:', selectedImage || machinery.image);
+                      e.currentTarget.src = `https://placehold.co/600x450/1a1a1a/ffffff?text=${encodeURIComponent(machinery.name.substring(0, 30))}`;
+                    }}
                   />
                   
                   {/* Image Counter */}
@@ -188,9 +192,13 @@ export default function MachineryDetail() {
                           }}
                         >
                           <img
-                            src={img}
+                            src={img.replace('https://auctiontechupload.s3.amazonaws.com/216/auction/2187/', '/api/images/').replace('_', '/').replace('.jpg', '')}
                             alt={`${machinery.name} - Imagen ${index + 1}`}
                             className="w-20 h-16 object-cover"
+                            onError={(e) => {
+                              console.log('Error loading thumbnail:', img);
+                              e.currentTarget.src = `https://placehold.co/80x64/1a1a1a/ffffff?text=${index + 1}`;
+                            }}
                           />
                         </div>
                       ))}

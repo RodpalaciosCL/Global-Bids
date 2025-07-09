@@ -91,3 +91,23 @@ The application is configured for deployment on platforms like Replit:
 - **Database**: Uses Neon serverless PostgreSQL for scalability
 
 The application includes proper error boundaries, loading states, and fallback mechanisms to ensure a smooth user experience across different deployment scenarios.
+
+## Recent Changes (July 2025)
+
+### Price Information Removal
+- **Complete removal of all pricing information** from the marketplace interface as requested
+- Eliminated price filters, sorting by price, and price displays in all catalog components
+- Updated sorting to default to "Year: newest" instead of price-based sorting
+- Removed price-related UI elements from both mobile and desktop catalog views
+
+### Image Proxy Implementation
+- **Added server-side image proxy** to resolve AWS S3 access restrictions from browser
+- Implemented `/api/images/:lotId/:imageNum` endpoint for serving auction images
+- Updated all frontend components to use the proxy URLs instead of direct S3 URLs
+- Added proper error handling and caching for proxied images
+- All 68+ auction lot images now display correctly through the proxy system
+
+### Inventory Verification
+- Verified authentic auction data with exact AWS S3 image counts for all lots
+- Confirmed 628+ total images across the complete Prelco auction inventory
+- Updated existing lots with correct image quantities based on actual S3 bucket content

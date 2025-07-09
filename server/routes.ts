@@ -85,6 +85,28 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Image proxy endpoint
+  app.get("/api/images/:lotId/:imageNum", async (req, res) => {
+    try {
+      const { lotId, imageNum } = req.params;
+      const imageUrl = `https://auctiontechupload.s3.amazonaws.com/216/auction/2187/${lotId}_${imageNum}.jpg`;
+      
+      const response = await fetch(imageUrl);
+      
+      if (!response.ok) {
+        return res.status(404).json({ message: "Image not found" });
+      }
+      
+      const imageBuffer = await response.buffer();
+      res.set('Content-Type', 'image/jpeg');
+      res.set('Cache-Control', 'public, max-age=86400'); // Cache for 24 hours
+      res.send(imageBuffer);
+    } catch (error) {
+      console.error("Error proxying image:", error);
+      res.status(500).json({ message: "Failed to fetch image" });
+    }
+  });
+
   // ─────────────── CONTACT FORM ───────────────
   app.post("/api/contact", async (req, res) => {
     try {

@@ -1,6 +1,5 @@
 import { Link } from 'wouter';
 import { Machinery } from '@/types/machinery';
-import { useCurrency } from '@/contexts/CurrencyContext';
 import { Button } from '@/components/ui/button';
 import { motion } from 'framer-motion';
 
@@ -10,13 +9,10 @@ interface MachineryCardCompactProps {
 }
 
 export function MachineryCardCompact({ item, index }: MachineryCardCompactProps) {
-  const { convertPrice, formatPrice } = useCurrency();
   const { 
-    id, name, price, type, brand, year, hours, 
+    id, name, type, brand, year, hours, 
     kilometers, condition, description, image 
   } = item;
-  
-  const displayPrice = convertPrice(price);
   
   return (
     <motion.div 
@@ -28,11 +24,12 @@ export function MachineryCardCompact({ item, index }: MachineryCardCompactProps)
       {/* Type Badge */}
       <div className="relative">
         <img 
-          src={image} 
+          src={image.replace('https://auctiontechupload.s3.amazonaws.com/216/auction/2187/', '/api/images/').replace('_', '/').replace('.jpg', '')} 
           alt={name} 
           className="w-full h-44 object-cover"
           onError={(e) => {
-            e.currentTarget.src = 'https://placehold.co/400x280?text=Imagen+no+disponible';
+            console.log('Error loading image:', image);
+            e.currentTarget.src = `https://placehold.co/400x280/1a1a1a/ffffff?text=${encodeURIComponent(name.substring(0, 20))}`;
           }}
         />
         <div className="absolute top-2 left-2 bg-black/70 text-white px-2 py-1 text-xs rounded">
@@ -75,12 +72,8 @@ export function MachineryCardCompact({ item, index }: MachineryCardCompactProps)
           {description}
         </p>
         
-        {/* Price & Actions */}
-        <div className="flex justify-between items-center">
-          <div className="bg-amber-300 text-gray-900 font-bold px-2 py-1 rounded text-sm">
-            ${price.toLocaleString()}
-          </div>
-          
+        {/* Actions */}
+        <div className="flex justify-end items-center">
           <div className="flex gap-2">
             <Button 
               variant="ghost" 
