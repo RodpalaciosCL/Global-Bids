@@ -39,18 +39,18 @@ function extractSpecsFromDescription(description: string, name: string) {
     }
   }
 
-  // Extract kilometers - look for patterns like "87220 Km", "1000 km", "93,770 Miles", etc.
-  const kmMatch = description.match(/(\d+(?:,\d+)*)\s*(?:km|Km|KM|kilometers?)/i);
-  const milesMatch = description.match(/(\d+(?:,\d+)*)\s*(?:miles?|Miles?|MILES?)/i);
+  // Extract kilometers - look for patterns like "86.026 Km", "87,220 Km", "1000 km", "93,770 Miles", etc.
+  const kmMatch = description.match(/(\d+(?:[.,]\d+)*)\s*(?:km|Km|KM|kilometers?)/i);
+  const milesMatch = description.match(/(\d+(?:[.,]\d+)*)\s*(?:miles?|Miles?|MILES?)/i);
   
   if (kmMatch) {
-    const km = parseInt(kmMatch[1].replace(/,/g, ''));
+    const km = parseInt(kmMatch[1].replace(/[.,]/g, ''));
     if (km > 0) {
       specs.kilometers = km;
     }
   } else if (milesMatch) {
     // Convert miles to kilometers (1 mile = 1.60934 km)
-    const miles = parseInt(milesMatch[1].replace(/,/g, ''));
+    const miles = parseInt(milesMatch[1].replace(/[.,]/g, ''));
     if (miles > 0) {
       specs.kilometers = Math.round(miles * 1.60934);
     }
