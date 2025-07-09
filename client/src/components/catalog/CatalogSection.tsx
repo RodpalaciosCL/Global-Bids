@@ -1,10 +1,10 @@
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { fadeIn, staggerContainer, slideUp } from "@/lib/animations";
 import { MachineryCard } from "./MachineryCard";
 import { MachineryCardCompact } from "./MachineryCardCompact";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import {
   Machinery,
   MachineryFilters,
@@ -18,11 +18,14 @@ export function CatalogSection() {
   const sectionRef = useRef(null);
   const isInView = useInView(sectionRef, { once: true, amount: 0.1 });
   const { t, language } = useLanguage();
+  const queryClient = useQueryClient();
 
   const [filters, setFilters] = useState<MachineryFilters>({});
   const [currentPage, setCurrentPage] = useState(1);
   const [sortOrder, setSortOrder] = useState("price-asc");
   const [limit] = useState(12);
+
+  const [refreshKey, setRefreshKey] = useState(Date.now());
 
   // Build query URL with parameters
   const buildQueryUrl = () => {
@@ -47,8 +50,8 @@ export function CatalogSection() {
     isLoading,
     refetch,
   } = useQuery({
-    queryKey: [buildQueryUrl()],
-    staleTime: 60000,
+    queryKey: ['machinery', buildQueryUrl(), refreshKey],
+    staleTime: 0,
     refetchOnWindowFocus: false,
   });
 
