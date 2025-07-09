@@ -10,7 +10,7 @@ import {
   MachineryFilters,
   MachineryType,
   MachineryCondition,
-} from "@/types/machinery";
+} from "@shared/schema";
 import { CurrencySelector } from "@/components/ui/CurrencySelector";
 import { useLanguage } from "@/contexts/LanguageContext";
 
@@ -25,7 +25,7 @@ export function CatalogSection() {
   const [sortOrder, setSortOrder] = useState("price-asc");
   const [limit] = useState(12);
 
-  const [refreshKey, setRefreshKey] = useState(Date.now());
+  const [refreshKey] = useState(Date.now());
 
   // Build query URL with parameters
   const buildQueryUrl = () => {
@@ -51,6 +51,17 @@ export function CatalogSection() {
     refetch,
   } = useQuery({
     queryKey: ['machinery', buildQueryUrl(), refreshKey],
+    queryFn: async () => {
+      const url = buildQueryUrl();
+      console.log('Fetching from:', url);
+      const response = await fetch(url);
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      const data = await response.json();
+      console.log('Received data:', data);
+      return data;
+    },
     staleTime: 0,
     refetchOnWindowFocus: false,
   });
@@ -58,11 +69,17 @@ export function CatalogSection() {
   // Define and type the result properly
   interface MachineryResponse {
     items: Machinery[];
+    total: number;
     totalPages: number;
   }
   
-  const machinery = machineryData ? (machineryData as MachineryResponse).items || [] : [];
-  const totalPages = machineryData ? (machineryData as MachineryResponse).totalPages || 1 : 1;
+  const machinery = machineryData?.items || [];
+  const totalPages = machineryData?.totalPages || 1;
+
+  // Debug logs - only show important info
+  if (machinery?.length > 0) {
+    console.log(`✅ Loaded ${machinery.length} machinery items successfully`);
+  }
 
   // Apply filters handler
   const handleApplyFilters = () => {
