@@ -88,9 +88,9 @@ export function AuctionsIframe() {
           </motion.p>
         </div>
         
-        {/* Grid de 3 columnas centrado perfectamente */}
+        {/* Grid de 2 columnas centrado perfectamente */}
         <motion.div 
-          className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch"
+          className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch"
           variants={fadeIn}
           initial="hidden"
           whileInView="visible"
@@ -163,36 +163,7 @@ export function AuctionsIframe() {
             </div>
           </motion.div>
 
-          {/* Sección de Registro */}
-          <motion.div
-            className="bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/20 text-center h-full flex flex-col"
-            variants={fadeIn}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            transition={{ delay: 0.3 }}
-          >
-            <div className="w-12 h-12 bg-secondary rounded-full flex items-center justify-center mx-auto mb-4">
-              <i className="fas fa-user-plus text-lg text-white"></i>
-            </div>
-            <h3 className="text-xl font-bold text-white mb-3">
-              {language === 'es' ? '¿Listo para participar?' : 'Ready to participate?'}
-            </h3>
-            <p className="text-gray-300 mb-4 text-xs leading-relaxed flex-grow">
-              {language === 'es' 
-                ? 'Accede a nuestra plataforma de remates en vivo para pujar por la maquinaria que necesitas a precios competitivos'
-                : 'Access our live auction platform to bid on the machinery you need at competitive prices'
-              }
-            </p>
-            <button 
-              onClick={openForm}
-              className="w-full bg-black hover:bg-gray-800 text-white font-bold py-2.5 px-4 rounded-lg transition-colors duration-300 flex items-center justify-center text-sm mt-auto"
-            >
-              <i className="fas fa-sign-in-alt mr-2"></i>
-              {language === 'es' ? 'Regístrate Gratis' : 'Register Free'}
-              <i className="fas fa-arrow-right ml-2"></i>
-            </button>
-          </motion.div>
+
         </motion.div>
       </div>
     </section>

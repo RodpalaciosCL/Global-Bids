@@ -1,5 +1,5 @@
 import { AboutSection } from "@/components/home/AboutSection";
-import { ActionCTA } from "@/components/home/ActionCTA";
+
 import { BrandsSection } from "@/components/home/BrandsSection";
 import { ContactSection } from "@/components/home/ContactSection";
 import { HeroSection } from "@/components/home/HeroSection";
@@ -29,7 +29,6 @@ export default function Home() {
       <section id="subastas">
         <AuctionsIframe />
       </section>
-      <ActionCTA />
       <section id="soporte">
         <SoporteSection />
       </section>

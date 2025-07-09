@@ -122,6 +122,12 @@ export function Header() {
                 <a
                   key={item.href}
                   href={item.href}
+                  onClick={(e) => {
+                    if (location !== '/') {
+                      e.preventDefault();
+                      window.location.href = item.href;
+                    }
+                  }}
                   className={`relative px-4 py-2 mx-1 font-medium transition-all duration-300 flex items-center justify-center whitespace-nowrap ${
                     activeSection === item.id 
                       ? 'bg-white text-primary rounded-md' 
@@ -149,9 +155,15 @@ export function Header() {
                 </button>
               </Link>
               
-              {/* Resto de hash routes */}
+              {/* Resto de hash routes - forzar navegación a home */}
               <a
                 href="/#soporte"
+                onClick={(e) => {
+                  if (location !== '/') {
+                    e.preventDefault();
+                    window.location.href = '/#soporte';
+                  }
+                }}
                 className={`relative px-4 py-2 mx-1 font-medium transition-all duration-300 flex items-center justify-center whitespace-nowrap ${
                   activeSection === 'soporte' 
                     ? 'bg-white text-primary rounded-md' 
@@ -166,6 +178,12 @@ export function Header() {
               
               <a
                 href="/#contacto"
+                onClick={(e) => {
+                  if (location !== '/') {
+                    e.preventDefault();
+                    window.location.href = '/#contacto';
+                  }
+                }}
                 className={`relative px-4 py-2 mx-1 font-medium transition-all duration-300 flex items-center justify-center whitespace-nowrap ${
                   activeSection === 'contacto' 
                     ? 'bg-white text-primary rounded-md' 
@@ -208,7 +226,13 @@ export function Header() {
                   <a
                     key={item.href}
                     href={item.href}
-                    onClick={() => setIsMenuOpen(false)}
+                    onClick={(e) => {
+                      setIsMenuOpen(false);
+                      if (location !== '/') {
+                        e.preventDefault();
+                        window.location.href = item.href;
+                      }
+                    }}
                     className={`px-5 py-4 transition flex items-center w-full ${
                       activeSection === item.id
                         ? 'bg-primary/10 text-primary font-medium border-l-4 border-primary'
@@ -261,7 +285,13 @@ export function Header() {
                 {/* Resto de hash routes */}
                 <a
                   href="/#soporte"
-                  onClick={() => setIsMenuOpen(false)}
+                  onClick={(e) => {
+                    setIsMenuOpen(false);
+                    if (location !== '/') {
+                      e.preventDefault();
+                      window.location.href = '/#soporte';
+                    }
+                  }}
                   className={`px-5 py-4 transition flex items-center w-full ${
                     activeSection === 'soporte'
                       ? 'bg-primary/10 text-primary font-medium border-l-4 border-primary'
@@ -283,7 +313,13 @@ export function Header() {
                 
                 <a
                   href="/#contacto"
-                  onClick={() => setIsMenuOpen(false)}
+                  onClick={(e) => {
+                    setIsMenuOpen(false);
+                    if (location !== '/') {
+                      e.preventDefault();
+                      window.location.href = '/#contacto';
+                    }
+                  }}
                   className={`px-5 py-4 transition flex items-center w-full ${
                     activeSection === 'contacto'
                       ? 'bg-primary/10 text-primary font-medium border-l-4 border-primary'
