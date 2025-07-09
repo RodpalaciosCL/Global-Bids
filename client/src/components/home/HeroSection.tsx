@@ -75,8 +75,8 @@ export function HeroSection() {
       </div>
       
       <div className="min-h-screen flex flex-col">
-        <div className="flex-grow flex items-center relative z-10 pt-2 md:pt-0">
-          <div className="container mx-auto px-4 py-4 md:py-0">
+        <div className="flex-grow flex items-center relative z-10 -mt-4 md:pt-0">
+          <div className="container mx-auto px-4 py-2 md:py-0">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8 items-center">
               <div className="w-full">
                 <AnimatePresence mode="wait">
