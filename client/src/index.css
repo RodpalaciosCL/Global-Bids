@@ -16,14 +16,7 @@
   
   /* Scroll padding for anchor links (offset for header) */
   html {
-    scroll-padding-top: 5rem; /* Esto ajusta la posición del scroll al hacer clic en los enlaces de anclaje */
-  }
-  
-  /* Específico para móvil - scroll exacto sin offset extra */
-  @media (max-width: 768px) {
-    html {
-      scroll-padding-top: 3.2rem;
-    }
+    scroll-padding-top: 6rem; /* Esto ajusta la posición del scroll al hacer clic en los enlaces de anclaje */
   }
 }
 

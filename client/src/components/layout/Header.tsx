@@ -79,7 +79,7 @@ export function Header() {
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center">
           {/* Logo & Brand Name */}
-          <a href="/#inicio">
+          <Link href="/">
             <motion.div 
               className="flex items-center cursor-pointer"
               whileHover={{ scale: 1.03 }}
@@ -101,7 +101,7 @@ export function Header() {
                 </div>
               </div>
             </motion.div>
-          </a>
+          </Link>
           
           {/* Mobile menu toggle */}
           <motion.button 
