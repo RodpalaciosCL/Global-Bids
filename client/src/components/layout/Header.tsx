@@ -114,30 +114,60 @@ export function Header() {
           </motion.button>
           
           {/* Desktop Menu */}
-          <div className="hidden md:flex items-center space-x-4">
-            <nav className="flex items-center">
+          <div className="hidden md:flex items-center justify-center flex-1">
+            <nav className="flex items-center space-x-2">
               {/* Hash links */}
-              <a href="/#inicio" target="_self" className="relative px-4 py-2 mx-1 font-medium transition-all duration-300 flex items-center justify-center whitespace-nowrap text-white hover:bg-white/10 rounded-md">
+              <a href="/#inicio" 
+                 onClick={(e) => {
+                   e.preventDefault();
+                   window.location.href = '/#inicio';
+                 }}
+                 className="relative px-3 py-2 font-medium transition-all duration-300 flex items-center justify-center whitespace-nowrap text-white hover:bg-white/10 rounded-md">
                 <i className="fas fa-home mr-2 text-white/80"></i>
                 <span>{t('nav.home')}</span>
               </a>
-              <a href="/#nosotros" target="_self" className="relative px-4 py-2 mx-1 font-medium transition-all duration-300 flex items-center justify-center whitespace-nowrap text-white hover:bg-white/10 rounded-md">
+              <a href="/#nosotros" 
+                 onClick={(e) => {
+                   e.preventDefault();
+                   window.location.href = '/#nosotros';
+                 }}
+                 className="relative px-3 py-2 font-medium transition-all duration-300 flex items-center justify-center whitespace-nowrap text-white hover:bg-white/10 rounded-md">
                 <i className="fas fa-users mr-2 text-white/80"></i>
                 <span>{t('nav.about')}</span>
               </a>
-              <a href="/#servicios" target="_self" className="relative px-4 py-2 mx-1 font-medium transition-all duration-300 flex items-center justify-center whitespace-nowrap text-white hover:bg-white/10 rounded-md">
+              <a href="/#servicios" 
+                 onClick={(e) => {
+                   e.preventDefault();
+                   window.location.href = '/#servicios';
+                 }}
+                 className="relative px-3 py-2 font-medium transition-all duration-300 flex items-center justify-center whitespace-nowrap text-white hover:bg-white/10 rounded-md">
                 <i className="fas fa-wrench mr-2 text-white/80"></i>
                 <span>{t('nav.services')}</span>
               </a>
-              <a href="/#subastas" target="_self" className="relative px-4 py-2 mx-1 font-medium transition-all duration-300 flex items-center justify-center whitespace-nowrap text-white hover:bg-white/10 rounded-md">
+              <a href="/#subastas" 
+                 onClick={(e) => {
+                   e.preventDefault();
+                   window.location.href = '/#subastas';
+                 }}
+                 className="relative px-3 py-2 font-medium transition-all duration-300 flex items-center justify-center whitespace-nowrap text-white hover:bg-white/10 rounded-md">
                 <i className="fas fa-gavel mr-2 text-white/80"></i>
                 <span>{t('nav.auctions')}</span>
               </a>
-              <a href="/#soporte" target="_self" className="relative px-4 py-2 mx-1 font-medium transition-all duration-300 flex items-center justify-center whitespace-nowrap text-white hover:bg-white/10 rounded-md">
+              <a href="/#soporte" 
+                 onClick={(e) => {
+                   e.preventDefault();
+                   window.location.href = '/#soporte';
+                 }}
+                 className="relative px-3 py-2 font-medium transition-all duration-300 flex items-center justify-center whitespace-nowrap text-white hover:bg-white/10 rounded-md">
                 <i className="fas fa-headset mr-2 text-white/80"></i>
                 <span>{t('nav.support')}</span>
               </a>
-              <a href="/#contacto" target="_self" className="relative px-4 py-2 mx-1 font-medium transition-all duration-300 flex items-center justify-center whitespace-nowrap text-white hover:bg-white/10 rounded-md">
+              <a href="/#contacto" 
+                 onClick={(e) => {
+                   e.preventDefault();
+                   window.location.href = '/#contacto';
+                 }}
+                 className="relative px-3 py-2 font-medium transition-all duration-300 flex items-center justify-center whitespace-nowrap text-white hover:bg-white/10 rounded-md">
                 <i className="fas fa-envelope mr-2 text-white/80"></i>
                 <span>{t('nav.contact')}</span>
               </a>
@@ -146,7 +176,7 @@ export function Header() {
               <div className="text-white/50 px-2">|</div>
 
               {/* SPA link con animación de parpadeo blanco-amarillo */}
-              <Link href="/marketplace" className="relative px-4 py-2 mx-1 font-medium transition-all duration-300 flex items-center justify-center whitespace-nowrap text-white hover:bg-white/10 rounded-md font-semibold marketplace-pulse">
+              <Link href="/marketplace" className="relative px-3 py-2 font-medium transition-all duration-300 flex items-center justify-center whitespace-nowrap text-white hover:bg-white/10 rounded-md font-semibold marketplace-pulse">
                 <i className="fas fa-th-large mr-2 text-white/80"></i>
                 <span>{t('nav.catalog')}</span>
               </Link>
@@ -177,7 +207,13 @@ export function Header() {
                 </div>
                 
                 {/* Mobile hash links */}
-                <a href="/#inicio" target="_self" onClick={() => setIsMenuOpen(false)} className="px-5 py-4 transition flex items-center w-full text-gray-700 hover:bg-gray-50 border-l-4 border-transparent">
+                <a href="/#inicio" 
+                   onClick={(e) => {
+                     e.preventDefault();
+                     setIsMenuOpen(false);
+                     window.location.href = '/#inicio';
+                   }} 
+                   className="px-5 py-4 transition flex items-center w-full text-gray-700 hover:bg-gray-50 border-l-4 border-transparent">
                   <div className="w-8 h-8 rounded-lg flex items-center justify-center mr-3 bg-gray-100 text-gray-500">
                     <i className="fas fa-home"></i>
                   </div>
@@ -187,7 +223,13 @@ export function Header() {
                   </div>
                 </a>
                 
-                <a href="/#nosotros" target="_self" onClick={() => setIsMenuOpen(false)} className="px-5 py-4 transition flex items-center w-full text-gray-700 hover:bg-gray-50 border-l-4 border-transparent">
+                <a href="/#nosotros" 
+                   onClick={(e) => {
+                     e.preventDefault();
+                     setIsMenuOpen(false);
+                     window.location.href = '/#nosotros';
+                   }} 
+                   className="px-5 py-4 transition flex items-center w-full text-gray-700 hover:bg-gray-50 border-l-4 border-transparent">
                   <div className="w-8 h-8 rounded-lg flex items-center justify-center mr-3 bg-gray-100 text-gray-500">
                     <i className="fas fa-users"></i>
                   </div>
@@ -197,7 +239,13 @@ export function Header() {
                   </div>
                 </a>
                 
-                <a href="/#servicios" target="_self" onClick={() => setIsMenuOpen(false)} className="px-5 py-4 transition flex items-center w-full text-gray-700 hover:bg-gray-50 border-l-4 border-transparent">
+                <a href="/#servicios" 
+                   onClick={(e) => {
+                     e.preventDefault();
+                     setIsMenuOpen(false);
+                     window.location.href = '/#servicios';
+                   }} 
+                   className="px-5 py-4 transition flex items-center w-full text-gray-700 hover:bg-gray-50 border-l-4 border-transparent">
                   <div className="w-8 h-8 rounded-lg flex items-center justify-center mr-3 bg-gray-100 text-gray-500">
                     <i className="fas fa-wrench"></i>
                   </div>
@@ -207,7 +255,13 @@ export function Header() {
                   </div>
                 </a>
                 
-                <a href="/#subastas" target="_self" onClick={() => setIsMenuOpen(false)} className="px-5 py-4 transition flex items-center w-full text-gray-700 hover:bg-gray-50 border-l-4 border-transparent">
+                <a href="/#subastas" 
+                   onClick={(e) => {
+                     e.preventDefault();
+                     setIsMenuOpen(false);
+                     window.location.href = '/#subastas';
+                   }} 
+                   className="px-5 py-4 transition flex items-center w-full text-gray-700 hover:bg-gray-50 border-l-4 border-transparent">
                   <div className="w-8 h-8 rounded-lg flex items-center justify-center mr-3 bg-gray-100 text-gray-500">
                     <i className="fas fa-gavel"></i>
                   </div>
@@ -217,7 +271,13 @@ export function Header() {
                   </div>
                 </a>
                 
-                <a href="/#soporte" target="_self" onClick={() => setIsMenuOpen(false)} className="px-5 py-4 transition flex items-center w-full text-gray-700 hover:bg-gray-50 border-l-4 border-transparent">
+                <a href="/#soporte" 
+                   onClick={(e) => {
+                     e.preventDefault();
+                     setIsMenuOpen(false);
+                     window.location.href = '/#soporte';
+                   }} 
+                   className="px-5 py-4 transition flex items-center w-full text-gray-700 hover:bg-gray-50 border-l-4 border-transparent">
                   <div className="w-8 h-8 rounded-lg flex items-center justify-center mr-3 bg-gray-100 text-gray-500">
                     <i className="fas fa-headset"></i>
                   </div>
@@ -227,7 +287,13 @@ export function Header() {
                   </div>
                 </a>
                 
-                <a href="/#contacto" target="_self" onClick={() => setIsMenuOpen(false)} className="px-5 py-4 transition flex items-center w-full text-gray-700 hover:bg-gray-50 border-l-4 border-transparent">
+                <a href="/#contacto" 
+                   onClick={(e) => {
+                     e.preventDefault();
+                     setIsMenuOpen(false);
+                     window.location.href = '/#contacto';
+                   }} 
+                   className="px-5 py-4 transition flex items-center w-full text-gray-700 hover:bg-gray-50 border-l-4 border-transparent">
                   <div className="w-8 h-8 rounded-lg flex items-center justify-center mr-3 bg-gray-100 text-gray-500">
                     <i className="fas fa-envelope"></i>
                   </div>
