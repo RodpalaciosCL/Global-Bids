@@ -105,34 +105,65 @@ export default function MachineryDetail() {
                 </div>
               </div>
               
-              {/* Image Thumbnails - Full width */}
+              {/* Image Thumbnails with Navigation - Full width */}
               <div className="px-3 w-full">
-                <div className="flex gap-2 overflow-x-auto pb-3 w-full">
-                  <div 
-                    className={`${selectedImage === machinery.image || !selectedImage ? 'border-2 border-primary' : 'border border-gray-200'} rounded overflow-hidden flex-shrink-0 cursor-pointer`}
-                    onClick={() => setSelectedImage(machinery.image)}
-                  >
-                    <img
-                      src={machinery.image}
-                      alt={`${machinery.name} - Thumbnail 1`}
-                      className="w-20 h-16 object-cover"
-                    />
+                {machinery.gallery && machinery.gallery.length > 1 ? (
+                  <div className="relative">
+                    {/* Navigation arrows */}
+                    <div className="absolute left-0 top-1/2 transform -translate-y-1/2 z-10">
+                      <button 
+                        onClick={() => {
+                          const currentIndex = machinery.gallery.findIndex(img => img === (selectedImage || machinery.image));
+                          const prevIndex = currentIndex > 0 ? currentIndex - 1 : machinery.gallery.length - 1;
+                          setSelectedImage(machinery.gallery[prevIndex]);
+                        }}
+                        className="bg-black/50 text-white hover:bg-black/70 rounded-full p-1 shadow-lg"
+                      >
+                        <i className="fas fa-chevron-left text-sm"></i>
+                      </button>
+                    </div>
+                    <div className="absolute right-0 top-1/2 transform -translate-y-1/2 z-10">
+                      <button 
+                        onClick={() => {
+                          const currentIndex = machinery.gallery.findIndex(img => img === (selectedImage || machinery.image));
+                          const nextIndex = currentIndex < machinery.gallery.length - 1 ? currentIndex + 1 : 0;
+                          setSelectedImage(machinery.gallery[nextIndex]);
+                        }}
+                        className="bg-black/50 text-white hover:bg-black/70 rounded-full p-1 shadow-lg"
+                      >
+                        <i className="fas fa-chevron-right text-sm"></i>
+                      </button>
+                    </div>
+                    
+                    {/* Thumbnails */}
+                    <div className="flex gap-2 overflow-x-auto pb-3 w-full px-6">
+                      {machinery.gallery.map((img, index) => (
+                        <div 
+                          key={index} 
+                          className={`${(selectedImage || machinery.image) === img ? 'border-2 border-primary' : 'border border-gray-200'} rounded overflow-hidden flex-shrink-0 cursor-pointer`}
+                          onClick={() => setSelectedImage(img)}
+                        >
+                          <img
+                            src={img}
+                            alt={`${machinery.name} - Thumbnail ${index + 1}`}
+                            className="w-20 h-16 object-cover"
+                          />
+                        </div>
+                      ))}
+                    </div>
                   </div>
-                  
-                  {machinery.gallery && machinery.gallery.map((img, index) => (
-                    <div 
-                      key={index} 
-                      className={`${selectedImage === img ? 'border-2 border-primary' : 'border border-gray-200'} rounded overflow-hidden flex-shrink-0 cursor-pointer`}
-                      onClick={() => setSelectedImage(img)}
-                    >
+                ) : (
+                  // Single image - no navigation needed
+                  <div className="flex gap-2 overflow-x-auto pb-3 w-full">
+                    <div className="border-2 border-primary rounded overflow-hidden flex-shrink-0">
                       <img
-                        src={img}
-                        alt={`${machinery.name} - Thumbnail ${index + 2}`}
+                        src={machinery.image}
+                        alt={`${machinery.name} - Single image`}
                         className="w-20 h-16 object-cover"
                       />
                     </div>
-                  ))}
-                </div>
+                  </div>
+                )}
               </div>
             </div>
             
