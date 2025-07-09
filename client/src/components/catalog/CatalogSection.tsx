@@ -13,47 +13,61 @@ import { useLanguage } from "@/contexts/LanguageContext";
 
 // Intelligent classification function (same as in card components)
 function getCorrectType(name: string, description: string): string {
+  const titleWords = name.toLowerCase();
   const nameAndDesc = (name + ' ' + description).toLowerCase();
   
-  // Precise classification system
-  if (nameAndDesc.includes('golf cart') || nameAndDesc.includes('carrito de golf')) {
+  // CRITICAL: Prioritize title keywords first for accuracy
+  
+  // Priority 1: Exact title matches (highest priority)
+  if (titleWords.includes('excavator') || titleWords.includes('excavadora')) {
+    return 'excavadora';
+  } else if (titleWords.includes('dump truck') || titleWords.includes('volquete')) {
+    return 'camion-tolva';
+  } else if (titleWords.includes('dump trailer') && titleWords.includes('tri-axle')) {
+    return 'tolva';
+  } else if (titleWords.includes('tractor') && !titleWords.includes('dump')) {
+    return 'tractor';
+  } else if (titleWords.includes('wheel loader') || titleWords.includes('cargador')) {
+    return 'cargador';
+  } else if (titleWords.includes('motor grader') || titleWords.includes('motoniveladora')) {
+    return 'motoniveladora';
+  } else if (titleWords.includes('dozer') || titleWords.includes('bulldozer')) {
+    return 'bulldozer';
+  } else if (titleWords.includes('mobile crane') || titleWords.includes('grua movil')) {
+    return 'grua';
+  } else if (titleWords.includes('telehandler') || titleWords.includes('manipulador')) {
+    return 'manipulador-telescopico';
+  } else if (titleWords.includes('compressor') || titleWords.includes('compresor')) {
+    return 'compresor';
+  } else if (titleWords.includes('golf cart') || titleWords.includes('carrito de golf')) {
     return 'vehiculo-golf';
-  } else if (nameAndDesc.includes('ripper tooth') || nameAndDesc.includes('diente') || nameAndDesc.includes('teeth')) {
+  } else if (titleWords.includes('trailer') || titleWords.includes('remolque')) {
+    return 'remolque';
+  } else if (titleWords.includes('bus') || titleWords.includes('autobus')) {
+    return 'autobus';
+  }
+  
+  // Priority 2: Brand-specific vehicle classification
+  if (titleWords.includes('ford explorer') || titleWords.includes('jeep cherokee') || 
+      titleWords.includes('peugeot') || titleWords.includes('landtrek')) {
+    return 'camioneta';
+  }
+  
+  // Priority 3: Specific truck types
+  if (titleWords.includes('water truck') || titleWords.includes('fuel truck')) {
+    return 'camion';
+  }
+  
+  // Priority 4: Parts and attachments (lower priority to avoid misclassification)
+  if (nameAndDesc.includes('ripper tooth') || nameAndDesc.includes('diente') || nameAndDesc.includes('teeth')) {
     return 'repuesto';
   } else if (nameAndDesc.includes('rake attachment') || nameAndDesc.includes('implemento') || nameAndDesc.includes('attachment')) {
     return 'implemento';
-  } else if (nameAndDesc.includes('ford explorer') || nameAndDesc.includes('jeep cherokee') || nameAndDesc.includes('peugeot') || nameAndDesc.includes('landtrek')) {
-    return 'camioneta';
-  } else if (nameAndDesc.includes('john deere') && (nameAndDesc.includes('tractor') || nameAndDesc.includes('6105e'))) {
-    return 'tractor';
-  } else if (nameAndDesc.includes('excavator') || nameAndDesc.includes('excavadora')) {
-    return 'excavadora';
-  } else if (nameAndDesc.includes('dozer') || nameAndDesc.includes('bulldozer')) {
-    return 'bulldozer';
-  } else if (nameAndDesc.includes('motor grader') || nameAndDesc.includes('motoniveladora')) {
-    return 'motoniveladora';
-  } else if (nameAndDesc.includes('wheel loader') || nameAndDesc.includes('cargador')) {
-    return 'cargador';
-  } else if (nameAndDesc.includes('water truck') || nameAndDesc.includes('camion agua')) {
-    return 'camion';
-  } else if (nameAndDesc.includes('dump truck') || nameAndDesc.includes('volquete') || nameAndDesc.includes('tri-axle')) {
-    return 'volquete';
-  } else if (nameAndDesc.includes('sleeper tractor') || nameAndDesc.includes('tractor sleeper')) {
-    return 'tractor';
-  } else if (nameAndDesc.includes('mobile crane') || nameAndDesc.includes('grua movil')) {
-    return 'grua';
-  } else if (nameAndDesc.includes('bus') || nameAndDesc.includes('autobus')) {
-    return 'autobus';
-  } else if (nameAndDesc.includes('fuel truck') || nameAndDesc.includes('camion combustible')) {
-    return 'camion';
-  } else if (nameAndDesc.includes('trailer') || nameAndDesc.includes('remolque')) {
-    return 'remolque';
-  } else if (nameAndDesc.includes('vertical drill') || nameAndDesc.includes('perforadora')) {
+  }
+  
+  // Priority 5: Other equipment types
+  if (nameAndDesc.includes('vertical drill') || nameAndDesc.includes('perforadora')) {
     return 'perforadora';
-  } else if (nameAndDesc.includes('telehandler') || nameAndDesc.includes('manipulador')) {
-    return 'manipulador-telescopico';
-  } else if (nameAndDesc.includes('compressor') || nameAndDesc.includes('compresor')) {
-    return 'compresor';
   } else if (nameAndDesc.includes('concrete mixer') || nameAndDesc.includes('mezcladora')) {
     return 'mezcladora';
   } else if (nameAndDesc.includes('roller') || nameAndDesc.includes('rodillo')) {
@@ -284,12 +298,13 @@ export function CatalogSection() {
                     <option value="">{language === 'es' ? '✅ Todas las familias' : '✅ All families'}</option>
                     <option value="excavadora">{language === 'es' ? 'Excavadora' : 'Excavator'}</option>
                     <option value="camion">{language === 'es' ? 'Camión' : 'Truck'}</option>
+                    <option value="camion-tolva">{language === 'es' ? 'Camión Tolva' : 'Dump Truck'}</option>
+                    <option value="tolva">{language === 'es' ? 'Tolva' : 'Dump Trailer'}</option>
                     <option value="cargador">{language === 'es' ? 'Cargador' : 'Loader'}</option>
                     <option value="camioneta">{language === 'es' ? 'Camioneta' : 'Pickup Truck'}</option>
                     <option value="tractor">{language === 'es' ? 'Tractor' : 'Tractor'}</option>
                     <option value="bulldozer">{language === 'es' ? 'Bulldozer' : 'Bulldozer'}</option>
                     <option value="motoniveladora">{language === 'es' ? 'Motoniveladora' : 'Motor Grader'}</option>
-                    <option value="volquete">{language === 'es' ? 'Volquete' : 'Dump Truck'}</option>
                     <option value="grua">{language === 'es' ? 'Grúa' : 'Crane'}</option>
                     <option value="autobus">{language === 'es' ? 'Autobús' : 'Bus'}</option>
                     <option value="remolque">{language === 'es' ? 'Remolque' : 'Trailer'}</option>
@@ -358,12 +373,13 @@ export function CatalogSection() {
                     <option value="">{language === 'es' ? '✅ Todas las familias' : '✅ All families'}</option>
                     <option value="excavadora">{language === 'es' ? 'Excavadora' : 'Excavator'}</option>
                     <option value="camion">{language === 'es' ? 'Camión' : 'Truck'}</option>
+                    <option value="camion-tolva">{language === 'es' ? 'Camión Tolva' : 'Dump Truck'}</option>
+                    <option value="tolva">{language === 'es' ? 'Tolva' : 'Dump Trailer'}</option>
                     <option value="cargador">{language === 'es' ? 'Cargador' : 'Loader'}</option>
                     <option value="camioneta">{language === 'es' ? 'Camioneta' : 'Pickup Truck'}</option>
                     <option value="tractor">{language === 'es' ? 'Tractor' : 'Tractor'}</option>
                     <option value="bulldozer">{language === 'es' ? 'Bulldozer' : 'Bulldozer'}</option>
                     <option value="motoniveladora">{language === 'es' ? 'Motoniveladora' : 'Motor Grader'}</option>
-                    <option value="volquete">{language === 'es' ? 'Volquete' : 'Dump Truck'}</option>
                     <option value="grua">{language === 'es' ? 'Grúa' : 'Crane'}</option>
                     <option value="autobus">{language === 'es' ? 'Autobús' : 'Bus'}</option>
                     <option value="remolque">{language === 'es' ? 'Remolque' : 'Trailer'}</option>
