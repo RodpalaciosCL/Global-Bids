@@ -117,57 +117,27 @@ export function Header() {
           <div className="hidden md:flex items-center justify-center flex-1">
             <nav className="flex items-center space-x-2">
               {/* Hash links */}
-              <a href="/#inicio" 
-                 onClick={(e) => {
-                   e.preventDefault();
-                   window.location.href = '/#inicio';
-                 }}
-                 className="relative px-3 py-2 font-medium transition-all duration-300 flex items-center justify-center whitespace-nowrap text-white hover:bg-white/10 rounded-md">
+              <a href="/#inicio" className="relative px-3 py-2 font-medium transition-all duration-300 flex items-center justify-center whitespace-nowrap text-white hover:bg-white/10 rounded-md">
                 <i className="fas fa-home mr-2 text-white/80"></i>
                 <span>{t('nav.home')}</span>
               </a>
-              <a href="/#nosotros" 
-                 onClick={(e) => {
-                   e.preventDefault();
-                   window.location.href = '/#nosotros';
-                 }}
-                 className="relative px-3 py-2 font-medium transition-all duration-300 flex items-center justify-center whitespace-nowrap text-white hover:bg-white/10 rounded-md">
+              <a href="/#nosotros" className="relative px-3 py-2 font-medium transition-all duration-300 flex items-center justify-center whitespace-nowrap text-white hover:bg-white/10 rounded-md">
                 <i className="fas fa-users mr-2 text-white/80"></i>
                 <span>{t('nav.about')}</span>
               </a>
-              <a href="/#servicios" 
-                 onClick={(e) => {
-                   e.preventDefault();
-                   window.location.href = '/#servicios';
-                 }}
-                 className="relative px-3 py-2 font-medium transition-all duration-300 flex items-center justify-center whitespace-nowrap text-white hover:bg-white/10 rounded-md">
+              <a href="/#servicios" className="relative px-3 py-2 font-medium transition-all duration-300 flex items-center justify-center whitespace-nowrap text-white hover:bg-white/10 rounded-md">
                 <i className="fas fa-wrench mr-2 text-white/80"></i>
                 <span>{t('nav.services')}</span>
               </a>
-              <a href="/#subastas" 
-                 onClick={(e) => {
-                   e.preventDefault();
-                   window.location.href = '/#subastas';
-                 }}
-                 className="relative px-3 py-2 font-medium transition-all duration-300 flex items-center justify-center whitespace-nowrap text-white hover:bg-white/10 rounded-md">
+              <a href="/#subastas" className="relative px-3 py-2 font-medium transition-all duration-300 flex items-center justify-center whitespace-nowrap text-white hover:bg-white/10 rounded-md">
                 <i className="fas fa-gavel mr-2 text-white/80"></i>
                 <span>{t('nav.auctions')}</span>
               </a>
-              <a href="/#soporte" 
-                 onClick={(e) => {
-                   e.preventDefault();
-                   window.location.href = '/#soporte';
-                 }}
-                 className="relative px-3 py-2 font-medium transition-all duration-300 flex items-center justify-center whitespace-nowrap text-white hover:bg-white/10 rounded-md">
+              <a href="/#soporte" className="relative px-3 py-2 font-medium transition-all duration-300 flex items-center justify-center whitespace-nowrap text-white hover:bg-white/10 rounded-md">
                 <i className="fas fa-headset mr-2 text-white/80"></i>
                 <span>{t('nav.support')}</span>
               </a>
-              <a href="/#contacto" 
-                 onClick={(e) => {
-                   e.preventDefault();
-                   window.location.href = '/#contacto';
-                 }}
-                 className="relative px-3 py-2 font-medium transition-all duration-300 flex items-center justify-center whitespace-nowrap text-white hover:bg-white/10 rounded-md">
+              <a href="/#contacto" className="relative px-3 py-2 font-medium transition-all duration-300 flex items-center justify-center whitespace-nowrap text-white hover:bg-white/10 rounded-md">
                 <i className="fas fa-envelope mr-2 text-white/80"></i>
                 <span>{t('nav.contact')}</span>
               </a>
@@ -175,11 +145,11 @@ export function Header() {
               {/* Separador visual */}
               <div className="text-white/50 px-2">|</div>
 
-              {/* SPA link con animación de parpadeo blanco-amarillo */}
-              <Link href="/marketplace" className="relative px-3 py-2 font-medium transition-all duration-300 flex items-center justify-center whitespace-nowrap text-white hover:bg-white/10 rounded-md font-semibold marketplace-pulse">
+              {/* Hash link igual que los demás con animación de parpadeo */}
+              <a href="/#marketplace" className="relative px-3 py-2 font-medium transition-all duration-300 flex items-center justify-center whitespace-nowrap text-white hover:bg-white/10 rounded-md font-semibold marketplace-pulse">
                 <i className="fas fa-th-large mr-2 text-white/80"></i>
                 <span>{t('nav.catalog')}</span>
-              </Link>
+              </a>
             </nav>
             
             <div className="pl-2 border-l border-white/20">
@@ -310,18 +280,18 @@ export function Header() {
                   <div className="w-full h-px bg-gray-200"></div>
                 </div>
 
-                {/* SPA link for mobile con destaque */}
-                <Link href="/marketplace">
-                  <button onClick={() => setIsMenuOpen(false)} className="px-5 py-4 transition flex items-center w-full text-gray-900 hover:bg-gray-50 border-l-4 border-transparent font-semibold animate-pulse">
-                    <div className="w-8 h-8 rounded-lg flex items-center justify-center mr-3 bg-primary/10 text-primary">
-                      <i className="fas fa-th-large"></i>
-                    </div>
-                    <div>
-                      <div className="font-semibold text-gray-900">{t('nav.catalog')}</div>
-                      <div className="text-xs text-gray-600">{t('nav.catalogDesc')}</div>
-                    </div>
-                  </button>
-                </Link>
+                {/* Hash link for mobile con destaque */}
+                <a href="/#marketplace" 
+                   onClick={() => setIsMenuOpen(false)} 
+                   className="px-5 py-4 transition flex items-center w-full text-gray-900 hover:bg-gray-50 border-l-4 border-transparent font-semibold marketplace-pulse">
+                  <div className="w-8 h-8 rounded-lg flex items-center justify-center mr-3 bg-primary/10 text-primary">
+                    <i className="fas fa-th-large"></i>
+                  </div>
+                  <div>
+                    <div className="font-semibold text-gray-900">{t('nav.catalog')}</div>
+                    <div className="text-xs text-gray-600">{t('nav.catalogDesc')}</div>
+                  </div>
+                </a>
                 
                 <div className="px-5 py-4 flex justify-between items-center bg-gray-50 mt-2">
                   <div className="text-sm text-gray-500">{t('nav.language')}:</div>

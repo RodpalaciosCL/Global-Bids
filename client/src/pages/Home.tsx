@@ -1,5 +1,6 @@
+import { useEffect } from "react";
+import { useLocation } from "wouter";
 import { AboutSection } from "@/components/home/AboutSection";
-
 import { BrandsSection } from "@/components/home/BrandsSection";
 import { ContactSection } from "@/components/home/ContactSection";
 import { HeroSection } from "@/components/home/HeroSection";
@@ -10,6 +11,23 @@ import { CatalogSection } from "@/components/catalog/CatalogSection";
 import { AuctionsIframe } from "@/components/auctions/AuctionsIframe";
 
 export default function Home() {
+  const [location] = useLocation();
+
+  useEffect(() => {
+    // Extrae la parte tras el '#'
+    const [, hash] = location.split("#");
+    if (hash) {
+      // Dale al navegador un tick para montar contenido
+      setTimeout(() => {
+        const el = document.getElementById(hash);
+        if (el) {
+          // Scroll suave y nativo
+          el.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+      }, 50);
+    }
+  }, [location]);
+
   return (
     <>
       <section id="inicio">
@@ -28,6 +46,9 @@ export default function Home() {
       </section>
       <section id="soporte">
         <SoporteSection />
+      </section>
+      <section id="marketplace">
+        <CatalogSection />
       </section>
       <section id="contacto">
         <ContactSection />

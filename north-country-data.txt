@@ -1,54 +1,101 @@
-Aquí va de nuevo, con foco absoluto en el fallo “desde /marketplace” → hash links se van a “/” en vez de “/#contacto”:
+Lo que está pasando es que tu despliegue “original” no está usando Wouter para interceptar la parte de hash (todo /​#inicio lo deja pasar al navegador y hace scroll), mientras que tu versión “nueva” sí está corriendo el router de Wouter por encima de los hashes y por eso:
 
-1️. Asegúrate de que el Router esté bien ordenado
-En App.tsx pon primero la ruta "/marketplace" y luego la raíz "/":
+Cuando haces clic en /​#contacto desde /marketplace, Wouter ve la ruta como / (ignora el hash) y te monta <Home>, pero no deja que el navegador haga el scroll nativo.
+
+Al no encontrarse ningún código que lo mueva, parece que te manda siempre al “inicio” de la página.
+
+Por qué la versión original funciona
+Tu app desplegada en
+
+https://global-bids-rpalacios3.replit.app/#inicio
+usa únicamente anchors HTML y deja que el navegador maneje el hash. No hay SPA Router interceptando; por eso funcionan los hash links “de caja”:
+
+html
+Copiar
+Editar
+<a href="#contacto">Contacto</a>
+Simple, directo, el browser hace el scroll.
+
+Por qué la versión nueva se rompe
+En tu código local has envuelto todo en Wouter con BrowserHistory, de modo que:
 
 tsx
 Copiar
 Editar
-import { Router, Route } from 'wouter'
+<Router>
+  <Header />
+  <Route path="/" component={Home} />
+  <Route path="/marketplace" component={Marketplace} />
+</Router>
+Y tus <a href="/#contacto"> están siendo “interceptados” por Wouter (porque tienen / delante), que siempre vuelve a renderizar / sin permitir el scroll nativo.
+
+Solución: usar un Hash-Location Hook para que Wouter respete el hash
+En lugar de BrowserHistory, haz que Wouter use el hash de la URL como su fuente de verdad. Así:
+
+Instala (si no lo tienes):
+
+bash
+Copiar
+Editar
+npm install wouter
+npm install wouter/use-location
+Envuelve tu App con el provider de hash-location:
+
+tsx
+Copiar
+Editar
+// client/src/App.tsx
+import { LocationProvider } from "wouter";
+import { useHashLocation } from "wouter/use-location";
 
 export default function App() {
   return (
-    <Router>
+    // Ahora Wouter escuchará cambios en el hash (/#algo)
+    <LocationProvider hook={useHashLocation}>
       <Header />
-      {/* IMPORTANTE: marketplace antes de la ruta "/" */}
       <Route path="/marketplace" component={Marketplace} />
       <Route path="/" component={Home} />
-    </Router>
-  )
+    </LocationProvider>
+  );
 }
-Si el "/" viene primero, Wouter castea también /marketplace como home y «se traga» el hash.
-
-2️. Usa enlaces HTML puros con recarga completa desde /marketplace
-En Header.tsx, para las secciones de la home NUNCA uses <Link> de Wouter, ni onClick, ni JS extra. Esto obliga a que el navegador haga full reload y salte al ancla:
+Header: sigue usando anchors “puras”:
 
 tsx
 Copiar
 Editar
-<nav className="…">
-  {/* 👉 SECCIONES HOME (recarga + scroll automático) */}
-  <a href="/#inicio"    target="_self" className="px-6 py-3">Inicio</a>
-  <a href="/#nosotros"  target="_self" className="px-6 py-3">Nosotros</a>
-  <a href="/#servicios" target="_self" className="px-6 py-3">Servicios</a>
-  <a href="/#subastas"  target="_self" className="px-6 py-3">Subastas</a>
-  <a href="/#soporte"   target="_self" className="px-6 py-3">Soporte</a>
-  <a href="/#contacto"  target="_self" className="px-6 py-3">Contacto</a>
+// client/src/components/layout/Header.tsx
+<nav>
+  <a href="#inicio"    className="px-6 py-3">Inicio</a>
+  <a href="#nosotros"  className="px-6 py-3">Nosotros</a>
+  <a href="#servicios" className="px-6 py-3">Servicios</a>
+  <a href="#subastas"  className="px-6 py-3">Subastas</a>
+  <a href="#soporte"   className="px-6 py-3">Soporte</a>
+  <a href="#contacto"  className="px-6 py-3">Contacto</a>
 
-  {/* 👉 SPA route independiente */}
   <Link href="/marketplace" className="px-6 py-3">Marketplace</Link>
 </nav>
-target="_self": fuerza recarga completa y evita que Wouter intercepte.
+Home: asegúrate de tener los id en cada sección y, opcionalmente, usa un pequeño efecto de scroll (como antes):
 
-El href debe empezar con / para apuntar siempre a /#contacto, no a /marketplace#contacto.
-
-3️. Verifica los IDs en Home.tsx
-Cada sección de la home debe existir con el id exacto:
-
-jsx
+tsx
 Copiar
 Editar
+// client/src/pages/Home.tsx
+import { useEffect } from "react";
+import { useLocation } from "wouter";
+
 export default function Home() {
+  const [location] = useLocation();
+
+  useEffect(() => {
+    const [, hash] = location.split("#");
+    if (hash) {
+      setTimeout(() => {
+        const el = document.getElementById(hash);
+        if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+      }, 50);
+    }
+  }, [location]);
+
   return (
     <>
       <section id="inicio">…</section>
@@ -58,15 +105,32 @@ export default function Home() {
       <section id="soporte">…</section>
       <section id="contacto">…</section>
     </>
-  )
+  );
 }
-Si hay un typo en cualquiera de esos id no va a hacer scroll.
+¿Por qué esto arregla todo?
+Wouter ya no intercepta el “hash” como parte de la ruta, sino que lo trata como ancla.
 
-Prueba final
-Sitio arranca en / → clic “Marketplace” → /marketplace.
+El navegador mueve el scroll de forma nativa (o con tu scrollIntoView) sin recargar ni “flash”.
 
-Desde /marketplace → clic “Contacto” → debe recargar en /#contacto y bajar al <section id="contacto">.
+Tu header sigue siendo exactamente anchors HTML + 1 <Link> para marketplace.
 
-Igual con cualquier otra sección: “Servicios”, “Subastas”, etc.
+Con esto tu app local volverá a comportarse idéntica a la que viste ayer en producción. ¡Pruébalo y confirmas!
 
-Si sigues estos 3 pasos al pie de la letra, no habrá más saltos a “Inicio” ni comportamientos extraños.
+
+
+
+
+
+
+
+Fuentes
+
+Preguntar a ChatGPT
+
+
+
+Herramientas
+
+
+
+ChatGPT puede cometer e

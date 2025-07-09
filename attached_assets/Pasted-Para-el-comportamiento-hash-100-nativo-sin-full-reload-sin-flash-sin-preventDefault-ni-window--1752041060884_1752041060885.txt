@@ -1,0 +1,94 @@
+Para el comportamiento “hash” 100% nativo (sin full-reload, sin flash, sin preventDefault ni window.location), Wouter NO va a dejar que el navegador haga el scroll por sí solo, porque está manejando la navegación como SPA. La única forma de restaurar el “sentir” de un hash link en una SPA es implementar un pequeño scroll-on-hash en el componente Home.
+
+1. Enlaza siempre con <a href="/#sección">
+diff
+Copiar
+Editar
+<!-- Header.tsx -->
+<nav>
+  {/* Secciones home (hash links puros) */}
+  <a href="/#inicio"    className="px-6 py-3">Inicio</a>
+  <a href="/#nosotros"  className="px-6 py-3">Nosotros</a>
+  <a href="/#servicios" className="px-6 py-3">Servicios</a>
+  <a href="/#subastas"  className="px-6 py-3">Subastas</a>
+  <a href="/#soporte"   className="px-6 py-3">Soporte</a>
+  <a href="/#contacto"  className="px-6 py-3">Contacto</a>
+
+  {/* Ruta SPA independiente */}
+  <Link href="/marketplace" className="px-6 py-3">Marketplace</Link>
+</nav>
+🔑 Importante: no uses onClick, preventDefault, ni window.location. Estas etiquetas <a> harán que el browser “navegue” a /#contacto, pero como es una SPA no recarga la página entera y no hace scroll automáticamente.
+
+2. Agrega un “scroll-on-hash” en tu Home
+En client/src/pages/Home.tsx añade este hook:
+
+tsx
+Copiar
+Editar
+import { useEffect } from "react";
+import { useLocation } from "wouter";
+
+export default function Home() {
+  const [location] = useLocation();
+
+  useEffect(() => {
+    // Extrae la parte tras el '#'
+    const [, hash] = location.split("#");
+    if (hash) {
+      // Dale al navegador un tick para montar contenido
+      setTimeout(() => {
+        const el = document.getElementById(hash);
+        if (el) {
+          // Scroll suave y nativo
+          el.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+      }, 50);
+    }
+  }, [location]);
+
+  return (
+    <>
+      <section id="inicio">…</section>
+      <section id="nosotros">…</section>
+      <section id="servicios">…</section>
+      <section id="subastas">…</section>
+      <section id="soporte">…</section>
+      <section id="contacto">…</section>
+    </>
+  );
+}
+Este efecto escucha el cambio de ruta (location de Wouter).
+
+Si detecta un #algo, busca el elemento con ese id y hace scrollIntoView({behavior:"smooth"}).
+
+No hay full-reload ni flash blanco, y obtienes un scroll suave “como hash link nativo”.
+
+3. (Opcional) CSS global para scroll-behavior
+En tu CSS global (por ejemplo en index.css):
+
+css
+Copiar
+Editar
+html {
+  scroll-behavior: smooth;
+}
+Esto asegura suavizado también si en algún otro punto usas anclas nativas.
+
+Prueba final
+Arrancas en / → clic “Marketplace” → vas a /marketplace
+
+Desde /marketplace → clic “Contacto” → hash link cambia a /#contacto, Wouter renderiza <Home>, el hook hace scroll al <section id="contacto"> sin recarga ni parpadeo.
+
+Con esto, el router no interfiere con tus hash links y recuperas ese comportamiento de navegadores clásicos.
+
+
+
+
+
+
+
+
+Fuentes
+
+Preguntar a ChatGPT
+

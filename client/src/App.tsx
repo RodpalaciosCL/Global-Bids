@@ -17,8 +17,6 @@ import { useHtmlLang } from "@/hooks/useHtmlLang";
 function Router() {
   return (
     <Switch>
-      {/* IMPORTANTE: marketplace antes de la ruta "/" */}
-      <Route path="/marketplace" component={Marketplace} />
       <Route path="/machinery/:id" component={MachineryDetail} />
       <Route path="/" component={Home} />
       <Route component={NotFound} />
