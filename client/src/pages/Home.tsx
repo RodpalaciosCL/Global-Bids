@@ -25,7 +25,7 @@ export default function Home() {
           const header = document.querySelector('header');
           const headerHeight = header ? header.offsetHeight : 80;
           const elementPosition = el.getBoundingClientRect().top + window.pageYOffset;
-          const offsetPosition = elementPosition - headerHeight - 10;
+          const offsetPosition = elementPosition - headerHeight + 10;
           
           window.scrollTo({
             top: offsetPosition,

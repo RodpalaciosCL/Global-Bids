@@ -25,7 +25,7 @@ export function Header() {
       const header = document.querySelector('header');
       if (header) {
         const height = header.offsetHeight;
-        document.documentElement.style.setProperty('--header-height', `${height + 10}px`);
+        document.documentElement.style.setProperty('--header-height', `${height - 10}px`);
       }
     };
     
