@@ -4,10 +4,10 @@ import { machinery } from '../shared/schema';
 // Lotes exactos de la página 2 según captura real
 const page2Lots = [
   // Fila 1
-  { lotNum: 114, name: "New 2025 CAT 325", type: "excavator", brand: "Caterpillar", year: 2025, hours: 0, condition: "new" },
-  { lotNum: 140, name: "2013 Komatsu PC78", type: "excavator", brand: "Komatsu", year: 2013, hours: 3500, condition: "good" },
-  { lotNum: 145, name: "2021 JCB 8R-6-1 Mini Excavator", type: "excavator", brand: "JCB", year: 2021, hours: 850, condition: "excellent" },
-  { lotNum: 146, name: "2014 Hyundai Robex 330LC-9 Excavator", type: "excavator", brand: "Hyundai", year: 2014, hours: 4200, condition: "good" },
+  { lotNum: 114, name: "New 2025 CAT 323 excavator (unused)", type: "excavator", brand: "Caterpillar", year: 2025, hours: 0, condition: "new" },
+  { lotNum: 140, name: "2012 Komatsu PC78 Excavator", type: "excavator", brand: "Komatsu", year: 2012, hours: 3500, condition: "good" },
+  { lotNum: 145, name: "2021 Jcb E6.5r1 Mini Excavator", type: "excavator", brand: "JCB", year: 2021, hours: 850, condition: "excellent" },
+  { lotNum: 146, name: "2014 Hyundai Robex 330LC-9 excavator", type: "excavator", brand: "Hyundai", year: 2014, hours: 4200, condition: "good" },
   
   // Fila 2  
   { lotNum: 150, name: "2018 Doosan Dx140w Excavator", type: "excavator", brand: "Doosan", year: 2018, hours: 2800, condition: "excellent" },
@@ -48,13 +48,13 @@ const page2Lots = [
   // Fila 8
   { lotNum: 194, name: "Caterpillar 140g Motor Grader", type: "grader", brand: "Caterpillar", year: 2005, hours: 11000, condition: "fair" },
   { lotNum: 195, name: "Caterpillar 140g Motor Grader", type: "grader", brand: "Caterpillar", year: 2005, hours: 10800, condition: "fair" },
-  { lotNum: 195A, name: "Caterpillar 140g Motor Grader", type: "grader", brand: "Caterpillar", year: 2005, hours: 11200, condition: "fair" },
+  { lotNum: "195A", name: "Caterpillar 140g Motor Grader", type: "grader", brand: "Caterpillar", year: 2005, hours: 11200, condition: "fair" },
   { lotNum: 196, name: "Caterpillar 130g Motor Grader", type: "grader", brand: "Caterpillar", year: 2004, hours: 12000, condition: "fair" },
   
   // Fila 9
   { lotNum: 197, name: "2018 Caterpillar 140m Motor Grader", type: "grader", brand: "Caterpillar", year: 2018, hours: 3500, condition: "excellent" },
   { lotNum: 198, name: "2018 Caterpillar 140k Motor Grader", type: "grader", brand: "Caterpillar", year: 2018, hours: 3200, condition: "excellent" },
-  { lotNum: 198A, name: "Komatsu Gd705a-2ec Motor Grader", type: "grader", brand: "Komatsu", year: 2012, hours: 6500, condition: "good" },
+  { lotNum: "198A", name: "Komatsu Gd705a-2ec Motor Grader", type: "grader", brand: "Komatsu", year: 2012, hours: 6500, condition: "good" },
   { lotNum: 199, name: "2011 Komatsu Wa300-3 Wheel Loader", type: "wheel loader", brand: "Komatsu", year: 2011, hours: 7800, condition: "good" },
   
   // Fila 10
