@@ -22,6 +22,7 @@ export function CatalogSection() {
 
   const [filters, setFilters] = useState<MachineryFilters>({});
   const [currentPage, setCurrentPage] = useState(1);
+  const [auctionPage, setAuctionPage] = useState(1); // Página de subasta (1 o 2)
   const [sortOrder, setSortOrder] = useState("name-asc");
   const [limit] = useState(40);
 
@@ -38,6 +39,7 @@ export function CatalogSection() {
     params.append('sort', sortOrder);
     params.append('page', currentPage.toString());
     params.append('limit', limit.toString());
+    params.append('auctionPage', auctionPage.toString()); // Filtro por página de subasta
     
     return `/api/machinery?${params.toString()}`;
   };
@@ -248,6 +250,41 @@ export function CatalogSection() {
                 
 
                 
+                {/* Auction Page Selector */}
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    {language === 'es' ? 'Página de Subasta' : 'Auction Page'}
+                  </label>
+                  <div className="grid grid-cols-2 gap-2">
+                    <button
+                      className={`px-4 py-2 rounded-lg font-semibold transition ${
+                        auctionPage === 1 
+                          ? 'bg-primary text-white' 
+                          : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+                      }`}
+                      onClick={() => {
+                        setAuctionPage(1);
+                        setCurrentPage(1);
+                      }}
+                    >
+                      {language === 'es' ? 'Página 1' : 'Page 1'}
+                    </button>
+                    <button
+                      className={`px-4 py-2 rounded-lg font-semibold transition ${
+                        auctionPage === 2 
+                          ? 'bg-primary text-white' 
+                          : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+                      }`}
+                      onClick={() => {
+                        setAuctionPage(2);
+                        setCurrentPage(1);
+                      }}
+                    >
+                      {language === 'es' ? 'Página 2' : 'Page 2'}
+                    </button>
+                  </div>
+                </div>
+
                 {/* Filter button */}
                 <button
                   className="w-full bg-primary hover:bg-primary-light text-white font-semibold px-4 py-3 rounded-lg transition duration-300 mt-2"
@@ -348,6 +385,41 @@ export function CatalogSection() {
 
               </div>
               
+              {/* Auction Page Selector - Desktop */}
+              <div className="mt-4">
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  {language === 'es' ? 'Página de Subasta' : 'Auction Page'}
+                </label>
+                <div className="flex gap-2 mb-4">
+                  <button
+                    className={`px-6 py-2 rounded-lg font-semibold transition ${
+                      auctionPage === 1 
+                        ? 'bg-primary text-white' 
+                        : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+                    }`}
+                    onClick={() => {
+                      setAuctionPage(1);
+                      setCurrentPage(1);
+                    }}
+                  >
+                    {language === 'es' ? 'Página 1' : 'Page 1'}
+                  </button>
+                  <button
+                    className={`px-6 py-2 rounded-lg font-semibold transition ${
+                      auctionPage === 2 
+                        ? 'bg-primary text-white' 
+                        : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+                    }`}
+                    onClick={() => {
+                      setAuctionPage(2);
+                      setCurrentPage(1);
+                    }}
+                  >
+                    {language === 'es' ? 'Página 2' : 'Page 2'}
+                  </button>
+                </div>
+              </div>
+
               <div className="mt-4 flex justify-end">
                 {/* Filter button */}
                 <button

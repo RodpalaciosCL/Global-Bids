@@ -115,7 +115,8 @@ export class MemStorage implements IStorage {
     condition?: string,
     sortBy: string = 'price-asc',
     page: number = 1,
-    limit: number = 40
+    limit: number = 40,
+    auctionPage?: number
   ): Promise<{ items: Machinery[], total: number, totalPages: number }> {
     let filtered = Array.from(this.machinery.values());
     
@@ -545,10 +546,16 @@ export class DatabaseStorage implements IStorage {
     condition?: string,
     sortBy: string = 'price-asc',
     page: number = 1,
-    limit: number = 6
+    limit: number = 6,
+    auctionPage?: number
   ): Promise<{ items: Machinery[], total: number, totalPages: number }> {
     // Build where conditions
     const conditions = [];
+
+    // Filter by auction page if specified
+    if (auctionPage) {
+      conditions.push(eq(machinery.page, auctionPage));
+    }
 
     if (search) {
       conditions.push(

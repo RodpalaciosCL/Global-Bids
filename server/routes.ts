@@ -37,6 +37,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         sort = "price-asc",
         page = "1",
         limit = "10",
+        auctionPage = "1", // New: auction page filter
       } = req.query;
 
       const result = await storage.searchMachinery(
@@ -50,6 +51,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         sort as string,
         parseInt(page as string),
         parseInt(limit as string),
+        parseInt(auctionPage as string), // Pass auction page filter
       );
 
       res.json(result);
