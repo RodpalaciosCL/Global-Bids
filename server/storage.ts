@@ -115,7 +115,7 @@ export class MemStorage implements IStorage {
     condition?: string,
     sortBy: string = 'price-asc',
     page: number = 1,
-    limit: number = 30
+    limit: number = 40
   ): Promise<{ items: Machinery[], total: number, totalPages: number }> {
     let filtered = Array.from(this.machinery.values());
     
