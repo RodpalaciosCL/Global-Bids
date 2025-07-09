@@ -22,7 +22,7 @@ export function CatalogSection() {
 
   const [filters, setFilters] = useState<MachineryFilters>({});
   const [currentPage, setCurrentPage] = useState(1);
-  const [sortOrder, setSortOrder] = useState("year-desc");
+  const [sortOrder, setSortOrder] = useState("name-asc");
   const [limit] = useState(40);
 
   const [refreshKey] = useState(Date.now());
@@ -380,8 +380,9 @@ export function CatalogSection() {
                 onChange={handleSelectChange}
                 value={sortOrder}
               >
-                <option value="year-desc">{language === 'es' ? 'Año: más reciente' : 'Year: newest'}</option>
-                <option value="year-asc">{language === 'es' ? 'Año: más antiguo' : 'Year: oldest'}</option>
+                <option value="name-asc">{language === 'es' ? 'Nombre: A-Z' : 'Name: A-Z'}</option>
+                <option value="name-desc">{language === 'es' ? 'Nombre: Z-A' : 'Name: Z-A'}</option>
+                <option value="condition-desc">{language === 'es' ? 'Condición: mejor primero' : 'Condition: best first'}</option>
               </select>
             </div>
           </motion.div>

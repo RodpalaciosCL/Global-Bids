@@ -170,6 +170,14 @@ export class MemStorage implements IStorage {
       
       // Si tienen la misma prioridad, aplicamos el criterio solicitado
       switch (sortBy) {
+        case 'name-desc':
+          return b.name.localeCompare(a.name);
+        case 'name-asc':
+          return a.name.localeCompare(b.name);
+        case 'condition-desc':
+          const conditionOrder = { 'excellent': 4, 'good': 3, 'fair': 2, 'repair': 1 };
+          return (conditionOrder[b.condition as keyof typeof conditionOrder] || 0) - 
+                 (conditionOrder[a.condition as keyof typeof conditionOrder] || 0);
         case 'price-asc':
           return a.price - b.price;
         case 'price-desc':
