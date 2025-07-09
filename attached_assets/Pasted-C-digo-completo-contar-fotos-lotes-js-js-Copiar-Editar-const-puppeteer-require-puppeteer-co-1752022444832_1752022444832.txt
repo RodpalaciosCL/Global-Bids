@@ -1,0 +1,114 @@
+Código completo — contar_fotos_lotes.js
+js
+Copiar
+Editar
+const puppeteer = require('puppeteer');
+
+const AUCTION_URL = 'https://northcountry.auctiontechs.com/auction-detail/174912699568418f53a4cac';
+const AUCTION_ID = '174912699568418f53a4cac';
+
+(async () => {
+  const browser = await puppeteer.launch({
+    headless: true,
+    args: ['--no-sandbox']
+  });
+
+  const page = await browser.newPage();
+  await page.goto(AUCTION_URL, { waitUntil: 'networkidle2' });
+
+  console.log('🌀 Obteniendo todos los lotes de la página 1...');
+  await page.waitForSelector('a[href*="item-detail"]');
+
+  // Scroll por si hay lazy loading
+  for (let i = 0; i < 6; i++) {
+    await page.evaluate(() => window.scrollBy(0, window.innerHeight));
+    await new Promise(resolve => setTimeout(resolve, 600));
+  }
+
+  // Obtener todos los IDs de lotes únicos
+  const lotes = await page.$$eval('a[href*="/item-detail"]', links => {
+    const seen = new Set();
+    return links.map(link => {
+      const href = link.getAttribute('href');
+      const id = href?.split('/item-detail/')[1]?.split('?')[0];
+      if (id && !seen.has(id)) {
+        seen.add(id);
+        return id;
+      }
+      return null;
+    }).filter(Boolean);
+  });
+
+  console.log(`🔍 Se encontraron ${lotes.length} lotes.\n`);
+
+  const resultados = [];
+
+  for (const id of lotes) {
+    const loteURL = `https://northcountry.auctiontechs.com/item-detail/${id}?auction_id=${AUCTION_ID}`;
+    await page.goto(loteURL, { waitUntil: 'domcontentloaded' });
+    await page.waitForTimeout(600);
+
+    // Contar las imágenes del carrusel
+    let count = await page.$$eval('.slick-track img', imgs => imgs.length);
+
+    // Opción secundaria: leer contador visual "1 / 22"
+    const textoContador = await page.$eval('.slick-counter', el => el.innerText).catch(() => '');
+    const matches = textoContador.match(/\/\s*(\d+)/);
+    if (matches) {
+      count = parseInt(matches[1], 10);
+    }
+
+    const title = await page.$eval('.item-detail-title', el => el.innerText).catch(() => `Lote ${id}`);
+
+    resultados.push({ id, title, fotos: count });
+    console.log(`✅ ${title} → ${count} fotos`);
+  }
+
+  console.log('\n📊 Tabla resumen:\n');
+  console.table(resultados);
+
+  await browser.close();
+})();
+✅ Resultado esperado
+Cuando lo ejecutas con:
+
+bash
+Copiar
+Editar
+node contar_fotos_lotes.js
+Verás una tabla como esta:
+
+bash
+Copiar
+Editar
+Lotes encontrados: 40
+
+✅ Lot 77 - Peugeot Landtrek Action 4x4 → 22 fotos
+✅ Lot 78 - Komatsu Bulldozer D65EX → 8 fotos
+
+📊 Tabla resumen:
+
+┌─────────┬──────────────┬──────────────────────────────────────────┬───────┐
+│ (index) │     id       │                 title                   │ fotos │
+├─────────┼──────────────┼──────────────────────────────────────────┼───────┤
+│    0    │ '6862f9c8...'│ 'Lot 77 - Peugeot Landtrek 4x4 HDi'     │  22   │
+│    1    │ '686466bb...'│ 'Lot 78 - Komatsu D65EX Bulldozer'      │   8   │
+└─────────┴──────────────┴──────────────────────────────────────────┴───────┘
+🧩 ¿Qué puedes hacer luego?
+Subir la información a Supabase automáticamente
+
+Descargar las fotos desde Cloudinary
+
+Crear una vista web con filtros, búsqueda, favoritos, etc.
+
+O integrarlo al dashboard de Replit directamente
+
+Pide esa versión extendida si la necesitas.
+
+yaml
+Copiar
+Editar
+
+---
+
+¿Quieres que también te lo prepare como `.zip` o `.txt` descargable desde acá? Te lo armo al ti
