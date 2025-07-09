@@ -107,7 +107,10 @@ The application includes proper error boundaries, loading states, and fallback m
 - Added proper error handling and caching for proxied images
 - All 68+ auction lot images now display correctly through the proxy system
 
-### Inventory Verification
-- Verified authentic auction data with exact AWS S3 image counts for all lots
+### Inventory Verification & Data Updates (July 2025)
+- **Verified authentic auction data** with exact AWS S3 image counts for all lots
+- **Updated to 80 authentic lots** with real equipment data instead of generic descriptions
+- **Fixed image connectivity** by using only lot IDs that exist in AWS S3 (1-20, 100-114, 160-210)
+- **Enhanced lot information** with specific locations in Chile and detailed equipment descriptions
+- **Improved card displays** to show location, technical details, and auction information
 - Confirmed 628+ total images across the complete Prelco auction inventory
-- Updated existing lots with correct image quantities based on actual S3 bucket content
