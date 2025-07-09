@@ -1,0 +1,110 @@
+✅ Resumen del problema
+Carga secuencial de imágenes (una por una desde cada lote) genera tiempos de espera y timeouts, especialmente desde S3.
+
+El navegador headless (Puppeteer) o los fetch individuales están verificando la existencia de cada imagen de forma lenta.
+
+Hay que evitar contenido “placeholder” o inventado.
+
+Replit tiene límites de tiempo y rendimiento que no ayudan si haces scraping bloqueante.
+
+✅ Estrategia técnica recomendada (Bulk + Paralelismo)
+Aquí está el enfoque robusto y rápido, divido en pasos:
+
+🧩 1. Obtener todos los lotes (IDs y links) desde página 1
+Esto sí puedes hacerlo rápido con Puppeteer o Cheerio, con un solo render:
+
+js
+Copiar
+Editar
+const lotes = await page.$$eval('a[href*="/item-detail"]', links => {
+  const seen = new Set();
+  return links.map(link => {
+    const href = link.getAttribute('href');
+    const id = href?.split('/item-detail/')[1]?.split('?')[0];
+    const title = link.innerText.trim();
+    const image = link.querySelector('img')?.src || '';
+    if (id && !seen.has(id)) {
+      seen.add(id);
+      return { id, url: `https://...${href}`, title, image };
+    }
+    return null;
+  }).filter(Boolean);
+});
+⚡ 2. Procesar los 40 lotes en paralelo controlado (con límite)
+Usa un task runner paralelo tipo p-limit para controlar concurrencia y evitar saturar S3 o Replit.
+
+bash
+Copiar
+Editar
+npm install p-limit
+js
+Copiar
+Editar
+const limit = require('p-limit')(5); // 5 lotes al mismo tiempo
+
+const results = await Promise.all(
+  lotes.map(lote => limit(async () => {
+    const page = await browser.newPage();
+    await page.goto(lote.url, { waitUntil: 'domcontentloaded' });
+
+    // Extraer imágenes de galería
+    const imgs = await page.$$eval('.slick-track img', imgs =>
+      imgs.map(i => i.src).filter(Boolean)
+    );
+
+    const description = await page.$eval('.item-detail-body', el => el.innerText).catch(() => '');
+
+    return {
+      ...lote,
+      images: imgs,
+      description
+    };
+  }))
+);
+🔐 3. Verificar URLs de imágenes sin descargarlas
+En vez de bajar o mostrar cada imagen (que hace timeout), usa una solicitud HEAD HTTP para validar que existe en AWS S3 y devuelve 200 OK.
+
+js
+Copiar
+Editar
+const axios = require('axios');
+
+async function verificarImagen(url) {
+  try {
+    const res = await axios.head(url, { timeout: 5000 });
+    return res.status === 200;
+  } catch {
+    return false;
+  }
+}
+
+// Verifica solo la imagen principal por lote (por velocidad)
+const imagenOK = await verificarImagen(lote.images[0]);
+💾 4. Guardar lote limpio solo si tiene imágenes válidas
+Después de verificar, guarda solo los lotes que cumplen con:
+
+✅ Título real
+
+✅ Descripción existente
+
+✅ Al menos 1 imagen real status 200 desde S3
+
+✅ Bonus: Performance Tips
+Evita page.goto() 40 veces sin paralelismo.
+
+Usa Promise.allSettled() si quieres evitar que 1 fallo rompa todo.
+
+Evita descargar imágenes: solo verifica cabeceras (HEAD).
+
+Limpia el navegador (page.close()) tras cada lote para liberar memoria.
+
+📦 Resultado esperado
+Tienes 40 lotes auténticos, cada uno con:
+
+✅ Título original
+
+✅ Descripción real
+
+✅ Galería con imágenes verdaderas (verificadas)
+
+Procesado en segundos (no minutos) gracias a paralelismo controlado
