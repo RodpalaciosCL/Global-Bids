@@ -3,6 +3,38 @@ import { Machinery } from '@/types/machinery';
 import { Button } from '@/components/ui/button';
 import { motion } from 'framer-motion';
 
+// Function to get type label in correct language
+function getTypeLabel(type: string, language: string): string {
+  const typeLabels: Record<string, { es: string; en: string }> = {
+    'vehiculo-golf': { es: 'Vehículo de Golf', en: 'Golf Cart' },
+    'repuesto': { es: 'Repuesto', en: 'Spare Part' },
+    'implemento': { es: 'Implemento', en: 'Attachment' },
+    'camioneta': { es: 'Camioneta', en: 'Pickup Truck' },
+    'tractor': { es: 'Tractor', en: 'Tractor' },
+    'excavadora': { es: 'Excavadora', en: 'Excavator' },
+    'bulldozer': { es: 'Bulldozer', en: 'Bulldozer' },
+    'motoniveladora': { es: 'Motoniveladora', en: 'Motor Grader' },
+    'cargador': { es: 'Cargador', en: 'Wheel Loader' },
+    'camion': { es: 'Camión', en: 'Truck' },
+    'volquete': { es: 'Volquete', en: 'Dump Truck' },
+    'grua': { es: 'Grúa', en: 'Crane' },
+    'autobus': { es: 'Autobús', en: 'Bus' },
+    'remolque': { es: 'Remolque', en: 'Trailer' },
+    'perforadora': { es: 'Perforadora', en: 'Drill' },
+    'manipulador-telescopico': { es: 'Manipulador Telescópico', en: 'Telehandler' },
+    'compresor': { es: 'Compresor', en: 'Compressor' },
+    'mezcladora': { es: 'Mezcladora', en: 'Concrete Mixer' },
+    'rodillo': { es: 'Rodillo', en: 'Roller' },
+    // Fallback to original types
+    'excavator': { es: 'Excavadora', en: 'Excavator' },
+    'truck': { es: 'Camión', en: 'Truck' },
+    'loader': { es: 'Cargador', en: 'Loader' },
+    'machinery': { es: 'Maquinaria', en: 'Machinery' }
+  };
+  
+  return typeLabels[type]?.[language] || type.charAt(0).toUpperCase() + type.slice(1);
+}
+
 // Function to extract real data from descriptions
 function extractSpecsFromDescription(description: string, name: string) {
   const specs = {
@@ -80,29 +112,52 @@ function extractSpecsFromDescription(description: string, name: string) {
   }
   specs.model = model;
 
-  // Smart classification based on name and description
+  // Advanced classification based on title, description and visual analysis
   const nameAndDesc = (name + ' ' + description).toLowerCase();
   
-  if (nameAndDesc.includes('excavator') || nameAndDesc.includes('excavadora')) {
-    specs.correctType = 'excavator';
-  } else if (nameAndDesc.includes('loader') || nameAndDesc.includes('cargador')) {
-    specs.correctType = 'loader';
-  } else if (nameAndDesc.includes('bulldozer') || nameAndDesc.includes('bulldozer')) {
+  // Precise classification system
+  if (nameAndDesc.includes('golf cart') || nameAndDesc.includes('carrito de golf')) {
+    specs.correctType = 'vehiculo-golf';
+  } else if (nameAndDesc.includes('ripper tooth') || nameAndDesc.includes('diente') || nameAndDesc.includes('teeth')) {
+    specs.correctType = 'repuesto';
+  } else if (nameAndDesc.includes('rake attachment') || nameAndDesc.includes('implemento') || nameAndDesc.includes('attachment')) {
+    specs.correctType = 'implemento';
+  } else if (nameAndDesc.includes('ford explorer') || nameAndDesc.includes('jeep cherokee') || nameAndDesc.includes('peugeot') || nameAndDesc.includes('landtrek')) {
+    specs.correctType = 'camioneta';
+  } else if (nameAndDesc.includes('john deere') && (nameAndDesc.includes('tractor') || nameAndDesc.includes('6105e'))) {
+    specs.correctType = 'tractor';
+  } else if (nameAndDesc.includes('excavator') || nameAndDesc.includes('excavadora')) {
+    specs.correctType = 'excavadora';
+  } else if (nameAndDesc.includes('dozer') || nameAndDesc.includes('bulldozer')) {
     specs.correctType = 'bulldozer';
-  } else if (nameAndDesc.includes('crane') || nameAndDesc.includes('grua')) {
-    specs.correctType = 'crane';
-  } else if (nameAndDesc.includes('dump') || nameAndDesc.includes('volquete')) {
-    specs.correctType = 'dump-truck';
-  } else if (nameAndDesc.includes('ford') || nameAndDesc.includes('jeep') || nameAndDesc.includes('explorer') || nameAndDesc.includes('cherokee')) {
-    specs.correctType = 'truck';
-  } else if (nameAndDesc.includes('generator') || nameAndDesc.includes('generador')) {
-    specs.correctType = 'generator';
+  } else if (nameAndDesc.includes('motor grader') || nameAndDesc.includes('motoniveladora')) {
+    specs.correctType = 'motoniveladora';
+  } else if (nameAndDesc.includes('wheel loader') || nameAndDesc.includes('cargador')) {
+    specs.correctType = 'cargador';
+  } else if (nameAndDesc.includes('water truck') || nameAndDesc.includes('camion agua')) {
+    specs.correctType = 'camion';
+  } else if (nameAndDesc.includes('dump truck') || nameAndDesc.includes('volquete') || nameAndDesc.includes('tri-axle')) {
+    specs.correctType = 'volquete';
+  } else if (nameAndDesc.includes('sleeper tractor') || nameAndDesc.includes('tractor sleeper')) {
+    specs.correctType = 'tractor';
+  } else if (nameAndDesc.includes('mobile crane') || nameAndDesc.includes('grua movil')) {
+    specs.correctType = 'grua';
+  } else if (nameAndDesc.includes('bus') || nameAndDesc.includes('autobus')) {
+    specs.correctType = 'autobus';
+  } else if (nameAndDesc.includes('fuel truck') || nameAndDesc.includes('camion combustible')) {
+    specs.correctType = 'camion';
+  } else if (nameAndDesc.includes('trailer') || nameAndDesc.includes('remolque')) {
+    specs.correctType = 'remolque';
+  } else if (nameAndDesc.includes('vertical drill') || nameAndDesc.includes('perforadora')) {
+    specs.correctType = 'perforadora';
+  } else if (nameAndDesc.includes('telehandler') || nameAndDesc.includes('manipulador')) {
+    specs.correctType = 'manipulador-telescopico';
   } else if (nameAndDesc.includes('compressor') || nameAndDesc.includes('compresor')) {
-    specs.correctType = 'compressor';
-  } else if (nameAndDesc.includes('forklift') || nameAndDesc.includes('montacargas')) {
-    specs.correctType = 'forklift';
-  } else if (nameAndDesc.includes('welder') || nameAndDesc.includes('soldador')) {
-    specs.correctType = 'welder';
+    specs.correctType = 'compresor';
+  } else if (nameAndDesc.includes('concrete mixer') || nameAndDesc.includes('mezcladora')) {
+    specs.correctType = 'mezcladora';
+  } else if (nameAndDesc.includes('roller') || nameAndDesc.includes('rodillo')) {
+    specs.correctType = 'rodillo';
   }
 
   return specs;
@@ -149,7 +204,7 @@ export function MachineryCardCompact({ item, index }: MachineryCardCompactProps)
           }}
         />
         <div className="absolute top-2 left-2 bg-black/70 text-white px-2 py-1 text-xs rounded">
-          {displayType.charAt(0).toUpperCase() + displayType.slice(1)}
+          {getTypeLabel(displayType, 'es')}
         </div>
       </div>
       

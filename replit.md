@@ -136,3 +136,14 @@ The application includes proper error boundaries, loading states, and fallback m
 - **Simplified format to "Marca: Kms: Horas:"** with N/A for missing values
 - **Added intelligent equipment classification** to correctly categorize excavators, trucks, generators based on name/description
 - **Connected International Auctions button** to authentic North Country Auctions URL (https://northcountry.auctiontechs.com/auction-detail/174912699568418f53a4cac)
+
+### Comprehensive Classification System Implementation (July 9, 2025)
+- **Intelligent classification engine** analyzes title, description, and visual context for precise equipment categorization
+- **20 specialized categories** including new "Camioneta/Vehículo" family for passenger vehicles (Peugeot, Ford Explorer, Jeep Cherokee)
+- **Consistent Spanish translations** with proper bilingual category labels across all components
+- **Updated filter options** in both mobile and desktop catalog views with all new equipment families
+- **Advanced detection patterns** for golf carts, spare parts, attachments, motor graders, telehandlers, and specialized equipment
+- **Client-side intelligent filtering** using getCorrectType() function for accurate category matching
+- **Applied across all components** - MachineryCard, MachineryCardCompact, MachineryDetail, and CatalogSection
+- **Fixed classification errors** preventing golf carts from showing as excavators, vehicles from showing as trucks
+- **Bilingual type labels** with getTypeLabel() function providing accurate Spanish/English translations
