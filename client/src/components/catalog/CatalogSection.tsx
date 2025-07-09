@@ -89,6 +89,18 @@ export function CatalogSection() {
     refetch();
   };
 
+  // Handle page change with scroll to marketplace top
+  const handlePageChange = (newPage: number) => {
+    setCurrentPage(newPage);
+    // Scroll to marketplace section top smoothly
+    setTimeout(() => {
+      const marketplaceSection = document.getElementById('marketplace');
+      if (marketplaceSection) {
+        marketplaceSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }, 100);
+  };
+
   // Handle input change for search only (removed price filters)
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { id, value } = e.target;
@@ -448,7 +460,7 @@ export function CatalogSection() {
               <button
                 onClick={() => {
                   if (currentPage > 1) {
-                    setCurrentPage(currentPage - 1);
+                    handlePageChange(currentPage - 1);
                   }
                 }}
                 disabled={currentPage === 1}
@@ -465,7 +477,7 @@ export function CatalogSection() {
               {Array.from({ length: totalPages }, (_, i) => i + 1).map((pageNumber) => (
                 <button
                   key={pageNumber}
-                  onClick={() => setCurrentPage(pageNumber)}
+                  onClick={() => handlePageChange(pageNumber)}
                   className={`px-3 py-2 rounded-lg ${
                     currentPage === pageNumber
                       ? 'bg-primary text-white'
@@ -480,7 +492,7 @@ export function CatalogSection() {
               <button
                 onClick={() => {
                   if (currentPage < totalPages) {
-                    setCurrentPage(currentPage + 1);
+                    handlePageChange(currentPage + 1);
                   }
                 }}
                 disabled={currentPage === totalPages}
