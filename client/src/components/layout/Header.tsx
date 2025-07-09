@@ -117,28 +117,31 @@ export function Header() {
           <div className="hidden md:flex items-center space-x-4">
             <nav className="flex items-center">
               {/* Hash links */}
-              <a href="/#inicio" className="text-white hover:bg-white/10 px-3 py-2 rounded-md flex items-center">
-                <i className="fas fa-home mr-1"></i>{t('nav.home')}
+              <a href="/#inicio" className="text-white hover:bg-white/10 px-4 py-2 rounded-md flex items-center">
+                <i className="fas fa-home mr-2"></i>{t('nav.home')}
               </a>
-              <a href="/#nosotros" className="text-white hover:bg-white/10 px-3 py-2 rounded-md flex items-center">
-                <i className="fas fa-users mr-1"></i>{t('nav.about')}
+              <a href="/#nosotros" className="text-white hover:bg-white/10 px-4 py-2 rounded-md flex items-center">
+                <i className="fas fa-users mr-2"></i>{t('nav.about')}
               </a>
-              <a href="/#servicios" className="text-white hover:bg-white/10 px-3 py-2 rounded-md flex items-center">
-                <i className="fas fa-wrench mr-1"></i>{t('nav.services')}
+              <a href="/#servicios" className="text-white hover:bg-white/10 px-4 py-2 rounded-md flex items-center">
+                <i className="fas fa-wrench mr-2"></i>{t('nav.services')}
               </a>
-              <a href="/#subastas" className="text-white hover:bg-white/10 px-3 py-2 rounded-md flex items-center">
-                <i className="fas fa-gavel mr-1"></i>{t('nav.auctions')}
+              <a href="/#subastas" className="text-white hover:bg-white/10 px-4 py-2 rounded-md flex items-center">
+                <i className="fas fa-gavel mr-2"></i>{t('nav.auctions')}
               </a>
-              <a href="/#soporte" className="text-white hover:bg-white/10 px-3 py-2 rounded-md flex items-center">
-                <i className="fas fa-headset mr-1"></i>{t('nav.support')}
+              <a href="/#soporte" className="text-white hover:bg-white/10 px-4 py-2 rounded-md flex items-center">
+                <i className="fas fa-headset mr-2"></i>{t('nav.support')}
               </a>
-              <a href="/#contacto" className="text-white hover:bg-white/10 px-3 py-2 rounded-md flex items-center">
-                <i className="fas fa-envelope mr-1"></i>{t('nav.contact')}
+              <a href="/#contacto" className="text-white hover:bg-white/10 px-4 py-2 rounded-md flex items-center">
+                <i className="fas fa-envelope mr-2"></i>{t('nav.contact')}
               </a>
 
-              {/* SPA link */}
-              <Link href="/marketplace" className="text-white hover:bg-white/10 px-3 py-2 rounded-md flex items-center">
-                <i className="fas fa-th-large mr-1"></i>{t('nav.catalog')}
+              {/* Separador visual */}
+              <div className="text-white/50 px-2">|</div>
+
+              {/* SPA link con animación de parpadeo */}
+              <Link href="/marketplace" className="text-white hover:bg-white/10 px-4 py-2 rounded-md flex items-center font-semibold animate-pulse">
+                <i className="fas fa-th-large mr-2"></i>{t('nav.catalog')}
               </Link>
             </nav>
             
@@ -227,15 +230,22 @@ export function Header() {
                   </div>
                 </a>
 
-                {/* SPA link for mobile */}
+                {/* Separador en móvil */}
+                <div className="px-5 py-2 flex items-center">
+                  <div className="w-full h-px bg-gray-200"></div>
+                  <div className="px-3 text-xs text-gray-400 whitespace-nowrap">MARKETPLACE</div>
+                  <div className="w-full h-px bg-gray-200"></div>
+                </div>
+
+                {/* SPA link for mobile con destaque */}
                 <Link href="/marketplace">
-                  <button onClick={() => setIsMenuOpen(false)} className="px-5 py-4 transition flex items-center w-full text-gray-700 hover:bg-gray-50 border-l-4 border-transparent">
-                    <div className="w-8 h-8 rounded-lg flex items-center justify-center mr-3 bg-gray-100 text-gray-500">
+                  <button onClick={() => setIsMenuOpen(false)} className="px-5 py-4 transition flex items-center w-full text-gray-900 hover:bg-gray-50 border-l-4 border-transparent font-semibold animate-pulse">
+                    <div className="w-8 h-8 rounded-lg flex items-center justify-center mr-3 bg-primary/10 text-primary">
                       <i className="fas fa-th-large"></i>
                     </div>
                     <div>
-                      <div className="font-medium">{t('nav.catalog')}</div>
-                      <div className="text-xs text-gray-500">{t('nav.catalogDesc')}</div>
+                      <div className="font-semibold text-gray-900">{t('nav.catalog')}</div>
+                      <div className="text-xs text-gray-600">{t('nav.catalogDesc')}</div>
                     </div>
                   </button>
                 </Link>
