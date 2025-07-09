@@ -87,65 +87,82 @@ export function AuctionsIframe() {
           </motion.p>
         </div>
         
+        {/* Botones de subastas nacionales e internacionales */}
         <motion.div 
-          className="bg-white rounded-3xl overflow-hidden max-w-5xl mx-auto shadow-2xl"
+          className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8"
           variants={fadeIn}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
           transition={{ delay: 0.2 }}
         >
-          {/* Contenido de las subastas sin pestañas */}
-          <div className="p-6">
-            <div className="space-y-6">
-              {AUCTION_DATA.map((auction) => (
-                <div key={auction.id} className="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow">
-                  <div className="flex flex-col md:flex-row gap-4">
-                    <div className="w-full md:w-1/5">
-                      <div className="h-32 rounded-md overflow-hidden">
-                        <img 
-                          src={auction.image} 
-                          alt={auction.title} 
-                          className="w-full h-full object-cover"
-                          onError={(e) => {
-                            // Si la imagen no carga, usar una imagen por defecto
-                            const target = e.target as HTMLImageElement;
-                            target.onerror = null;
-                            target.src = "/pexels-ywanphoto-188679.jpg";
-                          }}
-                        />
-                      </div>
-                    </div>
-                    <div className="w-full md:w-4/5">
-                      <h3 className="text-lg font-bold text-gray-800">{auction.title}</h3>
-                      <div className="mt-2 space-y-1 text-sm text-gray-600">
-                        <p><span className="inline-block w-5 h-5 mr-2 text-gray-400"><i className="fas fa-calendar"></i></span> {auction.date}</p>
-                        <p><span className="inline-block w-5 h-5 mr-2 text-gray-400"><i className="fas fa-tag"></i></span> {auction.type}</p>
-                        <p><span className="inline-block w-5 h-5 mr-2 text-gray-400"><i className="fas fa-map-marker-alt"></i></span> {auction.location}</p>
-                      </div>
-                      <button 
-                        onClick={openForm}
-                        className="mt-3 px-4 py-2 bg-primary text-white text-sm font-medium rounded hover:bg-primary-dark transition-colors"
-                      >
-                        {t('auctions.auctionDetails')}
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              ))}
+          {/* Botón Subastas Nacionales */}
+          <motion.div
+            className="group relative overflow-hidden bg-gradient-to-br from-primary to-primary-dark rounded-2xl p-8 shadow-2xl hover:shadow-3xl transition-all duration-300 transform hover:-translate-y-2"
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+          >
+            <div className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            <div className="relative z-10 text-center">
+              <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-white/30 transition-colors duration-300">
+                <i className="fas fa-flag text-2xl text-white"></i>
+              </div>
+              <h3 className="text-2xl font-bold text-white mb-4">
+                {language === 'es' ? 'Subastas Nacionales' : 'National Auctions'}
+              </h3>
+              <p className="text-white/90 mb-6 text-sm leading-relaxed">
+                {language === 'es' 
+                  ? 'Participa en subastas de maquinaria pesada en Chile y toda América Latina'
+                  : 'Participate in heavy machinery auctions in Chile and Latin America'
+                }
+              </p>
+              <button 
+                onClick={() => {
+                  // Placeholder para el link que proporcionarás después
+                  console.log('Subastas Nacionales clicked');
+                }}
+                className="w-full bg-white text-primary font-bold py-3 px-6 rounded-lg hover:bg-gray-100 transition-colors duration-300 flex items-center justify-center group-hover:shadow-lg"
+              >
+                <i className="fas fa-gavel mr-2"></i>
+                {language === 'es' ? 'Ver Subastas' : 'View Auctions'}
+                <i className="fas fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform duration-300"></i>
+              </button>
             </div>
-          </div>
-          
-          {/* Footer con link a más subastas */}
-          <div className="bg-gray-100 px-6 py-4 text-center">
-            <button 
-              onClick={openForm}
-              className="text-primary hover:text-primary-dark font-medium inline-flex items-center transition-colors"
-            >
-              {t('auctions.register')}
-              <i className="fas fa-arrow-right ml-2"></i>
-            </button>
-          </div>
+          </motion.div>
+
+          {/* Botón Subastas Internacionales */}
+          <motion.div
+            className="group relative overflow-hidden bg-gradient-to-br from-secondary to-accent rounded-2xl p-8 shadow-2xl hover:shadow-3xl transition-all duration-300 transform hover:-translate-y-2"
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+          >
+            <div className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            <div className="relative z-10 text-center">
+              <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-white/30 transition-colors duration-300">
+                <i className="fas fa-globe text-2xl text-white"></i>
+              </div>
+              <h3 className="text-2xl font-bold text-white mb-4">
+                {language === 'es' ? 'Subastas Internacionales' : 'International Auctions'}
+              </h3>
+              <p className="text-white/90 mb-6 text-sm leading-relaxed">
+                {language === 'es' 
+                  ? 'Accede a subastas globales de equipos especializados y maquinaria internacional'
+                  : 'Access global auctions for specialized equipment and international machinery'
+                }
+              </p>
+              <button 
+                onClick={() => {
+                  // Placeholder para el link que proporcionarás después
+                  console.log('Subastas Internacionales clicked');
+                }}
+                className="w-full bg-white text-secondary font-bold py-3 px-6 rounded-lg hover:bg-gray-100 transition-colors duration-300 flex items-center justify-center group-hover:shadow-lg"
+              >
+                <i className="fas fa-globe-americas mr-2"></i>
+                {language === 'es' ? 'Ver Subastas' : 'View Auctions'}
+                <i className="fas fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform duration-300"></i>
+              </button>
+            </div>
+          </motion.div>
         </motion.div>
       </div>
     </section>
