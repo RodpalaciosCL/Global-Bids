@@ -1,0 +1,102 @@
+// Header.tsx
+import { Link } from 'wouter'
+
+export function Header() {
+  return (
+    <header>
+      {/* SPA nav */}
+      <Link href="/marketplace">
+        <button>Marketplace</button>
+      </Link>
+
+      {/* enlaces a secciones de la home con recarga completa */}
+      <a href="/#subastas">
+        <button>Subastas</button>
+      </a>
+      <a href="/#servicios">
+        <button>Servicios</button>
+      </a>
+      {/* …otros enlaces de hash… */}
+    </header>
+  )
+}
+De esta manera el navegador, al hacer clic en /#subastas, hará una nueva carga de / y saltará al <div id="subastas"> de tu Home, sin que Wouter lo interprete como “otra ruta” ni que te quede “pegado” en /marketplace#subastas.
+
+En tu Home elimina todo el scroll-forzado en JS
+Basta con que cada sección de tu Home esté envuelta en un elemento con el id correspondiente:
+
+tsx
+Copiar
+Editar
+// Home.tsx
+export function Home() {
+  return (
+    <main>
+      {/* …secciones previas… */}
+
+      <section id="subastas">
+        <h2>Subastas</h2>
+        {/* tu contenido de subastas */}
+      </section>
+
+      <section id="servicios">
+        <h2>Servicios</h2>
+        {/* tu contenido de servicios */}
+      </section>
+
+      {/* …resto de secciones… */}
+    </main>
+  )
+}
+Así el navegador gestiona el scroll automático por el fragmento #subastas.
+
+Mantén Wouter sólo para rutas “limpias”
+En tu App.tsx asegura que tienes algo como:
+
+tsx
+Copiar
+Editar
+import { Route, Switch } from 'wouter'
+
+function App() {
+  return (
+    <Switch>
+      <Route path="/marketplace">
+        <Marketplace />
+      </Route>
+      <Route path="/">
+        <Home />
+      </Route>
+    </Switch>
+  )
+}
+De este modo, /marketplace se carga sin hash y / (con o sin fragmento) carga el Home.
+
+¿Por qué esto funciona?
+<a href="/#subastas">: fuerza recarga a la raíz y el navegador salta al elemento con id="subastas".
+
+<Link href="/marketplace">: usa Wouter sólo donde quieres SPA, sin mezcla de hashes.
+
+Quitas cualquier useEffect para scroll o lógica compleja de window.location.hash, que es precisamente lo que está liando tu app.
+
+Con estos cuatro cambios tu header volverá a comportarse como “un sitio HTML normal”:
+
+Desde cualquier página, “Subastas” siempre te recarga en / y baja a la sección.
+
+Marketplace sigue enrutándose como SPA.
+
+No hay pantallas en blanco, retrocesos extraños, ni conflictos entre hash y router.
+
+— ¡pruébalo y dime cómo te va!
+
+
+
+
+
+
+
+
+Fuentes
+
+Preguntar a ChatGPT
+

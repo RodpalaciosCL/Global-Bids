@@ -64,11 +64,16 @@ export function Header() {
   
 
 
-  const menuItems = [
+  // SPA routes (using Link)
+  const spaRoutes = [
+    { href: '/marketplace', label: t('nav.catalog'), icon: 'fa-th-large', section: 'catalogo' },
+  ];
+
+  // Home sections (using <a> with full reload)
+  const homeSections = [
     { href: '/', label: t('nav.home'), icon: 'fa-home', section: 'inicio' },
     { href: '/#nosotros', label: t('nav.about'), icon: 'fa-users', section: 'nosotros' },
     { href: '/#servicios', label: t('nav.services'), icon: 'fa-wrench', section: 'servicios' },
-    { href: '/marketplace', label: t('nav.catalog'), icon: 'fa-th-large', section: 'catalogo' },
     { href: '/#subastas', label: t('nav.auctions'), icon: 'fa-gavel', section: 'subastas' },
     { href: '/#soporte', label: t('nav.support'), icon: 'fa-headset', section: 'soporte' },
     { href: '/#contacto', label: t('nav.contact'), icon: 'fa-envelope', section: 'contacto' }
@@ -120,7 +125,24 @@ export function Header() {
           {/* Desktop Menu */}
           <div className="hidden md:flex items-center space-x-4">
             <nav className="flex items-center">
-              {menuItems.map((item) => (
+              {/* SPA routes using Link */}
+              {spaRoutes.map((item) => (
+                <Link key={item.href} href={item.href}>
+                  <button className={`relative px-4 py-2 mx-1 font-medium transition-all duration-300 flex items-center justify-center whitespace-nowrap ${
+                    activeSection === item.section 
+                      ? 'bg-white text-primary rounded-md' 
+                      : 'text-white hover:bg-white/10 rounded-md'
+                  }`}>
+                    <i className={`fas ${item.icon} mr-2 ${
+                      activeSection === item.section ? 'text-primary' : 'text-white/80'
+                    }`}></i>
+                    <span>{item.label}</span>
+                  </button>
+                </Link>
+              ))}
+              
+              {/* Home sections using regular <a> with full reload */}
+              {homeSections.map((item) => (
                 <a
                   key={item.href}
                   href={item.href}
@@ -162,7 +184,36 @@ export function Header() {
                   </div>
                 </div>
                 
-                {menuItems.map((item) => (
+                {/* SPA routes using Link for mobile */}
+                {spaRoutes.map((item) => (
+                  <Link key={item.href} href={item.href}>
+                    <button
+                      onClick={() => setIsMenuOpen(false)}
+                      className={`px-5 py-4 transition flex items-center w-full ${
+                        activeSection === item.section
+                          ? 'bg-primary/10 text-primary font-medium border-l-4 border-primary'
+                          : 'text-gray-700 hover:bg-gray-50 border-l-4 border-transparent'
+                      }`}
+                    >
+                      <div className={`w-8 h-8 rounded-lg flex items-center justify-center mr-3 ${
+                        activeSection === item.section 
+                        ? 'bg-primary/10 text-primary' 
+                        : 'bg-gray-100 text-gray-500'
+                      }`}>
+                        <i className={`fas ${item.icon}`}></i>
+                      </div>
+                      <div>
+                        <div className="font-medium">{item.label}</div>
+                        <div className="text-xs text-gray-500">
+                          {t('nav.catalogDesc')}
+                        </div>
+                      </div>
+                    </button>
+                  </Link>
+                ))}
+                
+                {/* Home sections using regular <a> with full reload for mobile */}
+                {homeSections.map((item) => (
                   <a
                     key={item.href}
                     href={item.href}
@@ -185,7 +236,6 @@ export function Header() {
                       <div className="text-xs text-gray-500">
                         {item.section === 'inicio' ? t('nav.homeDesc') : 
                          item.section === 'nosotros' ? t('nav.aboutDesc') :
-                         item.section === 'catalogo' ? t('nav.catalogDesc') :
                          item.section === 'subastas' ? t('nav.auctionsDesc') :
                          item.section === 'servicios' ? t('nav.servicesDesc') :
                          item.section === 'soporte' ? t('nav.supportDesc') :

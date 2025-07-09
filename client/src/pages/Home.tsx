@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { AboutSection } from "@/components/home/AboutSection";
 import { ActionCTA } from "@/components/home/ActionCTA";
 import { BrandsSection } from "@/components/home/BrandsSection";
@@ -11,35 +10,32 @@ import { CatalogSection } from "@/components/catalog/CatalogSection";
 import { AuctionsIframe } from "@/components/auctions/AuctionsIframe";
 
 export default function Home() {
-  useEffect(() => {
-    // Check if there's a hash in the URL and scroll to that section
-    const hash = window.location.hash;
-    if (hash) {
-      // Wait a bit for the page to render
-      setTimeout(() => {
-        const element = document.querySelector(hash);
-        if (element) {
-          element.scrollIntoView({ 
-            behavior: 'smooth',
-            block: 'start'
-          });
-        }
-      }, 100);
-    }
-  }, []);
-
   return (
     <>
-      <HeroSection />
-      <AboutSection />
-      <TimelineSection />
-      <ServicesSection />
-      <BrandsSection />
-      <CatalogSection />
-      <AuctionsIframe />
+      <section id="inicio">
+        <HeroSection />
+      </section>
+      <section id="nosotros">
+        <AboutSection />
+        <TimelineSection />
+      </section>
+      <section id="servicios">
+        <ServicesSection />
+        <BrandsSection />
+      </section>
+      <section id="catalogo">
+        <CatalogSection />
+      </section>
+      <section id="subastas">
+        <AuctionsIframe />
+      </section>
       <ActionCTA />
-      <SoporteSection />
-      <ContactSection />
+      <section id="soporte">
+        <SoporteSection />
+      </section>
+      <section id="contacto">
+        <ContactSection />
+      </section>
     </>
   );
 }
