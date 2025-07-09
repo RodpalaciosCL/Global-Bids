@@ -175,15 +175,29 @@ export default function MachineryDetail() {
                 <div className="flex flex-wrap gap-2 mb-2 border-b border-gray-200 pb-2">
                   <div className="flex items-center">
                     <i className="fas fa-calendar-alt mr-1 text-gray-500 text-sm"></i>
-                    <span className="text-gray-900 text-sm">{machinery.year}</span>
+                    <span className="text-gray-900 text-sm">{displayYear || 'N/A'}</span>
                   </div>
-                  <div className="flex items-center">
-                    <i className="fas fa-tachometer-alt mr-1 text-gray-500 text-sm"></i>
-                    <span className="text-gray-900 text-sm">{machinery.hours} hrs</span>
-                  </div>
+                  {displayKilometers && (
+                    <div className="flex items-center">
+                      <i className="fas fa-road mr-1 text-gray-500 text-sm"></i>
+                      <span className="text-gray-900 text-sm">{displayKilometers.toLocaleString()} km</span>
+                    </div>
+                  )}
+                  {displayHours && (
+                    <div className="flex items-center">
+                      <i className="fas fa-clock mr-1 text-gray-500 text-sm"></i>
+                      <span className="text-gray-900 text-sm">{displayHours} hrs</span>
+                    </div>
+                  )}
+                  {!displayKilometers && !displayHours && (
+                    <div className="flex items-center">
+                      <i className="fas fa-tachometer-alt mr-1 text-gray-500 text-sm"></i>
+                      <span className="text-gray-900 text-sm">N/A</span>
+                    </div>
+                  )}
                   <div className="flex items-center">
                     <i className="fas fa-industry mr-1 text-gray-500 text-sm"></i>
-                    <span className="text-gray-900 text-sm">{machinery.brand}</span>
+                    <span className="text-gray-900 text-sm">{displayBrand || 'N/A'}</span>
                   </div>
                 </div>
                 
