@@ -21,10 +21,18 @@ export default function Home() {
       setTimeout(() => {
         const el = document.getElementById(hash);
         if (el) {
-          // Scroll suave y nativo
-          el.scrollIntoView({ behavior: "smooth", block: "start" });
+          // Scroll suave y nativo con offset correcto
+          const header = document.querySelector('header');
+          const headerHeight = header ? header.offsetHeight : 80;
+          const elementPosition = el.getBoundingClientRect().top + window.pageYOffset;
+          const offsetPosition = elementPosition - headerHeight - 20;
+          
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth'
+          });
         }
-      }, 50);
+      }, 100);
     }
   }, [location]);
 

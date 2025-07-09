@@ -1,0 +1,151 @@
+RESUMEN TÉCNICO COMPLETO DEL PROYECTO “GLOBAL BIDS”
+(Para facilitar el traspaso a otro desarrollador)
+
+1. Arquitectura General
+Frontend: React + TypeScript + Vite
+
+Routing: Wouter (SPA) combinado con navegación nativa por hash (anclas)
+
+Styling: Tailwind CSS + shadcn/ui components
+
+Animaciones: Framer Motion
+
+Backend: Express.js + TypeScript
+
+Base de datos: PostgreSQL vía Drizzle ORM
+
+2. Estructura del Repositorio
+pgsql
+Copiar
+Editar
+client/  
+├─ src/  
+│  ├─ components/  
+│  │  ├─ layout/  
+│  │  │  └─ Header.tsx         ← Header común desktop/mobile  
+│  │  ├─ home/                  ← Secciones de la página principal  
+│  │  └─ catalog/               ← Marketplace (CatalogSection.tsx)  
+│  ├─ pages/  
+│  │  ├─ Home.tsx               ← Página “/” con todas las secciones id="…"  
+│  │  └─ Marketplace.tsx        ← Página “/marketplace”  
+│  └─ contexts/LanguageContext.tsx ← Bilingüe ES/EN  
+server/  
+├─ index.ts       ← Arranque de Express  
+├─ routes.ts      ← Endpoints REST  
+└─ storage.ts     ← Lógica de acceso a datos  
+shared/  
+└─ schema.ts      ← Tipos y tablas de Drizzle  
+3. Datos Auténticos Cargados
+146 lotes reales importados de North Country Auctions (páginas 1–4)
+
+Localización: Colina, Chile
+
+Marcas: Kubota, Caterpillar, Briggs & Stratton, etc.
+
+Imágenes servidas vía proxy /api/images/:imageId
+
+4. Navegación y Scroll
+Hashes nativos: #inicio, #nosotros, #servicios, #subastas, #soporte, #contacto
+
+SPA route: /marketplace via <Link> de Wouter
+
+Scroll behavior (en Home.tsx):
+
+ts
+Copiar
+Editar
+useEffect(() => {
+  const [, hash] = location.split('#')
+  if (hash) {
+    setTimeout(() => {
+      const el = document.getElementById(hash)
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    }, 50)
+  }
+}, [location])
+Header sticky con cambio de padding según scroll y menú móvil desplegable.
+
+5. Problemas Actuales (Mobile y Desktop)
+Scroll offset incorrecto
+
+Al hacer clic en un hash link, la sección queda demasiado arriba o cortada por el header.
+
+CSS actual:
+
+css
+Copiar
+Editar
+html { scroll-padding-top: 5rem; }
+section[id] { padding-top: 1rem; }
+Causa: la propiedad no coincide con la altura real del header en mobile/desktop.
+
+Marketplace no visible en mobile
+
+Al pulsar “Marketplace” en el menú móvil, la pantalla queda vacía o carga desde media sección.
+
+Verificar que CatalogSection respete id="marketplace" y no quede oculto por CSS overflow.
+
+Interferencia de Wouter en hash links
+
+En algunas pruebas, Wouter sigue interceptando href="/#contacto" en lugar de dejar pasar el scroll nativo.
+
+Padding/tamaño del menú reducido
+
+El header móvil perdió parte del padding original tras varios ajustes.
+
+6. Comandos de Desarrollo
+bash
+Copiar
+Editar
+npm run dev        # Inicia frontend+backend en modo dev  
+npm run build      # Genera build de producción  
+npm run db:push    # Aplica cambios de Drizzle a PostgreSQL  
+7. Pasos Siguientes Recomendados
+Scroll-offset dinámico
+
+Calcular la altura real del <Header> (desktop/mobile) en JS o CSS custom property.
+
+Ajustar scroll-padding-top o inyectar inline style document.documentElement.style.setProperty('--scroll-padding', '${headerHeight}px').
+
+Verificar Marketplace mobile
+
+Comprobar en el inspector de mobile que #marketplace exista y no esté cubierto por ningún contenedor con overflow: hidden.
+
+Asegurar que el menú móvil use <Link href="/marketplace"> sin hashes.
+
+Forzar anclas nativas
+
+En Header solo usar <a href="#section"> (sin /) para que el navegador haga scroll interno.
+
+Confirmar que LocationProvider de Wouter no esté usando useHashLocation.
+
+Restaurar padding del menú
+
+Revisar clases Tailwind en Header: compararlas con la versión original en producción y ajustar py-3 px-6 en mobile/desktop.
+
+Pruebas finales
+
+Test cross-device (iOS/Android y varios browsers).
+
+Verificar que al hacer clic en cualquier menú lleve exactamente al top de la sección deseada.
+
+Desplegar y comparar con la URL original para confirmar que el comportamiento idéntico.
+
+Con esto cualquier desarrollador podrá entender al instante la arquitectura, lo que ya está hecho, los issues pendientes y los pasos concretos para cerrar el proyecto al 100 %.
+
+
+
+
+
+
+
+
+Fuentes
+
+Preguntar a ChatGPT
+
+
+
+Herramientas
+
+

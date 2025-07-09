@@ -20,11 +20,27 @@ export function Header() {
       return;
     }
     
+    // Calculate and set header height dynamically
+    const updateHeaderHeight = () => {
+      const header = document.querySelector('header');
+      if (header) {
+        const height = header.offsetHeight;
+        document.documentElement.style.setProperty('--header-height', `${height + 20}px`);
+      }
+    };
+    
+    // Update header height on mount and resize
+    updateHeaderHeight();
+    window.addEventListener('resize', updateHeaderHeight);
+    
     // If we're on the home page, detect sections by scroll
     if (location === '/') {
       const handleScroll = () => {
         // Update scrolled state
         setScrolled(window.scrollY > 50);
+        
+        // Update header height when scroll state changes
+        updateHeaderHeight();
         
         // Update active section based on scroll position
         const sections = [
@@ -54,10 +70,14 @@ export function Header() {
       };
       
       window.addEventListener('scroll', handleScroll);
-      return () => window.removeEventListener('scroll', handleScroll);
+      return () => {
+        window.removeEventListener('scroll', handleScroll);
+        window.removeEventListener('resize', updateHeaderHeight);
+      };
     } else {
       // For other routes, set to 'inicio' as default
       setActiveSection('inicio');
+      return () => window.removeEventListener('resize', updateHeaderHeight);
     }
   }, [location]);
   
@@ -73,7 +93,7 @@ export function Header() {
   return (
     <header 
       className={`bg-primary text-white sticky top-0 z-40 transition-all duration-300 shadow-lg ${
-        scrolled ? 'py-2 md:py-2' : 'py-3 md:py-3'
+        scrolled ? 'py-2 md:py-3' : 'py-4 md:py-4'
       }`}
     >
       <div className="container mx-auto px-4">

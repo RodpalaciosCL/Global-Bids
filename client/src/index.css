@@ -16,12 +16,12 @@
   
   /* Scroll padding for anchor links (offset for header) */
   html {
-    scroll-padding-top: 5rem; /* Ajuste para compensar el header sticky */
+    scroll-padding-top: var(--header-height, 5rem);
   }
   
   /* Padding top para secciones */
   section[id] {
-    padding-top: 1rem;
+    padding-top: 2rem;
   }
 }
 
