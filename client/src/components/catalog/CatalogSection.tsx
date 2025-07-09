@@ -14,64 +14,81 @@ import { useLanguage } from "@/contexts/LanguageContext";
 // Intelligent classification function (same as in card components)
 function getCorrectType(name: string, description: string): string {
   const titleWords = name.toLowerCase();
-  const nameAndDesc = (name + ' ' + description).toLowerCase();
   
-  // CRITICAL: Prioritize title keywords first for accuracy
+  // ABSOLUTE PRIORITY: Title keywords are FINAL authority
   
-  // Priority 1: Exact title matches (highest priority)
-  if (titleWords.includes('excavator') || titleWords.includes('excavadora')) {
+  // Excavators - HIGHEST PRIORITY  
+  if (titleWords.includes('excavator')) {
     return 'excavadora';
-  } else if (titleWords.includes('dump truck') || titleWords.includes('volquete')) {
-    return 'camion-tolva';
-  } else if (titleWords.includes('dump trailer') && titleWords.includes('tri-axle')) {
-    return 'tolva';
-  } else if (titleWords.includes('tractor') && !titleWords.includes('dump')) {
-    return 'tractor';
-  } else if (titleWords.includes('wheel loader') || titleWords.includes('cargador')) {
-    return 'cargador';
-  } else if (titleWords.includes('motor grader') || titleWords.includes('motoniveladora')) {
-    return 'motoniveladora';
-  } else if (titleWords.includes('dozer') || titleWords.includes('bulldozer')) {
-    return 'bulldozer';
-  } else if (titleWords.includes('mobile crane') || titleWords.includes('grua movil')) {
-    return 'grua';
-  } else if (titleWords.includes('telehandler') || titleWords.includes('manipulador')) {
-    return 'manipulador-telescopico';
-  } else if (titleWords.includes('compressor') || titleWords.includes('compresor')) {
-    return 'compresor';
-  } else if (titleWords.includes('golf cart') || titleWords.includes('carrito de golf')) {
-    return 'vehiculo-golf';
-  } else if (titleWords.includes('trailer') || titleWords.includes('remolque')) {
-    return 'remolque';
-  } else if (titleWords.includes('bus') || titleWords.includes('autobus')) {
-    return 'autobus';
   }
   
-  // Priority 2: Brand-specific vehicle classification
-  if (titleWords.includes('ford explorer') || titleWords.includes('jeep cherokee') || 
-      titleWords.includes('peugeot') || titleWords.includes('landtrek')) {
+  // Tractors - must be explicit
+  if (titleWords.includes('tractor') && !titleWords.includes('dump')) {
+    return 'tractor';
+  }
+  
+  // Vehicles - Cherokee, Explorer, etc.
+  if (titleWords.includes('cherokee') || titleWords.includes('explorer') || 
+      titleWords.includes('peugeot') || titleWords.includes('landtrek') ||
+      titleWords.includes('armored car')) {
     return 'camioneta';
   }
   
-  // Priority 3: Specific truck types
-  if (titleWords.includes('water truck') || titleWords.includes('fuel truck')) {
+  // Loaders
+  if (titleWords.includes('loader') || titleWords.includes('wheel loader')) {
+    return 'cargador';
+  }
+  
+  // Motor Graders  
+  if (titleWords.includes('motor grader') || titleWords.includes('grader')) {
+    return 'motoniveladora';
+  }
+  
+  // Dump Trucks vs Dump Trailers
+  if (titleWords.includes('dump truck')) {
+    return 'camion-tolva';
+  } else if (titleWords.includes('dump trailer')) {
+    return 'tolva';
+  }
+  
+  // Other specific equipment
+  if (titleWords.includes('bulldozer') || titleWords.includes('dozer')) {
+    return 'bulldozer';
+  }
+  
+  if (titleWords.includes('crane')) {
+    return 'grua';
+  }
+  
+  if (titleWords.includes('telehandler')) {
+    return 'manipulador-telescopico';
+  }
+  
+  if (titleWords.includes('compressor')) {
+    return 'compresor';
+  }
+  
+  if (titleWords.includes('golf cart')) {
+    return 'vehiculo-golf';
+  }
+  
+  if (titleWords.includes('trailer') && !titleWords.includes('dump')) {
+    return 'remolque';
+  }
+  
+  if (titleWords.includes('bus')) {
+    return 'autobus';
+  }
+  
+  // Generic trucks
+  if (titleWords.includes('truck')) {
     return 'camion';
   }
   
-  // Priority 4: Parts and attachments (lower priority to avoid misclassification)
-  if (nameAndDesc.includes('ripper tooth') || nameAndDesc.includes('diente') || nameAndDesc.includes('teeth')) {
+  // Only check description for very specific parts/attachments
+  const nameAndDesc = (name + ' ' + description).toLowerCase();
+  if (nameAndDesc.includes('ripper tooth') || nameAndDesc.includes('rake attachment')) {
     return 'repuesto';
-  } else if (nameAndDesc.includes('rake attachment') || nameAndDesc.includes('implemento') || nameAndDesc.includes('attachment')) {
-    return 'implemento';
-  }
-  
-  // Priority 5: Other equipment types
-  if (nameAndDesc.includes('vertical drill') || nameAndDesc.includes('perforadora')) {
-    return 'perforadora';
-  } else if (nameAndDesc.includes('concrete mixer') || nameAndDesc.includes('mezcladora')) {
-    return 'mezcladora';
-  } else if (nameAndDesc.includes('roller') || nameAndDesc.includes('rodillo')) {
-    return 'rodillo';
   }
   
   // Fallback to original type
