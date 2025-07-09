@@ -26,9 +26,6 @@ export default function Home() {
       <section id="subastas">
         <AuctionsIframe />
       </section>
-      <section id="catalogo">
-        <CatalogSection />
-      </section>
       <section id="soporte">
         <SoporteSection />
       </section>

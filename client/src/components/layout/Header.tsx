@@ -16,7 +16,7 @@ export function Header() {
   useEffect(() => {
     // Set active section based on current route
     if (location === '/marketplace') {
-      setActiveSection('catalogo');
+      setActiveSection('marketplace');
       return;
     }
     
@@ -32,7 +32,6 @@ export function Header() {
           'nosotros', 
           'servicios',
           'subastas',
-          'catalogo',
           'soporte', 
           'contacto'
         ];
@@ -139,23 +138,19 @@ export function Header() {
                 </a>
               ))}
               
-              {/* Marketplace como hash route también */}
-              <a
-                href="/#catalogo"
-                onClick={(e) => {
-                  // Usar navegación estándar del navegador
-                }}
-                className={`relative px-4 py-2 mx-1 font-medium transition-all duration-300 flex items-center justify-center whitespace-nowrap ${
-                  activeSection === 'catalogo' 
+              {/* Marketplace mantiene como Link independiente */}
+              <Link href="/marketplace">
+                <button className={`relative px-4 py-2 mx-1 font-medium transition-all duration-300 flex items-center justify-center whitespace-nowrap ${
+                  location === '/marketplace' 
                     ? 'bg-white text-primary rounded-md' 
                     : 'text-white hover:bg-white/10 rounded-md'
-                }`}
-              >
-                <i className={`fas fa-th-large mr-2 ${
-                  activeSection === 'catalogo' ? 'text-primary' : 'text-white/80'
-                }`}></i>
-                <span>{t('nav.catalog')}</span>
-              </a>
+                }`}>
+                  <i className={`fas fa-th-large mr-2 ${
+                    location === '/marketplace' ? 'text-primary' : 'text-white/80'
+                  }`}></i>
+                  <span>{t('nav.catalog')}</span>
+                </button>
+              </Link>
               
               {/* Resto de hash routes - forzar navegación a home */}
               <a
