@@ -113,9 +113,9 @@ export function Header() {
             <i className={`fas ${isMenuOpen ? 'fa-times' : 'fa-bars'} text-white`}></i>
           </motion.button>
           
-          {/* Desktop Menu */}
+          {/* Desktop Menu - Properly centered */}
           <div className="hidden md:flex items-center justify-center flex-1">
-            <nav className="flex items-center space-x-2">
+            <nav className="flex items-center space-x-1">
               {/* Hash links */}
               <a href="/#inicio" className="relative px-3 py-2 font-medium transition-all duration-300 flex items-center justify-center whitespace-nowrap text-white hover:bg-white/10 rounded-md">
                 <i className="fas fa-home mr-2 text-white/80"></i>
@@ -142,19 +142,21 @@ export function Header() {
                 <span>{t('nav.contact')}</span>
               </a>
 
-              {/* Separador visual */}
-              <div className="text-white/50 px-2">|</div>
+              {/* Separador visual bien posicionado */}
+              <div className="text-white/30 mx-3">|</div>
 
-              {/* Hash link igual que los demás con animación de parpadeo */}
+              {/* Marketplace con animación de parpadeo */}
               <a href="/#marketplace" className="relative px-3 py-2 font-medium transition-all duration-300 flex items-center justify-center whitespace-nowrap text-white hover:bg-white/10 rounded-md font-semibold marketplace-pulse">
                 <i className="fas fa-th-large mr-2 text-white/80"></i>
                 <span>{t('nav.catalog')}</span>
               </a>
             </nav>
-            
-            <div className="pl-2 border-l border-white/20">
-              <LanguageSelector />
-            </div>
+          </div>
+
+          {/* Right Side: Language Selector - More space from center */}
+          <div className="hidden md:flex items-center ml-6">
+            <div className="text-white/30 mr-4">|</div>
+            <LanguageSelector />
           </div>
         </div>
         
