@@ -31,8 +31,8 @@ export function Header() {
           'inicio', 
           'nosotros', 
           'servicios',
-          'catalogo',
           'subastas',
+          'catalogo',
           'soporte', 
           'contacto'
         ];
