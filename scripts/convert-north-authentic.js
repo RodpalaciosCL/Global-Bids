@@ -1,14 +1,18 @@
 // Convert authentic North Country data to our database format
 import fs from 'fs';
 
-// Read the authentic North Country data
+// Read the authentic North Country data from all 4 pages
 const page1Data = JSON.parse(fs.readFileSync('page1-authentic.json', 'utf8'));
 const page2Data = JSON.parse(fs.readFileSync('page2-authentic.json', 'utf8'));
+const page3Data = JSON.parse(fs.readFileSync('page3-authentic.json', 'utf8'));
+const page4Data = JSON.parse(fs.readFileSync('page4-authentic.json', 'utf8'));
 
-// Combine both pages
+// Combine all 4 pages
 const allLots = [
   ...page1Data.data.map(item => ({ ...item, page: 1 })),
-  ...page2Data.data.map(item => ({ ...item, page: 2 }))
+  ...page2Data.data.map(item => ({ ...item, page: 2 })),
+  ...page3Data.data.map(item => ({ ...item, page: 3 })),
+  ...page4Data.data.map(item => ({ ...item, page: 4 }))
 ];
 
 console.log(`Found ${allLots.length} authentic lots from North Country`);
@@ -90,5 +94,7 @@ console.log('');
 console.log(`-- Generated ${convertedLots.length} authentic lots`);
 console.log(`-- Page 1: ${convertedLots.filter(l => l.page === 1).length} lots`);
 console.log(`-- Page 2: ${convertedLots.filter(l => l.page === 2).length} lots`);
+console.log(`-- Page 3: ${convertedLots.filter(l => l.page === 3).length} lots`);
+console.log(`-- Page 4: ${convertedLots.filter(l => l.page === 4).length} lots`);
 console.log(`-- Types: ${[...new Set(convertedLots.map(l => l.type))].join(', ')}`);
 console.log(`-- Brands: ${[...new Set(convertedLots.map(l => l.brand))].join(', ')}`);
