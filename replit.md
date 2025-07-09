@@ -115,3 +115,11 @@ The application includes proper error boundaries, loading states, and fallback m
 - **Verified brands**: Kubota engines, Briggs & Stratton, Rato, and other authentic manufacturers
 - **AWS S3 image integration** with working proxy system for all auction images
 - **API endpoint used**: `getWebcastItems?auction_id=2187&page={1-4}` from northcountry.auctiontechs.com
+
+### Navigation and Scroll Fixes (July 9, 2025)
+- **Resolved marketplace visibility issue** by removing problematic Framer Motion isInView dependencies
+- **Fixed scroll offset positioning** with dynamic header height calculation (headerHeight + 40px offset)
+- **Implemented CSS custom property** --header-height for consistent scroll-padding-top across all sections
+- **Updated section padding** to 3rem for better visual separation between sections
+- **Marketplace now displays immediately** without requiring scroll trigger or viewport detection
+- **All 146 authentic auction lots visible** in marketplace with proper filtering and pagination
