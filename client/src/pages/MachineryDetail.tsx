@@ -5,9 +5,8 @@ import { fadeIn, slideUp, staggerContainer } from '@/lib/animations';
 import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Machinery } from '@shared/schema';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { apiRequest } from '@/lib/queryClient';
-import { ImageGallery } from '@/components/machinery/ImageGallery';
 import { useLanguage } from '@/contexts/LanguageContext';
 
 export default function MachineryDetail() {
@@ -16,12 +15,54 @@ export default function MachineryDetail() {
   const machineryId = params?.id ? parseInt(params.id) : null;
   const [activeTab, setActiveTab] = useState('specs');
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const { language, t } = useLanguage();
   
   // Scroll to top on page load - smooth scroll to prevent jarring movement
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, [machineryId]);
+
+  // Navigation functions
+  const goToNextImage = useCallback(() => {
+    if (machinery?.gallery && machinery.gallery.length > 1) {
+      const nextIndex = currentImageIndex < machinery.gallery.length - 1 ? currentImageIndex + 1 : 0;
+      setCurrentImageIndex(nextIndex);
+      setSelectedImage(machinery.gallery[nextIndex]);
+    }
+  }, [currentImageIndex, machinery?.gallery]);
+
+  const goToPrevImage = useCallback(() => {
+    if (machinery?.gallery && machinery.gallery.length > 1) {
+      const prevIndex = currentImageIndex > 0 ? currentImageIndex - 1 : machinery.gallery.length - 1;
+      setCurrentImageIndex(prevIndex);
+      setSelectedImage(machinery.gallery[prevIndex]);
+    }
+  }, [currentImageIndex, machinery?.gallery]);
+
+  // Keyboard navigation
+  useEffect(() => {
+    const handleKeyPress = (event: KeyboardEvent) => {
+      if (event.key === 'ArrowLeft') {
+        event.preventDefault();
+        goToPrevImage();
+      } else if (event.key === 'ArrowRight') {
+        event.preventDefault();
+        goToNextImage();
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyPress);
+    return () => window.removeEventListener('keydown', handleKeyPress);
+  }, [goToPrevImage, goToNextImage]);
+
+  // Update selected image when machinery changes
+  useEffect(() => {
+    if (machinery?.gallery && machinery.gallery.length > 0) {
+      setSelectedImage(machinery.gallery[0]);
+      setCurrentImageIndex(0);
+    }
+  }, [machinery]);
   
   // Fetch the machinery data
   const { data: machinery, isLoading, isError } = useQuery<Machinery>({
@@ -93,74 +134,66 @@ export default function MachineryDetail() {
                 </div>
                 
                 {/* Main Image Gallery */}
-                <div 
-                  className="w-full h-[450px] border border-gray-200 rounded-lg overflow-hidden mb-1 cursor-pointer" 
-                  onClick={() => setSelectedImage(selectedImage ? null : machinery.image)}
-                >
+                <div className="relative w-full h-[450px] border border-gray-200 rounded-lg overflow-hidden mb-1">
                   <img 
                     src={selectedImage || machinery.image} 
                     alt={machinery.name}
                     className="w-full h-full object-contain"
                   />
+                  
+                  {/* Image Counter */}
+                  {machinery.gallery && machinery.gallery.length > 1 && (
+                    <div className="absolute top-2 right-2 bg-black/70 text-white px-2 py-1 rounded text-sm">
+                      {currentImageIndex + 1}/{machinery.gallery.length}
+                    </div>
+                  )}
+                  
+                  {/* Navigation arrows on image */}
+                  {machinery.gallery && machinery.gallery.length > 1 && (
+                    <>
+                      <button 
+                        onClick={goToPrevImage}
+                        className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-black/50 text-white hover:bg-black/70 rounded-full p-2 shadow-lg transition-all"
+                      >
+                        <i className="fas fa-chevron-left"></i>
+                      </button>
+                      <button 
+                        onClick={goToNextImage}
+                        className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-black/50 text-white hover:bg-black/70 rounded-full p-2 shadow-lg transition-all"
+                      >
+                        <i className="fas fa-chevron-right"></i>
+                      </button>
+                    </>
+                  )}
                 </div>
               </div>
               
-              {/* Image Thumbnails with Navigation - Full width */}
+              {/* Image Thumbnails - Full width scrollable */}
               <div className="px-3 w-full">
-                {machinery.gallery && machinery.gallery.length > 1 ? (
-                  <div className="relative">
-                    {/* Navigation arrows */}
-                    <div className="absolute left-0 top-1/2 transform -translate-y-1/2 z-10">
-                      <button 
-                        onClick={() => {
-                          const currentIndex = machinery.gallery.findIndex(img => img === (selectedImage || machinery.image));
-                          const prevIndex = currentIndex > 0 ? currentIndex - 1 : machinery.gallery.length - 1;
-                          setSelectedImage(machinery.gallery[prevIndex]);
-                        }}
-                        className="bg-black/50 text-white hover:bg-black/70 rounded-full p-1 shadow-lg"
-                      >
-                        <i className="fas fa-chevron-left text-sm"></i>
-                      </button>
-                    </div>
-                    <div className="absolute right-0 top-1/2 transform -translate-y-1/2 z-10">
-                      <button 
-                        onClick={() => {
-                          const currentIndex = machinery.gallery.findIndex(img => img === (selectedImage || machinery.image));
-                          const nextIndex = currentIndex < machinery.gallery.length - 1 ? currentIndex + 1 : 0;
-                          setSelectedImage(machinery.gallery[nextIndex]);
-                        }}
-                        className="bg-black/50 text-white hover:bg-black/70 rounded-full p-1 shadow-lg"
-                      >
-                        <i className="fas fa-chevron-right text-sm"></i>
-                      </button>
+                {machinery.gallery && machinery.gallery.length > 1 && (
+                  <div className="w-full">
+                    <div className="text-center text-sm text-gray-600 mb-2">
+                      {language === 'es' ? 'Navegue con las flechas del teclado o haga clic en las miniaturas' : 'Navigate with arrow keys or click thumbnails'}
                     </div>
                     
                     {/* Thumbnails */}
-                    <div className="flex gap-2 overflow-x-auto pb-3 w-full px-6">
+                    <div className="flex gap-2 overflow-x-auto pb-3 w-full">
                       {machinery.gallery.map((img, index) => (
                         <div 
                           key={index} 
-                          className={`${(selectedImage || machinery.image) === img ? 'border-2 border-primary' : 'border border-gray-200'} rounded overflow-hidden flex-shrink-0 cursor-pointer`}
-                          onClick={() => setSelectedImage(img)}
+                          className={`${currentImageIndex === index ? 'border-2 border-primary ring-2 ring-primary/20' : 'border border-gray-200'} rounded overflow-hidden flex-shrink-0 cursor-pointer transition-all hover:border-primary/50`}
+                          onClick={() => {
+                            setCurrentImageIndex(index);
+                            setSelectedImage(img);
+                          }}
                         >
                           <img
                             src={img}
-                            alt={`${machinery.name} - Thumbnail ${index + 1}`}
+                            alt={`${machinery.name} - Imagen ${index + 1}`}
                             className="w-20 h-16 object-cover"
                           />
                         </div>
                       ))}
-                    </div>
-                  </div>
-                ) : (
-                  // Single image - no navigation needed
-                  <div className="flex gap-2 overflow-x-auto pb-3 w-full">
-                    <div className="border-2 border-primary rounded overflow-hidden flex-shrink-0">
-                      <img
-                        src={machinery.image}
-                        alt={`${machinery.name} - Single image`}
-                        className="w-20 h-16 object-cover"
-                      />
                     </div>
                   </div>
                 )}
@@ -176,10 +209,10 @@ export default function MachineryDetail() {
                 <p className="text-xs text-gray-500 mb-2">{language === 'en' ? 'Final price (taxes included)' : 'Precio final (impuestos incluidos)'}</p>
                 
                 <div className="border-t border-gray-100 pt-2">
-                  <h3 className="text-xs font-medium text-gray-700 mb-0.5">{language === 'en' ? 'Offer type' : 'Tipo de oferta'}</h3>
+                  <h3 className="text-xs font-medium text-gray-700 mb-0.5">{language === 'en' ? 'Auction date' : 'Fecha de subasta'}</h3>
                   <p className="text-xs text-gray-600">
-                    <i className="fas fa-tag mr-1 text-gray-400"></i>
-                    {language === 'en' ? 'Direct sale (no auction)' : 'Venta directa (sin subasta)'}
+                    <i className="fas fa-calendar mr-1 text-gray-400"></i>
+                    {language === 'en' ? 'July 15, 2025' : '15 de julio, 2025'}
                   </p>
                 </div>
               </div>
@@ -187,8 +220,8 @@ export default function MachineryDetail() {
               {/* Action Buttons */}
               <div className="grid gap-2 mb-3">
                 <Button className="bg-primary hover:bg-primary/90 w-full py-2 h-auto text-sm">
-                  <i className="fas fa-shopping-cart mr-1"></i>
-                  {language === 'en' ? 'Buy now' : 'Comprar ahora'}
+                  <i className="fas fa-gavel mr-1"></i>
+                  {language === 'en' ? 'Register for auction' : 'Registrarse para subasta'}
                 </Button>
                 <Button variant="outline" className="border-gray-300 w-full py-2 h-auto text-sm">
                   <i className="fas fa-phone-alt mr-1"></i>
@@ -203,25 +236,17 @@ export default function MachineryDetail() {
               </div>
               
               {/* Tabs for Specs and Description */}
-              <div className="bg-white rounded-lg shadow-sm overflow-hidden">
+              <div className="bg-white rounded-lg shadow-sm">
                 <div className="flex border-b">
-                  <button
+                  <button 
+                    className={`flex-1 py-2 px-2 text-sm font-medium ${activeTab === 'specs' ? 'border-b-2 border-primary text-primary' : 'text-gray-500'}`}
                     onClick={() => setActiveTab('specs')}
-                    className={`flex-1 py-1.5 text-center font-medium text-sm ${
-                      activeTab === 'specs' 
-                        ? 'text-primary border-b-2 border-primary' 
-                        : 'text-gray-500 hover:text-gray-700'
-                    }`}
                   >
                     {t('detail.specs')}
                   </button>
-                  <button
+                  <button 
+                    className={`flex-1 py-2 px-2 text-sm font-medium ${activeTab === 'description' ? 'border-b-2 border-primary text-primary' : 'text-gray-500'}`}
                     onClick={() => setActiveTab('description')}
-                    className={`flex-1 py-1.5 text-center font-medium text-sm ${
-                      activeTab === 'description' 
-                        ? 'text-primary border-b-2 border-primary' 
-                        : 'text-gray-500 hover:text-gray-700'
-                    }`}
                   >
                     {t('detail.description')}
                   </button>
@@ -280,202 +305,46 @@ export default function MachineryDetail() {
           </div>
         </div>
       </div>
-      
-      {/* Modal para vista ampliada */}
-      {selectedImage && (
-        <div 
-          className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center" 
-          onClick={() => setSelectedImage(null)}
-        >
-          <div className="relative max-w-4xl max-h-full p-2">
-            <img 
-              src={selectedImage} 
-              alt={machinery.name} 
-              className="max-w-full max-h-[90vh] object-contain"
-            />
-            <button 
-              className="absolute top-4 right-4 bg-white/20 hover:bg-white/40 rounded-full p-2 text-white"
-              onClick={(e) => {
-                e.stopPropagation();
-                setSelectedImage(null);
-              }}
-            >
-              <i className="fas fa-times"></i>
-            </button>
-          </div>
-        </div>
-      )}
     </div>
   );
 }
 
+// Loading skeleton component
+function LoadingSkeleton() {
+  return (
+    <div className="container mx-auto p-4">
+      <div className="space-y-4">
+        <Skeleton className="h-8 w-64" />
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <div className="lg:col-span-2">
+            <Skeleton className="h-96 w-full" />
+          </div>
+          <div>
+            <Skeleton className="h-32 w-full" />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// Error state component
 function ErrorState() {
   const { language, t } = useLanguage();
   
   return (
-    <div className="py-16 bg-accent min-h-screen">
-      <div className="container mx-auto px-4 text-center">
-        <motion.div 
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.5 }}
-          className="bg-white p-8 md:p-12 rounded-2xl shadow-lg max-w-2xl mx-auto"
-        >
-          <div className="text-red-500 text-5xl mb-6">
-            <i className="fas fa-exclamation-circle"></i>
-          </div>
-          <h1 className="text-2xl md:text-3xl font-bold text-primary mb-4">
-            {language === 'en' ? 'Machine not found' : 'Máquina no encontrada'}
-          </h1>
-          <p className="text-gray-600 mb-8">
-            {language === 'en' 
-              ? 'We could not find the machine you are looking for. It may have been sold or removed from our database.'
-              : 'No pudimos encontrar la máquina que estás buscando. Puede que haya sido vendida o retirada de nuestra base de datos.'}
-          </p>
-          <Button asChild>
-            <Link href="/marketplace">
-              <i className="fas fa-arrow-left mr-2"></i>
-              {t('detail.back')}
-            </Link>
-          </Button>
-        </motion.div>
-      </div>
+    <div className="container mx-auto p-4 text-center">
+      <h1 className="text-2xl font-bold text-gray-900 mb-4">
+        {language === 'en' ? 'Equipment not found' : 'Equipo no encontrado'}
+      </h1>
+      <p className="text-gray-600 mb-4">
+        {language === 'en' 
+          ? 'The equipment you are looking for does not exist or has been removed.'
+          : 'El equipo que buscas no existe o ha sido eliminado.'}
+      </p>
+      <Link href="/marketplace">
+        <Button>{language === 'en' ? 'Back to catalog' : 'Volver al catálogo'}</Button>
+      </Link>
     </div>
   );
-}
-
-function LoadingSkeleton() {
-  const { t } = useLanguage();
-  return (
-    <div className="bg-accent h-screen flex flex-col overflow-y-auto">
-      <div className="flex-grow container mx-auto px-4 py-4 md:py-6">
-        <div className="mb-6 md:mb-10 flex items-center">
-          <Skeleton className="h-6 w-16 rounded" />
-          <Skeleton className="h-6 w-4 mx-2 rounded" />
-          <Skeleton className="h-6 w-24 rounded" />
-          <Skeleton className="h-6 w-4 mx-2 rounded" />
-          <Skeleton className="h-6 w-36 rounded" />
-        </div>
-        
-        <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
-          {/* Banner skeleton */}
-          <div className="w-full h-64 md:h-96 bg-gray-200 animate-pulse relative">
-            <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
-            <div className="absolute bottom-0 left-0 p-6 md:p-10 space-y-3 w-full">
-              <Skeleton className="h-6 w-24 rounded" />
-              <Skeleton className="h-10 w-3/4 rounded" />
-              <div className="flex flex-wrap gap-4">
-                <Skeleton className="h-5 w-24 rounded" />
-                <Skeleton className="h-5 w-28 rounded" />
-                <Skeleton className="h-5 w-32 rounded" />
-                <Skeleton className="h-5 w-24 rounded" />
-              </div>
-            </div>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 p-6 md:p-10">
-            <div className="md:col-span-2 space-y-8">
-              <div className="space-y-4">
-                <Skeleton className="h-8 w-40 rounded" />
-                <Skeleton className="h-4 w-full rounded mb-1" />
-                <Skeleton className="h-4 w-full rounded mb-1" />
-                <Skeleton className="h-4 w-3/4 rounded" />
-              </div>
-              
-              <div className="space-y-4">
-                <Skeleton className="h-8 w-40 rounded" />
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                  <div className="bg-gray-50 p-4 rounded-lg space-y-4">
-                    <Skeleton className="h-6 w-40 rounded" />
-                    <Skeleton className="h-4 w-full rounded mb-2" />
-                    <Skeleton className="h-4 w-full rounded mb-2" />
-                    <Skeleton className="h-4 w-full rounded mb-2" />
-                    <Skeleton className="h-4 w-full rounded" />
-                  </div>
-                  <div className="bg-gray-50 p-4 rounded-lg space-y-4">
-                    <Skeleton className="h-6 w-40 rounded" />
-                    <Skeleton className="h-4 w-full rounded mb-2" />
-                    <Skeleton className="h-4 w-full rounded mb-2" />
-                    <Skeleton className="h-4 w-full rounded mb-2" />
-                    <Skeleton className="h-4 w-full rounded" />
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-            <div className="space-y-6">
-              <div className="bg-gray-50 p-5 rounded-lg space-y-4">
-                <Skeleton className="h-7 w-24 rounded" />
-                <Skeleton className="h-10 w-40 rounded" />
-                <Skeleton className="h-4 w-full rounded mb-2" />
-                <Skeleton className="h-4 w-full rounded" />
-              </div>
-              
-              <div className="space-y-3">
-                <Skeleton className="h-12 w-full rounded" />
-                <Skeleton className="h-12 w-full rounded" />
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-// Helper function to generate features based on machinery type
-function generateFeatures(type: string): string[] {
-  const commonFeatures = [
-    'Documentación completa y al día',
-    'Mantenimiento preventivo reciente',
-    'Sistema hidráulico en excelente estado'
-  ];
-  
-  const typeSpecificFeatures: Record<string, string[]> = {
-    excavator: [
-      'Brazo extendido para mayor alcance',
-      'Sistema de control preciso',
-      'Cabina climatizada con visibilidad 360°',
-      'Motor de alta eficiencia energética'
-    ],
-    truck: [
-      'Suspensión reforzada para cargas pesadas',
-      'Caja de cambios automática',
-      'Sistema de frenos ABS',
-      'Aire acondicionado en cabina'
-    ],
-    loader: [
-      'Cuchara de alta resistencia',
-      'Articulación central reforzada',
-      'Sistema de nivelación automática',
-      'Cabina ROPS/FOPS certificada'
-    ],
-    generator: [
-      'Panel de control digital',
-      'Consumo eficiente de combustible',
-      'Sistema de arranque automático',
-      'Aislamiento acústico premium'
-    ],
-    crane: [
-      'Sistema anti-balanceo de cargas',
-      'Controles remotos inalámbricos',
-      'Sensores de peso y estabilidad',
-      'Alcance vertical extendido'
-    ],
-    backhoe: [
-      'Retroexcavadora y cargadora frontal',
-      'Estabilizadores hidráulicos',
-      'Múltiples implementos disponibles',
-      'Tracción 4x4 para todo terreno'
-    ],
-    manlift: [
-      'Sistema de nivelación automática',
-      'Controles proporcionales precisos',
-      'Rotación de 360° de la plataforma',
-      'Sensor anti-colisión incluido'
-    ]
-  };
-  
-  const specificFeatures = typeSpecificFeatures[type] || [];
-  return [...commonFeatures, ...specificFeatures];
 }
