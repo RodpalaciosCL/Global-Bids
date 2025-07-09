@@ -133,3 +133,6 @@ The application includes proper error boundaries, loading states, and fallback m
 - **Conditional display logic** - only shows kilometers/hours when actually available in descriptions
 - **Applied across all 146 lots** ensuring Peugeot and all vehicles show correct kilometers (87,220 km) instead of "0 hrs"
 - **Consistent data display** across marketplace, detail pages, and all card views
+- **Simplified format to "Marca: Kms: Horas:"** with N/A for missing values
+- **Added intelligent equipment classification** to correctly categorize excavators, trucks, generators based on name/description
+- **Connected International Auctions button** to authentic North Country Auctions URL (https://northcountry.auctiontechs.com/auction-detail/174912699568418f53a4cac)

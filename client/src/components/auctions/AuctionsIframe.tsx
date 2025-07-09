@@ -152,7 +152,7 @@ export function AuctionsIframe() {
               </p>
               <button 
                 onClick={() => {
-                  console.log('Subastas Internacionales clicked');
+                  window.open('https://northcountry.auctiontechs.com/auction-detail/174912699568418f53a4cac', '_blank');
                 }}
                 className="w-full bg-white text-primary font-bold py-2.5 px-4 rounded-lg hover:bg-gray-100 transition-colors duration-300 flex items-center justify-center group-hover:shadow-lg text-sm mt-auto"
               >
