@@ -15,37 +15,63 @@ function extractSpecsFromDescription(description: string, name: string) {
     model: ''
   };
 
-  // Extract year from description or name
-  const yearMatch = description.match(/(\d{4})/g) || name.match(/(\d{4})/g);
-  if (yearMatch) {
-    // Get the year that makes sense (between 1990-2030)
-    const years = yearMatch.map(y => parseInt(y)).filter(y => y >= 1990 && y <= 2030);
-    if (years.length > 0) {
-      specs.realYear = Math.max(...years); // Take the most recent year
+  // Extract year from NAME first (more reliable) - look for 4-digit year at the beginning
+  const nameYearMatch = name.match(/^(\d{4})\s+/);
+  if (nameYearMatch) {
+    const year = parseInt(nameYearMatch[1]);
+    if (year >= 1990 && year <= 2030) {
+      specs.realYear = year;
+    }
+  }
+
+  // If no year in name, try description
+  if (!specs.realYear) {
+    const descYearMatch = description.match(/(\d{4})/g);
+    if (descYearMatch) {
+      const years = descYearMatch.map(y => parseInt(y)).filter(y => y >= 1990 && y <= 2030);
+      if (years.length > 0) {
+        specs.realYear = Math.max(...years);
+      }
     }
   }
 
   // Extract kilometers - look for patterns like "87220 Km", "1000 km", etc.
   const kmMatch = description.match(/(\d+(?:,\d+)*)\s*(?:km|Km|KM|kilometers?)/i);
   if (kmMatch) {
-    specs.kilometers = parseInt(kmMatch[1].replace(/,/g, ''));
+    const km = parseInt(kmMatch[1].replace(/,/g, ''));
+    if (km > 0) {
+      specs.kilometers = km;
+    }
   }
 
   // Extract hours - look for patterns like "100 hrs", "1500 hours", etc.
   const hoursMatch = description.match(/(\d+(?:,\d+)*)\s*(?:hrs?|hours?)/i);
   if (hoursMatch) {
-    specs.hours = parseInt(hoursMatch[1].replace(/,/g, ''));
+    const hrs = parseInt(hoursMatch[1].replace(/,/g, ''));
+    if (hrs > 0) {
+      specs.hours = hrs;
+    }
   }
 
-  // Extract brand from name (first word usually)
-  const nameWords = name.split(' ');
-  if (nameWords.length > 0) {
-    specs.realBrand = nameWords[0];
+  // Extract brand from name - if starts with year, take the word after year
+  if (nameYearMatch) {
+    const afterYear = name.replace(nameYearMatch[0], '').trim();
+    const brandMatch = afterYear.split(' ')[0];
+    specs.realBrand = brandMatch || '';
+  } else {
+    // Otherwise take first word
+    specs.realBrand = name.split(' ')[0] || '';
   }
 
   // Extract model (everything after brand and year)
-  const brandAndYear = `${specs.realBrand}${specs.realYear ? ` ${specs.realYear}` : ''}`;
-  specs.model = name.replace(brandAndYear, '').trim();
+  let model = name;
+  if (specs.realYear) {
+    model = model.replace(specs.realYear.toString(), '').trim();
+  }
+  if (specs.realBrand) {
+    model = model.replace(specs.realBrand, '').trim();
+  }
+  specs.model = model;
 
   return specs;
 }
