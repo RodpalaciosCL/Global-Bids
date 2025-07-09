@@ -93,3 +93,12 @@
   transform: translateY(-5px);
   box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
 }
+
+/* Marketplace pulse animation - white to yellow */
+@keyframes marketplacePulse {
+  0%, 100% { color: white; }
+  50% { color: #fbbf24; }
+}
+.marketplace-pulse {
+  animation: marketplacePulse 2s infinite;
+}
