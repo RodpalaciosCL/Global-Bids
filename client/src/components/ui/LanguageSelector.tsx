@@ -16,12 +16,7 @@ export function LanguageSelector() {
         title="Español"
       >
         {language === 'es' && (
-          <motion.div 
-            className="absolute inset-0 bg-primary rounded-full" 
-            layoutId="langIndicatorES"
-            initial={false}
-            transition={{ type: 'spring', damping: 30, stiffness: 400 }}
-          />
+          <div className="absolute inset-0 bg-primary rounded-full" />
         )}
         <div className="relative z-10 px-2 sm:px-3 py-1 sm:py-1.5 flex items-center space-x-1">
           <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 sm:w-5 sm:h-5 rounded-full shadow-sm" viewBox="0 0 640 480">
@@ -42,12 +37,7 @@ export function LanguageSelector() {
         title="English"
       >
         {language === 'en' && (
-          <motion.div 
-            className="absolute inset-0 bg-primary rounded-full" 
-            layoutId="langIndicatorEN"
-            initial={false}
-            transition={{ type: 'spring', damping: 30, stiffness: 400 }}
-          />
+          <div className="absolute inset-0 bg-primary rounded-full" />
         )}
         <div className="relative z-10 px-2 sm:px-3 py-1 sm:py-1.5 flex items-center space-x-1">
           <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 sm:w-5 sm:h-5 rounded-full shadow-sm" viewBox="0 0 640 480">
