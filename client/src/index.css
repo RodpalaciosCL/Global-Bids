@@ -22,7 +22,7 @@
   /* Específico para móvil - reduce scroll padding */
   @media (max-width: 768px) {
     html {
-      scroll-padding-top: 4.5rem;
+      scroll-padding-top: 3.5rem;
     }
   }
 }
