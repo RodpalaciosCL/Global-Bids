@@ -118,8 +118,18 @@ The application includes proper error boundaries, loading states, and fallback m
 
 ### Navigation and Scroll Fixes (July 9, 2025)
 - **Resolved marketplace visibility issue** by removing problematic Framer Motion isInView dependencies
-- **Fixed scroll offset positioning** with dynamic header height calculation (headerHeight + 40px offset)
+- **Fixed scroll offset positioning** with dynamic header height calculation (headerHeight - 10px offset)
 - **Implemented CSS custom property** --header-height for consistent scroll-padding-top across all sections
-- **Updated section padding** to 3rem for better visual separation between sections
+- **Updated section padding** to 0.5rem for optimal visual positioning
 - **Marketplace now displays immediately** without requiring scroll trigger or viewport detection
 - **All 146 authentic auction lots visible** in marketplace with proper filtering and pagination
+- **Fixed navigation 404 error** by correcting detail page links from `/marketplace` to `/#marketplace`
+
+### Data Extraction and Display Enhancement (July 9, 2025)
+- **Implemented intelligent data extraction** from authentic North Country Auctions descriptions
+- **Real specification parsing** for Brand, Model, Year, Kilometers, and Hours from equipment descriptions
+- **Updated all card components** (MachineryCardCompact, MachineryCard) to display extracted real data
+- **Enhanced detail page specifications** to show authentic information instead of placeholder data
+- **Conditional display logic** - only shows kilometers/hours when actually available in descriptions
+- **Applied across all 146 lots** ensuring Peugeot and all vehicles show correct kilometers (87,220 km) instead of "0 hrs"
+- **Consistent data display** across marketplace, detail pages, and all card views

@@ -9,6 +9,51 @@ import { useEffect, useState, useCallback } from 'react';
 import { apiRequest } from '@/lib/queryClient';
 import { useLanguage } from '@/contexts/LanguageContext';
 
+// Function to extract real data from descriptions
+function extractSpecsFromDescription(description: string, name: string) {
+  const specs = {
+    realYear: null as number | null,
+    kilometers: null as number | null,
+    hours: null as number | null,
+    realBrand: '',
+    model: ''
+  };
+
+  // Extract year from description or name
+  const yearMatch = description.match(/(\d{4})/g) || name.match(/(\d{4})/g);
+  if (yearMatch) {
+    // Get the year that makes sense (between 1990-2030)
+    const years = yearMatch.map(y => parseInt(y)).filter(y => y >= 1990 && y <= 2030);
+    if (years.length > 0) {
+      specs.realYear = Math.max(...years); // Take the most recent year
+    }
+  }
+
+  // Extract kilometers - look for patterns like "87220 Km", "1000 km", etc.
+  const kmMatch = description.match(/(\d+(?:,\d+)*)\s*(?:km|Km|KM|kilometers?)/i);
+  if (kmMatch) {
+    specs.kilometers = parseInt(kmMatch[1].replace(/,/g, ''));
+  }
+
+  // Extract hours - look for patterns like "100 hrs", "1500 hours", etc.
+  const hoursMatch = description.match(/(\d+(?:,\d+)*)\s*(?:hrs?|hours?)/i);
+  if (hoursMatch) {
+    specs.hours = parseInt(hoursMatch[1].replace(/,/g, ''));
+  }
+
+  // Extract brand from name (first word usually)
+  const nameWords = name.split(' ');
+  if (nameWords.length > 0) {
+    specs.realBrand = nameWords[0];
+  }
+
+  // Extract model (everything after brand and year)
+  const brandAndYear = `${specs.realBrand}${specs.realYear ? ` ${specs.realYear}` : ''}`;
+  specs.model = name.replace(brandAndYear, '').trim();
+
+  return specs;
+}
+
 export default function MachineryDetail() {
   // Extract the ID from the URL
   const [, params] = useRoute('/machinery/:id');
@@ -77,6 +122,15 @@ export default function MachineryDetail() {
   if (isError || !machinery) {
     return <ErrorState />;
   }
+
+  // Extract real specs from description
+  const realSpecs = extractSpecsFromDescription(machinery.description, machinery.name);
+  
+  // Use extracted data or fallback to original data
+  const displayYear = realSpecs.realYear || machinery.year;
+  const displayBrand = realSpecs.realBrand || machinery.brand;
+  const displayKilometers = realSpecs.kilometers || machinery.kilometers;
+  const displayHours = realSpecs.hours || machinery.hours;
   
   return (
     <div className="bg-white min-h-screen">
@@ -276,20 +330,28 @@ export default function MachineryDetail() {
                       <tbody>
                         <tr className="border-b">
                           <td className="py-1 text-gray-600">{t('detail.brand')}:</td>
-                          <td className="py-1 text-gray-900 font-medium">{machinery.brand}</td>
+                          <td className="py-1 text-gray-900 font-medium">{displayBrand || 'N/A'}</td>
                         </tr>
                         <tr className="border-b">
                           <td className="py-1 text-gray-600">{language === 'en' ? 'Model' : 'Modelo'}:</td>
-                          <td className="py-1 text-gray-900 font-medium">{machinery.name}</td>
+                          <td className="py-1 text-gray-900 font-medium">{realSpecs.model || machinery.name}</td>
                         </tr>
                         <tr className="border-b">
                           <td className="py-1 text-gray-600">{t('detail.year')}:</td>
-                          <td className="py-1 text-gray-900 font-medium">{machinery.year}</td>
+                          <td className="py-1 text-gray-900 font-medium">{displayYear || 'N/A'}</td>
                         </tr>
-                        <tr className="border-b">
-                          <td className="py-1 text-gray-600">{t('detail.hours')}:</td>
-                          <td className="py-1 text-gray-900 font-medium">{machinery.hours} hrs</td>
-                        </tr>
+                        {displayKilometers && (
+                          <tr className="border-b">
+                            <td className="py-1 text-gray-600">{language === 'en' ? 'Kilometers' : 'Kilómetros'}:</td>
+                            <td className="py-1 text-gray-900 font-medium">{displayKilometers.toLocaleString()} km</td>
+                          </tr>
+                        )}
+                        {displayHours && (
+                          <tr className="border-b">
+                            <td className="py-1 text-gray-600">{t('detail.hours')}:</td>
+                            <td className="py-1 text-gray-900 font-medium">{displayHours} hrs</td>
+                          </tr>
+                        )}
                         <tr className="border-b">
                           <td className="py-1 text-gray-600">{t('detail.condition')}:</td>
                           <td className="py-1 text-gray-900 font-medium">

@@ -3,6 +3,51 @@ import { Machinery } from '@/types/machinery';
 import { Button } from '@/components/ui/button';
 import { motion } from 'framer-motion';
 
+// Function to extract real data from descriptions
+function extractSpecsFromDescription(description: string, name: string) {
+  const specs = {
+    realYear: null as number | null,
+    kilometers: null as number | null,
+    hours: null as number | null,
+    realBrand: '',
+    model: ''
+  };
+
+  // Extract year from description or name
+  const yearMatch = description.match(/(\d{4})/g) || name.match(/(\d{4})/g);
+  if (yearMatch) {
+    // Get the year that makes sense (between 1990-2030)
+    const years = yearMatch.map(y => parseInt(y)).filter(y => y >= 1990 && y <= 2030);
+    if (years.length > 0) {
+      specs.realYear = Math.max(...years); // Take the most recent year
+    }
+  }
+
+  // Extract kilometers - look for patterns like "87220 Km", "1000 km", etc.
+  const kmMatch = description.match(/(\d+(?:,\d+)*)\s*(?:km|Km|KM|kilometers?)/i);
+  if (kmMatch) {
+    specs.kilometers = parseInt(kmMatch[1].replace(/,/g, ''));
+  }
+
+  // Extract hours - look for patterns like "100 hrs", "1500 hours", etc.
+  const hoursMatch = description.match(/(\d+(?:,\d+)*)\s*(?:hrs?|hours?)/i);
+  if (hoursMatch) {
+    specs.hours = parseInt(hoursMatch[1].replace(/,/g, ''));
+  }
+
+  // Extract brand from name (first word usually)
+  const nameWords = name.split(' ');
+  if (nameWords.length > 0) {
+    specs.realBrand = nameWords[0];
+  }
+
+  // Extract model (everything after brand and year)
+  const brandAndYear = `${specs.realBrand}${specs.realYear ? ` ${specs.realYear}` : ''}`;
+  specs.model = name.replace(brandAndYear, '').trim();
+
+  return specs;
+}
+
 interface MachineryCardCompactProps {
   item: Machinery;
   index: number;
@@ -13,6 +58,15 @@ export function MachineryCardCompact({ item, index }: MachineryCardCompactProps)
     id, name, type, brand, year, hours, 
     kilometers, condition, description, image 
   } = item;
+
+  // Extract real specs from description
+  const realSpecs = extractSpecsFromDescription(description, name);
+  
+  // Use extracted data or fallback to original data
+  const displayYear = realSpecs.realYear || year;
+  const displayBrand = realSpecs.realBrand || brand;
+  const displayKilometers = realSpecs.kilometers || kilometers;
+  const displayHours = realSpecs.hours || hours;
   
   return (
     <motion.div 
@@ -42,28 +96,27 @@ export function MachineryCardCompact({ item, index }: MachineryCardCompactProps)
         {/* Title */}
         <h3 className="text-lg font-bold text-gray-900 mb-2 line-clamp-1">{name}</h3>
         
-        {/* Specs Grid */}
+        {/* Specs Grid - Marca, Modelo, Año, Kms, Horas */}
         <div className="grid grid-cols-2 gap-1 mb-3">
           <div className="flex items-center text-sm text-gray-600">
-            <i className="far fa-calendar-alt mr-1.5"></i>
-            <span>{year}</span>
-          </div>
-          <div className="flex items-center text-sm text-gray-600">
-            <i className="fas fa-tachometer-alt mr-1.5"></i>
-            <span>
-              {hours ? `${hours} hrs` : kilometers ? `${kilometers} km` : 'N/A'}
-            </span>
-          </div>
-          <div className="flex items-center text-sm text-gray-600">
             <i className="fas fa-tag mr-1.5"></i>
-            <span>{brand}</span>
+            <span>{displayBrand}</span>
           </div>
           <div className="flex items-center text-sm text-gray-600">
-            <i className="fas fa-check-circle mr-1.5"></i>
-            <span>{condition === 'excellent' ? 'Excelente' : 
-                   condition === 'good' ? 'Buen estado' : 
-                   condition === 'fair' ? 'Estado regular' : 
-                   'Requiere reparación'}</span>
+            <i className="fas fa-cog mr-1.5"></i>
+            <span className="truncate">{realSpecs.model || type}</span>
+          </div>
+          <div className="flex items-center text-sm text-gray-600">
+            <i className="far fa-calendar-alt mr-1.5"></i>
+            <span>{displayYear || 'N/A'}</span>
+          </div>
+          <div className="flex items-center text-sm text-gray-600">
+            <i className="fas fa-road mr-1.5"></i>
+            <span>{displayKilometers ? `${displayKilometers.toLocaleString()} km` : 'N/A'}</span>
+          </div>
+          <div className="flex items-center text-sm text-gray-600 col-span-2">
+            <i className="fas fa-clock mr-1.5"></i>
+            <span>{displayHours ? `${displayHours} hrs` : 'N/A'}</span>
           </div>
         </div>
         
