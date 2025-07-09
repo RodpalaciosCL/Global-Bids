@@ -28,16 +28,7 @@ export function CatalogSection() {
 
   const [refreshKey] = useState(Date.now());
 
-  // Only scroll when explicitly on marketplace page, not from home
-  useEffect(() => {
-    // Only scroll if we're on the marketplace page (not home page)
-    if (catalogStartRef.current && window.location.pathname === '/marketplace') {
-      catalogStartRef.current.scrollIntoView({ 
-        behavior: 'smooth',
-        block: 'start'
-      });
-    }
-  }, [currentPage]);
+
 
   // Build query URL with parameters (removed price filters)
   const buildQueryUrl = () => {

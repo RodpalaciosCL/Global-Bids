@@ -62,10 +62,7 @@ export function Header() {
     }
   }, [location]);
   
-  const handleNavClick = (href: string) => {
-    // Simple navigation - just go to the URL
-    window.location.href = href;
-  };
+
 
   const menuItems = [
     { href: '/', label: t('nav.home'), icon: 'fa-home', section: 'inicio' },
@@ -124,9 +121,9 @@ export function Header() {
           <div className="hidden md:flex items-center space-x-4">
             <nav className="flex items-center">
               {menuItems.map((item) => (
-                <button
+                <a
                   key={item.href}
-                  onClick={() => handleNavClick(item.href)}
+                  href={item.href}
                   className={`relative px-4 py-2 mx-1 font-medium transition-all duration-300 flex items-center justify-center whitespace-nowrap ${
                     activeSection === item.section 
                       ? 'bg-white text-primary rounded-md' 
@@ -137,7 +134,7 @@ export function Header() {
                     activeSection === item.section ? 'text-primary' : 'text-white/80'
                   }`}></i>
                   <span>{item.label}</span>
-                </button>
+                </a>
               ))}
             </nav>
             
@@ -166,13 +163,11 @@ export function Header() {
                 </div>
                 
                 {menuItems.map((item) => (
-                  <button
+                  <a
                     key={item.href}
-                    onClick={() => {
-                      handleNavClick(item.href);
-                      setIsMenuOpen(false);
-                    }}
-                    className={`px-5 py-4 transition flex items-center w-full text-left ${
+                    href={item.href}
+                    onClick={() => setIsMenuOpen(false)}
+                    className={`px-5 py-4 transition flex items-center w-full ${
                       activeSection === item.section
                         ? 'bg-primary/10 text-primary font-medium border-l-4 border-primary'
                         : 'text-gray-700 hover:bg-gray-50 border-l-4 border-transparent'
@@ -197,7 +192,7 @@ export function Header() {
                          item.section === 'contacto' ? t('nav.contactDesc') : ''}
                       </div>
                     </div>
-                  </button>
+                  </a>
                 ))}
                 
                 <div className="px-5 py-4 flex justify-between items-center bg-gray-50 mt-2">
