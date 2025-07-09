@@ -139,19 +139,23 @@ export function Header() {
                 </a>
               ))}
               
-              {/* Solo Marketplace usa Link */}
-              <Link href="/marketplace">
-                <button className={`relative px-4 py-2 mx-1 font-medium transition-all duration-300 flex items-center justify-center whitespace-nowrap ${
+              {/* Marketplace como hash route también */}
+              <a
+                href="/#catalogo"
+                onClick={(e) => {
+                  // Usar navegación estándar del navegador
+                }}
+                className={`relative px-4 py-2 mx-1 font-medium transition-all duration-300 flex items-center justify-center whitespace-nowrap ${
                   activeSection === 'catalogo' 
                     ? 'bg-white text-primary rounded-md' 
                     : 'text-white hover:bg-white/10 rounded-md'
-                }`}>
-                  <i className={`fas fa-th-large mr-2 ${
-                    activeSection === 'catalogo' ? 'text-primary' : 'text-white/80'
-                  }`}></i>
-                  <span>{t('nav.catalog')}</span>
-                </button>
-              </Link>
+                }`}
+              >
+                <i className={`fas fa-th-large mr-2 ${
+                  activeSection === 'catalogo' ? 'text-primary' : 'text-white/80'
+                }`}></i>
+                <span>{t('nav.catalog')}</span>
+              </a>
               
               {/* Resto de hash routes - forzar navegación a home */}
               <a
