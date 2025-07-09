@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { motion } from 'framer-motion';
-import { useRoute, Link } from 'wouter';
+import { useRoute, Link, useLocation } from 'wouter';
 import { fadeIn, slideUp, staggerContainer } from '@/lib/animations';
 import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
@@ -83,6 +83,7 @@ function extractSpecsFromDescription(description: string, name: string) {
 export default function MachineryDetail() {
   // Extract the ID from the URL
   const [, params] = useRoute('/machinery/:id');
+  const [, setLocation] = useLocation();
   const machineryId = params?.id ? parseInt(params.id) : null;
   const [activeTab, setActiveTab] = useState('specs');
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
@@ -173,7 +174,12 @@ export default function MachineryDetail() {
         {/* Back to catalog button */}
         <div className="flex mb-4 mt-2">
           <button 
-            onClick={() => window.location.href = '/#marketplace'}
+            onClick={() => {
+              setLocation('/');
+              setTimeout(() => {
+                window.location.hash = '#marketplace';
+              }, 100);
+            }}
             className="text-gray-600 hover:text-primary flex items-center text-sm font-medium"
           >
             <i className="fas fa-arrow-left mr-2"></i>
