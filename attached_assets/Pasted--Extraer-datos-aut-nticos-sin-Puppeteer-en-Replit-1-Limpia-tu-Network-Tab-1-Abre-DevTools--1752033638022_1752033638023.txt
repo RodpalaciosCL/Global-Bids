@@ -1,0 +1,85 @@
+# 🔍 Extraer datos auténticos sin Puppeteer en Replit
+
+## 1. Limpia tu Network Tab
+1. Abre DevTools (F12) en  
+   `https://northcountry.auctiontechs.com/auction-detail/174912699568418f53a4cac?page=2`  
+2. En **Network → Fetch/XHR**, quita **todos** los filtros (p. ej. “kml”) y selecciona “All” o “XHR”.  
+3. Recarga la página (F5). Aparecerán decenas de requests XHR—ahí verás la llamada real al JSON.
+
+---
+
+## 2. Encuentra automáticamente la URL de la API
+En Replit crea `find_api_endpoint.js`:
+
+```js
+const axios = require('axios');
+(async()=>{
+  // 1) Descarga el bundle JS
+  const js = (await axios.get(
+    'https://northcountry.auctiontechs.com/js/app.js',
+    { timeout:10000 }
+  )).data;
+  // 2) Busca con regex "/api/.../auctions/{ID}/items?page=X&per_page=Y"
+  const m = js.match(/\/api\/v\d+\/auctions\/[0-9a-f]+\/items\?page=\d+&per_page=\d+/);
+  if(!m) return console.error('❌ Endpoint no encontrado');
+  console.log('✅ Endpoint:', 'https://northcountry.auctiontechs.com'+m[0]);
+})();
+Ejecútalo:
+
+bash
+Copiar
+Editar
+npm install axios
+node find_api_endpoint.js
+Apunta la URL que imprime (debería ser algo como
+https://northcountry.auctiontechs.com/api/v1/auctions/174912699568418f53a4cac/items?page=2&per_page=40).
+
+3. Script final para extraer y generar Markdown
+Crea fetch_page2_to_md.js, reemplaza API_URL con la anterior:
+
+js
+Copiar
+Editar
+const axios = require('axios');
+const fs    = require('fs');
+
+const API_URL = 'https://northcountry.auctiontechs.com/api/v1/auctions/174912699568418f53a4cac/items?page=2&per_page=40';
+
+(async()=>{
+  const { data } = await axios.get(API_URL, { timeout:10000 });
+  const items = data.items || data.results || [];
+
+  let md = '# Detalle de los 40 Lotes – Página 2\n\n';
+  md += '| ID | Título | URL detalle | Fotos |\n';
+  md += '| --- | --- | --- | ---: |\n';
+
+  items.forEach(item=>{
+    const id    = item.id;
+    const title = item.title.replace(/\|/g,'\\|');
+    const url   = `https://northcountry.auctiontechs.com/item-detail/${id}?auction_id=174912699568418f53a4cac`;
+    const photos= Array.isArray(item.images)?item.images.length:(item.image_url?1:0);
+    md += `| ${id} | ${title} | [ver](${url}) | ${photos} |\n`;
+  });
+
+  fs.writeFileSync('detalle_pagina2.md', md);
+  console.log('✅ detalle_pagina2.md generado');
+})();
+Instala y ejecuta:
+
+bash
+Copiar
+Editar
+npm install axios
+node fetch_page2_to_md.js
+—> Obtendrás detalle_pagina2.md con la tabla exacta de los 40 lotes (ID, título auténtico, enlace y número de fotos) lista para pegar en tu marketplace.
+
+
+
+
+
+
+
+
+Fuentes
+
+Preguntar a ChatGPT
