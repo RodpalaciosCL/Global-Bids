@@ -144,7 +144,7 @@ function extractSpecsFromDescription(description: string, name: string) {
   } else if (nameAndDesc.includes('water truck') || nameAndDesc.includes('camion agua')) {
     specs.correctType = 'camion';
   } else if (nameAndDesc.includes('dump truck') || nameAndDesc.includes('volquete') || nameAndDesc.includes('tri-axle')) {
-    specs.correctType = 'volquete';
+    specs.correctType = 'camion-tolva';
   } else if (nameAndDesc.includes('sleeper tractor') || nameAndDesc.includes('tractor sleeper')) {
     specs.correctType = 'tractor';
   } else if (nameAndDesc.includes('mobile crane') || nameAndDesc.includes('grua movil')) {

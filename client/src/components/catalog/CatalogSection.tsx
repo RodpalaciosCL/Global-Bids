@@ -22,7 +22,10 @@ function getCorrectType(name: string, description: string): string {
     return 'excavadora';
   }
   
-  // Tractors - must be explicit
+  // Tractors - must be explicit and different types
+  if (titleWords.includes('sleeper tractor')) {
+    return 'tractor';
+  }
   if (titleWords.includes('tractor') && !titleWords.includes('dump')) {
     return 'tractor';
   }
@@ -34,7 +37,10 @@ function getCorrectType(name: string, description: string): string {
     return 'camioneta';
   }
   
-  // Loaders
+  // Loaders including Self Loader
+  if (titleWords.includes('self loader')) {
+    return 'cargador';
+  }
   if (titleWords.includes('loader') || titleWords.includes('wheel loader')) {
     return 'cargador';
   }
@@ -44,11 +50,26 @@ function getCorrectType(name: string, description: string): string {
     return 'motoniveladora';
   }
   
+  // Water Trucks - specific type
+  if (titleWords.includes('water truck')) {
+    return 'camion';
+  }
+  
   // Dump Trucks vs Dump Trailers
   if (titleWords.includes('dump truck')) {
     return 'camion-tolva';
-  } else if (titleWords.includes('dump trailer')) {
+  } else if (titleWords.includes('dump trailer') || titleWords.includes('tri-axle dump trailer')) {
     return 'tolva';
+  }
+  
+  // Haul Trucks (special category)
+  if (titleWords.includes('haul truck') || titleWords.includes('articulated haul truck')) {
+    return 'camion-tolva';
+  }
+  
+  // Rock Trucks  
+  if (titleWords.includes('rock truck') || titleWords.includes('rigid rock truck')) {
+    return 'camion-tolva';
   }
   
   // Other specific equipment
@@ -70,6 +91,11 @@ function getCorrectType(name: string, description: string): string {
   
   if (titleWords.includes('golf cart')) {
     return 'vehiculo-golf';
+  }
+  
+  // Lowbed Trailer
+  if (titleWords.includes('lowbed trailer')) {
+    return 'remolque';
   }
   
   if (titleWords.includes('trailer') && !titleWords.includes('dump')) {
@@ -312,7 +338,7 @@ export function CatalogSection() {
                     onChange={handleSelectChange}
                     value={filters.type || ""}
                   >
-                    <option value="">{language === 'es' ? '✅ Todas las familias' : '✅ All families'}</option>
+                    <option value="">{language === 'es' ? 'Todas las familias' : 'All families'}</option>
                     <option value="excavadora">{language === 'es' ? 'Excavadora' : 'Excavator'}</option>
                     <option value="camion">{language === 'es' ? 'Camión' : 'Truck'}</option>
                     <option value="camion-tolva">{language === 'es' ? 'Camión Tolva' : 'Dump Truck'}</option>
@@ -387,7 +413,7 @@ export function CatalogSection() {
                     onChange={handleSelectChange}
                     value={filters.type || ""}
                   >
-                    <option value="">{language === 'es' ? '✅ Todas las familias' : '✅ All families'}</option>
+                    <option value="">{language === 'es' ? 'Todas las familias' : 'All families'}</option>
                     <option value="excavadora">{language === 'es' ? 'Excavadora' : 'Excavator'}</option>
                     <option value="camion">{language === 'es' ? 'Camión' : 'Truck'}</option>
                     <option value="camion-tolva">{language === 'es' ? 'Camión Tolva' : 'Dump Truck'}</option>

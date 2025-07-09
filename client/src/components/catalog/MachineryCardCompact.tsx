@@ -116,49 +116,87 @@ function extractSpecsFromDescription(description: string, name: string) {
   // Advanced classification based on title, description and visual analysis
   const nameAndDesc = (name + ' ' + description).toLowerCase();
   
-  // Precise classification system
-  if (nameAndDesc.includes('golf cart') || nameAndDesc.includes('carrito de golf')) {
-    specs.correctType = 'vehiculo-golf';
-  } else if (nameAndDesc.includes('ripper tooth') || nameAndDesc.includes('diente') || nameAndDesc.includes('teeth')) {
-    specs.correctType = 'repuesto';
-  } else if (nameAndDesc.includes('rake attachment') || nameAndDesc.includes('implemento') || nameAndDesc.includes('attachment')) {
-    specs.correctType = 'implemento';
-  } else if (nameAndDesc.includes('ford explorer') || nameAndDesc.includes('jeep cherokee') || nameAndDesc.includes('peugeot') || nameAndDesc.includes('landtrek')) {
-    specs.correctType = 'camioneta';
-  } else if (nameAndDesc.includes('john deere') && (nameAndDesc.includes('tractor') || nameAndDesc.includes('6105e'))) {
-    specs.correctType = 'tractor';
-  } else if (nameAndDesc.includes('excavator') || nameAndDesc.includes('excavadora')) {
+  // PRECISE CLASSIFICATION - Title has priority
+  const titleWords = name.toLowerCase();
+  
+  // Excavators - HIGHEST PRIORITY  
+  if (titleWords.includes('excavator')) {
     specs.correctType = 'excavadora';
-  } else if (nameAndDesc.includes('dozer') || nameAndDesc.includes('bulldozer')) {
-    specs.correctType = 'bulldozer';
-  } else if (nameAndDesc.includes('motor grader') || nameAndDesc.includes('motoniveladora')) {
-    specs.correctType = 'motoniveladora';
-  } else if (nameAndDesc.includes('wheel loader') || nameAndDesc.includes('cargador')) {
-    specs.correctType = 'cargador';
-  } else if (nameAndDesc.includes('water truck') || nameAndDesc.includes('camion agua')) {
-    specs.correctType = 'camion';
-  } else if (nameAndDesc.includes('dump truck') || nameAndDesc.includes('volquete') || nameAndDesc.includes('tri-axle')) {
-    specs.correctType = 'volquete';
-  } else if (nameAndDesc.includes('sleeper tractor') || nameAndDesc.includes('tractor sleeper')) {
+  }
+  // Tractors - multiple types
+  else if (titleWords.includes('sleeper tractor')) {
     specs.correctType = 'tractor';
-  } else if (nameAndDesc.includes('mobile crane') || nameAndDesc.includes('grua movil')) {
-    specs.correctType = 'grua';
-  } else if (nameAndDesc.includes('bus') || nameAndDesc.includes('autobus')) {
-    specs.correctType = 'autobus';
-  } else if (nameAndDesc.includes('fuel truck') || nameAndDesc.includes('camion combustible')) {
+  }
+  else if (titleWords.includes('tractor') && !titleWords.includes('dump')) {
+    specs.correctType = 'tractor';
+  }
+  // Vehicles
+  else if (titleWords.includes('cherokee') || titleWords.includes('explorer') || 
+           titleWords.includes('peugeot') || titleWords.includes('landtrek')) {
+    specs.correctType = 'camioneta';
+  }
+  // Loaders
+  else if (titleWords.includes('self loader')) {
+    specs.correctType = 'cargador';
+  }
+  else if (titleWords.includes('loader') || titleWords.includes('wheel loader')) {
+    specs.correctType = 'cargador';
+  }
+  // Motor Graders  
+  else if (titleWords.includes('motor grader') || titleWords.includes('grader')) {
+    specs.correctType = 'motoniveladora';
+  }
+  // Water Trucks
+  else if (titleWords.includes('water truck')) {
     specs.correctType = 'camion';
-  } else if (nameAndDesc.includes('trailer') || nameAndDesc.includes('remolque')) {
-    specs.correctType = 'remolque';
-  } else if (nameAndDesc.includes('vertical drill') || nameAndDesc.includes('perforadora')) {
-    specs.correctType = 'perforadora';
-  } else if (nameAndDesc.includes('telehandler') || nameAndDesc.includes('manipulador')) {
+  }
+  // Dump Trucks vs Dump Trailers
+  else if (titleWords.includes('dump truck')) {
+    specs.correctType = 'camion-tolva';
+  } 
+  else if (titleWords.includes('dump trailer') || titleWords.includes('tri-axle dump trailer')) {
+    specs.correctType = 'tolva';
+  }
+  // Haul Trucks
+  else if (titleWords.includes('haul truck') || titleWords.includes('articulated haul truck')) {
+    specs.correctType = 'camion-tolva';
+  }
+  // Rock Trucks  
+  else if (titleWords.includes('rock truck') || titleWords.includes('rigid rock truck')) {
+    specs.correctType = 'camion-tolva';
+  }
+  // Other equipment
+  else if (titleWords.includes('bulldozer') || titleWords.includes('dozer')) {
+    specs.correctType = 'bulldozer';
+  }
+  else if (titleWords.includes('crane')) {
+    specs.correctType = 'grua';
+  }
+  else if (titleWords.includes('telehandler')) {
     specs.correctType = 'manipulador-telescopico';
-  } else if (nameAndDesc.includes('compressor') || nameAndDesc.includes('compresor')) {
+  }
+  else if (titleWords.includes('compressor')) {
     specs.correctType = 'compresor';
-  } else if (nameAndDesc.includes('concrete mixer') || nameAndDesc.includes('mezcladora')) {
-    specs.correctType = 'mezcladora';
-  } else if (nameAndDesc.includes('roller') || nameAndDesc.includes('rodillo')) {
-    specs.correctType = 'rodillo';
+  }
+  else if (titleWords.includes('golf cart')) {
+    specs.correctType = 'vehiculo-golf';
+  }
+  else if (titleWords.includes('lowbed trailer')) {
+    specs.correctType = 'remolque';
+  }
+  else if (titleWords.includes('trailer') && !titleWords.includes('dump')) {
+    specs.correctType = 'remolque';
+  }
+  else if (titleWords.includes('bus')) {
+    specs.correctType = 'autobus';
+  }
+  // Generic trucks
+  else if (titleWords.includes('truck')) {
+    specs.correctType = 'camion';
+  }
+  // Parts only in description
+  else if (nameAndDesc.includes('ripper tooth') || nameAndDesc.includes('rake attachment')) {
+    specs.correctType = 'repuesto';
   }
 
   return specs;
