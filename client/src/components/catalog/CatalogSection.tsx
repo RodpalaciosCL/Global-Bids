@@ -1,7 +1,4 @@
 import { useRef, useState, useEffect } from "react";
-import { motion } from "framer-motion";
-import { useInView } from "framer-motion";
-import { fadeIn, staggerContainer, slideUp } from "@/lib/animations";
 import { MachineryCard } from "./MachineryCard";
 import { MachineryCardCompact } from "./MachineryCardCompact";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
@@ -15,9 +12,7 @@ import { CurrencySelector } from "@/components/ui/CurrencySelector";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 export function CatalogSection() {
-  const sectionRef = useRef(null);
   const catalogStartRef = useRef<HTMLDivElement>(null);
-  const isInView = useInView(sectionRef, { once: true, amount: 0.1 });
   const { t, language } = useLanguage();
   const queryClient = useQueryClient();
 
@@ -169,14 +164,9 @@ export function CatalogSection() {
   }
 
   return (
-    <section id="marketplace" className="py-20 bg-accent" ref={sectionRef}>
+    <section id="marketplace" className="py-20 bg-accent">
       <div className="container mx-auto px-4">
-        <motion.div
-          className="text-center mb-12"
-          initial="hidden"
-          animate={isInView ? "visible" : "hidden"}
-          variants={fadeIn}
-        >
+        <div className="text-center mb-12">
           <h2 className="font-heading text-3xl md:text-4xl font-bold mb-4 text-primary">
             {t('catalog.title')}
           </h2>
@@ -184,19 +174,11 @@ export function CatalogSection() {
           <p className="max-w-3xl mx-auto text-gray-600">
             {t('catalog.subtitle')}
           </p>
-        </motion.div>
+        </div>
 
-        <motion.div
-          className="catalog-wrapper"
-          initial="hidden"
-          animate={isInView ? "visible" : "hidden"}
-          variants={staggerContainer}
-        >
+        <div className="catalog-wrapper">
           {/* Filters */}
-          <motion.div
-            className="filters mb-8 p-6 bg-white rounded-lg shadow-md"
-            variants={slideUp}
-          >
+          <div className="filters mb-8 p-6 bg-white rounded-lg shadow-md">
             {/* Mobile view */}
             <div className="md:hidden">
               {/* Search */}
@@ -378,13 +360,12 @@ export function CatalogSection() {
                 </button>
               </div>
             </div>
-          </motion.div>
+          </div>
 
           {/* Results info - Scroll anchor point */}
-          <motion.div
+          <div
             ref={catalogStartRef}
             className="flex flex-col md:flex-row justify-between items-center mb-6"
-            variants={slideUp}
           >
             <div className="text-gray-600 mb-3 md:mb-0">
               {language === 'es' ? 'Mostrando' : 'Showing'}{" "}
@@ -406,13 +387,10 @@ export function CatalogSection() {
                 <option value="condition-desc">{language === 'es' ? 'Condición: mejor primero' : 'Condition: best first'}</option>
               </select>
             </div>
-          </motion.div>
+          </div>
 
           {/* Catalog grid */}
-          <motion.div
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-8"
-            variants={staggerContainer}
-          >
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
             {isLoading ? (
               // Loading skeletons
               Array.from({ length: 6 }).map((_, index) => (
@@ -448,14 +426,11 @@ export function CatalogSection() {
                 </p>
               </div>
             )}
-          </motion.div>
+          </div>
 
           {/* Paginación normal con números */}
           {totalPages > 1 && (
-            <motion.div 
-              className="flex justify-center items-center space-x-2 mt-8"
-              variants={slideUp}
-            >
+            <div className="flex justify-center items-center space-x-2 mt-8">
               {/* Botón anterior */}
               <button
                 onClick={() => {
@@ -504,9 +479,9 @@ export function CatalogSection() {
               >
                 ›
               </button>
-            </motion.div>
+            </div>
           )}
-        </motion.div>
+        </div>
       </div>
     </section>
   );

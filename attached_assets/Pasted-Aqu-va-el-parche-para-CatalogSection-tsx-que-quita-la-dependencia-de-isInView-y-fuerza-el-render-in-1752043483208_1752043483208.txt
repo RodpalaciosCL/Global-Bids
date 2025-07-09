@@ -1,0 +1,82 @@
+Aquí va el parche para CatalogSection.tsx que quita la dependencia de isInView y fuerza el render inmediato de todo el contenido:
+
+diff
+Copiar
+Editar
+--- a/client/src/components/catalog/CatalogSection.tsx
++++ b/client/src/components/catalog/CatalogSection.tsx
+@@ -1,7 +1,6 @@
+-import { useRef } from 'react';
+-import { useInView } from 'framer-motion';
++import React from 'react';
+ import { motion } from 'framer-motion';
+ import { useMachinery } from '@/hooks/useMachinery';
+
+-export function CatalogSection() {
+-  const ref = useRef(null);
+-  const isInView = useInView(ref, { once: true, margin: '-100px 0px' });
++export function CatalogSection() {
++  // Renderizamos TODO inmediatamente, sin esperar a que entre en viewport
+   const { items, isLoading } = useMachinery({ sort: 'name-asc', page: 1, limit: 40 });
+
+   if (isLoading) {
+@@ -20,17 +19,13 @@ export function CatalogSection() {
+       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+         {items.map(item => (
+           <CatalogCard key={item.id} item={item} />
+         ))}
++      </div>
++    </section>
++  );
++}
+
+-  return (
+-    <section id="marketplace" ref={ref} className="py-16 bg-gray-50">
+-      <header className="mb-8">
+-        <h2 className="text-3xl font-bold text-center">Marketplace</h2>
+-      </header>
+-
+-      {/* antes: sólo mostraba el grid cuando isInView === true */}
+-      {isInView && (
+-        <motion.div
+-          initial="hidden"
+-          animate="visible"
+-          variants={{
+-            hidden: { opacity: 0, y: 50 },
+-            visible: { opacity: 1, y: 0, transition: { staggerChildren: 0.1 } }
+-          }}
+-        >
+-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+-            {items.map(item => <CatalogCard key={item.id} item={item} />)}
+-          </div>
+-        </motion.div>
+-      )}
+-    </section>
+-  );
+-}
++```
++
+> **Qué cambia**  
+> - Eliminamos `useRef` + `useInView` para que NO espere a que el grid entre en pantalla.  
+> - Quitamos el wrapper condicional y el `<motion.div>` que bloqueaba el render.  
+> - Mantenemos el `<section id="marketplace">` (asegúrate de que ese id coincida con tu ancla).  
+>
+> Después de esto, tu `/marketplace` debería mostrar siempre los items sin necesidad de hacer scroll previo ni animación.  
+> Haz redeploy y prueba de nuevo en móvil y desktop.
+::contentReference[oaicite:0]{index=0}
+
+
+
+
+
+
+
+Fuentes
+
+Preguntar a ChatGPT
+
+
+
+Herramientas
+
+
