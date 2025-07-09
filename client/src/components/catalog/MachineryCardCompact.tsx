@@ -10,7 +10,8 @@ function extractSpecsFromDescription(description: string, name: string) {
     kilometers: null as number | null,
     hours: null as number | null,
     realBrand: '',
-    model: ''
+    model: '',
+    correctType: '' as string
   };
 
   // Extract year from NAME first (more reliable) - look for 4-digit year at the beginning
@@ -79,6 +80,31 @@ function extractSpecsFromDescription(description: string, name: string) {
   }
   specs.model = model;
 
+  // Smart classification based on name and description
+  const nameAndDesc = (name + ' ' + description).toLowerCase();
+  
+  if (nameAndDesc.includes('excavator') || nameAndDesc.includes('excavadora')) {
+    specs.correctType = 'excavator';
+  } else if (nameAndDesc.includes('loader') || nameAndDesc.includes('cargador')) {
+    specs.correctType = 'loader';
+  } else if (nameAndDesc.includes('bulldozer') || nameAndDesc.includes('bulldozer')) {
+    specs.correctType = 'bulldozer';
+  } else if (nameAndDesc.includes('crane') || nameAndDesc.includes('grua')) {
+    specs.correctType = 'crane';
+  } else if (nameAndDesc.includes('dump') || nameAndDesc.includes('volquete')) {
+    specs.correctType = 'dump-truck';
+  } else if (nameAndDesc.includes('ford') || nameAndDesc.includes('jeep') || nameAndDesc.includes('explorer') || nameAndDesc.includes('cherokee')) {
+    specs.correctType = 'truck';
+  } else if (nameAndDesc.includes('generator') || nameAndDesc.includes('generador')) {
+    specs.correctType = 'generator';
+  } else if (nameAndDesc.includes('compressor') || nameAndDesc.includes('compresor')) {
+    specs.correctType = 'compressor';
+  } else if (nameAndDesc.includes('forklift') || nameAndDesc.includes('montacargas')) {
+    specs.correctType = 'forklift';
+  } else if (nameAndDesc.includes('welder') || nameAndDesc.includes('soldador')) {
+    specs.correctType = 'welder';
+  }
+
   return specs;
 }
 
@@ -102,6 +128,7 @@ export function MachineryCardCompact({ item, index }: MachineryCardCompactProps)
   const displayBrand = realSpecs.realBrand || brand;
   const displayKilometers = realSpecs.kilometers || kilometers;
   const displayHours = realSpecs.hours || hours;
+  const displayType = realSpecs.correctType || type;
   
   return (
     <motion.div 
@@ -122,7 +149,7 @@ export function MachineryCardCompact({ item, index }: MachineryCardCompactProps)
           }}
         />
         <div className="absolute top-2 left-2 bg-black/70 text-white px-2 py-1 text-xs rounded">
-          {type.charAt(0).toUpperCase() + type.slice(1)}
+          {displayType.charAt(0).toUpperCase() + displayType.slice(1)}
         </div>
       </div>
       
@@ -131,19 +158,12 @@ export function MachineryCardCompact({ item, index }: MachineryCardCompactProps)
         {/* Title */}
         <h3 className="text-lg font-bold text-gray-900 mb-2 line-clamp-1">{name}</h3>
         
-        {/* Specs - Marca, Kms, Horas (formato móvil) */}
-        <div className="flex flex-wrap gap-3 mb-3 text-sm">
-          <div className="flex items-center text-gray-600">
-            <i className="fas fa-industry mr-1"></i>
-            <span>{displayBrand || 'N/A'}</span>
-          </div>
-          <div className="flex items-center text-gray-600">
-            <i className="fas fa-road mr-1"></i>
-            <span>{displayKilometers ? `${displayKilometers.toLocaleString()} km` : 'N/A'}</span>
-          </div>
-          <div className="flex items-center text-gray-600">
-            <i className="fas fa-clock mr-1"></i>
-            <span>{displayHours ? `${displayHours} hrs` : 'N/A'}</span>
+        {/* Specs - Marca: Kms: Horas: formato simplificado */}
+        <div className="text-sm text-gray-600 mb-3">
+          <div className="flex items-center gap-4">
+            <span><strong>Marca:</strong> {displayBrand || 'N/A'}</span>
+            <span><strong>Kms:</strong> {displayKilometers ? displayKilometers.toLocaleString() : 'N/A'}</span>
+            <span><strong>Horas:</strong> {displayHours || 'N/A'}</span>
           </div>
         </div>
         

@@ -16,7 +16,8 @@ function extractSpecsFromDescription(description: string, name: string) {
     kilometers: null as number | null,
     hours: null as number | null,
     realBrand: '',
-    model: ''
+    model: '',
+    correctType: '' as string
   };
 
   // Extract year from NAME first (more reliable) - look for 4-digit year at the beginning
@@ -84,6 +85,31 @@ function extractSpecsFromDescription(description: string, name: string) {
     model = model.replace(specs.realBrand, '').trim();
   }
   specs.model = model;
+
+  // Smart classification based on name and description
+  const nameAndDesc = (name + ' ' + description).toLowerCase();
+  
+  if (nameAndDesc.includes('excavator') || nameAndDesc.includes('excavadora')) {
+    specs.correctType = 'excavator';
+  } else if (nameAndDesc.includes('loader') || nameAndDesc.includes('cargador')) {
+    specs.correctType = 'loader';
+  } else if (nameAndDesc.includes('bulldozer') || nameAndDesc.includes('bulldozer')) {
+    specs.correctType = 'bulldozer';
+  } else if (nameAndDesc.includes('crane') || nameAndDesc.includes('grua')) {
+    specs.correctType = 'crane';
+  } else if (nameAndDesc.includes('dump') || nameAndDesc.includes('volquete')) {
+    specs.correctType = 'dump-truck';
+  } else if (nameAndDesc.includes('ford') || nameAndDesc.includes('jeep') || nameAndDesc.includes('explorer') || nameAndDesc.includes('cherokee')) {
+    specs.correctType = 'truck';
+  } else if (nameAndDesc.includes('generator') || nameAndDesc.includes('generador')) {
+    specs.correctType = 'generator';
+  } else if (nameAndDesc.includes('compressor') || nameAndDesc.includes('compresor')) {
+    specs.correctType = 'compressor';
+  } else if (nameAndDesc.includes('forklift') || nameAndDesc.includes('montacargas')) {
+    specs.correctType = 'forklift';
+  } else if (nameAndDesc.includes('welder') || nameAndDesc.includes('soldador')) {
+    specs.correctType = 'welder';
+  }
 
   return specs;
 }

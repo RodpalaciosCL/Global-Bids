@@ -139,32 +139,12 @@ export function MachineryCard({ item, index }: MachineryCardProps) {
           <h3 className="font-heading font-bold text-lg text-primary">{name}</h3>
         </div>
         
-        <div className="mb-4 text-sm">
-          <div className="grid grid-cols-2 gap-2">
-            <div className="flex items-center text-gray-600">
-              <i className="fas fa-tag mr-2"></i>
-              <span>{displayBrand || 'N/A'}</span>
-            </div>
-            <div className="flex items-center text-gray-600">
-              <i className="fas fa-calendar-alt mr-2"></i>
-              <span>{displayYear || 'N/A'}</span>
-            </div>
-            {displayKilometers && (
-              <div className="flex items-center text-gray-600">
-                <i className="fas fa-road mr-2"></i>
-                <span>{displayKilometers.toLocaleString()} km</span>
-              </div>
-            )}
-            {displayHours && (
-              <div className="flex items-center text-gray-600">
-                <i className="fas fa-clock mr-2"></i>
-                <span>{displayHours} hrs</span>
-              </div>
-            )}
-            <div className="flex items-center text-gray-600">
-              <i className="fas fa-check-circle mr-2"></i>
-              <span>{conditionLabels[condition][language]}</span>
-            </div>
+        {/* Specs - Marca: Kms: Horas: formato simplificado */}
+        <div className="text-sm text-gray-600 mb-3">
+          <div className="flex items-center gap-4">
+            <span><strong>Marca:</strong> {displayBrand || 'N/A'}</span>
+            <span><strong>Kms:</strong> {displayKilometers ? displayKilometers.toLocaleString() : 'N/A'}</span>
+            <span><strong>Horas:</strong> {displayHours || 'N/A'}</span>
           </div>
         </div>
         
