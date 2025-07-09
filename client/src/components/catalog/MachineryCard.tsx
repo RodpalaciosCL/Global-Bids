@@ -20,6 +20,8 @@ function getTypeLabel(type: string, language: string): string {
     'camion': { es: 'Camión', en: 'Truck' },
     'camion-tolva': { es: 'Camión Tolva', en: 'Dump Truck' },
     'tolva': { es: 'Tolva', en: 'Dump Trailer' },
+    'mezcladora': { es: 'Mezcladora', en: 'Concrete Mixer' },
+    'rodillo': { es: 'Rodillo', en: 'Roller' },
     'grua': { es: 'Grúa', en: 'Crane' },
     'autobus': { es: 'Autobús', en: 'Bus' },
     'remolque': { es: 'Remolque', en: 'Trailer' },
@@ -124,12 +126,24 @@ function extractSpecsFromDescription(description: string, name: string) {
   if (titleWords.includes('excavator')) {
     specs.correctType = 'excavadora';
   }
+  // Concrete Mixer Trucks
+  else if (titleWords.includes('concrete mixer')) {
+    specs.correctType = 'mezcladora';
+  }
+  // Rollers
+  else if (titleWords.includes('roller')) {
+    specs.correctType = 'rodillo';
+  }
+  // Crawler Dumpers (oruga tolva)
+  else if (titleWords.includes('crawler dumper') || titleWords.includes('crawler dump')) {
+    specs.correctType = 'tolva';
+  }
   // Tractors - multiple types
   else if (titleWords.includes('sleeper tractor')) {
-    specs.correctType = 'tractor';
+    specs.correctType = 'camion'; // These are trucks, not tractors
   }
   else if (titleWords.includes('tractor') && !titleWords.includes('dump')) {
-    specs.correctType = 'tractor';
+    specs.correctType = 'camion'; // Most "tractors" in images are actually trucks
   }
   // Vehicles
   else if (titleWords.includes('cherokee') || titleWords.includes('explorer') || 
@@ -138,7 +152,7 @@ function extractSpecsFromDescription(description: string, name: string) {
   }
   // Loaders
   else if (titleWords.includes('self loader')) {
-    specs.correctType = 'cargador';
+    specs.correctType = 'camion'; // Self loaders are trucks
   }
   else if (titleWords.includes('loader') || titleWords.includes('wheel loader')) {
     specs.correctType = 'cargador';

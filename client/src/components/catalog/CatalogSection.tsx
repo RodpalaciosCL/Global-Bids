@@ -22,12 +22,27 @@ function getCorrectType(name: string, description: string): string {
     return 'excavadora';
   }
   
+  // Concrete Mixer Trucks
+  if (titleWords.includes('concrete mixer')) {
+    return 'mezcladora';
+  }
+  
+  // Rollers
+  if (titleWords.includes('roller')) {
+    return 'rodillo';
+  }
+  
+  // Crawler Dumpers (oruga tolva)
+  if (titleWords.includes('crawler dumper') || titleWords.includes('crawler dump')) {
+    return 'tolva';
+  }
+  
   // Tractors - must be explicit and different types
   if (titleWords.includes('sleeper tractor')) {
-    return 'tractor';
+    return 'camion'; // These are trucks, not tractors
   }
   if (titleWords.includes('tractor') && !titleWords.includes('dump')) {
-    return 'tractor';
+    return 'camion'; // Most "tractors" in images are actually trucks
   }
   
   // Vehicles - Cherokee, Explorer, etc.
@@ -39,7 +54,7 @@ function getCorrectType(name: string, description: string): string {
   
   // Loaders including Self Loader
   if (titleWords.includes('self loader')) {
-    return 'cargador';
+    return 'camion'; // Self loaders are trucks
   }
   if (titleWords.includes('loader') || titleWords.includes('wheel loader')) {
     return 'cargador';
