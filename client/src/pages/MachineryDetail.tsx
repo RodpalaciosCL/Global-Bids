@@ -23,6 +23,12 @@ export default function MachineryDetail() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, [machineryId]);
 
+  // Fetch the machinery data
+  const { data: machinery, isLoading, isError } = useQuery<Machinery>({
+    queryKey: [`/api/machinery/${machineryId}`],
+    enabled: !!machineryId
+  });
+
   // Navigation functions
   const goToNextImage = useCallback(() => {
     if (machinery?.gallery && machinery.gallery.length > 1) {
@@ -63,12 +69,6 @@ export default function MachineryDetail() {
       setCurrentImageIndex(0);
     }
   }, [machinery]);
-  
-  // Fetch the machinery data
-  const { data: machinery, isLoading, isError } = useQuery<Machinery>({
-    queryKey: [`/api/machinery/${machineryId}`],
-    enabled: !!machineryId
-  });
   
   if (isLoading) {
     return <LoadingSkeleton />;
