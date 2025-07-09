@@ -1,0 +1,71 @@
+# Instala dependencias en Replit
+npm install puppeteer axios p-limit fs
+js
+Copiar
+Editar
+// scrape_page2_to_md.js
+const puppeteer = require('puppeteer'),
+      axios     = require('axios'),
+      pLimit    = require('p-limit'),
+      fs        = require('fs');
+(async()=>{
+  const PAGE2 = 'https://northcountry.auctiontechs.com/auction-detail/174912699568418f53a4cac?page=2',
+        browser = await puppeteer.launch({headless:true,args:['--no-sandbox']}),
+        page    = await browser.newPage();
+  await page.goto(PAGE2,{waitUntil:'networkidle2'});
+  await page.waitForSelector('a[href*="/item-detail"]');
+  for(let i=0;i<4;i++){
+    await page.evaluate(()=>window.scrollBy(0,window.innerHeight));
+    await new Promise(r=>setTimeout(r,500));
+  }
+  const lotes = await page.$$eval('a[href*="/item-detail"]',els=>{
+    const seen = new Set();
+    return els.map(e=>{
+      const u=e.href,
+            id=u.split('/item-detail/')[1].split('?')[0],
+            t=e.innerText.trim().split('\n')[0];
+      if(id&&!seen.has(id)){ seen.add(id); return {id,t,u}; }
+    }).filter(Boolean);
+  });
+  await page.close();
+  const limit = pLimit(5),
+        results = await Promise.all(lotes.map(l=>limit(async()=>{
+      const p = await browser.newPage();
+      await p.goto(l.u,{waitUntil:'domcontentloaded'});
+      await p.waitForTimeout(600);
+      const slides = await p.$$eval('.slick-track .slick-slide',s=>s.length);
+      for(let i=0;i<slides;i++){
+        await p.click('.slick-next').catch(()=>{});
+        await p.waitForTimeout(200);
+      }
+      const imgs = await p.$$eval('.slick-track img',imgs=>imgs.map(i=>i.src).filter(x=>x.startsWith('http')));
+      await p.close();
+      const ok = imgs.length>0 && await axios.head(imgs[0],{timeout:3000}).then(r=>r.status===200).catch(()=>false);
+      return ok?{id:l.id,title:l.t,url:l.u,fotos:imgs.length}:null;
+    })));
+  await browser.close();
+  const valid = results.filter(x=>x);
+  let md = '# Detalle de los 40 Lotes – Página 2\n|ID|Título|URL|Fotos|\n|--|--|--|--:|\n';
+  valid.forEach(d=>{
+    md += `|${d.id}|${d.title.replace(/\|/g,'\\|')}|${d.url}|${d.fotos}|\n`;
+  });
+  fs.writeFileSync('detalle_pagina2.md',md);
+  console.log(`✅ detalle_pagina2.md generado con ${valid.length} lotes válidos`);
+})();
+bash
+Copiar
+Editar
+# Ejecuta el scraper
+node scrape_page2_to_md.js
+Esto generará en tu Replit un archivo detalle_pagina2.md con la tabla de los 40 lotes (ID, título real, enlace y número de fotos) lista para copiar y pegar en tu Marketplace.
+
+
+
+
+
+
+
+
+Fuentes
+
+Preguntar a ChatGPT
