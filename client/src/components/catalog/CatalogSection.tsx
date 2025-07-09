@@ -23,7 +23,7 @@ export function CatalogSection() {
   const [filters, setFilters] = useState<MachineryFilters>({});
   const [currentPage, setCurrentPage] = useState(1);
   const [sortOrder, setSortOrder] = useState("name-asc");
-  const [limit] = useState(25); // 25 lotes por página
+  const [limit] = useState(40); // 40 lotes por página
 
   const [refreshKey] = useState(Date.now());
 

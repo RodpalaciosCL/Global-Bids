@@ -546,7 +546,7 @@ export class DatabaseStorage implements IStorage {
     condition?: string,
     sortBy: string = 'price-asc',
     page: number = 1,
-    limit: number = 25,
+    limit: number = 40,
     auctionPage?: number
   ): Promise<{ items: Machinery[], total: number, totalPages: number }> {
     // Build where conditions
@@ -613,10 +613,13 @@ export class DatabaseStorage implements IStorage {
         break;
     }
 
-    // Get total count
+    // Get total count first
     const whereCondition = conditions.length > 0 ? and(...conditions) : undefined;
     const totalResult = await db.select().from(machinery).where(whereCondition);
     const total = totalResult.length;
+    
+    // Calculate total pages
+    const totalPages = Math.ceil(total / limit);
 
     // Get paginated results
     const offset = (page - 1) * limit;
@@ -627,8 +630,6 @@ export class DatabaseStorage implements IStorage {
       .orderBy(...orderBy)
       .limit(limit)
       .offset(offset);
-
-    const totalPages = Math.ceil(total / limit);
 
     return { items, total, totalPages };
   }
