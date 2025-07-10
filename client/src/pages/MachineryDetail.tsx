@@ -429,11 +429,18 @@ export default function MachineryDetail() {
                   <i className="fas fa-phone-alt mr-1"></i>
                   {language === 'en' ? 'Contact consultant' : 'Contactar consultor'}
                 </Button>
-                <Button asChild variant="ghost" className="text-gray-500 text-sm py-1">
-                  <Link href="/#marketplace">
-                    <i className="fas fa-arrow-left mr-1"></i>
-                    {t('detail.back')}
-                  </Link>
+                <Button 
+                  variant="ghost" 
+                  className="text-gray-500 text-sm py-1"
+                  onClick={() => {
+                    setLocation('/');
+                    setTimeout(() => {
+                      window.location.hash = '#marketplace';
+                    }, 100);
+                  }}
+                >
+                  <i className="fas fa-arrow-left mr-1"></i>
+                  {t('detail.back')}
                 </Button>
               </div>
               
