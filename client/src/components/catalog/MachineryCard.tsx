@@ -283,9 +283,9 @@ export function MachineryCard({ item, index }: MachineryCardProps) {
         {/* Specs - Marca: Kms: Horas: formato simplificado */}
         <div className="text-sm text-gray-600 mb-3">
           <div className="flex items-center gap-4">
-            <span><strong>Marca:</strong> {displayBrand || 'N/A'}</span>
-            <span><strong>Kms:</strong> {displayKilometers ? displayKilometers.toLocaleString() : 'N/A'}</span>
-            <span><strong>Horas:</strong> {displayHours || 'N/A'}</span>
+            <span><strong>{language === 'es' ? 'Marca:' : 'Brand:'}</strong> {displayBrand || 'N/A'}</span>
+            <span><strong>{language === 'es' ? 'Kms:' : 'Kms:'}</strong> {displayKilometers ? displayKilometers.toLocaleString() : 'N/A'}</span>
+            <span><strong>{language === 'es' ? 'Horas:' : 'Hours:'}</strong> {displayHours || 'N/A'}</span>
           </div>
         </div>
         

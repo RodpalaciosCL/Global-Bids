@@ -2,6 +2,7 @@ import { Link, useLocation } from 'wouter';
 import { Machinery } from '@/types/machinery';
 import { Button } from '@/components/ui/button';
 import { motion } from 'framer-motion';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 // Function to get type label in correct language
 function getTypeLabel(type: string, language: string): string {
@@ -228,6 +229,7 @@ interface MachineryCardCompactProps {
 
 export function MachineryCardCompact({ item, index }: MachineryCardCompactProps) {
   const [, setLocation] = useLocation();
+  const { language } = useLanguage();
   const { 
     id, name, type, brand, year, hours, 
     kilometers, condition, description, image 
@@ -262,7 +264,7 @@ export function MachineryCardCompact({ item, index }: MachineryCardCompactProps)
           }}
         />
         <div className="absolute top-2 left-2 bg-black/70 text-white px-2 py-1 text-xs rounded">
-          {getTypeLabel(displayType, 'es')}
+          {getTypeLabel(displayType, language)}
         </div>
       </div>
       
@@ -274,9 +276,9 @@ export function MachineryCardCompact({ item, index }: MachineryCardCompactProps)
         {/* Specs - Marca: Kms: Horas: formato simplificado */}
         <div className="text-sm text-gray-600 mb-3">
           <div className="flex items-center gap-4">
-            <span><strong>Marca:</strong> {displayBrand || 'N/A'}</span>
-            <span><strong>Kms:</strong> {displayKilometers ? displayKilometers.toLocaleString() : 'N/A'}</span>
-            <span><strong>Horas:</strong> {displayHours || 'N/A'}</span>
+            <span><strong>{language === 'es' ? 'Marca:' : 'Brand:'}</strong> {displayBrand || 'N/A'}</span>
+            <span><strong>{language === 'es' ? 'Kms:' : 'Kms:'}</strong> {displayKilometers ? displayKilometers.toLocaleString() : 'N/A'}</span>
+            <span><strong>{language === 'es' ? 'Horas:' : 'Hours:'}</strong> {displayHours || 'N/A'}</span>
           </div>
         </div>
         
@@ -305,7 +307,7 @@ export function MachineryCardCompact({ item, index }: MachineryCardCompactProps)
               size="sm" 
               className="text-gray-500 hover:text-gray-700"
             >
-              <i className="far fa-heart"></i> Guardar
+              <i className="far fa-heart"></i> {language === 'es' ? 'Guardar' : 'Save'}
             </Button>
             <Button 
               variant="default"
@@ -313,7 +315,7 @@ export function MachineryCardCompact({ item, index }: MachineryCardCompactProps)
               className="bg-gray-900 hover:bg-gray-800"
               onClick={() => setLocation(`/machinery/${id}`)}
             >
-              Ver más
+              {language === 'es' ? 'Ver más' : 'View more'}
             </Button>
           </div>
         </div>
