@@ -175,7 +175,7 @@ export function ContactSection() {
                 <h4 className="font-medium text-lg">
                   {t("contact.emailLabel")}
                 </h4>
-                <p className="text-gray-300">auctions@theglobalbid.com</p>
+                <p className="text-gray-300">contacto@theglobalbid.com</p>
               </div>
             </motion.div>
           </motion.div>

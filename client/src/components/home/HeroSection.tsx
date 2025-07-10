@@ -119,56 +119,56 @@ export function HeroSection() {
                         <div className="mb-6 sm:mb-8">
                           <div className="text-white/80 text-xs sm:text-sm mb-2 font-medium">{t('hero.findByCategory')}:</div>
                           <div className="flex flex-wrap gap-2 sm:gap-4 max-w-2xl">
-                            <a href="#catalogo" className="flex items-center text-white hover:text-white/80 transition-colors text-xs sm:text-sm group">
+                            <a href="/#marketplace" className="flex items-center text-white hover:text-white/80 transition-colors text-xs sm:text-sm group">
                               <div className="w-6 h-6 sm:w-8 sm:h-8 bg-black/40 border border-white/10 rounded-full flex items-center justify-center mr-1 sm:mr-2 group-hover:bg-primary/40 transition-colors">
                                 <i className="fas fa-truck-monster text-white text-xs"></i>
                               </div>
                               <span>{language === 'es' ? 'Activos Minería' : 'Mining Assets'}</span>
                             </a>
                             
-                            <a href="#catalogo" className="flex items-center text-white hover:text-white/80 transition-colors text-xs sm:text-sm group">
+                            <a href="/#marketplace" className="flex items-center text-white hover:text-white/80 transition-colors text-xs sm:text-sm group">
                               <div className="w-6 h-6 sm:w-8 sm:h-8 bg-black/40 border border-white/10 rounded-full flex items-center justify-center mr-1 sm:mr-2 group-hover:bg-primary/40 transition-colors">
                                 <i className="fas fa-tree text-white text-xs"></i>
                               </div>
                               <span>{language === 'es' ? 'Activos Forestales' : 'Forestry Assets'}</span>
                             </a>
                             
-                            <a href="#catalogo" className="flex items-center text-white hover:text-white/80 transition-colors text-xs sm:text-sm group">
+                            <a href="/#marketplace" className="flex items-center text-white hover:text-white/80 transition-colors text-xs sm:text-sm group">
                               <div className="w-6 h-6 sm:w-8 sm:h-8 bg-black/40 border border-white/10 rounded-full flex items-center justify-center mr-1 sm:mr-2 group-hover:bg-primary/40 transition-colors">
                                 <i className="fas fa-truck text-white text-xs"></i>
                               </div>
                               <span>{language === 'es' ? 'Camiones' : 'Trucks'}</span>
                             </a>
                             
-                            <a href="#catalogo" className="flex items-center text-white hover:text-white/80 transition-colors text-xs sm:text-sm group">
+                            <a href="/#marketplace" className="flex items-center text-white hover:text-white/80 transition-colors text-xs sm:text-sm group">
                               <div className="w-6 h-6 sm:w-8 sm:h-8 bg-black/40 border border-white/10 rounded-full flex items-center justify-center mr-1 sm:mr-2 group-hover:bg-primary/40 transition-colors">
                                 <i className="fas fa-tools text-white text-xs"></i>
                               </div>
                               <span>{language === 'es' ? 'Repuestos' : 'Spare Parts'}</span>
                             </a>
                             
-                            <a href="#catalogo" className="flex items-center text-white hover:text-white/80 transition-colors text-xs sm:text-sm group">
+                            <a href="/#marketplace" className="flex items-center text-white hover:text-white/80 transition-colors text-xs sm:text-sm group">
                               <div className="w-6 h-6 sm:w-8 sm:h-8 bg-black/40 border border-white/10 rounded-full flex items-center justify-center mr-1 sm:mr-2 group-hover:bg-primary/40 transition-colors">
                                 <i className="fas fa-industry text-white text-xs"></i>
                               </div>
                               <span>{language === 'es' ? 'Industrial' : 'Industrial'}</span>
                             </a>
                             
-                            <a href="#catalogo" className="flex items-center text-white hover:text-white/80 transition-colors text-xs sm:text-sm group">
+                            <a href="/#marketplace" className="flex items-center text-white hover:text-white/80 transition-colors text-xs sm:text-sm group">
                               <div className="w-6 h-6 sm:w-8 sm:h-8 bg-black/40 border border-white/10 rounded-full flex items-center justify-center mr-1 sm:mr-2 group-hover:bg-primary/40 transition-colors">
                                 <i className="fas fa-recycle text-white text-xs"></i>
                               </div>
                               <span>{language === 'es' ? 'Chatarra' : 'Scrap'}</span>
                             </a>
                             
-                            <a href="#catalogo" className="flex items-center text-white hover:text-white/80 transition-colors text-xs sm:text-sm group">
+                            <a href="/#marketplace" className="flex items-center text-white hover:text-white/80 transition-colors text-xs sm:text-sm group">
                               <div className="w-6 h-6 sm:w-8 sm:h-8 bg-black/40 border border-white/10 rounded-full flex items-center justify-center mr-1 sm:mr-2 group-hover:bg-primary/40 transition-colors">
                                 <i className="fas fa-bolt text-white text-xs"></i>
                               </div>
                               <span>{language === 'es' ? 'Generadores' : 'Generators'}</span>
                             </a>
                             
-                            <a href="#catalogo" className="flex items-center text-white hover:text-white/80 transition-colors text-xs sm:text-sm group">
+                            <a href="/#marketplace" className="flex items-center text-white hover:text-white/80 transition-colors text-xs sm:text-sm group">
                               <div className="w-6 h-6 sm:w-8 sm:h-8 bg-black/40 border border-white/10 rounded-full flex items-center justify-center mr-1 sm:mr-2 group-hover:bg-primary/40 transition-colors">
                                 <i className="fas fa-ellipsis-h text-white text-xs"></i>
                               </div>

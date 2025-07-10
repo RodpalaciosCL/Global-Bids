@@ -13,7 +13,7 @@ const smtp = nodemailer.createTransport({
   port: 587,
   secure: false, // STARTTLS
   auth: {
-    user: "auctions@theglobalbid.com",
+    user: "contacto@theglobalbid.com",
     pass: process.env.EMAIL_PASS, // ← APP‑PASSWORD
   },
   tls: { ciphers: "SSLv3" },
@@ -133,8 +133,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
       // 4. Send through Office 365
       const info = await smtp.sendMail({
-        from: '"Global Bids Web" <auctions@theglobalbid.com>',
-        to: "auctions@theglobalbid.com",
+        from: '"Global Bids Web" <contacto@theglobalbid.com>',
+        to: "contacto@theglobalbid.com",
         subject: `Nuevo contacto – ${contact.subject ?? "Sin asunto"}`,
         html: htmlBody,
       });

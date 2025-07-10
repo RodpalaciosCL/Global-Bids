@@ -33,7 +33,7 @@ export const sendContactEmail = async (req: Request, res: Response) => {
 
     // Crear el mensaje
     const msg = {
-      to: 'auctions@theglobalbid.com',
+      to: 'contacto@theglobalbid.com',
       from: 'noreply@theglobalbid.com', // Debe ser un remitente verificado en SendGrid
       subject: 'Nuevo mensaje de contacto - Global Bids',
       text: `Nombre: ${name}\nEmail: ${email}\nMensaje: ${message}`,
