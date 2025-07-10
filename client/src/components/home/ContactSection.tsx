@@ -162,7 +162,7 @@ export function ContactSection() {
               </div>
               <div>
                 <h4 className="font-medium text-lg">{t("contact.phone")}</h4>
-                <p className="text-gray-300">+56 2 2756 9900</p>
+                <p className="text-gray-300">+56994275157</p>
               </div>
             </motion.div>
 
