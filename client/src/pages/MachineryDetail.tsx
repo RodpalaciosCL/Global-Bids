@@ -430,7 +430,7 @@ export default function MachineryDetail() {
                   {language === 'en' ? 'Contact consultant' : 'Contactar consultor'}
                 </Button>
                 <Button asChild variant="ghost" className="text-gray-500 text-sm py-1">
-                  <Link href="/marketplace">
+                  <Link href="/#marketplace">
                     <i className="fas fa-arrow-left mr-1"></i>
                     {t('detail.back')}
                   </Link>
