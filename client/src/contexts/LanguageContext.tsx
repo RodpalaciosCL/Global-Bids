@@ -153,7 +153,7 @@ const translations: Record<Language, Record<string, string>> = {
     'contact.successTitle': 'Mensaje enviado',
     'contact.successMsg': 'Gracias por contactarnos. Te responderemos a la brevedad.',
     'contact.errorTitle': 'Error al enviar mensaje',
-    'contact.errorMsg': 'Por favor intenta nuevamente más tarde. Si el problema persiste, contáctanos directamente al +56 2 2756 9900.',
+    'contact.errorMsg': 'Por favor intenta nuevamente más tarde. Si el problema persiste, contáctanos directamente al +56994275157.',
     'contact.phone': 'Teléfono',
     'contact.emailLabel': 'Email',
     
@@ -447,7 +447,7 @@ const translations: Record<Language, Record<string, string>> = {
     'contact.successTitle': 'Message sent',
     'contact.successMsg': 'Thank you for contacting us. We will respond shortly.',
     'contact.errorTitle': 'Error sending message',
-    'contact.errorMsg': 'Please try again later. If the problem persists, contact us directly at +56 2 2756 9900.',
+    'contact.errorMsg': 'Please try again later. If the problem persists, contact us directly at +56994275157.',
     'contact.phone': 'Phone',
     'contact.emailLabel': 'Email',
     
