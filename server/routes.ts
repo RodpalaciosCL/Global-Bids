@@ -3,27 +3,10 @@ import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { z } from "zod";
 import { insertContactSchema, insertRegistrationSchema } from "@shared/schema";
-
-import nodemailer from "nodemailer";
 import "dotenv/config";
 
-/* ─────────── Nodemailer (Office 365) ─────────── */
-const smtp = nodemailer.createTransport({
-  host: "smtp.office365.com",
-  port: 587,
-  secure: false, // STARTTLS
-  auth: {
-    user: "contacto@theglobalbid.com",
-    pass: process.env.EMAIL_PASS, // ← APP‑PASSWORD
-  },
-  tls: { ciphers: "SSLv3" },
-});
-
 export async function registerRoutes(app: Express): Promise<Server> {
-  /* Prefix all API routes with /api
-     (en tu index de Express ya montas esto) */
-
-  // ─────────────── MACHINERY ENDPOINTS (igual) ───────────────
+  // ─────────────── MACHINERY ENDPOINTS ───────────────
   app.get("/api/machinery", async (req, res) => {
     try {
       const {
@@ -113,7 +96,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // ─────────────── CONTACT FORM ───────────────
+  // ─────────────── CONTACT FORM (Simplified - no email backend) ───────────────
   app.post("/api/contact", async (req, res) => {
     try {
       const { type, interests, ...data } = req.body;
@@ -124,48 +107,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         const validatedData = insertRegistrationSchema.parse(registrationData);
         const registration = await storage.createRegistration(validatedData);
 
-        // Get interest labels in Spanish
-        const interestLabels = interests?.map((id: string) => {
-          const labels: Record<string, string> = {
-            'maquinaria-general': 'Maquinaria General',
-            'excavadoras': 'Excavadoras',
-            'bulldozer': 'Bulldozer',
-            'cargadores': 'Cargadores',
-            'tractores': 'Tractores',
-            'camionetas': 'Camionetas',
-            'camiones': 'Camiones',
-            'camiones-tolva': 'Camiones Tolva',
-            'rodillos': 'Rodillos',
-            'gruas': 'Grúas',
-            'motoniveladoras': 'Motoniveladoras',
-            'repuestos': 'Repuestos',
-            'implementos': 'Implementos y Herramientas'
-          };
-          return labels[id] || id;
-        }) || [];
-
-        // Compose registration email
-        const htmlBody = `
-          <h2>Nuevo contacto de registro</h2>
-          <p><strong>Nombre:</strong> ${registration.name}</p>
-          <p><strong>Empresa:</strong> ${registration.company || "No indicado"}</p>
-          <p><strong>Email:</strong> ${registration.email}</p>
-          <p><strong>Teléfono:</strong> ${registration.phone || "No indicado"}</p>
-          <p><strong>Intereses:</strong><br>${interestLabels.join(', ')}</p>
-          <p><em>Registro realizado para participar en subastas de maquinaria</em></p>
-        `;
-
-      // 4. Send through Office 365
-      const info = await smtp.sendMail({
-        from: '"Global Bids Web" <contacto@theglobalbid.com>',
-        to: "contacto@theglobalbid.com",
-        subject: "Nuevo contacto de registro",
-        html: htmlBody,
-      });
-
-        console.log(`✅ Correo de registro enviado → ${info.messageId}`);
-
-        await new Promise((r) => setTimeout(r, 800));
+        console.log(`✅ Registration saved to database: ${registration.name}`);
 
         res.status(201).json({
           message: "Registration submitted successfully",
@@ -176,24 +118,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         const validatedData = insertContactSchema.parse(data);
         const contact = await storage.createContact(validatedData);
 
-        const htmlBody = `
-          <h2>Nuevo mensaje desde el formulario</h2>
-          <p><strong>Nombre:</strong> ${contact.name}</p>
-          <p><strong>Email:</strong> ${contact.email}</p>
-          <p><strong>Teléfono:</strong> ${contact.phone || "No indicado"}</p>
-          <p><strong>Mensaje:</strong><br>${contact.message}</p>
-        `;
-
-        const info = await smtp.sendMail({
-          from: '"Global Bids Web" <contacto@theglobalbid.com>',
-          to: "contacto@theglobalbid.com",
-          subject: `Nuevo contacto – ${contact.subject ?? "Sin asunto"}`,
-          html: htmlBody,
-        });
-
-        console.log(`✅ Correo enviado → ${info.messageId}`);
-
-        await new Promise((r) => setTimeout(r, 800));
+        console.log(`✅ Contact saved to database: ${contact.name}`);
 
         res.status(201).json({
           message: "Contact form submitted successfully",
@@ -206,12 +131,12 @@ export async function registerRoutes(app: Express): Promise<Server> {
           .status(400)
           .json({ message: "Validation error", errors: error.errors });
       }
-      console.error("❌ Error al enviar contacto:", error);
+      console.error("❌ Error saving contact:", error);
       res.status(500).json({ message: "Failed to submit contact form" });
     }
   });
 
-  // ─────────────── REGISTRATION FORM (igual) ───────────────
+  // ─────────────── REGISTRATION FORM ───────────────
   app.post("/api/register", async (req, res) => {
     try {
       const validatedData = insertRegistrationSchema.parse(req.body);
@@ -234,5 +159,6 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
   // ─────────────── HTTP SERVER ───────────────
   const httpServer = createServer(app);
+  
   return httpServer;
 }

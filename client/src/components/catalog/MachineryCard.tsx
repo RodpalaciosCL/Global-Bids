@@ -270,7 +270,7 @@ export function MachineryCard({ item, index }: MachineryCardProps) {
         <div className="text-sm text-gray-600 mb-3">
           <div className="flex items-center gap-4">
             <span><strong>{language === 'es' ? 'Marca:' : 'Brand:'}</strong> {displayBrand || 'N/A'}</span>
-            <span><strong>{language === 'es' ? 'Kms:' : 'Kms:'}</strong> {displayKilometers ? displayKilometers.toLocaleString() : 'N/A'}</span>
+            <span><strong>{language === 'es' ? 'Kms:' : 'Km:'}</strong> {displayKilometers ? displayKilometers.toLocaleString() : 'N/A'}</span>
             <span><strong>{language === 'es' ? 'Horas:' : 'Hours:'}</strong> {displayHours || 'N/A'}</span>
           </div>
         </div>

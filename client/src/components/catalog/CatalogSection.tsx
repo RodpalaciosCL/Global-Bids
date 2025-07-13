@@ -498,26 +498,23 @@ export function CatalogSection() {
                     value={filters.type || ""}
                   >
                     <option value="">{language === 'es' ? 'Todas las familias' : 'All families'}</option>
-                    <option value="excavadora">{language === 'es' ? 'Excavadora' : 'Excavator'}</option>
-                    <option value="camion">{language === 'es' ? 'Camión' : 'Truck'}</option>
-                    <option value="camion-tolva">{language === 'es' ? 'Camión Tolva' : 'Dump Truck'}</option>
-                    <option value="tolva">{language === 'es' ? 'Tolva' : 'Dump Trailer'}</option>
-                    <option value="cargador">{language === 'es' ? 'Cargador' : 'Loader'}</option>
-                    <option value="camioneta">{language === 'es' ? 'Camioneta' : 'Pickup Truck'}</option>
-                    <option value="tractor">{language === 'es' ? 'Tractor' : 'Tractor'}</option>
-                    <option value="bulldozer">{language === 'es' ? 'Bulldozer' : 'Bulldozer'}</option>
-                    <option value="motoniveladora">{language === 'es' ? 'Motoniveladora' : 'Motor Grader'}</option>
-                    <option value="grua">{language === 'es' ? 'Grúa' : 'Crane'}</option>
-                    <option value="autobus">{language === 'es' ? 'Autobús' : 'Bus'}</option>
-                    <option value="remolque">{language === 'es' ? 'Remolque' : 'Trailer'}</option>
-                    <option value="perforadora">{language === 'es' ? 'Perforadora' : 'Drill'}</option>
-                    <option value="manipulador-telescopico">{language === 'es' ? 'Manipulador Telescópico' : 'Telehandler'}</option>
-                    <option value="compresor">{language === 'es' ? 'Compresor' : 'Compressor'}</option>
-                    <option value="mezcladora">{language === 'es' ? 'Mezcladora' : 'Concrete Mixer'}</option>
-                    <option value="rodillo">{language === 'es' ? 'Rodillo' : 'Roller'}</option>
-                    <option value="vehiculo-golf">{language === 'es' ? 'Vehículo de Golf' : 'Golf Cart'}</option>
-                    <option value="repuesto">{language === 'es' ? 'Repuesto' : 'Spare Part'}</option>
-                    <option value="implemento">{language === 'es' ? 'Implemento' : 'Attachment'}</option>
+                    <option value="truck">{language === 'es' ? 'Camión (30)' : 'Truck (30)'}</option>
+                    <option value="excavator">{language === 'es' ? 'Excavadora (26)' : 'Excavator (26)'}</option>
+                    <option value="loader">{language === 'es' ? 'Cargador (20)' : 'Loader (20)'}</option>
+                    <option value="bulldozer">{language === 'es' ? 'Bulldozer (12)' : 'Bulldozer (12)'}</option>
+                    <option value="grader">{language === 'es' ? 'Motoniveladora (9)' : 'Grader (9)'}</option>
+                    <option value="attachment">{language === 'es' ? 'Implemento (6)' : 'Attachment (6)'}</option>
+                    <option value="bus">{language === 'es' ? 'Autobús (5)' : 'Bus (5)'}</option>
+                    <option value="roller">{language === 'es' ? 'Rodillo (5)' : 'Roller (5)'}</option>
+                    <option value="telehandler">{language === 'es' ? 'Manipulador Telescópico (5)' : 'Telehandler (5)'}</option>
+                    <option value="dump_truck">{language === 'es' ? 'Camión Tolva (4)' : 'Dump Truck (4)'}</option>
+                    <option value="golf_cart">{language === 'es' ? 'Carrito Golf (4)' : 'Golf Cart (4)'}</option>
+                    <option value="vehicle">{language === 'es' ? 'Vehículo (3)' : 'Vehicle (3)'}</option>
+                    <option value="compressor">{language === 'es' ? 'Compresor (2)' : 'Compressor (2)'}</option>
+                    <option value="drill">{language === 'es' ? 'Perforadora (2)' : 'Drill (2)'}</option>
+                    <option value="crane">{language === 'es' ? 'Grúa (1)' : 'Crane (1)'}</option>
+                    <option value="tractor">{language === 'es' ? 'Tractor (1)' : 'Tractor (1)'}</option>
+                    <option value="trailer">{language === 'es' ? 'Remolque (1)' : 'Trailer (1)'}</option>
                   </select>
                 </div>
                 
@@ -573,26 +570,23 @@ export function CatalogSection() {
                     value={filters.type || ""}
                   >
                     <option value="">{language === 'es' ? 'Todas las familias' : 'All families'}</option>
-                    <option value="excavadora">{language === 'es' ? 'Excavadora' : 'Excavator'}</option>
-                    <option value="camion">{language === 'es' ? 'Camión' : 'Truck'}</option>
-                    <option value="camion-tolva">{language === 'es' ? 'Camión Tolva' : 'Dump Truck'}</option>
-                    <option value="tolva">{language === 'es' ? 'Tolva' : 'Dump Trailer'}</option>
-                    <option value="cargador">{language === 'es' ? 'Cargador' : 'Loader'}</option>
-                    <option value="camioneta">{language === 'es' ? 'Camioneta' : 'Pickup Truck'}</option>
-                    <option value="tractor">{language === 'es' ? 'Tractor' : 'Tractor'}</option>
-                    <option value="bulldozer">{language === 'es' ? 'Bulldozer' : 'Bulldozer'}</option>
-                    <option value="motoniveladora">{language === 'es' ? 'Motoniveladora' : 'Motor Grader'}</option>
-                    <option value="grua">{language === 'es' ? 'Grúa' : 'Crane'}</option>
-                    <option value="autobus">{language === 'es' ? 'Autobús' : 'Bus'}</option>
-                    <option value="remolque">{language === 'es' ? 'Remolque' : 'Trailer'}</option>
-                    <option value="perforadora">{language === 'es' ? 'Perforadora' : 'Drill'}</option>
-                    <option value="manipulador-telescopico">{language === 'es' ? 'Manipulador Telescópico' : 'Telehandler'}</option>
-                    <option value="compresor">{language === 'es' ? 'Compresor' : 'Compressor'}</option>
-                    <option value="mezcladora">{language === 'es' ? 'Mezcladora' : 'Concrete Mixer'}</option>
-                    <option value="rodillo">{language === 'es' ? 'Rodillo' : 'Roller'}</option>
-                    <option value="vehiculo-golf">{language === 'es' ? 'Vehículo de Golf' : 'Golf Cart'}</option>
-                    <option value="repuesto">{language === 'es' ? 'Repuesto' : 'Spare Part'}</option>
-                    <option value="implemento">{language === 'es' ? 'Implemento' : 'Attachment'}</option>
+                    <option value="truck">{language === 'es' ? 'Camión (30)' : 'Truck (30)'}</option>
+                    <option value="excavator">{language === 'es' ? 'Excavadora (26)' : 'Excavator (26)'}</option>
+                    <option value="loader">{language === 'es' ? 'Cargador (20)' : 'Loader (20)'}</option>
+                    <option value="bulldozer">{language === 'es' ? 'Bulldozer (12)' : 'Bulldozer (12)'}</option>
+                    <option value="grader">{language === 'es' ? 'Motoniveladora (9)' : 'Grader (9)'}</option>
+                    <option value="attachment">{language === 'es' ? 'Implemento (6)' : 'Attachment (6)'}</option>
+                    <option value="bus">{language === 'es' ? 'Autobús (5)' : 'Bus (5)'}</option>
+                    <option value="roller">{language === 'es' ? 'Rodillo (5)' : 'Roller (5)'}</option>
+                    <option value="telehandler">{language === 'es' ? 'Manipulador Telescópico (5)' : 'Telehandler (5)'}</option>
+                    <option value="dump_truck">{language === 'es' ? 'Camión Tolva (4)' : 'Dump Truck (4)'}</option>
+                    <option value="golf_cart">{language === 'es' ? 'Carrito Golf (4)' : 'Golf Cart (4)'}</option>
+                    <option value="vehicle">{language === 'es' ? 'Vehículo (3)' : 'Vehicle (3)'}</option>
+                    <option value="compressor">{language === 'es' ? 'Compresor (2)' : 'Compressor (2)'}</option>
+                    <option value="drill">{language === 'es' ? 'Perforadora (2)' : 'Drill (2)'}</option>
+                    <option value="crane">{language === 'es' ? 'Grúa (1)' : 'Crane (1)'}</option>
+                    <option value="tractor">{language === 'es' ? 'Tractor (1)' : 'Tractor (1)'}</option>
+                    <option value="trailer">{language === 'es' ? 'Remolque (1)' : 'Trailer (1)'}</option>
                   </select>
                 </div>
 

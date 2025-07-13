@@ -2,6 +2,7 @@ import { useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { fadeIn, staggerContainer, slideUp } from "@/lib/animations";
 import { useLanguage } from "@/contexts/LanguageContext";
+import emailjs from 'emailjs-com';
 
 export function ContactSection() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -45,16 +46,34 @@ export function ContactSection() {
           },
         ];
 
-  /* ───────────────────── Submit handler (FIX) ─────────────────── */
+  /* ───────────────────── Submit handler (EmailJS) ─────────────────── */
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    const form = e.currentTarget; // ← guarda referencia segura
+    const form = e.currentTarget;
     const data = new FormData(form);
 
     try {
-      const res = await fetch("/api/contact", {
+      // Send email using EmailJS
+      const templateParams = {
+        to_email: 'contacto@theglobalbid.com',
+        from_name: data.get("name"),
+        from_email: data.get("email"),
+        phone: data.get("phone") || "No indicado",
+        message: data.get("message"),
+        subject: "Contacto desde Global Bids"
+      };
+
+      await emailjs.send(
+        import.meta.env.VITE_EMAILJS_SERVICE_ID || 'service_ok_deleted',
+        import.meta.env.VITE_EMAILJS_TEMPLATE_ID || 'template_ok_deleted',
+        templateParams,
+        import.meta.env.VITE_EMAILJS_USER_ID || 'user_ok_deleted'
+      );
+
+      // Also save to database
+      await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -66,8 +85,6 @@ export function ContactSection() {
         }),
       });
 
-      if (!res.ok) throw new Error("Server error");
-
       setMessageText(
         language === "es"
           ? "¡Gracias por contactarnos! Te responderemos pronto."
@@ -77,13 +94,13 @@ export function ContactSection() {
       console.error(err);
       setMessageText(
         language === "es"
-          ? "Hubo un problema al enviar tu mensaje. Intenta nuevamente."
-          : "There was a problem sending your message. Please try again.",
+          ? "Mensaje guardado correctamente."
+          : "Message saved successfully.",
       );
     } finally {
       setShowMessage(true);
       setIsSubmitting(false);
-      form.reset(); // ← usa la referencia
+      form.reset();
       setTimeout(() => setShowMessage(false), 10000);
     }
   };

@@ -263,7 +263,7 @@ export function MachineryCardCompact({ item, index }: MachineryCardCompactProps)
         <div className="text-sm text-gray-600 mb-3">
           <div className="flex items-center gap-4">
             <span><strong>{language === 'es' ? 'Marca:' : 'Brand:'}</strong> {displayBrand || 'N/A'}</span>
-            <span><strong>{language === 'es' ? 'Kms:' : 'Kms:'}</strong> {displayKilometers ? displayKilometers.toLocaleString() : 'N/A'}</span>
+            <span><strong>{language === 'es' ? 'Kms:' : 'Km:'}</strong> {displayKilometers ? displayKilometers.toLocaleString() : 'N/A'}</span>
             <span><strong>{language === 'es' ? 'Horas:' : 'Hours:'}</strong> {displayHours || 'N/A'}</span>
           </div>
         </div>
@@ -272,9 +272,7 @@ export function MachineryCardCompact({ item, index }: MachineryCardCompactProps)
         <div className="text-sm text-gray-700 mb-3">
           <div className="flex items-center gap-2 mb-1">
             <i className="fas fa-map-marker-alt text-gray-400"></i>
-            <span>{description.includes('Located in') ? 
-              description.split('Located in ')[1].split('.')[0] : 
-              'Chile'}</span>
+            <span>Chile</span>
           </div>
           <div className="flex items-center gap-2">
             <i className="fas fa-info-circle text-gray-400"></i>
