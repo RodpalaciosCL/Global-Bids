@@ -93,15 +93,16 @@ function translateMachineryName(englishName: string, language: string): string {
 // Function to map Spanish filter values to English database values
 function mapFilterToDbValue(filterValue: string): string {
   const mapping: Record<string, string> = {
-    // EXACT database types:
-    'excavadora': 'excavator',          
-    'cargador': 'loader',               
+    // EXACT database types mapping:
+    'excavadora': 'excavator',          // Maps to "excavator" type (34 items)
+    'cargador': 'loader',               // Maps to "loader" type (22 items)
+    'mini-excavadora': 'mini-excavator', // Maps to "mini-excavator" type (5 items, but now golf carts are moved)
     
-    // These map to 'machinery' but will use keyword search
+    // All other categories map to 'machinery' + keyword search:
     'camion': 'machinery', 
     'camion-tolva': 'machinery',
     'motoniveladora': 'machinery',
-    'carrito-golf': 'machinery',
+    'carrito-golf': 'machinery',        // Golf carts now in machinery
     'rodillo': 'machinery',
     'manipulador-telescopico': 'machinery',
     'camioneta': 'machinery',
@@ -109,6 +110,11 @@ function mapFilterToDbValue(filterValue: string): string {
     'grua': 'machinery',
     'tractor': 'machinery',
     'remolque': 'machinery',
+    'bulldozer': 'machinery',
+    'autobus': 'machinery',
+    'tolva': 'machinery',
+    'mezcladora': 'machinery',
+    'repuesto': 'machinery',
     'maquinaria-general': 'machinery'
   };
   
@@ -253,29 +259,34 @@ export function CatalogSection() {
       // If mapping to 'machinery', add specific keywords to search instead
       if (mappedType === 'machinery') {
         const keywordMap: Record<string, string> = {
-          'camion': 'truck mixer sleeper concrete',
-          'camion-tolva': 'dump truck haul truck rock truck rigid',
+          'camion': 'truck mixer sleeper concrete dump haul rock rigid',
+          'camion-tolva': 'dump truck haul truck rock truck rigid articulated',
           'motoniveladora': 'motor grader grader',
-          'carrito-golf': 'golf cart',
+          'carrito-golf': 'golf cart irgc40',
           'rodillo': 'roller',
           'manipulador-telescopico': 'telehandler',
-          'camioneta': 'explorer peugeot cherokee armored',
+          'camioneta': 'explorer peugeot cherokee landtrek pickup armored',
           'compresor': 'compressor generator',
           'grua': 'crane',
-          'tractor': 'tractor',
-          'remolque': 'trailer',
-          'maquinaria-general': '' // No specific keywords, will show varied machinery
+          'tractor': 'tractor john deere',
+          'remolque': 'trailer lowbed dump',
+          'bulldozer': 'bulldozer dozer',
+          'autobus': 'bus autobus',
+          'tolva': 'dump trailer tri-axle dumper',
+          'mezcladora': 'concrete mixer',
+          'repuesto': 'ripper tooth rake attachment',
+          'maquinaria-general': '' // No specific keywords, will show all machinery
         };
         
         const keywords = keywordMap[filters.type];
         if (keywords) {
           searchTerm = searchTerm ? `${searchTerm} ${keywords}` : keywords;
           console.log(`🔍 Added keywords to search: '${keywords}'`);
-          // Still set the type filter to machinery
-          params.append('type', mappedType);
         }
+        // Always set the type filter to machinery for these categories
+        params.append('type', mappedType);
       } else {
-        // For exact types like excavator, loader, use direct type filter
+        // For exact types like excavator, loader, mini-excavator, use direct type filter
         params.append('type', mappedType);
       }
     }
