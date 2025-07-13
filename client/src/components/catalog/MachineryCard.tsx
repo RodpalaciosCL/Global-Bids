@@ -261,14 +261,7 @@ export function MachineryCard({ item, index }: MachineryCardProps) {
           <h3 className="font-heading font-bold text-lg text-primary">{name}</h3>
         </div>
         
-        {/* Specs - Marca: Kms: Horas: formato simplificado */}
-        <div className="text-sm text-gray-600 mb-3">
-          <div className="flex items-center gap-4">
-            <span><strong>{language === 'es' ? 'Marca:' : 'Brand:'}</strong> {displayBrand || 'N/A'}</span>
-            <span><strong>{language === 'es' ? 'Kms:' : 'Km:'}</strong> {displayKilometers ? displayKilometers.toLocaleString() : 'N/A'}</span>
-            <span><strong>{language === 'es' ? 'Horas:' : 'Hours:'}</strong> {displayHours || 'N/A'}</span>
-          </div>
-        </div>
+        {/* Solo mostrar specs si tienen valores reales */}
         
         <p className="text-gray-600 text-sm mb-4">{description}</p>
         

@@ -256,14 +256,7 @@ export function MachineryCardCompact({ item, index }: MachineryCardCompactProps)
         {/* Title */}
         <h3 className="text-lg font-bold text-gray-900 mb-2 line-clamp-1">{name}</h3>
         
-        {/* Specs - Marca: Kms: Horas: formato simplificado */}
-        <div className="text-sm text-gray-600 mb-3">
-          <div className="flex items-center gap-4">
-            <span><strong>{language === 'es' ? 'Marca:' : 'Brand:'}</strong> {displayBrand || 'N/A'}</span>
-            <span><strong>{language === 'es' ? 'Kms:' : 'Km:'}</strong> {displayKilometers ? displayKilometers.toLocaleString() : 'N/A'}</span>
-            <span><strong>{language === 'es' ? 'Horas:' : 'Hours:'}</strong> {displayHours || 'N/A'}</span>
-          </div>
-        </div>
+        {/* Solo mostrar specs si tienen valores reales */}
         
         {/* Key specifications */}
         <div className="text-sm text-gray-700 mb-3">
