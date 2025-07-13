@@ -301,9 +301,17 @@ export function CatalogSection() {
   
   // Apply client-side type filter based on intelligent classification
   if (filters.type) {
+    console.log(`🔧 Aplicando filtro: ${filters.type}`);
+    console.log(`📊 Items antes del filtro: ${machinery.length}`);
+    
     machinery = machinery.filter(item => {
       // Use intelligent classification as primary filter
       const correctType = item.correctType;
+      
+      // Debug para cada item
+      if (machinery.indexOf(item) < 3) { // Solo los primeros 3 para no saturar logs
+        console.log(`Item: ${item.name.substring(0, 30)}..., correctType: ${correctType}, originalType: ${item.type}`);
+      }
       
       // Direct match with intelligent classification
       if (correctType === filters.type) return true;
@@ -398,13 +406,23 @@ export function CatalogSection() {
           return item.type === filters.type || correctType === filters.type;
       }
     });
+    
+    console.log(`📊 Items después del filtro: ${machinery.length}`);
   }
   
   const totalPages = machineryData?.totalPages || 1;
 
-  // Debug logs - only show important info
+  // Debug logs - show important info and filter details
   if (machinery?.length > 0) {
     console.log(`✅ Loaded ${machinery.length} machinery items successfully`);
+    if (filters.type) {
+      console.log(`🔍 Filtering by type: ${filters.type}`);
+      console.log(`📋 First few items:`, machinery.slice(0, 3).map(item => ({
+        name: item.name,
+        originalType: item.type,
+        correctType: item.correctType
+      })));
+    }
   }
 
   // Apply filters handler

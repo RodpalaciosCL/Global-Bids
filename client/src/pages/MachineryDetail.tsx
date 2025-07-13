@@ -170,40 +170,40 @@ function translateAndFormatDescription(englishDescription: string, language: str
   // Extract location
   const locationMatch = description.match(/Located In ([^.,]+(?:, [^.,]+)*)/i);
   if (locationMatch) {
-    parts.push(`**Ubicación:** ${locationMatch[1]}`);
+    parts.push(`Ubicación: ${locationMatch[1]}`);
   }
   
   // Extract VIN
   const vinMatch = description.match(/Vin#?\s*([a-zA-Z0-9]+)/i);
   if (vinMatch) {
-    parts.push(`**VIN:** ${vinMatch[1].toLowerCase()}`);
+    parts.push(`VIN: ${vinMatch[1].toLowerCase()}`);
   }
   
   // Extract kilometrage/mileage
   const kmMatch = description.match(/(?:Meter Reads\s*)?(\d+(?:[.,]\d+)*)\s*Km/i);
   if (kmMatch) {
     const km = kmMatch[1].replace(/[.,]/g, ',');
-    parts.push(`**Kilometraje:** ${km} km`);
+    parts.push(`Kilometraje: ${km} km`);
   }
   
   // Extract miles
   const milesMatch = description.match(/(\d+(?:[.,]\d+)*)\s*miles/i);
   if (milesMatch) {
     const miles = milesMatch[1].replace(/[.,]/g, ',');
-    parts.push(`**Millas:** ${miles} millas`);
+    parts.push(`Millas: ${miles} millas`);
   }
   
   // Extract hours
   const hoursMatch = description.match(/(\d+(?:[.,]\d+)*)\s*(?:hrs?|hours)/i);
   if (hoursMatch) {
     const hours = hoursMatch[1].replace(/[.,]/g, ',');
-    parts.push(`**Horas de Uso:** ${hours} horas`);
+    parts.push(`Horas de Uso: ${hours} horas`);
   }
   
   // Extract engine model
   const engineMatch = description.match(/Engine Model:\s*([^,]+)/i);
   if (engineMatch) {
-    parts.push(`**Modelo del Motor:** ${engineMatch[1].trim()}`);
+    parts.push(`Modelo del Motor: ${engineMatch[1].trim()}`);
   }
   
   // Extract engine displacement (for cars like "2.3l GTDI")
@@ -213,7 +213,7 @@ function translateAndFormatDescription(englishDescription: string, language: str
     if (engineDesc.toLowerCase().includes('eco boost')) {
       engineDesc = engineDesc.replace(/eco boost powered/gi, 'con tecnología EcoBoost');
     }
-    parts.push(`**Motor:** ${engineSizeMatch[1]} ${engineDesc}`);
+    parts.push(`Motor: ${engineSizeMatch[1]} ${engineDesc}`);
   }
   
   // Extract power type
@@ -221,26 +221,26 @@ function translateAndFormatDescription(englishDescription: string, language: str
   if (powerTypeMatch) {
     let powerType = powerTypeMatch[1].trim();
     powerType = powerType.replace(/Internal Combustion Engine/i, 'Motor de Combustión Interna');
-    parts.push(`**Tipo de Motor:** ${powerType}`);
+    parts.push(`Tipo de Motor: ${powerType}`);
   }
   
   // Extract displacement
   const displMatch = description.match(/Displacement \(l\):\s*([^,]+)/i);
   if (displMatch) {
-    parts.push(`**Cilindrada:** ${displMatch[1].trim()} l`);
+    parts.push(`Cilindrada: ${displMatch[1].trim()} l`);
   }
   
   // Extract maximum power
   const maxPowerMatch = description.match(/Maximum Power \(kw\/rpm\):\s*([^,]+)/i);
   if (maxPowerMatch) {
-    parts.push(`**Potencia Máxima:** ${maxPowerMatch[1].trim()} kw/rpm`);
+    parts.push(`Potencia Máxima: ${maxPowerMatch[1].trim()} kw/rpm`);
   }
   
   // Extract horsepower
   const hpMatch = description.match(/(?:Horsepower \(hp\):\s*(\d+)|(\d+)\s*Hp)/i);
   if (hpMatch) {
     const hp = hpMatch[1] || hpMatch[2];
-    parts.push(`**Caballos de Fuerza:** ${hp} HP`);
+    parts.push(`Caballos de Fuerza: ${hp} HP`);
   }
   
   // Extract fuel type
@@ -248,25 +248,25 @@ function translateAndFormatDescription(englishDescription: string, language: str
   if (fuelMatch) {
     let fuelType = fuelMatch[1].trim();
     fuelType = fuelType.replace(/Diesel/i, 'Diésel');
-    parts.push(`**Tipo de Combustible:** ${fuelType}`);
+    parts.push(`Tipo de Combustible: ${fuelType}`);
   }
   
   // Extract fuel consumption
   const consumptionMatch = description.match(/Fuel Consumption \(g\/kwh\):\s*([^,]+)/i);
   if (consumptionMatch) {
-    parts.push(`**Consumo de Combustible:** ${consumptionMatch[1].trim()} g/kwh`);
+    parts.push(`Consumo de Combustible: ${consumptionMatch[1].trim()} g/kwh`);
   }
   
   // Extract fuel capacity
   const capacityMatch = description.match(/Fuel Capacity \(l\):\s*([^,]+)/i);
   if (capacityMatch) {
-    parts.push(`**Capacidad de Combustible:** ${capacityMatch[1].trim()}`);
+    parts.push(`Capacidad de Combustible: ${capacityMatch[1].trim()}`);
   }
   
   // Extract transmission
   const transMatch = description.match(/Automatic Transmission/i);
   if (transMatch) {
-    parts.push(`**Transmisión:** Automática`);
+    parts.push(`Transmisión: Automática`);
   }
   
   // Extract level information
@@ -274,46 +274,46 @@ function translateAndFormatDescription(englishDescription: string, language: str
   if (levelMatch) {
     let level = levelMatch[1].trim();
     level = level.replace(/up To (\d+mm)/i, 'hasta $1');
-    parts.push(`**Nivel:** ${level}`);
+    parts.push(`Nivel: ${level}`);
   }
   
   // Extract passenger capacity
   const passengerMatch = description.match(/(\d+)\s*Passenger/i);
   if (passengerMatch) {
-    parts.push(`**Capacidad de Pasajeros:** ${passengerMatch[1]} pasajeros`);
+    parts.push(`Capacidad de Pasajeros: ${passengerMatch[1]} pasajeros`);
   }
   
   // Extract bucket capacity
   const bucketMatch = description.match(/Bucket Capacity \(m\s*³\):\s*([^,]+)/i);
   if (bucketMatch) {
-    parts.push(`**Capacidad del Cucharón:** ${bucketMatch[1].trim()} m³`);
+    parts.push(`Capacidad del Cucharón: ${bucketMatch[1].trim()} m³`);
   }
   
   // Extract dimensions
   const dimMatch = description.match(/Length\*width\*height \(mm\):\s*(\d+)\s*\*\s*(\d+)\s*\*\s*(\d+)/i);
   if (dimMatch) {
     const [, length, width, height] = dimMatch;
-    parts.push(`**Dimensiones:** ${length} × ${width} × ${height} mm (Largo × Ancho × Alto)`);
+    parts.push(`Dimensiones: ${length} × ${width} × ${height} mm (Largo × Ancho × Alto)`);
   }
   
   // Extract track width
   const trackMatch = description.match(/Track Width \(mm\):\s*(\d+)/i);
   if (trackMatch) {
-    parts.push(`**Ancho de Oruga:** ${trackMatch[1]} mm`);
+    parts.push(`Ancho de Oruga: ${trackMatch[1]} mm`);
   }
   
   // Extract excavation depth
   const depthMatch = description.match(/Maximum Excavation Depth \(mm\):\s*(\d+)/i);
   if (depthMatch) {
     const depth = parseInt(depthMatch[1]).toLocaleString();
-    parts.push(`**Profundidad Máxima de Excavación:** ${depth} mm`);
+    parts.push(`Profundidad Máxima de Excavación: ${depth} mm`);
   }
   
   // Extract unloading height
   const heightMatch = description.match(/Maximum Unloading Height\(mm\):\s*(\d+)/i);
   if (heightMatch) {
     const height = parseInt(heightMatch[1]).toLocaleString();
-    parts.push(`**Altura Máxima de Descarga:** ${height} mm`);
+    parts.push(`Altura Máxima de Descarga: ${height} mm`);
   }
   
   // Extract vehicle features
@@ -335,17 +335,17 @@ function translateAndFormatDescription(englishDescription: string, language: str
   }
   
   if (features.length > 0) {
-    parts.push(`**Características:** ${features.join(', ')}`);
+    parts.push(`Características: ${features.join(', ')}`);
   }
   
   // Extract condition
   if (description.match(/Super Clean Inside And Out/i)) {
-    parts.push(`**Estado:** Súper limpio por dentro y por fuera`);
+    parts.push(`Estado: Súper limpio por dentro y por fuera`);
   }
   
   // If we have formatted parts, return them with header
   if (parts.length > 0) {
-    return `**Detalles del Equipo:**\n\n${parts.join('\n')}`;
+    return `Detalles del Equipo:\n\n${parts.join('\n')}`;
   }
   
   // If no specific patterns found, do basic translation
