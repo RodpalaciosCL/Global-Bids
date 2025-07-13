@@ -697,7 +697,8 @@ export default function MachineryDetail() {
   const displayBrand = realSpecs.realBrand || machinery.brand;
   const displayKilometers = realSpecs.kilometers || machinery.kilometers;
   const displayHours = realSpecs.hours || machinery.hours;
-  const displayType = realSpecs.correctType || machinery.type;
+  // ALWAYS use database type - it's already correct
+  const displayType = machinery.type;
   
   return (
     <div className="bg-white min-h-screen">

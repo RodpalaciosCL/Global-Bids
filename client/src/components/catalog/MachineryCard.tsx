@@ -228,7 +228,8 @@ export function MachineryCard({ item, index }: MachineryCardProps) {
   const displayBrand = realSpecs.realBrand || brand;
   const displayKilometers = realSpecs.kilometers || kilometers;
   const displayHours = realSpecs.hours || hours;
-  const displayType = realSpecs.correctType || type;
+  // ALWAYS use database type - it's already correct
+  const displayType = type;
   
   return (
     <motion.div 
