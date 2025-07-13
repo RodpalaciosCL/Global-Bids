@@ -13,7 +13,7 @@ import {
   type InsertRegistration
 } from "@shared/schema";
 import { db } from "./db";
-import { eq, and, gte, lte, like, or, desc, asc } from "drizzle-orm";
+import { eq, and, gte, lte, like, or, desc, asc, sql } from "drizzle-orm";
 
 // Interface for storage operations
 export interface IStorage {
@@ -571,10 +571,10 @@ export class DatabaseStorage implements IStorage {
       const searchPattern = `%${search}%`;
       conditions.push(
         or(
-          like(machinery.name, searchPattern),
-          like(machinery.description, searchPattern),
-          like(machinery.brand, searchPattern),
-          like(machinery.type, searchPattern)
+          sql`${machinery.name} ILIKE ${searchPattern}`,
+          sql`${machinery.description} ILIKE ${searchPattern}`,
+          sql`${machinery.brand} ILIKE ${searchPattern}`,
+          sql`${machinery.type} ILIKE ${searchPattern}`
         )
       );
     }
