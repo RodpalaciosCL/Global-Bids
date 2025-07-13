@@ -279,8 +279,7 @@ export function MachineryCardCompact({ item, index }: MachineryCardCompactProps)
           <div className="flex items-center gap-2">
             <i className="fas fa-info-circle text-gray-400"></i>
             <span className="line-clamp-2">
-              {description.split(' - ')[1]?.split('.')[0] || 
-               'Authentic auction item from International Global Bids And Prelco Auctions'}
+              {language === 'es' ? 'Equipos disponibles subasta 15 de julio' : 'Equipment available July 15 auction'}
             </span>
           </div>
         </div>

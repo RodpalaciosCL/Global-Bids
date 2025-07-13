@@ -148,8 +148,8 @@ export function AboutSection() {
                     </div>
                     <p className="text-sm font-medium text-gray-700">
                       {language === 'es' 
-                        ? 'Líderes en subastas de maquinaria en Latinoamérica'
-                        : 'Leaders in machinery auctions in Latin America'}
+                        ? 'Subastas de Chile para todo el mundo'
+                        : 'Auctions from Chile to the world'}
                     </p>
                   </motion.div>
                   

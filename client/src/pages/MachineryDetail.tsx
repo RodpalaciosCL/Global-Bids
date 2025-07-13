@@ -906,8 +906,8 @@ export default function MachineryDetail() {
                           </p>
                           <p className="text-sm text-gray-600">
                             {language === 'es' 
-                              ? 'Artículo auténtico de subasta de International Global Bids And Prelco Auctions'
-                              : 'Authentic auction item from International Global Bids And Prelco Auctions'
+                              ? 'Equipos disponibles subasta 15 de julio'
+                              : 'Equipment available July 15 auction'
                             }
                           </p>
                           <p className="text-xs text-gray-500 mt-1">
