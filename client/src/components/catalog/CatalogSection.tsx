@@ -490,6 +490,26 @@ export function CatalogSection() {
                   </select>
                 </div>
                 
+                {/* Condition filter */}
+                <div>
+                  <label
+                    htmlFor="condition-filter-mobile"
+                    className="block text-sm font-medium text-gray-700 mb-1"
+                  >
+                    {language === 'es' ? 'Condición' : 'Condition'}
+                  </label>
+                  <select
+                    id="condition-filter-mobile"
+                    className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary focus:border-secondary transition"
+                    onChange={handleSelectChange}
+                    value={filters.condition || ""}
+                  >
+                    <option value="">{language === 'es' ? 'Todas las condiciones' : 'All conditions'}</option>
+                    <option value="nuevo">{language === 'es' ? 'Nuevo' : 'New'}</option>
+                    <option value="usado">{language === 'es' ? 'Usado' : 'Used'}</option>
+                  </select>
+                </div>
+                
 
                 
 
