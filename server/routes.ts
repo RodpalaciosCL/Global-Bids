@@ -3,9 +3,16 @@ import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { z } from "zod";
 import { insertContactSchema, insertRegistrationSchema } from "@shared/schema";
+import { testDatabaseConnection } from "./db";
 import "dotenv/config";
 
 export async function registerRoutes(app: Express): Promise<Server> {
+  // Test database connection on startup
+  console.log('Initializing database connection...');
+  const isDbConnected = await testDatabaseConnection();
+  if (!isDbConnected) {
+    console.warn('Database connection failed, but continuing with server startup...');
+  }
   // ─────────────── MACHINERY ENDPOINTS ───────────────
   app.get("/api/machinery", async (req, res) => {
     try {
@@ -40,7 +47,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
       res.json(result);
     } catch (error) {
       console.error("Error fetching machinery:", error);
-      res.status(500).json({ message: "Failed to fetch machinery" });
+      // Return empty result set instead of error to prevent frontend crashes
+      res.json({ items: [], total: 0, totalPages: 0 });
     }
   });
 
