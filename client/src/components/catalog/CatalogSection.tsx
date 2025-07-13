@@ -93,23 +93,26 @@ function translateMachineryName(englishName: string, language: string): string {
 // Function to map Spanish filter values to English database values
 function mapFilterToDbValue(filterValue: string): string {
   const mapping: Record<string, string> = {
-    'excavadora': 'excavator',
-    'camion': 'truck', 
-    'camion-tolva': 'truck',
-    'tolva': 'truck',
-    'cargador': 'loader',
-    'camioneta': 'truck',
-    'tractor': 'tractor',
-    'bulldozer': 'bulldozer',
+    // EXACT database types (from SQL query):
+    'excavadora': 'excavator',          // 34 items
+    'cargador': 'loader',               // 22 items
+    
+    // Everything else maps to 'machinery' (84 items) - the catch-all category in DB
+    'camion': 'machinery', 
+    'camion-tolva': 'machinery',
+    'tolva': 'machinery',
+    'autobus': 'machinery',
+    'remolque': 'machinery',
+    'mezcladora': 'machinery',
+    'camioneta': 'machinery',
+    'tractor': 'machinery',
+    'bulldozer': 'machinery',
+    'grua': 'machinery',
     'motoniveladora': 'machinery',
-    'grua': 'crane',
     'rodillo': 'machinery',
-    'autobus': 'truck',
-    'remolque': 'truck',
     'perforadora': 'machinery',
     'manipulador-telescopico': 'machinery',
     'compresor': 'machinery',
-    'mezcladora': 'truck',
     'vehiculo-golf': 'machinery',
     'repuesto': 'machinery',
     'implemento': 'machinery'
@@ -249,6 +252,7 @@ export function CatalogSection() {
     // Map Spanish filter values to English database values
     if (filters.type) {
       const mappedType = mapFilterToDbValue(filters.type);
+      console.log(`🗂️ Mapeando filtro: '${filters.type}' -> '${mappedType}'`);
       params.append('type', mappedType);
     }
     
