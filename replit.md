@@ -156,4 +156,7 @@ The application includes proper error boundaries, loading states, and fallback m
 - **Comprehensive coverage** - every equipment type from mini excavators to specialized parts properly categorized
 - **Complete bilingual translation system** - all equipment types display correctly in Spanish ("Excavadora", "Carrito Golf", "Repuestos") when site is in Spanish, and in English ("Excavator", "Golf Cart", "Parts") when site is in English
 - **All components updated** - MachineryCard, MachineryCardCompact, MachineryDetail all use updated getTypeLabel functions with complete type mappings
+- **Case-insensitive search fixed** - PostgreSQL ILIKE implementation now correctly finds brands like "peugeot" (1), "komatsu" (14), "kubota" (4)
+- **Automatic condition classification** - 23 items marked as "nuevo" (with "sin usar", "nuevo", "unused", "new" in titles), 122 as "usado"
+- **Simplified condition system** - Only "Nuevo" and "Usado" options in condition filters, replacing previous complex system
 - **Tested and verified** - all filters working correctly with proper counts and multilingual display

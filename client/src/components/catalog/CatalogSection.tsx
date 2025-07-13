@@ -576,10 +576,8 @@ export function CatalogSection() {
                     value={filters.condition || ""}
                   >
                     <option value="">{language === 'es' ? 'Todas las condiciones' : 'All conditions'}</option>
-                    <option value="excellent">{language === 'es' ? 'Excelente' : 'Excellent'}</option>
-                    <option value="good">{language === 'es' ? 'Bueno' : 'Good'}</option>
-                    <option value="fair">{language === 'es' ? 'Regular' : 'Fair'}</option>
-                    <option value="repair">{language === 'es' ? 'Para reparar' : 'For repair'}</option>
+                    <option value="nuevo">{language === 'es' ? 'Nuevo' : 'New'}</option>
+                    <option value="usado">{language === 'es' ? 'Usado' : 'Used'}</option>
                   </select>
                 </div>
                 

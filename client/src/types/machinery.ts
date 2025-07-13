@@ -45,10 +45,8 @@ export type MachineryType =
   | 'attachment';    // Implemento/Accesorio
 
 export type MachineryCondition = 
-  | 'excellent' 
-  | 'good' 
-  | 'fair' 
-  | 'repair';
+  | 'nuevo' 
+  | 'usado';
 
 export interface MachineryFilters {
   search?: string;
@@ -90,8 +88,6 @@ export const typeLabels: Record<MachineryType, Record<'es' | 'en', string>> = {
 };
 
 export const conditionLabels: Record<MachineryCondition, Record<'es' | 'en', string>> = {
-  excellent: { es: 'Excelente', en: 'Excellent' },
-  good: { es: 'Buen estado', en: 'Good condition' },
-  fair: { es: 'Regular', en: 'Fair' },
-  repair: { es: 'Para reparar', en: 'Needs repair' }
+  nuevo: { es: 'Nuevo', en: 'New' },
+  usado: { es: 'Usado', en: 'Used' }
 };
