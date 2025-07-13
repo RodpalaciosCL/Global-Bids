@@ -160,3 +160,13 @@ The application includes proper error boundaries, loading states, and fallback m
 - **Automatic condition classification** - 23 items marked as "nuevo" (with "sin usar", "nuevo", "unused", "new" in titles), 122 as "usado"
 - **Simplified condition system** - Only "Nuevo" and "Usado" options in condition filters, replacing previous complex system
 - **Tested and verified** - all filters working correctly with proper counts and multilingual display
+
+### Description Formatting Fix (July 13, 2025)
+- **Complete description overhaul** following strict formatting rules from leeer.md guidelines
+- **Eliminated all repetitions** - removed duplicate "Located In" phrases and redundant information
+- **Full Spanish translation** - converted all technical terms from English to Spanish per translation rules
+- **Proper formatting** - removed asterisks, organized information logically with clear structure
+- **Number formatting** - added proper comma separators for thousands (87,220 km)
+- **Technical accuracy** - maintained all original technical specifications without data loss
+- **Structured layout** - added "Detalles del Equipo:" headers and organized specifications clearly
+- **All 145 descriptions processed** - eliminated formatting inconsistencies across entire database
