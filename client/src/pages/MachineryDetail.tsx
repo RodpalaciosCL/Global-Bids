@@ -663,22 +663,29 @@ export default function MachineryDetail() {
                 <h1 className="text-xl font-bold text-gray-900 mb-2 line-clamp-1">{translatedName}</h1>
                 
                 <div className="flex flex-wrap gap-3 mb-2 border-b border-gray-200 pb-2">
-                  <div className="flex items-center">
-                    <i className="fas fa-industry mr-1 text-gray-500 text-sm"></i>
-                    <span className="text-gray-900 text-sm">{displayBrand || 'N/A'}</span>
-                  </div>
-                  <div className="flex items-center">
-                    <i className="fas fa-road mr-1 text-gray-500 text-sm"></i>
-                    <span className="text-gray-900 text-sm">
-                      {displayKilometers ? `${displayKilometers.toLocaleString()} km` : 'N/A'}
-                    </span>
-                  </div>
-                  <div className="flex items-center">
-                    <i className="fas fa-clock mr-1 text-gray-500 text-sm"></i>
-                    <span className="text-gray-900 text-sm">
-                      {displayHours ? `${displayHours} hrs` : 'N/A'}
-                    </span>
-                  </div>
+                  {/* Solo mostrar información si está disponible */}
+                  {displayBrand && (
+                    <div className="flex items-center">
+                      <i className="fas fa-industry mr-1 text-gray-500 text-sm"></i>
+                      <span className="text-gray-900 text-sm">{displayBrand}</span>
+                    </div>
+                  )}
+                  {displayKilometers && (
+                    <div className="flex items-center">
+                      <i className="fas fa-road mr-1 text-gray-500 text-sm"></i>
+                      <span className="text-gray-900 text-sm">
+                        {displayKilometers.toLocaleString()} km
+                      </span>
+                    </div>
+                  )}
+                  {displayHours && (
+                    <div className="flex items-center">
+                      <i className="fas fa-clock mr-1 text-gray-500 text-sm"></i>
+                      <span className="text-gray-900 text-sm">
+                        {displayHours} hrs
+                      </span>
+                    </div>
+                  )}
                 </div>
                 
                 {/* Main Image Gallery */}
