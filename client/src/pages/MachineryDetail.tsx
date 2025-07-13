@@ -89,6 +89,262 @@ function translateMachineryName(englishName: string, language: string): string {
   return translatedName;
 }
 
+// Function to translate and format technical descriptions according to info.md instructions
+function translateAndFormatDescription(englishDescription: string, language: string): string {
+  if (language === 'en') return englishDescription;
+  
+  // Translation mappings based on info.md instructions
+  const translations: Record<string, string> = {
+    // Location and identification
+    'Located In': 'Ubicación',
+    'VIN#': 'VIN',
+    'Vin#': 'VIN',
+    'Meter Reads': 'Kilometraje',
+    'Miles': 'Millas',
+    'Hours': 'Horas',
+    'Km': 'km',
+    
+    // Engine and power
+    'Engine Model': 'Modelo del Motor',
+    'Power Type': 'Tipo de Motor',
+    'Internal Combustion Engine': 'Motor de Combustión Interna',
+    'Displacement': 'Cilindrada',
+    'Maximum Power': 'Potencia Máxima',
+    'Horsepower': 'Caballos de Fuerza',
+    'HP': 'HP',
+    'GTDI': 'GTDI',
+    'EcoBoost': 'EcoBoost',
+    'Eco Boost Powered': 'con tecnología EcoBoost',
+    
+    // Transmission and fuel
+    'Automatic Transmission': 'Transmisión Automática',
+    'Fuel Type': 'Tipo de Combustible',
+    'fuel Type': 'Tipo de Combustible',
+    'Diesel': 'Diésel',
+    'Fuel Consumption': 'Consumo de Combustible',
+    'Fuel Capacity': 'Capacidad de Combustible',
+    'Level': 'Nivel',
+    
+    // Vehicle characteristics
+    'Passenger': 'Pasajeros',
+    'All Wheel Disc Brakes': 'Frenos de disco en todas las ruedas',
+    'Cloth Interior': 'Tapizado de tela',
+    'Cruise Control': 'Control de crucero',
+    'Heat/AC': 'Calefacción/AC',
+    'Rear Climate Controls': 'Controles de clima traseros',
+    'Super Clean Inside And Out': 'Súper limpio por dentro y por fuera',
+    
+    // Construction equipment
+    'Bucket Capacity': 'Capacidad del Cucharón',
+    'Length*width*height': 'Dimensiones',
+    'Track Width': 'Ancho de Oruga',
+    'Maximum Excavation Depth': 'Profundidad Máxima de Excavación',
+    'Maximum Unloading Height': 'Altura Máxima de Descarga',
+    
+    // Units - keep as is but mention for reference
+    'up To 9mm': 'hasta 9mm'
+  };
+  
+  // Clean and parse the description
+  let description = englishDescription.trim();
+  
+  // Remove redundant "Located In" at the end if it repeats
+  description = description.replace(/\.\s*Located In[^.]*\.\s*$/, '.');
+  
+  // Split into parts and process
+  const parts: string[] = [];
+  
+  // Extract location
+  const locationMatch = description.match(/Located In ([^.,]+(?:, [^.,]+)*)/i);
+  if (locationMatch) {
+    parts.push(`**Ubicación:** ${locationMatch[1]}`);
+  }
+  
+  // Extract VIN
+  const vinMatch = description.match(/Vin#?\s*([a-zA-Z0-9]+)/i);
+  if (vinMatch) {
+    parts.push(`**VIN:** ${vinMatch[1].toLowerCase()}`);
+  }
+  
+  // Extract kilometrage/mileage
+  const kmMatch = description.match(/(?:Meter Reads\s*)?(\d+(?:[.,]\d+)*)\s*Km/i);
+  if (kmMatch) {
+    const km = kmMatch[1].replace(/[.,]/g, ',');
+    parts.push(`**Kilometraje:** ${km} km`);
+  }
+  
+  // Extract miles
+  const milesMatch = description.match(/(\d+(?:[.,]\d+)*)\s*miles/i);
+  if (milesMatch) {
+    const miles = milesMatch[1].replace(/[.,]/g, ',');
+    parts.push(`**Millas:** ${miles} millas`);
+  }
+  
+  // Extract hours
+  const hoursMatch = description.match(/(\d+(?:[.,]\d+)*)\s*(?:hrs?|hours)/i);
+  if (hoursMatch) {
+    const hours = hoursMatch[1].replace(/[.,]/g, ',');
+    parts.push(`**Horas de Uso:** ${hours} horas`);
+  }
+  
+  // Extract engine model
+  const engineMatch = description.match(/Engine Model:\s*([^,]+)/i);
+  if (engineMatch) {
+    parts.push(`**Modelo del Motor:** ${engineMatch[1].trim()}`);
+  }
+  
+  // Extract engine displacement (for cars like "2.3l GTDI")
+  const engineSizeMatch = description.match(/(\d+\.\d+l)\s*([^,]*(?:GTDI|EcoBoost)[^,]*)/i);
+  if (engineSizeMatch) {
+    let engineDesc = engineSizeMatch[2].trim();
+    if (engineDesc.toLowerCase().includes('eco boost')) {
+      engineDesc = engineDesc.replace(/eco boost powered/gi, 'con tecnología EcoBoost');
+    }
+    parts.push(`**Motor:** ${engineSizeMatch[1]} ${engineDesc}`);
+  }
+  
+  // Extract power type
+  const powerTypeMatch = description.match(/Power Type:\s*([^,]+)/i);
+  if (powerTypeMatch) {
+    let powerType = powerTypeMatch[1].trim();
+    powerType = powerType.replace(/Internal Combustion Engine/i, 'Motor de Combustión Interna');
+    parts.push(`**Tipo de Motor:** ${powerType}`);
+  }
+  
+  // Extract displacement
+  const displMatch = description.match(/Displacement \(l\):\s*([^,]+)/i);
+  if (displMatch) {
+    parts.push(`**Cilindrada:** ${displMatch[1].trim()} l`);
+  }
+  
+  // Extract maximum power
+  const maxPowerMatch = description.match(/Maximum Power \(kw\/rpm\):\s*([^,]+)/i);
+  if (maxPowerMatch) {
+    parts.push(`**Potencia Máxima:** ${maxPowerMatch[1].trim()} kw/rpm`);
+  }
+  
+  // Extract horsepower
+  const hpMatch = description.match(/(?:Horsepower \(hp\):\s*(\d+)|(\d+)\s*Hp)/i);
+  if (hpMatch) {
+    const hp = hpMatch[1] || hpMatch[2];
+    parts.push(`**Caballos de Fuerza:** ${hp} HP`);
+  }
+  
+  // Extract fuel type
+  const fuelMatch = description.match(/fuel Type:\s*([^,]+)/i);
+  if (fuelMatch) {
+    let fuelType = fuelMatch[1].trim();
+    fuelType = fuelType.replace(/Diesel/i, 'Diésel');
+    parts.push(`**Tipo de Combustible:** ${fuelType}`);
+  }
+  
+  // Extract fuel consumption
+  const consumptionMatch = description.match(/Fuel Consumption \(g\/kwh\):\s*([^,]+)/i);
+  if (consumptionMatch) {
+    parts.push(`**Consumo de Combustible:** ${consumptionMatch[1].trim()} g/kwh`);
+  }
+  
+  // Extract fuel capacity
+  const capacityMatch = description.match(/Fuel Capacity \(l\):\s*([^,]+)/i);
+  if (capacityMatch) {
+    parts.push(`**Capacidad de Combustible:** ${capacityMatch[1].trim()}`);
+  }
+  
+  // Extract transmission
+  const transMatch = description.match(/Automatic Transmission/i);
+  if (transMatch) {
+    parts.push(`**Transmisión:** Automática`);
+  }
+  
+  // Extract level information
+  const levelMatch = description.match(/Level\s*([^,]+)/i);
+  if (levelMatch) {
+    let level = levelMatch[1].trim();
+    level = level.replace(/up To (\d+mm)/i, 'hasta $1');
+    parts.push(`**Nivel:** ${level}`);
+  }
+  
+  // Extract passenger capacity
+  const passengerMatch = description.match(/(\d+)\s*Passenger/i);
+  if (passengerMatch) {
+    parts.push(`**Capacidad de Pasajeros:** ${passengerMatch[1]} pasajeros`);
+  }
+  
+  // Extract bucket capacity
+  const bucketMatch = description.match(/Bucket Capacity \(m\s*³\):\s*([^,]+)/i);
+  if (bucketMatch) {
+    parts.push(`**Capacidad del Cucharón:** ${bucketMatch[1].trim()} m³`);
+  }
+  
+  // Extract dimensions
+  const dimMatch = description.match(/Length\*width\*height \(mm\):\s*(\d+)\s*\*\s*(\d+)\s*\*\s*(\d+)/i);
+  if (dimMatch) {
+    const [, length, width, height] = dimMatch;
+    parts.push(`**Dimensiones:** ${length} × ${width} × ${height} mm (Largo × Ancho × Alto)`);
+  }
+  
+  // Extract track width
+  const trackMatch = description.match(/Track Width \(mm\):\s*(\d+)/i);
+  if (trackMatch) {
+    parts.push(`**Ancho de Oruga:** ${trackMatch[1]} mm`);
+  }
+  
+  // Extract excavation depth
+  const depthMatch = description.match(/Maximum Excavation Depth \(mm\):\s*(\d+)/i);
+  if (depthMatch) {
+    const depth = parseInt(depthMatch[1]).toLocaleString();
+    parts.push(`**Profundidad Máxima de Excavación:** ${depth} mm`);
+  }
+  
+  // Extract unloading height
+  const heightMatch = description.match(/Maximum Unloading Height\(mm\):\s*(\d+)/i);
+  if (heightMatch) {
+    const height = parseInt(heightMatch[1]).toLocaleString();
+    parts.push(`**Altura Máxima de Descarga:** ${height} mm`);
+  }
+  
+  // Extract vehicle features
+  const features: string[] = [];
+  if (description.match(/All Wheel Disc Brakes/i)) {
+    features.push('Frenos de disco en todas las ruedas');
+  }
+  if (description.match(/Cloth Interior/i)) {
+    features.push('Tapizado de tela');
+  }
+  if (description.match(/Cruise Control/i)) {
+    features.push('Control de crucero');
+  }
+  if (description.match(/Heat\/AC/i)) {
+    features.push('Calefacción/AC');
+  }
+  if (description.match(/Rear Climate Controls/i)) {
+    features.push('Controles de clima traseros');
+  }
+  
+  if (features.length > 0) {
+    parts.push(`**Características:** ${features.join(', ')}`);
+  }
+  
+  // Extract condition
+  if (description.match(/Super Clean Inside And Out/i)) {
+    parts.push(`**Estado:** Súper limpio por dentro y por fuera`);
+  }
+  
+  // If we have formatted parts, return them with header
+  if (parts.length > 0) {
+    return `**Detalles del Equipo:**\n\n${parts.join('\n')}`;
+  }
+  
+  // If no specific patterns found, do basic translation
+  let translated = description;
+  Object.entries(translations).forEach(([english, spanish]) => {
+    const regex = new RegExp(english, 'gi');
+    translated = translated.replace(regex, spanish);
+  });
+  
+  return translated;
+}
+
 // Function to get type label in correct language
 function getTypeLabel(type: string, language: string): string {
   const typeLabels: Record<string, { es: string; en: string }> = {
@@ -618,29 +874,13 @@ export default function MachineryDetail() {
                 {activeTab === 'description' && (
                   <div className="p-2">
                     <div className="space-y-3">
-                      {/* Location */}
-                      {machinery.description.includes('Located in') && (
-                        <div className="flex items-start gap-2">
-                          <i className="fas fa-map-marker-alt text-primary mt-1"></i>
-                          <div>
-                            <p className="font-medium text-gray-900">Ubicación</p>
-                            <p className="text-sm text-gray-600">
-                              {machinery.description.split('Located in ')[1].split('.')[0]}
-                            </p>
-                          </div>
-                        </div>
-                      )}
-                      
-                      {/* Equipment Details */}
+                      {/* Translated Technical Description */}
                       <div className="flex items-start gap-2">
                         <i className="fas fa-cogs text-primary mt-1"></i>
-                        <div>
-                          <p className="font-medium text-gray-900">Detalles del Equipo</p>
-                          <p className="text-sm text-gray-600 leading-relaxed">
-                            {machinery.description.split(' - ')[1]?.split('. Located')[0] || 
-                             machinery.description.split(' - ')[1] || 
-                             machinery.description}
-                          </p>
+                        <div className="w-full">
+                          <div className="text-sm text-gray-600 leading-relaxed whitespace-pre-line">
+                            {translateAndFormatDescription(machinery.description, language)}
+                          </div>
                         </div>
                       </div>
                       
@@ -648,12 +888,20 @@ export default function MachineryDetail() {
                       <div className="flex items-start gap-2">
                         <i className="fas fa-gavel text-primary mt-1"></i>
                         <div>
-                          <p className="font-medium text-gray-900">Información de Subasta</p>
+                          <p className="font-medium text-gray-900">
+                            {language === 'es' ? 'Información de Subasta' : 'Auction Information'}
+                          </p>
                           <p className="text-sm text-gray-600">
-                            Artículo auténtico de subasta de International Global Bids And Prelco Auctions
+                            {language === 'es' 
+                              ? 'Artículo auténtico de subasta de International Global Bids And Prelco Auctions'
+                              : 'Authentic auction item from International Global Bids And Prelco Auctions'
+                            }
                           </p>
                           <p className="text-xs text-gray-500 mt-1">
-                            Fecha de subasta: 15 de julio, 2025
+                            {language === 'es' 
+                              ? 'Fecha de subasta: 15 de julio, 2025'
+                              : 'Auction date: July 15, 2025'
+                            }
                           </p>
                         </div>
                       </div>
