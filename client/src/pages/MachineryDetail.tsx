@@ -103,8 +103,14 @@ function translateMachineryName(englishName: string, language: string): string {
 }
 
 // Function to translate and format technical descriptions according to info.md instructions
-function translateAndFormatDescription(englishDescription: string, language: string): string {
-  if (language === 'en') return englishDescription;
+function translateAndFormatDescription(descText: string, language: string): string {
+  if (language === 'en') {
+    // If requesting English, translate Spanish description to English
+    if (descText.includes('Detalles del Equipo:')) {
+      return translateSpanishToEnglish(descText);
+    }
+    return descText;
+  }
   
   // Translation mappings based on info.md instructions
   const translations: Record<string, string> = {
@@ -159,7 +165,7 @@ function translateAndFormatDescription(englishDescription: string, language: str
   };
   
   // Clean and parse the description
-  let description = englishDescription.trim();
+  let description = descText.trim();
   
   // Remove redundant "Located In" at the end if it repeats
   description = description.replace(/\.\s*Located In[^.]*\.\s*$/, '.');
@@ -356,6 +362,85 @@ function translateAndFormatDescription(englishDescription: string, language: str
   });
   
   return translated;
+}
+
+// Function to translate Spanish descriptions to English
+function translateSpanishToEnglish(spanishDescription: string): string {
+  const spanishToEnglish: Record<string, string> = {
+    'Detalles del Equipo:': 'Equipment Details:',
+    'Ubicación:': 'Location:',
+    'Año:': 'Year:',
+    'Número de Serie:': 'Serial Number:',
+    'VIN:': 'VIN:',
+    'Lectura del Medidor:': 'Meter Reading:',
+    'Kilometraje:': 'Mileage:',
+    'Potencia:': 'Power:',
+    'Motor:': 'Engine:',
+    'Motor Diesel': 'Diesel Engine',
+    'Motor a Gasolina': 'Gas Engine',
+    'Motor Kubota Diesel': 'Kubota Diesel Engine',
+    'Motor Diesel Caterpillar': 'Caterpillar Diesel Engine',
+    'Transmisión:': 'Transmission:',
+    'Automática': 'Automatic',
+    'velocidades': 'speeds',
+    'Tracción:': 'Drivetrain:',
+    'Clima:': 'Climate:',
+    'Calefacción/AC': 'Heat/AC',
+    'Cabina:': 'Cabin:',
+    'Vidrios completos': 'Full Glass',
+    'Iluminación:': 'Lighting:',
+    'Luces de trabajo': 'Work Lights',
+    'Hidráulicos:': 'Hydraulics:',
+    'Hidráulicos auxiliares': 'Auxiliary Hydraulics',
+    'Balde:': 'Bucket:',
+    'Balde de excavación': 'Digging Bucket',
+    'Balde de descarga': 'Dump Bucket',
+    'Balde de descarga lateral': 'Side Dump Bucket',
+    'Ripper:': 'Ripper:',
+    'Ripper incluido': 'Ripper Included',
+    'Hoja:': 'Blade:',
+    'Hoja incluida': 'Blade Included',
+    'Tren de Rodaje:': 'Undercarriage:',
+    'UC al': 'UC at',
+    'Control:': 'Control:',
+    'Control joystick': 'Joystick Control',
+    'Capacidad:': 'Capacity:',
+    'lbs': 'lbs',
+    'Alcance:': 'Reach:',
+    'pies máximo': 'ft max',
+    'Neumáticos:': 'Tires:',
+    'Neumáticos en buen estado': 'Good Tires',
+    'Estado:': 'Condition:',
+    'Máquina limpia': 'Clean Machine',
+    'Operación:': 'Operation:',
+    'Funciona y opera correctamente': 'Runs and Operates',
+    'Disponibilidad:': 'Availability:',
+    'Lista para trabajar': 'Ready for Work',
+    'Estabilizadores:': 'Stabilizers:',
+    'Estabilizadores duales': 'Dual Stabilizers',
+    'Seguridad:': 'Safety:',
+    'Sistema supresor de incendios': 'Fire Suppressant System',
+    'Interior:': 'Interior:',
+    'Asientos de cuero': 'Leather Seats',
+    'Tecnología:': 'Technology:',
+    'Sistema de navegación': 'Navigation System',
+    'Comodidad:': 'Comfort:',
+    'Asientos calefaccionados': 'Heated Seats',
+    'Monitor de puntos ciegos': 'Blind Spot Monitor',
+    'horas': 'hours',
+    'km': 'km',
+    'HP': 'HP',
+    'Chile': 'Chile'
+  };
+
+  let englishDescription = spanishDescription;
+  
+  Object.entries(spanishToEnglish).forEach(([spanish, english]) => {
+    const regex = new RegExp(spanish.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g');
+    englishDescription = englishDescription.replace(regex, english);
+  });
+
+  return englishDescription;
 }
 
 // Function to get type label in correct language
