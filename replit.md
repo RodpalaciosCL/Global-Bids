@@ -170,3 +170,13 @@ The application includes proper error boundaries, loading states, and fallback m
 - **Technical accuracy** - maintained all original technical specifications without data loss
 - **Structured layout** - added "Detalles del Equipo:" headers and organized specifications clearly
 - **All 145 descriptions processed** - eliminated formatting inconsistencies across entire database
+
+### Dynamic Description Template System (July 13, 2025)
+- **Created smart template system** that organizes information into clear, separated fields instead of text blocks
+- **Automatic field detection** - extracts ubicación, VIN, kilómetros, motor, transmisión, interior, calefacción, etc.
+- **Conditional display** - only shows fields that each equipment actually has (no empty sections)
+- **Organized structure** with logical field order: location → identification → usage metrics → engine → vehicle features → condition
+- **Complete Spanish translation** - all field names and values properly translated
+- **Preserved all original data** while organizing into readable sections
+- **Applied to all 146 descriptions** creating consistent, professional format across entire marketplace
+- **Perfect for mobile display** - each specification on its own line for easy reading
