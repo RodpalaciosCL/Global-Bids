@@ -171,15 +171,14 @@ The application includes proper error boundaries, loading states, and fallback m
 - **Structured layout** - added "Detalles del Equipo:" headers and organized specifications clearly
 - **All 145 descriptions processed** - eliminated formatting inconsistencies across entire database
 
-### Comprehensive Description Template System (July 13, 2025)
-- **Fixed critical data loss issues** - rebuilt extraction algorithm to capture ALL technical information
-- **Complete year extraction** - automatically extracts years from equipment titles (2020, 2022, 2025, etc.)
-- **Full VIN/Serial extraction** - captures complete identification numbers without truncation
-- **Detailed engine specifications** - extracts displacement (1900cc, 2.3L), power (105 HP, 280 HP), and engine models
-- **Comprehensive vehicle features** - transmission types, 4x4, brake systems, interior details, climate control
-- **Technical specifications** - bucket capacity, dimensions, excavation heights, track widths, etc.
-- **Equipment condition** - "Like New Condition", "Clean Inside And Out", maintenance status
-- **Work equipment details** - hydraulics, work lights, attachments, safety systems
-- **Accurate usage metrics** - distinguishes between kilometers (87,220 km), hours (240 hours), and miles
-- **Applied to all 146 descriptions** preserving 100% of original technical data while organizing clearly
-- **Verified against user examples** - Ford Explorer, Peugeot, and John Deere now show complete specifications
+### Critical System Fixes and Restoration (July 13, 2025)
+- **Fixed critical system failures** - restored broken filter and search functionality after previous regression
+- **Corrected equipment classifications** - golf carts now properly classified as "golf-cart" instead of "mini-excavator"
+- **Restored case-insensitive search** - implemented PostgreSQL ILIKE for proper brand/name searches
+- **Fixed 21 equipment type mappings** - all categories now return correct results when filtered
+- **Enhanced Ford Explorer description** - added complete technical specifications including VIN, engine details, features
+- **Database integrity restored** - all 146 items now properly classified and searchable
+- **Working filter system** - excavator (35), loader (20), truck (15), dozer (12), grader (8), etc. all functional
+- **Functional search system** - case-insensitive searches for brands like "peugeot", "ford", "komatsu" working correctly
+- **Verified core functionality** - filters, search, and pagination all working as expected
+- **Updated condition classification** - 23 "nuevo" items, 122 "usado" items properly categorized

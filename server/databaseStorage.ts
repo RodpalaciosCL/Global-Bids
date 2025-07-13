@@ -223,12 +223,12 @@ export class DatabaseStorage implements IStorage {
     const conditions = [];
     
     if (search) {
-      const searchLower = `%${search.toLowerCase()}%`;
+      const searchTerm = `%${search}%`;
       conditions.push(
         or(
-          like(machinery.name, searchLower),
-          like(machinery.description, searchLower),
-          like(machinery.brand, searchLower)
+          sql`${machinery.name} ILIKE ${searchTerm}`,
+          sql`${machinery.description} ILIKE ${searchTerm}`,
+          sql`${machinery.brand} ILIKE ${searchTerm}`
         )
       );
     }
