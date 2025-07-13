@@ -247,15 +247,52 @@ export function CatalogSection() {
   // Build query URL with parameters (removed price filters)
   const buildQueryUrl = () => {
     const params = new URLSearchParams();
-    if (filters.search) params.append('search', filters.search);
     
-    // Map Spanish filter values to English database values
+    // Handle search with intelligent keyword mapping
+    let searchTerm = filters.search || '';
+    
+    // When filtering by specific equipment types, add relevant keywords to search
     if (filters.type) {
       const mappedType = mapFilterToDbValue(filters.type);
       console.log(`🗂️ Mapeando filtro: '${filters.type}' -> '${mappedType}'`);
-      params.append('type', mappedType);
+      
+      // If mapping to 'machinery', add specific keywords to search instead
+      if (mappedType === 'machinery') {
+        const keywordMap: Record<string, string> = {
+          'camion': 'truck',
+          'camion-tolva': 'dump truck haul truck rock truck',
+          'tolva': 'dump trailer tri-axle dumper',
+          'autobus': 'bus',
+          'remolque': 'trailer',
+          'mezcladora': 'concrete mixer',
+          'tractor': 'tractor',
+          'bulldozer': 'bulldozer dozer',
+          'grua': 'crane',
+          'motoniveladora': 'motor grader grader',
+          'rodillo': 'roller',
+          'compresor': 'compressor',
+          'manipulador-telescopico': 'telehandler',
+          'vehiculo-golf': 'golf cart',
+          'perforadora': 'drill',
+          'repuesto': 'attachment tooth rake',
+          'implemento': 'attachment',
+          'camioneta': 'pickup cherokee explorer peugeot landtrek'
+        };
+        
+        const keywords = keywordMap[filters.type];
+        if (keywords) {
+          searchTerm = searchTerm ? `${searchTerm} ${keywords}` : keywords;
+          console.log(`🔍 Added keywords to search: '${keywords}'`);
+          // Still set the type filter to machinery
+          params.append('type', mappedType);
+        }
+      } else {
+        // For exact types like excavator, loader, use direct type filter
+        params.append('type', mappedType);
+      }
     }
     
+    if (searchTerm) params.append('search', searchTerm);
     if (filters.brand) params.append('brand', filters.brand);
     if (filters.year) params.append('year', filters.year);
     if (filters.condition) params.append('condition', filters.condition);
@@ -303,116 +340,9 @@ export function CatalogSection() {
     translatedName: translateMachineryName(item.name, language)
   }));
   
-  // Apply client-side type filter based on intelligent classification
-  if (filters.type) {
-    console.log(`🔧 Aplicando filtro: ${filters.type}`);
-    console.log(`📊 Items antes del filtro: ${machinery.length}`);
-    
-    machinery = machinery.filter(item => {
-      // Use intelligent classification as primary filter
-      const correctType = item.correctType;
-      
-      // Debug para cada item
-      if (machinery.indexOf(item) < 3) { // Solo los primeros 3 para no saturar logs
-        console.log(`Item: ${item.name.substring(0, 30)}..., correctType: ${correctType}, originalType: ${item.type}`);
-      }
-      
-      // Direct match with intelligent classification
-      if (correctType === filters.type) return true;
-      
-      // Additional title-based filtering for precision
-      const titleLower = item.name.toLowerCase();
-      
-      switch (filters.type) {
-        case 'camion':
-          // General trucks (not tolva, not bus, not specific vehicles)
-          return (item.type === 'truck' || correctType === 'camion') && 
-                 !titleLower.includes('tolva') && 
-                 !titleLower.includes('dump') && 
-                 !titleLower.includes('bus') &&
-                 !titleLower.includes('cherokee') &&
-                 !titleLower.includes('explorer') &&
-                 !titleLower.includes('peugeot');
-        
-        case 'camion-tolva':
-          // Dump trucks, haul trucks, rock trucks
-          return titleLower.includes('tolva') || 
-                 titleLower.includes('dump truck') || 
-                 titleLower.includes('haul truck') || 
-                 titleLower.includes('rock truck') ||
-                 correctType === 'camion-tolva';
-        
-        case 'tolva':
-          // Dump trailers, dumpers, tolvas
-          return titleLower.includes('dump trailer') || 
-                 titleLower.includes('dumper') ||
-                 titleLower.includes('tri-axle') ||
-                 correctType === 'tolva';
-        
-        case 'autobus':
-          // All buses
-          return titleLower.includes('bus') || 
-                 titleLower.includes('autobús') ||
-                 correctType === 'autobus';
-        
-        case 'camioneta':
-          // Pickup trucks and passenger vehicles
-          return titleLower.includes('cherokee') || 
-                 titleLower.includes('explorer') || 
-                 titleLower.includes('peugeot') || 
-                 titleLower.includes('pickup') ||
-                 titleLower.includes('landtrek') ||
-                 correctType === 'camioneta';
-        
-        case 'excavadora':
-          return titleLower.includes('excavator') || correctType === 'excavadora';
-        
-        case 'cargador':
-          return titleLower.includes('loader') || correctType === 'cargador';
-        
-        case 'motoniveladora':
-          return titleLower.includes('motor grader') || titleLower.includes('grader') || correctType === 'motoniveladora';
-        
-        case 'rodillo':
-          return titleLower.includes('roller') || correctType === 'rodillo';
-        
-        case 'remolque':
-          return titleLower.includes('trailer') && !titleLower.includes('dump trailer') || correctType === 'remolque';
-        
-        case 'compresor':
-          return titleLower.includes('compressor') || correctType === 'compresor';
-        
-        case 'manipulador-telescopico':
-          return titleLower.includes('telehandler') || correctType === 'manipulador-telescopico';
-        
-        case 'vehiculo-golf':
-          return titleLower.includes('golf cart') || correctType === 'vehiculo-golf';
-        
-        case 'mezcladora':
-          return titleLower.includes('concrete mixer') || correctType === 'mezcladora';
-        
-        case 'repuesto':
-          return titleLower.includes('attachment') || 
-                 titleLower.includes('tooth') || 
-                 titleLower.includes('rake') ||
-                 correctType === 'repuesto';
-        
-        case 'grua':
-          return titleLower.includes('crane') || titleLower.includes('grúa') || correctType === 'grua';
-        
-        case 'bulldozer':
-          return titleLower.includes('bulldozer') || titleLower.includes('dozer') || correctType === 'bulldozer';
-        
-        case 'tractor':
-          return titleLower.includes('tractor') && !titleLower.includes('sleeper') || correctType === 'tractor';
-        
-        default:
-          return item.type === filters.type || correctType === filters.type;
-      }
-    });
-    
-    console.log(`📊 Items después del filtro: ${machinery.length}`);
-  }
+  // NO CLIENT-SIDE FILTERING - Let backend handle everything
+  console.log(`📊 Total items received from backend: ${machinery.length}`);
+
   
   const totalPages = machineryData?.totalPages || 1;
 

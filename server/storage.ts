@@ -35,7 +35,9 @@ export interface IStorage {
     condition?: string,
     sortBy?: string,
     page?: number,
-    limit?: number
+    limit?: number,
+    auctionPage?: number,
+    specificFilter?: string // New parameter for specific equipment filtering
   ): Promise<{ items: Machinery[], total: number, totalPages: number }>;
   getFeaturedMachinery(): Promise<Machinery[]>;
   createMachinery(machinery: InsertMachinery): Promise<Machinery>;
@@ -131,7 +133,15 @@ export class MemStorage implements IStorage {
     }
     
     if (type) {
-      filtered = filtered.filter(item => item.type === type);
+      // If type is 'machinery', we need to do intelligent filtering by keywords
+      if (type === 'machinery') {
+        // For 'machinery' type, we need additional context to filter properly
+        // This will be enhanced with specific keyword filtering
+        filtered = filtered.filter(item => item.type === type);
+      } else {
+        // For specific types like 'excavator', 'loader', do exact match
+        filtered = filtered.filter(item => item.type === type);
+      }
     }
     
     if (brand) {
