@@ -291,10 +291,7 @@ export function MachineryCard({ item, index }: MachineryCardProps) {
         
         <p className="text-gray-600 text-sm mb-4">{description}</p>
         
-        <div className="flex justify-between items-center">
-          <button className="text-primary hover:text-secondary font-medium transition">
-            <i className="far fa-heart mr-1"></i> {language === 'es' ? 'Guardar' : 'Save'}
-          </button>
+        <div className="flex justify-end items-center">
           <a 
             href={`/machinery/${id}`} 
             className="inline-block bg-primary hover:bg-primary-light text-white font-medium px-4 py-2 rounded transition duration-300"

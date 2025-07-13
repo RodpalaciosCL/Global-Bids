@@ -8,6 +8,7 @@ import { Machinery } from '@shared/schema';
 import { useEffect, useState, useCallback } from 'react';
 import { apiRequest } from '@/lib/queryClient';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { useRegistration } from '@/contexts/RegistrationContext';
 
 // Function to get type label in correct language
 function getTypeLabel(type: string, language: string): string {
@@ -179,6 +180,21 @@ export default function MachineryDetail() {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const { language, t } = useLanguage();
+  const { openForm } = useRegistration();
+  
+  // Functions for button actions
+  const handleOpenRegistration = () => {
+    openForm();
+  };
+  
+  const handleContactConsultant = () => {
+    const phoneNumber = "56994275157";
+    const message = language === 'es' 
+      ? `Hola, estoy interesado en el lote "${machinery?.name}" de la subasta del 15 de julio. ¿Podrían darme más información?`
+      : `Hello, I'm interested in the lot "${machinery?.name}" from the July 15 auction. Could you give me more information?`;
+    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+    window.open(whatsappUrl, '_blank');
+  };
   
   // Scroll to top on page load - smooth scroll to prevent jarring movement
   useEffect(() => {
@@ -421,11 +437,18 @@ export default function MachineryDetail() {
               
               {/* Action Buttons */}
               <div className="grid gap-2 mb-3">
-                <Button className="bg-primary hover:bg-primary/90 w-full py-2 h-auto text-sm">
+                <Button 
+                  className="bg-primary hover:bg-primary/90 w-full py-2 h-auto text-sm"
+                  onClick={handleOpenRegistration}
+                >
                   <i className="fas fa-gavel mr-1"></i>
                   {language === 'en' ? 'Register for auction' : 'Registrarse para subasta'}
                 </Button>
-                <Button variant="outline" className="border-gray-300 w-full py-2 h-auto text-sm">
+                <Button 
+                  variant="outline" 
+                  className="border-gray-300 w-full py-2 h-auto text-sm"
+                  onClick={handleContactConsultant}
+                >
                   <i className="fas fa-phone-alt mr-1"></i>
                   {language === 'en' ? 'Contact consultant' : 'Contactar consultor'}
                 </Button>
