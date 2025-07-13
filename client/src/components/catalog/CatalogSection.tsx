@@ -269,7 +269,13 @@ export function CatalogSection() {
   const buildQueryUrl = () => {
     const params = new URLSearchParams();
     if (filters.search) params.append('search', filters.search);
-    if (filters.type) params.append('type', filters.type);
+    
+    // Map Spanish filter values to English database values
+    if (filters.type) {
+      const mappedType = mapFilterToDbValue(filters.type);
+      params.append('type', mappedType);
+    }
+    
     if (filters.brand) params.append('brand', filters.brand);
     if (filters.year) params.append('year', filters.year);
     if (filters.condition) params.append('condition', filters.condition);

@@ -64,6 +64,14 @@ function translateMachineryName(englishName: string, language: string): string {
     'Peugeot': 'Peugeot',
     'Landtrek': 'Landtrek',
     'Armored Car': 'Vehículo Blindado',
+    'Mini Golf Cart': 'Mini Carrito de Golf',
+    
+    // Spare parts / Attachments
+    'Ripper Tooth': 'Diente Desgarrador',
+    'Rake Attachment': 'Implemento de Rastrillo',
+    'New Ir': 'Nuevo',
+    'Attachment': 'Implemento',
+    'Spare Part': 'Repuesto',
     
     // Common words
     'Unused': 'Sin Usar',
@@ -79,6 +87,11 @@ function translateMachineryName(englishName: string, language: string): string {
   };
   
   let translatedName = englishName;
+  
+  // Handle specific patterns first
+  translatedName = translatedName.replace(/New Ir(\d+) Mini Golf Cart/gi, 'Nuevo Irgc$1 Mini Carrito de Golf');
+  translatedName = translatedName.replace(/New Ir Ripper Tooth/gi, 'Nuevo Diente Desgarrador Ir');
+  translatedName = translatedName.replace(/New Ir Rake Attachment/gi, 'Nuevo Implemento de Rastrillo Ir');
   
   // Apply translations
   Object.entries(translations).forEach(([english, spanish]) => {
