@@ -105,7 +105,7 @@ function mapFilterToDbValue(filterValue: string): string {
     'carrito-golf': 'machinery',        // Golf carts now in machinery
     'rodillo': 'machinery',
     'manipulador-telescopico': 'machinery',
-    'camioneta': 'machinery',
+    'vehiculo': 'machinery',            // Changed from 'camioneta' to 'vehiculo'
     'compresor': 'machinery',
     'grua': 'machinery',
     'tractor': 'machinery',
@@ -115,6 +115,8 @@ function mapFilterToDbValue(filterValue: string): string {
     'tolva': 'machinery',
     'mezcladora': 'machinery',
     'repuesto': 'machinery',
+    'perforadora': 'machinery',
+    'minicargador': 'machinery',
     'maquinaria-general': 'machinery'
   };
   
@@ -259,22 +261,24 @@ export function CatalogSection() {
       // If mapping to 'machinery', add specific keywords to search instead
       if (mappedType === 'machinery') {
         const keywordMap: Record<string, string> = {
-          'camion': 'truck mixer sleeper concrete dump haul rock rigid',
+          'camion': 'truck mixer sleeper concrete water fuel refrigerated',
           'camion-tolva': 'dump truck haul truck rock truck rigid articulated',
           'motoniveladora': 'motor grader grader',
           'carrito-golf': 'golf cart irgc40',
-          'rodillo': 'roller',
-          'manipulador-telescopico': 'telehandler',
-          'camioneta': 'explorer peugeot cherokee landtrek pickup armored',
-          'compresor': 'compressor generator',
-          'grua': 'crane',
+          'rodillo': 'roller drum',
+          'manipulador-telescopico': 'telehandler telescopic',
+          'vehiculo': 'explorer peugeot cherokee landtrek pickup armored car',
+          'compresor': 'compressor tow behind',
+          'grua': 'crane mobile',
           'tractor': 'tractor john deere',
-          'remolque': 'trailer lowbed dump',
+          'remolque': 'trailer lowbed tri-axle',
           'bulldozer': 'bulldozer dozer',
-          'autobus': 'bus autobus',
+          'autobus': 'bus sprinter taxi mini',
           'tolva': 'dump trailer tri-axle dumper',
-          'mezcladora': 'concrete mixer',
-          'repuesto': 'ripper tooth rake attachment',
+          'mezcladora': 'concrete mixer carmix',
+          'repuesto': 'ripper tooth rake attachment toilet body',
+          'perforadora': 'drill vertical industrial',
+          'minicargador': 'skidsteer',
           'maquinaria-general': '' // No specific keywords, will show all machinery
         };
         
@@ -497,20 +501,26 @@ export function CatalogSection() {
                     value={filters.type || ""}
                   >
                     <option value="">{language === 'es' ? 'Todas las familias' : 'All families'}</option>
-                    <option value="excavadora">{language === 'es' ? 'Excavadora (39)' : 'Excavator (39)'}</option>
-                    <option value="camion">{language === 'es' ? 'Camión (30)' : 'Truck (30)'}</option>
-                    <option value="cargador">{language === 'es' ? 'Cargador (22)' : 'Loader (22)'}</option>
-                    <option value="maquinaria-general">{language === 'es' ? 'Maquinaria General (15)' : 'General Machinery (15)'}</option>
-                    <option value="camion-tolva">{language === 'es' ? 'Camión Tolva (12)' : 'Dump Truck (12)'}</option>
-                    <option value="motoniveladora">{language === 'es' ? 'Motoniveladora (9)' : 'Motor Grader (9)'}</option>
-                    <option value="carrito-golf">{language === 'es' ? 'Carrito Golf (6)' : 'Golf Cart (6)'}</option>
-                    <option value="rodillo">{language === 'es' ? 'Rodillo (5)' : 'Roller (5)'}</option>
-                    <option value="manipulador-telescopico">{language === 'es' ? 'Manipulador Telescópico (5)' : 'Telehandler (5)'}</option>
-                    <option value="camioneta">{language === 'es' ? 'Camioneta (3)' : 'Pickup/Vehicle (3)'}</option>
-                    <option value="compresor">{language === 'es' ? 'Compresor (2)' : 'Compressor (2)'}</option>
+                    <option value="excavadora">{language === 'es' ? 'Excavadora (37)' : 'Excavator (37)'}</option>
+                    <option value="cargador">{language === 'es' ? 'Cargador (18)' : 'Loader (18)'}</option>
+                    <option value="bulldozer">{language === 'es' ? 'Bulldozer (9)' : 'Bulldozer (9)'}</option>
+                    <option value="camion-tolva">{language === 'es' ? 'Camión Tolva (8)' : 'Dump Truck (8)'}</option>
+                    <option value="motoniveladora">{language === 'es' ? 'Motoniveladora (7)' : 'Motor Grader (7)'}</option>
+                    <option value="camion">{language === 'es' ? 'Camión (6)' : 'Truck (6)'}</option>
+                    <option value="autobus">{language === 'es' ? 'Autobús (5)' : 'Bus (5)'}</option>
+                    <option value="carrito-golf">{language === 'es' ? 'Carrito Golf (4)' : 'Golf Cart (4)'}</option>
+                    <option value="rodillo">{language === 'es' ? 'Rodillo (4)' : 'Roller (4)'}</option>
+                    <option value="manipulador-telescopico">{language === 'es' ? 'Manipulador Telescópico (3)' : 'Telehandler (3)'}</option>
+                    <option value="vehiculo">{language === 'es' ? 'Vehículo (3)' : 'Vehicle (3)'}</option>
+                    <option value="repuesto">{language === 'es' ? 'Repuestos/Accesorios (8)' : 'Parts/Attachments (8)'}</option>
                     <option value="grua">{language === 'es' ? 'Grúa (1)' : 'Crane (1)'}</option>
                     <option value="tractor">{language === 'es' ? 'Tractor (1)' : 'Tractor (1)'}</option>
-                    <option value="remolque">{language === 'es' ? 'Remolque (1)' : 'Trailer (1)'}</option>
+                    <option value="perforadora">{language === 'es' ? 'Perforadora (2)' : 'Drill (2)'}</option>
+                    <option value="compresor">{language === 'es' ? 'Compresor (1)' : 'Compressor (1)'}</option>
+                    <option value="minicargador">{language === 'es' ? 'Minicargador (1)' : 'Skidsteer (1)'}</option>
+                    <option value="remolque">{language === 'es' ? 'Remolque (2)' : 'Trailer (2)'}</option>
+                    <option value="mezcladora">{language === 'es' ? 'Mezcladora (1)' : 'Concrete Mixer (1)'}</option>
+                    <option value="maquinaria-general">{language === 'es' ? 'Maquinaria General (27)' : 'General Machinery (27)'}</option>
                   </select>
                 </div>
                 
@@ -566,20 +576,25 @@ export function CatalogSection() {
                     value={filters.type || ""}
                   >
                     <option value="">{language === 'es' ? 'Todas las familias' : 'All families'}</option>
-                    <option value="excavadora">{language === 'es' ? 'Excavadora (39)' : 'Excavator (39)'}</option>
-                    <option value="camion">{language === 'es' ? 'Camión (30)' : 'Truck (30)'}</option>
-                    <option value="cargador">{language === 'es' ? 'Cargador (22)' : 'Loader (22)'}</option>
-                    <option value="maquinaria-general">{language === 'es' ? 'Maquinaria General (15)' : 'General Machinery (15)'}</option>
-                    <option value="camion-tolva">{language === 'es' ? 'Camión Tolva (12)' : 'Dump Truck (12)'}</option>
-                    <option value="motoniveladora">{language === 'es' ? 'Motoniveladora (9)' : 'Motor Grader (9)'}</option>
-                    <option value="carrito-golf">{language === 'es' ? 'Carrito Golf (6)' : 'Golf Cart (6)'}</option>
-                    <option value="rodillo">{language === 'es' ? 'Rodillo (5)' : 'Roller (5)'}</option>
+                    <option value="excavadora">{language === 'es' ? 'Excavadora (35)' : 'Excavator (35)'}</option>
+                    <option value="cargador">{language === 'es' ? 'Cargador (20)' : 'Loader (20)'}</option>
+                    <option value="camion-tolva">{language === 'es' ? 'Camión Tolva (15)' : 'Dump Truck (15)'}</option>
+                    <option value="bulldozer">{language === 'es' ? 'Bulldozer (12)' : 'Bulldozer (12)'}</option>
+                    <option value="motoniveladora">{language === 'es' ? 'Motoniveladora (11)' : 'Motor Grader (11)'}</option>
+                    <option value="camion">{language === 'es' ? 'Camión (8)' : 'Truck (8)'}</option>
+                    <option value="tractor">{language === 'es' ? 'Tractor (7)' : 'Tractor (7)'}</option>
+                    <option value="repuesto">{language === 'es' ? 'Repuestos/Accesorios (7)' : 'Parts/Attachments (7)'}</option>
                     <option value="manipulador-telescopico">{language === 'es' ? 'Manipulador Telescópico (5)' : 'Telehandler (5)'}</option>
-                    <option value="camioneta">{language === 'es' ? 'Camioneta (3)' : 'Pickup/Vehicle (3)'}</option>
+                    <option value="rodillo">{language === 'es' ? 'Rodillo (5)' : 'Roller (5)'}</option>
+                    <option value="autobus">{language === 'es' ? 'Autobús (5)' : 'Bus (5)'}</option>
+                    <option value="carrito-golf">{language === 'es' ? 'Carrito Golf (4)' : 'Golf Cart (4)'}</option>
+                    <option value="vehiculo">{language === 'es' ? 'Vehículo (3)' : 'Vehicle (3)'}</option>
+                    <option value="remolque">{language === 'es' ? 'Remolque (3)' : 'Trailer (3)'}</option>
+                    <option value="perforadora">{language === 'es' ? 'Perforadora (2)' : 'Drill (2)'}</option>
                     <option value="compresor">{language === 'es' ? 'Compresor (2)' : 'Compressor (2)'}</option>
                     <option value="grua">{language === 'es' ? 'Grúa (1)' : 'Crane (1)'}</option>
-                    <option value="tractor">{language === 'es' ? 'Tractor (1)' : 'Tractor (1)'}</option>
-                    <option value="remolque">{language === 'es' ? 'Remolque (1)' : 'Trailer (1)'}</option>
+                    <option value="minicargador">{language === 'es' ? 'Minicargador (1)' : 'Skidsteer (1)'}</option>
+                    <option value="maquinaria-general">{language === 'es' ? 'Maquinaria General (2)' : 'General Machinery (2)'}</option>
                   </select>
                 </div>
 
