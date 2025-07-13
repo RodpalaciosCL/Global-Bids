@@ -498,23 +498,10 @@ export function CatalogSection() {
                     value={filters.type || ""}
                   >
                     <option value="">{language === 'es' ? 'Todas las familias' : 'All families'}</option>
-                    <option value="truck">{language === 'es' ? 'Camión (30)' : 'Truck (30)'}</option>
-                    <option value="excavator">{language === 'es' ? 'Excavadora (26)' : 'Excavator (26)'}</option>
-                    <option value="loader">{language === 'es' ? 'Cargador (20)' : 'Loader (20)'}</option>
-                    <option value="bulldozer">{language === 'es' ? 'Bulldozer (12)' : 'Bulldozer (12)'}</option>
-                    <option value="grader">{language === 'es' ? 'Motoniveladora (9)' : 'Grader (9)'}</option>
-                    <option value="attachment">{language === 'es' ? 'Implemento (6)' : 'Attachment (6)'}</option>
-                    <option value="bus">{language === 'es' ? 'Autobús (5)' : 'Bus (5)'}</option>
-                    <option value="roller">{language === 'es' ? 'Rodillo (5)' : 'Roller (5)'}</option>
-                    <option value="telehandler">{language === 'es' ? 'Manipulador Telescópico (5)' : 'Telehandler (5)'}</option>
-                    <option value="dump_truck">{language === 'es' ? 'Camión Tolva (4)' : 'Dump Truck (4)'}</option>
-                    <option value="golf_cart">{language === 'es' ? 'Carrito Golf (4)' : 'Golf Cart (4)'}</option>
-                    <option value="vehicle">{language === 'es' ? 'Vehículo (3)' : 'Vehicle (3)'}</option>
-                    <option value="compressor">{language === 'es' ? 'Compresor (2)' : 'Compressor (2)'}</option>
-                    <option value="drill">{language === 'es' ? 'Perforadora (2)' : 'Drill (2)'}</option>
-                    <option value="crane">{language === 'es' ? 'Grúa (1)' : 'Crane (1)'}</option>
-                    <option value="tractor">{language === 'es' ? 'Tractor (1)' : 'Tractor (1)'}</option>
-                    <option value="trailer">{language === 'es' ? 'Remolque (1)' : 'Trailer (1)'}</option>
+                    <option value="machinery">{language === 'es' ? 'Maquinaria General (84)' : 'General Machinery (84)'}</option>
+                    <option value="excavator">{language === 'es' ? 'Excavadora (34)' : 'Excavator (34)'}</option>
+                    <option value="loader">{language === 'es' ? 'Cargador (22)' : 'Loader (22)'}</option>
+                    <option value="mini-excavator">{language === 'es' ? 'Mini Excavadora (5)' : 'Mini Excavator (5)'}</option>
                   </select>
                 </div>
                 
@@ -570,23 +557,10 @@ export function CatalogSection() {
                     value={filters.type || ""}
                   >
                     <option value="">{language === 'es' ? 'Todas las familias' : 'All families'}</option>
-                    <option value="truck">{language === 'es' ? 'Camión (30)' : 'Truck (30)'}</option>
-                    <option value="excavator">{language === 'es' ? 'Excavadora (26)' : 'Excavator (26)'}</option>
-                    <option value="loader">{language === 'es' ? 'Cargador (20)' : 'Loader (20)'}</option>
-                    <option value="bulldozer">{language === 'es' ? 'Bulldozer (12)' : 'Bulldozer (12)'}</option>
-                    <option value="grader">{language === 'es' ? 'Motoniveladora (9)' : 'Grader (9)'}</option>
-                    <option value="attachment">{language === 'es' ? 'Implemento (6)' : 'Attachment (6)'}</option>
-                    <option value="bus">{language === 'es' ? 'Autobús (5)' : 'Bus (5)'}</option>
-                    <option value="roller">{language === 'es' ? 'Rodillo (5)' : 'Roller (5)'}</option>
-                    <option value="telehandler">{language === 'es' ? 'Manipulador Telescópico (5)' : 'Telehandler (5)'}</option>
-                    <option value="dump_truck">{language === 'es' ? 'Camión Tolva (4)' : 'Dump Truck (4)'}</option>
-                    <option value="golf_cart">{language === 'es' ? 'Carrito Golf (4)' : 'Golf Cart (4)'}</option>
-                    <option value="vehicle">{language === 'es' ? 'Vehículo (3)' : 'Vehicle (3)'}</option>
-                    <option value="compressor">{language === 'es' ? 'Compresor (2)' : 'Compressor (2)'}</option>
-                    <option value="drill">{language === 'es' ? 'Perforadora (2)' : 'Drill (2)'}</option>
-                    <option value="crane">{language === 'es' ? 'Grúa (1)' : 'Crane (1)'}</option>
-                    <option value="tractor">{language === 'es' ? 'Tractor (1)' : 'Tractor (1)'}</option>
-                    <option value="trailer">{language === 'es' ? 'Remolque (1)' : 'Trailer (1)'}</option>
+                    <option value="machinery">{language === 'es' ? 'Maquinaria General (84)' : 'General Machinery (84)'}</option>
+                    <option value="excavator">{language === 'es' ? 'Excavadora (34)' : 'Excavator (34)'}</option>
+                    <option value="loader">{language === 'es' ? 'Cargador (22)' : 'Loader (22)'}</option>
+                    <option value="mini-excavator">{language === 'es' ? 'Mini Excavadora (5)' : 'Mini Excavator (5)'}</option>
                   </select>
                 </div>
 
