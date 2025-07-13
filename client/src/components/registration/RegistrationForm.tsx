@@ -28,21 +28,37 @@ export function RegistrationForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
 
-  // Opciones de interés según el idioma
+  // Opciones de interés según el idioma - categorías de maquinaria específicas
   const interestOptions = language === 'es' 
     ? [
-      { id: 'machinery', label: 'Maquinaria Pesada' },
-      { id: 'parts', label: 'Repuestos' },
-      { id: 'tools', label: 'Herramientas' },
-      { id: 'auction', label: 'Subastas' },
-      { id: 'rental', label: 'Alquiler' },
+      { id: 'maquinaria-general', label: 'Maquinaria General' },
+      { id: 'excavadoras', label: 'Excavadoras' },
+      { id: 'bulldozer', label: 'Bulldozer' },
+      { id: 'cargadores', label: 'Cargadores' },
+      { id: 'tractores', label: 'Tractores' },
+      { id: 'camionetas', label: 'Camionetas' },
+      { id: 'camiones', label: 'Camiones' },
+      { id: 'camiones-tolva', label: 'Camiones Tolva' },
+      { id: 'rodillos', label: 'Rodillos' },
+      { id: 'gruas', label: 'Grúas' },
+      { id: 'motoniveladoras', label: 'Motoniveladoras' },
+      { id: 'repuestos', label: 'Repuestos' },
+      { id: 'implementos', label: 'Implementos y Herramientas' },
     ]
     : [
-      { id: 'machinery', label: 'Heavy Machinery' },
-      { id: 'parts', label: 'Spare Parts' },
-      { id: 'tools', label: 'Tools' },
-      { id: 'auction', label: 'Auctions' },
-      { id: 'rental', label: 'Rental' },
+      { id: 'maquinaria-general', label: 'General Machinery' },
+      { id: 'excavadoras', label: 'Excavators' },
+      { id: 'bulldozer', label: 'Bulldozers' },
+      { id: 'cargadores', label: 'Loaders' },
+      { id: 'tractores', label: 'Tractors' },
+      { id: 'camionetas', label: 'Pickup Trucks' },
+      { id: 'camiones', label: 'Trucks' },
+      { id: 'camiones-tolva', label: 'Dump Trucks' },
+      { id: 'rodillos', label: 'Rollers' },
+      { id: 'gruas', label: 'Cranes' },
+      { id: 'motoniveladoras', label: 'Motor Graders' },
+      { id: 'repuestos', label: 'Spare Parts' },
+      { id: 'implementos', label: 'Attachments & Tools' },
     ];
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -65,34 +81,62 @@ export function RegistrationForm() {
     });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (currentStep < 3) {
       setCurrentStep(prev => prev + 1);
       return;
     }
 
-    // Simulamos el envío del formulario
+    // Envío real del formulario
     setIsSubmitting(true);
-    setTimeout(() => {
+    
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          type: 'registration',
+          name: formData.name,
+          company: formData.company,
+          email: formData.email,
+          phone: formData.phone,
+          interests: formData.interests,
+          subject: 'Nuevo contacto de registro'
+        }),
+      });
+
+      if (response.ok) {
+        setIsSubmitting(false);
+        setIsSuccess(true);
+        
+        // Reseteamos el formulario después de unos segundos
+        setTimeout(() => {
+          setIsSuccess(false);
+          setCurrentStep(1);
+          setFormData({
+            name: '',
+            company: '',
+            email: '',
+            phone: '',
+            interests: [],
+            acceptTerms: false,
+          });
+          closeForm();
+        }, 3000);
+      } else {
+        throw new Error('Error en el envío');
+      }
+    } catch (error) {
+      console.error('Error sending registration:', error);
       setIsSubmitting(false);
-      setIsSuccess(true);
-      
-      // Reseteamos el formulario después de unos segundos
-      setTimeout(() => {
-        setIsSuccess(false);
-        setCurrentStep(1);
-        setFormData({
-          name: '',
-          company: '',
-          email: '',
-          phone: '',
-          interests: [],
-          acceptTerms: false,
-        });
-        closeForm();
-      }, 3000);
-    }, 1500);
+      // En caso de error, mostrar mensaje pero no resetear el formulario
+      alert(language === 'es' 
+        ? 'Error al enviar el formulario. Por favor intente nuevamente.' 
+        : 'Error sending form. Please try again.');
+    }
   };
 
   const isFormValid = () => {
@@ -252,12 +296,12 @@ export function RegistrationForm() {
                   className="space-y-4"
                 >
                   <h3 className="font-bold text-lg text-gray-800">
-                    {language === 'es' ? 'Áreas de Interés' : 'Areas of Interest'}
+                    {language === 'es' ? 'Interés en:' : 'Interest in:'}
                   </h3>
                   <p className="text-gray-600 text-sm">
                     {language === 'es' 
-                      ? 'Seleccione las áreas en las que está interesado(a)' 
-                      : 'Select the areas you are interested in'}
+                      ? 'Seleccione las categorías de maquinaria que le interesan' 
+                      : 'Select the machinery categories you are interested in'}
                   </p>
                   
                   <div className="space-y-3">

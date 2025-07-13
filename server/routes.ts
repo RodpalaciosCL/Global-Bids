@@ -116,38 +116,90 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // ─────────────── CONTACT FORM ───────────────
   app.post("/api/contact", async (req, res) => {
     try {
-      // 1. Validate body
-      const validatedData = insertContactSchema.parse(req.body);
+      const { type, interests, ...data } = req.body;
+      
+      if (type === 'registration') {
+        // Handle registration form
+        const registrationData = { ...data, interests: JSON.stringify(interests) };
+        const validatedData = insertRegistrationSchema.parse(registrationData);
+        const registration = await storage.createRegistration(validatedData);
 
-      // 2. Store in DB
-      const contact = await storage.createContact(validatedData);
+        // Get interest labels in Spanish
+        const interestLabels = interests?.map((id: string) => {
+          const labels: Record<string, string> = {
+            'maquinaria-general': 'Maquinaria General',
+            'excavadoras': 'Excavadoras',
+            'bulldozer': 'Bulldozer',
+            'cargadores': 'Cargadores',
+            'tractores': 'Tractores',
+            'camionetas': 'Camionetas',
+            'camiones': 'Camiones',
+            'camiones-tolva': 'Camiones Tolva',
+            'rodillos': 'Rodillos',
+            'gruas': 'Grúas',
+            'motoniveladoras': 'Motoniveladoras',
+            'repuestos': 'Repuestos',
+            'implementos': 'Implementos y Herramientas'
+          };
+          return labels[id] || id;
+        }) || [];
 
-      // 3. Compose HTML email
-      const htmlBody = `
-        <h2>Nuevo mensaje desde el formulario</h2>
-        <p><strong>Nombre:</strong> ${contact.name}</p>
-        <p><strong>Email:</strong> ${contact.email}</p>
-        <p><strong>Teléfono:</strong> ${contact.phone || "No indicado"}</p>
-        <p><strong>Mensaje:</strong><br>${contact.message}</p>
-      `;
+        // Compose registration email
+        const htmlBody = `
+          <h2>Nuevo contacto de registro</h2>
+          <p><strong>Nombre:</strong> ${registration.name}</p>
+          <p><strong>Empresa:</strong> ${registration.company || "No indicado"}</p>
+          <p><strong>Email:</strong> ${registration.email}</p>
+          <p><strong>Teléfono:</strong> ${registration.phone || "No indicado"}</p>
+          <p><strong>Intereses:</strong><br>${interestLabels.join(', ')}</p>
+          <p><em>Registro realizado para participar en subastas de maquinaria</em></p>
+        `;
 
       // 4. Send through Office 365
       const info = await smtp.sendMail({
         from: '"Global Bids Web" <contacto@theglobalbid.com>',
         to: "contacto@theglobalbid.com",
-        subject: `Nuevo contacto – ${contact.subject ?? "Sin asunto"}`,
+        subject: "Nuevo contacto de registro",
         html: htmlBody,
       });
 
-      console.log(`✅ Correo enviado → ${info.messageId}`);
+        console.log(`✅ Correo de registro enviado → ${info.messageId}`);
 
-      // Pequeño delay UX
-      await new Promise((r) => setTimeout(r, 800));
+        await new Promise((r) => setTimeout(r, 800));
 
-      res.status(201).json({
-        message: "Contact form submitted successfully",
-        contactId: contact.id,
-      });
+        res.status(201).json({
+          message: "Registration submitted successfully",
+          registrationId: registration.id,
+        });
+      } else {
+        // Handle regular contact form
+        const validatedData = insertContactSchema.parse(data);
+        const contact = await storage.createContact(validatedData);
+
+        const htmlBody = `
+          <h2>Nuevo mensaje desde el formulario</h2>
+          <p><strong>Nombre:</strong> ${contact.name}</p>
+          <p><strong>Email:</strong> ${contact.email}</p>
+          <p><strong>Teléfono:</strong> ${contact.phone || "No indicado"}</p>
+          <p><strong>Mensaje:</strong><br>${contact.message}</p>
+        `;
+
+        const info = await smtp.sendMail({
+          from: '"Global Bids Web" <contacto@theglobalbid.com>',
+          to: "contacto@theglobalbid.com",
+          subject: `Nuevo contacto – ${contact.subject ?? "Sin asunto"}`,
+          html: htmlBody,
+        });
+
+        console.log(`✅ Correo enviado → ${info.messageId}`);
+
+        await new Promise((r) => setTimeout(r, 800));
+
+        res.status(201).json({
+          message: "Contact form submitted successfully",
+          contactId: contact.id,
+        });
+      }
     } catch (error) {
       if (error instanceof z.ZodError) {
         return res
