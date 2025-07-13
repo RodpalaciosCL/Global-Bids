@@ -154,4 +154,6 @@ The application includes proper error boundaries, loading states, and fallback m
 - **Simplified filter logic** - removed complex keyword mapping in favor of direct database type matching
 - **Verified against visual assets** - classifications match actual equipment images provided by user
 - **Comprehensive coverage** - every equipment type from mini excavators to specialized parts properly categorized
-- **Bilingual filter interface** maintained with accurate Spanish/English translations and counts
+- **Complete bilingual translation system** - all equipment types display correctly in Spanish ("Excavadora", "Carrito Golf", "Repuestos") when site is in Spanish, and in English ("Excavator", "Golf Cart", "Parts") when site is in English
+- **All components updated** - MachineryCard, MachineryCardCompact, MachineryDetail all use updated getTypeLabel functions with complete type mappings
+- **Tested and verified** - all filters working correctly with proper counts and multilingual display

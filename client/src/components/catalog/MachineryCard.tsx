@@ -8,33 +8,28 @@ import { ReactNode } from 'react';
 // Function to get type label in correct language
 function getTypeLabel(type: string, language: string): string {
   const typeLabels: Record<string, { es: string; en: string }> = {
-    'vehiculo-golf': { es: 'Vehículo de Golf', en: 'Golf Cart' },
-    'repuesto': { es: 'Repuesto', en: 'Spare Part' },
-    'implemento': { es: 'Implemento', en: 'Attachment' },
-    'camioneta': { es: 'Camioneta', en: 'Pickup Truck' },
-    'tractor': { es: 'Tractor', en: 'Tractor' },
-    'excavadora': { es: 'Excavadora', en: 'Excavator' },
-    'bulldozer': { es: 'Bulldozer', en: 'Bulldozer' },
-    'motoniveladora': { es: 'Motoniveladora', en: 'Motor Grader' },
-    'cargador': { es: 'Cargador', en: 'Wheel Loader' },
-    'camion': { es: 'Camión', en: 'Truck' },
-    'camion-tolva': { es: 'Camión Tolva', en: 'Dump Truck' },
-    'tolva': { es: 'Tolva', en: 'Dump Trailer' },
-    'mezcladora': { es: 'Mezcladora', en: 'Concrete Mixer' },
-    'rodillo': { es: 'Rodillo', en: 'Roller' },
-    'grua': { es: 'Grúa', en: 'Crane' },
-    'autobus': { es: 'Autobús', en: 'Bus' },
-    'remolque': { es: 'Remolque', en: 'Trailer' },
-    'perforadora': { es: 'Perforadora', en: 'Drill' },
-    'manipulador-telescopico': { es: 'Manipulador Telescópico', en: 'Telehandler' },
-    'compresor': { es: 'Compresor', en: 'Compressor' },
-    'mezcladora': { es: 'Mezcladora', en: 'Concrete Mixer' },
-    'rodillo': { es: 'Rodillo', en: 'Roller' },
-    // Fallback to original types
+    // Database types (English keys) - these are the actual database values
     'excavator': { es: 'Excavadora', en: 'Excavator' },
-    'truck': { es: 'Camión', en: 'Truck' },
     'loader': { es: 'Cargador', en: 'Loader' },
-    'machinery': { es: 'Maquinaria', en: 'Machinery' }
+    'dump-truck': { es: 'Camión Tolva', en: 'Dump Truck' },
+    'dozer': { es: 'Bulldozer', en: 'Bulldozer' },
+    'grader': { es: 'Motoniveladora', en: 'Motor Grader' },
+    'parts': { es: 'Repuestos', en: 'Parts' },
+    'truck': { es: 'Camión', en: 'Truck' },
+    'machinery': { es: 'Maquinaria', en: 'Machinery' },
+    'telehandler': { es: 'Manipulador Telescópico', en: 'Telehandler' },
+    'bus': { es: 'Autobús', en: 'Bus' },
+    'roller': { es: 'Rodillo', en: 'Roller' },
+    'golf-cart': { es: 'Carrito Golf', en: 'Golf Cart' },
+    'trailer': { es: 'Remolque', en: 'Trailer' },
+    'vehicle': { es: 'Vehículo', en: 'Vehicle' },
+    'dumper': { es: 'Volquete', en: 'Dumper' },
+    'compressor': { es: 'Compresor', en: 'Compressor' },
+    'drill': { es: 'Perforadora', en: 'Drill' },
+    'mixer': { es: 'Mezcladora', en: 'Concrete Mixer' },
+    'tractor': { es: 'Tractor', en: 'Tractor' },
+    'skidsteer': { es: 'Minicargador', en: 'Skidsteer' },
+    'crane': { es: 'Grúa', en: 'Crane' }
   };
   
   return typeLabels[type]?.[language] || type.charAt(0).toUpperCase() + type.slice(1);
