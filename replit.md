@@ -145,13 +145,13 @@ The application includes proper error boundaries, loading states, and fallback m
 - **Added intelligent equipment classification** to correctly categorize excavators, trucks, generators based on name/description
 - **Connected International Auctions button** to authentic North Country Auctions URL (https://northcountry.auctiontechs.com/auction-detail/174912699568418f53a4cac)
 
-### Comprehensive Classification System Implementation (July 9, 2025)
-- **Intelligent classification engine** analyzes title, description, and visual context for precise equipment categorization
-- **20 specialized categories** including new "Camioneta/Vehículo" family for passenger vehicles (Peugeot, Ford Explorer, Jeep Cherokee)
-- **Consistent Spanish translations** with proper bilingual category labels across all components
-- **Updated filter options** in both mobile and desktop catalog views with all new equipment families
-- **Advanced detection patterns** for golf carts, spare parts, attachments, motor graders, telehandlers, and specialized equipment
-- **Client-side intelligent filtering** using getCorrectType() function for accurate category matching
-- **Applied across all components** - MachineryCard, MachineryCardCompact, MachineryDetail, and CatalogSection
-- **Fixed classification errors** preventing golf carts from showing as excavators, vehicles from showing as trucks
-- **Bilingual type labels** with getTypeLabel() function providing accurate Spanish/English translations
+### Complete Filter System Overhaul (July 13, 2025)
+- **Complete database reclassification** of all 145 equipment items with accurate types based on visual verification
+- **21 distinct equipment categories** now properly mapped: excavator (34), loader (20), dump-truck (15), dozer (12), grader (9), parts (7), truck (7), machinery (6), telehandler (5), bus (5), roller (5), golf-cart (4), trailer (3), vehicle (3), dumper (2), compressor (2), drill (2), mixer (1), tractor (1), skidsteer (1), crane (1)
+- **Direct type mapping system** eliminates complex keyword searches - each Spanish filter value maps directly to exact database type
+- **Fully functional filtering** - all 21 categories now return correct results when selected
+- **Updated filter counts** reflect actual equipment inventory with precise numbers
+- **Simplified filter logic** - removed complex keyword mapping in favor of direct database type matching
+- **Verified against visual assets** - classifications match actual equipment images provided by user
+- **Comprehensive coverage** - every equipment type from mini excavators to specialized parts properly categorized
+- **Bilingual filter interface** maintained with accurate Spanish/English translations and counts
