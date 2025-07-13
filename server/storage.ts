@@ -568,11 +568,13 @@ export class DatabaseStorage implements IStorage {
     }
 
     if (search) {
+      const searchPattern = `%${search}%`;
       conditions.push(
         or(
-          like(machinery.name, `%${search}%`),
-          like(machinery.description, `%${search}%`),
-          like(machinery.brand, `%${search}%`)
+          like(machinery.name, searchPattern),
+          like(machinery.description, searchPattern),
+          like(machinery.brand, searchPattern),
+          like(machinery.type, searchPattern)
         )
       );
     }
