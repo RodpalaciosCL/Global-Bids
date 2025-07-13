@@ -11,6 +11,113 @@ import {
 import { CurrencySelector } from "@/components/ui/CurrencySelector";
 import { useLanguage } from "@/contexts/LanguageContext";
 
+// Translation functions for machinery names and types
+function translateMachineryName(englishName: string, language: string): string {
+  if (language === 'en') return englishName;
+  
+  // Common translations for equipment names
+  const translations: Record<string, string> = {
+    // Excavators
+    'Mini Excavator': 'Mini Excavadora',
+    'Excavator': 'Excavadora',
+    'Compact Excavator': 'Excavadora Compacta',
+    'Wheel Excavator': 'Excavadora de Ruedas',
+    
+    // Trucks
+    'Dump Truck': 'Camión Tolva',
+    'Water Truck': 'Camión Cisterna',
+    'Haul Truck': 'Camión de Volteo',
+    'Rock Truck': 'Camión Minero',
+    'Articulated Haul Truck': 'Camión Articulado de Volteo',
+    'Rigid Rock Truck': 'Camión Rígido Minero',
+    'Concrete Mixer Truck': 'Camión Mezclador',
+    'Self Loader Truck': 'Camión Autocargador',
+    'Sleeper Tractor': 'Tractocamión',
+    'Fuel Truck': 'Camión Combustible',
+    
+    // Loaders
+    'Wheel Loader': 'Cargador Frontal',
+    'Loader': 'Cargador',
+    'Self Loader': 'Autocargador',
+    'Track Loader': 'Cargador de Orugas',
+    
+    // Other equipment
+    'Motor Grader': 'Motoniveladora',
+    'Bulldozer': 'Bulldozer',
+    'Dozer': 'Bulldozer',
+    'Crane': 'Grúa',
+    'Roller': 'Rodillo',
+    'Compressor': 'Compresor',
+    'Telehandler': 'Manipulador Telescópico',
+    'Golf Cart': 'Carrito de Golf',
+    'Concrete Mixer': 'Mezcladora de Concreto',
+    'Crawler Dumper': 'Volquete de Orugas',
+    'Dump Trailer': 'Remolque Tolva',
+    'Lowbed Trailer': 'Remolque Cama Baja',
+    'Trailer': 'Remolque',
+    'Bus': 'Autobús',
+    
+    // Vehicles
+    'Pickup Truck': 'Camioneta',
+    'Pickup': 'Camioneta',
+    'Cherokee': 'Cherokee',
+    'Explorer': 'Explorer',
+    'Peugeot': 'Peugeot',
+    'Landtrek': 'Landtrek',
+    'Armored Car': 'Vehículo Blindado',
+    
+    // Common words
+    'Unused': 'Sin Usar',
+    'Used': 'Usado',
+    'With': 'con',
+    'Engine': 'Motor',
+    'Kubota Engine': 'Motor Kubota',
+    'Briggs & Stratton': 'Briggs & Stratton',
+    'Diesel': 'Diésel',
+    'Gasoline': 'Gasolina',
+    'Manual': 'Manual',
+    'Automatic': 'Automático',
+  };
+  
+  let translatedName = englishName;
+  
+  // Apply translations
+  Object.entries(translations).forEach(([english, spanish]) => {
+    const regex = new RegExp(`\\b${english}\\b`, 'gi');
+    translatedName = translatedName.replace(regex, spanish);
+  });
+  
+  return translatedName;
+}
+
+// Function to map Spanish filter values to English database values
+function mapFilterToDbValue(filterValue: string): string {
+  const mapping: Record<string, string> = {
+    'excavadora': 'excavator',
+    'camion': 'truck', 
+    'camion-tolva': 'truck', // Will filter by title containing "dump truck"
+    'tolva': 'truck', // Will filter by title containing "dump trailer"
+    'cargador': 'loader',
+    'camioneta': 'truck', // Will filter by title containing specific vehicle names
+    'tractor': 'tractor',
+    'bulldozer': 'bulldozer',
+    'motoniveladora': 'machinery', // Will filter by title containing "motor grader"
+    'grua': 'crane',
+    'rodillo': 'machinery', // Will filter by title containing "roller"
+    'autobus': 'truck', // Will filter by title containing "bus"
+    'remolque': 'truck', // Will filter by title containing "trailer"
+    'perforadora': 'machinery',
+    'manipulador-telescopico': 'machinery', // Will filter by title containing "telehandler"
+    'compresor': 'machinery', // Will filter by title containing "compressor"
+    'mezcladora': 'truck', // Will filter by title containing "concrete mixer"
+    'vehiculo-golf': 'machinery', // Will filter by title containing "golf cart"
+    'repuesto': 'machinery',
+    'implemento': 'machinery'
+  };
+  
+  return mapping[filterValue] || filterValue;
+}
+
 // Intelligent classification function (same as in card components)
 function getCorrectType(name: string, description: string): string {
   const titleWords = name.toLowerCase();
@@ -203,17 +310,53 @@ export function CatalogSection() {
     totalPages: number;
   }
   
-  // Apply intelligent classification and client-side filtering
+  // Apply intelligent classification, translations and client-side filtering
   let machinery = (machineryData?.items || []).map(item => ({
     ...item,
-    correctType: getCorrectType(item.name, item.description)
+    correctType: getCorrectType(item.name, item.description),
+    translatedName: translateMachineryName(item.name, language)
   }));
   
   // Apply client-side type filter based on intelligent classification
   if (filters.type) {
-    machinery = machinery.filter(item => 
-      item.correctType === filters.type || item.type === filters.type
-    );
+    machinery = machinery.filter(item => {
+      // Direct match with intelligent classification
+      if (item.correctType === filters.type) return true;
+      
+      // Special filtering for specific Spanish categories that need title analysis
+      const titleLower = item.name.toLowerCase();
+      
+      switch (filters.type) {
+        case 'camion-tolva':
+          return titleLower.includes('dump truck') || titleLower.includes('haul truck') || titleLower.includes('rock truck');
+        case 'tolva':
+          return titleLower.includes('dump trailer') || titleLower.includes('dumper');
+        case 'motoniveladora':
+          return titleLower.includes('motor grader') || titleLower.includes('grader');
+        case 'rodillo':
+          return titleLower.includes('roller');
+        case 'camioneta':
+          return titleLower.includes('cherokee') || titleLower.includes('explorer') || 
+                 titleLower.includes('peugeot') || titleLower.includes('pickup') ||
+                 titleLower.includes('landtrek');
+        case 'autobus':
+          return titleLower.includes('bus');
+        case 'remolque':
+          return titleLower.includes('trailer');
+        case 'compresor':
+          return titleLower.includes('compressor');
+        case 'manipulador-telescopico':
+          return titleLower.includes('telehandler');
+        case 'vehiculo-golf':
+          return titleLower.includes('golf cart');
+        case 'mezcladora':
+          return titleLower.includes('concrete mixer');
+        case 'repuesto':
+          return titleLower.includes('attachment') || titleLower.includes('tooth') || titleLower.includes('rake');
+        default:
+          return item.type === filters.type;
+      }
+    });
   }
   
   const totalPages = machineryData?.totalPages || 1;
@@ -549,8 +692,8 @@ export function CatalogSection() {
                 </div>
               ))
             ) : machinery.length > 0 ? (
-              machinery.map((item: Machinery, index: number) => (
-                <MachineryCardCompact key={item.id} item={item} index={index} />
+              machinery.map((item: Machinery & { translatedName: string }, index: number) => (
+                <MachineryCardCompact key={item.id} item={{ ...item, name: item.translatedName }} index={index} />
               ))
             ) : (
               <div className="col-span-full py-12 text-center">

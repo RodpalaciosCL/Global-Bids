@@ -10,6 +10,85 @@ import { apiRequest } from '@/lib/queryClient';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useRegistration } from '@/contexts/RegistrationContext';
 
+// Translation function for machinery names
+function translateMachineryName(englishName: string, language: string): string {
+  if (language === 'en') return englishName;
+  
+  // Common translations for equipment names
+  const translations: Record<string, string> = {
+    // Excavators
+    'Mini Excavator': 'Mini Excavadora',
+    'Excavator': 'Excavadora',
+    'Compact Excavator': 'Excavadora Compacta',
+    'Wheel Excavator': 'Excavadora de Ruedas',
+    
+    // Trucks
+    'Dump Truck': 'Camión Tolva',
+    'Water Truck': 'Camión Cisterna',
+    'Haul Truck': 'Camión de Volteo',
+    'Rock Truck': 'Camión Minero',
+    'Articulated Haul Truck': 'Camión Articulado de Volteo',
+    'Rigid Rock Truck': 'Camión Rígido Minero',
+    'Concrete Mixer Truck': 'Camión Mezclador',
+    'Self Loader Truck': 'Camión Autocargador',
+    'Sleeper Tractor': 'Tractocamión',
+    'Fuel Truck': 'Camión Combustible',
+    
+    // Loaders
+    'Wheel Loader': 'Cargador Frontal',
+    'Loader': 'Cargador',
+    'Self Loader': 'Autocargador',
+    'Track Loader': 'Cargador de Orugas',
+    
+    // Other equipment
+    'Motor Grader': 'Motoniveladora',
+    'Bulldozer': 'Bulldozer',
+    'Dozer': 'Bulldozer',
+    'Crane': 'Grúa',
+    'Roller': 'Rodillo',
+    'Compressor': 'Compresor',
+    'Telehandler': 'Manipulador Telescópico',
+    'Golf Cart': 'Carrito de Golf',
+    'Concrete Mixer': 'Mezcladora de Concreto',
+    'Crawler Dumper': 'Volquete de Orugas',
+    'Dump Trailer': 'Remolque Tolva',
+    'Lowbed Trailer': 'Remolque Cama Baja',
+    'Trailer': 'Remolque',
+    'Bus': 'Autobús',
+    
+    // Vehicles
+    'Pickup Truck': 'Camioneta',
+    'Pickup': 'Camioneta',
+    'Cherokee': 'Cherokee',
+    'Explorer': 'Explorer',
+    'Peugeot': 'Peugeot',
+    'Landtrek': 'Landtrek',
+    'Armored Car': 'Vehículo Blindado',
+    
+    // Common words
+    'Unused': 'Sin Usar',
+    'Used': 'Usado',
+    'With': 'con',
+    'Engine': 'Motor',
+    'Kubota Engine': 'Motor Kubota',
+    'Briggs & Stratton': 'Briggs & Stratton',
+    'Diesel': 'Diésel',
+    'Gasoline': 'Gasolina',
+    'Manual': 'Manual',
+    'Automatic': 'Automático',
+  };
+  
+  let translatedName = englishName;
+  
+  // Apply translations
+  Object.entries(translations).forEach(([english, spanish]) => {
+    const regex = new RegExp(`\\b${english}\\b`, 'gi');
+    translatedName = translatedName.replace(regex, spanish);
+  });
+  
+  return translatedName;
+}
+
 // Function to get type label in correct language
 function getTypeLabel(type: string, language: string): string {
   const typeLabels: Record<string, { es: string; en: string }> = {
@@ -190,8 +269,8 @@ export default function MachineryDetail() {
   const handleContactConsultant = () => {
     const phoneNumber = "56994275157";
     const message = language === 'es' 
-      ? `Hola, estoy interesado en el lote "${machinery?.name}" de la subasta del 15 de julio. ¿Podrían darme más información?`
-      : `Hello, I'm interested in the lot "${machinery?.name}" from the July 15 auction. Could you give me more information?`;
+      ? `Hola, estoy interesado en el lote "${translatedName}" de la subasta del 15 de julio. ¿Podrían darme más información?`
+      : `Hello, I'm interested in the lot "${translatedName}" from the July 15 auction. Could you give me more information?`;
     const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
     window.open(whatsappUrl, '_blank');
   };
@@ -259,6 +338,9 @@ export default function MachineryDetail() {
   // Extract real specs from description
   const realSpecs = extractSpecsFromDescription(machinery.description, machinery.name);
   
+  // Translate machinery name
+  const translatedName = translateMachineryName(machinery.name, language);
+  
   // Use extracted data or fallback to original data
   const displayYear = realSpecs.realYear || machinery.year;
   const displayBrand = realSpecs.realBrand || machinery.brand;
@@ -275,7 +357,7 @@ export default function MachineryDetail() {
           <span className="mx-1 text-gray-400">/</span>
           <Link href="/#marketplace" className="text-gray-500 hover:text-primary">{t('nav.catalog')}</Link>
           <span className="mx-1 text-gray-400">/</span>
-          <span className="text-gray-700 truncate">{machinery.name}</span>
+          <span className="text-gray-700 truncate">{translatedName}</span>
         </div>
         
         {/* Back to catalog button */}
@@ -312,7 +394,7 @@ export default function MachineryDetail() {
                 </div>
                 
                 {/* Title and Main Details */}
-                <h1 className="text-xl font-bold text-gray-900 mb-2 line-clamp-1">{machinery.name}</h1>
+                <h1 className="text-xl font-bold text-gray-900 mb-2 line-clamp-1">{translatedName}</h1>
                 
                 <div className="flex flex-wrap gap-3 mb-2 border-b border-gray-200 pb-2">
                   <div className="flex items-center">
@@ -337,11 +419,11 @@ export default function MachineryDetail() {
                 <div className="relative w-full h-[450px] border border-gray-200 rounded-lg overflow-hidden mb-1">
                   <img 
                     src={(selectedImage || machinery.image).replace('https://auctiontechupload.s3.amazonaws.com/216/auction/2187/', '/api/images/')}
-                    alt={machinery.name}
+                    alt={translatedName}
                     className="w-full h-full object-contain"
                     onError={(e) => {
                       console.log('Error loading image:', selectedImage || machinery.image);
-                      e.currentTarget.src = `https://placehold.co/600x450/1a1a1a/ffffff?text=${encodeURIComponent(machinery.name.substring(0, 30))}`;
+                      e.currentTarget.src = `https://placehold.co/600x450/1a1a1a/ffffff?text=${encodeURIComponent(translatedName.substring(0, 30))}`;
                     }}
                   />
                   
@@ -393,7 +475,7 @@ export default function MachineryDetail() {
                         >
                           <img
                             src={img.replace('https://auctiontechupload.s3.amazonaws.com/216/auction/2187/', '/api/images/')}
-                            alt={`${machinery.name} - Imagen ${index + 1}`}
+                            alt={`${translatedName} - Imagen ${index + 1}`}
                             className="w-20 h-16 object-cover"
                             onError={(e) => {
                               console.log('Error loading thumbnail:', img);
