@@ -95,22 +95,22 @@ function mapFilterToDbValue(filterValue: string): string {
   const mapping: Record<string, string> = {
     'excavadora': 'excavator',
     'camion': 'truck', 
-    'camion-tolva': 'truck', // Will filter by title containing "dump truck"
-    'tolva': 'truck', // Will filter by title containing "dump trailer"
+    'camion-tolva': 'truck',
+    'tolva': 'truck',
     'cargador': 'loader',
-    'camioneta': 'truck', // Will filter by title containing specific vehicle names
+    'camioneta': 'truck',
     'tractor': 'tractor',
     'bulldozer': 'bulldozer',
-    'motoniveladora': 'machinery', // Will filter by title containing "motor grader"
+    'motoniveladora': 'machinery',
     'grua': 'crane',
-    'rodillo': 'machinery', // Will filter by title containing "roller"
-    'autobus': 'truck', // Will filter by title containing "bus"
-    'remolque': 'truck', // Will filter by title containing "trailer"
+    'rodillo': 'machinery',
+    'autobus': 'truck',
+    'remolque': 'truck',
     'perforadora': 'machinery',
-    'manipulador-telescopico': 'machinery', // Will filter by title containing "telehandler"
-    'compresor': 'machinery', // Will filter by title containing "compressor"
-    'mezcladora': 'truck', // Will filter by title containing "concrete mixer"
-    'vehiculo-golf': 'machinery', // Will filter by title containing "golf cart"
+    'manipulador-telescopico': 'machinery',
+    'compresor': 'machinery',
+    'mezcladora': 'truck',
+    'vehiculo-golf': 'machinery',
     'repuesto': 'machinery',
     'implemento': 'machinery'
   };
@@ -124,15 +124,22 @@ function getCorrectType(name: string, description: string): string {
   
   // ABSOLUTE PRIORITY: Title keywords are FINAL authority
   
-  // Spanish titles FIRST (highest priority)
-  if (titleWords.includes('camión tolva')) {
+  // Bus detection FIRST - highest priority for autobuses
+  if (titleWords.includes('autobús') || titleWords.includes('autobus') || titleWords.includes(' bus')) {
+    return 'autobus';
+  }
+  
+  // Tolva detection - specific Spanish keywords and dump trailers
+  if (titleWords.includes('tolva') || titleWords.includes('dump trailer') || 
+      titleWords.includes('tri-axle') || titleWords.includes('dumper')) {
+    return 'tolva';
+  }
+  
+  // Dump Trucks (different from tolvas - these are the truck chassis)
+  if (titleWords.includes('dump truck') || titleWords.includes('haul truck') || 
+      titleWords.includes('rock truck') || titleWords.includes('articulated haul truck') ||
+      titleWords.includes('rigid rock truck')) {
     return 'camion-tolva';
-  }
-  if (titleWords.includes('camión')) {
-    return 'camion';
-  }
-  if (titleWords.includes('tractor') && !titleWords.includes('camión')) {
-    return 'tractor'; // Real tractors like John Deere
   }
   
   // Excavators - HIGHEST PRIORITY  
@@ -140,7 +147,28 @@ function getCorrectType(name: string, description: string): string {
     return 'excavadora';
   }
   
-  // Concrete Mixer Trucks
+  // Loaders
+  if (titleWords.includes('loader') || titleWords.includes('wheel loader') || 
+      titleWords.includes('track loader')) {
+    return 'cargador';
+  }
+  
+  // Motor Graders  
+  if (titleWords.includes('motor grader') || titleWords.includes('grader')) {
+    return 'motoniveladora';
+  }
+  
+  // Bulldozers
+  if (titleWords.includes('bulldozer') || titleWords.includes('dozer')) {
+    return 'bulldozer';
+  }
+  
+  // Cranes
+  if (titleWords.includes('crane') || titleWords.includes('grúa')) {
+    return 'grua';
+  }
+  
+  // Concrete Mixers
   if (titleWords.includes('concrete mixer')) {
     return 'mezcladora';
   }
@@ -150,104 +178,52 @@ function getCorrectType(name: string, description: string): string {
     return 'rodillo';
   }
   
-  // Crawler Dumpers (oruga tolva)
-  if (titleWords.includes('crawler dumper') || titleWords.includes('crawler dump')) {
-    return 'tolva';
-  }
-  
-  // English truck types - must be explicit and different types
-  if (titleWords.includes('sleeper tractor')) {
-    return 'camion'; // These are trucks, not tractors
-  }
-  
-  // Vehicles - Cherokee, Explorer, etc.
-  if (titleWords.includes('cherokee') || titleWords.includes('explorer') || 
-      titleWords.includes('peugeot') || titleWords.includes('landtrek') ||
-      titleWords.includes('armored car')) {
-    return 'camioneta';
-  }
-  
-  // Loaders including Self Loader
-  if (titleWords.includes('self loader')) {
-    return 'camion'; // Self loaders are trucks
-  }
-  if (titleWords.includes('loader') || titleWords.includes('wheel loader')) {
-    return 'cargador';
-  }
-  
-  // Motor Graders  
-  if (titleWords.includes('motor grader') || titleWords.includes('grader')) {
-    return 'motoniveladora';
-  }
-  
-  // Water Trucks - specific type
-  if (titleWords.includes('water truck')) {
-    return 'camion';
-  }
-  
-  // Dump Trucks vs Dump Trailers
-  if (titleWords.includes('dump truck')) {
-    return 'camion-tolva';
-  } else if (titleWords.includes('dump trailer') || titleWords.includes('tri-axle dump trailer')) {
-    return 'tolva';
-  }
-  
-  // Haul Trucks (special category)
-  if (titleWords.includes('haul truck') || titleWords.includes('articulated haul truck')) {
-    return 'camion-tolva';
-  }
-  
-  // Rock Trucks  
-  if (titleWords.includes('rock truck') || titleWords.includes('rigid rock truck')) {
-    return 'camion-tolva';
-  }
-  
-  // Other specific equipment
-  if (titleWords.includes('bulldozer') || titleWords.includes('dozer')) {
-    return 'bulldozer';
-  }
-  
-  if (titleWords.includes('crane')) {
-    return 'grua';
-  }
-  
+  // Telehandlers
   if (titleWords.includes('telehandler')) {
     return 'manipulador-telescopico';
   }
   
+  // Compressors
   if (titleWords.includes('compressor')) {
     return 'compresor';
   }
   
+  // Golf Carts
   if (titleWords.includes('golf cart')) {
     return 'vehiculo-golf';
   }
   
-  // Lowbed Trailer
-  if (titleWords.includes('lowbed trailer')) {
-    return 'remolque';
+  // Vehicles - Cherokee, Explorer, Pickup trucks, etc.
+  if (titleWords.includes('cherokee') || titleWords.includes('explorer') || 
+      titleWords.includes('peugeot') || titleWords.includes('landtrek') ||
+      titleWords.includes('pickup') || titleWords.includes('armored car')) {
+    return 'camioneta';
   }
   
+  // Tractors (agricultural/construction - not sleeper tractors)
+  if (titleWords.includes('tractor') && !titleWords.includes('sleeper')) {
+    return 'tractor';
+  }
+  
+  // Trailers (not dump trailers - those are tolvas)
   if (titleWords.includes('trailer') && !titleWords.includes('dump')) {
     return 'remolque';
   }
   
-  if (titleWords.includes('bus')) {
-    return 'autobus';
-  }
-  
-  // Generic trucks
-  if (titleWords.includes('truck')) {
+  // Generic trucks (catch-all for other truck types)
+  if (titleWords.includes('truck') || titleWords.includes('camión') ||
+      titleWords.includes('sleeper tractor')) {
     return 'camion';
   }
   
-  // Only check description for very specific parts/attachments
+  // Parts and attachments
   const nameAndDesc = (name + ' ' + description).toLowerCase();
-  if (nameAndDesc.includes('ripper tooth') || nameAndDesc.includes('rake attachment')) {
+  if (nameAndDesc.includes('ripper tooth') || nameAndDesc.includes('rake attachment') ||
+      titleWords.includes('attachment') || titleWords.includes('tooth') || titleWords.includes('rake')) {
     return 'repuesto';
   }
   
-  // Fallback to original type
+  // Fallback to machinery for unidentified equipment
   return 'machinery';
 }
 
@@ -326,41 +302,100 @@ export function CatalogSection() {
   // Apply client-side type filter based on intelligent classification
   if (filters.type) {
     machinery = machinery.filter(item => {
-      // Direct match with intelligent classification
-      if (item.correctType === filters.type) return true;
+      // Use intelligent classification as primary filter
+      const correctType = item.correctType;
       
-      // Special filtering for specific Spanish categories that need title analysis
+      // Direct match with intelligent classification
+      if (correctType === filters.type) return true;
+      
+      // Additional title-based filtering for precision
       const titleLower = item.name.toLowerCase();
       
       switch (filters.type) {
+        case 'camion':
+          // General trucks (not tolva, not bus, not specific vehicles)
+          return (item.type === 'truck' || correctType === 'camion') && 
+                 !titleLower.includes('tolva') && 
+                 !titleLower.includes('dump') && 
+                 !titleLower.includes('bus') &&
+                 !titleLower.includes('cherokee') &&
+                 !titleLower.includes('explorer') &&
+                 !titleLower.includes('peugeot');
+        
         case 'camion-tolva':
-          return titleLower.includes('dump truck') || titleLower.includes('haul truck') || titleLower.includes('rock truck');
+          // Dump trucks, haul trucks, rock trucks
+          return titleLower.includes('tolva') || 
+                 titleLower.includes('dump truck') || 
+                 titleLower.includes('haul truck') || 
+                 titleLower.includes('rock truck') ||
+                 correctType === 'camion-tolva';
+        
         case 'tolva':
-          return titleLower.includes('dump trailer') || titleLower.includes('dumper');
-        case 'motoniveladora':
-          return titleLower.includes('motor grader') || titleLower.includes('grader');
-        case 'rodillo':
-          return titleLower.includes('roller');
-        case 'camioneta':
-          return titleLower.includes('cherokee') || titleLower.includes('explorer') || 
-                 titleLower.includes('peugeot') || titleLower.includes('pickup') ||
-                 titleLower.includes('landtrek');
+          // Dump trailers, dumpers, tolvas
+          return titleLower.includes('dump trailer') || 
+                 titleLower.includes('dumper') ||
+                 titleLower.includes('tri-axle') ||
+                 correctType === 'tolva';
+        
         case 'autobus':
-          return titleLower.includes('bus');
+          // All buses
+          return titleLower.includes('bus') || 
+                 titleLower.includes('autobús') ||
+                 correctType === 'autobus';
+        
+        case 'camioneta':
+          // Pickup trucks and passenger vehicles
+          return titleLower.includes('cherokee') || 
+                 titleLower.includes('explorer') || 
+                 titleLower.includes('peugeot') || 
+                 titleLower.includes('pickup') ||
+                 titleLower.includes('landtrek') ||
+                 correctType === 'camioneta';
+        
+        case 'excavadora':
+          return titleLower.includes('excavator') || correctType === 'excavadora';
+        
+        case 'cargador':
+          return titleLower.includes('loader') || correctType === 'cargador';
+        
+        case 'motoniveladora':
+          return titleLower.includes('motor grader') || titleLower.includes('grader') || correctType === 'motoniveladora';
+        
+        case 'rodillo':
+          return titleLower.includes('roller') || correctType === 'rodillo';
+        
         case 'remolque':
-          return titleLower.includes('trailer');
+          return titleLower.includes('trailer') && !titleLower.includes('dump trailer') || correctType === 'remolque';
+        
         case 'compresor':
-          return titleLower.includes('compressor');
+          return titleLower.includes('compressor') || correctType === 'compresor';
+        
         case 'manipulador-telescopico':
-          return titleLower.includes('telehandler');
+          return titleLower.includes('telehandler') || correctType === 'manipulador-telescopico';
+        
         case 'vehiculo-golf':
-          return titleLower.includes('golf cart');
+          return titleLower.includes('golf cart') || correctType === 'vehiculo-golf';
+        
         case 'mezcladora':
-          return titleLower.includes('concrete mixer');
+          return titleLower.includes('concrete mixer') || correctType === 'mezcladora';
+        
         case 'repuesto':
-          return titleLower.includes('attachment') || titleLower.includes('tooth') || titleLower.includes('rake');
+          return titleLower.includes('attachment') || 
+                 titleLower.includes('tooth') || 
+                 titleLower.includes('rake') ||
+                 correctType === 'repuesto';
+        
+        case 'grua':
+          return titleLower.includes('crane') || titleLower.includes('grúa') || correctType === 'grua';
+        
+        case 'bulldozer':
+          return titleLower.includes('bulldozer') || titleLower.includes('dozer') || correctType === 'bulldozer';
+        
+        case 'tractor':
+          return titleLower.includes('tractor') && !titleLower.includes('sleeper') || correctType === 'tractor';
+        
         default:
-          return item.type === filters.type;
+          return item.type === filters.type || correctType === filters.type;
       }
     });
   }
