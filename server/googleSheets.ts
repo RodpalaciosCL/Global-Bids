@@ -31,24 +31,34 @@ export async function addRegistrationToSheets(registration: InsertRegistration &
     const doc = new GoogleSpreadsheet(GOOGLE_SHEET_ID, auth);
     await doc.loadInfo();
     
-    // Get the first sheet or create one if it doesn't exist
+    // Get the first sheet
     let sheet = doc.sheetsByIndex[0];
     if (!sheet) {
+      console.log('Creating new sheet...');
       sheet = await doc.addSheet({ title: 'Registros de Participantes' });
     }
 
-    // Check if headers exist, if not add them
-    const rows = await sheet.getRows();
-    if (rows.length === 0) {
-      await sheet.setHeaderRow([
-        'ID',
-        'Fecha de Registro',
-        'Nombre',
-        'Apellido',
-        'Email',
-        'Teléfono',
-        'Tipos de Maquinaria Interesado'
-      ]);
+    // Try to get header row info, if fails, sheet is empty
+    let hasHeaders = false;
+    try {
+      await sheet.loadHeaderRow();
+      hasHeaders = sheet.headerValues && sheet.headerValues.length > 0;
+      console.log('Sheet has headers:', hasHeaders);
+    } catch (error) {
+      console.log('Sheet has no headers, will create them');
+      hasHeaders = false;
+    }
+
+    if (!hasHeaders) {
+      console.log('Setting up headers...');
+      // Clear the sheet first to ensure it's clean
+      await sheet.clear();
+      
+      // Set headers
+      const headers = ['ID', 'Fecha de Registro', 'Nombre', 'Apellido', 'Email', 'Teléfono', 'Tipos de Maquinaria Interesado'];
+      await sheet.setHeaderRow(headers);
+      
+      console.log('Headers configured successfully');
     }
 
     // Format the interested types for display
@@ -56,20 +66,24 @@ export async function addRegistrationToSheets(registration: InsertRegistration &
       ? registration.interestedIn.join(', ')
       : registration.interestedIn;
 
-    // Add the registration data
-    await sheet.addRow({
-      'ID': registration.id,
+    // Prepare the data row
+    const rowData = {
+      'ID': registration.id.toString(),
       'Fecha de Registro': new Date(registration.createdAt).toLocaleDateString('es-CL'),
       'Nombre': registration.firstName,
       'Apellido': registration.lastName,
       'Email': registration.email,
       'Teléfono': registration.phone,
       'Tipos de Maquinaria Interesado': interestedTypes
-    });
+    };
+
+    // Add the registration data
+    await sheet.addRow(rowData);
 
     console.log(`✅ Registration added to Google Sheets: ${registration.firstName} ${registration.lastName}`);
   } catch (error) {
     console.error('❌ Error adding registration to Google Sheets:', error);
+    console.error('Error details:', error.message);
   }
 }
 
