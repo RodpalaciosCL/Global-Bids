@@ -115,41 +115,36 @@
 
 /* Desktop Section Spacing Improvements */
 @media (min-width: 1024px) {
-  /* Better section spacing without forcing full height */
+  /* Better section spacing with proper margin between sections */
   #nosotros {
-    padding-top: 120px;
-    padding-bottom: 80px;
+    margin-top: 120px;
+    padding-top: 60px;
+    padding-bottom: 120px;
   }
   
   #servicios {
-    padding-top: 100px;
-    padding-bottom: 80px;
+    margin-top: 80px;
+    padding-top: 60px;
+    padding-bottom: 120px;
   }
   
   #soporte {
-    padding-top: 100px;
-    padding-bottom: 80px;
+    margin-top: 80px;
+    padding-top: 60px;
+    padding-bottom: 120px;
   }
   
   #contacto {
-    padding-top: 100px;
-    padding-bottom: 80px;
+    margin-top: 80px;
+    padding-top: 60px;
+    padding-bottom: 120px;
   }
   
-  /* Improve container spacing for better visual hierarchy */
-  #nosotros .container {
-    max-width: 1200px;
-  }
-  
-  #servicios .container {
-    max-width: 1200px;
-  }
-  
-  #soporte .container {
-    max-width: 1200px;
-  }
-  
-  #contacto .container {
-    max-width: 1200px;
+  /* Ensure proper spacing for section headers */
+  #nosotros h2,
+  #servicios h2,
+  #soporte h2,
+  #contacto h2 {
+    margin-bottom: 40px;
   }
 }
