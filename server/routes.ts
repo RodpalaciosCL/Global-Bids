@@ -144,7 +144,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         try {
           const info = await transporter.sendMail({
             from: '"Global Bids Web" <auctions@theglobalbid.com>',
-            to: "contacto@theglobalbid.com",
+            to: "rodpalacios@me.com",
             subject: "Nuevo contacto de registro",
             html: htmlBody,
           });
@@ -176,7 +176,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         try {
           const info = await transporter.sendMail({
             from: '"Global Bids Web" <auctions@theglobalbid.com>',
-            to: "contacto@theglobalbid.com",
+            to: "rodpalacios@me.com",
             subject: `Nuevo contacto – ${contact.subject || "Sin asunto"}`,
             html: htmlBody,
           });
