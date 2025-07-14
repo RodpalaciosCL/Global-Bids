@@ -92,19 +92,22 @@ export function RegistrationForm() {
     setIsSubmitting(true);
     
     try {
-      const response = await fetch('/api/contact', {
+      // Separar nombre completo en firstName y lastName
+      const nameParts = formData.name.trim().split(' ');
+      const firstName = nameParts[0] || '';
+      const lastName = nameParts.slice(1).join(' ') || '';
+      
+      const response = await fetch('/api/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          type: 'registration',
-          name: formData.name,
-          company: formData.company,
+          firstName: firstName,
+          lastName: lastName,
           email: formData.email,
           phone: formData.phone,
-          interests: formData.interests,
-          subject: 'Nuevo contacto de registro'
+          interestedIn: formData.interests
         }),
       });
 
