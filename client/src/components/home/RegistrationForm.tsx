@@ -241,14 +241,14 @@ export function RegistrationForm() {
             exit={{ opacity: 0 }}
           >
             <motion.div 
-              className="bg-white rounded-lg p-4 sm:p-6 shadow-xl max-w-md w-full text-left relative z-20 my-4 sm:my-8 max-h-[85vh] overflow-y-auto"
+              className="bg-white rounded-lg p-3 shadow-xl max-w-xs w-full text-left relative z-20 my-2"
               initial={{ opacity: 0, scale: 0.9, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.9, y: -20 }}
               transition={{ duration: 0.3 }}
             >
-              <div className="flex justify-between items-center mb-3 sm:mb-4">
-                <h3 className="text-lg sm:text-xl font-bold text-gray-900">{t('registration.title')}</h3>
+              <div className="flex justify-between items-center mb-2">
+                <h3 className="text-base font-bold text-gray-900">{t('registration.title')}</h3>
                 <Button
                   variant="ghost"
                   size="sm"
@@ -258,97 +258,38 @@ export function RegistrationForm() {
                   ✕
                 </Button>
               </div>
-              <p className="text-gray-600 text-sm sm:text-base mb-3 sm:mb-4">{t('registration.description')}</p>
-
-              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div>
-                    <label htmlFor="firstName" className="block text-sm font-medium text-gray-700 mb-1">{t('registration.firstName')}</label>
-                    <Input
-                      id="firstName"
-                      placeholder={language === 'es' ? "Ingresa tu nombre" : "Enter your first name"}
-                      {...form.register('firstName')}
-                      className={form.formState.errors.firstName ? 'border-red-500' : ''}
-                    />
-                    {form.formState.errors.firstName && (
-                      <p className="text-red-500 text-xs mt-1">{form.formState.errors.firstName.message?.toString()}</p>
-                    )}
-                  </div>
-
-                  <div>
-                    <label htmlFor="lastName" className="block text-sm font-medium text-gray-700 mb-1">{t('registration.lastName')}</label>
-                    <Input
-                      id="lastName"
-                      placeholder={language === 'es' ? "Ingresa tu apellido" : "Enter your last name"}
-                      {...form.register('lastName')}
-                      className={form.formState.errors.lastName ? 'border-red-500' : ''}
-                    />
-                    {form.formState.errors.lastName && (
-                      <p className="text-red-500 text-xs mt-1">{form.formState.errors.lastName.message?.toString()}</p>
-                    )}
-                  </div>
-                </div>
-
-                <div>
-                  <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">{t('registration.email')}</label>
+              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-2">
+                <div className="grid grid-cols-2 gap-2">
                   <Input
-                    id="email"
-                    type="email"
-                    placeholder={language === 'es' ? "tucorreo@ejemplo.com" : "your.email@example.com"}
-                    {...form.register('email')}
-                    className={form.formState.errors.email ? 'border-red-500' : ''}
+                    placeholder={t('registration.firstName')}
+                    {...form.register('firstName')}
+                    className={`text-sm ${form.formState.errors.firstName ? 'border-red-500' : ''}`}
                   />
-                  {form.formState.errors.email && (
-                    <p className="text-red-500 text-xs mt-1">{form.formState.errors.email.message?.toString()}</p>
-                  )}
+                  <Input
+                    placeholder={t('registration.lastName')}
+                    {...form.register('lastName')}
+                    className={`text-sm ${form.formState.errors.lastName ? 'border-red-500' : ''}`}
+                  />
                 </div>
 
-                <div>
-                  <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">{t('registration.phone')}</label>
-                  <div className="flex gap-2">
-                    <div className="w-2/5">
-                      <ReactFlagsSelect
-                        selected={selectedCountry}
-                        onSelect={(code) => {
-                          setSelectedCountry(code);
-                          // Actualiza el valor del teléfono con el nuevo código de país
-                          const phoneNumber = form.getValues('phone').replace(/^\+\d+\s/, '');
-                          form.setValue('phone', `${getCountryCode()} ${phoneNumber}`);
-                        }}
-                        countries={Object.keys(countryToCode)}
-                        customLabels={Object.keys(countryToCode).reduce((acc, code) => {
-                          acc[code] = `${countryToCode[code]} ${code}`;
-                          return acc;
-                        }, {} as Record<string, string>)}
-                        placeholder={language === 'es' ? "Selecciona" : "Select"}
-                        searchable={true}
-                        selectButtonClassName="!border-gray-300 rounded-md h-10 !bg-white w-full"
-                      />
-                    </div>
-                    <div className="flex-1">
-                      <Input
-                        id="phone"
-                        placeholder="XXXX XXXX"
-                        value={form.getValues('phone')?.replace(/^\+\d+\s/, '') || ''}
-                        onChange={(e) => {
-                          // Elimina cualquier código de país existente y agrega el seleccionado
-                          const phoneWithoutCode = e.target.value.replace(/^\+\d+\s/, '');
-                          form.setValue('phone', `${getCountryCode()} ${phoneWithoutCode}`);
-                        }}
-                        className={form.formState.errors.phone ? 'border-red-500' : ''}
-                      />
-                    </div>
-                  </div>
-                  {form.formState.errors.phone && (
-                    <p className="text-red-500 text-xs mt-1">{form.formState.errors.phone.message?.toString()}</p>
-                  )}
-                </div>
+                <Input
+                  type="email"
+                  placeholder={t('registration.email')}
+                  {...form.register('email')}
+                  className={`text-sm ${form.formState.errors.email ? 'border-red-500' : ''}`}
+                />
+
+                <Input
+                  placeholder={t('registration.phone')}
+                  {...form.register('phone')}
+                  className={`text-sm ${form.formState.errors.phone ? 'border-red-500' : ''}`}
+                />
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">{t('registration.interested')}</label>
-                  <div className="grid grid-cols-1 gap-2 max-h-40 overflow-y-auto border border-gray-200 p-3 rounded-md">
-                    {machineryTypes.map((type) => (
-                      <div key={type.id} className="flex items-center space-x-2">
+                  <label className="block text-xs font-medium text-gray-700 mb-1">{t('registration.interested')}</label>
+                  <div className="grid grid-cols-2 gap-1 text-xs">
+                    {machineryTypes.slice(0, 4).map((type) => (
+                      <div key={type.id} className="flex items-center space-x-1">
                         <Checkbox
                           id={type.id}
                           onCheckedChange={(checked) => {
@@ -363,28 +304,23 @@ export function RegistrationForm() {
                             }
                           }}
                         />
-                        <label htmlFor={type.id} className="text-sm text-gray-700">{t(`registration.${type.id}s`)}</label>
+                        <label htmlFor={type.id} className="text-xs text-gray-700">{t(`registration.${type.id}s`)}</label>
                       </div>
                     ))}
                   </div>
-                  {form.formState.errors.interestedIn && (
-                    <p className="text-red-500 text-xs mt-1">{form.formState.errors.interestedIn.message?.toString()}</p>
-                  )}
                 </div>
 
-                <div className="mt-6 pt-4 border-t border-gray-200">
-                  <Button
-                    type="submit"
-                    className="w-full bg-primary hover:bg-primary-dark text-white font-bold py-3 text-lg"
-                    disabled={mutation.isPending}
-                  >
-                    {mutation.isPending ? 
-                      (language === 'es' ? 'Enviando...' : 'Sending...') : 
-                      t('registration.register')}
-                  </Button>
-                </div>
+                <Button
+                  type="submit"
+                  className="w-full bg-primary hover:bg-primary-dark text-white font-bold py-2 text-sm"
+                  disabled={mutation.isPending}
+                >
+                  {mutation.isPending ? 
+                    (language === 'es' ? 'Enviando...' : 'Sending...') : 
+                    t('registration.register')}
+                </Button>
 
-                <p className="text-xs text-gray-500 text-center mt-2">
+                <p className="text-xs text-gray-400 text-center">
                   {t('registration.terms')}
                 </p>
               </form>
