@@ -55,25 +55,8 @@ export function ContactSection() {
     const data = new FormData(form);
 
     try {
-      // Send email using EmailJS
-      const templateParams = {
-        to_email: 'contacto@theglobalbid.com',
-        from_name: data.get("name"),
-        from_email: data.get("email"),
-        phone: data.get("phone") || "No indicado",
-        message: data.get("message"),
-        subject: "Contacto desde Global Bids"
-      };
-
-      await emailjs.send(
-        import.meta.env.VITE_EMAILJS_SERVICE_ID || 'service_ok_deleted',
-        import.meta.env.VITE_EMAILJS_TEMPLATE_ID || 'template_ok_deleted',
-        templateParams,
-        import.meta.env.VITE_EMAILJS_USER_ID || 'user_ok_deleted'
-      );
-
-      // Also save to database
-      await fetch("/api/contact", {
+      // Send directly to our backend API (which now sends emails)
+      const response = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -85,11 +68,15 @@ export function ContactSection() {
         }),
       });
 
-      setMessageText(
-        language === "es"
-          ? "¡Gracias por contactarnos! Te responderemos pronto."
-          : "Thank you for contacting us! We will respond soon.",
-      );
+      if (response.ok) {
+        setMessageText(
+          language === "es"
+            ? "¡Gracias por contactarnos! Te responderemos pronto."
+            : "Thank you for contacting us! We will respond soon.",
+        );
+      } else {
+        throw new Error('Error en el envío');
+      }
     } catch (err) {
       console.error(err);
       setMessageText(
