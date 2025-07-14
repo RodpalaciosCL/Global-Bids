@@ -12,11 +12,68 @@ interface FormData {
   acceptTerms: boolean;
 }
 
+// Códigos de país completos para selector
+const countryPhoneCodes = [
+  { code: 'CL', name: 'Chile', dialCode: '+56', flag: '🇨🇱' },
+  { code: 'AR', name: 'Argentina', dialCode: '+54', flag: '🇦🇷' },
+  { code: 'BR', name: 'Brasil', dialCode: '+55', flag: '🇧🇷' },
+  { code: 'PE', name: 'Perú', dialCode: '+51', flag: '🇵🇪' },
+  { code: 'CO', name: 'Colombia', dialCode: '+57', flag: '🇨🇴' },
+  { code: 'MX', name: 'México', dialCode: '+52', flag: '🇲🇽' },
+  { code: 'EC', name: 'Ecuador', dialCode: '+593', flag: '🇪🇨' },
+  { code: 'UY', name: 'Uruguay', dialCode: '+598', flag: '🇺🇾' },
+  { code: 'BO', name: 'Bolivia', dialCode: '+591', flag: '🇧🇴' },
+  { code: 'VE', name: 'Venezuela', dialCode: '+58', flag: '🇻🇪' },
+  { code: 'PY', name: 'Paraguay', dialCode: '+595', flag: '🇵🇾' },
+  { code: 'US', name: 'Estados Unidos', dialCode: '+1', flag: '🇺🇸' },
+  { code: 'CA', name: 'Canadá', dialCode: '+1', flag: '🇨🇦' },
+  { code: 'ES', name: 'España', dialCode: '+34', flag: '🇪🇸' },
+  { code: 'DE', name: 'Alemania', dialCode: '+49', flag: '🇩🇪' },
+  { code: 'FR', name: 'Francia', dialCode: '+33', flag: '🇫🇷' },
+  { code: 'IT', name: 'Italia', dialCode: '+39', flag: '🇮🇹' },
+  { code: 'GB', name: 'Reino Unido', dialCode: '+44', flag: '🇬🇧' },
+  { code: 'PT', name: 'Portugal', dialCode: '+351', flag: '🇵🇹' },
+  { code: 'NL', name: 'Países Bajos', dialCode: '+31', flag: '🇳🇱' },
+  { code: 'CH', name: 'Suiza', dialCode: '+41', flag: '🇨🇭' },
+  { code: 'AT', name: 'Austria', dialCode: '+43', flag: '🇦🇹' },
+  { code: 'BE', name: 'Bélgica', dialCode: '+32', flag: '🇧🇪' },
+  { code: 'SE', name: 'Suecia', dialCode: '+46', flag: '🇸🇪' },
+  { code: 'NO', name: 'Noruega', dialCode: '+47', flag: '🇳🇴' },
+  { code: 'DK', name: 'Dinamarca', dialCode: '+45', flag: '🇩🇰' },
+  { code: 'FI', name: 'Finlandia', dialCode: '+358', flag: '🇫🇮' },
+  { code: 'AU', name: 'Australia', dialCode: '+61', flag: '🇦🇺' },
+  { code: 'NZ', name: 'Nueva Zelanda', dialCode: '+64', flag: '🇳🇿' },
+  { code: 'ZA', name: 'Sudáfrica', dialCode: '+27', flag: '🇿🇦' },
+  { code: 'IN', name: 'India', dialCode: '+91', flag: '🇮🇳' },
+  { code: 'CN', name: 'China', dialCode: '+86', flag: '🇨🇳' },
+  { code: 'JP', name: 'Japón', dialCode: '+81', flag: '🇯🇵' },
+  { code: 'KR', name: 'Corea del Sur', dialCode: '+82', flag: '🇰🇷' },
+  { code: 'RU', name: 'Rusia', dialCode: '+7', flag: '🇷🇺' },
+  { code: 'AE', name: 'Emiratos Árabes Unidos', dialCode: '+971', flag: '🇦🇪' },
+  { code: 'SA', name: 'Arabia Saudita', dialCode: '+966', flag: '🇸🇦' },
+  { code: 'QA', name: 'Qatar', dialCode: '+974', flag: '🇶🇦' },
+  { code: 'EG', name: 'Egipto', dialCode: '+20', flag: '🇪🇬' },
+  { code: 'MA', name: 'Marruecos', dialCode: '+212', flag: '🇲🇦' },
+  { code: 'NG', name: 'Nigeria', dialCode: '+234', flag: '🇳🇬' },
+  { code: 'KE', name: 'Kenia', dialCode: '+254', flag: '🇰🇪' },
+  { code: 'GH', name: 'Ghana', dialCode: '+233', flag: '🇬🇭' },
+  { code: 'SG', name: 'Singapur', dialCode: '+65', flag: '🇸🇬' },
+  { code: 'MY', name: 'Malasia', dialCode: '+60', flag: '🇲🇾' },
+  { code: 'TH', name: 'Tailandia', dialCode: '+66', flag: '🇹🇭' },
+  { code: 'ID', name: 'Indonesia', dialCode: '+62', flag: '🇮🇩' },
+  { code: 'PH', name: 'Filipinas', dialCode: '+63', flag: '🇵🇭' },
+  { code: 'PK', name: 'Pakistán', dialCode: '+92', flag: '🇵🇰' },
+  { code: 'TR', name: 'Turquía', dialCode: '+90', flag: '🇹🇷' },
+  { code: 'IS', name: 'Islandia', dialCode: '+354', flag: '🇮🇸' }
+];
+
 export function RegistrationForm() {
   const { isFormOpen, closeForm } = useRegistration();
   const { language } = useLanguage();
 
   const [currentStep, setCurrentStep] = useState(1);
+  const [selectedCountry, setSelectedCountry] = useState(countryPhoneCodes[0]); // Chile por defecto
+  const [phoneNumber, setPhoneNumber] = useState('');
   const [formData, setFormData] = useState<FormData>({
     name: '',
     company: '',
@@ -69,6 +126,20 @@ export function RegistrationForm() {
       ...formData,
       [name]: type === 'checkbox' ? checked : value,
     });
+  };
+
+  const handlePhoneChange = (value: string) => {
+    setPhoneNumber(value);
+    // Combinar código de país + número para el formData
+    const fullPhone = selectedCountry.dialCode + ' ' + value;
+    setFormData(prev => ({ ...prev, phone: fullPhone }));
+  };
+
+  const handleCountryChange = (country: typeof countryPhoneCodes[0]) => {
+    setSelectedCountry(country);
+    // Actualizar teléfono con nuevo código
+    const fullPhone = country.dialCode + ' ' + phoneNumber;
+    setFormData(prev => ({ ...prev, phone: fullPhone }));
   };
 
   const handleInterestChange = (interestId: string) => {
@@ -278,13 +349,36 @@ export function RegistrationForm() {
                     <label className="block text-sm font-medium text-gray-700 mb-1">
                       {language === 'es' ? 'Teléfono' : 'Phone'}
                     </label>
-                    <input
-                      type="tel"
-                      name="phone"
-                      value={formData.phone}
-                      onChange={handleChange}
-                      className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition"
-                    />
+                    <div className="flex gap-2">
+                      {/* Selector de país */}
+                      <div className="relative">
+                        <select
+                          value={selectedCountry.code}
+                          onChange={(e) => {
+                            const country = countryPhoneCodes.find(c => c.code === e.target.value);
+                            if (country) handleCountryChange(country);
+                          }}
+                          className="px-3 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition bg-white text-sm appearance-none pr-8"
+                        >
+                          {countryPhoneCodes.map(country => (
+                            <option key={country.code} value={country.code}>
+                              {country.flag} {country.dialCode}
+                            </option>
+                          ))}
+                        </select>
+                      </div>
+                      {/* Input del número */}
+                      <input
+                        type="tel"
+                        value={phoneNumber}
+                        onChange={(e) => handlePhoneChange(e.target.value)}
+                        placeholder={language === 'es' ? 'Ej: 971415496' : 'Ex: 971415496'}
+                        className="flex-1 px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition"
+                      />
+                    </div>
+                    <p className="text-xs text-gray-500 mt-1">
+                      {language === 'es' ? 'Formato completo: ' : 'Full format: '}{selectedCountry.dialCode} {phoneNumber}
+                    </p>
                   </div>
                 </motion.div>
               )}

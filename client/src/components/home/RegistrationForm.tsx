@@ -64,7 +64,8 @@ export function openRegistrationForm() {
 
 export function RegistrationForm() {
   const [isFormOpen, setIsFormOpen] = useState(false);
-  const [selectedCountry, setSelectedCountry] = useState("CL"); // Chile por defecto
+  const [selectedCountry, setSelectedCountry] = useState(countryPhoneCodes[0]); // Chile por defecto
+  const [phoneNumber, setPhoneNumber] = useState('');
   const { toast } = useToast();
   const { t, language } = useLanguage();
   
@@ -88,62 +89,41 @@ export function RegistrationForm() {
     };
   }, []);
 
-  // Mapa de códigos de país a códigos telefónicos (ampliado)
-  const countryToCode: Record<string, string> = {
-    "CL": "+56", // Chile
-    "AR": "+54", // Argentina
-    "BR": "+55", // Brasil
-    "PE": "+51", // Perú
-    "CO": "+57", // Colombia
-    "MX": "+52", // México
-    "EC": "+593", // Ecuador
-    "UY": "+598", // Uruguay
-    "BO": "+591", // Bolivia
-    "VE": "+58", // Venezuela
-    "US": "+1", // Estados Unidos
-    "CA": "+1", // Canadá
-    "ES": "+34", // España
-    "DE": "+49", // Alemania
-    "FR": "+33", // Francia
-    "IT": "+39", // Italia
-    "GB": "+44", // Reino Unido
-    "PT": "+351", // Portugal
-    "NL": "+31", // Países Bajos
-    "CH": "+41", // Suiza
-    "AU": "+61", // Australia
-    "NZ": "+64", // Nueva Zelanda
-    "ZA": "+27", // Sudáfrica
-    "IN": "+91", // India
-    "CN": "+86", // China
-    "JP": "+81", // Japón
-    "KR": "+82", // Corea del Sur
-    "RU": "+7", // Rusia
-    "AE": "+971", // Emiratos Árabes Unidos
-    "SA": "+966", // Arabia Saudita
-    "QA": "+974", // Qatar
-    "EG": "+20", // Egipto
-    "MA": "+212", // Marruecos
-    "NG": "+234", // Nigeria
-    "KE": "+254", // Kenia
-    "GH": "+233", // Ghana
-    "SG": "+65", // Singapur
-    "MY": "+60", // Malasia
-    "TH": "+66", // Tailandia
-    "ID": "+62", // Indonesia
-    "PH": "+63", // Filipinas
-    "PK": "+92", // Pakistán
-    "TR": "+90", // Turquía
-    "DK": "+45", // Dinamarca
-    "SE": "+46", // Suecia
-    "NO": "+47", // Noruega
-    "FI": "+358", // Finlandia
-    "IS": "+354", // Islandia
-    "BE": "+32", // Bélgica
-    "AT": "+43", // Austria
-  };
+  // Códigos de país para selector
+  const countryPhoneCodes = [
+    { code: 'CL', name: 'Chile', dialCode: '+56', flag: '🇨🇱' },
+    { code: 'AR', name: 'Argentina', dialCode: '+54', flag: '🇦🇷' },
+    { code: 'BR', name: 'Brasil', dialCode: '+55', flag: '🇧🇷' },
+    { code: 'PE', name: 'Perú', dialCode: '+51', flag: '🇵🇪' },
+    { code: 'CO', name: 'Colombia', dialCode: '+57', flag: '🇨🇴' },
+    { code: 'MX', name: 'México', dialCode: '+52', flag: '🇲🇽' },
+    { code: 'EC', name: 'Ecuador', dialCode: '+593', flag: '🇪🇨' },
+    { code: 'UY', name: 'Uruguay', dialCode: '+598', flag: '🇺🇾' },
+    { code: 'BO', name: 'Bolivia', dialCode: '+591', flag: '🇧🇴' },
+    { code: 'VE', name: 'Venezuela', dialCode: '+58', flag: '🇻🇪' },
+    { code: 'US', name: 'Estados Unidos', dialCode: '+1', flag: '🇺🇸' },
+    { code: 'CA', name: 'Canadá', dialCode: '+1', flag: '🇨🇦' },
+    { code: 'ES', name: 'España', dialCode: '+34', flag: '🇪🇸' },
+    { code: 'DE', name: 'Alemania', dialCode: '+49', flag: '🇩🇪' },
+    { code: 'FR', name: 'Francia', dialCode: '+33', flag: '🇫🇷' },
+    { code: 'IT', name: 'Italia', dialCode: '+39', flag: '🇮🇹' },
+    { code: 'GB', name: 'Reino Unido', dialCode: '+44', flag: '🇬🇧' }
+  ];
   
-  // Obtener el código telefónico actual basado en el país seleccionado
-  const getCountryCode = () => countryToCode[selectedCountry] || "+56";
+  // Manejar cambios de teléfono
+  const handlePhoneChange = (value: string) => {
+    setPhoneNumber(value);
+    // Actualizar el formulario con el número completo
+    const fullPhone = selectedCountry.dialCode + value;
+    form.setValue('phone', fullPhone);
+  };
+
+  const handleCountryChange = (country: typeof countryPhoneCodes[0]) => {
+    setSelectedCountry(country);
+    // Actualizar teléfono con nuevo código
+    const fullPhone = country.dialCode + phoneNumber;
+    form.setValue('phone', fullPhone);
+  };
   
   // Form with validation
   const [schema, setSchema] = useState(() => getRegistrationFormSchema(language));
@@ -279,11 +259,34 @@ export function RegistrationForm() {
                   className={`text-sm ${form.formState.errors.email ? 'border-red-500' : ''}`}
                 />
 
-                <Input
-                  placeholder={t('registration.phone')}
-                  {...form.register('phone')}
-                  className={`text-sm ${form.formState.errors.phone ? 'border-red-500' : ''}`}
-                />
+                <div className="space-y-1">
+                  <div className="flex gap-1">
+                    <select
+                      value={selectedCountry.code}
+                      onChange={(e) => {
+                        const country = countryPhoneCodes.find(c => c.code === e.target.value);
+                        if (country) handleCountryChange(country);
+                      }}
+                      className="px-2 py-2 rounded border border-gray-300 focus:ring-2 focus:ring-primary focus:border-transparent outline-none bg-white text-xs"
+                    >
+                      {countryPhoneCodes.map(country => (
+                        <option key={country.code} value={country.code}>
+                          {country.flag} {country.dialCode}
+                        </option>
+                      ))}
+                    </select>
+                    <Input
+                      type="tel"
+                      value={phoneNumber}
+                      onChange={(e) => handlePhoneChange(e.target.value)}
+                      placeholder={language === 'es' ? '971415496' : '971415496'}
+                      className={`flex-1 text-sm ${form.formState.errors.phone ? 'border-red-500' : ''}`}
+                    />
+                  </div>
+                  <p className="text-xs text-gray-400">
+                    {selectedCountry.dialCode}{phoneNumber}
+                  </p>
+                </div>
 
                 <div>
                   <label className="block text-xs font-medium text-gray-700 mb-1">{t('registration.interested')}</label>
