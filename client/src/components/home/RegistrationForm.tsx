@@ -241,7 +241,7 @@ export function RegistrationForm() {
             exit={{ opacity: 0 }}
           >
             <motion.div 
-              className="bg-white rounded-lg p-4 sm:p-6 shadow-xl max-w-lg w-full text-left relative z-20 my-4 sm:my-8"
+              className="bg-white rounded-lg p-4 sm:p-6 shadow-xl max-w-lg w-full text-left relative z-20 my-4 sm:my-8 max-h-[90vh] overflow-y-auto"
               initial={{ opacity: 0, scale: 0.9, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.9, y: -20 }}
@@ -372,15 +372,17 @@ export function RegistrationForm() {
                   )}
                 </div>
 
-                <Button
-                  type="submit"
-                  className="w-full bg-primary hover:bg-primary-dark text-white font-bold py-2"
-                  disabled={mutation.isPending}
-                >
-                  {mutation.isPending ? 
-                    (language === 'es' ? 'Enviando...' : 'Sending...') : 
-                    t('registration.register')}
-                </Button>
+                <div className="mt-6 pt-4 border-t border-gray-200">
+                  <Button
+                    type="submit"
+                    className="w-full bg-primary hover:bg-primary-dark text-white font-bold py-3 text-lg"
+                    disabled={mutation.isPending}
+                  >
+                    {mutation.isPending ? 
+                      (language === 'es' ? 'Enviando...' : 'Sending...') : 
+                      t('registration.register')}
+                  </Button>
+                </div>
 
                 <p className="text-xs text-gray-500 text-center mt-2">
                   {t('registration.terms')}
