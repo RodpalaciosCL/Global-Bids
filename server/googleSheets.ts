@@ -2,6 +2,9 @@ import { GoogleSpreadsheet } from 'google-spreadsheet';
 import { JWT } from 'google-auth-library';
 import { InsertRegistration } from '@shared/schema';
 
+// Your Google Sheet ID from the URL
+const GOOGLE_SHEET_ID = '1zErj_X7P9J-U0Ed8607zgTuBpfuqwwScQtH24aTLKqA';
+
 // Initialize Google Sheets authentication
 const getAuth = () => {
   if (!process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL || !process.env.GOOGLE_PRIVATE_KEY) {
@@ -25,13 +28,7 @@ export async function addRegistrationToSheets(registration: InsertRegistration &
       return;
     }
 
-    const sheetId = process.env.GOOGLE_SHEET_ID;
-    if (!sheetId) {
-      console.log('⚠️  GOOGLE_SHEET_ID not configured');
-      return;
-    }
-
-    const doc = new GoogleSpreadsheet(sheetId, auth);
+    const doc = new GoogleSpreadsheet(GOOGLE_SHEET_ID, auth);
     await doc.loadInfo();
     
     // Get the first sheet or create one if it doesn't exist
