@@ -470,10 +470,7 @@ function getTypeLabel(type: string, language: string): string {
     'crane': { es: 'Grúa', en: 'Crane' }
   };
   
-  console.log('getTypeLabel called with:', { type, language });
-  const result = typeLabels[type]?.[language] || type.charAt(0).toUpperCase() + type.slice(1);
-  console.log('getTypeLabel result:', result);
-  return result;
+  return typeLabels[type]?.[language] || type.charAt(0).toUpperCase() + type.slice(1);
 }
 
 // Function to extract real data from descriptions
@@ -946,7 +943,7 @@ export default function MachineryDetail() {
                         </tr>
                         <tr>
                           <td className="py-1 text-gray-600">{language === 'en' ? 'Type' : 'Tipo'}:</td>
-                          <td className="py-1 text-gray-900 font-medium">{machinery.type}</td>
+                          <td className="py-1 text-gray-900 font-medium">{getTypeLabel(displayType, language)}</td>
                         </tr>
                       </tbody>
                     </table>

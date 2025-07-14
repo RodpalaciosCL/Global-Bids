@@ -31,10 +31,7 @@ function getTypeLabel(type: string, language: string): string {
     'crane': { es: 'Grúa', en: 'Crane' }
   };
   
-  console.log('MachineryCardCompact getTypeLabel called with:', { type, language });
-  const result = typeLabels[type]?.[language] || type.charAt(0).toUpperCase() + type.slice(1);
-  console.log('MachineryCardCompact getTypeLabel result:', result);
-  return result;
+  return typeLabels[type]?.[language] || type.charAt(0).toUpperCase() + type.slice(1);
 }
 
 // Function to extract real data from descriptions
