@@ -47,7 +47,7 @@ app.post("/api/contact", async (req, res) => {
 
   const mailOptions = {
     from: '"Global Bids Web" <auctions@theglobalbid.com>',
-    to: "auctions@theglobalbid.com",
+    to: "rodpalacios@me.com",
     subject: `Nuevo contacto – ${subject || "Sin asunto"}`,
     html: htmlBody,
   };

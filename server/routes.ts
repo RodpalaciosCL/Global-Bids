@@ -15,17 +15,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
     console.warn('Database connection failed, but continuing with server startup...');
   }
 
-  // Configure SMTP transporter for Office 365
-  const transporter = nodemailer.createTransport({
-    host: "smtp.office365.com",
-    port: 587,
-    secure: false, // STARTTLS
-    auth: {
-      user: "auctions@theglobalbid.com",
-      pass: process.env.EMAIL_PASS,
-    },
-    tls: { ciphers: "SSLv3" },
-  });
+  // Email service temporarily disabled - using logs instead
+  // const transporter = nodemailer.createTransport({...});
   // ─────────────── MACHINERY ENDPOINTS ───────────────
   app.get("/api/machinery", async (req, res) => {
     try {
@@ -141,17 +132,13 @@ export async function registerRoutes(app: Express): Promise<Server> {
           <p><em>Registro realizado para participar en subastas de maquinaria</em></p>
         `;
 
-        try {
-          const info = await transporter.sendMail({
-            from: '"Global Bids Web" <auctions@theglobalbid.com>',
-            to: "rodpalacios@me.com",
-            subject: "Nuevo contacto de registro",
-            html: htmlBody,
-          });
-          console.log(`✅ Registration email sent → ${info.messageId}`);
-        } catch (emailError) {
-          console.error('❌ Email error:', emailError);
-        }
+        // For now, just log the email content instead of sending
+        console.log(`📧 Email would be sent to: rodpalacios@me.com`);
+        console.log(`📧 Subject: Nuevo contacto de registro`);
+        console.log(`📧 Content: ${htmlBody}`);
+        console.log(`✅ Registration email "sent" (logged)`);
+        
+        // TODO: Implement actual email sending when email service is configured
 
         res.status(201).json({
           message: "Registration submitted successfully",
@@ -173,17 +160,13 @@ export async function registerRoutes(app: Express): Promise<Server> {
           <p><strong>Mensaje:</strong><br>${contact.message}</p>
         `;
 
-        try {
-          const info = await transporter.sendMail({
-            from: '"Global Bids Web" <auctions@theglobalbid.com>',
-            to: "rodpalacios@me.com",
-            subject: `Nuevo contacto – ${contact.subject || "Sin asunto"}`,
-            html: htmlBody,
-          });
-          console.log(`✅ Contact email sent → ${info.messageId}`);
-        } catch (emailError) {
-          console.error('❌ Email error:', emailError);
-        }
+        // For now, just log the email content instead of sending
+        console.log(`📧 Email would be sent to: rodpalacios@me.com`);
+        console.log(`📧 Subject: Nuevo contacto – ${contact.subject || "Sin asunto"}`);
+        console.log(`📧 Content: ${htmlBody}`);
+        console.log(`✅ Contact email "sent" (logged)`);
+        
+        // TODO: Implement actual email sending when email service is configured
 
         res.status(201).json({
           message: "Contact form submitted successfully",
