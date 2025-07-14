@@ -204,6 +204,6 @@ The application includes proper error boundaries, loading states, and fallback m
 - **Removed decorative elements** - eliminated color pastel dividers between sections for cleaner visual transitions
 - **Implemented working SMTP system** - configured Nodemailer with Office 365 SMTP for reliable email delivery
 - **Fixed contact form integration** - removed broken EmailJS dependency and connected form directly to backend API
-- **Email destination configured** - set up email forwarding to rodpalacios@me.com for testing and monitoring
+- **Email destination configured** - emails now sent to contacto@theglobalbid.com (original business email)
 - **Real email delivery working** - confirmed email system sends messages with proper formatting and unique message IDs
 - **Both form types functional** - contact form and registration form both save to database and send emails automatically
