@@ -70,9 +70,7 @@ export function ServicesSection() {
 
   return (
     <section id="servicios" className="py-16 lg:py-0 bg-white relative" ref={sectionRef}>
-      {/* Decorative patterns */}
-      <div className="absolute top-0 right-0 w-64 h-64 bg-secondary/5 -z-10 rounded-bl-full"></div>
-      <div className="absolute bottom-0 left-0 w-96 h-96 bg-primary/5 -z-10 rounded-tr-full"></div>
+
       
       <div className="container mx-auto px-4">
         <motion.div 

@@ -4,6 +4,7 @@ import { storage } from "./storage";
 import { z } from "zod";
 import { insertContactSchema, insertRegistrationSchema } from "@shared/schema";
 import { testDatabaseConnection } from "./db";
+import nodemailer from "nodemailer";
 import "dotenv/config";
 
 export async function registerRoutes(app: Express): Promise<Server> {
@@ -13,6 +14,18 @@ export async function registerRoutes(app: Express): Promise<Server> {
   if (!isDbConnected) {
     console.warn('Database connection failed, but continuing with server startup...');
   }
+
+  // Configure SMTP transporter for Office 365
+  const transporter = nodemailer.createTransport({
+    host: "smtp.office365.com",
+    port: 587,
+    secure: false, // STARTTLS
+    auth: {
+      user: "auctions@theglobalbid.com",
+      pass: process.env.EMAIL_PASS,
+    },
+    tls: { ciphers: "SSLv3" },
+  });
   // ─────────────── MACHINERY ENDPOINTS ───────────────
   app.get("/api/machinery", async (req, res) => {
     try {
@@ -104,7 +117,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // ─────────────── CONTACT FORM (Simplified - no email backend) ───────────────
+  // ─────────────── CONTACT FORM WITH EMAIL ───────────────
   app.post("/api/contact", async (req, res) => {
     try {
       const { type, interests, ...data } = req.body;
@@ -117,6 +130,29 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
         console.log(`✅ Registration saved to database: ${registration.name}`);
 
+        // Send registration email
+        const htmlBody = `
+          <h2>Nuevo registro para subastas - Global Bids</h2>
+          <p><strong>Nombre:</strong> ${registration.name}</p>
+          <p><strong>Email:</strong> ${registration.email}</p>
+          <p><strong>Teléfono:</strong> ${registration.phone || "No indicado"}</p>
+          <p><strong>Empresa:</strong> ${registration.company || "No indicada"}</p>
+          <p><strong>País:</strong> ${registration.country || "No indicado"}</p>
+          <p><em>Registro realizado para participar en subastas de maquinaria</em></p>
+        `;
+
+        try {
+          const info = await transporter.sendMail({
+            from: '"Global Bids Web" <auctions@theglobalbid.com>',
+            to: "contacto@theglobalbid.com",
+            subject: "Nuevo contacto de registro",
+            html: htmlBody,
+          });
+          console.log(`✅ Registration email sent → ${info.messageId}`);
+        } catch (emailError) {
+          console.error('❌ Email error:', emailError);
+        }
+
         res.status(201).json({
           message: "Registration submitted successfully",
           registrationId: registration.id,
@@ -127,6 +163,27 @@ export async function registerRoutes(app: Express): Promise<Server> {
         const contact = await storage.createContact(validatedData);
 
         console.log(`✅ Contact saved to database: ${contact.name}`);
+
+        // Send contact email
+        const htmlBody = `
+          <h2>Nuevo mensaje desde el formulario de contacto</h2>
+          <p><strong>Nombre:</strong> ${contact.name}</p>
+          <p><strong>Email:</strong> ${contact.email}</p>
+          <p><strong>Teléfono:</strong> ${contact.phone || "No indicado"}</p>
+          <p><strong>Mensaje:</strong><br>${contact.message}</p>
+        `;
+
+        try {
+          const info = await transporter.sendMail({
+            from: '"Global Bids Web" <auctions@theglobalbid.com>',
+            to: "contacto@theglobalbid.com",
+            subject: `Nuevo contacto – ${contact.subject || "Sin asunto"}`,
+            html: htmlBody,
+          });
+          console.log(`✅ Contact email sent → ${info.messageId}`);
+        } catch (emailError) {
+          console.error('❌ Email error:', emailError);
+        }
 
         res.status(201).json({
           message: "Contact form submitted successfully",

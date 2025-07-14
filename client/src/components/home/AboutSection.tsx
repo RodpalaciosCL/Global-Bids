@@ -80,12 +80,7 @@ export function AboutSection() {
   
   return (
     <section id="nosotros" className="py-16 lg:py-0 bg-white relative overflow-hidden" ref={sectionRef}>
-      {/* Fondo con gradiente */}
-      <div className="absolute inset-0 bg-gradient-to-br from-gray-50 via-white to-gray-50 z-0"></div>
-      
-      {/* Elementos decorativos */}
-      <div className="absolute top-[20%] right-[5%] w-[500px] h-[500px] bg-primary/5 rounded-full blur-3xl"></div>
-      <div className="absolute bottom-[10%] left-[5%] w-[500px] h-[500px] bg-primary/5 rounded-full blur-3xl"></div>
+
       
       <div className="container mx-auto px-4 relative z-10">
         {/* Encabezado de sección con animación */}
