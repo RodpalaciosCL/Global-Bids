@@ -50,7 +50,7 @@ export interface IStorage {
   
   // Registration operations
   createRegistration(registration: InsertRegistration): Promise<Registration>;
-  getAllRegistrations(): Promise<Registration[]>;
+  getRegistrations(): Promise<Registration[]>;
 }
 
 // In-memory implementation of storage
@@ -273,7 +273,7 @@ export class MemStorage implements IStorage {
     return registration;
   }
   
-  async getAllRegistrations(): Promise<Registration[]> {
+  async getRegistrations(): Promise<Registration[]> {
     return Array.from(this.registrations.values());
   }
   

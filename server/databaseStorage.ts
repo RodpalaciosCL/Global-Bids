@@ -316,4 +316,8 @@ export class DatabaseStorage implements IStorage {
     const [newRegistration] = await db.insert(registrations).values(registration).returning();
     return newRegistration;
   }
+
+  async getRegistrations(): Promise<Registration[]> {
+    return db.select().from(registrations).orderBy(desc(registrations.createdAt));
+  }
 }

@@ -6,6 +6,7 @@ import { insertContactSchema, insertRegistrationSchema } from "@shared/schema";
 import { testDatabaseConnection } from "./db";
 import nodemailer from "nodemailer";
 import "dotenv/config";
+import { addRegistrationToSheets } from "./googleSheets";
 
 export async function registerRoutes(app: Express): Promise<Server> {
   // Test database connection on startup
@@ -209,6 +210,39 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const validatedData = insertRegistrationSchema.parse(req.body);
       const registration = await storage.createRegistration(validatedData);
 
+      console.log(`✅ Registration saved to database: ${registration.firstName} ${registration.lastName}`);
+
+      // Send registration data to Google Sheets
+      try {
+        await addRegistrationToSheets(registration);
+      } catch (sheetError) {
+        console.error('⚠️  Failed to add registration to Google Sheets:', sheetError);
+        // Continue with response even if Google Sheets fails
+      }
+
+      // Send registration email
+      const htmlBody = `
+        <h2>Nuevo registro para subastas - Global Bids</h2>
+        <p><strong>Nombre:</strong> ${registration.firstName} ${registration.lastName}</p>
+        <p><strong>Email:</strong> ${registration.email}</p>
+        <p><strong>Teléfono:</strong> ${registration.phone}</p>
+        <p><strong>Interesado en:</strong> ${Array.isArray(registration.interestedIn) ? registration.interestedIn.join(', ') : registration.interestedIn}</p>
+        <p><em>Registro realizado para participar en subastas de maquinaria</em></p>
+      `;
+
+      // Send email using SMTP transporter
+      try {
+        const info = await transporter.sendMail({
+          from: '"Global Bids Web" <auctions@theglobalbid.com>',
+          to: "contacto@theglobalbid.com",
+          subject: "Nuevo registro para subastas",
+          html: htmlBody,
+        });
+        console.log(`✅ Registration email sent → ${info.messageId}`);
+      } catch (emailError) {
+        console.error('❌ Email error:', emailError);
+      }
+
       res.status(201).json({
         message: "Registration submitted successfully",
         registrationId: registration.id,
@@ -221,6 +255,18 @@ export async function registerRoutes(app: Express): Promise<Server> {
       }
       console.error("Error submitting registration form:", error);
       res.status(500).json({ message: "Failed to submit registration form" });
+    }
+  });
+
+  // ─────────────── ADMIN ENDPOINTS ───────────────
+  // Get all registrations (for admin/partner access)
+  app.get("/api/registrations", async (req, res) => {
+    try {
+      const registrations = await storage.getRegistrations();
+      res.json(registrations);
+    } catch (error) {
+      console.error("Error fetching registrations:", error);
+      res.status(500).json({ message: "Failed to fetch registrations" });
     }
   });
 
