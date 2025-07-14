@@ -115,62 +115,41 @@
 
 /* Desktop Section Spacing Improvements */
 @media (min-width: 1024px) {
-  /* Main sections styling for better vertical centering */
-  .main-section {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding-top: 120px;
-    padding-bottom: 100px;
-  }
-  
-  /* Section containers with proper spacing */
-  .section-container {
-    padding-top: 120px;
-    padding-bottom: 100px;
-  }
-  
-  /* Section titles with better vertical positioning */
-  .section-title {
-    margin-top: 80px;
-    margin-bottom: 60px;
-  }
-  
-  /* Specific sections styling */
+  /* Better section spacing without forcing full height */
   #nosotros {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
     padding-top: 120px;
-    padding-bottom: 100px;
+    padding-bottom: 80px;
   }
   
   #servicios {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding-top: 120px;
-    padding-bottom: 100px;
+    padding-top: 100px;
+    padding-bottom: 80px;
   }
   
   #soporte {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding-top: 120px;
-    padding-bottom: 100px;
+    padding-top: 100px;
+    padding-bottom: 80px;
   }
   
   #contacto {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding-top: 120px;
-    padding-bottom: 100px;
+    padding-top: 100px;
+    padding-bottom: 80px;
+  }
+  
+  /* Improve container spacing for better visual hierarchy */
+  #nosotros .container {
+    max-width: 1200px;
+  }
+  
+  #servicios .container {
+    max-width: 1200px;
+  }
+  
+  #soporte .container {
+    max-width: 1200px;
+  }
+  
+  #contacto .container {
+    max-width: 1200px;
   }
 }
