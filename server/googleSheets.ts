@@ -73,7 +73,7 @@ export async function addRegistrationToSheets(registration: InsertRegistration &
       'Nombre': registration.firstName,
       'Apellido': registration.lastName,
       'Email': registration.email,
-      'Teléfono': registration.phone,
+      'Teléfono': `'${registration.phone}`,
       'Tipos de Maquinaria Interesado': interestedTypes
     };
 
