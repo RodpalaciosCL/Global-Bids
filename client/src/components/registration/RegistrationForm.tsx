@@ -164,14 +164,14 @@ export function RegistrationForm() {
         />
         
         <motion.div
-          className="bg-white rounded-xl shadow-2xl w-full max-w-lg z-50 overflow-hidden relative"
+          className="bg-white rounded-xl shadow-2xl w-full max-w-md z-50 overflow-hidden relative max-h-[90vh] overflow-y-auto"
           initial={{ opacity: 0, scale: 0.9, y: 20 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.9, y: 20 }}
           transition={{ type: 'spring', damping: 25, stiffness: 300 }}
         >
           {/* Cabecera del formulario */}
-          <div className="bg-primary text-white p-6">
+          <div className="bg-primary text-white p-4">
             <button 
               onClick={closeForm}
               className="absolute top-4 right-4 w-8 h-8 flex items-center justify-center bg-white/20 hover:bg-white/30 rounded-full transition-all"
@@ -179,17 +179,17 @@ export function RegistrationForm() {
               <i className="fas fa-times"></i>
             </button>
             
-            <h2 className="text-2xl font-bold">
+            <h2 className="text-lg font-bold">
               {language === 'es' ? 'Registro de Participante' : 'Participant Registration'}
             </h2>
-            <p className="text-white/80 mt-1">
+            <p className="text-white/80 mt-1 text-sm">
               {language === 'es' 
                 ? 'Complete el formulario para acceder a nuestras subastas' 
                 : 'Complete the form to access our auctions'}
             </p>
             
             {/* Indicador de pasos */}
-            <div className="flex items-center mt-4">
+            <div className="flex items-center mt-3">
               {[1, 2, 3].map(step => (
                 <div key={step} className="flex items-center">
                   <div 
@@ -215,7 +215,7 @@ export function RegistrationForm() {
           </div>
           
           {/* Contenido del formulario */}
-          <form onSubmit={handleSubmit} className="p-6">
+          <form onSubmit={handleSubmit} className="p-4">
             <AnimatePresence mode="wait">
               {/* Paso 1: Información personal */}
               {currentStep === 1 && (
@@ -293,30 +293,30 @@ export function RegistrationForm() {
                   initial={{ opacity: 0, x: 20 }}
                   animate={{ opacity: 1, x: 0 }}
                   exit={{ opacity: 0, x: -20 }}
-                  className="space-y-4"
+                  className="space-y-3"
                 >
-                  <h3 className="font-bold text-lg text-gray-800">
+                  <h3 className="font-bold text-base text-gray-800">
                     {language === 'es' ? 'Interés en:' : 'Interest in:'}
                   </h3>
-                  <p className="text-gray-600 text-sm">
+                  <p className="text-gray-600 text-xs">
                     {language === 'es' 
                       ? 'Seleccione las categorías de maquinaria que le interesan' 
                       : 'Select the machinery categories you are interested in'}
                   </p>
                   
-                  <div className="space-y-3">
+                  <div className="grid grid-cols-1 gap-2 max-h-48 overflow-y-auto">
                     {interestOptions.map(option => (
                       <label 
                         key={option.id} 
-                        className="flex items-center p-3 rounded-lg border border-gray-200 cursor-pointer hover:bg-gray-50 transition"
+                        className="flex items-center p-2 rounded border border-gray-200 cursor-pointer hover:bg-gray-50 transition text-sm"
                       >
                         <input
                           type="checkbox"
-                          className="w-5 h-5 text-primary rounded border-gray-300 focus:ring-primary"
+                          className="w-4 h-4 text-primary rounded border-gray-300 focus:ring-primary"
                           checked={formData.interests.includes(option.id)}
                           onChange={() => handleInterestChange(option.id)}
                         />
-                        <span className="ml-3 font-medium text-gray-700">{option.label}</span>
+                        <span className="ml-2 text-gray-700">{option.label}</span>
                       </label>
                     ))}
                   </div>
@@ -408,7 +408,7 @@ export function RegistrationForm() {
             
             {/* Botones de navegación */}
             {!isSuccess && (
-              <div className="flex justify-between mt-8">
+              <div className="flex justify-between mt-4">
                 {currentStep > 1 ? (
                   <button
                     type="button"
