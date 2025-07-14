@@ -110,7 +110,7 @@ export function ContactSection() {
     <section
       id="contacto"
       ref={sectionRef}
-      className="py-16 bg-primary text-white relative"
+      className="bg-primary text-white relative"
     >
       {/* Overlay + modal */}
       {showMessage && (

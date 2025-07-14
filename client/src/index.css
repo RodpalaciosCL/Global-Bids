@@ -112,3 +112,65 @@
 .marketplace-pulse {
   animation: marketplacePulse 2s infinite;
 }
+
+/* Desktop Section Spacing Improvements */
+@media (min-width: 1024px) {
+  /* Main sections styling for better vertical centering */
+  .main-section {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-top: 120px;
+    padding-bottom: 100px;
+  }
+  
+  /* Section containers with proper spacing */
+  .section-container {
+    padding-top: 120px;
+    padding-bottom: 100px;
+  }
+  
+  /* Section titles with better vertical positioning */
+  .section-title {
+    margin-top: 80px;
+    margin-bottom: 60px;
+  }
+  
+  /* Specific sections styling */
+  #nosotros {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-top: 120px;
+    padding-bottom: 100px;
+  }
+  
+  #servicios {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-top: 120px;
+    padding-bottom: 100px;
+  }
+  
+  #soporte {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-top: 120px;
+    padding-bottom: 100px;
+  }
+  
+  #contacto {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-top: 120px;
+    padding-bottom: 100px;
+  }
+}

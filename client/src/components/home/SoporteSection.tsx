@@ -35,7 +35,7 @@ export function SoporteSection() {
   ];
 
   return (
-    <section id="soporte" className="py-20 bg-white">
+    <section id="soporte" className="bg-white">
       <div className="container mx-auto px-4">
         <motion.div 
           className="text-center mb-16"
