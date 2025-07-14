@@ -241,7 +241,7 @@ export function RegistrationForm() {
             exit={{ opacity: 0 }}
           >
             <motion.div 
-              className="bg-white rounded-lg p-4 sm:p-6 shadow-xl max-w-lg w-full text-left relative z-20 my-4 sm:my-8 max-h-[90vh] overflow-y-auto"
+              className="bg-white rounded-lg p-4 sm:p-6 shadow-xl max-w-md w-full text-left relative z-20 my-4 sm:my-8 max-h-[85vh] overflow-y-auto"
               initial={{ opacity: 0, scale: 0.9, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.9, y: -20 }}
@@ -346,7 +346,7 @@ export function RegistrationForm() {
 
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">{t('registration.interested')}</label>
-                  <div className="grid grid-cols-2 gap-2">
+                  <div className="grid grid-cols-1 gap-2 max-h-40 overflow-y-auto border border-gray-200 p-3 rounded-md">
                     {machineryTypes.map((type) => (
                       <div key={type.id} className="flex items-center space-x-2">
                         <Checkbox
