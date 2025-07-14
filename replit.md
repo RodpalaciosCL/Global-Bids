@@ -192,3 +192,10 @@ The application includes proper error boundaries, loading states, and fallback m
 - **Structured format consistency** - all 146 descriptions now use "Detalles del Equipo:" format with detailed Spanish translations
 - **Clean conditional display** - only show specifications when actual data is available, no placeholder text
 - **Source data reference** - all information extracted from authentic North Country Auctions API: `https://northcountry.auctiontechs.com/getWebcastItems?auction_id=2187&page=1-4`
+
+### Data Authentication and Cleanup (July 13, 2025)
+- **Removed non-existent auction lots** - eliminated 2 equipment items (Caterpillar 323d2l Excavator and 966h Wheel Loader) that were no longer available in North Country Auctions current API
+- **Verified data authenticity** - confirmed all remaining 144 items exist in the live North Country Auctions system
+- **Updated filter counts** - corrected equipment type counts to reflect current inventory: Excavator (34), Loader (19), maintaining accurate filter displays
+- **Enhanced data integrity** - ensured all displayed equipment has working images and exists in the source auction system
+- **Mobile filter enhancement** - added condition filter to mobile view to match desktop functionality

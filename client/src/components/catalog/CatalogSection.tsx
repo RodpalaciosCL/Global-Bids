@@ -466,8 +466,8 @@ export function CatalogSection() {
                     value={filters.type || ""}
                   >
                     <option value="">{language === 'es' ? 'Todas las familias' : 'All families'}</option>
-                    <option value="excavadora">{language === 'es' ? 'Excavadora (35)' : 'Excavator (35)'}</option>
-                    <option value="cargador">{language === 'es' ? 'Cargador (20)' : 'Loader (20)'}</option>
+                    <option value="excavadora">{language === 'es' ? 'Excavadora (34)' : 'Excavator (34)'}</option>
+                    <option value="cargador">{language === 'es' ? 'Cargador (19)' : 'Loader (19)'}</option>
                     <option value="camion-tolva">{language === 'es' ? 'Camión Tolva (15)' : 'Dump Truck (15)'}</option>
                     <option value="bulldozer">{language === 'es' ? 'Bulldozer (12)' : 'Bulldozer (12)'}</option>
                     <option value="motoniveladora">{language === 'es' ? 'Motoniveladora (9)' : 'Motor Grader (9)'}</option>
@@ -562,8 +562,8 @@ export function CatalogSection() {
                     value={filters.type || ""}
                   >
                     <option value="">{language === 'es' ? 'Todas las familias' : 'All families'}</option>
-                    <option value="excavadora">{language === 'es' ? 'Excavadora (35)' : 'Excavator (35)'}</option>
-                    <option value="cargador">{language === 'es' ? 'Cargador (20)' : 'Loader (20)'}</option>
+                    <option value="excavadora">{language === 'es' ? 'Excavadora (34)' : 'Excavator (34)'}</option>
+                    <option value="cargador">{language === 'es' ? 'Cargador (19)' : 'Loader (19)'}</option>
                     <option value="camion-tolva">{language === 'es' ? 'Camión Tolva (15)' : 'Dump Truck (15)'}</option>
                     <option value="bulldozer">{language === 'es' ? 'Bulldozer (12)' : 'Bulldozer (12)'}</option>
                     <option value="motoniveladora">{language === 'es' ? 'Motoniveladora (9)' : 'Motor Grader (9)'}</option>
