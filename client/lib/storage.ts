@@ -203,7 +203,7 @@ export class DatabaseStorage implements IStorage {
 
   async deleteMachinery(id: number): Promise<boolean> {
     const result = await db.delete(machinery).where(eq(machinery.id, id));
-    return result.rowCount > 0;
+    return (result.rowCount || 0) > 0;
   }
 
   async createContact(insertContact: InsertContact): Promise<Contact> {
@@ -222,6 +222,10 @@ export class DatabaseStorage implements IStorage {
 
   async getAllRegistrations(): Promise<Registration[]> {
     return await db.select().from(registrations).orderBy(desc(registrations.id));
+  }
+
+  async getRegistrations(): Promise<Registration[]> {
+    return this.getAllRegistrations();
   }
 }
 

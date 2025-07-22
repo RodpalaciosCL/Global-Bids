@@ -21,7 +21,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   }
 
   // Configure SMTP transporter for Office 365
-  const transporter = nodemailer.createTransporter({
+  const transporter = nodemailer.createTransport({
     host: "smtp.office365.com",
     port: 587,
     secure: false, // STARTTLS
