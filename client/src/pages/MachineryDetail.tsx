@@ -753,7 +753,7 @@ export default function MachineryDetail() {
                 {/* Main Image Gallery */}
                 <div className="relative w-full h-[450px] border border-gray-200 rounded-lg overflow-hidden mb-1">
                   <img 
-                    src={(selectedImage || machinery.image).replace('https://auctiontechupload.s3.amazonaws.com/216/auction/2187/', '/api/images/')}
+                    src={`/api/image-proxy?url=${encodeURIComponent(selectedImage || machinery.image)}`}
                     alt={translatedName}
                     className="w-full h-full object-contain"
                     onError={(e) => {
@@ -809,7 +809,7 @@ export default function MachineryDetail() {
                           }}
                         >
                           <img
-                            src={img.replace('https://auctiontechupload.s3.amazonaws.com/216/auction/2187/', '/api/images/')}
+                            src={`/api/image-proxy?url=${encodeURIComponent(img)}`}
                             alt={`${translatedName} - Imagen ${index + 1}`}
                             className="w-20 h-16 object-cover"
                             onError={(e) => {
