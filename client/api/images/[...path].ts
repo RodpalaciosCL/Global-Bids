@@ -17,10 +17,15 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   }
 
   try {
+    console.log('Request query:', req.query);
+    console.log('Request URL:', req.url);
+    
     const { path } = req.query;
     const imagePath = Array.isArray(path) ? path.join('/') : path;
     const imageUrl = `https://auctiontechupload.s3.amazonaws.com/216/auction/2187/${imagePath}`;
     
+    console.log('Extracted path:', path);
+    console.log('Final imagePath:', imagePath);
     console.log('Proxying image:', imageUrl);
     
     const response = await fetch(imageUrl);
