@@ -1,6 +1,6 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { z } from "zod";
-import { insertContactSchema, insertRegistrationSchema } from "../src/types/schema";
+import { insertContactSchema, insertRegistrationSchema } from "../src/types/schema.js";
 import nodemailer from "nodemailer";
 import { storage } from './storage.js';
 

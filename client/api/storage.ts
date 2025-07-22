@@ -11,7 +11,7 @@ import {
   registrations,
   type Registration,
   type InsertRegistration
-} from "../src/types/schema";
+} from "../src/types/schema.js";
 import { db } from "./db.js";
 import { eq, and, gte, lte, like, or, desc, asc, sql } from "drizzle-orm";
 
