@@ -37,20 +37,19 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     
     if (type === 'registration') {
       // Handle registration form
-      const registrationData = { ...data, interests: JSON.stringify(interests) };
+      const registrationData = { ...data, interestedIn: interests };
       const validatedData = insertRegistrationSchema.parse(registrationData);
       const registration = await storage.createRegistration(validatedData);
 
-      console.log(`✅ Registration saved to database: ${registration.name}`);
+      console.log(`✅ Registration saved to database: ${registration.firstName} ${registration.lastName}`);
 
       // Send registration email
       const htmlBody = `
         <h2>Nuevo registro para subastas - Global Bids</h2>
-        <p><strong>Nombre:</strong> ${registration.name}</p>
+        <p><strong>Nombre:</strong> ${registration.firstName} ${registration.lastName}</p>
         <p><strong>Email:</strong> ${registration.email}</p>
-        <p><strong>Teléfono:</strong> ${registration.phone || "No indicado"}</p>
-        <p><strong>Empresa:</strong> ${registration.company || "No indicada"}</p>
-        <p><strong>País:</strong> ${registration.country || "No indicado"}</p>
+        <p><strong>Teléfono:</strong> ${registration.phone}</p>
+        <p><strong>Interesado en:</strong> ${Array.isArray(registration.interestedIn) ? registration.interestedIn.join(', ') : registration.interestedIn}</p>
         <p><em>Registro realizado para participar en subastas de maquinaria</em></p>
       `;
 

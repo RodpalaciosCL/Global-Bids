@@ -85,43 +85,7 @@ export type ContactType = typeof contacts.$inferSelect;
 export type InsertRegistration = z.infer<typeof insertRegistrationSchema>;
 export type RegistrationType = typeof registrations.$inferSelect;
 
-// Machinery types (inferred from API responses)
-export type Machinery = {
-  id: number;
-  name: string;
-  type: string;
-  brand: string;
-  year: number;
-  hours?: number;
-  kilometers?: number;
-  price: number;
-  condition: string;
-  description: string;
-  image: string;
-  gallery?: string[];
-  isSold?: boolean;
-  auctionDate?: string;
-  priority?: number;
-  page?: number;
-  createdAt?: string;
-};
-
-export type Contact = {
-  id: number;
-  name: string;
-  email: string;
-  phone?: string;
-  subject: string;
-  message: string;
-  createdAt: string;
-};
-
-export type Registration = {
-  id: number;
-  firstName: string;
-  lastName: string;
-  email: string;
-  phone: string;
-  interestedIn: string[];
-  createdAt: string;
-};
+// Use Drizzle inferred types
+export type Machinery = typeof machinery.$inferSelect;
+export type Contact = typeof contacts.$inferSelect;
+export type Registration = typeof registrations.$inferSelect;
