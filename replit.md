@@ -217,3 +217,13 @@ The application includes proper error boundaries, loading states, and fallback m
 - **Multi-destination data flow** - registration data goes to: database, email notification, and Google Sheets simultaneously
 - **System fully operational** - confirmed working integration with organized data columns: ID, Fecha, Nombre, Apellido, Email, Teléfono, Intereses
 - **Partner access enabled** - business partner can view real-time registration data in shared Google Sheet
+
+### Country Code Selector and Translation Fixes (July 14, 2025)
+- **Implemented comprehensive country code selector** - 50+ countries with flags and phone codes for both registration forms
+- **Fixed Google Sheets phone formatting** - added text prefix (') to prevent formula interpretation errors
+- **Enhanced phone number handling** - automatic formatting with country code (+56 971415496)
+- **Dual registration forms updated** - both simple (home) and multi-step (registration) forms now use country selector
+- **Chile set as default** - appropriate for local Chilean market focus
+- **Fixed machinery type translations** - corrected getTypeLabel function usage in detail page specifications
+- **Complete bilingual support** - machinery types now display correctly: "Excavadora"/"Excavator", "Cargador"/"Loader"
+- **Translation consistency** - all pages (catalog, detail, cards) now use proper translation functions
