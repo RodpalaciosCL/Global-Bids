@@ -27,40 +27,22 @@ export async function registerRoutes(app: Express): Promise<Server> {
     },
     tls: { ciphers: "SSLv3" },
   });
-  // ─────────────── MACHINERY ENDPOINTS ───────────────
+  // ─────────────── MACHINERY ENDPOINTS (PROXY TO VERCEL FOR DEVELOPMENT) ───────────────
   app.get("/api/machinery", async (req, res) => {
     try {
-      const {
-        search,
-        type,
-        brand,
-        year,
-        minPrice,
-        maxPrice,
-        condition,
-        sort = "price-asc",
-        page = "1",
-        limit = "40",
-        auctionPage, // New: auction page filter
-      } = req.query;
-
-      const result = await storage.searchMachinery(
-        search as string | undefined,
-        type as string | undefined,
-        brand as string | undefined,
-        year as string | undefined,
-        minPrice ? parseInt(minPrice as string) : undefined,
-        maxPrice ? parseInt(maxPrice as string) : undefined,
-        condition as string | undefined,
-        sort as string,
-        parseInt(page as string),
-        parseInt(limit as string),
-        auctionPage ? parseInt(auctionPage as string) : undefined, // Pass auction page filter
-      );
-
+      console.log('Proxying machinery request to Vercel...');
+      const queryParams = new URLSearchParams(req.query as Record<string, string>);
+      const vercelUrl = `https://global-bids.vercel.app/api/machinery?${queryParams.toString()}`;
+      
+      const response = await fetch(vercelUrl);
+      if (!response.ok) {
+        throw new Error(`Vercel API returned ${response.status}`);
+      }
+      
+      const result = await response.json();
       res.json(result);
     } catch (error) {
-      console.error("Error fetching machinery:", error);
+      console.error("Error fetching machinery from Vercel:", error);
       // Return empty result set instead of error to prevent frontend crashes
       res.json({ items: [], total: 0, totalPages: 0 });
     }
@@ -68,10 +50,16 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
   app.get("/api/machinery/featured", async (_req, res) => {
     try {
-      const featuredMachinery = await storage.getFeaturedMachinery();
-      res.json(featuredMachinery);
+      console.log('Proxying featured machinery request to Vercel...');
+      const response = await fetch('https://global-bids.vercel.app/api/machinery/featured');
+      if (!response.ok) {
+        throw new Error(`Vercel API returned ${response.status}`);
+      }
+      
+      const result = await response.json();
+      res.json(result);
     } catch (error) {
-      console.error("Error fetching featured machinery:", error);
+      console.error("Error fetching featured machinery from Vercel:", error);
       res.status(500).json({ message: "Failed to fetch featured machinery" });
     }
   });

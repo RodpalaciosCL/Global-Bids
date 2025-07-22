@@ -4,6 +4,19 @@ import { Button } from '@/components/ui/button';
 import { motion } from 'framer-motion';
 import { useLanguage } from '@/contexts/LanguageContext';
 
+// Function to extract image name from full S3 URL
+function extractImageName(imageUrl: string): string {
+  if (!imageUrl) return '';
+  
+  // If it's already just a filename, return as is
+  if (!imageUrl.includes('http')) return imageUrl;
+  
+  // Extract filename from full S3 URL
+  // Example: "https://auctiontechupload.s3.amazonaws.com/216/auction/2187/8_1.jpg" -> "8_1.jpg"
+  const parts = imageUrl.split('/');
+  return parts[parts.length - 1] || '';
+}
+
 // Function to get type label in correct language
 function getTypeLabel(type: string, language: string): string {
   const typeLabels: Record<string, { es: string; en: string }> = {
@@ -239,7 +252,7 @@ export function MachineryCardCompact({ item, index }: MachineryCardCompactProps)
       {/* Type Badge */}
       <div className="relative">
         <img 
-          src={`/api/image-proxy?url=${encodeURIComponent(image)}`}
+          src={`/api/images/${encodeURIComponent(extractImageName(image))}`}
           alt={name} 
           className="w-full h-44 object-cover"
           onError={(e) => {
