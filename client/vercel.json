@@ -1,0 +1,7 @@
+{
+  "functions": {
+    "api/images/[...path].ts": {
+      "memory": 1024
+    }
+  }
+}
