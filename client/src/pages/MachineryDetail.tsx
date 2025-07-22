@@ -4,7 +4,7 @@ import { useRoute, Link, useLocation } from 'wouter';
 import { fadeIn, slideUp, staggerContainer } from '@/lib/animations';
 import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
-import { Machinery } from '@shared/schema';
+import { Machinery } from '@/types/schema';
 import { useEffect, useState, useCallback } from 'react';
 import { apiRequest } from '@/lib/queryClient';
 import { useLanguage } from '@/contexts/LanguageContext';

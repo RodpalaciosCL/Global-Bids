@@ -2,12 +2,7 @@ import { useRef, useState, useEffect } from "react";
 import { MachineryCard } from "./MachineryCard";
 import { MachineryCardCompact } from "./MachineryCardCompact";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import {
-  Machinery,
-  MachineryFilters,
-  MachineryType,
-  MachineryCondition,
-} from "@shared/schema";
+import { Machinery } from "@/types/schema";
 import { CurrencySelector } from "@/components/ui/CurrencySelector";
 import { useLanguage } from "@/contexts/LanguageContext";
 

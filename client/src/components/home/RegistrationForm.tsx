@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import { insertRegistrationSchema } from '@shared/schema';
+import { insertRegistrationSchema } from '@/types/schema';
 import { apiRequest } from '@/lib/queryClient';
 import { useMutation } from '@tanstack/react-query';
 import { motion, AnimatePresence } from 'framer-motion';
