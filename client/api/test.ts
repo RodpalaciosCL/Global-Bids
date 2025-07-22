@@ -1,5 +1,6 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { db } from '../lib/db';
+import { sql } from 'drizzle-orm';
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   // Configure CORS
@@ -18,22 +19,26 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   }
 
   try {
-    // Test basic database connection
-    console.log('Testing database connection...');
-    const result = await db.execute('SELECT 1 as test');
-    console.log('Database connection successful:', result);
-    
-    // Check environment variables
+    // Check environment variables first
     const envCheck = {
       DATABASE_URL: !!process.env.DATABASE_URL,
       DATABASE_URL_length: process.env.DATABASE_URL?.length || 0,
       NODE_ENV: process.env.NODE_ENV || 'unknown'
     };
     
+    if (!process.env.DATABASE_URL) {
+      throw new Error('DATABASE_URL environment variable is not set');
+    }
+    
+    console.log('Testing database connection...');
+    // Use a simple query with sql template
+    const result = await db.execute(sql`SELECT 1 as test`);
+    console.log('Database connection successful');
+    
     res.json({ 
       success: true, 
       message: 'Database connection test successful',
-      dbResult: result,
+      dbResult: 'Connected successfully',
       env: envCheck
     });
   } catch (error) {
@@ -42,6 +47,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       success: false, 
       message: 'Database connection failed',
       error: error instanceof Error ? error.message : 'Unknown error',
+      stack: error instanceof Error ? error.stack : undefined,
       env: {
         DATABASE_URL: !!process.env.DATABASE_URL,
         DATABASE_URL_length: process.env.DATABASE_URL?.length || 0,
