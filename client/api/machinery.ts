@@ -1,5 +1,5 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
-const { storage } = require('./storage');
+import { storage } from './storage.js';
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   // Configure CORS

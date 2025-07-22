@@ -12,7 +12,7 @@ import {
   type Registration,
   type InsertRegistration
 } from "../src/types/schema";
-import { db } from "./db";
+import { db } from "./db.js";
 import { eq, and, gte, lte, like, or, desc, asc, sql } from "drizzle-orm";
 
 // Interface for storage operations
