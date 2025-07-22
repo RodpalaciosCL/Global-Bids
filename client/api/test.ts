@@ -1,6 +1,4 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
-import { db } from '../lib/db';
-import { sql } from 'drizzle-orm';
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   // Configure CORS
@@ -27,27 +25,47 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     };
     
     if (!process.env.DATABASE_URL) {
-      throw new Error('DATABASE_URL environment variable is not set');
+      return res.status(500).json({ 
+        success: false, 
+        message: 'DATABASE_URL environment variable is not set',
+        env: envCheck
+      });
     }
     
-    console.log('Testing database connection...');
-    // Use a simple query with sql template
-    const result = await db.execute(sql`SELECT 1 as test`);
-    console.log('Database connection successful');
-    
-    res.json({ 
-      success: true, 
-      message: 'Database connection test successful',
-      dbResult: 'Connected successfully',
-      env: envCheck
-    });
+    // Now test importing db
+    let dbImportSuccess = false;
+    let dbError = null;
+    try {
+      const { db } = await import('../lib/db');
+      dbImportSuccess = true;
+      
+      // Test database connection
+      const { sql } = await import('drizzle-orm');
+      const result = await db.execute(sql`SELECT 1 as test`);
+      
+      res.json({ 
+        success: true, 
+        message: 'Database connection test successful',
+        dbImportSuccess,
+        dbResult: 'Connected successfully',
+        env: envCheck
+      });
+    } catch (dbErr) {
+      dbError = dbErr instanceof Error ? dbErr.message : 'Unknown db error';
+      res.status(500).json({ 
+        success: false, 
+        message: 'Database connection failed',
+        dbImportSuccess,
+        error: dbError,
+        env: envCheck
+      });
+    }
   } catch (error) {
-    console.error("Database test error:", error);
+    console.error("Test error:", error);
     res.status(500).json({ 
       success: false, 
-      message: 'Database connection failed',
+      message: 'Test failed',
       error: error instanceof Error ? error.message : 'Unknown error',
-      stack: error instanceof Error ? error.stack : undefined,
       env: {
         DATABASE_URL: !!process.env.DATABASE_URL,
         DATABASE_URL_length: process.env.DATABASE_URL?.length || 0,
