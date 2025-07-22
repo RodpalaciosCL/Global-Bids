@@ -36,7 +36,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     let dbImportSuccess = false;
     let dbError = null;
     try {
-      const { db } = await import('./db');
+      const { db } = require('./db');
+      const dbImport = true;
       dbImportSuccess = true;
       
       // Test database connection
