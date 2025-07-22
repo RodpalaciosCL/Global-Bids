@@ -1,8 +1,8 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { z } from "zod";
-import { insertContactSchema, insertRegistrationSchema } from "../../shared/schema";
+import { insertContactSchema, insertRegistrationSchema } from "../src/types/schema";
 import nodemailer from "nodemailer";
-import { storage } from '../../server/storage';
+import { storage } from '../lib/storage';
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   // Configure CORS
