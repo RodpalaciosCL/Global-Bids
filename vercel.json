@@ -1,4 +1,15 @@
 {
   "cleanUrls": true,
-  "trailingSlash": false
+  "trailingSlash": false,
+  "functions": {
+    "client/api/images/[...path].ts": {
+      "memory": 1024
+    }
+  },
+  "routes": [
+    {
+      "src": "/api/images/(.*)",
+      "dest": "/api/images/[...path]?path=$1"
+    }
+  ]
 }
