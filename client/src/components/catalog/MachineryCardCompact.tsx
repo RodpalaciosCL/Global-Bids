@@ -252,7 +252,7 @@ export function MachineryCardCompact({ item, index }: MachineryCardCompactProps)
       {/* Type Badge */}
       <div className="relative">
         <img 
-          src={`/api/images/${encodeURIComponent(extractImageName(image))}`}
+          src={`/api/image-proxy?url=${encodeURIComponent(image)}`}
           alt={name} 
           className="w-full h-44 object-cover"
           onError={(e) => {
