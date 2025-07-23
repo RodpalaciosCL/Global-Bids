@@ -766,7 +766,7 @@ export default function MachineryDetail() {
                 {/* Main Image Gallery */}
                 <div className="relative w-full h-[450px] border border-gray-200 rounded-lg overflow-hidden mb-1">
                   <img 
-                    src={`/api/image-proxy?url=${encodeURIComponent(selectedImage || machinery.image)}`}
+                    src={selectedImage || machinery.image}
                     alt={translatedName}
                     className="w-full h-full object-contain"
                     onError={(e) => {
@@ -822,7 +822,7 @@ export default function MachineryDetail() {
                           }}
                         >
                           <img
-                            src={`/api/image-proxy?url=${encodeURIComponent(img)}`}
+                            src={img}
                             alt={`${translatedName} - Imagen ${index + 1}`}
                             className="w-20 h-16 object-cover"
                             onError={(e) => {
