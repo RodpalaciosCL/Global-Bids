@@ -17,6 +17,6 @@ export default function handler(req: VercelRequest, res: VercelResponse) {
     });
   } catch (error) {
     console.error('Hello endpoint error:', error);
-    res.status(500).json({ error: 'Internal server error', message: error.message });
+    res.status(500).json({ error: 'Internal server error', message: error instanceof Error ? error.message : 'Unknown error' });
   }
 }
